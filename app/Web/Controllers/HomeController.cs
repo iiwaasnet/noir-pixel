@@ -17,9 +17,7 @@ namespace Web.Controllers
         {
             var deviceType = GetDeviceType(Request);
 
-            Request.Cookies.SetDeviceType(deviceType);
             Response.Cookies.SetDeviceType(deviceType);
-
             return GetDeviceSpecificView(deviceType);
         }
 
