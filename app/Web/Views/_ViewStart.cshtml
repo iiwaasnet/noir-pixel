@@ -1,0 +1,6 @@
+﻿@using Web.Components
+@using Web.Controllers
+
+@if (Response.Cookies.GetDeviceType() == DeviceType.Desktop){
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
