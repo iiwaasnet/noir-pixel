@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Web;
-using Web.Components;
+using Web.Components.DeviceDetection;
 
-namespace Web.Controllers
+namespace Web.Components.Common
 {
     public static class CookiesExtensions
     {

@@ -2,7 +2,7 @@
 using WURFL;
 using WURFL.Request;
 
-namespace Web.Components
+namespace Web.Components.DeviceDetection
 {
     public class DeviceDetection : IDeviceDetection
     {

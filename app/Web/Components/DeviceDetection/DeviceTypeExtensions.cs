@@ -1,4 +1,4 @@
-﻿namespace Web.Components
+﻿namespace Web.Components.DeviceDetection
 {
     public static class DeviceTypeExtensions
     {

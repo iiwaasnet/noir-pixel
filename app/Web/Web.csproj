@@ -144,19 +144,16 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="Components\DeviceDetection.cs" />
-    <Compile Include="Components\DeviceDetectionExtensions.cs" />
-    <Compile Include="Components\DeviceDetectionMiddleware.cs" />
-    <Compile Include="Components\DeviceDetectionModule.cs" />
+    <Compile Include="Components\DeviceDetection\DeviceDetection.cs" />
+    <Compile Include="Components\DeviceDetection\DeviceDetectionModule.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Components\DeviceType.cs" />
-    <Compile Include="Components\IDeviceDetection.cs" />
-    <Compile Include="Components\OwinHeadersExtensions.cs" />
-    <Compile Include="Components\DeviceTypeExtensions.cs" />
-    <Compile Include="Controllers\CookiesExtensions.cs" />
+    <Compile Include="Components\DeviceDetection\DeviceType.cs" />
+    <Compile Include="Components\DeviceDetection\IDeviceDetection.cs" />
+    <Compile Include="Components\DeviceDetection\DeviceTypeExtensions.cs" />
+    <Compile Include="Components\Common\CookiesExtensions.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="App_Start\DependencyInjection.cs" />
-    <Compile Include="Controllers\NameValueCollectionExtensions.cs" />
+    <Compile Include="Components\Common\NameValueCollectionExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -254,6 +251,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.m.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Layout.t.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Layout.m.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

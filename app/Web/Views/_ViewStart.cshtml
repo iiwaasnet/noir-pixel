@@ -1,6 +1,20 @@
 ﻿@using Web.Components
+@using Web.Components.Common
+@using Web.Components.DeviceDetection
 @using Web.Controllers
 
-@if (Response.Cookies.GetDeviceType() == DeviceType.Desktop){
-    Layout = "~/Views/Shared/_Layout.cshtml";
+@switch (Response.Cookies.GetDeviceType())
+{
+    case DeviceType.Mobile:
+        Layout = "~/Views/Shared/_Layout.m.cshtml";
+        break;
+    case DeviceType.Tablet:
+        Layout = "~/Views/Shared/_Layout.t.cshtml";
+        break;
+    case DeviceType.Desktop:
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        break;
+    default:
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        break;
 }

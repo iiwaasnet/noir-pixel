@@ -1,6 +1,8 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 using Web.Components;
+using Web.Components.Common;
+using Web.Components.DeviceDetection;
 
 namespace Web.Controllers
 {

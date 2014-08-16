@@ -2,7 +2,7 @@
 using System.Collections.Specialized;
 using System.Linq;
 
-namespace Web.Controllers
+namespace Web.Components.Common
 {
     public static class NameValueCollectionExtensions
     {

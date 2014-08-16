@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Collections.Specialized;
 
-namespace Web.Components
+namespace Web.Components.DeviceDetection
 {
     public interface IDeviceDetection
     {
