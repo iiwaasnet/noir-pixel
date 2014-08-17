@@ -1,4 +1,4 @@
-﻿angular.module('np').config(function($routeProvider, $locationProvider) {
+﻿npApp.config(function($routeProvider, $locationProvider) {
     $routeProvider
         .when('/', {
             templateUrl: '/app/src/Home/Home.html',

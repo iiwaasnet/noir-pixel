@@ -1,4 +1,4 @@
-﻿angular.module('np').controller('listController', [
+﻿npApp.controller('listController', [
     function() {
         var ctrl = this;
     }
