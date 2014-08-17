@@ -4,12 +4,15 @@ namespace Web
 {
     public class BundleConfig
     {
-        // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            var angular = new ScriptBundle("~/bundles/angular").Include("~/app/vendor/angular-*.min.js");
+            var angular = new ScriptBundle("~/bundles/angular")
+                .Include("~/app/vendor/angular.min.js")
+                .Include("~/app/vendor/angular-route.min.js");
             angular.Transforms.Clear();
             bundles.Add(angular);
+
+            bundles.Add(new ScriptBundle("~/bundles/app").IncludeDirectory("~/app/src", "*.js", true));
 
 #if DEBUG
             BundleTable.EnableOptimizations = false;
