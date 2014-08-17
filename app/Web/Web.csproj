@@ -155,7 +155,9 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\src\list\listCtrl.js" />
+    <Content Include="app\src\Home\Home.html" />
+    <Content Include="app\src\Home\homeCtrl.js" />
+    <Content Include="app\src\List\listCtrl.js" />
     <Content Include="app\src\np.js" />
     <Content Include="app\src\routes.js" />
     <Content Include="app\vendor\angular-mocks.js" />
@@ -251,7 +253,7 @@
     <Content Include="Views\Shared\_Layout.m.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\src\list\List.html" />
+    <Content Include="app\src\List\List.html" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\Web.config" />
