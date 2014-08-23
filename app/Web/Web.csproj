@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -22,6 +23,7 @@
     <IISExpressUseClassicPipelineMode />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -155,11 +157,14 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\assets\np-header.png" />
     <Content Include="app\src\Home\Home.html" />
-    <Content Include="app\src\Home\homeCtrl.js" />
-    <Content Include="app\src\List\listCtrl.js" />
-    <Content Include="app\src\np.js" />
-    <Content Include="app\src\routes.js" />
+    <Content Include="app\src\Home\HomeController.js" />
+    <Content Include="app\src\Layout\Footer\FooterController.js" />
+    <Content Include="app\src\Layout\Header\HeaderController.js" />
+    <Content Include="app\src\List\ListController.js" />
+    <Content Include="app\src\npApp.js" />
+    <Content Include="app\src\Routes.js" />
     <Content Include="app\vendor\angular-mocks.js" />
     <Content Include="app\vendor\angular-route.js" />
     <Content Include="app\vendor\angular-route.min.js" />
@@ -181,7 +186,6 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\assets\" />
     <Folder Include="app\less\" />
   </ItemGroup>
   <ItemGroup>
@@ -221,11 +225,23 @@
   <ItemGroup>
     <Content Include="app\Web.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\src\Layout\Header\Header.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\src\Layout\Footer\Footer.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\assets\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">

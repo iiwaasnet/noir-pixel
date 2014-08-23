@@ -1,0 +1,1 @@
+﻿var npApp = angular.module('npApp', ['ngRoute']);

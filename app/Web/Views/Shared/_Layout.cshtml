@@ -1,22 +1,25 @@
 ﻿<!DOCTYPE html>
-<html ng-app="np">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASP.NET Application</title>
-    @*@Styles.Render("~/Content/css")*@
+<html ng-app="npApp">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ASP.NET Application</title>
+        @*@Styles.Render("~/Content/css")*@
 
-</head>
-<body>
-    @RenderBody()
+    </head>
+    <body>
+        @RenderPage("~/app/src/Layout/Header/Header.cshtml")
+        
+        <main>
+            <div ng-view>
+                @RenderBody()
+            </div>
+        </main>
+        
+        @RenderPage("~/app/src/Layout/Footer/Footer.cshtml")
     
-    @*<script type="text/javascript" src="~/app/vendor/angular.js"></script>
-    <script type="text/javascript" src="~/app/vendor/angular-route.js"></script>
-    <script type="text/javascript" src="~/app/src/np.js"></script>
-    <script type="text/javascript" src="~/app/src/routes.js"></script>
-    <script type="text/javascript" src="~/app/src/list/listCtrl.js"></script>*@
-    @Scripts.Render("~/bundles/angular")
-    @Scripts.Render("~/bundles/app")
-    @*@RenderSection("scripts", required: false)*@
-</body>
+        @Scripts.Render("~/bundles/angular")
+        @Scripts.Render("~/bundles/app")
+        @*@RenderSection("scripts", required: false)*@
+    </body>
 </html>

@@ -1,0 +1,5 @@
+﻿npApp.controller('FooterController', [
+    function() {
+        
+    }
+]);

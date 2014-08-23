@@ -1,4 +1,4 @@
-﻿npApp.controller('listController', [
+﻿npApp.controller('HomeController', [
     function() {
         var ctrl = this;
     }

@@ -2,11 +2,11 @@
     $routeProvider
         .when('/', {
             templateUrl: '/app/src/Home/Home.html',
-            controller: 'homeController'
+            controller: 'HomeController as homeCtrl'
         })
         .when('/list', {
             templateUrl: '/app/src/List/List.html',
-            controller: 'listController'
+            controller: 'ListController as listCtrl'
         })
     .otherwise({
         redirectTo: '/'
