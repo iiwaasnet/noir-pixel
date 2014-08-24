@@ -1,7 +1,6 @@
 using System.Reflection;
 using Autofac;
 using Autofac.Integration.Mvc;
-using Autofac.Integration.Owin;
 
 namespace Web
 {

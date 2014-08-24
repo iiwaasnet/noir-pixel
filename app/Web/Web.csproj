@@ -53,6 +53,9 @@
       <HintPath>..\packages\Autofac.Owin.3.0.1\lib\net45\Autofac.Integration.Owin.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.3.1.0.0\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -140,6 +143,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\MainModule.cs" />
     <Compile Include="Components\DeviceDetection\DeviceDetection.cs" />
     <Compile Include="Components\DeviceDetection\DeviceDetectionModule.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -147,9 +151,17 @@
     <Compile Include="Components\DeviceDetection\IDeviceDetection.cs" />
     <Compile Include="Components\DeviceDetection\DeviceTypeExtensions.cs" />
     <Compile Include="Components\Common\CookiesExtensions.cs" />
+    <Compile Include="Components\Localization\ILocalizedStrings.cs" />
+    <Compile Include="Components\Localization\LocalizedString.cs" />
+    <Compile Include="Components\Localization\LocalizedStringCollection.cs" />
+    <Compile Include="Components\Localization\LocalizedStrings.cs" />
+    <Compile Include="Components\Localization\LocalizationModule.cs" />
+    <Compile Include="Controllers\CustomJsonResult.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="App_Start\DependencyInjection.cs" />
     <Compile Include="Components\Common\NameValueCollectionExtensions.cs" />
+    <Compile Include="Controllers\MimeTypes.cs" />
+    <Compile Include="Controllers\StringsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -232,9 +244,22 @@
     <Content Include="app\src\Layout\Footer\Footer.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\assets\Web.config">
-      <SubType>Designer</SubType>
+    <ProjectReference Include="..\Diagnostics\Diagnostics.csproj">
+      <Project>{fa2d348c-a9d9-45ef-8059-1ab5d1554e67}</Project>
+      <Name>Diagnostics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resources\Resources.csproj">
+      <Project>{87c1faee-88e4-41f9-a66d-2e52a37e27b5}</Project>
+      <Name>Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

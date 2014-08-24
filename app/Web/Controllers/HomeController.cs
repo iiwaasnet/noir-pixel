@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using Resources;
 using Web.Components.Common;
 using Web.Components.DeviceDetection;
 
@@ -12,6 +13,7 @@ namespace Web.Controllers
         public HomeController(IDeviceDetection deviceDetection)
         {
             this.deviceDetection = deviceDetection;
+            new StringsProvider();
         }
 
         public ActionResult Index()

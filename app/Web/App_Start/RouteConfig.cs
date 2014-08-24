@@ -9,10 +9,16 @@ namespace Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute("StringResources",
+                            "{controller}/{action}/{lang}",
+                            new
+                            {
+                                controller = "Strings",
+                                lang = UrlParameter.Optional
+                            });
             routes.MapRoute("RedirectToHome",
                             "{*url}",
-                            new {controller = "Home", action = "Index"}
-                );
+                            new {controller = "Home", action = "Index"});
         }
     }
 }
