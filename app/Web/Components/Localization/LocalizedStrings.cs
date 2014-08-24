@@ -6,6 +6,7 @@ namespace Web.Components.Localization
 {
     public class LocalizedStrings : ILocalizedStrings
     {
+        private const string DefaultLocale = "en";
         private readonly IStringsProvider stringsProvider;
         public LocalizedStrings(IStringsProvider stringsProvider)
         {
@@ -25,9 +26,14 @@ namespace Web.Components.Localization
                    };
         }
 
+        public LocalizedStringCollection GetDefaultCollection()
+        {
+            return GetLocalizedCollection(DefaultLocale);
+        }
+
         public IEnumerable<string> GetSupportedLocales()
         {
-            yield return "en";
+            yield return DefaultLocale;
             yield return "ru";
         }
     }

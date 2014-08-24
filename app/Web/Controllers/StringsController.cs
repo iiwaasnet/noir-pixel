@@ -30,10 +30,19 @@ namespace Web.Controllers
         [HttpGet]
         public ActionResult Localized(string lang)
         {
-            return new CustomJsonResult
-                   {
-                       Data = localizedStrings.GetLocalizedCollection(lang)
-                   };
+            object strings;
+            try
+            {
+                strings = localizedStrings.GetLocalizedCollection(lang);
+            }
+            catch (Exception err)
+            {
+                logger.Error(err);
+
+                strings = localizedStrings.GetDefaultCollection();
+            }
+
+            return new CustomJsonResult {Data = strings};
         }
 
         [HttpGet]
