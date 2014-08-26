@@ -14,7 +14,7 @@ namespace JsonConfigurationProvider
 
         public string GetCurrentTarget()
         {
-            using (var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName)))
+            using (var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.RelativeSearchPath, fileName)))
             {
                 return reader.ReadToEnd().Trim();
             }

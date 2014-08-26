@@ -11,7 +11,7 @@ namespace JsonConfigurationProvider
         public ConfigFileLocator(params string[] paths)
         {
             this.paths = paths;
-            fileExtensions = new[] {"json", "json.config", "config.json", "jsonconfig", "config"};
+            fileExtensions = new[] {"json.config", "config.json", "jsonconfig"};
         }
 
         public IEnumerable<FileInfo> FindConfigFiles()

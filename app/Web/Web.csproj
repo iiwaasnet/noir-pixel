@@ -145,6 +145,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\MainModule.cs" />
     <Compile Include="Components\Configuration\ConfigurationModule.cs" />
+    <Compile Include="Components\Configuration\TestConfiguration.cs" />
     <Compile Include="Components\DeviceDetection\DeviceDetection.cs" />
     <Compile Include="Components\DeviceDetection\DeviceDetectionModule.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -262,6 +263,7 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="config\test.config.json" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

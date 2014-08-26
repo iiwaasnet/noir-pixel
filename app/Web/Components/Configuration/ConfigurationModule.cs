@@ -8,7 +8,7 @@ namespace Web.Components.Configuration
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<JsonConfigProvider>().As<IJsonConfigProvider>().SingleInstance();
-            builder.RegisterType<ConfigTargetProvider>().As<IConfigTargetProvider>().SingleInstance();
+            builder.Register(c => new ConfigTargetProvider("build-target.config")).As<IConfigTargetProvider>().SingleInstance();
         }
     }
 }
