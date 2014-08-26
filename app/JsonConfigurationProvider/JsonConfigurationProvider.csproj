@@ -48,6 +48,9 @@
     <Compile Include="ConfigFileMetadata.cs" />
     <Compile Include="ConfigFileReader.cs" />
     <Compile Include="ConfigSections.cs" />
+    <Compile Include="ConfigTargetProvider.cs" />
+    <Compile Include="IConfigTargetProvider.cs" />
+    <Compile Include="IJsonConfigProvider.cs" />
     <Compile Include="JsonConfigProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

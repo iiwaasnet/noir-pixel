@@ -144,6 +144,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\MainModule.cs" />
+    <Compile Include="Components\Configuration\ConfigurationModule.cs" />
     <Compile Include="Components\DeviceDetection\DeviceDetection.cs" />
     <Compile Include="Components\DeviceDetection\DeviceDetectionModule.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -248,6 +249,10 @@
       <Project>{fa2d348c-a9d9-45ef-8059-1ab5d1554e67}</Project>
       <Name>Diagnostics</Name>
     </ProjectReference>
+    <ProjectReference Include="..\JsonConfigurationProvider\JsonConfigurationProvider.csproj">
+      <Project>{7baef581-a42b-4a8a-af73-e9b1f52c1ffa}</Project>
+      <Name>JsonConfigurationProvider</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Resources\Resources.csproj">
       <Project>{87c1faee-88e4-41f9-a66d-2e52a37e27b5}</Project>
       <Name>Resources</Name>
@@ -299,8 +304,10 @@
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
   <Target Name="AfterBuild">
   </Target> -->
+  <Target Name="BeforeBuild">
+    <WriteLinesToFile File="$(OutputPath)\build-target.config" Lines="$(Configuration)" Overwrite="true">
+    </WriteLinesToFile>
+  </Target>
 </Project>

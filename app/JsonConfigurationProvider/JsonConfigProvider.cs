@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 
 namespace JsonConfigurationProvider
 {
-    public class JsonConfigProvider
+    public class JsonConfigProvider : IJsonConfigProvider
     {
         private readonly string baseDir;
         private readonly string target;
@@ -15,15 +14,15 @@ namespace JsonConfigurationProvider
 
         private volatile bool configLoaded;
 
-        public JsonConfigProvider(string target)
-            : this(target, AppDomain.CurrentDomain.BaseDirectory)
+        public JsonConfigProvider(IConfigTargetProvider targetProvider)
+            : this(targetProvider, AppDomain.CurrentDomain.BaseDirectory)
         {
         }
 
-        public JsonConfigProvider(string target, string baseDir)
+        public JsonConfigProvider(IConfigTargetProvider targetProvider, string baseDir)
         {
             this.baseDir = baseDir;
-            this.target = target;
+            target = targetProvider.GetCurrentTarget();
             configurations = new ConcurrentDictionary<string, ConcurrentDictionary<Type, object>>();
             metadatas = new ConcurrentDictionary<string, ConfigFileMetadata>();
             configLoaded = false;
@@ -38,6 +37,8 @@ namespace JsonConfigurationProvider
         public T GetConfiguration<T>(string target)
             where T : class, new()
         {
+            target = target.ToLower();
+
             if (!configLoaded)
             {
                 LoadConfiguration();
@@ -46,34 +47,26 @@ namespace JsonConfigurationProvider
 
             ConcurrentDictionary<Type, object> configObjects;
             T config;
-            if (!configurations.TryGetValue(target, out configObjects))
+            if (!configurations.TryGetValue(target, out configObjects) || (config = TryGetConfiguration<T>(configObjects)) == null)
             {
                 config = TryGetConfiguration<T>(target);
                 if (config == null)
                 {
                     throw new Exception(string.Format("Unable to get configuration of type {0} for target {1}!", typeof (T).Name, target));
                 }
-                configObjects = new ConcurrentDictionary<Type, object>(new[] {new KeyValuePair<Type, object>(typeof (T), config)});
-                configurations[target] = configObjects;
-            }
-            else
-            {
-                config = TryGetConfiguration<T>(configObjects);
-                if (config == null)
+
+                if (configObjects == null)
                 {
-                    config = TryGetConfiguration<T>(target);
-                    if (config == null)
-                    {
-                        throw new Exception(string.Format("Unable to get configuration of type {0} for target {1}!", typeof(T).Name, target));
-                    }
-                    configObjects[typeof(T)] = config;
+                    configObjects = new ConcurrentDictionary<Type, object>();
+                    configurations[target] = configObjects;
                 }
+                configObjects[typeof (T)] = config;
             }
 
             return config;
         }
 
-        private T TryGetConfiguration<T>(ConcurrentDictionary<Type, object> configObjects)
+        private static T TryGetConfiguration<T>(ConcurrentDictionary<Type, object> configObjects)
         {
             object tmpConfig;
             configObjects.TryGetValue(typeof (T), out tmpConfig);
@@ -119,11 +112,11 @@ namespace JsonConfigurationProvider
 
             foreach (var metadata in configFiles.Select(configReader.Parse))
             {
-                if (metadatas.ContainsKey(metadata.Name))
+                if (metadatas.ContainsKey(metadata.Name.ToLower()))
                 {
                     throw new Exception(string.Format("Configuration {0} is already loaded!", metadata.Name));
                 }
-                metadatas[metadata.Name] = metadata;
+                metadatas[metadata.Name.ToLower()] = metadata;
             }
         }
     }
