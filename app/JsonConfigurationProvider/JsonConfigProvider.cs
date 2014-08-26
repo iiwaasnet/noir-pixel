@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 
@@ -40,13 +41,44 @@ namespace JsonConfigurationProvider
             if (!configLoaded)
             {
                 LoadConfiguration();
+                configLoaded = true;
             }
 
             ConcurrentDictionary<Type, object> configObjects;
+            T config;
             if (!configurations.TryGetValue(target, out configObjects))
             {
-                var config = TryGetConfiguration<T>(target);
+                config = TryGetConfiguration<T>(target);
+                if (config == null)
+                {
+                    throw new Exception(string.Format("Unable to get configuration of type {0} for target {1}!", typeof (T).Name, target));
+                }
+                configObjects = new ConcurrentDictionary<Type, object>(new[] {new KeyValuePair<Type, object>(typeof (T), config)});
+                configurations[target] = configObjects;
             }
+            else
+            {
+                config = TryGetConfiguration<T>(configObjects);
+                if (config == null)
+                {
+                    config = TryGetConfiguration<T>(target);
+                    if (config == null)
+                    {
+                        throw new Exception(string.Format("Unable to get configuration of type {0} for target {1}!", typeof(T).Name, target));
+                    }
+                    configObjects[typeof(T)] = config;
+                }
+            }
+
+            return config;
+        }
+
+        private T TryGetConfiguration<T>(ConcurrentDictionary<Type, object> configObjects)
+        {
+            object tmpConfig;
+            configObjects.TryGetValue(typeof (T), out tmpConfig);
+
+            return (T) tmpConfig;
         }
 
         private T TryGetConfiguration<T>(string target)
@@ -60,7 +92,7 @@ namespace JsonConfigurationProvider
                     foreach (var section in metadata.Sections)
                     {
                         JsonConvert.PopulateObject(section.SectionData, config);
-                        if (section.SectionName == target || metadata.Sections.All(s => s.SectionName != target))
+                        if (section.SectionName == target || NoExplicitTargetSection(target, metadata))
                         {
                             return config;
                         }
@@ -70,21 +102,13 @@ namespace JsonConfigurationProvider
                 {
                 }
             }
-            //foreach (var metadata in metadatas.Values)
-            //{
-            //    try
-            //    {
-            //        var config = new T();
-            //        var section = metadata.Sections.First();
-            //        JsonConvert.PopulateObject(section.SectionData, config);
-            //        return config;
-            //    }
-            //    catch
-            //    {
-            //    }
-            //}
 
             return default(T);
+        }
+
+        private static bool NoExplicitTargetSection(string target, ConfigFileMetadata metadata)
+        {
+            return metadata.Sections.All(s => s.SectionName != target);
         }
 
         private void LoadConfiguration()
