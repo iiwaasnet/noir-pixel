@@ -61,11 +61,20 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to werwer.
+        ///   Looks up a localized string similar to Exhibitions.
         /// </summary>
-        public static string String1 {
+        public static string MainMenu_Exhibitions {
             get {
-                return ResourceManager.GetString("String1", resourceCulture);
+                return ResourceManager.GetString("MainMenu_Exhibitions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gallery.
+        /// </summary>
+        public static string MainMenu_Gallery {
+            get {
+                return ResourceManager.GetString("MainMenu_Gallery", resourceCulture);
             }
         }
     }

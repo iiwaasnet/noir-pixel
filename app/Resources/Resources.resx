@@ -117,7 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="String1" xml:space="preserve">
-    <value>werwer</value>
+  <data name="MainMenu_Exhibitions" xml:space="preserve">
+    <value>Exhibitions</value>
+  </data>
+  <data name="MainMenu_Gallery" xml:space="preserve">
+    <value>Gallery</value>
   </data>
 </root>

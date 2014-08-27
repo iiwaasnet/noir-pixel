@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Web.Controllers
 {
@@ -11,7 +12,8 @@ namespace Web.Controllers
             response.ContentType = MimeTypes.Json;
             if (Data != null)
             {
-                response.Write(JsonConvert.SerializeObject(Data));
+                var jsonSerializerSettings = new JsonSerializerSettings{ContractResolver = new CamelCasePropertyNamesContractResolver()};
+                response.Write(JsonConvert.SerializeObject(Data, jsonSerializerSettings));
             }
         }
 
