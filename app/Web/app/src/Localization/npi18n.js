@@ -13,7 +13,7 @@
             },
             updateText: function(elm, token) {
                 var values = token.split('|');
-                if (values.length <= 1) {
+                if (values.length >= 1) {
                     // construct the tag to insert into the element
                     var tag = Strings.getLocalizedString(values[0]);
                     // update the element only if data was returned
