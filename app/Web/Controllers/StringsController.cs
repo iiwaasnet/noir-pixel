@@ -52,7 +52,7 @@ namespace Web.Controllers
                    {
                        Data = localizedStrings
                            .GetSupportedLocales()
-                           .Select(l => new {Locale = l, Version = "1"})
+                           .Select(locale => new { Locale = locale, Version = "1" })
                            .ToArray()
                    };
         }

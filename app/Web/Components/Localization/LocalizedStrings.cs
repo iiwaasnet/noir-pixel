@@ -19,6 +19,7 @@ namespace Web.Components.Localization
             return new LocalizedStringCollection
                    {
                        Locale = locale,
+                       Version = "1",
                        Strings = stringsProvider
                            .GetLocalizedStrings(locale)
                            .Select(str => new LocalizedString {Key = str.Key, Value = str.Value})

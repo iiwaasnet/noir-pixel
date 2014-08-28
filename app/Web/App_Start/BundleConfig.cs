@@ -12,6 +12,14 @@ namespace Web
             angular.Transforms.Clear();
             bundles.Add(angular);
 
+            var vendor = new ScriptBundle("~/bundles/vendor")
+                .Include("~/app/vendor/angular-local-storage.js");
+            bundles.Add(vendor);
+            //var vendorMin = new ScriptBundle("~/bundles/vendor-min")
+            //    .Include("~/app/vendor/*.min.js");
+            //vendorMin.Transforms.Clear();
+            //bundles.Add(vendorMin);
+
             bundles.Add(new ScriptBundle("~/bundles/app").IncludeDirectory("~/app/src", "*.js", true));
 
 #if DEBUG
