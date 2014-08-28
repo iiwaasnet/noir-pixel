@@ -1,14 +1,14 @@
-﻿npApp.directive('npi18n', [
+﻿npApp.directive('npI18n', [
     'Strings', function(Strings) {
         var dir = {
             restrict: "EAC",
             link: function(scope, elm, attrs) {
                 scope.$on('stringsUpdates', function() {
-                    dir.updateText(elm, attrs.npi18n);
+                    dir.updateText(elm, attrs.npI18n);
                 });
 
-                attrs.$observe('np-i18n', function(value) {
-                    dir.updateText(elm, attrs.npi18n);
+                attrs.$observe('npI18n', function (value) {
+                    dir.updateText(elm, attrs.npI18n);
                 });
             },
             updateText: function(elm, token) {
