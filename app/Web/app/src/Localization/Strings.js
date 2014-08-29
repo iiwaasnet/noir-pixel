@@ -1,6 +1,6 @@
 ﻿npApp.service('Strings', [
-    '$http', '$rootScope', '$window', 'localStorageService',
-    function($http, $rootScope, $window, localStorageService) {
+    '$http', '$rootScope', '$window', '$interval', 'localStorageService',
+    function($http, $rootScope, $window, $interval, localStorageService) {
         var service = this,
             dictionary = {},
             stringsLoaded = false,
@@ -8,6 +8,11 @@
             language = localStorageService.get(langStorageKey)
                 || ($window.navigator.userLanguage || $window.navigator.language).split('-')[0];
 
+
+        service.init = function() {
+            service.setCurrentLanguage(service.getCurrentLanguage());
+            scheduleCacheInvalidation();
+        };
 
         service.setCurrentLanguage = function(value) {
             language = value;
@@ -33,7 +38,7 @@
                 dictionary[currentLang] = cache;
             } else {
                 $http({ method: "GET", url: url, cache: false })
-                    .success(function(data) { successCallback(currentLang, data); })
+                    .success(function(data) { getStringsSuccess(currentLang, data); })
                     .error(function() {
                         // TODO: Error logging
                     });
@@ -49,6 +54,47 @@
             return '';
         };
 
+        function scheduleCacheInvalidation() {
+            $http({ method: "GET", url: '/strings/config', cache: false })
+                .success(getConfigSuccess)
+                .error(function() {
+                    // TODO: Error logging
+                });
+        }
+
+        function getConfigSuccess(data) {
+            $interval(checkStringVersions, data.invalidationTimeout, 0, false);
+        }
+
+        function checkStringVersions() {
+            $http({ method: "GET", url: '/strings/versions', cache: false })
+                .success(getVersionsSuccess)
+                .error(function() {
+                    // TODO: Error logging
+                });
+        }
+
+
+        function getVersionsSuccess(data) {
+            Object.values(dictionary).forEach(function(cache) {
+                var versionInfo = data.versions.filter(function(el) {
+                    return el.locale === cache.locale;
+                });
+                if (versionInfo && versionInfo.version !== cache.version) {
+                    loadStringsForLocale(cache.language);
+                }
+            });
+        }
+
+        function loadStringsForLocale(locale) {
+
+            $http({ method: "GET", url: '/strings/localized/' + locale, cache: false })
+                .success(function(data) { getStringsSuccess(locale, data); })
+                .error(function() {
+                    // TODO: Error logging
+                });
+        }
+
         function getStringsFromCache() {
             var cache = angular.fromJson(localStorageService.get(getStringsStorageKey()));
             if (!!cache && Object.keys(cache.strings).length > 0) {
@@ -58,7 +104,7 @@
             return null;
         }
 
-        function successCallback(lang, data) {
+        function getStringsSuccess(lang, data) {
             var strings = {};
             data.strings.forEach(function(el) {
                 strings[el.key] = el.value;
@@ -67,6 +113,7 @@
             var cache = {
                 locale: data.locale,
                 language: lang,
+                version: data.version,
                 strings: strings
             };
             dictionary[lang] = cache;

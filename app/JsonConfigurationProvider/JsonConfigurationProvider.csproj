@@ -50,7 +50,7 @@
     <Compile Include="ConfigSections.cs" />
     <Compile Include="ConfigTargetProvider.cs" />
     <Compile Include="IConfigTargetProvider.cs" />
-    <Compile Include="IJsonConfigProvider.cs" />
+    <Compile Include="IConfigProvider.cs" />
     <Compile Include="JsonConfigProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

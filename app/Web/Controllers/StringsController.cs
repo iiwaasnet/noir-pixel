@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Diagnostics;
+using JsonConfigurationProvider;
+using Web.Components.Configuration;
 using Web.Components.Localization;
 
 namespace Web.Controllers
@@ -11,11 +13,15 @@ namespace Web.Controllers
     {
         private readonly ILocalizedStrings localizedStrings;
         private readonly ILogger logger;
+        private readonly IConfigProvider configProvider;
+        private readonly StringsCacheConfiguration config;
 
-        public StringsController(ILocalizedStrings localizedStrings, ILogger logger)
+        public StringsController(ILocalizedStrings localizedStrings, IConfigProvider configProvider, ILogger logger)
         {
             this.logger = logger;
+            this.configProvider = configProvider;
             this.localizedStrings = localizedStrings;
+            config = configProvider.GetConfiguration<StringsCacheConfiguration>();
         }
 
         [HttpGet]
@@ -50,11 +56,25 @@ namespace Web.Controllers
         {
             return new CustomJsonResult
                    {
-                       Data = localizedStrings
-                           .GetSupportedLocales()
-                           .Select(locale => new { Locale = locale, Version = "1" })
-                           .ToArray()
+                       Data = new
+                              {
+                                  Versions = localizedStrings.GetSupportedLocales()
+                                                             .Select(locale => new {Locale = locale, Version = "1"})
+                                                             .ToArray()
+                              }
                    };
+        }
+
+        [HttpGet]
+        public ActionResult Config()
+        {
+            return new CustomJsonResult
+            {
+                Data = new
+                {
+                    InvalidationTimeout = config.InvalidationTimeout.TotalMilliseconds
+                }
+            };
         }
 
         private IEnumerable<LocalizedStringCollection> GetStringsForAllLocales()

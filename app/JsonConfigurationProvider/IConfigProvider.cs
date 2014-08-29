@@ -1,6 +1,6 @@
 ﻿namespace JsonConfigurationProvider
 {
-    public interface IJsonConfigProvider
+    public interface IConfigProvider
     {
         T GetConfiguration<T>()
             where T : class, new();

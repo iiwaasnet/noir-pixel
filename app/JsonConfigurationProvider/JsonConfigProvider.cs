@@ -2,17 +2,28 @@
 using System.Collections.Concurrent;
 using System.Linq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 
 namespace JsonConfigurationProvider
 {
-    public class JsonConfigProvider : IJsonConfigProvider
+    public class JsonConfigProvider : IConfigProvider
     {
         private readonly string baseDir;
         private readonly string target;
         private readonly ConcurrentDictionary<string, ConcurrentDictionary<Type, object>> configurations;
         private readonly ConcurrentDictionary<string, ConfigFileMetadata> metadatas;
-
         private volatile bool configLoaded;
+        private static readonly JsonSerializerSettings jsonSerializerSettings;
+
+        static JsonConfigProvider()
+        {
+            jsonSerializerSettings = new JsonSerializerSettings
+                                     {
+                                         ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                                         Converters = {new JavaScriptDateTimeConverter()}
+                                     };
+        }
 
         public JsonConfigProvider(IConfigTargetProvider targetProvider)
             : this(targetProvider, AppDomain.CurrentDomain.BaseDirectory)
@@ -84,7 +95,7 @@ namespace JsonConfigurationProvider
                     var config = new T();
                     foreach (var section in metadata.Sections)
                     {
-                        JsonConvert.PopulateObject(section.SectionData, config);
+                        JsonConvert.PopulateObject(section.SectionData, config, jsonSerializerSettings);
                         if (section.SectionName == target || NoExplicitTargetSection(target, metadata))
                         {
                             return config;
