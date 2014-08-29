@@ -26,8 +26,7 @@
 
         service.loadStrings = function() {
             var currentLang = service.getCurrentLanguage(),
-                cache,
-                url = '/strings/localized/' + currentLang;
+                cache;
 
             cache = dictionary[currentLang];
             if (!cache || Object.keys(cache.strings).length === 0) {
@@ -37,11 +36,7 @@
             if (!!cache) {
                 dictionary[currentLang] = cache;
             } else {
-                $http({ method: "GET", url: url, cache: false })
-                    .success(function(data) { getStringsSuccess(currentLang, data); })
-                    .error(function() {
-                        // TODO: Error logging
-                    });
+                loadStringsForLocale(currentLang);
             }
         };
 
