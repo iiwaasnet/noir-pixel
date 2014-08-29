@@ -13,13 +13,11 @@ namespace Web.Controllers
     {
         private readonly ILocalizedStrings localizedStrings;
         private readonly ILogger logger;
-        private readonly IConfigProvider configProvider;
         private readonly StringsCacheConfiguration config;
 
         public StringsController(ILocalizedStrings localizedStrings, IConfigProvider configProvider, ILogger logger)
         {
             this.logger = logger;
-            this.configProvider = configProvider;
             this.localizedStrings = localizedStrings;
             config = configProvider.GetConfiguration<StringsCacheConfiguration>();
         }

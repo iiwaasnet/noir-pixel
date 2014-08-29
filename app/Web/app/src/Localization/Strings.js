@@ -71,10 +71,11 @@
 
 
         function getVersionsSuccess(data) {
-            Object.values(dictionary).forEach(function(cache) {
+            Object.keys(dictionary).forEach(function (lang) {
+                var cache = dictionary[lang];
                 var versionInfo = data.versions.filter(function(el) {
                     return el.locale === cache.locale;
-                });
+                })[0];
                 if (versionInfo && versionInfo.version !== cache.version) {
                     loadStringsForLocale(cache.language);
                 }
