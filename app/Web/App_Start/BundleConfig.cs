@@ -6,7 +6,7 @@ namespace Web
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
-            var angular = new ScriptBundle("~/bundles/angular")
+            var angular = new Bundle("~/bundles/angular")
                 .Include("~/app/vendor/angular.min.js")
                 .Include("~/app/vendor/angular-route.min.js");
             angular.Transforms.Clear();

@@ -1,4 +1,4 @@
-﻿npApp.config(function($routeProvider, $locationProvider) {
+﻿npApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     $routeProvider
         .when('/', {
             templateUrl: '/app/src/Home/Home.html',
@@ -14,4 +14,4 @@
 
     $locationProvider.html5Mode(true);
 
-});
+}]);
