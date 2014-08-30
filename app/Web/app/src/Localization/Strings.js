@@ -9,9 +9,10 @@
                 || ($window.navigator.userLanguage || $window.navigator.language).split('-')[0];
 
 
-        service.init = function() {
+        service.init = function () {
             service.setCurrentLanguage(service.getCurrentLanguage());
             scheduleCacheInvalidation();
+            nonFunction();
         };
 
         service.setCurrentLanguage = function(value) {
