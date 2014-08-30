@@ -18,8 +18,9 @@
         
         @RenderPage("~/app/src/Layout/Footer/Footer.cshtml")
     
+        @Scripts.Render("~/bundles/vendor-native")
         @Scripts.Render("~/bundles/angular")
-        @Scripts.Render("~/bundles/vendor")
+        @Scripts.Render("~/bundles/vendor-ng")
         @*@Scripts.Render("~/bundles/vendor-min")*@
         @Scripts.Render("~/bundles/app")
         @*@RenderSection("scripts", required: false)*@

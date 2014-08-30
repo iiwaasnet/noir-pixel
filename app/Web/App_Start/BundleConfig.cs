@@ -12,9 +12,13 @@ namespace Web
             angular.Transforms.Clear();
             bundles.Add(angular);
 
-            var vendor = new ScriptBundle("~/bundles/vendor")
+            var vendorNative = new ScriptBundle("~/bundles/vendor-native")
+                .Include("~/app/vendor/stacktrace.js");
+            bundles.Add(vendorNative);
+
+            var vendorNg = new ScriptBundle("~/bundles/vendor-ng")
                 .Include("~/app/vendor/angular-local-storage.js");
-            bundles.Add(vendor);
+            bundles.Add(vendorNg);
             //var vendorMin = new ScriptBundle("~/bundles/vendor-min")
             //    .Include("~/app/vendor/*.min.js");
             //vendorMin.Transforms.Clear();

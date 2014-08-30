@@ -187,6 +187,7 @@
     <Content Include="app\vendor\angular-route.min.js" />
     <Content Include="app\vendor\angular.js" />
     <Content Include="app\vendor\angular.min.js" />
+    <Content Include="app\vendor\stacktrace.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
