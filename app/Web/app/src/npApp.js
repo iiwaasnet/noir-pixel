@@ -1,6 +1,11 @@
 ﻿var npApp = angular.module('npApp', ['ngRoute', 'LocalStorageModule', 'npLogging'])
     .run([
-        'Strings', function(Strings) {
-            Strings.init();
+        'Strings', 'ApplicationLogging', function (Strings, ApplicationLogging) {
+            try {
+                Strings.init();
+            } catch (e) {
+                ApplicationLogging.error(e);
+            }
+
         }
     ]);

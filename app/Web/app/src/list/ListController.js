@@ -2,5 +2,6 @@
     function() {
         var ctrl = this;
         ctrl.items = [1, 2, 3];
+        nonFunction();
     }
 ]);

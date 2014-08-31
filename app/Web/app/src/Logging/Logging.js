@@ -11,12 +11,13 @@
 
                 try {
                     var errorMessage = exception.toString();
-
                     var stackTrace = Trace.print({ exception: exception });
 
                     $httpBackend('POST',
                         'http://api.logging.noir-pixel.com/logging/error',
-                        { 'Content-Type': 'application/json' },
+                        {
+                            'Content-Type': 'application/json',
+                        },
                         angular.toJson({
                             url: $window.location.href,
                             message: errorMessage,
@@ -29,24 +30,26 @@
                         }
                     );
 
-                } catch (loggingError) {
+                } catch (e) {
                     $log.warn("Error server-side logging failed");
-                    $log.log(loggingError);
+                    $log.log(e);
                 }
             }
 
             return error;
         }
     ])
-    .factory("ApplicationLogging", [
-            "$log", "$window", function($log, $window) {
+    .factory('ApplicationLogging', [
+            '$log', '$window', '$httpBackend', function($log, $window, $httpBackend) {
                 return ({
                     error: function(message) {
                         $log.error.apply($log, arguments);
 
                         $httpBackend('POST',
                             'http://api.logging.noir-pixel.com/logging/error',
-                            { 'Content-Type': 'application/json' },
+                            {
+                                'Content-Type': 'application/json',
+                            },
                             angular.toJson({
                                 url: $window.location.href,
                                 message: message,
@@ -62,7 +65,9 @@
 
                         $httpBackend('POST',
                             'http://api.logging.noir-pixel.com/logging/debug',
-                            { 'Content-Type': 'application/json' },
+                            {
+                                'Content-Type': 'application/json',
+                            },
                             angular.toJson({
                                 url: $window.location.href,
                                 message: message,
@@ -77,7 +82,7 @@
             }
         ]
     )
-    .provider("$exceptionHandler", {
+    .provider('$exceptionHandler', {
             $get: function(ExceptionLogging) {
                 return (ExceptionLogging);
             }

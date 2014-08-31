@@ -12,7 +12,6 @@
         service.init = function () {
             service.setCurrentLanguage(service.getCurrentLanguage());
             scheduleCacheInvalidation();
-            nonFunction();
         };
 
         service.setCurrentLanguage = function(value) {
