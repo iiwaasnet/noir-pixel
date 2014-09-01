@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using Api.Logging.Models;
+using Api.Logging.Providers;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
-using Api.Logging.Providers;
-using Api.Logging.Models;
 
 namespace Api.Logging
 {
@@ -34,13 +30,13 @@ namespace Api.Logging
             // Configure the application for OAuth based flow
             PublicClientId = "self";
             OAuthOptions = new OAuthAuthorizationServerOptions
-            {
-                TokenEndpointPath = new PathString("/Token"),
-                Provider = new ApplicationOAuthProvider(PublicClientId),
-                AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
-                AllowInsecureHttp = true
-            };
+                           {
+                               TokenEndpointPath = new PathString("/Token"),
+                               Provider = new ApplicationOAuthProvider(PublicClientId),
+                               AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
+                               AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
+                               AllowInsecureHttp = true
+                           };
 
             // Enable the application to use bearer tokens to authenticate users
             app.UseOAuthBearerTokens(OAuthOptions);
