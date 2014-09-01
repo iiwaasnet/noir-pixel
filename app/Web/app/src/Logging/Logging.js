@@ -5,7 +5,7 @@
         }
     ])
     .factory('ExceptionLogging', [
-        '$log', '$window', '$httpBackend', 'Trace', function ($log, $window, $httpBackend, Trace) {
+        '$log', '$window', '$httpBackend', 'Trace', function($log, $window, $httpBackend, Trace) {
             function error(exception, cause) {
                 $log.error.apply($log, arguments);
 
@@ -13,66 +13,19 @@
                     var errorMessage = exception.toString();
                     var stackTrace = Trace.print({ exception: exception });
 
-                    //var $http = $injector.get('$http');
-
-                    //$http({
-                    //        method: 'OPTIONS',
-                    //        url: 'http://api.logging.noir-pixel.com/logging/error',
-                    //        headers: {
-                    //            Origin: 'http://noir-pixel.com',
-                    //            'Access-Control-Request-Method': 'POST',
-                    //            'Access-Control-Request-Headers': 'X-PINGOTHER'
-                    //        }
-                    //    })
-                    //    .success(function(data, status) {
-                    //        //TODO
-                    //    })
-                    //    .error(function(data, status) {
-                    //        // TODO: Error logging
-                    //    });
-
-                    //$http({
-                    //        method: 'POST',
-                    //        url: 'http://api.logging.noir-pixel.com/logging/error',
-                    //        data: angular.toJson({
-                    //            url: $window.location.href,
-                    //            message: errorMessage,
-                    //            type: "exception",
-                    //            stackTrace: stackTrace,
-                    //            cause: (cause || "")
-                    //        })
-                    //    })
-                    //    .success(function(data, status) {
-                    //        //TODO
-                    //    })
-                    //    .error(function(data, status) {
-                    //        // TODO: Error logging
-                    //    });
-
-                    //$httpBackend('OPTIONS',
-                    //    'http://api.logging.noir-pixel.com/logging/error',
-                    //    {
-                    //        'Access-Control-Request-Method': 'POST',
-                    //        Origin: 'http://noir-pixel.com'
-                    //    },
-                    //    function(status, resp, headerString) {
-                    //        $log.log('Logging failed!', status, resp, headerString);
-                    //    }
-                    //);
-
-                    var data = angular.toJson({
-                        url: $window.location.href,
-                        message: errorMessage,
-                        type: 'exception',
-                        stackTrace: stackTrace,
-                        cause: (cause || '')
-                    });
-
                     $httpBackend('POST',
                         'http://api.logging.noir-pixel.com/logging/error',
-                        data,
+                        angular.toJson({
+                            url: $window.location.href,
+                            message: errorMessage,
+                            type: 'exception',
+                            stackTrace: stackTrace,
+                            cause: (cause || '')
+                        }),
                         function(status, resp, headerString) {
-                            $log.log('Logging failed!', status, resp, headerString);
+                            if (status !== 200) {
+                                $log.log(status, resp, headerString);
+                            }
                         },
                         {
                             'Content-Type': 'application/json',
@@ -89,23 +42,29 @@
         }
     ])
     .factory('ApplicationLogging', [
-            '$log', '$window', '$httpBackend', function($log, $window, $httpBackend) {
-                return ({
-                    error: function(message) {
+            '$log', '$window', '$httpBackend', 'Trace' ,function($log, $window, $httpBackend, Trace) {
+                var logger = {
+                    error: function(error) {
                         $log.error.apply($log, arguments);
+
+                        var message = error,
+                            stackTrace = '';
+                        if (error && typeof error === 'object') {
+                            message = error.toString();
+                            stackTrace = Trace.print({ exception: error });
+                        }
 
                         $httpBackend('POST',
                             'http://api.logging.noir-pixel.com/logging/error',
-                            {
-                                'Content-Type': 'application/json',
-                            },
                             angular.toJson({
                                 url: $window.location.href,
                                 message: message,
-                                type: "error"
+                                stackTrace: stackTrace,
+                                type: 'error'
                             }),
-                            function(status, resp, headerString) {
-                                $log.log('Logging failed!', status, resp, headerString);
+                            responseLogging,
+                            {
+                                'Content-Type': 'application/json',
                             }
                         );
                     },
@@ -114,20 +73,28 @@
 
                         $httpBackend('POST',
                             'http://api.logging.noir-pixel.com/logging/debug',
-                            {
-                                'Content-Type': 'application/json',
-                            },
                             angular.toJson({
                                 url: $window.location.href,
                                 message: message,
-                                type: "debug"
+                                type: 'debug'
                             }),
-                            function(status, resp, headerString) {
-                                $log.log('Logging failed!', status, resp, headerString);
+                            responseLogging,
+                            {
+                                'Content-Type': 'application/json',
                             }
                         );
                     }
-                });
+
+                    
+                };
+
+                function responseLogging(status, resp, headerString) {
+                    if (status !== 200) {
+                        $log.log(status, resp, headerString);
+                    }
+                }
+
+                return logger;
             }
         ]
     )

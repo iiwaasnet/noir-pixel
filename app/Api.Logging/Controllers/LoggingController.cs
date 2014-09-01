@@ -10,7 +10,13 @@ namespace Api.Logging.Controllers
     public class LoggingController : ApiController
     {
         [Route("error")]
-        public async Task<IHttpActionResult> Error(ErrorLoggingModel error)
+        public async Task<IHttpActionResult> Error(ApplicationLoggingModel error)
+        {
+            return Ok();
+        }
+        
+        [Route("debug")]
+        public async Task<IHttpActionResult> Debug(ApplicationLoggingModel debug)
         {
             return Ok();
         }
