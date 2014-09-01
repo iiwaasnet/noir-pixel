@@ -2,12 +2,11 @@
 using System.Web.Http;
 using System.Web.Http.Cors;
 using Api.Logging.Models;
-using Newtonsoft.Json.Serialization;
 
 namespace Api.Logging.Controllers
 {
     [RoutePrefix("logging")]
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [EnableCors(origins: "http://noir-pixel.com", headers: "*", methods: "GET, POST")]
     public class LoggingController : ApiController
     {
         [Route("error")]
