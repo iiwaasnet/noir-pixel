@@ -68,8 +68,6 @@
                         cause: (cause || '')
                     });
 
-                    data = angular.toJson({bla: 'bla'});
-
                     $httpBackend('POST',
                         'http://api.logging.noir-pixel.com/logging/error',
                         data,
