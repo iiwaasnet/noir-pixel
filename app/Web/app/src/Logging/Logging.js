@@ -10,8 +10,8 @@
         }
     ])
     .factory('ApplicationLogging', [
-            '$log', '$window', '$httpBackend', 'Trace', 'ApplicationLoggingConfig','Url',
-            function ($log, $window, $httpBackend, Trace, ApplicationLoggingConfig, Url) {
+            '$log', '$window', '$httpBackend', 'Trace', 'ApplicationLoggingConfig', 'Url',
+            function($log, $window, $httpBackend, Trace, ApplicationLoggingConfig, Url) {
                 var config = ApplicationLoggingConfig;
 
                 var logger = {
