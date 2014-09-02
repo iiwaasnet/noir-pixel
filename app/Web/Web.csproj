@@ -182,6 +182,8 @@
     <Content Include="app\src\Localization\Strings.js" />
     <Content Include="app\src\npApp.js" />
     <Content Include="app\src\Routes.js" />
+    <Content Include="app\src\Utils\npUtils.js" />
+    <Content Include="app\src\Utils\Url.js" />
     <Content Include="app\vendor\angular-local-storage.js" />
     <Content Include="app\vendor\angular-mocks.js" />
     <Content Include="app\vendor\angular-route.js" />

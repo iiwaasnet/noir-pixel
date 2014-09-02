@@ -1,11 +1,19 @@
-﻿var npLogging = angular.module('npLogging', [])
+﻿var npLogging = angular.module('npLogging', ['npUtils'])
+    .constant('ApplicationLoggingConfig', {
+        loggingApiUri: 'api.logging.noir-pixel.com/logging',
+        errorUri: 'error',
+        debugUri: 'debug'
+    })
     .factory('Trace', [
         function() {
             return { print: printStackTrace };
         }
     ])
     .factory('ApplicationLogging', [
-            '$log', '$window', '$httpBackend', 'Trace', function($log, $window, $httpBackend, Trace) {
+            '$log', '$window', '$httpBackend', 'Trace', 'ApplicationLoggingConfig','Url',
+            function ($log, $window, $httpBackend, Trace, ApplicationLoggingConfig, Url) {
+                var config = ApplicationLoggingConfig;
+
                 var logger = {
                     error: function(exception, cause) {
                         $log.error.apply($log, arguments);
@@ -17,7 +25,7 @@
                                 stackTrace = Trace.print({ exception: exception });
                             }
                             $httpBackend('POST',
-                                'http://api.logging.noir-pixel.com/logging/error',
+                                Url.combine([config.loggingApiUri, config.errorUri]),
                                 angular.toJson({
                                     url: $window.location.href,
                                     message: errorMessage,
@@ -40,7 +48,7 @@
                         $log.log.apply($log, arguments);
 
                         $httpBackend('POST',
-                            'http://api.logging.noir-pixel.com/logging/debug',
+                            Url.combine([config.loggingApiUri, config.debug]),
                             angular.toJson({
                                 url: $window.location.href,
                                 message: message,
