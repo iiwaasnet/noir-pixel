@@ -3,7 +3,7 @@
         var service = this,
             protocolMatch = new RegExp('^http(s|)', 'i');
 
-        service.combine = function(parts) {
+        service.build = function(parts) {
             if (!parts || !(parts instanceof Array)) {
                 throw '[parts] is either null or not an Array!';
             }

@@ -57,7 +57,7 @@
 
                 function sendLoggingRequest(data) {
                     $httpBackend('POST',
-                        Url.combine([config.loggingUri]),
+                        Url.build([config.loggingUri]),
                         angular.toJson(data),
                         responseLogging,
                         {
