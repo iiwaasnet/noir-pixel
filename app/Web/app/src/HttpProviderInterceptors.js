@@ -1,5 +1,6 @@
 ﻿npApp.constant('HttpProviderConfig', {
-        interceptStatuses: [500]
+    interceptStatuses: [500],
+    maxDataLength: 200
     })
     .config([
         '$httpProvider', function($httpProvider) {
@@ -26,7 +27,7 @@
                             return 'method: ' + error.method.toUpperCase()
                                 + ' url: ' + error.url
                                 + ' status: ' + error.status
-                                + ' data: ' + error.message.substring(0, 200);
+                                + ' data: ' + error.message.substring(0, HttpProviderConfig.maxDataLength);
                         }
 
                         return error;
