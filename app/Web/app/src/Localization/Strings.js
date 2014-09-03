@@ -1,6 +1,12 @@
-﻿npApp.service('Strings', [
-    '$http', '$rootScope', '$window', '$interval', 'localStorageService',
-    function($http, $rootScope, $window, $interval, localStorageService) {
+﻿npApp
+    .constant('StringsConfig', {
+        configUri: '/strings/config',
+        versionsUri: '/strings/versions',
+        localizedUri: '/strings/localized/'
+    })
+    .service('Strings', [
+    '$http', '$rootScope', '$window', '$interval', 'localStorageService', 'StringsConfig',
+    function ($http, $rootScope, $window, $interval, localStorageService, StringsConfig) {
         var service = this,
             dictionary = {},
             stringsLoaded = false,
@@ -12,7 +18,6 @@
         service.init = function () {
             service.setCurrentLanguage(service.getCurrentLanguage());
             scheduleCacheInvalidation();
-            errorFunc();
         };
 
         service.setCurrentLanguage = function(value) {
@@ -51,7 +56,7 @@
         };
 
         function scheduleCacheInvalidation() {
-            $http({ method: "GET", url: '/strings/config', cache: false })
+            $http({ method: "GET", url: StringsConfig.configUri, cache: false })
                 .success(getConfigSuccess)
                 .error(function() {
                     // TODO: Error logging
@@ -63,7 +68,7 @@
         }
 
         function checkStringVersions() {
-            $http({ method: "GET", url: '/strings/versions', cache: false })
+            $http({ method: "GET", url: StringsConfig.versionsUri, cache: false })
                 .success(getVersionsSuccess)
                 .error(function() {
                     // TODO: Error logging
@@ -85,7 +90,7 @@
 
         function loadStringsForLocale(locale) {
 
-            $http({ method: "GET", url: '/strings/localized/' + locale, cache: false })
+            $http({ method: "GET", url: StringsConfig.localizedUri + locale, cache: false })
                 .success(function(data) { getStringsSuccess(locale, data); })
                 .error(function() {
                     // TODO: Error logging
