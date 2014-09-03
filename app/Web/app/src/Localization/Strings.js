@@ -91,10 +91,10 @@
         function loadStringsForLocale(locale) {
 
             $http({ method: "GET", url: StringsConfig.localizedUri + locale, cache: false })
-                .success(function(data) { getStringsSuccess(locale, data); })
-                .error(function() {
-                    // TODO: Error logging
-                });
+                .success(function(data) { getStringsSuccess(locale, data); });
+                //.error(function() {
+                //    // TODO: Error logging
+                //});
         }
 
         function getStringsFromCache() {

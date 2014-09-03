@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using Diagnostics;
 using JsonConfigurationProvider;
@@ -34,6 +36,8 @@ namespace Web.Controllers
         [HttpGet]
         public ActionResult Localized(string lang)
         {
+            return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+
             object strings;
             try
             {

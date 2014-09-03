@@ -24,7 +24,17 @@ namespace Web
             //vendorMin.Transforms.Clear();
             //bundles.Add(vendorMin);
 
-            bundles.Add(new ScriptBundle("~/bundles/app").IncludeDirectory("~/app/src", "*.js", true));
+            bundles.Add(new ScriptBundle("~/bundles/app")
+                            .IncludeDirectory("~/app/src/Utils", "*.js", true)
+                            .IncludeDirectory("~/app/src/Logging", "*.js", true)
+                            .Include("~/app/src/npApp.js")
+                            .Include("~/app/src/HttpProviderInterceptors.js")
+                            .Include("~/app/src/Routes.js")
+                            .IncludeDirectory("~/app/src/Localization", "*.js", true)
+                            .IncludeDirectory("~/app/src/Layout", "*.js", true)
+                            .IncludeDirectory("~/app/src/Home", "*.js", true)
+                            .IncludeDirectory("~/app/src/List", "*.js", true)
+                );
 
 #if DEBUG
             BundleTable.EnableOptimizations = false;
