@@ -22,7 +22,7 @@ namespace Web
                             .IncludeDirectory("~/app/src/Utils", "*.js", true)
                             .IncludeDirectory("~/app/src/Logging", "*.js", true)
                             .Include("~/app/src/npApp.js")
-                            .Include("~/app/src/HttpProviderInterceptors.js")
+                            .IncludeDirectory("~/app/src/Interceptors", "*.js", true)
                             .Include("~/app/src/Routes.js")
                             .IncludeDirectory("~/app/src/Localization", "*.js", true)
                             .IncludeDirectory("~/app/src/Layout", "*.js", true)

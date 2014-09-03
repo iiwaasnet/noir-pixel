@@ -5,8 +5,8 @@
     .config([
         '$httpProvider', function($httpProvider) {
             $httpProvider.interceptors.push([
-                '$rootScope', '$q', '$injector', '$location', 'ApplicationLogging', 'HttpProviderConfig',
-                function($rootScope, $q, $injector, $location, ApplicationLogging, HttpProviderConfig) {
+                '$q', 'ApplicationLogging', 'HttpProviderConfig',
+                function($q, ApplicationLogging, HttpProviderConfig) {
                     function responseError(response) {
                         if (response && HttpProviderConfig.interceptStatuses.indexOf(response.status) > -1) {
                             ApplicationLogging.error(createError(response));
