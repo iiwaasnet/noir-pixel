@@ -5,8 +5,8 @@
         localizedUri: '/strings/localized/'
     })
     .service('Strings', [
-    '$http', '$rootScope', '$window', '$interval', 'localStorageService', 'StringsConfig',
-    function ($http, $rootScope, $window, $interval, localStorageService, StringsConfig) {
+    '$http', '$rootScope', '$window', '$interval', 'localStorageService', 'StringsConfig', 'ApplicationLogging',
+    function ($http, $rootScope, $window, $interval, localStorageService, StringsConfig, ApplicationLogging) {
         var service = this,
             dictionary = {},
             stringsLoaded = false,
@@ -57,10 +57,7 @@
 
         function scheduleCacheInvalidation() {
             $http({ method: "GET", url: StringsConfig.configUri, cache: false })
-                .success(getConfigSuccess)
-                .error(function() {
-                    // TODO: Error logging
-                });
+                .success(getConfigSuccess);
         }
 
         function getConfigSuccess(data) {
@@ -69,10 +66,7 @@
 
         function checkStringVersions() {
             $http({ method: "GET", url: StringsConfig.versionsUri, cache: false })
-                .success(getVersionsSuccess)
-                .error(function() {
-                    // TODO: Error logging
-                });
+                .success(getVersionsSuccess);
         }
 
 
@@ -92,9 +86,6 @@
 
             $http({ method: "GET", url: StringsConfig.localizedUri + locale, cache: false })
                 .success(function(data) { getStringsSuccess(locale, data); });
-                //.error(function() {
-                //    // TODO: Error logging
-                //});
         }
 
         function getStringsFromCache() {
@@ -126,7 +117,7 @@
             $rootScope.$broadcast('stringsUpdates');
 
             if (lang !== data.locale) {
-                //TODO: logging
+                ApplicationLogging.warn('No Strings defined for language ' + lang + '! Locale ' + data.locale + ' used as fall-back.');
             }
         }
 

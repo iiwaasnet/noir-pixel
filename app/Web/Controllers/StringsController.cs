@@ -36,8 +36,6 @@ namespace Web.Controllers
         [HttpGet]
         public ActionResult Localized(string lang)
         {
-            return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
-
             object strings;
             try
             {

@@ -1,8 +1,6 @@
 ﻿var npLogging = angular.module('npLogging', ['npUtils'])
     .constant('ApplicationLoggingConfig', {
-        loggingApiUri: 'api.logging.noir-pixel.com/logging',
-        errorUri: 'error',
-        debugUri: 'debug'
+        loggingUri: 'api.logging.noir-pixel.com/log/add'
     })
     .factory('Trace', [
         function() {
@@ -24,43 +22,49 @@
                             if (typeof exception === 'object') {
                                 stackTrace = Trace.print({ exception: exception });
                             }
-                            $httpBackend('POST',
-                                Url.combine([config.loggingApiUri, config.errorUri]),
-                                angular.toJson({
-                                    url: $window.location.href,
-                                    message: errorMessage,
-                                    type: 'exception',
-                                    stackTrace: stackTrace,
-                                    cause: (cause || '')
-                                }),
-                                responseLogging,
-                                {
-                                    'Content-Type': 'application/json',
-                                }
-                            );
 
+                            sendLoggingRequest({
+                                url: $window.location.href,
+                                message: errorMessage,
+                                type: 'exception',
+                                stackTrace: stackTrace,
+                                cause: (cause || '')
+                            });
                         } catch (e) {
                             $log.warn("Error server-side logging failed");
                             $log.log(e);
                         }
                     },
                     debug: function(message) {
-                        $log.log.apply($log, arguments);
+                        $log.debug.apply($log, arguments);
 
-                        $httpBackend('POST',
-                            Url.combine([config.loggingApiUri, config.debug]),
-                            angular.toJson({
-                                url: $window.location.href,
-                                message: message,
-                                type: 'debug'
-                            }),
-                            responseLogging,
-                            {
-                                'Content-Type': 'application/json',
-                            }
-                        );
+                        sendLoggingRequest({
+                            url: $window.location.href,
+                            message: message,
+                            type: 'debug'
+                        });
+                    },
+                    warn: function (message) {
+                        $log.warn.apply($log, arguments);
+
+                        sendLoggingRequest({
+                            url: $window.location.href,
+                            message: message,
+                            type: 'warn'
+                        });
                     }
                 };
+
+                function sendLoggingRequest(data) {
+                    $httpBackend('POST',
+                        Url.combine([config.loggingUri]),
+                        angular.toJson(data),
+                        responseLogging,
+                        {
+                            'Content-Type': 'application/json',
+                        }
+                    );
+                }
 
                 function responseLogging(status, resp, headerString) {
                     if (status !== 200) {
