@@ -20,6 +20,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonConfigurationProvider",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Logging", "Api.Logging\Api.Logging.csproj", "{394150E4-5135-4952-8844-2A4FCEA5D99C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "grunt", "grunt", "{8437A769-56D6-4FAA-9B2D-436FC1F79E5E}"
+	ProjectSection(SolutionItems) = preProject
+		Gruntfile.js = Gruntfile.js
+		package.json = package.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

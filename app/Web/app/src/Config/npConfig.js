@@ -1,0 +1,1 @@
+﻿var npConfig = angular.module('npConfig', []);

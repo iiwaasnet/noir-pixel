@@ -1,5 +1,5 @@
 ﻿[
     { PROD: { 
-          InvalidationTimeout:  "00:01:00"
+          invalidationTimeout:  "00:01:00"
       } }
 ]
