@@ -1,3 +1,5 @@
-{
-    environment: 'DEV'
-}
+[
+    {
+        environment: 'DEV'
+    }
+]

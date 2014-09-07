@@ -1,6 +1,5 @@
 ﻿using Autofac;
 using Diagnostics;
-using Logger = NLog.Logger;
 
 namespace Api.Logging
 {

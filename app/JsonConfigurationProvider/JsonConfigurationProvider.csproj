@@ -52,6 +52,7 @@
     <Compile Include="IConfigTargetProvider.cs" />
     <Compile Include="IConfigProvider.cs" />
     <Compile Include="JsonConfigProvider.cs" />
+    <Compile Include="JsonConfigTargetProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

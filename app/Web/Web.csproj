@@ -173,7 +173,9 @@
   <ItemGroup>
     <Content Include="app\assets\np-header.png" />
     <Content Include="app\src\Config\Const.js" />
-    <Content Include="app\src\Config\env\Const.js" />
+    <Content Include="app\src\Config\env\prod.json" />
+    <None Include="app\src\Config\env\dev.json" />
+    <Content Include="app\src\Config\env\Const.tt.js" />
     <Content Include="app\src\Config\npConfig.js" />
     <Content Include="app\src\Home\Home.html" />
     <Content Include="app\src\Home\HomeController.js" />
@@ -276,7 +278,7 @@
     </Content>
     <Content Include="config\StringsCache.config.json" />
     <Content Include="config\Environment.config.json" />
-    <None Include="config\env\Environment.config.json" />
+    <None Include="config\env\Environment.tt.config.json" />
     <Content Include="config\env\prod.json" />
     <Content Include="config\env\dev.json" />
     <None Include="NLog.xsd">
