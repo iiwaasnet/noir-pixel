@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 
 namespace JsonConfigurationProvider
@@ -12,6 +13,7 @@ namespace JsonConfigurationProvider
         private readonly string baseDir;
         private readonly string target;
         private readonly ConcurrentDictionary<string, ConcurrentDictionary<Type, object>> configurations;
+        private readonly ConcurrentDictionary<string, ConcurrentDictionary<string, string>> untypedConfigurations;
         private readonly ConcurrentDictionary<string, ConfigFileMetadata> metadatas;
         private volatile bool configLoaded;
         private static readonly JsonSerializerSettings jsonSerializerSettings;
@@ -35,6 +37,7 @@ namespace JsonConfigurationProvider
             this.baseDir = baseDir;
             target = targetProvider.GetCurrentTarget();
             configurations = new ConcurrentDictionary<string, ConcurrentDictionary<Type, object>>();
+            untypedConfigurations = new ConcurrentDictionary<string, ConcurrentDictionary<string, string>>();
             metadatas = new ConcurrentDictionary<string, ConfigFileMetadata>();
             configLoaded = false;
         }
@@ -50,11 +53,7 @@ namespace JsonConfigurationProvider
         {
             target = target.ToLower();
 
-            if (!configLoaded)
-            {
-                LoadConfiguration();
-                configLoaded = true;
-            }
+            CheckLoadConfiguration();
 
             ConcurrentDictionary<Type, object> configObjects;
             T config;
@@ -75,6 +74,40 @@ namespace JsonConfigurationProvider
             }
 
             return config;
+        }
+
+        public string GetUntypedConfiguration(string name)
+        {
+            return GetUntypedConfiguration(name, target);
+        }
+
+        public string GetUntypedConfiguration(string name, string target)
+        {
+            target = target.ToLower();
+            name = name.ToLower();
+
+            CheckLoadConfiguration();
+
+
+            ConfigFileMetadata metadata;
+            if (!metadatas.TryGetValue(name, out metadata))
+            {
+                throw new Exception(string.Format("Unable to get configuration named {0} for target {1}!", name, target));
+            }
+
+            var config = new JObject();
+            foreach (var section in metadata.Sections)
+            {
+                var tmp = JObject.Parse(section.SectionData);
+                config.Merge(tmp, new JsonMergeSettings{MergeArrayHandling = MergeArrayHandling.Replace});
+
+                if (section.SectionName == target || NoExplicitTargetSection(target, metadata))
+                {
+                    return config.ToString();
+                }
+            }
+
+            return string.Empty;
         }
 
         private static T TryGetConfiguration<T>(ConcurrentDictionary<Type, object> configObjects)
@@ -123,11 +156,20 @@ namespace JsonConfigurationProvider
 
             foreach (var metadata in configFiles.Select(configReader.Parse))
             {
-                if (metadatas.ContainsKey(metadata.Name.ToLower()))
-                {
-                    throw new Exception(string.Format("Configuration {0} is already loaded!", metadata.Name));
-                }
+                //if (metadatas.ContainsKey(metadata.Name.ToLower()))
+                //{
+                //    throw new Exception(string.Format("Configuration {0} is already loaded!", metadata.Name));
+                //}
                 metadatas[metadata.Name.ToLower()] = metadata;
+            }
+        }
+
+        private void CheckLoadConfiguration()
+        {
+            if (!configLoaded)
+            {
+                LoadConfiguration();
+                configLoaded = true;
             }
         }
     }

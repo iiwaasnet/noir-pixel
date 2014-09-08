@@ -30,7 +30,7 @@ namespace JsonConfigurationProvider
                 var sections = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(content, jsonSerializerSettings);
                 return new ConfigFileMetadata
                        {
-                           Name = configFile.Name,
+                           Name = configFile.NameWithoutExtension(),
                            Sections = sections.Select(s => new ConfigSections
                                                            {
                                                                SectionName = s.Keys.First(),

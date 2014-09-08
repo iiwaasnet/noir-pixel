@@ -21,12 +21,12 @@ module.exports = function(grunt) {
                     {
                         expand: false,
                         flatten: true,
-                        src: ['./web/config/env/Environment.tt.config.json'],
+                        src: ['./web/config/env/Environment.config.tt'],
                         dest: './Web/config/Environment.config.json'
                     }, {
                         expand: false,
                         flatten: false,
-                        src: ['./web/app/src/config/env/Const.tt.js'],
+                        src: ['./web/app/src/config/env/Const.tt'],
                         dest: './web/app/src/config/Const.js'
                     }
                 ]
@@ -45,12 +45,12 @@ module.exports = function(grunt) {
                     {
                         expand: false,
                         flatten: true,
-                        src: ['./web/config/env/Environment.tt.config.json'],
+                        src: ['./web/config/env/Environment.config.tt'],
                         dest: './Web/config/Environment.config.json'
                     }, {
                         expand: false,
                         flatten: true,
-                        src: ['./web/app/src/config/env/Const.tt.js'],
+                        src: ['./web/app/src/config/env/Const.tt'],
                         dest: './web/app/src/config/Const.js'
                     }
                 ]

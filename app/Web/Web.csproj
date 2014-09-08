@@ -53,6 +53,10 @@
       <HintPath>..\packages\Autofac.Owin.3.0.1\lib\net45\Autofac.Integration.Owin.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.3.1.0.0\lib\net45\NLog.dll</HintPath>
     </Reference>
@@ -127,9 +131,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
@@ -175,7 +176,10 @@
     <Content Include="app\src\Config\Const.js" />
     <Content Include="app\src\Config\env\prod.json" />
     <None Include="app\src\Config\env\dev.json" />
-    <Content Include="app\src\Config\env\Const.tt.js" />
+    <None Include="app\src\Config\env\Const.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Const1.cs</LastGenOutput>
+    </None>
     <Content Include="app\src\Config\npConfig.js" />
     <Content Include="app\src\Home\Home.html" />
     <Content Include="app\src\Home\HomeController.js" />
@@ -278,12 +282,18 @@
     </Content>
     <Content Include="config\StringsCache.config.json" />
     <Content Include="config\Environment.config.json" />
-    <None Include="config\env\Environment.tt.config.json" />
+    <None Include="config\env\Environment.config.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Environment.config1.cs</LastGenOutput>
+    </None>
     <Content Include="config\env\prod.json" />
     <Content Include="config\env\dev.json" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -325,8 +335,8 @@
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="AfterBuild">
   </Target> -->
-  <Target Name="BeforeBuild">
+  <!--<Target Name="BeforeBuild">
     <WriteLinesToFile File="$(OutputPath)\build-target.config" Lines="$(Configuration)" Overwrite="true">
     </WriteLinesToFile>
-  </Target>
+  </Target>-->
 </Project>

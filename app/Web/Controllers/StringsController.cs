@@ -22,6 +22,7 @@ namespace Web.Controllers
             this.logger = logger;
             this.localizedStrings = localizedStrings;
             config = configProvider.GetConfiguration<StringsCacheConfiguration>();
+            configProvider.GetUntypedConfiguration("StringsCache");
         }
 
         [HttpGet]
