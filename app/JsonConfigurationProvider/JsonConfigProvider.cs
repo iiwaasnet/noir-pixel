@@ -88,26 +88,55 @@ namespace JsonConfigurationProvider
 
             CheckLoadConfiguration();
 
-
-            ConfigFileMetadata metadata;
-            if (!metadatas.TryGetValue(name, out metadata))
+            string stringifiedConfig;
+            ConcurrentDictionary<string, string> configObjects;
+            if (!untypedConfigurations.TryGetValue(target, out configObjects) || string.IsNullOrEmpty(stringifiedConfig = TryGetUntypedConfiguration(configObjects, name)))
             {
-                throw new Exception(string.Format("Unable to get configuration named {0} for target {1}!", name, target));
+                stringifiedConfig = TryGetUntypedConfiguration(target, name);
+                if (string.IsNullOrEmpty(stringifiedConfig))
+                {
+                    throw new Exception(string.Format("Unable to get configuration named {0} for target {1}!", name, target));
+                }
+
+                if (configObjects == null)
+                {
+                    configObjects = new ConcurrentDictionary<string, string>();
+                    untypedConfigurations[target] = configObjects;
+                }
+                configObjects[name] = stringifiedConfig;
             }
 
-            var config = new JObject();
-            foreach (var section in metadata.Sections)
-            {
-                var tmp = JObject.Parse(section.SectionData);
-                config.Merge(tmp, new JsonMergeSettings{MergeArrayHandling = MergeArrayHandling.Replace});
+            return stringifiedConfig;
+        }
 
-                if (section.SectionName == target || NoExplicitTargetSection(target, metadata))
+        private string TryGetUntypedConfiguration(string target, string name)
+        {
+            var config = new JObject();
+            ConfigFileMetadata metadata;
+
+            if (metadatas.TryGetValue(name, out metadata))
+            {
+                foreach (var section in metadata.Sections)
                 {
-                    return config.ToString();
+                    var tmp = JObject.Parse(section.SectionData);
+                    config.Merge(tmp, new JsonMergeSettings {MergeArrayHandling = MergeArrayHandling.Replace});
+
+                    if (section.SectionName == target || NoExplicitTargetSection(target, metadata))
+                    {
+                        return config.ToString();
+                    }
                 }
             }
 
-            return string.Empty;
+            return null;
+        }
+
+        private static string TryGetUntypedConfiguration(ConcurrentDictionary<string, string> configObjects, string name)
+        {
+            string config;
+            configObjects.TryGetValue(name, out config);
+
+            return config;
         }
 
         private static T TryGetConfiguration<T>(ConcurrentDictionary<Type, object> configObjects)
@@ -156,10 +185,6 @@ namespace JsonConfigurationProvider
 
             foreach (var metadata in configFiles.Select(configReader.Parse))
             {
-                //if (metadatas.ContainsKey(metadata.Name.ToLower()))
-                //{
-                //    throw new Exception(string.Format("Configuration {0} is already loaded!", metadata.Name));
-                //}
                 metadatas[metadata.Name.ToLower()] = metadata;
             }
         }

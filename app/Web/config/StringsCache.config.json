@@ -1,13 +1,12 @@
 ﻿[
     {
         "PROD": {
-            "invalidationTimeout": "00:01:00"
+            "invalidationTimeout": "01:00:00"
         }
     },
     {
         "DEV": {
-            "timeout": "01:01:00",
-            "invalidationTimeout": "00:11:00"
+            "invalidationTimeout": "00:05:00"
         }
     }
 ]

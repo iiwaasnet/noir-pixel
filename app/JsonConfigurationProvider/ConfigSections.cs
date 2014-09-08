@@ -2,7 +2,14 @@
 {
     public class ConfigSections
     {
-        public string SectionName { get; set; }
+        private string sectionName;
+
+        public string SectionName
+        {
+            get { return sectionName; }
+            set { sectionName = value.ToLower(); }
+        }
+
         public string SectionData { get; set; }
     }
 }

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Diagnostics;
 using JsonConfigurationProvider;
@@ -22,7 +20,6 @@ namespace Web.Controllers
             this.logger = logger;
             this.localizedStrings = localizedStrings;
             config = configProvider.GetConfiguration<StringsCacheConfiguration>();
-            configProvider.GetUntypedConfiguration("StringsCache");
         }
 
         [HttpGet]
@@ -70,12 +67,12 @@ namespace Web.Controllers
         public ActionResult Config()
         {
             return new CustomJsonResult
-            {
-                Data = new
-                {
-                    InvalidationTimeout = config.InvalidationTimeout.TotalMilliseconds
-                }
-            };
+                   {
+                       Data = new
+                              {
+                                  InvalidationTimeout = config.InvalidationTimeout.TotalMilliseconds
+                              }
+                   };
         }
 
         private IEnumerable<LocalizedStringCollection> GetStringsForAllLocales()
