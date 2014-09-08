@@ -1,4 +1,4 @@
-﻿npApp.directive('npI18n', [
+﻿angular.module('npApp').directive('npI18n', [
     'Strings', function(Strings) {
         var dir = {
             restrict: "EAC",

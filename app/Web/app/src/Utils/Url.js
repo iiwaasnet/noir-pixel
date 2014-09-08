@@ -1,4 +1,4 @@
-﻿npUtils.service('Url', [
+﻿angular.module('npUtils', []).service('Url', [
     function() {
         var service = this,
             protocolMatch = new RegExp('^http(s|)', 'i');

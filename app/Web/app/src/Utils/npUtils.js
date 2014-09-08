@@ -1,1 +1,0 @@
-﻿var npUtils = angular.module('npUtils', []);

@@ -1,4 +1,4 @@
-﻿npApp.constant('HttpProviderConfig', {
+﻿angular.module('npApp').constant('HttpProviderConfig', {
     interceptStatuses: [500],
     maxDataLength: 200
     })

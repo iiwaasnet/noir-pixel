@@ -180,7 +180,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Const1.cs</LastGenOutput>
     </None>
-    <Content Include="app\src\Config\npConfig.js" />
     <Content Include="app\src\Home\Home.html" />
     <Content Include="app\src\Home\HomeController.js" />
     <Content Include="app\src\Layout\Footer\FooterController.js" />
@@ -192,7 +191,6 @@
     <Content Include="app\src\npApp.js" />
     <Content Include="app\src\Interceptors\HttpInterceptor.js" />
     <Content Include="app\src\Routes.js" />
-    <Content Include="app\src\Utils\npUtils.js" />
     <Content Include="app\src\Utils\Url.js" />
     <Content Include="app\vendor\angular-local-storage.js" />
     <Content Include="app\vendor\angular-mocks.js" />

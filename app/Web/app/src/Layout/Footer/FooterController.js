@@ -1,4 +1,4 @@
-﻿npApp.controller('FooterController', [
+﻿angular.module('npApp').controller('FooterController', [
     function() {
         
     }

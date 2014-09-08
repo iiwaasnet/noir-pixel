@@ -1,7 +1,4 @@
-﻿var npLogging = angular.module('npLogging', ['npUtils', 'npConfig'])
-    //.constant('ApplicationLoggingConfig', {
-    //    loggingUri: 'api.logging.noir-pixel.com/log/add'
-    //})
+﻿angular.module('npLogging', ['npUtils', 'npConfig'])
     .factory('Trace', [
         function() {
             return { print: printStackTrace };

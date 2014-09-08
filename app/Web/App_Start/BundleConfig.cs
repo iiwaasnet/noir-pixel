@@ -19,7 +19,6 @@ namespace Web
                             .Include("~/app/vendor/angular-local-storage.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/app")
-                            .Include("~/app/src/Config/npConfig.js")
                             .Include("~/app/src/Config/Const.js")
                             .IncludeDirectory("~/app/src/Utils", "*.js", true)
                             .IncludeDirectory("~/app/src/Logging", "*.js", true)

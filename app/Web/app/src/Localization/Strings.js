@@ -1,4 +1,4 @@
-﻿npApp
+﻿angular.module('npApp')
     .constant('StringsConfig', {
         configUri: '/strings/config',
         versionsUri: '/strings/versions',
