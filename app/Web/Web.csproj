@@ -177,7 +177,6 @@
     <Content Include="app\src\Config\env\prod.json" />
     <None Include="app\src\Config\env\dev.json" />
     <None Include="app\src\Config\env\Const.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Const1.cs</LastGenOutput>
     </None>
     <Content Include="app\src\Home\Home.html" />
@@ -281,7 +280,6 @@
     <Content Include="config\StringsCache.config.json" />
     <Content Include="config\Environment.config.json" />
     <None Include="config\env\Environment.config.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Environment.config1.cs</LastGenOutput>
     </None>
     <Content Include="config\env\prod.json" />
