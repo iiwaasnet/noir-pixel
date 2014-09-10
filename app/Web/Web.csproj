@@ -159,6 +159,7 @@
     <Compile Include="Components\Localization\LocalizedStringCollection.cs" />
     <Compile Include="Components\Localization\LocalizedStrings.cs" />
     <Compile Include="Components\Localization\LocalizationModule.cs" />
+    <Compile Include="Controllers\ConfigurationController.cs" />
     <Compile Include="Controllers\CustomJsonResult.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="App_Start\DependencyInjection.cs" />

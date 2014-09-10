@@ -4,7 +4,7 @@ namespace JsonConfigurationProvider
 {
     public class ConfigFileMetadata
     {
-        public string Name { get; set; }
+        public string ConfigName { get; set; }
         public IEnumerable<ConfigSections> Sections { get; set; }
     }
 }

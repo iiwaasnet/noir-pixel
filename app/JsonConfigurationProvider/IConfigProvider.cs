@@ -1,4 +1,6 @@
-﻿namespace JsonConfigurationProvider
+﻿using System.Collections.Generic;
+
+namespace JsonConfigurationProvider
 {
     public interface IConfigProvider
     {
@@ -8,7 +10,9 @@
         T GetConfiguration<T>(string target)
             where T : class, new();
 
-        string GetUntypedConfiguration(string name);
-        string GetUntypedConfiguration(string name, string target);
+        UntypedConfiguration GetUntypedConfiguration(string name);
+        UntypedConfiguration GetUntypedConfiguration(string name, string target);
+        IEnumerable<UntypedConfiguration> GetAllUntypedConfigurations();
+        IEnumerable<UntypedConfiguration> GetAllUntypedConfigurations(string target);
     }
 }

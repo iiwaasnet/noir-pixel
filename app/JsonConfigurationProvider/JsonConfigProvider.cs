@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
+using Diagnostics;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
@@ -16,6 +18,8 @@ namespace JsonConfigurationProvider
         private readonly ConcurrentDictionary<string, ConcurrentDictionary<string, string>> untypedConfigurations;
         private readonly ConcurrentDictionary<string, ConfigFileMetadata> metadatas;
         private volatile bool configLoaded;
+        private readonly ILogger logger;
+        private readonly object @lock = new object();
         private static readonly JsonSerializerSettings jsonSerializerSettings;
 
         static JsonConfigProvider()
@@ -27,14 +31,15 @@ namespace JsonConfigurationProvider
                                      };
         }
 
-        public JsonConfigProvider(IConfigTargetProvider targetProvider)
-            : this(targetProvider, AppDomain.CurrentDomain.BaseDirectory)
+        public JsonConfigProvider(IConfigTargetProvider targetProvider, ILogger logger)
+            : this(targetProvider, AppDomain.CurrentDomain.BaseDirectory, logger)
         {
         }
 
-        public JsonConfigProvider(IConfigTargetProvider targetProvider, string baseDir)
+        public JsonConfigProvider(IConfigTargetProvider targetProvider, string baseDir, ILogger logger)
         {
             this.baseDir = baseDir;
+            this.logger = logger;
             target = targetProvider.GetCurrentTarget();
             configurations = new ConcurrentDictionary<string, ConcurrentDictionary<Type, object>>();
             untypedConfigurations = new ConcurrentDictionary<string, ConcurrentDictionary<string, string>>();
@@ -76,12 +81,24 @@ namespace JsonConfigurationProvider
             return config;
         }
 
-        public string GetUntypedConfiguration(string name)
+        public UntypedConfiguration GetUntypedConfiguration(string name)
         {
             return GetUntypedConfiguration(name, target);
         }
 
-        public string GetUntypedConfiguration(string name, string target)
+        public IEnumerable<UntypedConfiguration> GetAllUntypedConfigurations()
+        {
+            return GetAllUntypedConfigurations(target);
+        }
+
+        public IEnumerable<UntypedConfiguration> GetAllUntypedConfigurations(string target)
+        {
+            CheckLoadConfiguration();
+
+            return GetConfigNames().Select(sectionName => GetUntypedConfiguration(sectionName, target)).ToArray();
+        }
+
+        public UntypedConfiguration GetUntypedConfiguration(string name, string target)
         {
             target = target.ToLower();
             name = name.ToLower();
@@ -106,7 +123,16 @@ namespace JsonConfigurationProvider
                 configObjects[name] = stringifiedConfig;
             }
 
-            return stringifiedConfig;
+            return new UntypedConfiguration
+                   {
+                       Name = name,
+                       Data = stringifiedConfig
+                   };
+        }
+
+        private IEnumerable<string> GetConfigNames()
+        {
+            return metadatas.Keys;
         }
 
         private string TryGetUntypedConfiguration(string target, string name)
@@ -121,7 +147,7 @@ namespace JsonConfigurationProvider
                     var tmp = JObject.Parse(section.SectionData);
                     config.Merge(tmp, new JsonMergeSettings {MergeArrayHandling = MergeArrayHandling.Replace});
 
-                    if (section.SectionName == target || NoExplicitTargetSection(target, metadata))
+                    if (section.Target == target || NoExplicitTargetSection(target, metadata))
                     {
                         return config.ToString();
                     }
@@ -158,7 +184,7 @@ namespace JsonConfigurationProvider
                     foreach (var section in metadata.Sections)
                     {
                         JsonConvert.PopulateObject(section.SectionData, config, jsonSerializerSettings);
-                        if (section.SectionName == target || NoExplicitTargetSection(target, metadata))
+                        if (section.Target == target || NoExplicitTargetSection(target, metadata))
                         {
                             return config;
                         }
@@ -174,7 +200,7 @@ namespace JsonConfigurationProvider
 
         private static bool NoExplicitTargetSection(string target, ConfigFileMetadata metadata)
         {
-            return metadata.Sections.All(s => s.SectionName != target);
+            return metadata.Sections.All(s => s.Target != target);
         }
 
         private void LoadConfiguration()
@@ -185,7 +211,7 @@ namespace JsonConfigurationProvider
 
             foreach (var metadata in configFiles.Select(configReader.Parse))
             {
-                metadatas[metadata.Name.ToLower()] = metadata;
+                metadatas[metadata.ConfigName.ToLower()] = metadata;
             }
         }
 
@@ -193,8 +219,14 @@ namespace JsonConfigurationProvider
         {
             if (!configLoaded)
             {
-                LoadConfiguration();
-                configLoaded = true;
+                lock (@lock)
+                {
+                    if (!configLoaded)
+                    {
+                        LoadConfiguration();
+                        configLoaded = true;
+                    }
+                }
             }
         }
     }
