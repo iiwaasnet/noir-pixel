@@ -1,9 +1,8 @@
 ﻿[
     {
-       PROD: {
-            invalidationTimeout: "01:00:00",
-            versionsUri: "/strings/versions",
-            localizedUri: "/strings/localized/"
+        "PROD": {
+            "versionsUri": "/strings/versions",
+            "localizedUri": "/strings/localized"
         }
     }
 ]
