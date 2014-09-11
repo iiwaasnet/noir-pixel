@@ -6,9 +6,9 @@
                 settings = {};
 
             service.getConfig = function(name) {
-                var config = resolveConfig()[name];
+                var config = resolveConfig();
 
-                return config;
+                //return config;
             };
 
             function resolveConfig() {
@@ -17,13 +17,23 @@
                 if (Object.keys(settings).length === 0) {
                     $http.get(Const.configApiUri)
                         .success(function(data) {
-                            deferred.resolve(data);
+                            settings = buildSettings(data);
+                            deferred.resolve(settings);
                         });
                 } else {
                     deferred.resolve(settings);
                 }
 
                 return deferred.promise;
+            }
+
+            function buildSettings(data) {
+                var tmp = {};
+                data.forEach(function(el) {
+                    tmp[el.name] = angular.fromJson(el.data);
+                });
+
+                return tmp;
             }
         }
     ]);
