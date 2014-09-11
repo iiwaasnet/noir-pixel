@@ -24,9 +24,9 @@ namespace JsonConfigurationProvider
             using (var reader = new StreamReader(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName)))
             {
                 var content = reader.ReadToEnd();
-                var env = JsonConvert.DeserializeObject<TargetEnvironment[]>(content, new JsonSerializerSettings {ContractResolver = new CamelCasePropertyNamesContractResolver()});
+                var env = JsonConvert.DeserializeObject<TargetEnvironment>(content, new JsonSerializerSettings {ContractResolver = new CamelCasePropertyNamesContractResolver()});
 
-                return env[0].Environment;
+                return env.Environment;
             }
         }
     }

@@ -279,8 +279,10 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="config\Strings.config.json" />
-    <Content Include="config\Environment.config.json" />
+    <None Include="config\Strings.config.json" />
+    <None Include="config\Environment.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="config\env\Environment.config.tt">
       <LastGenOutput>Environment.config1.cs</LastGenOutput>
     </None>

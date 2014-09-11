@@ -22,7 +22,7 @@ module.exports = function(grunt) {
                         expand: false,
                         flatten: true,
                         src: ['./web/config/env/Environment.config.tt'],
-                        dest: './Web/config/Environment.config.json'
+                        dest: './Web/config/Environment.config'
                     }, {
                         expand: false,
                         flatten: false,
@@ -46,7 +46,7 @@ module.exports = function(grunt) {
                         expand: false,
                         flatten: true,
                         src: ['./web/config/env/Environment.config.tt'],
-                        dest: './Web/config/Environment.config.json'
+                        dest: './Web/config/Environment.config'
                     }, {
                         expand: false,
                         flatten: true,
