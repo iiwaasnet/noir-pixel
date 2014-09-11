@@ -1,4 +1,6 @@
-﻿angular.module('npConfig', []).constant('Const', {
-    environment: '@@environment',
-    loggingApiUri: '@@loggingApiUri'
-});
+﻿angular.module('npConfig', [])
+    .constant('Const', {
+        environment: '@@environment',
+        loggingApiUri: '@@loggingApiUri',
+        configApiUri: '@@configApiUri'
+    });

@@ -1,18 +1,14 @@
 ﻿angular.module('npApp')
-    .constant('StringsConfig', {
-        configUri: '/strings/config',
-        versionsUri: '/strings/versions',
-        localizedUri: '/strings/localized/'
-    })
     .service('Strings', [
-    '$http', '$rootScope', '$window', '$interval', 'localStorageService', 'StringsConfig', 'ApplicationLogging',
-    function ($http, $rootScope, $window, $interval, localStorageService, StringsConfig, ApplicationLogging) {
+    '$http', '$rootScope', '$window', '$interval', 'localStorageService', 'Config', 'ApplicationLogging',
+    function ($http, $rootScope, $window, $interval, localStorageService, Config, ApplicationLogging) {
         var service = this,
             dictionary = {},
             stringsLoaded = false,
             langStorageKey = 'currentLang',
             language = localStorageService.get(langStorageKey)
-                || ($window.navigator.userLanguage || $window.navigator.language).split('-')[0];
+                || ($window.navigator.userLanguage || $window.navigator.language).split('-')[0],
+            config = Config.getConfig('Strings');
 
 
         service.init = function () {
@@ -56,16 +52,11 @@
         };
 
         function scheduleCacheInvalidation() {
-            $http({ method: "GET", url: StringsConfig.configUri, cache: false })
-                .success(getConfigSuccess);
-        }
-
-        function getConfigSuccess(data) {
-            $interval(checkStringVersions, data.invalidationTimeout, 0, false);
+            $interval(checkStringVersions, config.invalidationTimeout, 0, false);
         }
 
         function checkStringVersions() {
-            $http({ method: "GET", url: StringsConfig.versionsUri, cache: false })
+            $http({ method: "GET", url: config.versionsUri, cache: false })
                 .success(getVersionsSuccess);
         }
 
@@ -84,7 +75,7 @@
 
         function loadStringsForLocale(locale) {
 
-            $http({ method: "GET", url: StringsConfig.localizedUri + locale, cache: false })
+            $http({ method: "GET", url: config.localizedUri + locale, cache: false })
                 .success(function(data) { getStringsSuccess(locale, data); });
         }
 

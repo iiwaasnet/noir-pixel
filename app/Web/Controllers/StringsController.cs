@@ -13,13 +13,11 @@ namespace Web.Controllers
     {
         private readonly ILocalizedStrings localizedStrings;
         private readonly ILogger logger;
-        private readonly StringsCacheConfiguration config;
 
-        public StringsController(ILocalizedStrings localizedStrings, IConfigProvider configProvider, ILogger logger)
+        public StringsController(ILocalizedStrings localizedStrings, ILogger logger)
         {
             this.logger = logger;
             this.localizedStrings = localizedStrings;
-            config = configProvider.GetConfiguration<StringsCacheConfiguration>();
         }
 
         [HttpGet]
@@ -59,18 +57,6 @@ namespace Web.Controllers
                                   Versions = localizedStrings.GetSupportedLocales()
                                                              .Select(locale => new {Locale = locale, Version = "1"})
                                                              .ToArray()
-                              }
-                   };
-        }
-
-        [HttpGet]
-        public ActionResult Config()
-        {
-            return new CustomJsonResult
-                   {
-                       Data = new
-                              {
-                                  InvalidationTimeout = config.InvalidationTimeout.TotalMilliseconds
                               }
                    };
         }

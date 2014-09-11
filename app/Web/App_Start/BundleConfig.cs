@@ -20,6 +20,7 @@ namespace Web
 
             bundles.Add(new ScriptBundle("~/bundles/app")
                             .Include("~/app/src/Config/Const.js")
+                            .Include("~/app/src/Config/Config.js")
                             .IncludeDirectory("~/app/src/Utils", "*.js", true)
                             .IncludeDirectory("~/app/src/Logging", "*.js", true)
                             .Include("~/app/src/npApp.js")
