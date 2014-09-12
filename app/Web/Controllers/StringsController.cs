@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Diagnostics;
-using JsonConfigurationProvider;
-using Web.Components.Configuration;
 using Web.Components.Localization;
 
 namespace Web.Controllers
