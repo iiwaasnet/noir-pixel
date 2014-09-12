@@ -13,15 +13,20 @@ namespace Web
             bundles.Add(angular);
 
             bundles.Add(new ScriptBundle("~/bundles/vendor-native")
-                            .Include("~/app/vendor/stacktrace.js"));
+                            .Include("~/app/vendor/stacktrace.js")
+                            .Include("~/app/vendor/moment.js")
+                            );
 
             bundles.Add(new ScriptBundle("~/bundles/vendor-ng")
-                            .Include("~/app/vendor/angular-local-storage.js"));
+                            .Include("~/app/vendor/angular-local-storage.js")
+                            );
 
             bundles.Add(new ScriptBundle("~/bundles/app")
-                            .Include("~/app/src/Config/Const.js")
                             .Include("~/app/src/Config/Config.js")
-                            .IncludeDirectory("~/app/src/Utils", "*.js", true)
+
+                            .Include("~/app/src/Utils/Url.js")
+                            .Include("~/app/src/Utils/Moment.js")
+
                             .IncludeDirectory("~/app/src/Logging", "*.js", true)
                             .Include("~/app/src/npApp.js")
                             .IncludeDirectory("~/app/src/Interceptors", "*.js", true)

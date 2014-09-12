@@ -158,7 +158,6 @@
     <Compile Include="Components\Localization\LocalizedStringCollection.cs" />
     <Compile Include="Components\Localization\LocalizedStrings.cs" />
     <Compile Include="Components\Localization\LocalizationModule.cs" />
-    <Compile Include="Controllers\ConfigurationController.cs" />
     <Compile Include="Controllers\CustomJsonResult.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="App_Start\DependencyInjection.cs" />
@@ -174,12 +173,11 @@
   <ItemGroup>
     <Content Include="app\assets\np-header.png" />
     <Content Include="app\src\Config\Config.js" />
-    <Content Include="app\src\Config\Const.js" />
     <Content Include="app\src\Config\env\prod.json" />
     <None Include="app\src\Config\env\dev.json" />
-    <None Include="app\src\Config\env\Const.tt">
+    <Content Include="app\src\Config\env\Config.js">
       <LastGenOutput>Const1.cs</LastGenOutput>
-    </None>
+    </Content>
     <Content Include="app\src\Home\Home.html" />
     <Content Include="app\src\Home\HomeController.js" />
     <Content Include="app\src\Layout\Footer\FooterController.js" />
@@ -191,6 +189,7 @@
     <Content Include="app\src\npApp.js" />
     <Content Include="app\src\Interceptors\HttpInterceptor.js" />
     <Content Include="app\src\Routes.js" />
+    <Content Include="app\src\Utils\Moment.js" />
     <Content Include="app\src\Utils\Url.js" />
     <Content Include="app\vendor\angular-local-storage.js" />
     <Content Include="app\vendor\angular-mocks.js" />
@@ -198,6 +197,8 @@
     <Content Include="app\vendor\angular-route.min.js" />
     <Content Include="app\vendor\angular.js" />
     <Content Include="app\vendor\angular.min.js" />
+    <Content Include="app\vendor\moment.js" />
+    <Content Include="app\vendor\moment.min.js" />
     <Content Include="app\vendor\stacktrace.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -278,7 +279,6 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="config\Strings.config.json" />
     <None Include="config\Environment.config">
       <SubType>Designer</SubType>
     </None>

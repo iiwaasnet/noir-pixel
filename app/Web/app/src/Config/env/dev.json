@@ -1,3 +1,3 @@
 ﻿{
-    "loggingApiUri": "api.logging.noir-pixel.com/log/add"
+    "invalidationTimeout": "00:10:00"
 }

@@ -1,14 +1,13 @@
 ﻿angular.module('npApp')
     .service('Strings', [
-    '$http', '$rootScope', '$window', '$interval', 'localStorageService', 'Config', 'ApplicationLogging',
-    function ($http, $rootScope, $window, $interval, localStorageService, Config, ApplicationLogging) {
+    '$http', '$rootScope', '$window', '$interval', 'localStorageService', 'Config', 'ApplicationLogging', 'Moment',
+    function ($http, $rootScope, $window, $interval, localStorageService, Config, ApplicationLogging, Moment) {
         var service = this,
             dictionary = {},
             stringsLoaded = false,
             langStorageKey = 'currentLang',
             language = localStorageService.get(langStorageKey)
-                || ($window.navigator.userLanguage || $window.navigator.language).split('-')[0],
-            config = Config.getConfig('Strings');
+                || ($window.navigator.userLanguage || $window.navigator.language).split('-')[0];
 
 
         service.init = function () {
@@ -52,11 +51,12 @@
         };
 
         function scheduleCacheInvalidation() {
-            $interval(checkStringVersions, config.invalidationTimeout, 0, false);
+            var interval = Moment.duration(Config.strings.invalidationTimeout).asMilliseconds();
+            $interval(checkStringVersions, interval, 0, false);
         }
 
         function checkStringVersions() {
-            $http({ method: "GET", url: config.versionsUri, cache: false })
+            $http({ method: "GET", url: Config.strings.versionsUri, cache: false })
                 .success(getVersionsSuccess);
         }
 
@@ -75,7 +75,7 @@
 
         function loadStringsForLocale(locale) {
 
-            $http({ method: "GET", url: config.localizedUri + locale, cache: false })
+            $http({ method: "GET", url: Config.strings.localizedUri + locale, cache: false })
                 .success(function(data) { getStringsSuccess(locale, data); });
         }
 

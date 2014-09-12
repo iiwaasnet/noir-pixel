@@ -5,8 +5,8 @@
         }
     ])
     .factory('ApplicationLogging', [
-            '$log', '$window', '$httpBackend', 'Trace', 'Const', 'Url',
-            function($log, $window, $httpBackend, Trace, Const, Url) {
+            '$log', '$window', '$httpBackend', 'Trace', 'Config', 'Url',
+            function($log, $window, $httpBackend, Trace, Config, Url) {
                 var logger = {
                     error: function(exception, cause) {
                         $log.error.apply($log, arguments);
@@ -52,7 +52,7 @@
 
                 function sendLoggingRequest(data) {
                     $httpBackend('POST',
-                        Url.build([Const.loggingApiUri]),
+                        Url.build([Config.loggingApiUri]),
                         angular.toJson(data),
                         responseLogging,
                         {

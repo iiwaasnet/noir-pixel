@@ -26,8 +26,8 @@ module.exports = function(grunt) {
                     }, {
                         expand: false,
                         flatten: false,
-                        src: ['./web/app/src/config/env/Const.tt'],
-                        dest: './web/app/src/config/Const.js'
+                        src: ['./web/app/src/config/env/Config.js'],
+                        dest: './web/app/src/config/Config.js'
                     }
                 ]
             },
@@ -50,8 +50,8 @@ module.exports = function(grunt) {
                     }, {
                         expand: false,
                         flatten: true,
-                        src: ['./web/app/src/config/env/Const.tt'],
-                        dest: './web/app/src/config/Const.js'
+                        src: ['./web/app/src/config/env/Config.js'],
+                        dest: './web/app/src/config/Config.js'
                     }
                 ]
             }

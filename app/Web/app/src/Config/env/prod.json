@@ -1,4 +1,6 @@
 ﻿{
     "loggingApiUri": "api.logging.noir-pixel.com/log/add",
-    "configApiUri":  "configuration/all"
+    "invalidationTimeout": "01:00:00",
+    "versionsUri": "/strings/versions",
+    "localizedUri": "/strings/localized"
 }

@@ -1,4 +1,4 @@
-﻿angular.module('npApp', ['ngRoute', 'LocalStorageModule', 'npLogging'])
+﻿angular.module('npApp', ['ngRoute', 'LocalStorageModule', 'npLogging', 'npUtils'])
     .run([
         'Strings', 'ApplicationLogging', function(Strings, ApplicationLogging) {
             try {
