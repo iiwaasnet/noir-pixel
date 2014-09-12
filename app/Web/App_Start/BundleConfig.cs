@@ -1,4 +1,7 @@
-﻿using System.Web.Optimization;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Optimization;
 
 namespace Web
 {
@@ -15,18 +18,15 @@ namespace Web
             bundles.Add(new ScriptBundle("~/bundles/vendor-native")
                             .Include("~/app/vendor/stacktrace.js")
                             .Include("~/app/vendor/moment.js")
-                            );
+                );
 
             bundles.Add(new ScriptBundle("~/bundles/vendor-ng")
                             .Include("~/app/vendor/angular-local-storage.js")
-                            );
+                );
 
             bundles.Add(new ScriptBundle("~/bundles/app")
                             .Include("~/app/src/Config/Config.js")
-
-                            .Include("~/app/src/Utils/Url.js")
-                            .Include("~/app/src/Utils/Moment.js")
-
+                            .Include(UtilsAssets().ToArray())
                             .IncludeDirectory("~/app/src/Logging", "*.js", true)
                             .Include("~/app/src/npApp.js")
                             .IncludeDirectory("~/app/src/Interceptors", "*.js", true)
@@ -42,6 +42,12 @@ namespace Web
 #else
             BundleTable.EnableOptimizations = true;
 #endif
+        }
+
+        private static IEnumerable<String> UtilsAssets()
+        {
+            yield return "~/app/src/Utils/Url.js";
+            yield return "~/app/src/Utils/Moment.js";
         }
     }
 }
