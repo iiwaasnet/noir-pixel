@@ -186,9 +186,9 @@
     <Content Include="app\src\Logging\Logging.js" />
     <Content Include="app\src\Localization\npI18n.js" />
     <Content Include="app\src\Localization\Strings.js" />
-    <Content Include="app\src\npApp.js" />
+    <Content Include="app\src\App\npApp.module.js" />
     <Content Include="app\src\Interceptors\HttpInterceptor.js" />
-    <Content Include="app\src\Routes.js" />
+    <Content Include="app\src\App\Routes.js" />
     <Content Include="app\src\Utils\Moment.js" />
     <Content Include="app\src\Utils\Url.js" />
     <Content Include="app\vendor\angular-local-storage.js" />

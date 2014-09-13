@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using Api.Logging.Models;
@@ -23,7 +22,6 @@ namespace Api.Logging.Controllers
         {
             LogEntry(entry);
         }
-
 
         private void LogEntry(ApplicationLoggingModel entry)
         {

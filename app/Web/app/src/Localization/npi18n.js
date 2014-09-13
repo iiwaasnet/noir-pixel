@@ -1,7 +1,7 @@
 ﻿angular.module('npApp').directive('npI18n', [
     'Strings', function(Strings) {
         var dir = {
-            restrict: "EAC",
+            restrict: "A",
             link: function(scope, elm, attrs) {
                 scope.$on('stringsUpdates', function() {
                     dir.updateText(elm, attrs.npI18n);
