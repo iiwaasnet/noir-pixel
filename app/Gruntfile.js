@@ -55,8 +55,12 @@ module.exports = function(grunt) {
                     }
                 ]
             }
+        },
+        jshint: {
+            all: ['web/app/src/**/*.js']
         }
     });
 
     grunt.loadNpmTasks('grunt-replace');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
 };

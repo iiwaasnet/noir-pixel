@@ -28,7 +28,7 @@
                                 + ' url: ' + error.url
                                 + ' status: ' + error.status
                                 + ' data: ' + error.message.substring(0, HttpProviderConfig.maxDataLength);
-                        }
+                        };
 
                         return error;
                     }

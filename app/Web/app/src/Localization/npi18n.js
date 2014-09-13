@@ -26,7 +26,7 @@
                         }
                         // insert the text into the element
                         elm.text(tag);
-                    };
+                    }
                 }
             }
         };
