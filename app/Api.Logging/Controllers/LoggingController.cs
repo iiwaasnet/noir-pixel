@@ -12,6 +12,7 @@ namespace Api.Logging.Controllers
     public class LoggingController : ApiController
     {
         private readonly ILogger logger;
+
         public LoggingController(ILogger logger)
         {
             this.logger = logger;
@@ -22,6 +23,7 @@ namespace Api.Logging.Controllers
         {
             LogEntry(entry);
         }
+
 
         private void LogEntry(ApplicationLoggingModel entry)
         {
@@ -45,7 +47,7 @@ namespace Api.Logging.Controllers
             }
             catch (Exception err)
             {
-             logger.Error(err);   
+                logger.Error(err);
             }
         }
     }

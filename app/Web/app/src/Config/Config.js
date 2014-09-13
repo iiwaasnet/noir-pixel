@@ -5,6 +5,6 @@ angular.module('npConfig', [])
         strings: {
             invalidationTimeout: '00:10:00',
             versionsUri: '/strings/versions',
-            localizedUri: '/strings/localized'
+            localizedUri: '/strings/localized/'
         }
     });

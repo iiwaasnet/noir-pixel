@@ -30,6 +30,7 @@ namespace Web.Controllers
         [HttpGet]
         public ActionResult Localized(string lang)
         {
+            throw new Exception();
             object strings;
             try
             {
