@@ -1,4 +1,4 @@
-﻿angular.module('npApp').directive('npI18n', [
+﻿angular.module('np').directive('npI18n', [
     'Strings', function(Strings) {
         var dir = {
             restrict: "A",

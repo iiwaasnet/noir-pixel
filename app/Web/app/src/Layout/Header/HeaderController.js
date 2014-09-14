@@ -1,4 +1,4 @@
-﻿angular.module('npApp').controller('HeaderController', [
+﻿angular.module('np').controller('HeaderController', [
     function() {
         
     }

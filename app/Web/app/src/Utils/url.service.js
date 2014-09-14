@@ -1,9 +1,15 @@
-﻿angular.module('npUtils', []).service('Url', [
-    function() {
+﻿(function() {
+    'use strict';
+    angular.module('np.utils')
+        .service('Url', urlService);
+
+    function urlService() {
         var service = this,
             protocolMatch = new RegExp('^http(s|)', 'i');
 
-        service.build = function(parts) {
+        service.build = build;
+
+        function build(parts) {
             if (!parts || !(parts instanceof Array)) {
                 throw '[parts] is either null or not an Array!';
             }
@@ -28,6 +34,6 @@
             });
 
             return url;
-        };
+        }
     }
-]);
+})();

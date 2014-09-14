@@ -1,4 +1,4 @@
-﻿angular.module('npLogging', ['npUtils', 'npConfig'])
+﻿angular.module('npLogging', ['np.utils', 'npConfig'])
     .factory('Trace', [
         function() {
             return { print: printStackTrace };

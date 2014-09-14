@@ -1,4 +1,4 @@
-﻿angular.module('npApp')
+﻿angular.module('np')
     .service('Strings', [
     '$http', '$rootScope', '$window', '$interval', 'localStorageService', 'Config', 'ApplicationLogging', 'Moment',
     function ($http, $rootScope, $window, $interval, localStorageService, Config, ApplicationLogging, Moment) {

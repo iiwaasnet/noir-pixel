@@ -1,4 +1,4 @@
-﻿angular.module('npApp').controller('HomeController', [
+﻿angular.module('np').controller('HomeController', [
     function() {
         var ctrl = this;
     }

@@ -25,16 +25,16 @@ namespace Web
                 );
 
             bundles.Add(new ScriptBundle("~/bundles/app")
-                            .Include("~/app/src/Config/Config.js")
+                            .Include(ConfigAssets().ToArray())
                             .Include(UtilsAssets().ToArray())
-                            .IncludeDirectory("~/app/src/Logging", "*.js", true)
-                            .Include("~/app/src/App/npApp.module.js")
-                            .IncludeDirectory("~/app/src/Interceptors", "*.js", true)
+                            .Include(LoggingAssets().ToArray())
+                            .Include("~/app/src/App/np.js")
+                            .IncludeDirectory("~/app/src/interceptors", "*.js", true)
                             .Include("~/app/src/App/Routes.js")
-                            .IncludeDirectory("~/app/src/Localization", "*.js", true)
-                            .IncludeDirectory("~/app/src/Layout", "*.js", true)
-                            .IncludeDirectory("~/app/src/Home", "*.js", true)
-                            .IncludeDirectory("~/app/src/List", "*.js", true)
+                            .IncludeDirectory("~/app/src/localization", "*.js", true)
+                            .IncludeDirectory("~/app/src/layout", "*.js", true)
+                            .IncludeDirectory("~/app/src/home", "*.js", true)
+                            .IncludeDirectory("~/app/src/list", "*.js", true)
                 );
 
 #if DEBUG
@@ -44,10 +44,26 @@ namespace Web
 #endif
         }
 
+        private static IEnumerable<string> ConfigAssets()
+        {
+            yield return "~/app/src/config/config.module.js";
+            yield return "~/app/src/config/config.js";
+        }
+
+        private static IEnumerable<string> LoggingAssets()
+        {
+            yield return "~/app/src/logging/logging.module.js";
+            yield return "~/app/src/logging/trace.factory.js";
+            yield return "~/app/src/logging/application-logging.factory.js";
+            yield return "~/app/src/logging/exception-logging.factory.js";
+            yield return "~/app/src/logging/exception-handler.js";
+        }
+
         private static IEnumerable<String> UtilsAssets()
         {
-            yield return "~/app/src/Utils/Url.js";
-            yield return "~/app/src/Utils/Moment.js";
+            yield return "~/app/src/utils/utils.module.js";
+            yield return "~/app/src/utils/moment.factory.js";
+            yield return "~/app/src/utils/url.service.js";
         }
     }
 }

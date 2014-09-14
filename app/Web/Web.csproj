@@ -172,25 +172,31 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\assets\np-header.png" />
-    <Content Include="app\src\Config\Config.js" />
-    <Content Include="app\src\Config\env\prod.json" />
-    <None Include="app\src\Config\env\dev.json" />
-    <Content Include="app\src\Config\env\Config.js">
+    <Content Include="app\src\config\config.js" />
+    <Content Include="app\src\config\config.module.js" />
+    <Content Include="app\src\config\env\prod.json" />
+    <None Include="app\src\config\env\dev.json" />
+    <Content Include="app\src\config\env\config.js">
       <LastGenOutput>Const1.cs</LastGenOutput>
     </Content>
-    <Content Include="app\src\Home\Home.html" />
-    <Content Include="app\src\Home\HomeController.js" />
-    <Content Include="app\src\Layout\Footer\FooterController.js" />
-    <Content Include="app\src\Layout\Header\HeaderController.js" />
+    <Content Include="app\src\home\Home.html" />
+    <Content Include="app\src\home\HomeController.js" />
+    <Content Include="app\src\layout\footer\FooterController.js" />
+    <Content Include="app\src\layout\header\HeaderController.js" />
     <Content Include="app\src\List\ListController.js" />
-    <Content Include="app\src\Logging\Logging.js" />
-    <Content Include="app\src\Localization\npI18n.js" />
-    <Content Include="app\src\Localization\Strings.js" />
-    <Content Include="app\src\App\npApp.module.js" />
-    <Content Include="app\src\Interceptors\HttpInterceptor.js" />
-    <Content Include="app\src\App\Routes.js" />
-    <Content Include="app\src\Utils\Moment.js" />
-    <Content Include="app\src\Utils\Url.js" />
+    <Content Include="app\src\logging\application-logging.factory.js" />
+    <Content Include="app\src\logging\exception-handler.js" />
+    <Content Include="app\src\logging\Logging.js" />
+    <Content Include="app\src\localization\npI18n.js" />
+    <Content Include="app\src\localization\Strings.js" />
+    <Content Include="app\src\app\np.js" />
+    <Content Include="app\src\interceptors\HttpInterceptor.js" />
+    <Content Include="app\src\app\Routes.js" />
+    <Content Include="app\src\logging\logging.module.js" />
+    <Content Include="app\src\logging\trace.factory.js" />
+    <Content Include="app\src\utils\moment.factory.js" />
+    <Content Include="app\src\utils\url.service.js" />
+    <Content Include="app\src\utils\utils.module.js" />
     <Content Include="app\vendor\angular-local-storage.js" />
     <Content Include="app\vendor\angular-mocks.js" />
     <Content Include="app\vendor\angular-route.js" />
@@ -256,10 +262,10 @@
     <Content Include="app\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\src\Layout\Header\Header.cshtml" />
+    <Content Include="app\src\layout\header\Header.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\src\Layout\Footer\Footer.cshtml" />
+    <Content Include="app\src\layout\footer\Footer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Diagnostics\Diagnostics.csproj">
@@ -279,6 +285,7 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="app\src\logging\exception-logging.factory.js" />
     <None Include="config\Environment.config">
       <SubType>Designer</SubType>
     </None>

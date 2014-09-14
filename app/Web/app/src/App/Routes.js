@@ -1,4 +1,4 @@
-﻿angular.module('npApp')
+﻿angular.module('np')
     .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     $routeProvider
         .when('/', {
