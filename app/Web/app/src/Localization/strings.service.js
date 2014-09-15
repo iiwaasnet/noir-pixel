@@ -1,7 +1,14 @@
-﻿angular.module('np')
-    .service('Strings', [
-    '$http', '$rootScope', '$window', '$interval', 'localStorageService', 'Config', 'ApplicationLogging', 'Moment',
-    function ($http, $rootScope, $window, $interval, localStorageService, Config, ApplicationLogging, Moment) {
+﻿(function() {
+    'use strict';
+
+    angular.module('np.i18n')
+        .service('Strings', stringsService);
+
+    stringsService.$injector = [
+        '$http', '$rootScope', '$window', '$interval', 'localStorageService', 'Config', 'ApplicationLogging', 'Moment'
+    ];
+
+    function stringsService($http, $rootScope, $window, $interval, localStorageService, Config, ApplicationLogging, Moment) {
         var service = this,
             dictionary = {},
             stringsLoaded = false,
@@ -10,22 +17,28 @@
                 || ($window.navigator.userLanguage || $window.navigator.language).split('-')[0];
 
 
-        service.init = function () {
+        service.init = init;
+        service.setCurrentLanguage = setCurrentLanguage;
+        service.getCurrentLanguage = getCurrentLanguage;
+        service.loadStrings = loadStrings;
+        service.getLocalizedString = getLocalizedString;
+
+        function init() {
             service.setCurrentLanguage(service.getCurrentLanguage());
             scheduleCacheInvalidation();
         };
 
-        service.setCurrentLanguage = function(value) {
+        function setCurrentLanguage(value) {
             language = value;
             localStorageService.set(langStorageKey, value);
             service.loadStrings();
         };
 
-        service.getCurrentLanguage = function() {
+        function getCurrentLanguage() {
             return language;
         };
 
-        service.loadStrings = function() {
+        function loadStrings() {
             var currentLang = service.getCurrentLanguage(),
                 cache;
 
@@ -41,7 +54,7 @@
             }
         };
 
-        service.getLocalizedString = function(value) {
+        function getLocalizedString(value) {
             var cache = dictionary[service.getCurrentLanguage()];
             if (cache && Object.keys(cache.strings).length > 0) {
                 return cache.strings[value];
@@ -62,7 +75,7 @@
 
 
         function getVersionsSuccess(data) {
-            Object.keys(dictionary).forEach(function (lang) {
+            Object.keys(dictionary).forEach(function(lang) {
                 var cache = dictionary[lang];
                 var versionInfo = data.versions.filter(function(el) {
                     return el.locale === cache.locale;
@@ -115,6 +128,5 @@
         function getStringsStorageKey() {
             return 'strings-' + service.getCurrentLanguage();
         }
-
     }
-]);
+})();

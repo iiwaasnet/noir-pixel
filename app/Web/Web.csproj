@@ -183,15 +183,15 @@
     <Content Include="app\src\home\HomeController.js" />
     <Content Include="app\src\layout\footer\FooterController.js" />
     <Content Include="app\src\layout\header\HeaderController.js" />
-    <Content Include="app\src\List\ListController.js" />
+    <Content Include="app\src\list\ListController.js" />
+    <Content Include="app\src\localization\i18n.module.js" />
+    <Content Include="app\src\localization\strings.service.js" />
     <Content Include="app\src\logging\application-logging.factory.js" />
     <Content Include="app\src\logging\exception-handler.js" />
-    <Content Include="app\src\logging\Logging.js" />
-    <Content Include="app\src\localization\npI18n.js" />
-    <Content Include="app\src\localization\Strings.js" />
+    <Content Include="app\src\localization\np-i18n.directive.js" />
     <Content Include="app\src\app\np.js" />
-    <Content Include="app\src\interceptors\HttpInterceptor.js" />
-    <Content Include="app\src\app\Routes.js" />
+    <Content Include="app\src\interceptors\http-interceptor.js" />
+    <Content Include="app\src\app\np.routes.js" />
     <Content Include="app\src\logging\logging.module.js" />
     <Content Include="app\src\logging\trace.factory.js" />
     <Content Include="app\src\utils\moment.factory.js" />
@@ -256,7 +256,7 @@
     <Content Include="Views\Shared\_Layout.m.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\src\List\List.html" />
+    <Content Include="app\src\list\List.html" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\Web.config" />

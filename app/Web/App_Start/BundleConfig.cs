@@ -28,10 +28,9 @@ namespace Web
                             .Include(ConfigAssets().ToArray())
                             .Include(UtilsAssets().ToArray())
                             .Include(LoggingAssets().ToArray())
-                            .Include("~/app/src/App/np.js")
-                            .IncludeDirectory("~/app/src/interceptors", "*.js", true)
-                            .Include("~/app/src/App/Routes.js")
-                            .IncludeDirectory("~/app/src/localization", "*.js", true)
+                            .Include(MainAppAssets().ToArray())
+                            .Include(InterceptorsAssets().ToArray())
+                            .Include(LocalizationAssets().ToArray())
                             .IncludeDirectory("~/app/src/layout", "*.js", true)
                             .IncludeDirectory("~/app/src/home", "*.js", true)
                             .IncludeDirectory("~/app/src/list", "*.js", true)
@@ -42,6 +41,24 @@ namespace Web
 #else
             BundleTable.EnableOptimizations = true;
 #endif
+        }
+
+        private static IEnumerable<string> InterceptorsAssets()
+        {
+            yield return "~/app/src/interceptors/http-interceptor.js";
+        }
+
+        private static IEnumerable<string> MainAppAssets()
+        {
+            yield return "~/app/src/app/np.js";
+            yield return "~/app/src/app/np.routes.js";
+        }
+
+        private static IEnumerable<string> LocalizationAssets()
+        {
+            yield return "~/app/src/localization/i18n.module.js";
+            yield return "~/app/src/localization/strings.service.js";
+            yield return "~/app/src/localization/np-i18n.directive.js";
         }
 
         private static IEnumerable<string> ConfigAssets()

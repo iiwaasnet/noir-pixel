@@ -1,5 +1,6 @@
 (function() {
     'use strict';
+
     angular.module('np.config')
         .constant('Config', {
             environment: 'DEV',

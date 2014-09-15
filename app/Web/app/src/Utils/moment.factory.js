@@ -1,5 +1,6 @@
 ﻿(function() {
     'use strict';
+
     angular.module('np.utils')
         .constant('moment', moment)
         .factory('Moment', momentFactory);

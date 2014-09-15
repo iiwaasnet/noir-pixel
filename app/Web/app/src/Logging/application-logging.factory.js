@@ -1,5 +1,6 @@
 ﻿(function() {
     'use strict';
+
     angular.module('np.logging')
         .factory('ApplicationLogging', applicationLoggingFactory);
 

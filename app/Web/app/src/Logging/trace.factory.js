@@ -1,5 +1,6 @@
 ﻿(function () {
     'use strict';
+
     angular.module('np.logging')
         .constant('printStackTrace', printStackTrace)
         .factory('Trace', traceFactory);
