@@ -26,17 +26,17 @@
         function init() {
             service.setCurrentLanguage(service.getCurrentLanguage());
             scheduleCacheInvalidation();
-        };
+        }
 
         function setCurrentLanguage(value) {
             language = value;
             localStorageService.set(langStorageKey, value);
             service.loadStrings();
-        };
+        }
 
         function getCurrentLanguage() {
             return language;
-        };
+        }
 
         function loadStrings() {
             var currentLang = service.getCurrentLanguage(),
@@ -52,7 +52,7 @@
             } else {
                 loadStringsForLocale(currentLang);
             }
-        };
+        }
 
         function getLocalizedString(value) {
             var cache = dictionary[service.getCurrentLanguage()];
@@ -61,7 +61,7 @@
             }
 
             return '';
-        };
+        }
 
         function scheduleCacheInvalidation() {
             var interval = Moment.duration(Config.strings.invalidationTimeout).asMilliseconds();

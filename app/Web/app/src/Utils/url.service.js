@@ -5,8 +5,8 @@
         .service('Url', urlService);
 
     function urlService() {
-        var service = this,
-            protocolMatch = new RegExp('^http(s|)', 'i');
+        var protocolMatch = new RegExp('^http(s|)', 'i'),
+            service = this;
 
         service.build = build;
 
