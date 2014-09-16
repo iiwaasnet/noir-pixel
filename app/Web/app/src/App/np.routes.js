@@ -9,11 +9,11 @@
     function config($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: '/app/src/Home/Home.html',
+                templateUrl: '/app/src/Home/home.html',
                 controller: 'HomeController as homeCtrl'
             })
             .when('/list', {
-                templateUrl: '/app/src/List/List.html',
+                templateUrl: '/app/src/List/list.html',
                 controller: 'ListController as listCtrl'
             })
             .otherwise({

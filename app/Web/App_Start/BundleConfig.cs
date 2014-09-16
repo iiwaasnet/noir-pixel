@@ -31,9 +31,7 @@ namespace Web
                             .Include(MainAppAssets().ToArray())
                             .Include(InterceptorsAssets().ToArray())
                             .Include(LocalizationAssets().ToArray())
-                            .IncludeDirectory("~/app/src/layout", "*.js", true)
-                            .IncludeDirectory("~/app/src/home", "*.js", true)
-                            .IncludeDirectory("~/app/src/list", "*.js", true)
+                            .Include(HomeAssets().ToArray())
                 );
 
 #if DEBUG
@@ -41,6 +39,12 @@ namespace Web
 #else
             BundleTable.EnableOptimizations = true;
 #endif
+        }
+
+        private static IEnumerable<string> HomeAssets()
+        {
+            yield return "~/app/src/home/home.module.js";
+            yield return "~/app/src/home/home.controller.js";
         }
 
         private static IEnumerable<string> InterceptorsAssets()
