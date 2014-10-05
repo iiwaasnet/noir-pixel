@@ -12,7 +12,12 @@
                 url: '/',
                 templateUrl: '/app/src/Home/home.html',
                 controller: 'HomeController as homeCtrl'
-            });
+            })
+            .state('gallery', {
+                url: '/',
+                templateUrl: '/app/src/Home/home.html',
+                controller: 'HomeController as homeCtrl'
+        });
 
         $urlRouterProvider.otherwise('/');
 

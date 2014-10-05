@@ -10,8 +10,7 @@ namespace Web
         public static void RegisterBundles(BundleCollection bundles)
         {
             var angular = new Bundle("~/bundles/angular")
-                .Include("~/app/vendor/angular.min.js")
-                .Include("~/app/vendor/angular-ui-router.min.js");
+                .Include("~/app/vendor/angular.min.js");
             angular.Transforms.Clear();
             bundles.Add(angular);
 
@@ -23,6 +22,12 @@ namespace Web
             bundles.Add(new ScriptBundle("~/bundles/vendor-ng")
                             .Include("~/app/vendor/angular-local-storage.js")
                 );
+
+            var vendorNgMin = new Bundle("~/bundles/vendor-ng-min")
+                .Include("~/app/vendor/angular-ui-router.min.js")
+                .Include("~/app/vendor/bindonce.min.js");
+            vendorNgMin.Transforms.Clear();
+            bundles.Add(vendorNgMin);
 
             bundles.Add(new ScriptBundle("~/bundles/app")
                             .Include(ConfigAssets().ToArray())
@@ -44,6 +49,8 @@ namespace Web
 
         private static IEnumerable<string> LayoutAssets()
         {
+            yield return "~/app/src/layout/layout.module.js";
+            yield return "~/app/src/layout/header/mainMenu.service.js";
             yield return "~/app/src/layout/header/header.controller.js";
         }
 
