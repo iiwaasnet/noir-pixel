@@ -62,9 +62,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -77,7 +75,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
-    <Reference Include="System.EnterpriseServices" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -199,6 +196,8 @@
     <Content Include="app\vendor\angular-mocks.js" />
     <Content Include="app\vendor\angular-route.js" />
     <Content Include="app\vendor\angular-route.min.js" />
+    <Content Include="app\vendor\angular-ui-router.js" />
+    <Content Include="app\vendor\angular-ui-router.min.js" />
     <Content Include="app\vendor\angular.js" />
     <Content Include="app\vendor\angular.min.js" />
     <Content Include="app\vendor\moment.js" />
@@ -281,6 +280,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="app\src\logging\exception-logging.factory.js" />
+    <Content Include="app\src\layout\header\header.controller.js" />
     <None Include="config\Environment.config">
       <SubType>Designer</SubType>
     </None>

@@ -1,7 +1,7 @@
 ﻿(function() {
     'use strict';
 
-    angular.module('np', ['ngRoute', 'LocalStorageModule',
+    angular.module('np', ['ui.router', 'LocalStorageModule',
         'np.logging', 'np.i18n', 'np.home'])
         .run([
             'Strings', 'ApplicationLogging', function(Strings, ApplicationLogging) {

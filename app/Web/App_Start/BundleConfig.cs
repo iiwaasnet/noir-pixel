@@ -11,7 +11,7 @@ namespace Web
         {
             var angular = new Bundle("~/bundles/angular")
                 .Include("~/app/vendor/angular.min.js")
-                .Include("~/app/vendor/angular-route.min.js");
+                .Include("~/app/vendor/angular-ui-router.min.js");
             angular.Transforms.Clear();
             bundles.Add(angular);
 
@@ -32,6 +32,7 @@ namespace Web
                             .Include(InterceptorsAssets().ToArray())
                             .Include(LocalizationAssets().ToArray())
                             .Include(HomeAssets().ToArray())
+                            .Include(LayoutAssets().ToArray())
                 );
 
 #if DEBUG
@@ -39,6 +40,11 @@ namespace Web
 #else
             BundleTable.EnableOptimizations = true;
 #endif
+        }
+
+        private static IEnumerable<string> LayoutAssets()
+        {
+            yield return "~/app/src/layout/header/header.controller.js";
         }
 
         private static IEnumerable<string> HomeAssets()
