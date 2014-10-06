@@ -1,8 +1,10 @@
-﻿<header ng-controller="HeaderController as ctrl">
+﻿<header ng-controller="HeaderController">
     <img src="~/app/assets/np-header.png" alt="noir-pixel"/>
+    <span>{{::title}}</span>
     <ul>
-        <li ng-repeat="menuItem in ctrl.mainMenu">
-            <a ui-sref="home" ng-bind="menuItem.text"></a>
+        <li ng-repeat="menuItem in mainMenu">
+            <a ui-sref="home">{{::menuItem.text}}</a>
         </li>
     </ul>
+    <button ng-click="add()"></button>
 </header>
