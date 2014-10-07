@@ -19,6 +19,7 @@ namespace Web.Controllers
         }
 
         [HttpGet]
+        [Route("strings/all")]
         public ActionResult All()
         {
             return new CustomJsonResult
@@ -28,6 +29,7 @@ namespace Web.Controllers
         }
 
         [HttpGet]
+        [Route("strings/localized/{lang}")]
         public ActionResult Localized(string lang)
         {
             object strings;
@@ -46,6 +48,7 @@ namespace Web.Controllers
         }
 
         [HttpGet]
+        [Route("strings/versions")]
         public ActionResult Versions()
         {
             return new CustomJsonResult
