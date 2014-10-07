@@ -11,10 +11,9 @@ namespace Web
 
             routes.MapMvcAttributeRoutes();
 
-            //TODO: Move this to attribute routing
             routes.MapRoute("RedirectToHome",
                             "{*url}",
-                            new {controller = "Home", action = "Index"});
+                            new { controller = "Home", action = "Index" });
         }
     }
 }
