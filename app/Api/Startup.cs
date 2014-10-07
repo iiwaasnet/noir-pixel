@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Api;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(Api.Startup))]
+[assembly: OwinStartup(typeof (Startup))]
 
 namespace Api
 {
@@ -12,6 +10,7 @@ namespace Api
     {
         public void Configuration(IAppBuilder app)
         {
+            app.UseAutofacMiddleware(DependencyInjection.GetContainer());
             ConfigureAuth(app);
         }
     }
