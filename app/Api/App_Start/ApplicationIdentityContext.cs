@@ -15,9 +15,10 @@ namespace Api
         {
             // todo add settings where appropriate to switch server & database in your own application
             var client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetServer().GetDatabase("mydb");
+            var database = client.GetServer().GetDatabase("np-identity");
             var users = database.GetCollection<IdentityUser>("users");
             var roles = database.GetCollection<IdentityRole>("roles");
+
             return new ApplicationIdentityContext(users, roles);
         }
 
