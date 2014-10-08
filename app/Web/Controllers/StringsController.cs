@@ -7,6 +7,7 @@ using Web.Components.Localization;
 
 namespace Web.Controllers
 {
+    [RoutePrefix("strings")]
     public class StringsController : Controller
     {
         private readonly ILocalizedStrings localizedStrings;
@@ -19,7 +20,7 @@ namespace Web.Controllers
         }
 
         [HttpGet]
-        [Route("strings/all")]
+        [Route("all")]
         public ActionResult All()
         {
             return new CustomJsonResult
@@ -29,7 +30,7 @@ namespace Web.Controllers
         }
 
         [HttpGet]
-        [Route("strings/localized/{lang}")]
+        [Route("localized/{lang}")]
         public ActionResult Localized(string lang)
         {
             object strings;
@@ -48,7 +49,7 @@ namespace Web.Controllers
         }
 
         [HttpGet]
-        [Route("strings/versions")]
+        [Route("versions")]
         public ActionResult Versions()
         {
             return new CustomJsonResult
