@@ -1,5 +1,6 @@
 using System.Reflection;
 using Autofac;
+using Autofac.Integration.Mvc;
 
 namespace Api
 {
