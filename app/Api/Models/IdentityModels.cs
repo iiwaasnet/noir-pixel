@@ -1,8 +1,7 @@
 ﻿using System.Security.Claims;
 using System.Threading.Tasks;
+using AspNet.Identity.MongoDB;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
 
 namespace Api.Models
 {
@@ -14,20 +13,10 @@ namespace Api.Models
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
             // Add custom user claims here
-            return userIdentity;
-        }
-    }
+            userIdentity.AddClaim(new Claim("user", userIdentity.Name));
+            //userIdentity.AddClaim(new Claim("role", "bla"));
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
-    {
-        public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
-        {
-        }
-        
-        public static ApplicationDbContext Create()
-        {
-            return new ApplicationDbContext();
+            return userIdentity;
         }
     }
 }

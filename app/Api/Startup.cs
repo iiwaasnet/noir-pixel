@@ -1,11 +1,10 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
 using Api;
 using Autofac.Integration.WebApi;
 using Microsoft.Owin;
-using Newtonsoft.Json;
+using Microsoft.Owin.Cors;
 using Newtonsoft.Json.Serialization;
 using Owin;
 
@@ -19,6 +18,8 @@ namespace Api
         {
             app.UseAutofacMiddleware(DependencyInjection.GetContainer());
 
+            ConfigureAuth(app);
+
             var config = new HttpConfiguration
                          {
                              DependencyResolver = new AutofacWebApiDependencyResolver(DependencyInjection.GetContainer())
@@ -28,7 +29,7 @@ namespace Api
             formatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
             app.UseWebApi(config);
-            ConfigureAuth(app);
+            app.UseCors(CorsOptions.AllowAll);
         }
     }
 }
