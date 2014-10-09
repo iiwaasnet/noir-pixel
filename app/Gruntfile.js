@@ -68,12 +68,12 @@ module.exports = function(grunt) {
             }
         },
         jshint: {
-            //options: {
-            //    reporter: 'checkstyle'
-            //},
+            options: {
+                reporter: 'jslint'
+            },
             all: {
                 options: {
-                    '-W014': true,
+                    '-W014': true
                 },
                 src: ['web/app/src/**/*.js'],
             }
