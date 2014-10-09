@@ -68,7 +68,15 @@ module.exports = function(grunt) {
             }
         },
         jshint: {
-            all: ['web/app/src/**/*.js']
+            //options: {
+            //    reporter: 'checkstyle'
+            //},
+            all: {
+                options: {
+                    '-W014': true,
+                },
+                src: ['web/app/src/**/*.js'],
+            }
         }
     });
 
