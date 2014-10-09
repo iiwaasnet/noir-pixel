@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using WURFL;
 using WURFL.Request;
+using WURFL.Request.Normalizers;
 
 namespace Web.Components.DeviceDetection
 {
@@ -15,7 +16,7 @@ namespace Web.Components.DeviceDetection
 
         public DeviceType GetDeviceType(IDictionary<string, string> headers)
         {
-            var deviceInfo = wurflManager.GetDeviceForRequest(new WURFLRequest(headers));
+            var deviceInfo = wurflManager.GetDeviceForRequest(new WURFLRequest(headers, new GenericNormalizerChain(), UserAgentPriority.OverrideSideloadedBrowserUserAgent));
 
             if (deviceInfo.GetVirtualCapability("is_smartphone") == "true")
             {
