@@ -11,9 +11,9 @@ namespace Web
 
             routes.MapMvcAttributeRoutes();
 
-            routes.MapRoute("RedirectToHome",
+            routes.MapRoute("RedirectToBootstrap",
                             "{*url}",
-                            new { controller = "Home", action = "Index" });
+                            new { controller = "home", action = "index" });
         }
     }
 }
