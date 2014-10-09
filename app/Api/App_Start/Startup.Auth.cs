@@ -25,7 +25,7 @@ namespace Api
                                    AllowInsecureHttp = true,
                                    TokenEndpointPath = new PathString("/token"),
                                    AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
-                                   AuthorizeEndpointPath = new PathString("/api/account/external-login"),
+                                   AuthorizeEndpointPath = new PathString("/account/external-login"),
                                    Provider = new ApplicationOAuthProvider(PublicClientId)
                                };
 
