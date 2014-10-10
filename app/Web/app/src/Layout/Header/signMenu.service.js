@@ -4,13 +4,28 @@
     angular.module('np.layout')
         .service('SingMenu', signMenuService);
 
+    signMenuService.$injector = ['Auth', 'Strings'];
 
-    function signMenuService() {
+    function signMenuService(Auth, Strings) {
         var service = this;
-        service.getMenu = getMenu;
+        service.getSignInMenu = getSignInMenu;
 
-        function getMenu() {
-            
+        function getSignInMenu() {
+            var signIn = {
+                text: Strings.getLocalizedString('AuthMenu_SignIn'),
+                uri: 'signIn'
+            },
+            signUp = {
+                text: Strings.getLocalizedString('AuthMenu_SignUp'),
+                uri: 'signUp'
+            };
+
+            var menu = [
+                signIn,
+                signUp
+            ];
+
+            return menu;
         }
     }
 })();

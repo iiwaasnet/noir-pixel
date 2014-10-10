@@ -117,10 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AuthMenu_SignIn" xml:space="preserve">
+    <value>Sign in</value>
+  </data>
+  <data name="AuthMenu_SignOut" xml:space="preserve">
+    <value>Sign out</value>
+  </data>
+  <data name="AuthMenu_SignUp" xml:space="preserve">
+    <value>Sign up</value>
+  </data>
   <data name="MainMenu_Exhibitions" xml:space="preserve">
     <value>Exhibitions</value>
   </data>
   <data name="MainMenu_Gallery" xml:space="preserve">
     <value>Gallery</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>User name</value>
   </data>
 </root>

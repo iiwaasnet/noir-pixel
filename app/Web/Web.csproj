@@ -176,6 +176,8 @@
     <Content Include="app\assets\np-header.png" />
     <Content Include="app\src\auth\auth.module.js" />
     <Content Include="app\src\auth\auth.service.js" />
+    <Content Include="app\src\auth\sign-up.html" />
+    <Content Include="app\src\auth\sign-in.html" />
     <Content Include="app\src\config\config.js" />
     <Content Include="app\src\config\config.module.js" />
     <Content Include="app\src\config\env\prod.json" />
