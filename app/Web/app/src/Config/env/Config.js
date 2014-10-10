@@ -5,6 +5,10 @@
         .constant('Config', {
             environment: '@@environment',
             loggingApiUri: '@@loggingApiUri',
+            apiUris: {
+                base: '@@base',
+                signin: '@@signin'
+            },
             strings: {
                 invalidationTimeout: '@@invalidationTimeout',
                 versionsUri: '@@versionsUri',

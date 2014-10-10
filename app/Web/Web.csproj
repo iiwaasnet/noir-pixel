@@ -174,6 +174,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\assets\np-header.png" />
+    <Content Include="app\src\auth\auth.module.js" />
+    <Content Include="app\src\auth\auth.service.js" />
     <Content Include="app\src\config\config.js" />
     <Content Include="app\src\config\config.module.js" />
     <Content Include="app\src\config\env\prod.json" />
@@ -282,6 +284,7 @@
     <Content Include="app\src\logging\exception-logging.factory.js" />
     <Content Include="app\src\layout\header\header.controller.js" />
     <Content Include="app\src\layout\header\mainMenu.service.js" />
+    <Content Include="app\src\layout\header\signMenu.service.js" />
     <None Include="config\Environment.config">
       <SubType>Designer</SubType>
     </None>

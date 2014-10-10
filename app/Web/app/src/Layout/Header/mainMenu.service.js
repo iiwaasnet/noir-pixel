@@ -8,9 +8,9 @@
 
     function mainMenuService(Strings) {
         var service = this;
-        service.getMainMenu = getMainMenu;
+        service.getMenu = getMenu;
 
-        function getMainMenu() {
+        function getMenu() {
             var gallery = {
                 text: Strings.getLocalizedString('MainMenu_Gallery'),
                 uri: 'gallery'

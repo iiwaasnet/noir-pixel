@@ -8,6 +8,6 @@
 
     function headerController(MainMenu) {
         var ctrl = this;
-        ctrl.mainMenu = MainMenu.getMainMenu();
+        ctrl.mainMenu = MainMenu.getMenu();
     }
 })();
