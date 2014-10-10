@@ -2,9 +2,12 @@
   "name": "noir-pixel",
   "version": "1.0.0",
   "devDependencies": {
-    "grunt": "0.4.5",
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-replace": "0.7.9",
     "jshint-stylish": "^0.4.0"
+  },
+  "dependencies": {
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13"
   }
 }
