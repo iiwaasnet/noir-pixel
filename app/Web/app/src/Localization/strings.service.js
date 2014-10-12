@@ -25,6 +25,7 @@
 
         function init() {
             service.setCurrentLanguage(service.getCurrentLanguage());
+            checkStringVersions();
             scheduleCacheInvalidation();
         }
 
@@ -80,9 +81,10 @@
                 var versionInfo = data.versions.filter(function(el) {
                     return el.locale === cache.locale;
                 })[0];
-                if (versionInfo && versionInfo.version !== cache.version) {
+                //if (versionInfo && versionInfo.version !== cache.version) {
+                //TODO: Decide on the strings versioning
                     loadStringsForLocale(cache.language);
-                }
+                //}
             });
         }
 
