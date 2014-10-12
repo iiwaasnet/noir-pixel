@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('np.auth')
-        .service("Auth", authService);
+        .service('Auth', authService);
 
     authService.$injector = ['$http', '$q', 'Config', 'Url'];
 

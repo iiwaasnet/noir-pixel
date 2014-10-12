@@ -9,8 +9,13 @@ namespace Web
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
+            #if DEBUG
+            var angular = new Bundle("~/bundles/angular")
+                .Include("~/app/vendor/angular.js");
+#else
             var angular = new Bundle("~/bundles/angular")
                 .Include("~/app/vendor/angular.min.js");
+#endif
             angular.Transforms.Clear();
             bundles.Add(angular);
 
@@ -38,6 +43,7 @@ namespace Web
                             .Include(LocalizationAssets().ToArray())
                             .Include(HomeAssets().ToArray())
                             .Include(LayoutAssets().ToArray())
+                            .Include(AuthAssets().ToArray())
                 );
 
 #if DEBUG
@@ -47,10 +53,18 @@ namespace Web
 #endif
         }
 
+        private static IEnumerable<string> AuthAssets()
+        {
+            yield return "~/app/src/auth/auth.module.js";
+            yield return "~/app/src/auth/auth.service.js";
+            yield return "~/app/src/auth/signIn.controller.js";
+        }
+
         private static IEnumerable<string> LayoutAssets()
         {
             yield return "~/app/src/layout/layout.module.js";
             yield return "~/app/src/layout/header/mainMenu.service.js";
+            yield return "~/app/src/layout/header/signMenu.service.js";
             yield return "~/app/src/layout/header/header.controller.js";
         }
 

@@ -11,20 +11,20 @@
             .state('home', {
                 url: '/',
                 templateUrl: '/app/src/Home/home.html',
-                controller: 'HomeController as homeCtrl'
+                controller: 'HomeController as ctrl'
             })
             .state('gallery', {
                 url: '/',
                 templateUrl: '/app/src/Home/home.html',
-                controller: 'HomeController as homeCtrl'
+                controller: 'HomeController as ctrl'
             }).state('signIn', {
-                url: '/app/src/Auth/sign-in.html',
-                templateUrl: '',
-                controller: 'SignInController as signInCtrl'
+                url: '/sign-in',
+                templateUrl: '/app/src/Auth/sign-in.html',
+                controller: 'SignInController as ctrl'
             }).state('signUp', {
-                url: '/app/src/Auth/sign-up.html',
-                templateUrl: '',
-                controller: 'SignUpController as signUpCtrl'
+                url: '/sign-up',
+                templateUrl: '/app/src/Auth/sign-up.html',
+                controller: 'SignUpController as ctrl'
             });
 
         $urlRouterProvider.otherwise('/');

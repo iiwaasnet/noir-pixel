@@ -70,7 +70,7 @@ module.exports = function(grunt) {
         jshint: {
             options: {
                 //reporter: 'jslint'
-                //reporter: require('jshint-stylish', {'verbose': true})
+                //reporter: require('jshint-stylish')
                 reporter: require('jshint-teamcity')
             },
             all: {

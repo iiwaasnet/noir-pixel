@@ -4,10 +4,42 @@
     angular.module('np.layout')
         .controller('HeaderController', headerController);
 
-    headerController.$injector = ['MainMenu'];
+    headerController.$injector = ['Strings'];
 
-    function headerController(MainMenu) {
+    function headerController(Strings) {
         var ctrl = this;
-        ctrl.mainMenu = MainMenu.getMenu();
+        ctrl.mainMenu = getMainMenu();
+        ctrl.signInMenu = getSignInMenu();
+
+        function getMainMenu() {
+            var gallery = {
+                text: Strings.getLocalizedString('MainMenu_Gallery'),
+                uri: 'gallery'
+            };
+
+            var menu = [
+                gallery
+            ];
+
+            return menu;
+        }
+
+        function getSignInMenu() {
+            var signIn = {
+                    text: Strings.getLocalizedString('AuthMenu_SignIn'),
+                    uri: 'signIn'
+                },
+                signUp = {
+                    text: Strings.getLocalizedString('AuthMenu_SignUp'),
+                    uri: 'signUp'
+                };
+
+            var menu = [
+                signIn,
+                signUp
+            ];
+
+            return menu;
+        }
     }
 })();
