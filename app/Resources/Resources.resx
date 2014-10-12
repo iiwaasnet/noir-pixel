@@ -126,6 +126,9 @@
   <data name="AuthMenu_SignUp" xml:space="preserve">
     <value>Sign up</value>
   </data>
+  <data name="EditHint_UserName" xml:space="preserve">
+    <value>User name or email</value>
+  </data>
   <data name="MainMenu_Exhibitions" xml:space="preserve">
     <value>Exhibitions</value>
   </data>

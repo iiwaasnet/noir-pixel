@@ -89,6 +89,7 @@ namespace Web
         {
             yield return "~/app/src/localization/i18n.module.js";
             yield return "~/app/src/localization/strings.service.js";
+            yield return "~/app/src/localization/np-i18n.filter.js";
             yield return "~/app/src/localization/np-i18n.directive.js";
         }
 
