@@ -1,5 +1,5 @@
-﻿<label np-i18n="UserName"></label>
+﻿<!--<label np-i18n="UserName"></label>-->
 <input nd-model="ctrl.userName" placeholder="{{'EditHint_UserName'|npi18n}}" />
-<label np-i18n="Password"></label>
-<input ng-model="ctrl.password"/>
-<input type="button" np-i18n="Password" ng-click="signIn()"/>
+<!--<label np-i18n="Password"></label>-->
+<input type="password" ng-model="ctrl.password" placeholder="{{'EditHint_Password'|npi18n}}" />
+<input type="button" np-i18n="SignIn" ng-click="signIn()" />
