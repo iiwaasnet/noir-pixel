@@ -14,7 +14,7 @@
         function getMainMenu() {
             var gallery = {
                 text: Strings.getLocalizedString('MainMenu_Gallery'),
-                uri: 'app.gallery'
+                uri: 'gallery'
             };
 
             var menu = [
@@ -27,11 +27,11 @@
         function getSignInMenu() {
             var signIn = {
                     text: Strings.getLocalizedString('AuthMenu_SignIn'),
-                    uri: 'app.signIn'
+                    uri: 'signIn'
                 },
                 signUp = {
                     text: Strings.getLocalizedString('AuthMenu_SignUp'),
-                    uri: 'app.signUp'
+                    uri: 'signUp'
                 };
 
             var menu = [

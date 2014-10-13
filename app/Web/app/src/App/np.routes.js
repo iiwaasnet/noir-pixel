@@ -9,26 +9,23 @@
 
     function config($stateProvider, $urlRouterProvider, $locationProvider) {
         $stateProvider
-            //.state('app', {
-            //    url: '',
-            //    //'abstract': true,
-            //    resolve: { strings: bootstrapData }
-            //})
-            .state('app.home', {
+            .state('home', {
+                url: '/',
+                templateUrl: '/app/src/Home/home.html',
+                controller: 'HomeController as ctrl',
+                //resolve: { strings: function(strings) { return strings; } }
+            })
+            .state('gallery', {
                 url: '/',
                 templateUrl: '/app/src/Home/home.html',
                 controller: 'HomeController as ctrl'
             })
-            .state('app.gallery', {
-                url: '/',
-                templateUrl: '/app/src/Home/home.html',
-                controller: 'HomeController as ctrl'
-            }).state('signIn', {
+            .state('signIn', {
                 url: '/sign-in',
                 templateUrl: '/app/src/Auth/sign-in.html',
-                controller: 'SignInController as ctrl',
-                resolve: { strings: bootstrapData }
-            }).state('app.signUp', {
+                controller: 'SignInController as ctrl'
+            })
+            .state('signUp', {
                 url: '/sign-up',
                 templateUrl: '/app/src/Auth/sign-up.html',
                 controller: 'SignUpController as ctrl'
