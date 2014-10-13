@@ -5,10 +5,10 @@
         .service('Strings', stringsService);
 
     stringsService.$injector = [
-        '$http', '$rootScope', '$window', '$interval', 'localStorageService', 'Config', 'ApplicationLogging', 'Moment'
+        '$q', '$http', '$rootScope', '$window', '$interval', 'localStorageService', 'Config', 'ApplicationLogging', 'Moment'
     ];
 
-    function stringsService($http, $rootScope, $window, $interval, localStorageService, Config, ApplicationLogging, Moment) {
+    function stringsService($q, $http, $rootScope, $window, $interval, localStorageService, Config, ApplicationLogging, Moment) {
         var service = this,
             dictionary = {},
             stringsLoaded = false,
@@ -24,9 +24,13 @@
         service.getLocalizedString = getLocalizedString;
 
         function init() {
+            var deferred = $q.defer();
+
             service.setCurrentLanguage(service.getCurrentLanguage());
-            checkStringVersions();
-            scheduleCacheInvalidation();
+            checkStringVersions(deferred);
+            //scheduleCacheInvalidation();
+
+            return deferred.promise;
         }
 
         function setCurrentLanguage(value) {
@@ -65,17 +69,21 @@
         }
 
         function scheduleCacheInvalidation() {
+            var deferred = $q.defer();
+
             var interval = Moment.duration(Config.strings.invalidationTimeout).asMilliseconds();
-            $interval(checkStringVersions, interval, 0, false);
+            $interval(function () { checkStringVersions(deferred); }, interval, 0, false);
+
+            return deferred.promise;
         }
 
-        function checkStringVersions() {
+        function checkStringVersions(deferred) {
             $http({ method: "GET", url: Config.strings.versionsUri, cache: false })
-                .success(getVersionsSuccess);
+                .success(function(data) { getVersionsSuccess(data, deferred); });
         }
 
 
-        function getVersionsSuccess(data) {
+        function getVersionsSuccess(data, deferred) {
             Object.keys(dictionary).forEach(function(lang) {
                 var cache = dictionary[lang];
                 var versionInfo = data.versions.filter(function(el) {
@@ -83,15 +91,15 @@
                 })[0];
                 //if (versionInfo && versionInfo.version !== cache.version) {
                 //TODO: Decide on the strings versioning
-                    loadStringsForLocale(cache.language);
+                    loadStringsForLocale(cache.language, deferred);
                 //}
             });
         }
 
-        function loadStringsForLocale(locale) {
+        function loadStringsForLocale(locale, deferred) {
 
             $http({ method: "GET", url: Config.strings.localizedUri + locale, cache: false })
-                .success(function(data) { getStringsSuccess(locale, data); });
+                .success(function (data) { getStringsSuccess(locale, data, deferred); });
         }
 
         function getStringsFromCache() {
@@ -103,7 +111,7 @@
             return null;
         }
 
-        function getStringsSuccess(lang, data) {
+        function getStringsSuccess(lang, data, deferred) {
             var strings = {};
             data.strings.forEach(function(el) {
                 strings[el.key] = el.value;
@@ -120,7 +128,9 @@
 
             localStorageService.set(getStringsStorageKey(), angular.toJson(cache));
 
-            $rootScope.$broadcast('stringsUpdates');
+            deferred.resolve(true);
+
+            $rootScope.$broadcast('stringsUpdated');
 
             if (lang !== data.locale) {
                 ApplicationLogging.warn('No Strings defined for language ' + lang + '! Locale ' + data.locale + ' used as fall-back.');

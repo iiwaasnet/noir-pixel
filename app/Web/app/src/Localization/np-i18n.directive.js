@@ -39,7 +39,7 @@
         }
 
         function link(scope, elm, attrs) {
-            scope.$on('stringsUpdates', function() {
+            scope.$on('stringsUpdated', function() {
                 dir.updateText(elm, attrs.npI18n, attrs);
             });
 

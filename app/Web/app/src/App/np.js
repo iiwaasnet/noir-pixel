@@ -6,7 +6,7 @@
         .run([
             'Strings', 'ApplicationLogging', function(Strings, ApplicationLogging) {
                 try {
-                    Strings.init();
+                    //Strings.init();
                 } catch (e) {
                     ApplicationLogging.error(e);
                 }

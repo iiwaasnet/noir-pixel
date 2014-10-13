@@ -44,6 +44,7 @@ namespace Web
                             .Include(HomeAssets().ToArray())
                             .Include(LayoutAssets().ToArray())
                             .Include(AuthAssets().ToArray())
+                            .Include(RegisterRoutes().ToArray())
                 );
 
 #if DEBUG
@@ -51,6 +52,11 @@ namespace Web
 #else
             BundleTable.EnableOptimizations = true;
 #endif
+        }
+
+        private static IEnumerable<string> RegisterRoutes()
+        {
+            yield return "~/app/src/app/np.routes.js";
         }
 
         private static IEnumerable<string> AuthAssets()
@@ -81,8 +87,7 @@ namespace Web
 
         private static IEnumerable<string> MainAppAssets()
         {
-            yield return "~/app/src/app/np.js";
-            yield return "~/app/src/app/np.routes.js";
+            yield return "~/app/src/app/np.js";            
         }
 
         private static IEnumerable<string> LocalizationAssets()

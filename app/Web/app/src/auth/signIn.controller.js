@@ -4,7 +4,7 @@
     angular.module('np.auth')
         .controller('SignInController', signInController);
 
-    function signInController() {
+    function signInController(strings) {
         var ctrl = this;
         ctrl.signIn = signIn;
         ctrl.userName = '';
