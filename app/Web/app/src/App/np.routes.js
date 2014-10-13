@@ -5,15 +5,13 @@
         .config(config);
 
     config.$injector = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
-    bootstrapData.$injector = ['Strings'];
 
     function config($stateProvider, $urlRouterProvider, $locationProvider) {
         $stateProvider
             .state('home', {
                 url: '/',
                 templateUrl: '/app/src/Home/home.html',
-                controller: 'HomeController as ctrl',
-                //resolve: { strings: function(strings) { return strings; } }
+                controller: 'HomeController as ctrl'
             })
             .state('gallery', {
                 url: '/',
@@ -34,9 +32,5 @@
         $urlRouterProvider.otherwise('/');
 
         $locationProvider.html5Mode(true);
-    }
-
-    function bootstrapData(Strings) {
-        return Strings.init();
     }
 })();

@@ -9,7 +9,7 @@ namespace Web
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
-            #if DEBUG
+#if DEBUG
             var angular = new Bundle("~/bundles/angular")
                 .Include("~/app/vendor/angular.js");
 #else
@@ -35,6 +35,9 @@ namespace Web
             bundles.Add(vendorNgMin);
 
             bundles.Add(new ScriptBundle("~/bundles/app")
+                            .Include(RegisterApp().ToArray())
+                            .Include(RegisterRoutes().ToArray())
+                            .Include(RunApp().ToArray())
                             .Include(ConfigAssets().ToArray())
                             .Include(UtilsAssets().ToArray())
                             .Include(LoggingAssets().ToArray())
@@ -44,7 +47,6 @@ namespace Web
                             .Include(HomeAssets().ToArray())
                             .Include(LayoutAssets().ToArray())
                             .Include(AuthAssets().ToArray())
-                            .Include(RegisterRoutes().ToArray())
                 );
 
 #if DEBUG
@@ -52,6 +54,16 @@ namespace Web
 #else
             BundleTable.EnableOptimizations = true;
 #endif
+        }
+
+        private static IEnumerable<string> RunApp()
+        {
+            yield return "~/app/src/app/np.run.js";
+        }
+
+        private static IEnumerable<string> RegisterApp()
+        {
+            yield return "~/app/src/app/np.module.js";
         }
 
         private static IEnumerable<string> RegisterRoutes()
@@ -87,7 +99,7 @@ namespace Web
 
         private static IEnumerable<string> MainAppAssets()
         {
-            yield return "~/app/src/app/np.js";            
+            yield return "~/app/src/app/np.js";
         }
 
         private static IEnumerable<string> LocalizationAssets()
