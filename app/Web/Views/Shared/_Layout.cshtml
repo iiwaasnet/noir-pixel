@@ -29,22 +29,14 @@
         
         <script type="text/javascript">
             (function () {
-                debugger;
-                
                 var srv = angular.injector(['ng', 'np.i18n']).get('Strings');
                 srv.init().then(function () {
-                    debugger;
                     angular.element(document).ready(function () {
                         angular.bootstrap(document, ['np']);
                     });
                 });
 
             })();
-
-            
-            //angular.element(document).ready(function () {
-            //    angular.bootstrap(document, ['np']);
-            //});
         </script>
     </body>
 </html>
