@@ -28,15 +28,16 @@
         @*@RenderSection("scripts", required: false)*@
         
         <script type="text/javascript">
-            (function () {
+            (function() {
                 var srv = angular.injector(['ng', 'np.i18n']).get('Strings');
-                srv.init().then(function () {
-                    angular.element(document).ready(function () {
+                srv.init().then(function() {
+                    angular.element(document).ready(function() {
                         angular.bootstrap(document, ['np']);
                     });
                 });
 
             })();
         </script>
+
     </body>
 </html>
