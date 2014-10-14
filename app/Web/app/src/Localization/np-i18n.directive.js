@@ -29,7 +29,7 @@
                         }
                     }
                     // insert the text into the element
-                    if (attrs['type'] === 'button') {
+                    if (attrs.type === 'button') {
                         elm.val(localizedTemplate);
                     } else {
                         elm.text(localizedTemplate);
