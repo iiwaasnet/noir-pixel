@@ -27,10 +27,45 @@
             var deferred = $q.defer();
 
             service.setCurrentLanguage(service.getCurrentLanguage());
-            checkStringVersions(deferred);
+            checkStringVersions()
+                .success(invalidateLocalCache)
+                .error(function(msg) { invalidateLocalCache([]); })
+                .success()
+                .error();
             //scheduleCacheInvalidation();
 
             return deferred.promise;
+        }
+
+        function invalidateLocalCache(versions) {
+            var deferred = $q.defer();
+
+            versions.forEach(checkLocaleStrings);
+
+            Object.keys(dictionary).forEach(function(lang) {
+                var cache = dictionary[lang];
+                var versionInfo = data.versions.filter(function(el) {
+                    return el.locale === cache.locale;
+                })[0];
+                //if (versionInfo && versionInfo.version !== cache.version) {
+                //TODO: Decide on the strings versioning
+                loadStringsForLocale(cache.language, deferred);
+                //}
+            });
+
+            return deferred.promise;
+        }
+
+        function checkLocaleStrings(lang) {
+            var deferred = $q.defer();
+            var promises = new 
+
+            var cache = dictionary[lang.locale];
+            if (!cache || cache.version !== lang.version) {
+                return loadStringsForLocale(lang.locale);
+            }
+
+            return $q.when(true);
         }
 
         function setCurrentLanguage(value) {
@@ -72,14 +107,19 @@
             var deferred = $q.defer();
 
             var interval = Moment.duration(Config.strings.invalidationTimeout).asMilliseconds();
-            $interval(function () { checkStringVersions(deferred); }, interval, 0, false);
+            $interval(function() { checkStringVersions(deferred); }, interval, 0, false);
 
             return deferred.promise;
         }
 
-        function checkStringVersions(deferred) {
+        function checkStringVersions() {
+            var deferred = $q.defer();
+
             $http({ method: "GET", url: Config.strings.versionsUri, cache: false })
-                .success(function(data) { getVersionsSuccess(data, deferred); });
+                .success(function(data) { deferred.resolve(data.versions); })
+                .error(function(msg) { deferred.reject(msg); });
+
+            return deferred.promise;
         }
 
 
@@ -91,15 +131,15 @@
                 })[0];
                 //if (versionInfo && versionInfo.version !== cache.version) {
                 //TODO: Decide on the strings versioning
-                    loadStringsForLocale(cache.language, deferred);
+                loadStringsForLocale(cache.language, deferred);
                 //}
             });
         }
 
-        function loadStringsForLocale(locale, deferred) {
-
-            $http({ method: "GET", url: Config.strings.localizedUri + locale, cache: false })
-                .success(function (data) { getStringsSuccess(locale, data, deferred); });
+        function loadStringsForLocale(locale) {
+            return $http({ method: "GET", url: Config.strings.localizedUri + locale, cache: false })
+                .success(function(data) { getStringsSuccess(locale, data); })
+                .error(function() { ApplicationLogging.error('Failed loading Strings for language ' + locale + '!'); });
         }
 
         function getStringsFromCache() {
@@ -127,8 +167,6 @@
             stringsLoaded = true;
 
             localStorageService.set(getStringsStorageKey(), angular.toJson(cache));
-
-            deferred.resolve(true);
 
             $rootScope.$broadcast('stringsUpdated');
 

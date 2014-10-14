@@ -14,10 +14,10 @@
              //}
          });
 
-         try {
-             Strings.init();
-         } catch (e) {
-             ApplicationLogging.error(e);
-         }
+         //try {
+         //    Strings.init();
+         //} catch (e) {
+         //    ApplicationLogging.error(e);
+         //}
      }
  })();
