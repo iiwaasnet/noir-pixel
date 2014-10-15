@@ -23,8 +23,24 @@
 
         function init() {
             return checkStringVersions()
-                .then(invalidateLocalCache);
+                .then(invalidateLocalCache,
+                function () { return $q.reject(); });
+
             //scheduleCacheInvalidation();
+        }
+
+        function checkStringVersions() {
+            var deferred = $q.defer();
+
+            $http({ method: "GET", url: Config.strings.versionsUri, cache: false })
+                .success(function (data) {
+                    deferred.resolve(data.versions);
+                })
+                .error(function() {
+                    deferred.reject();
+                });
+
+            return deferred.promise;
         }
 
         function invalidateLocalCache(versions) {
@@ -36,11 +52,13 @@
             });
 
             $q.all(promises)
-                .then(function() {
+                .then(function () {
+                debugger;
                     removeUnusedStrings(versions);
-                    deferred.resolve(true);
-                }, function() {
-                    deferred.reject(false);
+                    deferred.resolve();
+                }, function () {
+                    debugger;
+                    deferred.reject();
                 });
 
             return deferred.promise;
@@ -71,7 +89,7 @@
             if (!cache || cache.version !== lang.version) {
                 return loadStringsForLocale(lang.locale);
             }
-            return $q.resolve(true);
+            return $q.resolve();
         }
 
         function setCurrentLanguage(lang) {
@@ -115,26 +133,14 @@
         //    return deferred.promise;
         //}
 
-        function checkStringVersions() {
-            var deferred = $q.defer();
-
-            $http({ method: "GET", url: Config.strings.versionsUri, cache: false })
-                .success(function(data) {
-                    deferred.resolve(data.versions);
-                })
-                .error(function() {
-                    deferred.reject([]);
-                });
-
-            return deferred.promise;
-        }
 
         function loadStringsForLocale(locale) {
             return $http({ method: "GET", url: Config.strings.localizedUri + locale, cache: false })
                 .success(function(data) {
                     saveStringsToStorage(locale, data);
                 })
-                .error(function() {
+                .error(function () {
+                debugger;
                     ApplicationLogging.error('Failed loading strings for language ' + locale + '!');
                 });
         }
