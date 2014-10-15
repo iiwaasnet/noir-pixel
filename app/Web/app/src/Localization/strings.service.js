@@ -15,17 +15,21 @@
             language = localStorageService.get(langStorageKey)
                 || ($window.navigator.userLanguage || $window.navigator.language).split('-')[0];
 
-
         service.init = init;
         service.setCurrentLanguage = setCurrentLanguage;
         service.getCurrentLanguage = getCurrentLanguage;
         service.getLocalizedString = getLocalizedString;
 
         function init() {
+            var promise = initStringResources();
+            scheduleCacheInvalidation();
+
+            return promise;
+        }
+
+        function initStringResources() {
             return checkStringVersions()
                 .then(invalidateLocalCache);
-
-            //scheduleCacheInvalidation();
         }
 
         function checkStringVersions() {
@@ -44,8 +48,8 @@
             var deferred = $q.defer(),
                 promises = [];
 
-            versions.forEach(function(lang) {
-                promises.push(checkInvalidateLocaleStrings(lang));
+            versions.forEach(function(ver) {
+                promises.push(checkInvalidateLocaleStrings(ver));
             });
 
             $q.all(promises)
@@ -77,13 +81,13 @@
             return unusedLocales;
         }
 
-        function checkInvalidateLocaleStrings(lang) {
-            var cache = readStringsFromStorage(lang);
+        function checkInvalidateLocaleStrings(version) {
+            var cache = readStringsFromStorage(version.locale);
 
-            if (!cache || cache.version !== lang.version) {
-                return loadStringsForLocale(lang.locale);
+            if (!cache || cache.version !== version.version) {
+                return loadStringsForLocale(version.locale);
             }
-            return $q.resolve();
+            return $q.when();
         }
 
         function setCurrentLanguage(lang) {
@@ -118,14 +122,10 @@
             return '';
         }
 
-        //function scheduleCacheInvalidation() {
-        //    var deferred = $q.defer();
-
-        //    var interval = Moment.duration(Config.strings.invalidationTimeout).asMilliseconds();
-        //    $interval(function() { checkStringVersions(deferred); }, interval, 0, false);
-
-        //    return deferred.promise;
-        //}
+        function scheduleCacheInvalidation() {
+            var interval = Moment.duration(Config.strings.invalidationTimeout).asMilliseconds();
+            $interval(initStringResources, interval, 0, false);
+        }
 
 
         function loadStringsForLocale(locale) {
