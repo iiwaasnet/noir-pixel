@@ -25,10 +25,10 @@
         function init() {
             var deferred = $q.defer();
 
-            //service.setCurrentLanguage(service.getCurrentLanguage());
             checkStringVersions()
                 .then(invalidateLocalCache)
-                .then(function() {
+                .then(function () {
+                    service.setCurrentLanguage(service.getCurrentLanguage());
                     deferred.resolve(true);
                 }, function() {
                     deferred.reject(false);
@@ -85,31 +85,44 @@
             return $q.resolve(true);
         }
 
-        function setCurrentLanguage(value) {
-            language = value;
-            localStorageService.set(langStorageKey, value);
-            service.loadStrings();
+        function setCurrentLanguage(lang) {
+            language = lang;
+            localStorageService.set(langStorageKey, lang);
+            loadStrings(lang);
         }
 
         function getCurrentLanguage() {
             return language;
         }
 
-        function loadStrings() {
-            var currentLang = service.getCurrentLanguage(),
-                cache;
-
-            cache = dictionary[currentLang];
+        function loadStrings(lang) {
+            var cache = dictionary[lang];
             if (!cache || Object.keys(cache.strings).length === 0) {
-                cache = getStringsFromCache();
+                cache = readStringsFromStorage(lang);
             }
 
             if (!!cache) {
-                dictionary[currentLang] = cache;
+                dictionary[lang] = cache;
             } else {
-                loadStringsForLocale(currentLang);
+                ApplicationLogging.error('Failed reading strings from storage for language ' + lang + '!');
             }
         }
+
+        //function loadStrings() {
+        //    var currentLang = service.getCurrentLanguage(),
+        //        cache;
+
+        //    cache = dictionary[currentLang];
+        //    if (!cache || Object.keys(cache.strings).length === 0) {
+        //        cache = getStringsFromCache();
+        //    }
+
+        //    if (!!cache) {
+        //        dictionary[currentLang] = cache;
+        //    } else {
+        //        loadStringsForLocale(currentLang);
+        //    }
+        //}
 
         function getLocalizedString(value) {
             var cache = dictionary[service.getCurrentLanguage()];
@@ -149,7 +162,7 @@
                     saveStringsToStorage(locale, data);
                 })
                 .error(function() {
-                    ApplicationLogging.error('Failed loading Strings for language ' + locale + '!');
+                    ApplicationLogging.error('Failed loading strings for language ' + locale + '!');
                 });
         }
 
@@ -180,12 +193,12 @@
             $rootScope.$broadcast('stringsUpdated');
 
             if (requestedLocale !== data.locale) {
-                ApplicationLogging.warn('No Strings defined for language ' + requestedLocale + '! Locale ' + data.locale + ' used as fall-back.');
+                ApplicationLogging.warn('No strings defined for language ' + requestedLocale + '! Locale ' + data.locale + ' used as fall-back.');
             }
         }
 
         function writeStringsToStorage(data) {
-            addStoredLocales(data.local);
+            addStoredLocales(data.locale);
             localStorageService.set(getStringsStorageKey(data.locale), angular.toJson(data));
         }
 

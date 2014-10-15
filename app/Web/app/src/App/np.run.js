@@ -14,10 +14,14 @@
              //}
          });
 
-         //try {
-         //    Strings.init();
-         //} catch (e) {
-         //    ApplicationLogging.error(e);
-         //}
+         try {
+         	setDefaultLanguage();            
+         } catch (e) {
+             ApplicationLogging.error(e);
+         }
+
+         function setDefaultLanguage(){
+         	Strings.setCurrentLanguage(Strings.getCurrentLanguage());
+         }
      }
  })();
