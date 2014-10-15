@@ -32,6 +32,7 @@
                 var srv = angular.injector(['ng', 'np.i18n']).get('Strings');
                 srv.init().then(function() {
                     angular.element(document).ready(function () {
+                        debugger;
                         angular.bootstrap(document, ['np']);
                     });
                 });
