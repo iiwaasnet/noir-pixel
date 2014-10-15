@@ -22,18 +22,9 @@
         service.getLocalizedString = getLocalizedString;
 
         function init() {
-            var deferred = $q.defer();
-
-            checkStringVersions()
-                .then(invalidateLocalCache)
-                .then(function () {
-                    deferred.resolve(true);
-                }, function() {
-                    deferred.reject(false);
-                });
+            return checkStringVersions()
+                .then(invalidateLocalCache);
             //scheduleCacheInvalidation();
-
-            return deferred.promise;
         }
 
         function invalidateLocalCache(versions) {
