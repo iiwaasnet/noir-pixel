@@ -19,7 +19,6 @@
         service.init = init;
         service.setCurrentLanguage = setCurrentLanguage;
         service.getCurrentLanguage = getCurrentLanguage;
-        //service.loadStrings = loadStrings;
         service.getLocalizedString = getLocalizedString;
 
         function init() {
@@ -28,7 +27,6 @@
             checkStringVersions()
                 .then(invalidateLocalCache)
                 .then(function () {
-                    service.setCurrentLanguage(service.getCurrentLanguage());
                     deferred.resolve(true);
                 }, function() {
                     deferred.reject(false);
@@ -108,22 +106,6 @@
             }
         }
 
-        //function loadStrings() {
-        //    var currentLang = service.getCurrentLanguage(),
-        //        cache;
-
-        //    cache = dictionary[currentLang];
-        //    if (!cache || Object.keys(cache.strings).length === 0) {
-        //        cache = getStringsFromCache();
-        //    }
-
-        //    if (!!cache) {
-        //        dictionary[currentLang] = cache;
-        //    } else {
-        //        loadStringsForLocale(currentLang);
-        //    }
-        //}
-
         function getLocalizedString(value) {
             var cache = dictionary[service.getCurrentLanguage()];
             if (cache && Object.keys(cache.strings).length > 0) {
@@ -165,15 +147,6 @@
                     ApplicationLogging.error('Failed loading strings for language ' + locale + '!');
                 });
         }
-
-        //function getStringsFromCache(lang) {
-        //    var cache = angular.fromJson(localStorageService.get(getStringsStorageKey(lang)));
-        //    if (!!cache && Object.keys(cache.strings).length > 0) {
-        //        return cache;
-        //    }
-
-        //    return null;
-        //}
 
         function saveStringsToStorage(requestedLocale, data) {
             var strings = {};
