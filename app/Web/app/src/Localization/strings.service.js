@@ -23,8 +23,7 @@
 
         function init() {
             return checkStringVersions()
-                .then(invalidateLocalCache,
-                function () { return $q.reject(); });
+                .then(invalidateLocalCache);
 
             //scheduleCacheInvalidation();
         }
@@ -33,12 +32,10 @@
             var deferred = $q.defer();
 
             $http({ method: "GET", url: Config.strings.versionsUri, cache: false })
-                .success(function (data) {
+                .success(function(data) {
                     deferred.resolve(data.versions);
                 })
-                .error(function() {
-                    deferred.reject();
-                });
+                .error(deferred.reject);
 
             return deferred.promise;
         }
@@ -52,14 +49,11 @@
             });
 
             $q.all(promises)
-                .then(function () {
-                debugger;
-                    removeUnusedStrings(versions);
-                    deferred.resolve();
-                }, function () {
-                    debugger;
-                    deferred.reject();
-                });
+                .then(function() {
+                        removeUnusedStrings(versions);
+                        deferred.resolve();
+                    },
+                    deferred.reject);
 
             return deferred.promise;
         }
@@ -139,8 +133,7 @@
                 .success(function(data) {
                     saveStringsToStorage(locale, data);
                 })
-                .error(function () {
-                debugger;
+                .error(function() {
                     ApplicationLogging.error('Failed loading strings for language ' + locale + '!');
                 });
         }

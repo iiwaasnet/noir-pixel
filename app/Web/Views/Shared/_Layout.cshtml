@@ -32,13 +32,12 @@
                 var srv = angular.injector(['ng', 'np.i18n']).get('Strings');
                 srv.init()
                     .then(function () {
-                        debugger;
                         angular.element(document).ready(function() {
                             angular.bootstrap(document, ['np']);
                         });
                     },
                     function() {
-                        debugger;
+                        alert("Sorry, something went wrong :(");
                     });
 
             })();
