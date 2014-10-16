@@ -24,6 +24,8 @@ namespace Api.Providers
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
+            EnableCors(context);
+
             var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
             var user = await userManager.FindAsync(context.UserName, context.Password);
@@ -41,6 +43,14 @@ namespace Api.Providers
             var ticket = new AuthenticationTicket(oAuthIdentity, properties);
             context.Validated(ticket);
             context.Request.Context.Authentication.SignIn(cookiesIdentity);
+        }
+
+        private static void EnableCors(OAuthGrantResourceOwnerCredentialsContext context)
+        {
+            //TODO: Get web-site name from config
+            var allowedOrigin = context.OwinContext.Get<string>("as:clientAllowedOrigin") ?? "http://noir-pixel.com";
+            
+            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] {allowedOrigin});
         }
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)

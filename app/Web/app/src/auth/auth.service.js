@@ -24,7 +24,10 @@
 
             $http.post(url,
                     data,
-                    { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
+                    { headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                        
+                    } })
                 .success(function(response) { signInSuccess(response, deferred); })
                 .error(function(err, status) { signInError(err, status, deferred); });
 

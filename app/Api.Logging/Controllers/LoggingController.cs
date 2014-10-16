@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Web.Http;
-using System.Web.Http.Cors;
 using Api.Logging.Models;
 using Diagnostics;
 
 namespace Api.Logging.Controllers
 {
     [RoutePrefix("log")]
-    [EnableCors(origins: "http://noir-pixel.com", headers: "*", methods: "GET, POST")]
     public class LoggingController : ApiController
     {
         private readonly ILogger logger;

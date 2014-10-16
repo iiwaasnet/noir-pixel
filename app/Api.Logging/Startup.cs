@@ -29,7 +29,6 @@ namespace Api.Logging
             formatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
             app.UseWebApi(config);
-
             app.UseCors(new CorsOptions());
         }
     }
