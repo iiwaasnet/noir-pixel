@@ -11,9 +11,11 @@ namespace Web
         {
 #if DEBUG
             var angular = new Bundle("~/bundles/angular")
-                .Include("~/app/vendor/angular.js");
+                .Include("~/app/vendor/angular.js")
+                .Include("~/app/vendor/angular-messages.js");
 #else
             var angular = new Bundle("~/bundles/angular")
+                .Include("~/app/vendor/angular-messages.min.js")
                 .Include("~/app/vendor/angular.min.js");
 #endif
             angular.Transforms.Clear();

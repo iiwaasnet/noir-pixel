@@ -13,11 +13,15 @@
         ctrl.password = '';
         ctrl.signInAllowed = true;
 
-        function signIn() {
-            ctrl.signInAllowed = false;
-            Auth.signIn(ctrl.userName, ctrl.password)
-                .then(signInSucceeded, signInFailed)
-                .then(enableSignIn);
+        function signIn(valid) {
+            if (valid) {
+                ctrl.signInAllowed = false;
+                Auth.signIn(ctrl.userName, ctrl.password)
+                    .then(signInSucceeded, signInFailed)
+                    .then(enableSignIn);
+            } else {
+                alert('Correct the errors and try again!');
+            }
         }
 
         function signInSucceeded(data) {
