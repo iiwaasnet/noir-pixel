@@ -27,7 +27,7 @@
                 ApplicationLogging.error(createError(response));
             }
 
-            return $q.reject(response.config);
+            return $q.reject(response);
         }
 
         function createError(response) {
