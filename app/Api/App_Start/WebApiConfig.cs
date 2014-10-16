@@ -14,7 +14,6 @@ namespace Api
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
             // Web API routes
-            config.EnableCors(new EnableCorsAttribute("http://noir-pixel.com", "*", "GET,POST"));
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
