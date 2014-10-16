@@ -13,7 +13,19 @@
         ctrl.password = '';
         ctrl.signInAllowed = true;
 
+
+        function boo() {
+            var subscriptions = {};
+            var evnt = 'auth';
+
+            if (!~Object.keys(subscriptions).indexOf(evnt)) {
+                subscriptions[evnt] = {signInSucceeded: signInSucceeded};
+            }
+        }
+
         function signIn(valid) {
+            boo();
+
             if (valid) {
                 ctrl.signInAllowed = false;
                 Auth.signIn(ctrl.userName, ctrl.password)
