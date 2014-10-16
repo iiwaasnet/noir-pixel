@@ -23,7 +23,7 @@
         return { responseError: responseError };
 
         function responseError(response) {
-            if (response && HttpProviderConfig.interceptStatuses.indexOf(response.status) > -1) {
+            if (response && ~HttpProviderConfig.interceptStatuses.indexOf(response.status)) {
                 ApplicationLogging.error(createError(response));
             }
 
