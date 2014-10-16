@@ -36,9 +36,7 @@
             var deferred = $q.defer();
 
             $http({ method: "GET", url: Config.strings.versionsUri, cache: false })
-                .success(function(data) {
-                    deferred.resolve(data.versions);
-                })
+                .success(function(data) { deferred.resolve(data.versions); })
                 .error(deferred.reject);
 
             return deferred.promise;
