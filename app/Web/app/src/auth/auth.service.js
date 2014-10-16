@@ -11,6 +11,7 @@
         service.signIn = signIn;
         service.extSignIn = extSignIn;
         service.authenticated = authenticated;
+        service.getUserInfo = getUserInfo;
         service.token = null;
 
         function authenticated() {
@@ -47,6 +48,11 @@
             service.token = null;
 
             deferred.reject(err);
+        }
+
+        function getUserInfo() {
+            var url = Url.build([Config.apiUris.base, 'account/user-info']);
+            return $http.get(url);
         }
     }
 })();
