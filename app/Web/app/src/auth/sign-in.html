@@ -1,14 +1,16 @@
 ﻿<form name="signInForm" ng-submit="ctrl.signIn(signInForm.$valid)" novalidate>
     <!--<label np-i18n="UserName"></label>-->
-    <input name="userName" ng-model="ctrl.userName" placeholder="{{'EditHint_UserName'|npi18n}}" required />
+    <input name="userName" ng-model="ctrl.userName" placeholder="{{'EditHint_UserName'|npi18n}}" required ng-minlength="5" />
     <div ng-messages="signInForm.userName.$error" style="color:maroon">
         <div ng-message="required">You did not enter a field</div>
+        <div ng-message="minlength">Your password is too short</div>
     </div>
 
     <!--<label np-i18n="Password"></label>-->
-    <input name="password" type="password" ng-model="ctrl.password" placeholder="{{'EditHint_Password'|npi18n}}" required />
-    <div ng-messages="signInForm.password.$error" style="color:maroon">
+    <input name="password" type="password" ng-model="ctrl.password" placeholder="{{'EditHint_Password'|npi18n}}" required ng-minlength="5" />
+    <div ng-messages="signInForm.password.$error" ng-messages-multiple style="color:maroon">
         <div ng-message="required">You did not enter a field</div>
+        <div ng-message="minlength">Your password is too short</div>
     </div>
 
     <input type="submit" np-i18n="SignIn" ng-disabled="signInForm.$invalid || !ctrl.signInAllowed" />
