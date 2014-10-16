@@ -1,5 +1,7 @@
-﻿<!--<label np-i18n="UserName"></label>-->
-<input ng-model="ctrl.userName" placeholder="{{'EditHint_UserName'|npi18n}}" />
-<!--<label np-i18n="Password"></label>-->
-<input type="password" ng-model="ctrl.password" placeholder="{{'EditHint_Password'|npi18n}}" />
-<input type="button" np-i18n="SignIn" ng-disabled="!ctrl.allowSignIn" ng-click="ctrl.signIn()"/>
+﻿<form ng-submit="ctrl.signIn()" novalidate>
+    <!--<label np-i18n="UserName"></label>-->
+    <input ng-model="ctrl.userName" placeholder="{{'EditHint_UserName'|npi18n}}" />
+    <!--<label np-i18n="Password"></label>-->
+    <input type="password" ng-model="ctrl.password" placeholder="{{'EditHint_Password'|npi18n}}" />
+    <input type="submit" np-i18n="SignIn" ng-disabled="!ctrl.signInAllowed" />
+</form>

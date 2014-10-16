@@ -11,10 +11,10 @@
         ctrl.signIn = signIn;
         ctrl.userName = '';
         ctrl.password = '';
-        ctrl.allowSignIn = true;
+        ctrl.signInAllowed = true;
 
         function signIn() {
-            ctrl.allowSignIn = false;
+            ctrl.signInAllowed = false;
             Auth.signIn(ctrl.userName, ctrl.password)
                 .then(signInSucceeded, signInFailed)
                 .then(enableSignIn);
@@ -29,7 +29,7 @@
         }
 
         function enableSignIn() {
-            ctrl.allowSignIn = true;
+            ctrl.signInAllowed = true;
         }
     }
 })();
