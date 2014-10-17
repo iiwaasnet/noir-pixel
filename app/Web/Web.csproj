@@ -200,7 +200,7 @@
     <Content Include="app\src\logging\exception-handler.js" />
     <Content Include="app\src\localization\np-i18n.directive.js" />
     <Content Include="app\src\app\np.module.js" />
-    <Content Include="app\src\interceptors\http-interceptor.js" />
+    <Content Include="app\src\interceptors\httpInterceptor.js" />
     <Content Include="app\src\app\np.routes.js" />
     <Content Include="app\src\logging\logging.module.js" />
     <Content Include="app\src\logging\trace.factory.js" />

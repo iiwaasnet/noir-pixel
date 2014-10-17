@@ -97,7 +97,7 @@ namespace Web
 
         private static IEnumerable<string> InterceptorsAssets()
         {
-            yield return "~/app/src/interceptors/http-interceptor.js";
+            yield return "~/app/src/interceptors/httpInterceptor.js";
         }
 
         private static IEnumerable<string> MainAppAssets()
