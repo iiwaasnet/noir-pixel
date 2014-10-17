@@ -49,7 +49,7 @@
                 event.preventDefault();
                 alert('Unauthorized!');
                 if (!fromState.name) {
-                    $state.go('notAuthorized', { redirectTo: fromState.url });
+                    $state.go('notAuthorized', { redirectTo: toState.url });
                 }
                 //else {
                 //    $state.go('notAuthorized', { backTo: fromState.name});

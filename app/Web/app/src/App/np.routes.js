@@ -25,7 +25,7 @@
                 controller: 'HomeController as ctrl'
             })
             .state('signIn', {
-                url: '/sign-in',
+                url: '/sign-in?redirectTo',
                 templateUrl: '/app/src/Auth/sign-in.html',
                 controller: 'SignInController as ctrl'
             })
