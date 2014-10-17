@@ -40,7 +40,7 @@
         function signInSucceeded(data) {
             alert('Welcome!');
             if (redirectTo) {
-                $location.path(redirectTo);
+                $location.url(redirectTo);
             }
         }
 

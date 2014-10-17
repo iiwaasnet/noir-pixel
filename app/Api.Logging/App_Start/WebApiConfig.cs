@@ -15,9 +15,7 @@ namespace Api.Logging
 
             // Web API routes
             config.EnableCors(new EnableCorsAttribute("http://noir-pixel.com", "*", "GET,POST"));
-
             config.MapHttpAttributeRoutes();
-
             config.Routes.MapHttpRoute(
                                        name: "DefaultApi",
                                        routeTemplate: "{controller}/{id}",

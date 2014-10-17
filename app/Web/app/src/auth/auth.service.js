@@ -9,6 +9,7 @@
     function authService($http, $q, Config, Url) {
         var service = this;
         service.signIn = signIn;
+        service.signOut = signOut;
         service.extSignIn = extSignIn;
         service.authenticated = authenticated;
         service.getUserInfo = getUserInfo;
@@ -26,10 +27,7 @@
             $http.post(url,
                     data,
                     {
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-
-                        }
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                     })
                 .success(function(response) { signInSuccess(response, deferred); })
                 .error(function(err, status) { signInError(err, status, deferred); });
@@ -42,7 +40,7 @@
 
         function signInSuccess(response, deferred) {
             service.token = response.access_token;
-
+            $http.defaults.headers.common.Authorization = 'Bearer ' + service.token;
             deferred.resolve(response);
         }
 
@@ -63,6 +61,10 @@
                     function(error) { deferred.reject(error); });
 
             return deferred.promise;
+        }
+
+        function signOut() {
+            $http.defaults.headers.common.Authorization = '';
         }
     }
 })();
