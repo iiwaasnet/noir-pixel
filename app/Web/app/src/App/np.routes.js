@@ -33,7 +33,12 @@
                 url: '/sign-up',
                 templateUrl: '/app/src/Auth/sign-up.html',
                 controller: 'SignUpController as ctrl'
-            });
+            })
+            .state('notAuthorized', {
+                url: '/not-authorized?backTo',
+                templateUrl: '/app/src/Auth/not-authorized.html',
+                controller: 'NotAuthorizedController as ctrl'
+        });
 
         $urlRouterProvider.otherwise('/');
 
