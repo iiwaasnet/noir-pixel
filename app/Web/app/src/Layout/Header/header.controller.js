@@ -14,7 +14,7 @@
         function getMainMenu() {
             var gallery = {
                 text: Strings.getLocalizedString('MainMenu_Gallery'),
-                uri: 'gallery'
+                uri: 'home'
             };
 
             var menu = [

@@ -25,10 +25,12 @@
 
             $http.post(url,
                     data,
-                    { headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                        
-                    } })
+                    {
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+
+                        }
+                    })
                 .success(function(response) { signInSuccess(response, deferred); })
                 .error(function(err, status) { signInError(err, status, deferred); });
 
@@ -52,7 +54,15 @@
 
         function getUserInfo() {
             var url = Url.build([Config.apiUris.base, 'account/user-info']);
-            return $http.get(url);
+
+            var deferred = $q.defer();
+
+            $http.get(url)
+                .then(
+                    function(response) { deferred.resolve(response.data); },
+                    function(error) { deferred.reject(error); });
+
+            return deferred.promise;
         }
     }
 })();

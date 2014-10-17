@@ -11,7 +11,13 @@
             .state('home', {
                 url: '/',
                 templateUrl: '/app/src/Home/home.html',
-                controller: 'HomeController as ctrl'
+                controller: 'HomeController as ctrl',
+                resolve: {
+                    Auth: 'Auth',
+                    userInfo: function (Auth) {
+                        return Auth.getUserInfo();
+                    }
+                }
             })
             .state('gallery', {
                 url: '/',
