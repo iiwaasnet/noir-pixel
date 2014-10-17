@@ -1,6 +1,5 @@
 ﻿using System.Web.Http;
 using System.Web.Http.Cors;
-using Microsoft.Owin.Security.OAuth;
 
 namespace Api.Logging
 {
@@ -15,6 +14,8 @@ namespace Api.Logging
             //config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
             // Web API routes
+            config.EnableCors(new EnableCorsAttribute("http://noir-pixel.com", "*", "GET,POST"));
+
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
