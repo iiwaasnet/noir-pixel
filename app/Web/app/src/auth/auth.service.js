@@ -4,19 +4,18 @@
     angular.module('np.auth')
         .service('Auth', authService);
 
-    authService.$injector = ['$http', '$q', 'Config', 'Url'];
+    authService.$injector = ['$http', '$q', 'Config', 'Url', 'tokenStorage'];
 
-    function authService($http, $q, Config, Url) {
+    function authService($http, $q, Config, Url, tokenStorage) {
         var service = this;
         service.signIn = signIn;
         service.signOut = signOut;
         service.extSignIn = extSignIn;
         service.authenticated = authenticated;
         service.getUserInfo = getUserInfo;
-        service.token = null;
 
         function authenticated() {
-            return !!service.token;
+            return !!tokenStorage.getToken();
         }
 
         function signIn(userName, pwd) {
@@ -39,14 +38,12 @@
         }
 
         function signInSuccess(response, deferred) {
-            service.token = response.access_token;
-            $http.defaults.headers.common.Authorization = 'Bearer ' + service.token;
+            tokenStorage.setToken(response.access_token);
             deferred.resolve(response);
         }
 
         function signInError(err, status, deferred) {
-            service.token = null;
-
+            tokenStorage.deleteToken();
             deferred.reject(err);
         }
 
@@ -64,7 +61,7 @@
         }
 
         function signOut() {
-            $http.defaults.headers.common.Authorization = '';
+            tokenStorage.deleteToken();
         }
     }
 })();

@@ -77,6 +77,7 @@ namespace Web
         {
             yield return "~/app/src/auth/auth.module.js";
             yield return "~/app/src/auth/auth.service.js";
+            yield return "~/app/src/auth/tokenStorage.service.js";
             yield return "~/app/src/auth/signIn.controller.js";
             yield return "~/app/src/auth/notAuthorized.controller.js";
         }

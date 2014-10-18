@@ -32,11 +32,16 @@
                 signUp = {
                     text: Strings.getLocalizedString('AuthMenu_SignUp'),
                     uri: 'signUp'
+                },
+                signOut = {
+                    text: Strings.getLocalizedString('AuthMenu_SignOut'),
+                    uri: 'signOut'
                 };
 
             var menu = [
                 signIn,
-                signUp
+                signUp,
+                signOut
             ];
 
             return menu;
