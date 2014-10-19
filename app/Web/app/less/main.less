@@ -12,7 +12,13 @@ body {
 a {
     color: @main-text-color;
     text-decoration: none;
-    &:hover{
+
+    &:hover {
         color: lighten(@main-text-color, 80%);
+        text-shadow: -1px 1px 30px rgba(255, 255, 255, 0.6), 1px -1px 30px rgba(255, 255, 255, 0.6);
+        -webkit-transition: 50ms linear 0s;
+        -moz-transition: 50ms linear 0s;
+        -o-transition: 50ms linear 0s;
+        transition: 50ms linear 0s;
     }
 }
