@@ -20,11 +20,11 @@
         service.getCurrentLanguage = getCurrentLanguage;
         service.getLocalizedString = getLocalizedString;
 
-        debugger;
         MessageBus.addListener('bla', alert1);
         MessageBus.addListener('bla', alert1);
         MessageBus.addListener('bla', alert2);
 
+        MessageBus.removeListener('bla', alert1);
         MessageBus.removeListener('bla', alert1);
 
         MessageBus.publishEvent('bla', null);

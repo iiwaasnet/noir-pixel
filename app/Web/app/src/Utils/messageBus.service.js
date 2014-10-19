@@ -19,18 +19,21 @@
         }
 
         function addListener(event, delegate) {
-            var eventHandlers = handlers[event] || {};
-            eventHandlers[delegate] = delegate;
+            var eventHandlers = handlers[event] || [];
+            
+            if (!~eventHandlers.indexOf(delegate)) {
+                eventHandlers.push(delegate);
+            }
+            
             handlers[event] = eventHandlers;
         }
 
         function removeListener(event, delegate) {
-            var eventHandlers = handlers[event];
-            if (!!eventHandlers) {
-                delete eventHandlers[delegate];
+            var eventHandlers = handlers[event] || {};
+            var index = eventHandlers.indexOf(delegate);
+            if (~index) {
+                eventHandlers.splice(index, 1);
             }
-
-            debugger;
         }
     }
 })();
