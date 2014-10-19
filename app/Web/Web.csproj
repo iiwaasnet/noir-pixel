@@ -173,7 +173,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\assets\np-header.png" />
+    <Content Include="app\images\np-header.png" />
     <Content Include="app\src\app\globalData.service.js" />
     <Content Include="app\src\auth\auth.module.js" />
     <Content Include="app\src\auth\auth.service.js" />
