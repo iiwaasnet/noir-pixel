@@ -75,7 +75,8 @@ module.exports = function(grunt) {
             },
             all: {
                 options: {
-                    '-W014': true
+                    '-W014': true,
+                    '-W040': true,
                 },
                 src: ['web/app/src/**/*.js']
             }
