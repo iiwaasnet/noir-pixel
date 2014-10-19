@@ -146,6 +146,7 @@ namespace Web
             yield return "~/app/src/utils/utils.module.js";
             yield return "~/app/src/utils/moment.factory.js";
             yield return "~/app/src/utils/url.service.js";
+            yield return "~/app/src/utils/messageBus.service.js";
         }
     }
 }

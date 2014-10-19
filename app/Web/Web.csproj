@@ -256,6 +256,7 @@
     <Content Include="app\src\app\np.routes.js" />
     <Content Include="app\src\logging\logging.module.js" />
     <Content Include="app\src\logging\trace.factory.js" />
+    <Content Include="app\src\utils\messageBus.service.js" />
     <Content Include="app\src\utils\moment.factory.js" />
     <Content Include="app\src\utils\url.service.js" />
     <Content Include="app\src\utils\utils.module.js" />

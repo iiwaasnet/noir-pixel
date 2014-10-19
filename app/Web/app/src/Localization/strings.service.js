@@ -5,10 +5,10 @@
         .service('Strings', stringsService);
 
     stringsService.$injector = [
-        '$q', '$http', '$rootScope', '$window', '$interval', 'localStorageService', 'Config', 'ApplicationLogging', 'Moment'
+        '$q', '$http', '$rootScope', '$window', '$interval', 'localStorageService', 'Config', 'ApplicationLogging', 'Moment', 'MessageBus'
     ];
 
-    function stringsService($q, $http, $rootScope, $window, $interval, localStorageService, Config, ApplicationLogging, Moment) {
+    function stringsService($q, $http, $rootScope, $window, $interval, localStorageService, Config, ApplicationLogging, Moment, MessageBus) {
         var service = this,
             dictionary = {},
             langStorageKey = 'currentLang',
@@ -19,6 +19,24 @@
         service.setCurrentLanguage = setCurrentLanguage;
         service.getCurrentLanguage = getCurrentLanguage;
         service.getLocalizedString = getLocalizedString;
+
+        debugger;
+        MessageBus.addListener('bla', alert1);
+        MessageBus.addListener('bla', alert1);
+        MessageBus.addListener('bla', alert2);
+
+        MessageBus.removeListener('bla', alert1);
+
+        MessageBus.publishEvent('bla', null);
+
+
+        function alert1() {
+            alert('1');
+        }
+
+        function alert2() {
+            alert('2');
+        }
 
         function init() {
             var promise = initStringResources();
