@@ -1,0 +1,18 @@
+﻿@import (reference) "colors.less";
+@import (reference) "fonts.less";
+
+body {
+    background-color: @background-color;
+    .main-font;
+    margin: 0.1em;
+    padding: 0;
+}
+
+/*links*/
+a {
+    color: @main-text-color;
+    text-decoration: none;
+    &:hover{
+        color: lighten(@main-text-color, 80%);
+    }
+}

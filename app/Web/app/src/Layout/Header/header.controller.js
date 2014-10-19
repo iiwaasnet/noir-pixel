@@ -15,10 +15,20 @@
             var gallery = {
                 text: Strings.getLocalizedString('MainMenu_Gallery'),
                 uri: 'home'
+            },
+            exhibition = {
+                text: Strings.getLocalizedString('MainMenu_Gallery'),
+                uri: 'exhibition'
+            },
+            projects = {
+                text: Strings.getLocalizedString('MainMenu_Gallery'),
+                uri: 'projects'
             };
 
             var menu = [
-                gallery
+                gallery,
+                exhibition,
+                projects
             ];
 
             return menu;

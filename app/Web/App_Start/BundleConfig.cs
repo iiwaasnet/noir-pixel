@@ -9,6 +9,24 @@ namespace Web
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
+            BundleJs(bundles);
+            BundleCss(bundles);
+
+#if DEBUG
+            BundleTable.EnableOptimizations = false;
+#else
+            BundleTable.EnableOptimizations = true;
+#endif
+        }
+
+        private static void BundleCss(BundleCollection bundles)
+        {
+            bundles.Add(new StyleBundle("~/bundles/css")
+                .Include("~/app/less/all.css", new CssRewriteUrlTransform()));
+        }
+
+        private static void BundleJs(BundleCollection bundles)
+        {
 #if DEBUG
             var angular = new Bundle("~/bundles/angular")
                 .Include("~/app/vendor/angular.js")
@@ -50,12 +68,6 @@ namespace Web
                             .Include(LayoutAssets().ToArray())
                             .Include(AuthAssets().ToArray())
                 );
-
-#if DEBUG
-            BundleTable.EnableOptimizations = false;
-#else
-            BundleTable.EnableOptimizations = true;
-#endif
         }
 
         private static IEnumerable<string> RunApp()
