@@ -20,6 +20,13 @@ packages/
 !packages/repositories.config
 !packages/*/build/
 
+
+# Ignore /less/{*.css, *.min.css, *.css.map} files
+/**/less/*.css
+/**/less/*.min.css
+/**/less/*.css.map
+
+
 # Ignore node modules
 node_modules/
 
