@@ -4,9 +4,9 @@
     angular.module('np.auth')
         .service('Auth', authService);
 
-    authService.$injector = ['$http', '$q', 'Config', 'Url', 'tokenStorage'];
+    authService.$injector = ['$http', '$q', 'Config', 'Url', 'tokenStorage', 'EventsHub'];
 
-    function authService($http, $q, Config, Url, tokenStorage) {
+    function authService($http, $q, Config, Url, tokenStorage, EventsHub) {
         var service = this;
         service.signIn = signIn;
         service.signOut = signOut;

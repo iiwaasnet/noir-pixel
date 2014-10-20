@@ -67,7 +67,14 @@ namespace Web
                             .Include(HomeAssets().ToArray())
                             .Include(LayoutAssets().ToArray())
                             .Include(AuthAssets().ToArray())
+                            .Include(EventsAssets().ToArray())
                 );
+        }
+
+        private static IEnumerable<string> EventsAssets()
+        {
+            yield return "~/app/src/events/events.module.js";
+            yield return "~/app/src/events/eventsHub.service.js";
         }
 
         private static IEnumerable<string> RunApp()
@@ -145,8 +152,7 @@ namespace Web
         {
             yield return "~/app/src/utils/utils.module.js";
             yield return "~/app/src/utils/moment.factory.js";
-            yield return "~/app/src/utils/url.service.js";
-            yield return "~/app/src/utils/messageBus.service.js";
+            yield return "~/app/src/utils/url.service.js";            
         }
     }
 }

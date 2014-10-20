@@ -1,10 +1,10 @@
 ﻿(function() {
     'use strict';
 
-    angular.module('np.utils')
-        .service('MessageBus', messageBusService);
+    angular.module('np.events')
+        .service('EventsHub', eventsHubService);
 
-    function messageBusService() {
+    function eventsHubService() {
         var service = this,
             handlers = {};
         service.addListener = addListener;

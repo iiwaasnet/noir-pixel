@@ -193,7 +193,6 @@
     <Content Include="app\less\main.min.css">
       <DependentUpon>main.css</DependentUpon>
     </Content>
-    <Content Include="app\src\app\globalData.service.js" />
     <Content Include="app\src\auth\auth.module.js" />
     <Content Include="app\src\auth\auth.service.js" />
     <Content Include="app\src\auth\not-authorized.html" />
@@ -217,6 +216,8 @@
     <Content Include="app\src\config\env\config.js">
       <LastGenOutput>Const1.cs</LastGenOutput>
     </Content>
+    <Content Include="app\src\events\events.const.js" />
+    <Content Include="app\src\events\events.module.js" />
     <Content Include="app\src\home\home.html" />
     <Content Include="app\src\home\home.controller.js" />
     <Content Include="app\src\home\home.module.js" />
@@ -232,7 +233,7 @@
     <Content Include="app\src\app\np.routes.js" />
     <Content Include="app\src\logging\logging.module.js" />
     <Content Include="app\src\logging\trace.factory.js" />
-    <Content Include="app\src\utils\messageBus.service.js" />
+    <Content Include="app\src\events\eventsHub.service.js" />
     <Content Include="app\src\utils\moment.factory.js" />
     <Content Include="app\src\utils\url.service.js" />
     <Content Include="app\src\utils\utils.module.js" />
