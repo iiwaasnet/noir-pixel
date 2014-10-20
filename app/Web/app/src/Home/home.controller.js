@@ -5,9 +5,7 @@
         .controller('HomeController', homeController);
 
     function homeController(userInfo) {
-        var ctrl = this;
-
-        var tmp = userInfo;
-
+        var ctrl = this,
+            tmp = userInfo;
     }
 })();

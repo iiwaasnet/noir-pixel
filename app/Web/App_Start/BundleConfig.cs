@@ -74,6 +74,7 @@ namespace Web
         private static IEnumerable<string> EventsAssets()
         {
             yield return "~/app/src/events/events.module.js";
+            yield return "~/app/src/events/events.const.js";
             yield return "~/app/src/events/eventsHub.service.js";
         }
 

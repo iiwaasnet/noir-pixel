@@ -4,12 +4,12 @@
     angular.module('np.layout')
         .controller('HeaderController', headerController);
 
-    headerController.$injector = ['Strings'];
+    headerController.$injector = ['$scope', 'Strings', 'Auth', 'EventsHub'];
 
-    function headerController(Strings) {
+    function headerController($scope, Strings, Auth, EventsHub) {
         var ctrl = this;
-        ctrl.mainMenu = getMainMenu();
-        ctrl.signInMenu = getSignInMenu();
+        
+        activate();
 
         function getMainMenu() {
             var gallery = {
@@ -48,13 +48,37 @@
                     uri: 'signOut'
                 };
 
-            var menu = [
-                signIn,
-                signUp,
-                signOut
-            ];
+            var menu = [];
 
+            if (Auth.authenticated()) {
+                menu.push(signOut);
+            } else {
+                menu.push(signIn);
+                menu.push(signUp);
+            }
+            
             return menu;
+        }
+
+        function buildMenus() {
+            ctrl.mainMenu = getMainMenu();
+            ctrl.signInMenu = getSignInMenu();
+        }
+
+        function onSignStatuesChanged() {
+            buildMenus();
+        }
+
+        function activate() {
+            buildMenus();
+
+            EventsHub.addListener(EventsHub.events.SignedIn, onSignStatuesChanged);
+            EventsHub.addListener(EventsHub.events.SignedOut, onSignStatuesChanged);
+
+            $scope.$on('$destroy', function () {
+                EventsHub.removeListener(EventsHub.events.SignedIn, onSignStatuesChanged);
+                EventsHub.removeListener(EventsHub.events.SignedOut, onSignStatuesChanged);
+            });
         }
     }
 })();

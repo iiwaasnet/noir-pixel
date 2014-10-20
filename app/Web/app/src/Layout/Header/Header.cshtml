@@ -7,7 +7,7 @@
     </ul>
 
     <ul>
-        <li ng-repeat="menuItem in ::ctrl.signInMenu">
+        <li ng-repeat="menuItem in ctrl.signInMenu">
             <a ui-sref="{{::menuItem.uri}}" ng-bind="::menuItem.text"></a>
         </li>
     </ul>

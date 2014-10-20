@@ -4,12 +4,15 @@
     angular.module('np.events')
         .service('EventsHub', eventsHubService);
 
-    function eventsHubService() {
+    eventsHubService.$injector = ['Events'];
+
+    function eventsHubService(Events) {
         var service = this,
             handlers = {};
         service.addListener = addListener;
         service.removeListener = removeListener;
         service.publishEvent = publishEvent;
+        service.events = Events;
 
         function publishEvent(event, data) {
             var eventHandlers = handlers[event] || {};

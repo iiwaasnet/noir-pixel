@@ -13,7 +13,7 @@
         service.extSignIn = extSignIn;
         service.authenticated = authenticated;
         service.getUserInfo = getUserInfo;
-
+        
         function authenticated() {
             return !!tokenStorage.getToken();
         }
@@ -39,6 +39,8 @@
 
         function signInSuccess(response, deferred) {
             tokenStorage.setToken(response.access_token);
+            EventsHub.publishEvent(EventsHub.events.SignedIn);
+
             deferred.resolve(response);
         }
 
@@ -62,6 +64,7 @@
 
         function signOut() {
             tokenStorage.deleteToken();
+            EventsHub.publishEvent(EventsHub.events.SignedOut);
         }
     }
 })();
