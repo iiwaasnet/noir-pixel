@@ -28,7 +28,7 @@ module.exports = function(grunt) {
                         expand: false,
                         flatten: true,
                         src: ['./web/config/env/Environment.config.tt'],
-                        dest: './Web/config/Environment.config'
+                        dest: './web/config/Environment.config'
                     }, {
                         expand: false,
                         flatten: false,
@@ -57,7 +57,7 @@ module.exports = function(grunt) {
                         expand: false,
                         flatten: true,
                         src: ['./web/config/env/Environment.config.tt'],
-                        dest: './Web/config/Environment.config'
+                        dest: './web/config/Environment.config'
                     }, {
                         expand: false,
                         flatten: true,
@@ -80,9 +80,25 @@ module.exports = function(grunt) {
                 },
                 src: ['web/app/src/**/*.js']
             }
+        },
+        less: {
+            dev: {
+                options: {
+                    paths: ["web/app/less"]
+                },
+                files: { "web/app/less/all.css": "web/app/less/all.less" }
+            },
+            prod: {
+                options: {
+                    paths: ["web/app/less"],
+                    cleancss: true
+                },
+                files: { "web/app/less/all.css": "web/app/less/all.less" }
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-replace');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-less');
 };

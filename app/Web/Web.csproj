@@ -178,26 +178,14 @@
     <Content Include="app\less\all.css">
       <DependentUpon>all.less</DependentUpon>
     </Content>
-    <Content Include="app\less\all.min.css">
-      <DependentUpon>all.css</DependentUpon>
-    </Content>
     <Content Include="app\less\colors.css">
       <DependentUpon>colors.less</DependentUpon>
-    </Content>
-    <Content Include="app\less\colors.min.css">
-      <DependentUpon>colors.css</DependentUpon>
     </Content>
     <Content Include="app\less\fonts.css">
       <DependentUpon>fonts.less</DependentUpon>
     </Content>
-    <Content Include="app\less\fonts.min.css">
-      <DependentUpon>fonts.css</DependentUpon>
-    </Content>
     <Content Include="app\less\header.css">
       <DependentUpon>header.less</DependentUpon>
-    </Content>
-    <Content Include="app\less\header.min.css">
-      <DependentUpon>header.css</DependentUpon>
     </Content>
     <Content Include="app\less\main.css">
       <DependentUpon>main.less</DependentUpon>
@@ -218,25 +206,13 @@
     <Content Include="app\src\config\config.module.js" />
     <Content Include="app\src\config\env\prod.json" />
     <Content Include="app\less\colors.less" />
-    <Content Include="app\less\colors.css.map">
-      <DependentUpon>colors.css</DependentUpon>
-    </Content>
     <Content Include="app\less\all.less" />
-    <Content Include="app\less\all.css.map">
-      <DependentUpon>all.css</DependentUpon>
-    </Content>
     <Content Include="app\less\main.less" />
     <Content Include="app\less\main.css.map">
       <DependentUpon>main.css</DependentUpon>
     </Content>
     <Content Include="app\less\fonts.less" />
-    <Content Include="app\less\fonts.css.map">
-      <DependentUpon>fonts.css</DependentUpon>
-    </Content>
     <Content Include="app\less\header.less" />
-    <Content Include="app\less\header.css.map">
-      <DependentUpon>header.css</DependentUpon>
-    </Content>
     <None Include="app\src\config\env\dev.json" />
     <Content Include="app\src\config\env\config.js">
       <LastGenOutput>Const1.cs</LastGenOutput>
