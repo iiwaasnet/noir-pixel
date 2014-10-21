@@ -35,13 +35,26 @@ namespace Api.Controllers
             AccessTokenFormat = accessTokenFormat;
         }
 
-        public ApplicationUserManager UserManager
+        [AllowAnonymous]
+        [Route("register")]
+        public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
-            get { return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
-            private set { _userManager = value; }
-        }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
+            var user = new ApplicationUser {UserName = model.Email, Email = model.Email};
+
+            var result = await UserManager.CreateAsync(user, model.Password);
+
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            return Ok();
+        }
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("user-info")]
@@ -305,27 +318,6 @@ namespace Api.Controllers
             return logins;
         }
 
-        [AllowAnonymous]
-        [Route("register")]
-        public async Task<IHttpActionResult> Register(RegisterBindingModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var user = new ApplicationUser() {UserName = model.Email, Email = model.Email};
-
-            var result = await UserManager.CreateAsync(user, model.Password);
-
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
-
-            return Ok();
-        }
-
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("register-external")]
@@ -367,6 +359,14 @@ namespace Api.Controllers
 
             base.Dispose(disposing);
         }
+
+        public ApplicationUserManager UserManager
+        {
+            get { return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+            private set { _userManager = value; }
+        }
+
+        public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
         #region Helpers
 
