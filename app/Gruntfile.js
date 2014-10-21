@@ -95,10 +95,24 @@ module.exports = function(grunt) {
                 },
                 files: { "web/app/less/all.css": "web/app/less/all.less" }
             }
+        },
+        sprite: {
+            all: {
+                src: ['web/app/images/sprites/*.png'],
+                destImg: 'web/app/images/sprites.png',
+                destCSS: 'web/app/less/sprites.less',
+                algorithm: 'binary-tree',
+                cssFormat: 'less',
+                imgOpts: {
+                    format: 'png',
+                    quality: 100
+                },
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-replace');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-spritesmith');
 };

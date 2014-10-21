@@ -175,6 +175,7 @@
   <ItemGroup>
     <Content Include="app\images\np-header-b.png" />
     <Content Include="app\images\np-header-w.png" />
+    <Content Include="app\images\sprites.png" />
     <Content Include="app\less\all.css">
       <DependentUpon>all.less</DependentUpon>
     </Content>
@@ -192,6 +193,9 @@
     </Content>
     <Content Include="app\less\main.min.css">
       <DependentUpon>main.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\sprites.css">
+      <DependentUpon>sprites.less</DependentUpon>
     </Content>
     <Content Include="app\src\auth\auth.module.js" />
     <Content Include="app\src\auth\auth.service.js" />
@@ -212,6 +216,7 @@
     </Content>
     <Content Include="app\less\fonts.less" />
     <Content Include="app\less\header.less" />
+    <Content Include="app\less\sprites.less" />
     <None Include="app\src\config\env\dev.json" />
     <Content Include="app\src\config\env\config.js">
       <LastGenOutput>Const1.cs</LastGenOutput>
@@ -271,7 +276,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="app\images\sprites\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
