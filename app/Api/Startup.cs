@@ -24,9 +24,6 @@ namespace Api
                          {
                              DependencyResolver = new AutofacWebApiDependencyResolver(DependencyInjection.GetContainer())
                          };
-            // TODO: Do the same in Web project instead of custom Json result
-            var formatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
-            formatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
             app.UseWebApi(config);
             app.UseCors(CorsOptions.AllowAll);
