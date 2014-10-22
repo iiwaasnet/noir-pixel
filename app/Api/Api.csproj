@@ -211,6 +211,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App\Users\UsersController.cs" />
     <Compile Include="App_Start\ApplicationIdentityContext.cs" />
     <Compile Include="App_Start\ApplicationRoleManager.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
