@@ -13,6 +13,10 @@ namespace Api.App.Users
         private readonly ApplicationUserManager userManager;
         private readonly ISecureDataFormat<AuthenticationTicket> accessTokenFormat;
 
+        public UsersController()
+        {
+        }
+
         public UsersController(ApplicationUserManager userManager,
                                ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
         {
@@ -20,26 +24,26 @@ namespace Api.App.Users
             this.accessTokenFormat = accessTokenFormat;
         }
 
-        //[AllowAnonymous]
-        //[Route("register")]
-        //[HttpPost]
-        //public async Task<IHttpActionResult> Register(RegisterBindingModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        [AllowAnonymous]
+        [Route("register")]
+        [HttpPost]
+        public async Task<IHttpActionResult> Register(RegisterRequest model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+            var user = new ApplicationUser { UserName = model.UserName };
 
-        //    var result = await userManager.CreateAsync(user, model.Password);
+            var result = await userManager.CreateAsync(user, model.Password);
 
-        //    if (!result.Succeeded)
-        //    {
-        //        return GetErrorResult(result);
-        //    }
+            //if (!result.Succeeded)
+            //{
+            //    return GetErrorResult(result);
+            //}
 
-        //    return Ok();
-        //}
+            return Ok();
+        }
     }
 }

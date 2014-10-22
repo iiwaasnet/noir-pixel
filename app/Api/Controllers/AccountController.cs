@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using Api.App.Users;
 using Api.Models;
 using Api.Providers;
 using Api.Results;
@@ -37,14 +38,14 @@ namespace Api.Controllers
 
         [AllowAnonymous]
         [Route("register")]
-        public async Task<IHttpActionResult> Register(RegisterBindingModel model)
+        public async Task<IHttpActionResult> Register(RegisterRequest model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser {UserName = model.Email, Email = model.Email};
+            var user = new ApplicationUser {UserName = model.UserName};
 
             var result = await UserManager.CreateAsync(user, model.Password);
 
