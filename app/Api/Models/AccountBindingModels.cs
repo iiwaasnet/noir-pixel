@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
+using Microsoft.Ajax.Utilities;
 using Newtonsoft.Json;
 
 namespace Api.Models
@@ -32,10 +34,12 @@ namespace Api.Models
         public string ConfirmPassword { get; set; }
     }
 
+    [DataContract]
     public class RegisterBindingModel
     {
-        [Required]
+        [Required(ErrorMessage = "ERR_REQUIRED")]
         [Display(Name = "Email")]
+        [DataMember(Name = "e-mail")]
         public string Email { get; set; }
 
         [Required]
