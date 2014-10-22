@@ -20,7 +20,7 @@ namespace Api
             var formatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
             formatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
-            config.Services.Replace(typeof(IBodyModelValidator), new PrefixlessBodyModelValidator(config.Services.GetBodyModelValidator()));
+            config.Services.Replace(typeof(IBodyModelValidator), new PrefixlessModelValidator(config.Services.GetBodyModelValidator()));
 
             // Web API routes
             config.MapHttpAttributeRoutes();

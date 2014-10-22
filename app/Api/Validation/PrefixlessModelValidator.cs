@@ -5,11 +5,11 @@ using System.Web.Http.Validation;
 
 namespace Api.Validation
 {
-    public class PrefixlessBodyModelValidator : IBodyModelValidator
+    public class PrefixlessModelValidator : IBodyModelValidator
     {
         private readonly IBodyModelValidator innerValidator;
 
-        public PrefixlessBodyModelValidator(IBodyModelValidator innerValidator)
+        public PrefixlessModelValidator(IBodyModelValidator innerValidator)
         {
             if (innerValidator == null)
             {
