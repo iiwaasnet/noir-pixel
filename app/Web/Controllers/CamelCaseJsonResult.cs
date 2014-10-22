@@ -5,11 +5,11 @@ using Newtonsoft.Json.Serialization;
 
 namespace Web.Controllers
 {
-    public class CustomJsonResult : ActionResult
+    public class CamelCaseJsonResult : ActionResult
     {
         private static readonly JsonSerializerSettings jsonSerializerSettings;
 
-        static CustomJsonResult()
+        static CamelCaseJsonResult()
         {
             jsonSerializerSettings = new JsonSerializerSettings
                                      {

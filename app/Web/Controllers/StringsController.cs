@@ -23,7 +23,7 @@ namespace Web.Controllers
         [Route("all")]
         public ActionResult All()
         {
-            return new CustomJsonResult
+            return new CamelCaseJsonResult
                    {
                        Data = GetStringsForAllLocales().ToArray()
                    };
@@ -45,14 +45,14 @@ namespace Web.Controllers
                 strings = localizedStrings.GetDefaultCollection();
             }
 
-            return new CustomJsonResult {Data = strings};
+            return new CamelCaseJsonResult {Data = strings};
         }
 
         [HttpGet]
         [Route("versions")]
         public ActionResult Versions()
         {
-            return new CustomJsonResult
+            return new CamelCaseJsonResult
                    {
                        Data = new
                               {
