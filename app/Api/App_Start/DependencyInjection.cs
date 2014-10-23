@@ -1,6 +1,7 @@
 using System.Reflection;
 using Autofac;
 using Autofac.Integration.Mvc;
+using Autofac.Integration.WebApi;
 
 namespace Api
 {
@@ -14,6 +15,7 @@ namespace Api
             var thisAssembly = Assembly.GetExecutingAssembly();
             builder.RegisterAssemblyModules(thisAssembly);
             builder.RegisterControllers(thisAssembly);
+            builder.RegisterApiControllers(thisAssembly);
             container = builder.Build();
         }
 

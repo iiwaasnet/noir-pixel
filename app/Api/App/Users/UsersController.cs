@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Http;
 using Api.Models;
-using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
 namespace Api.App.Users
@@ -12,10 +11,6 @@ namespace Api.App.Users
     {
         private readonly ApplicationUserManager userManager;
         private readonly ISecureDataFormat<AuthenticationTicket> accessTokenFormat;
-
-        //public UsersController()
-        //{
-        //}
 
         public UsersController(ApplicationUserManager userManager,
                                ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
