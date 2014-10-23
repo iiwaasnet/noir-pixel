@@ -12,8 +12,7 @@ namespace Api.App.Users
         private readonly ApplicationUserManager userManager;
         private readonly ISecureDataFormat<AuthenticationTicket> accessTokenFormat;
 
-        public UsersController(ApplicationUserManager userManager,
-                               ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
+        public UsersController(ApplicationUserManager userManager)
         {
             this.userManager = userManager;
             this.accessTokenFormat = accessTokenFormat;
