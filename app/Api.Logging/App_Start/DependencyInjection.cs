@@ -1,6 +1,6 @@
 using System.Reflection;
 using Autofac;
-using Autofac.Integration.Mvc;
+using Autofac.Integration.WebApi;
 
 namespace Api.Logging
 {
@@ -13,7 +13,7 @@ namespace Api.Logging
             var builder = new ContainerBuilder();
             var thisAssembly = Assembly.GetExecutingAssembly();
             builder.RegisterAssemblyModules(thisAssembly);
-            builder.RegisterControllers(thisAssembly);
+            builder.RegisterApiControllers(thisAssembly);
             container = builder.Build();
         }
 
