@@ -21,7 +21,6 @@ namespace Api
                          };
 
             ConfigureAuth(app);
-
             app.UseWebApi(config);
             app.UseCors(CorsOptions.AllowAll);
         }
