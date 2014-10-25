@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Web.Mvc;
 using Api.Providers;
 using Autofac;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
+using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 
@@ -38,7 +38,7 @@ namespace Api
 
             // Enable the application to use a cookie to store information for the signed in user
             // and to use a cookie to temporarily store information about a user logging in with a third party login provider
-            //app.UseCookieAuthentication(new CookieAuthenticationOptions());
+            app.UseCookieAuthentication(new CookieAuthenticationOptions());
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Uncomment the following lines to enable logging in with third party login providers
@@ -50,11 +50,12 @@ namespace Api
             //    appId: "",
             //    appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions
+            //                            {
+            //                                ClientId = "",
+            //                                ClientSecret = "",
+            //                                CallbackPath = new PathString("/signin-google")
+            //                            });
         }
     }
 }
