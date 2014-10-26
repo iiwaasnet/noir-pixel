@@ -4,14 +4,17 @@
     angular.module('np.auth')
         .controller('SignInController', signInController);
 
-    signInController.$injector = ['$stateParams', '$location', 'Auth'];
+    signInController.$injector = ['$stateParams', '$location', '$http', '$window', 'Auth'];
 
-    function signInController($stateParams, $location, Auth) {
+    function signInController($stateParams, $location, $http, $window, Auth) {
         var ctrl = this,
             redirectTo = $stateParams.redirectTo || '';
         ctrl.signIn = signIn;
+        ctrl.googleSignIn = googleSignIn;
+        ctrl.getGoogleSignIn = getGoogleSignIn;
         ctrl.userName = '';
         ctrl.password = '';
+        ctrl.signInUri = '';
         ctrl.signInAllowed = true;
 
 
@@ -20,8 +23,32 @@
             var evnt = 'auth';
 
             if (!~Object.keys(subscriptions).indexOf(evnt)) {
-                subscriptions[evnt] = {signInSucceeded: signInSucceeded};
+                subscriptions[evnt] = { signInSucceeded: signInSucceeded };
             }
+        }
+
+
+        function getGoogleSignIn() {
+            $http.get('http://api.noir-pixel.com/account/external-logins?returnUrl=%2F&generateState=false')
+                .success(function(response) {
+                    debugger;
+                    ctrl.signInUri = response;
+            });
+        }
+
+        function googleSignIn() {
+            $window.location.href = Auth.googleSignIn();
+            //Auth.googleSignIn()
+            //    .then(googleSignInSuccess, googleSignInError);
+        }
+
+
+        function googleSignInSuccess(data) {
+            debugger;
+        }
+
+        function googleSignInError(err) {
+            debugger;
         }
 
         function signIn(valid) {

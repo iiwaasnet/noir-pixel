@@ -9,13 +9,29 @@
     function authService($http, $q, Config, Url, tokenStorage, EventsHub) {
         var service = this;
         service.signIn = signIn;
+        service.googleSignIn = googleSignIn;
         service.signOut = signOut;
         service.extSignIn = extSignIn;
         service.authenticated = authenticated;
         service.getUserInfo = getUserInfo;
-        
+
         function authenticated() {
             return !!tokenStorage.getToken();
+        }
+
+        function googleSignIn() {
+            var extLogin = '/account/external-login?provider=Google&response_type=token&client_id=self&redirect_uri=http%3A%2F%2Fapi.noir-pixel.com%2F',
+            //var extLogin = '/account/external-login?provider=Google&response_type=token&client_id=self&redirect_uri=http%3A%2F%2Fapi.noir-pixel.com%2F',
+                url = Url.build([Config.apiUris.base, extLogin]),
+                deferred = $q.defer();
+
+            return url;
+
+            $http.get(url)
+                .success(function(response) { googleSignInSuccess(response, deferred); })
+                .error(function (err, status) { googleSignInError(err, status, deferred); });
+
+            return deferred.promise;
         }
 
         function signIn(userName, pwd) {
@@ -32,6 +48,14 @@
                 .error(function(err, status) { signInError(err, status, deferred); });
 
             return deferred.promise;
+        }
+
+        function googleSignInSuccess(response, deferred) {
+            deferred.resolve(response);
+        }
+
+        function googleSignInError(err, status, deferred) {
+            deferred.reject(err);
         }
 
         function extSignIn(provider) {
