@@ -47,7 +47,7 @@
         function stateChangeError(event, toState, toParams, fromState, fromParams, error) {
             if (error.status === 401) {
                 event.preventDefault();
-                alert('Unauthorized!');
+                //alert('Unauthorized!');
                 if (!fromState.name) {
                     $state.go('notAuthorized', { redirectTo: toState.url });
                 }
