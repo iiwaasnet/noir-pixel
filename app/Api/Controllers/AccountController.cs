@@ -352,15 +352,15 @@ namespace Api.Controllers
             return Ok();
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                UserManager.Dispose();
-            }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        UserManager.Dispose();
+        //    }
 
-            base.Dispose(disposing);
-        }
+        //    base.Dispose(disposing);
+        //}
 
         public ApplicationUserManager UserManager
         {
