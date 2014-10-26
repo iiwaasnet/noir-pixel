@@ -4,6 +4,7 @@ using Autofac;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 
@@ -56,6 +57,7 @@ namespace Api
             //                                ClientSecret = "",
             //                                CallbackPath = new PathString("/signin-google")
             //                            });
+                                            CallbackPath = new PathString("/signin-google")
         }
     }
 }
