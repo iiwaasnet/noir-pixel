@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNet.Identity;
 
 namespace Api.Models
 {
@@ -20,7 +21,7 @@ namespace Api.Models
 
         public string Email { get; set; }
 
-        public IEnumerable<UserLoginInfoViewModel> Logins { get; set; }
+        public IEnumerable<UserLoginInfo> Logins { get; set; }
 
         public IEnumerable<ExternalLoginViewModel> ExternalLoginProviders { get; set; }
     }
