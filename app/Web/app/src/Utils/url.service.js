@@ -5,8 +5,7 @@
         .service('Url', urlService);
 
     function urlService() {
-        var protocolMatch = new RegExp('^http(s|)', 'i'),
-            service = this;
+        var service = this;
 
         service.build = build;
 
@@ -18,12 +17,7 @@
                 throw '[parts] is empty!';
             }
 
-            var protocol = protocolMatch.exec(window.location) || [];
-            if (protocol.length === 0) {
-                throw 'Unknown protocol for url ' + window.location;
-            }
-
-            var url = protocol[0] + ':/';
+            var url = location.protocol + '/';
 
             parts.forEach(function(part) {
                 if (part.length !== 0) {

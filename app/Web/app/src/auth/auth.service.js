@@ -20,8 +20,7 @@
         }
 
         function googleSignIn() {
-            var extLogin = '/account/external-login?provider=Google&response_type=token&client_id=self&redirect_uri=http%3A%2F%2Fapi.noir-pixel.com%2F',
-            //var extLogin = '/account/external-login?provider=Google&response_type=token&client_id=self&redirect_uri=http%3A%2F%2Fapi.noir-pixel.com%2F',
+            var extLogin = '/account/external-login?provider=Google&response_type=token&client_id=self&redirect_uri=http%3A%2F%2Fnoir-pixel.com%2F',
                 url = Url.build([Config.apiUris.base, extLogin]),
                 deferred = $q.defer();
 

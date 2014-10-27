@@ -29,7 +29,8 @@
 
 
         function getGoogleSignIn() {
-            $http.get('http://api.noir-pixel.com/account/external-logins?returnUrl=%2F&generateState=false')
+            //$http.get('http://api.noir-pixel.com/account/external-logins?returnUrl=%2F&generateState=false')
+            $http.get('http://api.noir-pixel.com/account/external-logins?returnUrl=http%3A%2F%2Fnoir-pixel.com%2F&generateState=false')
                 .success(function(response) {
                     debugger;
                     ctrl.signInUri = response;

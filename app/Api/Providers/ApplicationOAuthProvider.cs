@@ -78,12 +78,12 @@ namespace Api.Providers
         {
             if (context.ClientId == publicClientId)
             {
-                var expectedRootUri = new Uri(context.Request.Uri, "/");
+                //var expectedRootUri = new Uri(context.Request.Uri, "/");
 
-                if (expectedRootUri.AbsoluteUri == context.RedirectUri)
-                {
+                //if (expectedRootUri.AbsoluteUri == context.RedirectUri)
+                //{
                     context.Validated();
-                }
+                //}
             }
 
             return Task.FromResult<object>(null);

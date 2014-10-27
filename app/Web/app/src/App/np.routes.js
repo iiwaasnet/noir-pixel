@@ -13,12 +13,12 @@
                 templateUrl: '/app/src/Home/home.html',
                 controller: 'HomeController',
                 controllerAs: 'ctrl',
-                resolve: {
-                    Auth: 'Auth',
-                    userInfo: function (Auth) {
-                        return Auth.getUserInfo();
-                    }
-                }
+                //resolve: {
+                //    Auth: 'Auth',
+                //    userInfo: function (Auth) {
+                //        return Auth.getUserInfo();
+                //    }
+                //}
             })
             .state('gallery', {
                 url: '/',

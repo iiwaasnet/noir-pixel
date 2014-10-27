@@ -4,8 +4,8 @@
     angular.module('np.home')
         .controller('HomeController', homeController);
 
-    function homeController(userInfo) {
-        var ctrl = this,
-            tmp = userInfo;
+    function homeController(/*userInfo*/) {
+        var ctrl = this;
+            //tmp = userInfo;
     }
 })();
