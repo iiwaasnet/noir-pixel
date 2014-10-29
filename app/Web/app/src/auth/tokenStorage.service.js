@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('np.auth')
-        .service('tokenStorage', tokenStorageService);
+        .service('TokenStorage', tokenStorageService);
 
     tokenStorageService.$injector = ['localStorageService'];
 

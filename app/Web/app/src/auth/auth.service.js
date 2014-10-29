@@ -4,9 +4,9 @@
     angular.module('np.auth')
         .service('Auth', authService);
 
-    authService.$injector = ['$http', '$q', 'Config', 'Url', 'tokenStorage', 'EventsHub'];
+    authService.$injector = ['$http', '$q', 'Config', 'Url', 'TokenStorage', 'EventsHub'];
 
-    function authService($http, $q, Config, Url, tokenStorage, EventsHub) {
+    function authService($http, $q, Config, Url, TokenStorage, EventsHub) {
         var service = this;
         service.signIn = signIn;
         service.googleSignIn = googleSignIn;
@@ -16,11 +16,11 @@
         service.getUserInfo = getUserInfo;
 
         function authenticated() {
-            return !!tokenStorage.getToken();
+            return !!TokenStorage.getToken();
         }
 
         function googleSignIn() {
-            var extLogin = '/account/external-login?provider=Google&response_type=token&client_id=self&redirect_uri=http%3A%2F%2Fnoir-pixel.com%2F',
+            var extLogin = '/account/external-login?provider=Google&response_type=token&client_id=self&redirect_uri=http%3A%2F%2Fnoir-pixel.com%2Fexternal-signin%2F',
                 url = Url.build([Config.apiUris.base, extLogin]),
                 deferred = $q.defer();
 
@@ -61,14 +61,14 @@
         }
 
         function signInSuccess(response, deferred) {
-            tokenStorage.setToken(response.access_token);
+            TokenStorage.setToken(response.access_token);
             EventsHub.publishEvent(EventsHub.events.SignedIn);
 
             deferred.resolve(response);
         }
 
         function signInError(err, status, deferred) {
-            tokenStorage.deleteToken();
+            TokenStorage.deleteToken();
             deferred.reject(err);
         }
 
@@ -86,7 +86,7 @@
         }
 
         function signOut() {
-            tokenStorage.deleteToken();
+            TokenStorage.deleteToken();
             EventsHub.publishEvent(EventsHub.events.SignedOut);
         }
     }

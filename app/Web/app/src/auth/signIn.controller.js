@@ -33,7 +33,7 @@
                 .success(function(response) {
                     debugger;
                     ctrl.signInUri = response;
-            });
+                });
         }
 
         function googleSignIn() {

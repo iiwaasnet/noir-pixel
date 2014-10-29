@@ -16,17 +16,22 @@
         $httpProvider.interceptors.push(httpProvider);
     }
 
-    httpProvider.$injector = ['$q', 'ApplicationLogging', 'HttpProviderConfig', 'tokenStorage'];
+    httpProvider.$injector = ['$q', 'ApplicationLogging', 'HttpProviderConfig', 'TokenStorage'];
 
-    function httpProvider($q, ApplicationLogging, HttpProviderConfig, tokenStorage) {
+    function httpProvider($q, ApplicationLogging, HttpProviderConfig, TokenStorage) {
 
         return {
             responseError: responseError,
-            request: request
+            request: request,
+            response: response
         };
 
+        function response(response) {
+            return response;
+        }
+
         function request(config) {
-            var token = tokenStorage.getToken();
+            var token = TokenStorage.getToken();
             if (!!token) {
                 config.headers.Authorization = 'Bearer ' + token;
             }
