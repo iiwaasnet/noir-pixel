@@ -6,7 +6,6 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using System.Web.Http.Cors;
 using Api.App.Users;
 using Api.Models;
 using Api.Providers;
@@ -17,6 +16,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
+using Newtonsoft.Json.Linq;
 
 namespace Api.Controllers
 {
@@ -331,13 +331,17 @@ namespace Api.Controllers
             }
 
             var auth = await Authentication.AuthenticateAsync(DefaultAuthenticationTypes.ExternalBearer);
-            var info = await Authentication.GetExternalLoginInfoAsync();
+            var info = GetExternalLoginInfo(auth);
             if (info == null)
             {
                 return InternalServerError();
             }
 
-            var user = new ApplicationUser {UserName = model.Email, Email = model.Email};
+            var user = new ApplicationUser
+                       {
+                           UserName = info.DefaultUserName,
+                           Email = info.Email
+                       };
 
             var result = await UserManager.CreateAsync(user);
             if (!result.Succeeded)
@@ -351,6 +355,33 @@ namespace Api.Controllers
                 return GetErrorResult(result);
             }
             return Ok();
+        }
+
+        private static ExternalLoginInfo GetExternalLoginInfo(AuthenticateResult result)
+        {
+            if (result == null || result.Identity == null)
+            {
+                return null;
+            }
+            var idClaim = result.Identity.FindFirst(ClaimTypes.NameIdentifier);
+            if (idClaim == null)
+            {
+                return null;
+            }
+            // By default we don't allow spaces in user names
+            var name = result.Identity.Name;
+            if (name != null)
+            {
+                name = name.Replace(" ", "");
+            }
+            var email = result.Identity.FindFirstValue(ClaimTypes.Email);
+            return new ExternalLoginInfo
+                   {
+                       ExternalIdentity = result.Identity,
+                       Login = new UserLoginInfo(idClaim.Issuer, idClaim.Value),
+                       DefaultUserName = name,
+                       Email = email
+                   };
         }
 
         //protected override void Dispose(bool disposing)
