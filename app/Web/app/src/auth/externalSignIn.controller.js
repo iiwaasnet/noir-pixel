@@ -4,9 +4,9 @@
     angular.module('np.auth')
         .controller('ExternalSignInController', externalSignInController);
 
-    externalSignInController.$injector = ['$location', 'TokenStorage'];
+    externalSignInController.$injector = ['$location', 'Auth'];
 
-    function externalSignInController($location, TokenStorage) {
+    function externalSignInController($location, Auth) {
         var ctrl = this;
             
 
@@ -14,7 +14,7 @@
 
         function activate() {
             var accessToken = getTokenFromUrl();
-            TokenStorage.setToken(accessToken);
+            Auth.externalSignUp(accessToken);
         }
 
         function getTokenFromUrl() {

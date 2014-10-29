@@ -11,7 +11,7 @@
         service.signIn = signIn;
         service.googleSignIn = googleSignIn;
         service.signOut = signOut;
-        service.extSignIn = extSignIn;
+        service.externalSignUp = externalSignUp;
         service.authenticated = authenticated;
         service.getUserInfo = getUserInfo;
 
@@ -57,7 +57,29 @@
             deferred.reject(err);
         }
 
-        function extSignIn(provider) {
+        function externalSignUp(externalToken) {
+            var externalLogin = 'account/register-external',
+                url = Url.build([Config.apiUris.base, externalLogin]),
+                deferred = $q.defer();
+
+            $http.post(url,
+                { email: 'me-google@google.com' },
+                { headers: { 'Authorization': 'Bearer ' + externalToken } })
+                .success(function(response) { externalSignUpSuccess(response, deferred); })
+                .error(function(err, status) { externalSignUpError(err, status, deferred); });
+
+            return deferred.promise;
+        }
+
+
+        function externalSignUpSuccess(response, deferred) {
+            debugger;
+            deferred.resolve();
+        }
+
+        function externalSignUpError(err, status, deferred) {
+            debugger;
+            deferred.reject();
         }
 
         function signInSuccess(response, deferred) {

@@ -330,13 +330,14 @@ namespace Api.Controllers
                 return BadRequest(ModelState);
             }
 
+            var auth = await Authentication.AuthenticateAsync(DefaultAuthenticationTypes.ExternalBearer);
             var info = await Authentication.GetExternalLoginInfoAsync();
             if (info == null)
             {
                 return InternalServerError();
             }
 
-            var user = new ApplicationUser() {UserName = model.Email, Email = model.Email};
+            var user = new ApplicationUser {UserName = model.Email, Email = model.Email};
 
             var result = await UserManager.CreateAsync(user);
             if (!result.Succeeded)
