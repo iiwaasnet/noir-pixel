@@ -4,19 +4,23 @@
     angular.module('np.auth')
         .controller('SignInController', signInController);
 
-    signInController.$injector = ['$stateParams', '$location', '$http', '$window', 'Auth'];
+    signInController.$injector = ['$stateParams', '$location', '$http', '$window', '$scope', 'Auth'];
 
-    function signInController($stateParams, $location, $http, $window, Auth) {
+    function signInController($stateParams, $location, $http, $window, $scope, Auth) {
         var ctrl = this,
             redirectTo = $stateParams.redirectTo || '';
         ctrl.signIn = signIn;
         ctrl.googleSignIn = googleSignIn;
         ctrl.getGoogleSignIn = getGoogleSignIn;
+        $scope.alert = alert;
         ctrl.userName = '';
         ctrl.password = '';
         ctrl.signInUri = '';
         ctrl.signInAllowed = true;
 
+        function alert(msg) {
+            alert(msg);
+        }
 
         function boo() {
             var subscriptions = {};
@@ -37,7 +41,10 @@
         }
 
         function googleSignIn() {
-            $window.location.href = Auth.googleSignIn();
+            //$window.location.href = Auth.googleSignIn();
+            debugger;
+            $window.$parentController = $scope;
+            $window.open(Auth.googleSignIn(), "Authenticate Account", "location=0,status=0,width=600,height=750");
         }
 
 

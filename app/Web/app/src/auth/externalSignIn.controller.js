@@ -4,19 +4,20 @@
     angular.module('np.auth')
         .controller('ExternalSignInController', externalSignInController);
 
-    externalSignInController.$injector = ['$location', 'Auth'];
+    externalSignInController.$injector = ['$location', '$window', 'Auth'];
 
-    function externalSignInController($location, Auth) {
+    function externalSignInController($location, $window, Auth) {
         var ctrl = this;
             
-
         activate();
+       
 
         function activate() {
             var loginResult = getExternalLoginResult();
             debugger;
             if (loginResult.registered) {
-                Auth.getLocalToken(loginResult.externalAccessToken, 'Google');
+                Auth.getLocalToken(loginResult.externalAccessToken, 'Google')
+                .then(getLocalTokenSuccess, getLocalTokenError);
             } else {
                 Auth.registerExternal(loginResult.externalAccessToken, 'Google')
                 .then(registerExternalSuccess, registerExternalError);
@@ -25,7 +26,8 @@
 
         function registerExternalSuccess(externalToken) {
             debugger;
-            Auth.getLocalToken(externalToken, 'Google');
+            Auth.getLocalToken(externalToken, 'Google')
+            .then(getLocalTokenSuccess, getLocalTokenError);
         }
 
         function registerExternalError(err) {
@@ -40,6 +42,15 @@
                 registered: params.registered === 'true'
             };
         }
+
+        function getLocalTokenSuccess() {
+            debugger;
+            var ctrl = $window.opener.$parentScope;
+            ctrl.alert('ku!');
+            $window.close();
+        }
+
+        function getLocalTokenError() {}
 
         function parseQueryString (queryString) {
             var parsed = {};
