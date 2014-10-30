@@ -61,7 +61,7 @@
         }
 
         function getLocalTokenSuccess(response, deferred) {
-            debugger;
+            TokenStorage.setToken(response.access_token);
             deferred.resolve(response);
         }
 
@@ -90,7 +90,7 @@
 
         function registerExternalSuccess(response, deferred) {
             debugger;
-            deferred.resolve();
+            deferred.resolve(response.access_token);
         }
 
         function registerExternalError(err, status, deferred) {

@@ -18,8 +18,18 @@
             if (loginResult.registered) {
                 Auth.getLocalToken(loginResult.externalAccessToken, 'Google');
             } else {
-                Auth.registerExternal(loginResult.externalAccessToken, 'Google');
+                Auth.registerExternal(loginResult.externalAccessToken, 'Google')
+                .then(registerExternalSuccess, registerExternalError);
             }
+        }
+
+        function registerExternalSuccess(externalToken) {
+            debugger;
+            Auth.getLocalToken(externalToken, 'Google');
+        }
+
+        function registerExternalError(err) {
+            
         }
 
         function getExternalLoginResult() {

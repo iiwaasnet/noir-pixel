@@ -3,6 +3,7 @@ using Api.Providers;
 using Autofac;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
+using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
@@ -12,7 +13,9 @@ namespace Api
 {
     public partial class Startup
     {
+        //TODO :Refactor both static props
         public static string PublicClientId { get; private set; }
+        public static OAuthAuthorizationServerOptions AuthOptions { get; private set; }
 
         public void ConfigureAuth(IAppBuilder app)
         {
@@ -31,6 +34,7 @@ namespace Api
                                    AuthorizeEndpointPath = new PathString("/account/external-login"),
                                    Provider = new ApplicationOAuthProvider(PublicClientId)
                                };
+            AuthOptions = oAuthOptions;
 
             app.UseOAuthBearerTokens(oAuthOptions);
 
@@ -51,14 +55,13 @@ namespace Api
             //    appId: "",
             //    appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions
-            //                            {
-            //                                ClientId = "",
-            //                                ClientSecret = "",
-            //                                CallbackPath = new PathString("/signin-google")
-            //                            });
-                                            CallbackPath = new PathString("/signin-google")
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions
+                                        {
+                                            ClientId = "180426522882-j68nln4atebaf3r1ddb6lgc7h4im2c7j.apps.googleusercontent.com",
+                                            ClientSecret = "yg_imJKvQIjYu40L01d23QZ4",
+                                            CallbackPath = new PathString("/signin-google"),
                                             Provider = new GoogleAuthProvider()
+                                        });
         }
     }
 }

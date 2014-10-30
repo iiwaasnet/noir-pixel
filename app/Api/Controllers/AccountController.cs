@@ -17,6 +17,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Api.Controllers
@@ -36,7 +37,6 @@ namespace Api.Controllers
                                  ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
         {
             UserManager = userManager;
-            AccessTokenFormat = accessTokenFormat;
         }
 
         [AllowAnonymous]
@@ -256,18 +256,18 @@ namespace Api.Controllers
             var user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
                                                                      externalLogin.ProviderKey));
 
-            var hasRegistered = user != null;
+            var registered = user != null;
 
             var redirectUri = string.Format("{0}#external_access_token={1}&registered={2}",
                                             GetRedirectUri(Request),
                                             externalLogin.ExternalAccessToken,
-                                            hasRegistered);
+                                            registered.ToString().ToLower());
 
             return Redirect(redirectUri);
 
             //Below goes to 
 
-            if (hasRegistered)
+            if (registered)
             {
                 Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
 
@@ -380,7 +380,6 @@ namespace Api.Controllers
                 return BadRequest(ModelState);
             }
 
-
             var verifiedAccessToken = await VerifyExternalAccessToken(model.Provider, model.ExternalAccessToken);
             if (verifiedAccessToken == null)
             {
@@ -388,7 +387,7 @@ namespace Api.Controllers
             }
 
             var user = await UserManager.FindAsync(new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
-            
+
             var hasRegistered = user != null;
 
             if (hasRegistered)
@@ -397,7 +396,7 @@ namespace Api.Controllers
             }
 
             //TODO: Username could be taken from the model with the request
-            user = new ApplicationUser{UserName = verifiedAccessToken.user_id};
+            user = new ApplicationUser {UserName = verifiedAccessToken.user_id};
 
             var result = await UserManager.CreateAsync(user);
             if (!result.Succeeded)
@@ -411,9 +410,7 @@ namespace Api.Controllers
                 return GetErrorResult(result);
             }
 
-            //var externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
-
-            return Ok(model.ExternalAccessToken);
+            return Ok(new JObject(new JProperty("access_token", model.ExternalAccessToken)));
         }
 
         [OverrideAuthentication]
@@ -423,7 +420,6 @@ namespace Api.Controllers
         [Route("local-access-token")]
         public async Task<IHttpActionResult> LocalAccessToken(LocalAccessTokenModel model)
         {
-
             if (string.IsNullOrWhiteSpace(model.Provider) || string.IsNullOrWhiteSpace(model.ExternalAccessToken))
             {
                 return BadRequest("Provider or external access token is not sent");
@@ -435,21 +431,7 @@ namespace Api.Controllers
                 return BadRequest("Invalid Provider or External Access Token");
             }
 
-            var externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
-
-            if (externalLogin == null)
-            {
-                return InternalServerError();
-            }
-
-            if (externalLogin.LoginProvider != model.Provider)
-            {
-                Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                return new ChallengeResult(model.Provider, this);
-            }
-
-            var user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
-                                                                     externalLogin.ProviderKey));
+            var user = await UserManager.FindAsync(new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
 
             var hasRegistered = user != null;
 
@@ -513,7 +495,7 @@ namespace Api.Controllers
             {
                 var content = await response.Content.ReadAsStringAsync();
 
-                dynamic jObj = (JObject)Newtonsoft.Json.JsonConvert.DeserializeObject(content);
+                dynamic jObj = (JObject) JsonConvert.DeserializeObject(content);
 
                 parsedToken = new ParsedExternalAccessToken();
 
@@ -538,9 +520,7 @@ namespace Api.Controllers
                     //{
                     //    return null;
                     //}
-
                 }
-
             }
 
             return parsedToken;
@@ -589,7 +569,10 @@ namespace Api.Controllers
             private set { _userManager = value; }
         }
 
-        public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
+        public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat
+        {
+            get { return Startup.AuthOptions.AccessTokenFormat; }
+        }
 
         #region Helpers
 
