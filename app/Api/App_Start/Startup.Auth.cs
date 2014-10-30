@@ -58,6 +58,7 @@ namespace Api
             //                                CallbackPath = new PathString("/signin-google")
             //                            });
                                             CallbackPath = new PathString("/signin-google")
+                                            Provider = new GoogleAuthProvider()
         }
     }
 }

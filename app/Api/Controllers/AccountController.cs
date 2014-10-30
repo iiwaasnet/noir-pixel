@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -257,6 +258,15 @@ namespace Api.Controllers
 
             var hasRegistered = user != null;
 
+            var redirectUri = string.Format("{0}#external_access_token={1}&registered={2}",
+                                            GetRedirectUri(Request),
+                                            externalLogin.ExternalAccessToken,
+                                            hasRegistered);
+
+            return Redirect(redirectUri);
+
+            //Below goes to 
+
             if (hasRegistered)
             {
                 Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
@@ -277,6 +287,45 @@ namespace Api.Controllers
             }
 
             return Ok();
+        }
+
+        private string GetRedirectUri(HttpRequestMessage request)
+        {
+            //TODO: Check if this logic should be moved into ApplicationOAuthProvider.ValidateClientRedirectUri()
+            Uri redirectUri;
+
+            var redirectUriString = GetQueryString(Request, "redirect_uri");
+
+            if (string.IsNullOrWhiteSpace(redirectUriString))
+            {
+                return "redirect_uri is required";
+            }
+
+            if (!Uri.TryCreate(redirectUriString, UriKind.Absolute, out redirectUri))
+            {
+                return "redirect_uri is invalid";
+            }
+
+            return redirectUri.AbsoluteUri;
+        }
+
+        private string GetQueryString(HttpRequestMessage request, string key)
+        {
+            var queryStrings = request.GetQueryNameValuePairs();
+
+            if (queryStrings == null)
+            {
+                return null;
+            }
+
+            var match = queryStrings.FirstOrDefault(keyValue => string.Compare(keyValue.Key, key, true) == 0);
+
+            if (string.IsNullOrEmpty(match.Value))
+            {
+                return null;
+            }
+
+            return match.Value;
         }
 
         [AllowAnonymous]
@@ -322,26 +371,33 @@ namespace Api.Controllers
 
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [AllowAnonymous]
         [Route("register-external")]
-        public async Task<IHttpActionResult> RegisterExternal(RegisterExternalBindingModel model)
+        public async Task<IHttpActionResult> RegisterExternal(LocalAccessTokenModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var auth = await Authentication.AuthenticateAsync(DefaultAuthenticationTypes.ExternalBearer);
-            var info = GetExternalLoginInfo(auth);
-            if (info == null)
+
+            var verifiedAccessToken = await VerifyExternalAccessToken(model.Provider, model.ExternalAccessToken);
+            if (verifiedAccessToken == null)
             {
-                return InternalServerError();
+                return BadRequest("Invalid Provider or External Access Token");
             }
 
-            var user = new ApplicationUser
-                       {
-                           UserName = info.DefaultUserName,
-                           Email = info.Email
-                       };
+            var user = await UserManager.FindAsync(new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
+            
+            var hasRegistered = user != null;
+
+            if (hasRegistered)
+            {
+                return BadRequest("External user is already registered");
+            }
+
+            //TODO: Username could be taken from the model with the request
+            user = new ApplicationUser{UserName = verifiedAccessToken.user_id};
 
             var result = await UserManager.CreateAsync(user);
             if (!result.Succeeded)
@@ -349,12 +405,145 @@ namespace Api.Controllers
                 return GetErrorResult(result);
             }
 
-            result = await UserManager.AddLoginAsync(user.Id, info.Login);
+            result = await UserManager.AddLoginAsync(user.Id, new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
             }
-            return Ok();
+
+            //var externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+
+            return Ok(model.ExternalAccessToken);
+        }
+
+        [OverrideAuthentication]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("local-access-token")]
+        public async Task<IHttpActionResult> LocalAccessToken(LocalAccessTokenModel model)
+        {
+
+            if (string.IsNullOrWhiteSpace(model.Provider) || string.IsNullOrWhiteSpace(model.ExternalAccessToken))
+            {
+                return BadRequest("Provider or external access token is not sent");
+            }
+
+            var verifiedAccessToken = await VerifyExternalAccessToken(model.Provider, model.ExternalAccessToken);
+            if (verifiedAccessToken == null)
+            {
+                return BadRequest("Invalid Provider or External Access Token");
+            }
+
+            var externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+
+            if (externalLogin == null)
+            {
+                return InternalServerError();
+            }
+
+            if (externalLogin.LoginProvider != model.Provider)
+            {
+                Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+                return new ChallengeResult(model.Provider, this);
+            }
+
+            var user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
+                                                                     externalLogin.ProviderKey));
+
+            var hasRegistered = user != null;
+
+            if (hasRegistered)
+            {
+                Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+
+                var oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
+                                                                         OAuthDefaults.AuthenticationType);
+                var cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
+                                                                          CookieAuthenticationDefaults.AuthenticationType);
+
+                var properties = ApplicationOAuthProvider.CreateProperties(user.UserName);
+                Authentication.SignIn(properties, oAuthIdentity, cookieIdentity);
+
+                var ticket = new AuthenticationTicket(oAuthIdentity, properties);
+
+                var accessToken = AccessTokenFormat.Protect(ticket);
+
+                var tokenResponse = new JObject(
+                    new JProperty("userName", user.UserName),
+                    new JProperty("access_token", accessToken),
+                    new JProperty("token_type", "bearer"),
+                    //new JProperty("expires_in", tokenExpiration.TotalSeconds.ToString()),
+                    new JProperty(".issued", ticket.Properties.IssuedUtc.ToString()),
+                    new JProperty(".expires", ticket.Properties.ExpiresUtc.ToString())
+                    );
+                return Ok(tokenResponse);
+            }
+
+            return BadRequest("User is not registered!");
+        }
+
+        private async Task<ParsedExternalAccessToken> VerifyExternalAccessToken(string provider, string accessToken)
+        {
+            ParsedExternalAccessToken parsedToken = null;
+
+            var verifyTokenEndPoint = "";
+
+            if (provider == "Facebook")
+            {
+                //You can get it from here: https://developers.facebook.com/tools/accesstoken/
+                //More about debug_tokn here: http://stackoverflow.com/questions/16641083/how-does-one-get-the-app-access-token-for-debug-token-inspection-on-facebook
+                var appToken = "xxxxxx";
+                verifyTokenEndPoint = string.Format("https://graph.facebook.com/debug_token?input_token={0}&access_token={1}", accessToken, appToken);
+            }
+            else if (provider == "Google")
+            {
+                verifyTokenEndPoint = string.Format("https://www.googleapis.com/oauth2/v1/tokeninfo?access_token={0}", accessToken);
+            }
+            else
+            {
+                return null;
+            }
+
+            var client = new HttpClient();
+            var uri = new Uri(verifyTokenEndPoint);
+            var response = await client.GetAsync(uri);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+
+                dynamic jObj = (JObject)Newtonsoft.Json.JsonConvert.DeserializeObject(content);
+
+                parsedToken = new ParsedExternalAccessToken();
+
+                if (provider == "Facebook")
+                {
+                    parsedToken.user_id = jObj["data"]["user_id"];
+                    parsedToken.app_id = jObj["data"]["app_id"];
+
+                    //TODO: Uncomment and fix!!!!
+                    //if (!string.Equals(Startup.facebookAuthOptions.AppId, parsedToken.app_id, StringComparison.OrdinalIgnoreCase))
+                    //{
+                    //    return null;
+                    //}
+                }
+                else if (provider == "Google")
+                {
+                    parsedToken.user_id = jObj["user_id"];
+                    parsedToken.app_id = jObj["audience"];
+
+                    //TODO: Uncomment and fix!!!!
+                    //if (!string.Equals(Startup.googleAuthOptions.ClientId, parsedToken.app_id, StringComparison.OrdinalIgnoreCase))
+                    //{
+                    //    return null;
+                    //}
+
+                }
+
+            }
+
+            return parsedToken;
         }
 
         private static ExternalLoginInfo GetExternalLoginInfo(AuthenticateResult result)
@@ -443,6 +632,7 @@ namespace Api.Controllers
             public string LoginProvider { get; set; }
             public string ProviderKey { get; set; }
             public string UserName { get; set; }
+            public string ExternalAccessToken { get; set; }
 
             public IList<Claim> GetClaims()
             {
@@ -481,7 +671,8 @@ namespace Api.Controllers
                        {
                            LoginProvider = providerKeyClaim.Issuer,
                            ProviderKey = providerKeyClaim.Value,
-                           UserName = identity.FindFirstValue(ClaimTypes.Name)
+                           UserName = identity.FindFirstValue(ClaimTypes.Name),
+                           ExternalAccessToken = identity.FindFirstValue("ExternalAccessToken")
                        };
             }
         }
@@ -508,5 +699,11 @@ namespace Api.Controllers
         }
 
         #endregion
+    }
+
+    public class LocalAccessTokenModel
+    {
+        public string Provider { get; set; }
+        public string ExternalAccessToken { get; set; }
     }
 }

@@ -11,8 +11,10 @@
         service.signIn = signIn;
         service.googleSignIn = googleSignIn;
         service.signOut = signOut;
-        service.externalSignUp = externalSignUp;
         service.authenticated = authenticated;
+        service.registerExternal = registerExternal;
+        service.getLocalToken = getLocalToken;
+
         service.getUserInfo = getUserInfo;
 
         function authenticated() {
@@ -20,17 +22,9 @@
         }
 
         function googleSignIn() {
-            var extLogin = '/account/external-login?provider=Google&response_type=token&client_id=self&redirect_uri=http%3A%2F%2Fnoir-pixel.com%2Fexternal-signin%2F',
-                url = Url.build([Config.apiUris.base, extLogin]),
-                deferred = $q.defer();
+            var uri = '/account/external-login?provider=Google&response_type=token&client_id=self&redirect_uri=http%3A%2F%2Fnoir-pixel.com%2Fexternal-signin%2F';
 
-            return url;
-
-            $http.get(url)
-                .success(function(response) { googleSignInSuccess(response, deferred); })
-                .error(function (err, status) { googleSignInError(err, status, deferred); });
-
-            return deferred.promise;
+            return Url.build([Config.apiUris.base, uri]);
         }
 
         function signIn(userName, pwd) {
@@ -49,35 +43,57 @@
             return deferred.promise;
         }
 
-        function googleSignInSuccess(response, deferred) {
-            deferred.resolve(response);
-        }
-
-        function googleSignInError(err, status, deferred) {
-            deferred.reject(err);
-        }
-
-        function externalSignUp(externalToken) {
-            var externalLogin = 'account/register-external',
-                url = Url.build([Config.apiUris.base, externalLogin]),
+        function getLocalToken(externalToken, provider) {
+            var uri = 'account/local-access-token',
+                url = Url.build([Config.apiUris.base, uri]),
                 deferred = $q.defer();
 
             $http.post(url,
-                { email: 'me-google@google.com' },
+                {
+                    provider: provider,
+                    externalAccessToken: externalToken
+                },
                 { headers: { 'Authorization': 'Bearer ' + externalToken } })
-                .success(function(response) { externalSignUpSuccess(response, deferred); })
-                .error(function(err, status) { externalSignUpError(err, status, deferred); });
+                .success(function (response) { getLocalTokenSuccess(response, deferred); })
+                .error(function (err, status) { getLocalTokenError(err, status, deferred); });
+
+            return deferred.promise;
+        }
+
+        function getLocalTokenSuccess(response, deferred) {
+            debugger;
+            deferred.resolve(response);
+        }
+
+        function getLocalTokenError(err, status, deferred) {
+            debugger;
+            deferred.reject(err);
+        }
+
+        function registerExternal(externalToken, provider) {
+            var uri = 'account/register-external',
+                url = Url.build([Config.apiUris.base, uri]),
+                deferred = $q.defer();
+
+            $http.post(url,
+                 {
+                     provider: provider,
+                     externalAccessToken: externalToken
+                 },
+                { headers: { 'Authorization': 'Bearer ' + externalToken } })
+                .success(function (response) { registerExternalSuccess(response, deferred); })
+                .error(function (err, status) { registerExternalError(err, status, deferred); });
 
             return deferred.promise;
         }
 
 
-        function externalSignUpSuccess(response, deferred) {
+        function registerExternalSuccess(response, deferred) {
             debugger;
             deferred.resolve();
         }
 
-        function externalSignUpError(err, status, deferred) {
+        function registerExternalError(err, status, deferred) {
             debugger;
             deferred.reject();
         }
