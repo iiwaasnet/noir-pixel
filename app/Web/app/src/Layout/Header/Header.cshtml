@@ -8,8 +8,9 @@
 
     <ul>
         <li>
-            <a href="#" role="button" ng-bind="::ctrl.signInMenu.signIn" ng-click="ctrl.signIn()"></a>
-            <a ui-sref="signOut" ng-bind="::ctrl.signInMenu.signOut"></a>
+            <a ui-sref="signIn" ng-bind="::ctrl.signInMenu.signIn" ng-if="!ctrl.authenticated"></a>
+            <a ui-sref="signUp" ng-bind="::ctrl.signInMenu.signUp" ng-if="!ctrl.authenticated"></a>
+            <a ui-sref="signOut" ng-bind="::ctrl.signInMenu.signOut" ng-if="ctrl.authenticated"></a>
         </li>
     </ul>
     <div class="header-divider"></div>

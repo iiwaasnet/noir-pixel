@@ -4,20 +4,15 @@
     angular.module('np.layout')
         .controller('HeaderController', headerController);
 
-    headerController.$injector = ['$scope', 'Strings', 'Auth', 'SignIn', 'EventsHub'];
+    headerController.$injector = ['$scope', 'Strings', 'Auth', 'EventsHub'];
 
-    function headerController($scope, Strings, Auth, SignIn, EventsHub) {
+    function headerController($scope, Strings, Auth, EventsHub) {
         var ctrl = this;
-        ctrl.signIn = signIn;
         ctrl.mainMenu = [];
         ctrl.signInMenu = {};
+        ctrl.authenticated = Auth.authenticated(),
 
-        activate();
-
-
-        function signIn() {
-            SignIn.signIn();
-        }
+        activate();     
 
         function getMainMenu() {
             var gallery = {
@@ -43,15 +38,10 @@
         }
 
         function getSignInMenu() {
-            if (Auth.authenticated()) {
-                return {
-                    signOut: Strings.getLocalizedString('AuthMenu_SignOut')
-                }
-            } else {
-                return {
-                    signIn: Strings.getLocalizedString('AuthMenu_SignIn'),
-                    signUp: Strings.getLocalizedString('AuthMenu_SignUp')
-                }
+            return {
+                signOut: Strings.getLocalizedString('AuthMenu_SignOut'),
+                signIn: Strings.getLocalizedString('AuthMenu_SignIn'),
+                signUp: Strings.getLocalizedString('AuthMenu_SignUp')
             }
         }
 

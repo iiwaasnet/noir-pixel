@@ -28,19 +28,19 @@
             })
             .state('signIn', {
                 url: '/signin?redirectTo',
-                templateUrl: '/app/src/Auth/sign-in.html',
+                templateUrl: '/app/src/Auth/signin.html',
                 controller: 'SignInController',
                 controllerAs: 'ctrl'
             })
             .state('externalSignIn', {
                 url: '/external-signin/?accessToken',
-                templateUrl: '/app/src/Auth/sign-in.html',
+                templateUrl: '/app/src/Auth/external-signin.html',
                 controller: 'ExternalSignInController',
                 controllerAs: 'ctrl'
             })
             .state('signUp', {
                 url: '/signup',
-                templateUrl: '/app/src/Auth/sign-up.html',
+                templateUrl: '/app/src/Auth/signup.html',
                 controller: 'SignUpController',
                 controllerAs: 'ctrl'
             })

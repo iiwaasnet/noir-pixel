@@ -3,10 +3,12 @@
 
     var config = {
         environment: '@@environment',
+        siteBaseUri: '@@siteBaseUri',
         loggingApiUri: '@@loggingApiUri',
         apiUris: {
             base: '@@base',
-            signin: '@@signin'
+            signin: '@@signin',
+            externalLogin: '@@externalLogin'
         },
         strings: {
             invalidationTimeout: '@@invalidationTimeout',

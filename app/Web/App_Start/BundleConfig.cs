@@ -68,7 +68,13 @@ namespace Web
                             .Include(LayoutAssets().ToArray())
                             .Include(AuthAssets().ToArray())
                             .Include(EventsAssets().ToArray())
+                            .Include(VanillaJs().ToArray())
                 );
+        }
+
+        private static IEnumerable<string> VanillaJs()
+        {
+            yield return "~/app/src/utils/string.format.js";
         }
 
         private static IEnumerable<string> EventsAssets()
@@ -99,7 +105,6 @@ namespace Web
             yield return "~/app/src/auth/auth.service.js";
             yield return "~/app/src/auth/tokenStorage.service.js";
             yield return "~/app/src/auth/signIn.controller.js";
-            yield return "~/app/src/auth/signIn.service.js";
             yield return "~/app/src/auth/externalSignIn.controller.js";
             yield return "~/app/src/auth/notAuthorized.controller.js";
         }

@@ -9,17 +9,16 @@
 
         service.build = build;
 
-        function build(parts) {
-            if (!parts || !(parts instanceof Array)) {
-                throw '[parts] is either null or not an Array!';
-            }
+        function build() {
+            var parts = arguments;
+
             if (parts.length === 0) {
-                throw '[parts] is empty!';
+                throw 'No arguments are provided!';
             }
 
             var url = location.protocol + '/';
 
-            parts.forEach(function(part) {
+            angular.forEach(parts, function (part) {
                 if (part.length !== 0) {
                     if (part[0] !== '/') {
                         part = '/' + part;

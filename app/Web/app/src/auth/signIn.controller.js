@@ -35,22 +35,19 @@
         function getGoogleSignIn() {
             $http.get('http://api.noir-pixel.com/account/external-logins?returnUrl=http%3A%2F%2Fnoir-pixel.com%2F&generateState=false')
                 .success(function(response) {
-                    debugger;
                     ctrl.signInUri = response;
                 });
         }
 
         function googleSignIn() {
-            $window.location.href = Auth.googleSignIn();
+            $window.location.href = Auth.googleSignIn('home');
         }
 
 
         function googleSignInSuccess(data) {
-            debugger;
         }
 
         function googleSignInError(err) {
-            debugger;
         }
 
         function signIn(valid) {

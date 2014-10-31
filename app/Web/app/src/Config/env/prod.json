@@ -1,7 +1,11 @@
 ﻿{
+    "siteBaseUri": "noir-pixel.com",
+    
     "loggingApiUri": "api.logging.noir-pixel.com/log/add",
     "base": "api.noir-pixel.com",
-    "signin":  "token",
+    "signin": "token",
+    "externalLogin": "/account/external-login?provider={0}&response_type=token&client_id=self&redirect_uri={1}",
+    
     "invalidationTimeout": "01:00:00",
     "versionsUri": "/strings/versions",
     "localizedUri": "/strings/localized/"

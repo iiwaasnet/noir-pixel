@@ -210,13 +210,13 @@
     </Content>
     <Content Include="app\src\auth\auth.module.js" />
     <Content Include="app\src\auth\auth.service.js" />
+    <Content Include="app\src\auth\external-signin.html" />
     <Content Include="app\src\auth\not-authorized.html" />
     <Content Include="app\src\auth\notAuthorized.controller.js" />
-    <Content Include="app\src\auth\sign-up.html" />
-    <Content Include="app\src\auth\sign-in.html" />
+    <Content Include="app\src\auth\signup.html" />
+    <Content Include="app\src\auth\signin.html" />
     <Content Include="app\src\auth\externalSignIn.controller.js" />
     <Content Include="app\src\auth\signIn.controller.js" />
-    <Content Include="app\src\auth\signIn.service.js" />
     <Content Include="app\src\auth\tokenStorage.service.js" />
     <Content Include="app\src\config\config.js" />
     <Content Include="app\src\config\config.module.js" />
@@ -253,6 +253,7 @@
     <Content Include="app\src\logging\trace.factory.js" />
     <Content Include="app\src\events\eventsHub.service.js" />
     <Content Include="app\src\utils\moment.factory.js" />
+    <Content Include="app\src\utils\string.format.js" />
     <Content Include="app\src\utils\url.service.js" />
     <Content Include="app\src\utils\utils.module.js" />
     <Content Include="app\vendor\angular-local-storage.js" />

@@ -4,10 +4,12 @@
     angular.module('np.auth')
         .service('Auth', authService);
 
-    authService.$injector = ['$http', '$q', 'Config', 'Url', 'TokenStorage', 'EventsHub'];
+    authService.$injector = ['$http', '$q', '$state', 'localStorageService', 'Config', 'Url', 'TokenStorage', 'EventsHub'];
 
-    function authService($http, $q, Config, Url, TokenStorage, EventsHub) {
-        var service = this;
+    function authService($http, $q, $state, localStorageService, Config, Url, TokenStorage, EventsHub) {
+        var service = this,
+            signInState = 'signIn',
+            loginRedirectStorageKey = 'loginRedirectState';
         service.signIn = signIn;
         service.googleSignIn = googleSignIn;
         service.signOut = signOut;
@@ -21,14 +23,23 @@
             return !!TokenStorage.getToken();
         }
 
-        function googleSignIn() {
-            var uri = '/account/external-login?provider=Google&response_type=token&client_id=self&redirect_uri=http%3A%2F%2Fnoir-pixel.com%2Fexternal-signin%2F';
+        function googleSignIn(redirectState) {
+            saveLoginRedirectState(redirectState);
 
-            return Url.build([Config.apiUris.base, uri]);
+            return getApiExternalLoginUrl('Google');
         }
 
-        function signIn(userName, pwd) {
-            var url = Url.build([Config.apiUris.base, Config.apiUris.signin]),
+        function getApiExternalLoginUrl(provider) {
+            var externalSignIn = $state.get('externalSignIn').url.split('?')[0],
+                redirectUrl = Url.build(Config.siteBaseUri, externalSignIn);
+
+            return Url.build(Config.apiUris.base, Config.apiUris.externalLogin.format(provider, encodeURIComponent(redirectUrl)));
+        }
+
+        function signIn(userName, pwd, redirectState) {
+            saveLoginRedirectState(redirectState);
+
+            var url = Url.build(Config.apiUris.base, Config.apiUris.signin),
                 data = "grant_type=password&username=" + userName + "&password=" + pwd,
                 deferred = $q.defer();
 
@@ -43,9 +54,10 @@
             return deferred.promise;
         }
 
+
         function getLocalToken(externalToken, provider) {
             var uri = 'account/local-access-token',
-                url = Url.build([Config.apiUris.base, uri]),
+                url = Url.build(Config.apiUris.base, uri),
                 deferred = $q.defer();
 
             $http.post(url,
@@ -54,8 +66,8 @@
                     externalAccessToken: externalToken
                 },
                 { headers: { 'Authorization': 'Bearer ' + externalToken } })
-                .success(function (response) { getLocalTokenSuccess(response, deferred); })
-                .error(function (err, status) { getLocalTokenError(err, status, deferred); });
+                .success(function(response) { getLocalTokenSuccess(response, deferred); })
+                .error(function(err, status) { getLocalTokenError(err, status, deferred); });
 
             return deferred.promise;
         }
@@ -63,38 +75,36 @@
         function getLocalTokenSuccess(response, deferred) {
             TokenStorage.setToken(response.access_token);
             deferred.resolve(response);
+            $state.go(getLoginRedirectState());
         }
 
         function getLocalTokenError(err, status, deferred) {
-            debugger;
             deferred.reject(err);
         }
 
         function registerExternal(externalToken, provider) {
             var uri = 'account/register-external',
-                url = Url.build([Config.apiUris.base, uri]),
+                url = Url.build(Config.apiUris.base, uri),
                 deferred = $q.defer();
 
             $http.post(url,
-                 {
-                     provider: provider,
-                     externalAccessToken: externalToken
-                 },
+                {
+                    provider: provider,
+                    externalAccessToken: externalToken
+                },
                 { headers: { 'Authorization': 'Bearer ' + externalToken } })
-                .success(function (response) { registerExternalSuccess(response, deferred); })
-                .error(function (err, status) { registerExternalError(err, status, deferred); });
+                .success(function(response) { registerExternalSuccess(response, deferred); })
+                .error(function(err, status) { registerExternalError(err, status, deferred); });
 
             return deferred.promise;
         }
 
 
         function registerExternalSuccess(response, deferred) {
-            debugger;
             deferred.resolve(response.access_token);
         }
 
         function registerExternalError(err, status, deferred) {
-            debugger;
             deferred.reject();
         }
 
@@ -111,7 +121,7 @@
         }
 
         function getUserInfo() {
-            var url = Url.build([Config.apiUris.base, 'account/user-info']);
+            var url = Url.build(Config.apiUris.base, 'account/user-info');
 
             var deferred = $q.defer();
 
@@ -126,6 +136,18 @@
         function signOut() {
             TokenStorage.deleteToken();
             EventsHub.publishEvent(EventsHub.events.SignedOut);
+        }
+
+        function saveLoginRedirectState(redirectState) {
+            if (redirectState !== signInState) {
+                localStorageService.set(loginRedirectStorageKey, redirectState);
+            }
+        }
+
+        function getLoginRedirectState() {
+            var redirectState = localStorageService.get(loginRedirectStorageKey);
+
+            return redirectState || 'home';
         }
     }
 })();

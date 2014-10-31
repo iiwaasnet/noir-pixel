@@ -14,7 +14,6 @@
 
         function activate() {
             var loginResult = getExternalLoginResult();
-            debugger;
             if (loginResult.registered) {
                 Auth.getLocalToken(loginResult.externalAccessToken, 'Google')
                 .then(getLocalTokenSuccess, getLocalTokenError);
@@ -25,7 +24,6 @@
         }
 
         function registerExternalSuccess(externalToken) {
-            debugger;
             Auth.getLocalToken(externalToken, 'Google')
             .then(getLocalTokenSuccess, getLocalTokenError);
         }
@@ -44,7 +42,6 @@
         }
 
         function getLocalTokenSuccess() {
-            debugger;
         }
 
         function getLocalTokenError() {}
