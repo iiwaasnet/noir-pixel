@@ -45,9 +45,6 @@
 
         function getLocalTokenSuccess() {
             debugger;
-            var ctrl = $window.opener.$parentScope;
-            ctrl.alert('ku!');
-            $window.close();
         }
 
         function getLocalTokenError() {}

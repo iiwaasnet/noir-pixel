@@ -41,10 +41,7 @@
         }
 
         function googleSignIn() {
-            //$window.location.href = Auth.googleSignIn();
-            debugger;
-            $window.$parentController = $scope;
-            $window.open(Auth.googleSignIn(), "Authenticate Account", "location=0,status=0,width=600,height=750");
+            $window.location.href = Auth.googleSignIn();
         }
 
 
