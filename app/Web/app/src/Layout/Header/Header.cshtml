@@ -7,8 +7,9 @@
     </ul>
 
     <ul>
-        <li ng-repeat="menuItem in ctrl.signInMenu">
-            <a ui-sref="{{::menuItem.uri}}" ng-bind="::menuItem.text"></a>
+        <li>
+            <a href="#" ng-bind="::ctrl.signInMenu.signIn" ng-click="ctrl.signIn()"></a>
+            <a ui-sref="signOut" ng-bind="::ctrl.signInMenu.signOut"></a>
         </li>
     </ul>
     <div class="header-divider"></div>

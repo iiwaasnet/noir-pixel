@@ -216,6 +216,7 @@
     <Content Include="app\src\auth\sign-in.html" />
     <Content Include="app\src\auth\externalSignIn.controller.js" />
     <Content Include="app\src\auth\signIn.controller.js" />
+    <Content Include="app\src\auth\signIn.service.js" />
     <Content Include="app\src\auth\tokenStorage.service.js" />
     <Content Include="app\src\config\config.js" />
     <Content Include="app\src\config\config.module.js" />
