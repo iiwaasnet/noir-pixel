@@ -3,40 +3,23 @@ using Api.Providers;
 using Autofac;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
-using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 
-namespace Api
+namespace Api.App.Auth
 {
-    public partial class Startup
+    public static class StartupAuth
     {
-        //TODO :Refactor both static props
-        public static string PublicClientId { get; private set; }
-        public static OAuthAuthorizationServerOptions AuthOptions { get; private set; }
-
-        public void ConfigureAuth(IAppBuilder app)
+        public static void ConfigureAuth(this IAppBuilder app)
         {
             // Configure the db context and user manager to use a single instance per request
             app.CreatePerOwinContext(() => DependencyInjection.GetContainer().Resolve<ApplicationIdentityContext>());
             app.CreatePerOwinContext(() => DependencyInjection.GetContainer().Resolve<ApplicationUserManager>());
             app.CreatePerOwinContext(() => DependencyInjection.GetContainer().Resolve<ApplicationRoleManager>());
 
-            //TODO: decode on clientid
-            PublicClientId = "self";
-            var oAuthOptions = new OAuthAuthorizationServerOptions
-                               {
-                                   AllowInsecureHttp = true,
-                                   TokenEndpointPath = new PathString("/token"),
-                                   AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
-                                   AuthorizeEndpointPath = new PathString("/account/external-login"),
-                                   Provider = new ApplicationOAuthProvider(PublicClientId)
-                               };
-            AuthOptions = oAuthOptions;
-
-            app.UseOAuthBearerTokens(oAuthOptions);
+            app.UseOAuthBearerTokens(DependencyInjection.GetContainer().Resolve<AuthOptions>().AuthServerOptions);
 
             //TODO: Walked through until here
             // Investigate why the next lines of code needed
@@ -57,8 +40,7 @@ namespace Api
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions
                                         {
-                                            ClientId = "180426522882-j68nln4atebaf3r1ddb6lgc7h4im2c7j.apps.googleusercontent.com",
-                                            ClientSecret = "yg_imJKvQIjYu40L01d23QZ4",
+                                            
                                             CallbackPath = new PathString("/signin-google"),
                                             Provider = new GoogleAuthProvider()
                                         });

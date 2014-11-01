@@ -7,6 +7,8 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Results;
+using Api.App.Auth;
 using Api.App.Users;
 using Api.Models;
 using Api.Providers;
@@ -27,35 +29,39 @@ namespace Api.Controllers
     public class AccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";
-        private ApplicationUserManager _userManager;
+        private readonly ApplicationUserManager userManager;
+        private readonly ISecureDataFormat<AuthenticationTicket> accessTokenFormat;
+        private readonly string publicClientId;
 
-        public AccountController()
+        public AccountController(ApplicationUserManager userManager, AuthOptions  authOptions)
         {
-        }
-
-        public AccountController(ApplicationUserManager userManager,
-                                 ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
-        {
-            UserManager = userManager;
+            this.userManager = userManager;
+            accessTokenFormat = authOptions.AuthServerOptions.AccessTokenFormat;
+            publicClientId = authOptions.PublicClientId;
         }
 
         [AllowAnonymous]
         [Route("register")]
         public async Task<IHttpActionResult> Register(RegisterRequest model)
         {
+            //TODO: Model validation filter
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser {UserName = model.UserName};
-
-            var result = await UserManager.CreateAsync(user, model.Password);
-
-            if (!result.Succeeded)
+            var existingUser = await userManager.FindByNameAsync(model.UserName);
+            if (existingUser != null)
             {
-                return GetErrorResult(result);
+                return new ConflictResult(this);
             }
+
+            var result = await userManager.CreateAsync(new ApplicationUser { UserName = model.UserName }, model.Password);
+
+            //if (!result.Succeeded)
+            //{
+            //    return GetErrorResult(result);
+            //}
 
             return Ok();
         }
@@ -85,7 +91,7 @@ namespace Api.Controllers
         [Route("ManageInfo")]
         public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)
         {
-            IdentityUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            IdentityUser user = await userManager.FindByIdAsync(User.Identity.GetUserId());
 
             if (user == null)
             {
@@ -128,7 +134,7 @@ namespace Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(),
+            var result = await userManager.ChangePasswordAsync(User.Identity.GetUserId(),
                                                                model.OldPassword,
                                                                model.NewPassword);
 
@@ -148,7 +154,7 @@ namespace Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            var result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
+            var result = await userManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
 
             if (!result.Succeeded)
             {
@@ -168,7 +174,7 @@ namespace Api.Controllers
 
             Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
 
-            var ticket = AccessTokenFormat.Unprotect(model.ExternalAccessToken);
+            var ticket = accessTokenFormat.Unprotect(model.ExternalAccessToken);
 
             if (ticket == null || ticket.Identity == null || (ticket.Properties != null
                                                               && ticket.Properties.ExpiresUtc.HasValue
@@ -184,7 +190,7 @@ namespace Api.Controllers
                 return BadRequest("The external login is already associated with an account.");
             }
 
-            var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(),
+            var result = await userManager.AddLoginAsync(User.Identity.GetUserId(),
                                                          new UserLoginInfo(externalData.LoginProvider, externalData.ProviderKey));
 
             if (!result.Succeeded)
@@ -207,11 +213,11 @@ namespace Api.Controllers
 
             if (model.LoginProvider == LocalLoginProvider)
             {
-                result = await UserManager.RemovePasswordAsync(User.Identity.GetUserId());
+                result = await userManager.RemovePasswordAsync(User.Identity.GetUserId());
             }
             else
             {
-                result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(),
+                result = await userManager.RemoveLoginAsync(User.Identity.GetUserId(),
                                                             new UserLoginInfo(model.LoginProvider, model.ProviderKey));
             }
 
@@ -253,7 +259,7 @@ namespace Api.Controllers
                 return new ChallengeResult(provider, this);
             }
 
-            var user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
+            var user = await userManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
                                                                      externalLogin.ProviderKey));
 
             var registered = user != null;
@@ -271,9 +277,9 @@ namespace Api.Controllers
             {
                 Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
 
-                var oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
+                var oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
                                                                          OAuthDefaults.AuthenticationType);
-                var cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
+                var cookieIdentity = await user.GenerateUserIdentityAsync(userManager,
                                                                           CookieAuthenticationDefaults.AuthenticationType);
 
                 var properties = ApplicationOAuthProvider.CreateProperties(user.UserName);
@@ -357,7 +363,7 @@ namespace Api.Controllers
                                                 {
                                                     provider = description.AuthenticationType,
                                                     response_type = "token",
-                                                    client_id = Startup.PublicClientId,
+                                                    client_id = publicClientId,
                                                     redirect_uri = new Uri(Request.RequestUri, returnUrl).AbsoluteUri,
                                                     state = state
                                                 }),
@@ -386,7 +392,7 @@ namespace Api.Controllers
                 return BadRequest("Invalid Provider or External Access Token");
             }
 
-            var user = await UserManager.FindAsync(new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
+            var user = await userManager.FindAsync(new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
 
             var hasRegistered = user != null;
 
@@ -398,13 +404,13 @@ namespace Api.Controllers
             //TODO: Username could be taken from the model with the request
             user = new ApplicationUser {UserName = verifiedAccessToken.user_id};
 
-            var result = await UserManager.CreateAsync(user);
+            var result = await userManager.CreateAsync(user);
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
             }
 
-            result = await UserManager.AddLoginAsync(user.Id, new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
+            result = await userManager.AddLoginAsync(user.Id, new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
@@ -431,7 +437,7 @@ namespace Api.Controllers
                 return BadRequest("Invalid Provider or External Access Token");
             }
 
-            var user = await UserManager.FindAsync(new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
+            var user = await userManager.FindAsync(new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
 
             var hasRegistered = user != null;
 
@@ -439,9 +445,9 @@ namespace Api.Controllers
             {
                 Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
 
-                var oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
+                var oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
                                                                          OAuthDefaults.AuthenticationType);
-                var cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
+                var cookieIdentity = await user.GenerateUserIdentityAsync(userManager,
                                                                           CookieAuthenticationDefaults.AuthenticationType);
 
                 var properties = ApplicationOAuthProvider.CreateProperties(user.UserName);
@@ -449,7 +455,7 @@ namespace Api.Controllers
 
                 var ticket = new AuthenticationTicket(oAuthIdentity, properties);
 
-                var accessToken = AccessTokenFormat.Protect(ticket);
+                var accessToken = accessTokenFormat.Protect(ticket);
 
                 var tokenResponse = new JObject(
                     new JProperty("userName", user.UserName),
@@ -563,18 +569,7 @@ namespace Api.Controllers
         //    base.Dispose(disposing);
         //}
 
-        public ApplicationUserManager UserManager
-        {
-            get { return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
-            private set { _userManager = value; }
-        }
-
-        public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat
-        {
-            get { return Startup.AuthOptions.AccessTokenFormat; }
-        }
-
-        #region Helpers
+       #region Helpers
 
         private IAuthenticationManager Authentication
         {

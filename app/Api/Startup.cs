@@ -1,5 +1,6 @@
 ﻿using System.Web.Http;
 using Api;
+using Api.App.Auth;
 using Autofac.Integration.WebApi;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
@@ -20,7 +21,7 @@ namespace Api
                              DependencyResolver = new AutofacWebApiDependencyResolver(DependencyInjection.GetContainer())
                          };
 
-            ConfigureAuth(app);
+            app.ConfigureAuth();
             app.UseWebApi(config);
             app.UseCors(CorsOptions.AllowAll);
         }
