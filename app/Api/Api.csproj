@@ -212,6 +212,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\Auth\AuthOptions.cs" />
+    <Compile Include="App\Auth\LocalAccessTokenModel.cs" />
+    <Compile Include="App\Auth\RegisterExternalModel.cs" />
     <Compile Include="App\Users\UsersController.cs" />
     <Compile Include="App_Start\ApplicationIdentityContext.cs" />
     <Compile Include="App_Start\ApplicationRoleManager.cs" />
@@ -252,7 +254,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="App\Auth\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Errors\ValidationErrors.cs" />

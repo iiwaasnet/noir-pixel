@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Results;
-using Api.App.Auth;
 using Api.App.Users;
 using Api.Models;
 using Api.Providers;
@@ -21,8 +20,9 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using WebGrease.Css.Extensions;
 
-namespace Api.Controllers
+namespace Api.App.Auth
 {
     [Authorize]
     [RoutePrefix("account")]
@@ -33,7 +33,7 @@ namespace Api.Controllers
         private readonly ISecureDataFormat<AuthenticationTicket> accessTokenFormat;
         private readonly string publicClientId;
 
-        public AccountController(ApplicationUserManager userManager, AuthOptions  authOptions)
+        public AccountController(ApplicationUserManager userManager, AuthOptions authOptions)
         {
             this.userManager = userManager;
             accessTokenFormat = authOptions.AuthServerOptions.AccessTokenFormat;
@@ -56,14 +56,14 @@ namespace Api.Controllers
                 return new ConflictResult(this);
             }
 
-            var result = await userManager.CreateAsync(new ApplicationUser { UserName = model.UserName }, model.Password);
+            var result = await userManager.CreateAsync(new ApplicationUser
+                                                       {
+                                                           UserName = model.UserName,
+                                                           Email = model.Email
+                                                       },
+                                                       model.Password);
 
-            //if (!result.Succeeded)
-            //{
-            //    return GetErrorResult(result);
-            //}
-
-            return Ok();
+            return GetIdentityResult(result);
         }
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
@@ -83,7 +83,7 @@ namespace Api.Controllers
         [Route("logout")]
         public IHttpActionResult Logout()
         {
-            Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
+            GetAuthentication().SignOut(CookieAuthenticationDefaults.AuthenticationType);
             return Ok();
         }
 
@@ -138,12 +138,7 @@ namespace Api.Controllers
                                                                model.OldPassword,
                                                                model.NewPassword);
 
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
-
-            return Ok();
+            return GetIdentityResult(result);
         }
 
         [Route("set-password")]
@@ -156,12 +151,7 @@ namespace Api.Controllers
 
             var result = await userManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
 
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
-
-            return Ok();
+            return GetIdentityResult(result);
         }
 
         [Route("AddExternalLogin")]
@@ -172,7 +162,7 @@ namespace Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+            GetAuthentication().SignOut(DefaultAuthenticationTypes.ExternalCookie);
 
             var ticket = accessTokenFormat.Unprotect(model.ExternalAccessToken);
 
@@ -193,12 +183,7 @@ namespace Api.Controllers
             var result = await userManager.AddLoginAsync(User.Identity.GetUserId(),
                                                          new UserLoginInfo(externalData.LoginProvider, externalData.ProviderKey));
 
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
-
-            return Ok();
+            return GetIdentityResult(result);
         }
 
         [Route("remove-login")]
@@ -221,12 +206,7 @@ namespace Api.Controllers
                                                             new UserLoginInfo(model.LoginProvider, model.ProviderKey));
             }
 
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
-
-            return Ok();
+            return GetIdentityResult(result);
         }
 
         // GET account/external-login
@@ -255,7 +235,7 @@ namespace Api.Controllers
 
             if (externalLogin.LoginProvider != provider)
             {
-                Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+                GetAuthentication().SignOut(DefaultAuthenticationTypes.ExternalCookie);
                 return new ChallengeResult(provider, this);
             }
 
@@ -275,7 +255,7 @@ namespace Api.Controllers
 
             if (registered)
             {
-                Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+                GetAuthentication().SignOut(DefaultAuthenticationTypes.ExternalCookie);
 
                 var oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
                                                                          OAuthDefaults.AuthenticationType);
@@ -283,13 +263,13 @@ namespace Api.Controllers
                                                                           CookieAuthenticationDefaults.AuthenticationType);
 
                 var properties = ApplicationOAuthProvider.CreateProperties(user.UserName);
-                Authentication.SignIn(properties, oAuthIdentity, cookieIdentity);
+                GetAuthentication().SignIn(properties, oAuthIdentity, cookieIdentity);
             }
             else
             {
                 IEnumerable<Claim> claims = externalLogin.GetClaims();
                 var identity = new ClaimsIdentity(claims, OAuthDefaults.AuthenticationType);
-                Authentication.SignIn(identity);
+                GetAuthentication().SignIn(identity);
             }
 
             return Ok();
@@ -338,7 +318,7 @@ namespace Api.Controllers
         [Route("external-logins")]
         public IEnumerable<ExternalLoginViewModel> GetExternalLogins(string returnUrl, bool generateState = false)
         {
-            var descriptions = Authentication.GetExternalAuthenticationTypes();
+            var descriptions = GetAuthentication().GetExternalAuthenticationTypes();
             var logins = new List<ExternalLoginViewModel>();
 
             string state;
@@ -379,7 +359,7 @@ namespace Api.Controllers
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [AllowAnonymous]
         [Route("register-external")]
-        public async Task<IHttpActionResult> RegisterExternal(LocalAccessTokenModel model)
+        public async Task<IHttpActionResult> RegisterExternal(RegisterExternalModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -407,13 +387,13 @@ namespace Api.Controllers
             var result = await userManager.CreateAsync(user);
             if (!result.Succeeded)
             {
-                return GetErrorResult(result);
+                return GetIdentityErrorResult(result);
             }
 
             result = await userManager.AddLoginAsync(user.Id, new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
             if (!result.Succeeded)
             {
-                return GetErrorResult(result);
+                return GetIdentityErrorResult(result);
             }
 
             return Ok(new JObject(new JProperty("access_token", model.ExternalAccessToken)));
@@ -443,7 +423,7 @@ namespace Api.Controllers
 
             if (hasRegistered)
             {
-                Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+                GetAuthentication().SignOut(DefaultAuthenticationTypes.ExternalCookie);
 
                 var oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
                                                                          OAuthDefaults.AuthenticationType);
@@ -451,7 +431,7 @@ namespace Api.Controllers
                                                                           CookieAuthenticationDefaults.AuthenticationType);
 
                 var properties = ApplicationOAuthProvider.CreateProperties(user.UserName);
-                Authentication.SignIn(properties, oAuthIdentity, cookieIdentity);
+                GetAuthentication().SignIn(properties, oAuthIdentity, cookieIdentity);
 
                 var ticket = new AuthenticationTicket(oAuthIdentity, properties);
 
@@ -559,24 +539,21 @@ namespace Api.Controllers
                    };
         }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        UserManager.Dispose();
-        //    }
+        #region Helpers
 
-        //    base.Dispose(disposing);
-        //}
-
-       #region Helpers
-
-        private IAuthenticationManager Authentication
+        private IAuthenticationManager GetAuthentication()
         {
-            get { return Request.GetOwinContext().Authentication; }
+            return Request.GetOwinContext().Authentication;
         }
 
-        private IHttpActionResult GetErrorResult(IdentityResult result)
+        private IHttpActionResult GetIdentityResult(IdentityResult result)
+        {
+            return (result.Succeeded)
+                       ? Ok()
+                       : GetIdentityErrorResult(result);
+        }
+
+        private IHttpActionResult GetIdentityErrorResult(IdentityResult result)
         {
             if (result == null)
             {
@@ -587,15 +564,11 @@ namespace Api.Controllers
             {
                 if (result.Errors != null)
                 {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error);
-                    }
+                    result.Errors.ForEach(e => ModelState.AddModelError("", e));
                 }
 
                 if (ModelState.IsValid)
                 {
-                    // No ModelState errors are available to send, so just return an empty BadRequest.
                     return BadRequest();
                 }
 
@@ -677,11 +650,5 @@ namespace Api.Controllers
         }
 
         #endregion
-    }
-
-    public class LocalAccessTokenModel
-    {
-        public string Provider { get; set; }
-        public string ExternalAccessToken { get; set; }
     }
 }
