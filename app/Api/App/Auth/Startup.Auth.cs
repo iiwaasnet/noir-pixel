@@ -19,7 +19,9 @@ namespace Api.App.Auth
             app.CreatePerOwinContext(() => DependencyInjection.GetContainer().Resolve<ApplicationUserManager>());
             app.CreatePerOwinContext(() => DependencyInjection.GetContainer().Resolve<ApplicationRoleManager>());
 
-            app.UseOAuthBearerTokens(DependencyInjection.GetContainer().Resolve<AuthOptions>().AuthServerOptions);
+            var authOptions = DependencyInjection.GetContainer().Resolve<AuthOptions>();
+
+            app.UseOAuthBearerTokens(authOptions.AuthServerOptions);
             app.UseCookieAuthentication(new CookieAuthenticationOptions());
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
@@ -32,12 +34,7 @@ namespace Api.App.Auth
             //    appId: "",
             //    appSecret: "");
 
-            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions
-                                        {
-                                            
-                                            CallbackPath = new PathString("/signin-google"),
-                                            Provider = new GoogleAuthProvider()
-                                        });
+            app.UseGoogleAuthentication(authOptions.GoogleAuthOptions);
         }
     }
 }

@@ -76,6 +76,7 @@ namespace Api.Providers
 
         public override Task ValidateClientRedirectUri(OAuthValidateClientRedirectUriContext context)
         {
+            //TODO: Check if client comes from allowed domains
             if (context.ClientId == publicClientId)
             {
                 //var expectedRootUri = new Uri(context.Request.Uri, "/");
