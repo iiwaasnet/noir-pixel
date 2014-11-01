@@ -1,9 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using Api.Errors;
 
-namespace Api.App.Users
+namespace Api.App.Auth
 {
-    public class RegisterRequest
+    public class RegisterModel
     {
         [Required(ErrorMessage = ValidationErrors.RequiredField)]
         public string UserName { get; set; }
@@ -17,5 +17,6 @@ namespace Api.App.Users
 
         [Compare("Password", ErrorMessage = ValidationErrors.NotSame)]
         public string ConfirmPassword { get; set; }
+
     }
 }

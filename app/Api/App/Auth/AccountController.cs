@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Results;
-using Api.App.Users;
 using Api.Models;
 using Api.Providers;
 using Api.Results;
@@ -42,7 +41,7 @@ namespace Api.App.Auth
 
         [AllowAnonymous]
         [Route("register")]
-        public async Task<IHttpActionResult> Register(RegisterRequest model)
+        public async Task<IHttpActionResult> Register(RegisterModel model)
         {
             //TODO: Model validation filter
             if (!ModelState.IsValid)
@@ -65,6 +64,54 @@ namespace Api.App.Auth
 
             return GetIdentityResult(result);
         }
+
+
+        [OverrideAuthentication]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
+        [AllowAnonymous]
+        [Route("external-login", Name = "ExternalLogin")]
+        public async Task<IHttpActionResult> GetExternalLogin(string provider, string error = null)
+        {
+            if (error != null)
+            {
+                return Redirect(Url.Content("~/") + "#error=" + Uri.EscapeDataString(error));
+            }
+
+            if (!User.Identity.IsAuthenticated)
+            {
+                return new ChallengeResult(provider, this);
+            }
+
+            var externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+
+            if (externalLogin == null)
+            {
+                return InternalServerError();
+            }
+
+            if (externalLogin.LoginProvider != provider)
+            {
+                GetAuthentication().SignOut(DefaultAuthenticationTypes.ExternalCookie);
+                return new ChallengeResult(provider, this);
+            }
+
+            var user = await userManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
+                                                                     externalLogin.ProviderKey));
+
+            var registered = user != null;
+
+            var redirectUri = string.Format("{0}#external_access_token={1}&registered={2}",
+                                            GetRedirectUri(Request),
+                                            externalLogin.ExternalAccessToken,
+                                            registered.ToString().ToLower());
+
+            return Redirect(redirectUri);
+        }
+
+
+        //===========================================================================================
+        //===========================================================================================
+        //===========================================================================================
 
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("user-info")]
@@ -210,77 +257,14 @@ namespace Api.App.Auth
         }
 
         // GET account/external-login
-        [OverrideAuthentication]
-        [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
-        [AllowAnonymous]
-        [Route("external-login", Name = "ExternalLogin")]
-        public async Task<IHttpActionResult> GetExternalLogin(string provider, string error = null)
-        {
-            if (error != null)
-            {
-                return Redirect(Url.Content("~/") + "#error=" + Uri.EscapeDataString(error));
-            }
-
-            if (!User.Identity.IsAuthenticated)
-            {
-                return new ChallengeResult(provider, this);
-            }
-
-            var externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
-
-            if (externalLogin == null)
-            {
-                return InternalServerError();
-            }
-
-            if (externalLogin.LoginProvider != provider)
-            {
-                GetAuthentication().SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                return new ChallengeResult(provider, this);
-            }
-
-            var user = await userManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
-                                                                     externalLogin.ProviderKey));
-
-            var registered = user != null;
-
-            var redirectUri = string.Format("{0}#external_access_token={1}&registered={2}",
-                                            GetRedirectUri(Request),
-                                            externalLogin.ExternalAccessToken,
-                                            registered.ToString().ToLower());
-
-            return Redirect(redirectUri);
-
-            //Below goes to 
-
-            if (registered)
-            {
-                GetAuthentication().SignOut(DefaultAuthenticationTypes.ExternalCookie);
-
-                var oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
-                                                                         OAuthDefaults.AuthenticationType);
-                var cookieIdentity = await user.GenerateUserIdentityAsync(userManager,
-                                                                          CookieAuthenticationDefaults.AuthenticationType);
-
-                var properties = ApplicationOAuthProvider.CreateProperties(user.UserName);
-                GetAuthentication().SignIn(properties, oAuthIdentity, cookieIdentity);
-            }
-            else
-            {
-                IEnumerable<Claim> claims = externalLogin.GetClaims();
-                var identity = new ClaimsIdentity(claims, OAuthDefaults.AuthenticationType);
-                GetAuthentication().SignIn(identity);
-            }
-
-            return Ok();
-        }
+        
 
         private string GetRedirectUri(HttpRequestMessage request)
         {
             //TODO: Check if this logic should be moved into ApplicationOAuthProvider.ValidateClientRedirectUri()
             Uri redirectUri;
 
-            var redirectUriString = GetQueryString(Request, "redirect_uri");
+            var redirectUriString = GetQueryString(request, "redirect_uri");
 
             if (string.IsNullOrWhiteSpace(redirectUriString))
             {
