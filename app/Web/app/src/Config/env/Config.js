@@ -8,7 +8,9 @@
         apiUris: {
             base: '@@base',
             signin: '@@signin',
-            externalLogin: '@@externalLogin'
+            externalLogin: '@@externalLogin',
+            localAccessToken: '@@localAccessToken',
+            registerExternal: '@@registerExternal'
         },
         strings: {
             invalidationTimeout: '@@invalidationTimeout',

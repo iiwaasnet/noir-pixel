@@ -40,14 +40,12 @@
             saveLoginRedirectState(redirectState);
 
             var url = Url.build(Config.apiUris.base, Config.apiUris.signin),
-                data = "grant_type=password&username=" + userName + "&password=" + pwd,
+                data = "grant_type=password&username={0}&password={1}".format(userName, pwd),
                 deferred = $q.defer();
 
             $http.post(url,
                     data,
-                    {
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-                    })
+                    {headers: { 'Content-Type': 'application/x-www-form-urlencoded' }})
                 .success(function(response) { signInSuccess(response, deferred); })
                 .error(function(err, status) { signInError(err, status, deferred); });
 
@@ -56,8 +54,7 @@
 
 
         function getLocalToken(externalToken, provider) {
-            var uri = 'account/local-access-token',
-                url = Url.build(Config.apiUris.base, uri),
+            var url = Url.build(Config.apiUris.base, Config.apiUris.localAccessToken),
                 deferred = $q.defer();
 
             $http.post(url,
@@ -83,8 +80,7 @@
         }
 
         function registerExternal(externalToken, provider) {
-            var uri = 'account/register-external',
-                url = Url.build(Config.apiUris.base, uri),
+            var url = Url.build(Config.apiUris.base, Config.apiUris.registerExternal),
                 deferred = $q.defer();
 
             $http.post(url,
