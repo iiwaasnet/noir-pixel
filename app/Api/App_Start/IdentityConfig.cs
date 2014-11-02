@@ -17,6 +17,26 @@ namespace Api
         public ApplicationUserManager(IUserStore<ApplicationUser> store)
             : base(store)
         {
+            UserValidator = new UserValidator<ApplicationUser>(this)
+            {
+                AllowOnlyAlphanumericUserNames = false,
+                RequireUniqueEmail = false
+            };
+            // Configure validation logic for passwords
+            PasswordValidator = new PasswordValidator
+            {
+                RequiredLength = 6,
+                RequireNonLetterOrDigit = false,
+                RequireDigit = false,
+                RequireLowercase = false,
+                RequireUppercase = false,
+            };
+            //TODO: find out what to do with options.DataProtectionProvider (see Create() function below)
+            //var dataProtectionProvider = options.DataProtectionProvider;
+            //if (dataProtectionProvider != null)
+            //{
+            //    manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
+            //}
         }
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)

@@ -212,7 +212,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\Auth\AuthOptions.cs" />
+    <Compile Include="App\Auth\ExternalUserInfo\EmailInfo.cs" />
+    <Compile Include="App\Auth\ExternalUserInfo\ExternalUserInfo.cs" />
+    <Compile Include="App\Auth\ExternalUserInfo\LinkInfo.cs" />
     <Compile Include="App\Auth\LocalAccessTokenModel.cs" />
+    <Compile Include="App\Auth\ExternalUserInfo\PersonInfo.cs" />
     <Compile Include="App\Auth\RegisterExternalModel.cs" />
     <Compile Include="App\Auth\RegisterModel.cs" />
     <Compile Include="App_Start\ApplicationIdentityContext.cs" />

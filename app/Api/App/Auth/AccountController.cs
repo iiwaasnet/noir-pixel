@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Results;
+using Api.App.Auth.ExternalUserInfo;
 using Api.Models;
 using Api.Providers;
 using Api.Results;
@@ -121,7 +122,7 @@ namespace Api.App.Auth
             if (verifiedAccessToken == null)
             {
                 return BadRequest("Invalid Provider or External Access Token");
-            }
+            }            
 
             var user = await userManager.FindAsync(new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
 
@@ -132,8 +133,13 @@ namespace Api.App.Auth
                 return BadRequest("External user is already registered");
             }
 
-            //TODO: Username could be taken from the model with the request
-            user = new ApplicationUser {UserName = verifiedAccessToken.user_id};
+            var externalUserInfo = await GetExternalUserInfo(model.Provider, verifiedAccessToken.user_id, model.ExternalAccessToken);
+
+            user = new ApplicationUser
+                   {
+                       UserName = CreateUserName(externalUserInfo.Person.DisplayName),
+                       Email = externalUserInfo.Emails.First(m => m.Type == "account").Address
+                   };
 
             var result = await userManager.CreateAsync(user);
             if (!result.Succeeded)
@@ -148,6 +154,11 @@ namespace Api.App.Auth
             }
 
             return Ok(new JObject(new JProperty("access_token", model.ExternalAccessToken)));
+        }
+
+        private string CreateUserName(string displayName)
+        {
+            return displayName.ToLower().Replace(' ', '-');
         }
 
         [OverrideAuthentication]
@@ -431,18 +442,18 @@ namespace Api.App.Auth
         {
             ParsedExternalAccessToken parsedToken = null;
 
-            var verifyTokenEndPoint = "";
+            var endPoint = "";
 
             if (provider == "Facebook")
             {
                 //You can get it from here: https://developers.facebook.com/tools/accesstoken/
                 //More about debug_tokn here: http://stackoverflow.com/questions/16641083/how-does-one-get-the-app-access-token-for-debug-token-inspection-on-facebook
                 var appToken = "xxxxxx";
-                verifyTokenEndPoint = string.Format("https://graph.facebook.com/debug_token?input_token={0}&access_token={1}", accessToken, appToken);
+                endPoint = string.Format("https://graph.facebook.com/debug_token?input_token={0}&access_token={1}", accessToken, appToken);
             }
             else if (provider == "Google")
             {
-                verifyTokenEndPoint = string.Format("https://www.googleapis.com/oauth2/v1/tokeninfo?access_token={0}", accessToken);
+                endPoint = string.Format("https://www.googleapis.com/oauth2/v1/tokeninfo?access_token={0}", accessToken);
             }
             else
             {
@@ -450,7 +461,7 @@ namespace Api.App.Auth
             }
 
             var client = new HttpClient();
-            var uri = new Uri(verifyTokenEndPoint);
+            var uri = new Uri(endPoint);
             var response = await client.GetAsync(uri);
 
             if (response.IsSuccessStatusCode)
@@ -487,6 +498,82 @@ namespace Api.App.Auth
 
             //TODO: If response.IsSuccessStatusCode == false, then re-authentication needed
             return parsedToken;
+        }
+
+        private async Task<ExternalUserInfo.ExternalUserInfo> GetExternalUserInfo(string provider, string user_id, string accessToken)
+        {
+            ExternalUserInfo.ExternalUserInfo token = null;
+
+            var endPoint = "";
+
+            if (provider == "Facebook")
+            {
+                //You can get it from here: https://developers.facebook.com/tools/accesstoken/
+                //More about debug_tokn here: http://stackoverflow.com/questions/16641083/how-does-one-get-the-app-access-token-for-debug-token-inspection-on-facebook
+                var appToken = "xxxxxx";
+                endPoint = string.Format("https://graph.facebook.com/debug_token?input_token={0}&access_token={1}", accessToken, appToken);
+            }
+            else if (provider == "Google")
+            {
+                endPoint = string.Format("https://www.googleapis.com/plus/v1/people/{0}?access_token={1}", user_id, accessToken);
+            }
+            else
+            {
+                return null;
+            }
+
+            var client = new HttpClient();
+            var uri = new Uri(endPoint);
+            var response = await client.GetAsync(uri);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+
+                dynamic jObj = JsonConvert.DeserializeObject(content);
+
+                token = new ExternalUserInfo.ExternalUserInfo();
+
+                //if (provider == "Facebook")
+                //{
+                //    token.user_id = jObj["data"]["user_id"];
+                //    token.app_id = jObj["data"]["app_id"];
+
+                //    //TODO: Uncomment and fix!!!!
+                //    //if (!string.Equals(Startup.facebookAuthOptions.AppId, parsedToken.app_id, StringComparison.OrdinalIgnoreCase))
+                //    //{
+                //    //    return null;
+                //    //}
+                //}
+
+                if (provider == "Google")
+                {
+                    token.Person = new PersonInfo
+                                   {
+                                       Id = jObj.id,
+                                       DisplayName = jObj.displayName,
+                                       FirstName = jObj.name.givenName,
+                                       LastName = jObj.name.familyName,
+                                       Gender = jObj.gender,
+                                       Image = jObj.image.url
+                                   };
+                    token.Emails = GetEmails(jObj.emails);
+                    //token.Links;
+
+                    if (!string.Equals(user_id, token.Person.Id, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return null;
+                    }
+                }
+            }
+
+            //TODO: If response.IsSuccessStatusCode == false, then re-authentication needed
+            return token;
+        }
+
+        private IEnumerable<EmailInfo> GetEmails(IEnumerable<dynamic> emails)
+        {
+            return emails.Select(m => new EmailInfo{Address = m.value, Type = m.type});
         }
 
         private static ExternalLoginInfo GetExternalLoginInfo(AuthenticateResult result)
