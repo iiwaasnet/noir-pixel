@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AspNet.Identity.MongoDB;
+using Api.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin;
-using Api.Models;
 using Microsoft.Owin.Security.DataProtection;
 
 namespace Api
@@ -19,59 +17,33 @@ namespace Api
             : base(store)
         {
             UserValidator = new UserValidator<ApplicationUser>(this)
-            {
-                AllowOnlyAlphanumericUserNames = false,
-                RequireUniqueEmail = false
-            };
+                            {
+                                AllowOnlyAlphanumericUserNames = false,
+                                RequireUniqueEmail = true
+                            };
             // Configure validation logic for passwords
             PasswordValidator = new PasswordValidator
-            {
-                RequiredLength = 6,
-                RequireNonLetterOrDigit = false,
-                RequireDigit = false,
-                RequireLowercase = false,
-                RequireUppercase = false,
-            };
+                                {
+                                    RequiredLength = 6,
+                                    RequireNonLetterOrDigit = false,
+                                    RequireDigit = false,
+                                    RequireLowercase = false,
+                                    RequireUppercase = false,
+                                };
 
             var provider = new DpapiDataProtectionProvider("np");
             UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser, string>(provider.Create("Web.Api Identity"));
         }
 
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
-        {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationIdentityContext>()));
-            // Configure validation logic for usernames
-            manager.UserValidator = new UserValidator<ApplicationUser>(manager)
-            {
-                AllowOnlyAlphanumericUserNames = false,
-                RequireUniqueEmail = false
-            };
-            // Configure validation logic for passwords
-            manager.PasswordValidator = new PasswordValidator
-            {
-                RequiredLength = 6,
-                RequireNonLetterOrDigit = false,
-                RequireDigit = false,
-                RequireLowercase = false,
-                RequireUppercase = false,
-            };
-            var dataProtectionProvider = options.DataProtectionProvider;
-            if (dataProtectionProvider != null)
-            {
-                manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
-            }
-            return manager;
-        }
-
         /// <summary>
-        /// Method to add user to multiple roles
+        ///     Method to add user to multiple roles
         /// </summary>
         /// <param name="userId">user id</param>
         /// <param name="roles">list of role names</param>
         /// <returns></returns>
         public virtual async Task<IdentityResult> AddUserToRolesAsync(string userId, IList<string> roles)
         {
-            var userRoleStore = (IUserRoleStore<ApplicationUser, string>)Store;
+            var userRoleStore = (IUserRoleStore<ApplicationUser, string>) Store;
 
             var user = await FindByIdAsync(userId).ConfigureAwait(false);
             if (user == null)
@@ -91,14 +63,14 @@ namespace Api
         }
 
         /// <summary>
-        /// Remove user from multiple roles
+        ///     Remove user from multiple roles
         /// </summary>
         /// <param name="userId">user id</param>
         /// <param name="roles">list of role names</param>
         /// <returns></returns>
         public virtual async Task<IdentityResult> RemoveUserFromRolesAsync(string userId, IList<string> roles)
         {
-            var userRoleStore = (IUserRoleStore<ApplicationUser, string>)Store;
+            var userRoleStore = (IUserRoleStore<ApplicationUser, string>) Store;
 
             var user = await FindByIdAsync(userId).ConfigureAwait(false);
             if (user == null)
