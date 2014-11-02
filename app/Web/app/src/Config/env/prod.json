@@ -1,14 +1,14 @@
 ﻿{
     "siteBaseUri": "noir-pixel.com",
-    
     "loggingApiUri": "api.logging.noir-pixel.com/log/add",
-    "base": "api.noir-pixel.com",
-    "signin": "token",
-    "externalLogin": "/account/external-login?provider={0}&response_type=token&client_id=self&redirect_uri={1}",
-    "localAccessToken": "account/local-access-token",
-    "registerExternal":  "account/register-external",
     
-    "invalidationTimeout": "01:00:00",
-    "versionsUri": "/strings/versions",
-    "localizedUri": "/strings/localized/"
+    "apiUris.base": "api.noir-pixel.com",
+    "apiUris.signin": "token",
+    "apiUris.externalLogin": "/account/external-login?provider={0}&response_type=token&client_id=self&redirect_uri={1}",
+    "apiUris.localAccessToken": "account/local-access-token",
+    "apiUris.registerExternal":  "account/register-external",
+    
+    "strings.invalidationTimeout": "01:00:00",
+    "strings.versionsUri": "/strings/versions",
+    "strings.localizedUri": "/strings/localized/"
 }

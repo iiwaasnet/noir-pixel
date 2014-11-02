@@ -6,16 +6,16 @@
         siteBaseUri: '@@siteBaseUri',
         loggingApiUri: '@@loggingApiUri',
         apiUris: {
-            base: '@@base',
-            signin: '@@signin',
-            externalLogin: '@@externalLogin',
-            localAccessToken: '@@localAccessToken',
-            registerExternal: '@@registerExternal'
+            base: '@@apiUris.base',
+            signin: '@@apiUris.signin',
+            externalLogin: '@@apiUris.externalLogin',
+            localAccessToken: '@@apiUris.localAccessToken',
+            registerExternal: '@@apiUris.registerExternal'
         },
         strings: {
-            invalidationTimeout: '@@invalidationTimeout',
-            versionsUri: '@@versionsUri',
-            localizedUri: '@@localizedUri'
+            invalidationTimeout: '@@strings.invalidationTimeout',
+            versionsUri: '@@strings.versionsUri',
+            localizedUri: '@@strings.localizedUri'
         }
     };
 

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "devDependencies": {
     "grunt-contrib-jshint": "^0.10.0",
-    "grunt-replace": "0.7.9",
+    "grunt-replace": "^0.7.9",
     "jshint-stylish": "^0.4.0",
     "jshint-teamcity": "^1.0.6",
     "grunt-contrib-less": "^0.11.4",
