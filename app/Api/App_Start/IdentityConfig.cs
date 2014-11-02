@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Api.Models;
+using Microsoft.Owin.Security.DataProtection;
 
 namespace Api
 {
@@ -31,12 +32,9 @@ namespace Api
                 RequireLowercase = false,
                 RequireUppercase = false,
             };
-            //TODO: find out what to do with options.DataProtectionProvider (see Create() function below)
-            //var dataProtectionProvider = options.DataProtectionProvider;
-            //if (dataProtectionProvider != null)
-            //{
-            //    manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
-            //}
+
+            var provider = new DpapiDataProtectionProvider("np");
+            UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser, string>(provider.Create("Web.Api Identity"));
         }
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
