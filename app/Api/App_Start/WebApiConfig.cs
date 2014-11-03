@@ -18,12 +18,12 @@ namespace Api
             // Configure Web API to use only bearer token authentication.
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
-            config.Services.Add(typeof(IExceptionLogger), DependencyInjection.GetContainer().Resolve<IExceptionLogger>());
+            config.Services.Add(typeof (IExceptionLogger), DependencyInjection.GetContainer().Resolve<IExceptionLogger>());
 
             var formatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
             formatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
-            config.Services.Replace(typeof(IBodyModelValidator), new PrefixlessModelValidator(config.Services.GetBodyModelValidator()));
+            config.Services.Replace(typeof (IBodyModelValidator), new PrefixlessModelValidator(config.Services.GetBodyModelValidator()));
 
             // Web API routes
             config.MapHttpAttributeRoutes();
