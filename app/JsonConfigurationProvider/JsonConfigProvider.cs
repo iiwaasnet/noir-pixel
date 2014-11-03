@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Diagnostics;
 using Newtonsoft.Json;
@@ -32,13 +33,13 @@ namespace JsonConfigurationProvider
         }
 
         public JsonConfigProvider(IConfigTargetProvider targetProvider, ILogger logger)
-            : this(targetProvider, AppDomain.CurrentDomain.BaseDirectory, logger)
+            : this(targetProvider, "", logger)
         {
         }
 
-        public JsonConfigProvider(IConfigTargetProvider targetProvider, string baseDir, ILogger logger)
+        public JsonConfigProvider(IConfigTargetProvider targetProvider, string configBaseDir, ILogger logger)
         {
-            this.baseDir = baseDir;
+            this.baseDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, configBaseDir);
             this.logger = logger;
             target = targetProvider.GetCurrentTarget();
             configurations = new ConcurrentDictionary<string, ConcurrentDictionary<Type, object>>();
@@ -209,9 +210,18 @@ namespace JsonConfigurationProvider
             var locator = new ConfigFileLocator(baseDir);
             var configFiles = locator.FindConfigFiles();
 
-            foreach (var metadata in configFiles.Select(configReader.Parse))
+            foreach (var configFile in configFiles)
             {
-                metadatas[metadata.ConfigName.ToLower()] = metadata;
+                try
+                {
+                    //TODO: FIX problem with exception reading Environment.config.json
+                    var metadata = configReader.Parse(configFile);
+                    metadatas[metadata.ConfigName.ToLower()] = metadata;
+                }
+                catch (Exception err)
+                {
+                    logger.Error(err);
+                }
             }
         }
 

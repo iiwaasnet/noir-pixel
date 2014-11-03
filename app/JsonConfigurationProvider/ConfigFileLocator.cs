@@ -28,7 +28,7 @@ namespace JsonConfigurationProvider
 
         private static IEnumerable<FileInfo> FindConfigFileByMask(DirectoryInfo dir, string fileExt)
         {
-            return dir.GetFiles("*." + fileExt, SearchOption.AllDirectories);
+            return dir.GetFiles("*." + fileExt, SearchOption.TopDirectoryOnly);
         }
     }
 }
