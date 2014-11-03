@@ -2,13 +2,14 @@
 using Diagnostics;
 using JsonConfigurationProvider;
 
-namespace Web.Components.Configuration
+namespace Api
 {
     public class ConfigurationModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
             builder.Register(c => new JsonConfigProvider(c.Resolve<IConfigTargetProvider>(),
+                                                         "config",
                                                          c.Resolve<ILogger>()))
                    .As<IConfigProvider>()
                    .SingleInstance();

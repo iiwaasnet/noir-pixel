@@ -16,10 +16,6 @@ module.exports = function(grunt) {
                             json: grunt.file.readJSON('./web/app/src/config/env/dev.json')
                         }, {
                             json: grunt.file.readJSON('./web/app/src/config/env/prod.json')
-                        }, {
-                            json: grunt.file.readJSON('./api/config/env/dev.json')
-                        }, {
-                            json: grunt.file.readJSON('./api/config/env/prod.json')
                         }
                     ]
                 },
@@ -27,8 +23,8 @@ module.exports = function(grunt) {
                     {
                         expand: false,
                         flatten: true,
-                        src: ['./web/config/env/Environment.config.tt'],
-                        dest: './web/config/Environment.config'
+                        src: ['./web/config/env/Environment.config.json'],
+                        dest: './web/config/Environment.config.json'
                     }, {
                         expand: false,
                         flatten: false,
@@ -37,8 +33,8 @@ module.exports = function(grunt) {
                     }, {
                         expand: false,
                         flatten: false,
-                        src: ['./api/config/env/api.config.tt'],
-                        dest: './api/config/api.config'
+                        src: ['./api/config/env/Environment.config.json'],
+                        dest: './api/config/Environment.config.json'
                     }
                 ]
             },

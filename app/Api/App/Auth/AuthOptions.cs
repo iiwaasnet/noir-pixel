@@ -21,6 +21,8 @@ namespace Api.App.Auth
                                 };
             GoogleAuthOptions = new GoogleOAuth2AuthenticationOptions
                                 {
+                                    ClientId = "180426522882-j68nln4atebaf3r1ddb6lgc7h4im2c7j.apps.googleusercontent.com",
+                                    ClientSecret = "yg_imJKvQIjYu40L01d23QZ4",
                                     CallbackPath = new PathString("/signin-google"),
                                     Provider = new GoogleAuthProvider()
                                 };

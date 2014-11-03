@@ -1,8 +1,10 @@
 ﻿using System;
+using Api.App.Db;
 using AspNet.Identity.MongoDB;
+using JsonConfigurationProvider;
 using MongoDB.Driver;
 
-namespace Api
+namespace Api.App.Auth
 {
     public class ApplicationIdentityContext : IdentityContext, IDisposable
     {
@@ -11,11 +13,12 @@ namespace Api
         {
         }
 
-        public static ApplicationIdentityContext Create()
+        public static ApplicationIdentityContext Create(IConfigProvider configProvider)
         {
-            // todo add settings where appropriate to switch server & database in your own application
-            var client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetServer().GetDatabase("np-identity");
+            var config = configProvider.GetConfiguration<DbConfiguration>();
+
+            var client = new MongoClient(config.Server);
+            var database = client.GetServer().GetDatabase(config.Identity.Database);
             var users = database.GetCollection<IdentityUser>("users");
             var roles = database.GetCollection<IdentityRole>("roles");
 

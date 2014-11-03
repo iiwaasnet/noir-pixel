@@ -344,10 +344,10 @@
     <Content Include="app\src\layout\header\mainMenu.service.js" />
     <Content Include="app\src\layout\header\signMenu.service.js" />
     <Content Include="app\vendor\angular-messages.min.js.map" />
-    <None Include="config\Environment.config">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="config\env\Environment.config.tt">
+    <Content Include="config\Environment.config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="config\env\Environment.config.json">
       <LastGenOutput>Environment.config1.cs</LastGenOutput>
     </None>
     <Content Include="config\env\prod.json" />

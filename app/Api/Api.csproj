@@ -219,13 +219,17 @@
     <Compile Include="App\Auth\ExternalUserInfo\PersonInfo.cs" />
     <Compile Include="App\Auth\RegisterExternalModel.cs" />
     <Compile Include="App\Auth\RegisterModel.cs" />
-    <Compile Include="App_Start\ApplicationIdentityContext.cs" />
-    <Compile Include="App_Start\ApplicationRoleManager.cs" />
+    <Compile Include="App\Auth\ApplicationIdentityContext.cs" />
+    <Compile Include="App\Auth\ApplicationRoleManager.cs" />
     <Compile Include="App\Auth\AuthModule.cs" />
+    <Compile Include="App\Db\DbConfiguration.cs" />
+    <Compile Include="App\Db\IdentityDbConfiguration.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\ConfigurationModule.cs" />
+    <Compile Include="App_Start\CustomExceptionLogger.cs" />
     <Compile Include="App_Start\DependencyInjection.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App\Auth\ApplicationUserManager.cs" />
     <Compile Include="App_Start\MainModule.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App\Auth\Startup.Auth.cs" />
@@ -319,14 +323,17 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <Content Include="config\api.config" />
-    <None Include="config\env\api.config.tt">
-      <LastGenOutput>api.config.cs</LastGenOutput>
+    <None Include="config\Db.config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Content Include="config\env\dev.json" />
-    <Content Include="config\env\prod.json" />
+    <Content Include="config\Environment.config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="config\env\Environment.config.json">
+      <LastGenOutput>Environment.config1.cs</LastGenOutput>
     </Content>
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
@@ -340,6 +347,10 @@
     <ProjectReference Include="..\Diagnostics\Diagnostics.csproj">
       <Project>{fa2d348c-a9d9-45ef-8059-1ab5d1554e67}</Project>
       <Name>Diagnostics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JsonConfigurationProvider\JsonConfigurationProvider.csproj">
+      <Project>{7baef581-a42b-4a8a-af73-e9b1f52c1ffa}</Project>
+      <Name>JsonConfigurationProvider</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

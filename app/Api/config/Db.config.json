@@ -1,0 +1,10 @@
+[
+    {
+        "dev": {
+            "server": "mongodb://localhost:27017",
+            "identity": {
+                "database": "np-identity"
+            }
+        }
+    }
+]

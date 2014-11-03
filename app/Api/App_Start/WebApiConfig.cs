@@ -1,8 +1,10 @@
 ﻿using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
+using System.Web.Http.ExceptionHandling;
 using System.Web.Http.Validation;
 using Api.Validation;
+using Autofac;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 
@@ -16,6 +18,7 @@ namespace Api
             // Configure Web API to use only bearer token authentication.
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
+            config.Services.Add(typeof(IExceptionLogger), DependencyInjection.GetContainer().Resolve<IExceptionLogger>());
 
             var formatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
             formatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
