@@ -5,7 +5,7 @@
         .constant('moment', moment)
         .factory('Moment', momentFactory);
 
-    momentFactory.$injector = ['moment'];
+    momentFactory.$inject = ['moment'];
 
     function momentFactory(moment) {
         return moment;

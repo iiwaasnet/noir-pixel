@@ -4,7 +4,7 @@
     angular.module('np.auth')
         .service('Auth', authService);
 
-    authService.$injector = ['$http', '$q', '$state', 'localStorageService', 'Config', 'Url', 'TokenStorage', 'EventsHub'];
+    authService.$inject = ['$http', '$q', '$state', 'localStorageService', 'Config', 'Url', 'TokenStorage', 'EventsHub'];
 
     function authService($http, $q, $state, localStorageService, Config, Url, TokenStorage, EventsHub) {
         var service = this,

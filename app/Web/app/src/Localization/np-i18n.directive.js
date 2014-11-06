@@ -4,7 +4,7 @@
     angular.module('np.i18n')
         .directive('npI18n', npI18n);
 
-    npI18n.$injector = ['Strings'];
+    npI18n.$inject = ['Strings'];
 
     function npI18n(Strings) {
         var dir = {

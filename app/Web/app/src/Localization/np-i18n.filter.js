@@ -4,7 +4,7 @@
     angular.module('np.i18n')
         .filter('npi18n', npI18n);
 
-    npI18n.$injector = ['Strings'];
+    npI18n.$inject = ['Strings'];
 
     function npI18n(Strings) {
         return translate;

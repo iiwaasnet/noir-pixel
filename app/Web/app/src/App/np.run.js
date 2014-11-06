@@ -4,7 +4,7 @@
     angular.module('np')
         .run(run);
 
-    run.$injector = ['$rootScope', '$state', 'Strings', 'ApplicationLogging'];
+    run.$inject = ['$rootScope', '$state', 'Strings', 'ApplicationLogging'];
 
     function run($rootScope, $state, Strings, ApplicationLogging) {
 

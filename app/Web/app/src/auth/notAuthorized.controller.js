@@ -4,7 +4,7 @@
     angular.module('np.auth')
         .controller('NotAuthorizedController', notAuthorizedController);
 
-    notAuthorizedController.$injector = ['$stateParams'];
+    notAuthorizedController.$inject = ['$stateParams'];
 
     function notAuthorizedController($stateParams) {
         var ctrl = this;

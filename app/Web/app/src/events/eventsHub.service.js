@@ -4,7 +4,7 @@
     angular.module('np.events')
         .service('EventsHub', eventsHubService);
 
-    eventsHubService.$injector = ['Events'];
+    eventsHubService.$inject = ['Events'];
 
     function eventsHubService(Events) {
         var service = this,

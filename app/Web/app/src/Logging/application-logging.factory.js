@@ -4,7 +4,7 @@
     angular.module('np.logging')
         .factory('ApplicationLogging', applicationLoggingFactory);
 
-    applicationLoggingFactory.$injector = ['$log', '$window', '$httpBackend', 'Trace', 'Config', 'Url'];
+    applicationLoggingFactory.$inject = ['$log', '$window', '$httpBackend', 'Trace', 'Config', 'Url'];
 
     function applicationLoggingFactory($log, $window, $httpBackend, Trace, Config, Url) {
         var logger = {

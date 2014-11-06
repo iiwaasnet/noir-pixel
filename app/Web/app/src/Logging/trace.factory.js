@@ -5,7 +5,7 @@
         .constant('printStackTrace', printStackTrace)
         .factory('Trace', traceFactory);
 
-    traceFactory.$injector = ['printStackTrace'];
+    traceFactory.$inject = ['printStackTrace'];
 
     function traceFactory(printStackTrace) {
         return { print: printStackTrace };

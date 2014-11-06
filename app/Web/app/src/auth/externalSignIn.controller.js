@@ -4,7 +4,7 @@
     angular.module('np.auth')
         .controller('ExternalSignInController', externalSignInController);
 
-    externalSignInController.$injector = ['$location', '$window', 'Auth', 'Url'];
+    externalSignInController.$inject = ['$location', '$window', 'Auth', 'Url'];
 
     function externalSignInController($location, $window, Auth, Url) {
         var ctrl = this;

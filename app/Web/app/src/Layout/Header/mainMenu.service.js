@@ -4,7 +4,7 @@
     angular.module('np.layout')
         .service('MainMenu', mainMenuService);
 
-    mainMenuService.$injector = ['Strings'];
+    mainMenuService.$inject = ['Strings'];
 
     function mainMenuService(Strings) {
         var service = this;

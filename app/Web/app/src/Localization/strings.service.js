@@ -4,7 +4,7 @@
     angular.module('np.i18n')
         .service('Strings', stringsService);
 
-    stringsService.$injector = [
+    stringsService.$inject = [
         '$q', '$http', '$rootScope', '$window', '$interval', 'localStorageService', 'Config', 'ApplicationLogging', 'Moment'
     ];
 

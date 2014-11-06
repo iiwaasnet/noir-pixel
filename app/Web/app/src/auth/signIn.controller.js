@@ -4,7 +4,7 @@
     angular.module('np.auth')
         .controller('SignInController', signInController);
 
-    signInController.$injector = ['$stateParams', '$location', '$http', '$window', '$scope', 'Auth'];
+    signInController.$inject = ['$stateParams', '$location', '$http', '$window', '$scope', 'Auth'];
 
     function signInController($stateParams, $location, $http, $window, $scope, Auth) {
         var ctrl = this,

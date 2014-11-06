@@ -4,7 +4,7 @@
     angular.module('np.layout')
         .controller('HeaderController', headerController);
 
-    headerController.$injector = ['$scope', 'Strings', 'Auth', 'EventsHub'];
+    headerController.$inject = ['$scope', 'Strings', 'Auth', 'EventsHub'];
 
     function headerController($scope, Strings, Auth, EventsHub) {
         var ctrl = this;

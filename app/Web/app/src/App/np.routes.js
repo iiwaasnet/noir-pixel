@@ -4,7 +4,7 @@
     angular.module('np')
         .config(config);
 
-    config.$injector = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
+    config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
 
     function config($stateProvider, $urlRouterProvider, $locationProvider) {
         $stateProvider

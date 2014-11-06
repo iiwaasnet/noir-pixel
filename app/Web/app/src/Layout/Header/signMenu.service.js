@@ -4,7 +4,7 @@
     angular.module('np.layout')
         .service('SingMenu', signMenuService);
 
-    signMenuService.$injector = ['Auth', 'Strings'];
+    signMenuService.$inject = ['Auth', 'Strings'];
 
     function signMenuService(Auth, Strings) {
         var service = this;

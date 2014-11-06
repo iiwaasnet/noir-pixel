@@ -4,7 +4,7 @@
     angular.module('np.auth')
         .service('TokenStorage', tokenStorageService);
 
-    tokenStorageService.$injector = ['localStorageService'];
+    tokenStorageService.$inject = ['localStorageService'];
 
     function tokenStorageService(localStorageService) {
         var service = this,

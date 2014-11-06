@@ -10,13 +10,13 @@
         .constant('HttpProviderConfig', httpProviderConfig)
         .config(config);
 
-    config.$injector = ['$httpProvider'];
+    config.$inject = ['$httpProvider'];
 
     function config($httpProvider) {
         $httpProvider.interceptors.push(httpProvider);
     }
 
-    httpProvider.$injector = ['$q', 'ApplicationLogging', 'HttpProviderConfig', 'TokenStorage'];
+    httpProvider.$inject = ['$q', 'ApplicationLogging', 'HttpProviderConfig', 'TokenStorage'];
 
     function httpProvider($q, ApplicationLogging, HttpProviderConfig, TokenStorage) {
 
