@@ -23,6 +23,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "grunt", "grunt", "{8437A769-56D6-4FAA-9B2D-436FC1F79E5E}"
 	ProjectSection(SolutionItems) = preProject
 		Gruntfile.js = Gruntfile.js
+		npm setup.txt = npm setup.txt
 		package.json = package.json
 	EndProjectSection
 EndProject
