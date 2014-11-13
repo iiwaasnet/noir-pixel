@@ -1,5 +1,0 @@
-	npm setup
-
-- install python 2.7.x
-- set GYP_MSVS_VERSION=2013 (or 2013e) env variable
-- if doesn't work, run: npm install iconv --msvs_version=2013e
