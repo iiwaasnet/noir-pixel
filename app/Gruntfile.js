@@ -113,5 +113,4 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-spritesmith');
 
     grunt.registerTask('transform', ['replace:dev', 'less:dev', 'sprite:all']);
-	grunt.registerTask('jshint', ['jshint:all']);
 };
