@@ -8,7 +8,9 @@
     <ul id="auth-menu">
         <li>
             <a ui-sref="signIn" ng-bind="::ctrl.signInMenu.signIn" ng-if="!ctrl.authenticated"></a>
-            <a ui-sref="signOut" ng-bind="::ctrl.signInMenu.signOut" ng-if="ctrl.authenticated"></a>
+            <a ui-sref="signOut" ng-if="ctrl.authenticated">
+                <div class="icon-user"></div>
+            </a>
         </li>
     </ul>
 </header>
