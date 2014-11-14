@@ -281,11 +281,12 @@
     <Content Include="app\src\logging\logging.module.js" />
     <Content Include="app\src\logging\trace.factory.js" />
     <Content Include="app\src\events\eventsHub.service.js" />
+    <Content Include="app\src\storage\storage.module.js" />
+    <Content Include="app\src\storage\storage.service.js" />
     <Content Include="app\src\utils\moment.factory.js" />
     <Content Include="app\src\utils\string.format.js" />
     <Content Include="app\src\utils\url.service.js" />
     <Content Include="app\src\utils\utils.module.js" />
-    <Content Include="app\vendor\angular-local-storage.js" />
     <Content Include="app\vendor\angular-messages.js" />
     <Content Include="app\vendor\angular-messages.min.js" />
     <Content Include="app\vendor\angular-mocks.js" />
@@ -293,6 +294,8 @@
     <Content Include="app\vendor\angular-route.min.js" />
     <Content Include="app\vendor\angular-ui-router.js" />
     <Content Include="app\vendor\angular-ui-router.min.js" />
+    <Content Include="app\vendor\angular-webstorage.js" />
+    <Content Include="app\vendor\angular-webstorage.min.js" />
     <Content Include="app\vendor\angular.js" />
     <Content Include="app\vendor\angular.min.js" />
     <Content Include="app\vendor\bindonce.js" />

@@ -4,9 +4,9 @@
     angular.module('np.auth')
         .service('Auth', authService);
 
-    authService.$inject = ['$http', '$q', '$state', 'localStorageService', 'Config', 'Url', 'TokenStorage', 'EventsHub'];
+    authService.$inject = ['$http', '$q', '$state', 'Storage', 'Config', 'Url', 'TokenStorage', 'EventsHub'];
 
-    function authService($http, $q, $state, localStorageService, Config, Url, TokenStorage, EventsHub) {
+    function authService($http, $q, $state, Storage, Config, Url, TokenStorage, EventsHub) {
         var service = this,
             signInState = 'signIn',
             loginRedirectStorageKey = 'loginRedirectState';
@@ -136,12 +136,12 @@
 
         function saveLoginRedirectState(redirectState) {
             if (redirectState !== signInState) {
-                localStorageService.set(loginRedirectStorageKey, redirectState);
+                Storage.set(loginRedirectStorageKey, redirectState);
             }
         }
 
         function getLoginRedirectState() {
-            var redirectState = localStorageService.get(loginRedirectStorageKey);
+            var redirectState = Storage.get(loginRedirectStorageKey);
 
             return redirectState || 'home';
         }

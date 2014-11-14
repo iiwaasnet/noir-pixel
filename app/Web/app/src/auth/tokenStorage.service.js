@@ -4,9 +4,9 @@
     angular.module('np.auth')
         .service('TokenStorage', tokenStorageService);
 
-    tokenStorageService.$inject = ['localStorageService'];
+    tokenStorageService.$inject = ['Storage'];
 
-    function tokenStorageService(localStorageService) {
+    function tokenStorageService(Storage) {
         var service = this,
             tokenKey = 'auth-token',
             token = null;
@@ -16,19 +16,19 @@
 
         function getToken() {
             if (!token) {
-                token = localStorageService.get(tokenKey);
+                token = Storage.get(tokenKey);
             }
             return token;
         }
 
         function deleteToken() {
             token = null;
-            localStorageService.remove(tokenKey);
+            Storage.remove(tokenKey);
         }
 
         function setToken(authToken) {
             token = authToken;
-            localStorageService.set(tokenKey, authToken);
+            Storage.set(tokenKey, authToken);
         }
     }
 })();

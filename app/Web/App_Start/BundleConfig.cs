@@ -45,7 +45,7 @@ namespace Web
                 );
 
             bundles.Add(new ScriptBundle("~/bundles/vendor-ng")
-                            .Include("~/app/vendor/angular-local-storage.js")
+                            .Include("~/app/vendor/angular-webstorage.js")
                 );
 
             var vendorNgMin = new Bundle("~/bundles/vendor-ng-min")
@@ -60,6 +60,7 @@ namespace Web
                             .Include(RunApp().ToArray())
                             .Include(ConfigAssets().ToArray())
                             .Include(UtilsAssets().ToArray())
+                            .Include(StorageAssets().ToArray())
                             .Include(LoggingAssets().ToArray())
                             .Include(MainAppAssets().ToArray())
                             .Include(InterceptorsAssets().ToArray())
@@ -70,6 +71,12 @@ namespace Web
                             .Include(EventsAssets().ToArray())
                             .Include(VanillaJs().ToArray())
                 );
+        }
+
+        private static IEnumerable<string> StorageAssets()
+        {
+            yield return "~/app/src/storage/storage.module.js";
+            yield return "~/app/src/storage/storage.service.js";
         }
 
         private static IEnumerable<string> VanillaJs()

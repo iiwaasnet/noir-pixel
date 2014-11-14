@@ -5,14 +5,15 @@
         .service('Strings', stringsService);
 
     stringsService.$inject = [
-        '$q', '$http', '$rootScope', '$window', '$interval', 'localStorageService', 'Config', 'ApplicationLogging', 'Moment'
+        '$q', '$http', '$rootScope', '$window', '$interval', 'Storage', 'Config', 'ApplicationLogging', 'Moment'
     ];
 
-    function stringsService($q, $http, $rootScope, $window, $interval, localStorageService, Config, ApplicationLogging, Moment) {
+    function stringsService($q, $http, $rootScope, $window, $interval, Storage, Config, ApplicationLogging, Moment) {
         var service = this,
             dictionary = {},
             langStorageKey = 'currentLang',
-            language = localStorageService.get(langStorageKey)
+            defaultLang = 'en',
+            language = Storage.get(langStorageKey)
                 || ($window.navigator.userLanguage || $window.navigator.language).split('-')[0];
 
         service.init = init;
@@ -89,9 +90,13 @@
         }
 
         function setCurrentLanguage(lang) {
+            if (!loadStrings(lang)) {
+                lang = defaultLang;
+                loadStrings(lang);
+            }
+
             language = lang;
-            localStorageService.set(langStorageKey, lang);
-            loadStrings(lang);
+            Storage.set(langStorageKey, lang);
         }
 
         function getCurrentLanguage() {
@@ -104,11 +109,15 @@
                 cache = readStringsFromStorage(lang);
             }
 
-            if (!!cache) {
+            var found = !!cache;
+
+            if (found) {
                 dictionary[lang] = cache;
             } else {
                 ApplicationLogging.error('Failed reading strings from storage for language ' + lang + '!');
             }
+
+            return found;
         }
 
         function getLocalizedString(value) {
@@ -160,11 +169,11 @@
 
         function writeStringsToStorage(data) {
             addStoredLocales(data.locale);
-            localStorageService.set(getStringsStorageKey(data.locale), angular.toJson(data));
+            Storage.set(getStringsStorageKey(data.locale), angular.toJson(data));
         }
 
         function readStringsFromStorage(lang) {
-            var cache = angular.fromJson(localStorageService.get(getStringsStorageKey(lang)));
+            var cache = angular.fromJson(Storage.get(getStringsStorageKey(lang)));
             if (!!cache && Object.keys(cache.strings).length > 0) {
                 return cache;
             }
@@ -173,12 +182,12 @@
         }
 
         function removeStringsFromStorage(lang) {
-            localStorageService.remove(getStringsStorageKey(lang));
+            Storage.remove(getStringsStorageKey(lang));
             removeStoredLocales(lang);
         }
 
         function getStoredLocales() {
-            return angular.fromJson(localStorageService.get(getLocaleListStorageKey()))
+            return angular.fromJson(Storage.get(getLocaleListStorageKey()))
                 || [];
         }
 
@@ -187,7 +196,7 @@
 
             if (locales.indexOf(locale) === -1) {
                 locales.push(locale);
-                localStorageService.set(getLocaleListStorageKey(), angular.toJson(locales));
+                Storage.set(getLocaleListStorageKey(), angular.toJson(locales));
             }
         }
 
@@ -197,7 +206,7 @@
             var index = locales.indexOf(locale);
             if (~index) {
                 locales.splice(index, 1);
-                localStorageService.set(getLocaleListStorageKey(), angular.toJson(locales));
+                Storage.set(getLocaleListStorageKey(), angular.toJson(locales));
             }
         }
 
