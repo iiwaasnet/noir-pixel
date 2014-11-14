@@ -137,7 +137,6 @@
         }
 
         function saveStringsToStorage(requestedLocale, data) {
-            //TODO: Fix LocalStorage issue for IE
             var strings = {};
             data.strings.forEach(function(el) {
                 strings[el.key] = el.value;
