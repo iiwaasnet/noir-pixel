@@ -1,9 +1,7 @@
 ﻿@import (reference) "colors.less";
 
-.header-divider {
-    background-color: @attention-color;
-    height: 0.15em;
-    width: 100%;
+header{
+    position: relative;
 }
 
 #main-menu {
@@ -19,6 +17,9 @@
 }
 
 #auth-menu {
+    position: absolute;
+    bottom: 0;
+    right: 0;
     list-style: none;
     list-style-type: none;
     display: inline-block;
@@ -27,5 +28,8 @@
     li{
         display: inline;
         margin: 0 1.5em 0 0;
+        a{
+            color: @link-color-imp;
+        }
     }
 }

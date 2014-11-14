@@ -187,11 +187,24 @@
     <Content Include="app\images\np-header-b.png" />
     <Content Include="app\images\np-header-w.png" />
     <Content Include="app\images\sprites.png" />
+    <Content Include="app\images\sprites\user.png" />
     <Content Include="app\less\all.css">
       <DependentUpon>all.less</DependentUpon>
     </Content>
+    <Content Include="app\less\all.min.css">
+      <DependentUpon>all.css</DependentUpon>
+    </Content>
     <Content Include="app\less\colors.css">
       <DependentUpon>colors.less</DependentUpon>
+    </Content>
+    <Content Include="app\less\colors.min.css">
+      <DependentUpon>colors.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\float-layout.css">
+      <DependentUpon>float-layout.less</DependentUpon>
+    </Content>
+    <Content Include="app\less\float-layout.min.css">
+      <DependentUpon>float-layout.css</DependentUpon>
     </Content>
     <Content Include="app\less\fonts.css">
       <DependentUpon>fonts.less</DependentUpon>
@@ -199,11 +212,14 @@
     <Content Include="app\less\header.css">
       <DependentUpon>header.less</DependentUpon>
     </Content>
-    <Content Include="app\less\main.css">
-      <DependentUpon>main.less</DependentUpon>
+    <Content Include="app\less\header.min.css">
+      <DependentUpon>header.css</DependentUpon>
     </Content>
-    <Content Include="app\less\main.min.css">
-      <DependentUpon>main.css</DependentUpon>
+    <Content Include="app\less\main-elements.css">
+      <DependentUpon>main-elements.less</DependentUpon>
+    </Content>
+    <Content Include="app\less\main-elements.min.css">
+      <DependentUpon>main-elements.css</DependentUpon>
     </Content>
     <Content Include="app\less\sprites.css">
       <DependentUpon>sprites.less</DependentUpon>
@@ -223,13 +239,26 @@
     <Content Include="app\src\config\env\prod.json" />
     <Content Include="app\less\colors.less" />
     <Content Include="app\less\all.less" />
-    <Content Include="app\less\main.less" />
-    <Content Include="app\less\main.css.map">
-      <DependentUpon>main.css</DependentUpon>
+    <Content Include="app\less\main-elements.less" />
+    <Content Include="app\less\main-elements.css.map">
+      <DependentUpon>main-elements.css</DependentUpon>
     </Content>
     <Content Include="app\less\fonts.less" />
     <Content Include="app\less\header.less" />
     <Content Include="app\less\sprites.less" />
+    <Content Include="app\less\header.css.map">
+      <DependentUpon>header.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\all.css.map">
+      <DependentUpon>all.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\colors.css.map">
+      <DependentUpon>colors.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\float-layout.less" />
+    <Content Include="app\less\float-layout.css.map">
+      <DependentUpon>float-layout.css</DependentUpon>
+    </Content>
     <None Include="app\src\config\env\dev.json" />
     <Content Include="app\src\config\env\config.js">
       <LastGenOutput>Const1.cs</LastGenOutput>
@@ -290,9 +319,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="app\images\sprites\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
