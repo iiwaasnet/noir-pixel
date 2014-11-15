@@ -26,7 +26,7 @@
         function googleSignIn(redirectState) {
             saveLoginRedirectState(redirectState);
 
-            return getApiExternalLoginUrl('Google');
+            return getApiExternalLoginUrl('GooglePlus');
         }
 
         function getApiExternalLoginUrl(provider) {

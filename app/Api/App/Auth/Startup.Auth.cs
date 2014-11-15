@@ -30,8 +30,8 @@ namespace Api.App.Auth
             //    appId: "",
             //    appSecret: "");
 
-            app.UseGoogleAuthentication(authOptions.GoogleAuthOptions);
-            app.UseGooglePlusAuthentication()
+            //app.UseGoogleAuthentication(authOptions.GoogleAuthOptions);
+            app.UseGooglePlusAuthentication(authOptions.GooglePlusAuthOptions);
         }
     }
 }

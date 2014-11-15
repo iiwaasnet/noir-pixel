@@ -15,16 +15,16 @@
         function activate() {
             var loginResult = getExternalLoginResult();
             if (loginResult.registered) {
-                Auth.getLocalToken(loginResult.externalAccessToken, 'Google')
+                Auth.getLocalToken(loginResult.externalAccessToken, 'GooglePlus')
                 .then(getLocalTokenSuccess, getLocalTokenError);
             } else {
-                Auth.registerExternal(loginResult.externalAccessToken, 'Google')
+                Auth.registerExternal(loginResult.externalAccessToken, 'GooglePlus')
                 .then(registerExternalSuccess, registerExternalError);
             }
         }
 
         function registerExternalSuccess(externalToken) {
-            Auth.getLocalToken(externalToken, 'Google')
+            Auth.getLocalToken(externalToken, 'GooglePlus')
             .then(getLocalTokenSuccess, getLocalTokenError);
         }
 

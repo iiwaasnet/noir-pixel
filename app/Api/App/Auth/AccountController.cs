@@ -451,7 +451,7 @@ namespace Api.App.Auth
                 var appToken = "xxxxxx";
                 endPoint = string.Format("https://graph.facebook.com/debug_token?input_token={0}&access_token={1}", accessToken, appToken);
             }
-            else if (provider == "Google")
+            else if (provider == "GooglePlus")
             {
                 endPoint = string.Format("https://www.googleapis.com/oauth2/v1/tokeninfo?access_token={0}", accessToken);
             }
@@ -483,13 +483,13 @@ namespace Api.App.Auth
                     //    return null;
                     //}
                 }
-                else if (provider == "Google")
+                else if (provider == "GooglePlus")
                 {
                     parsedToken.user_id = jObj.user_id;
                     parsedToken.app_id = jObj.audience;
                     parsedToken.email = jObj.email;
 
-                    if (!string.Equals(authOptions.GoogleAuthOptions.ClientId, parsedToken.app_id, StringComparison.OrdinalIgnoreCase))
+                    if (!string.Equals(authOptions.GooglePlusAuthOptions.ClientId, parsedToken.app_id, StringComparison.OrdinalIgnoreCase))
                     {
                         return null;
                     }
@@ -513,7 +513,7 @@ namespace Api.App.Auth
                 var appToken = "xxxxxx";
                 endPoint = string.Format("https://graph.facebook.com/debug_token?input_token={0}&access_token={1}", accessToken, appToken);
             }
-            else if (provider == "Google")
+            else if (provider == "GooglePlus")
             {
                 endPoint = string.Format("https://www.googleapis.com/plus/v1/people/{0}?access_token={1}", user_id, accessToken);
             }
@@ -546,7 +546,7 @@ namespace Api.App.Auth
                 //    //}
                 //}
 
-                if (provider == "Google")
+                if (provider == "GooglePlus")
                 {
                     token.Person = new PersonInfo
                                    {
