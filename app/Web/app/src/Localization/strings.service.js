@@ -11,10 +11,11 @@
     function stringsService($q, $http, $rootScope, $window, $interval, Storage, Config, ApplicationLogging, Moment) {
         var service = this,
             dictionary = {},
-            langStorageKey = 'currentLang',
-            defaultLang = 'en',
-            language = Storage.get(langStorageKey)
-                || ($window.navigator.userLanguage || $window.navigator.language).split('-')[0];
+            langStorageKey = 'curUILang',
+            fallbackLang = 'en',
+            uiLanguage = Storage.get(langStorageKey)
+                || ($window.navigator.userLanguage || $window.navigator.language).split('-')[0],
+            strLanguage = uiLanguage;
 
         service.init = init;
         service.setCurrentLanguage = setCurrentLanguage;
@@ -26,6 +27,29 @@
             scheduleCacheInvalidation();
 
             return promise;
+        }
+
+        function setCurrentLanguage(lang) {
+            uiLanguage = strLanguage = lang;
+            Storage.set(langStorageKey, uiLanguage);
+
+            if (!loadStrings(lang)) {
+                strLanguage = fallbackLang;
+                loadStrings(strLanguage);
+            }
+        }
+
+        function getCurrentLanguage() {
+            return uiLanguage;
+        }
+
+        function getLocalizedString(value) {
+            var cache = dictionary[service.getCurrentLanguage()];
+            if (cache && Object.keys(cache.strings).length > 0) {
+                return cache.strings[value];
+            }
+
+            return '';
         }
 
         function initStringResources() {
@@ -89,20 +113,6 @@
             return $q.when();
         }
 
-        function setCurrentLanguage(lang) {
-            if (!loadStrings(lang)) {
-                lang = defaultLang;
-                loadStrings(lang);
-            }
-
-            language = lang;
-            Storage.set(langStorageKey, lang);
-        }
-
-        function getCurrentLanguage() {
-            return language;
-        }
-
         function loadStrings(lang) {
             var cache = dictionary[lang];
             if (!cache || Object.keys(cache.strings).length === 0) {
@@ -119,16 +129,7 @@
 
             return found;
         }
-
-        function getLocalizedString(value) {
-            var cache = dictionary[service.getCurrentLanguage()];
-            if (cache && Object.keys(cache.strings).length > 0) {
-                return cache.strings[value];
-            }
-
-            return '';
-        }
-
+       
         function scheduleCacheInvalidation() {
             var interval = Moment.duration(Config.strings.invalidationTimeout).asMilliseconds();
             $interval(initStringResources, interval, 0, false);
