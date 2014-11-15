@@ -93,10 +93,21 @@ module.exports = function(grunt) {
             }
         },
         sprite: {
-            all: {
-                src: ['web/app/images/sprites/*.png'],
-                destImg: 'web/app/images/sprites.png',
-                destCSS: 'web/app/less/sprites.less',
+            32: {
+                src: ['web/app/images/sprites/32/*.png'],
+                destImg: 'web/app/images/sprites32.png',
+                destCSS: 'web/app/less/sprites32.less',
+                algorithm: 'binary-tree',
+                cssFormat: 'less',
+                imgOpts: {
+                    format: 'png',
+                    quality: 100
+                },
+            },
+            64: {
+                src: ['web/app/images/sprites/64/*.png'],
+                destImg: 'web/app/images/sprites64.png',
+                destCSS: 'web/app/less/sprites64.less',
                 algorithm: 'binary-tree',
                 cssFormat: 'less',
                 imgOpts: {
@@ -112,5 +123,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-spritesmith');
 
-    grunt.registerTask('transform', ['replace:dev', 'less:dev', 'sprite:all']);
+    grunt.registerTask('transform', ['replace:dev', 'less:dev', 'sprite:32', 'sprite:64']);
 };

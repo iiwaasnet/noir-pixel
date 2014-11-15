@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security.Cookies;
+using Owin.Security.Providers.GooglePlus;
 using Owin;
 
 namespace Api.App.Auth
@@ -30,6 +31,7 @@ namespace Api.App.Auth
             //    appSecret: "");
 
             app.UseGoogleAuthentication(authOptions.GoogleAuthOptions);
+            app.UseGooglePlusAuthentication()
         }
     }
 }

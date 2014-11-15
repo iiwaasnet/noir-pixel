@@ -3,6 +3,7 @@ using Api.Providers;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
+using Owin.Security.Providers.GooglePlus;
 
 namespace Api.App.Auth
 {
@@ -26,10 +27,18 @@ namespace Api.App.Auth
                                     CallbackPath = new PathString("/signin-google"),
                                     Provider = new GoogleAuthProvider()
                                 };
+            GooglePlusAuthOptions = new GooglePlusAuthenticationOptions
+            {
+                ClientId = "",
+                ClientSecret = "",
+                CallbackPath = new PathString(),
+                Provider = ,
+            };
         }
 
         public OAuthAuthorizationServerOptions AuthServerOptions { get; private set; }
         public GoogleOAuth2AuthenticationOptions GoogleAuthOptions { get; private set; }
+        public GooglePlusAuthenticationOptions GooglePlusAuthOptions { get; private set; }
         public string PublicClientId { get; private set; }
     }
 }

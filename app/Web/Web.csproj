@@ -186,8 +186,15 @@
   <ItemGroup>
     <Content Include="app\images\np-header-b.png" />
     <Content Include="app\images\np-header-w.png" />
-    <Content Include="app\images\sprites.png" />
-    <Content Include="app\images\sprites\user.png" />
+    <Content Include="app\images\sprites32.png" />
+    <Content Include="app\images\sprites64.png" />
+    <Content Include="app\images\sprites\32\user.png" />
+    <Content Include="app\images\sprites\64\facebook.png" />
+    <Content Include="app\images\sprites\64\google.png" />
+    <Content Include="app\images\sprites\64\instagram.png" />
+    <Content Include="app\images\sprites\64\pinterest.png" />
+    <Content Include="app\images\sprites\64\twitter.png" />
+    <Content Include="app\images\sprites\64\yahoo.png" />
     <Content Include="app\less\all.css">
       <DependentUpon>all.less</DependentUpon>
     </Content>
@@ -221,9 +228,6 @@
     <Content Include="app\less\main-elements.min.css">
       <DependentUpon>main-elements.css</DependentUpon>
     </Content>
-    <Content Include="app\less\sprites.css">
-      <DependentUpon>sprites.less</DependentUpon>
-    </Content>
     <Content Include="app\src\auth\auth.module.js" />
     <Content Include="app\src\auth\auth.service.js" />
     <Content Include="app\src\auth\external-signin.html" />
@@ -245,7 +249,6 @@
     </Content>
     <Content Include="app\less\fonts.less" />
     <Content Include="app\less\header.less" />
-    <Content Include="app\less\sprites.less" />
     <Content Include="app\less\header.css.map">
       <DependentUpon>header.css</DependentUpon>
     </Content>
@@ -259,6 +262,8 @@
     <Content Include="app\less\float-layout.css.map">
       <DependentUpon>float-layout.css</DependentUpon>
     </Content>
+    <Content Include="app\less\sprites32.less" />
+    <Content Include="app\less\sprites64.less" />
     <None Include="app\src\config\env\dev.json" />
     <Content Include="app\src\config\env\config.js">
       <LastGenOutput>Const1.cs</LastGenOutput>

@@ -41,6 +41,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Accessibility" />
     <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
@@ -61,6 +62,12 @@
     </Reference>
     <Reference Include="Autofac.Integration.WebApi">
       <HintPath>..\packages\Autofac.WebApi2.3.4.0\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="Flickr.Owin.Security">
+      <HintPath>..\packages\Flickr.Owin.Security.2.0.1\lib\net451\Flickr.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="JY.Owin.Security.Yahoo">
+      <HintPath>..\packages\JY.Owin.Security.Yahoo.0.9.0\lib\net45\JY.Owin.Security.Yahoo.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin">
@@ -112,6 +119,12 @@
     </Reference>
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.3.1.0.0\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="nonintanon.Owin.Security.Instagram">
+      <HintPath>..\packages\nonintanon.Owin.Security.Instagram.1.0.0\lib\nonintanon.Owin.Security.Instagram.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin.Security.Providers">
+      <HintPath>..\packages\Owin.Security.Providers.1.4.0\lib\net45\Owin.Security.Providers.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
