@@ -8,7 +8,7 @@
         apiUris: {
             base: '@@apiUris.base',
             signin: '@@apiUris.signin',
-            externalLogin: '@@apiUris.externalLogin',
+            externalLogins: '@@apiUris.externalLogins',
             localAccessToken: '@@apiUris.localAccessToken',
             registerExternal: '@@apiUris.registerExternal'
         },

@@ -4,7 +4,7 @@
     
     "apiUris.base": "api.noir-pixel.com",
     "apiUris.signin": "token",
-    "apiUris.externalLogin": "/account/external-login?provider={0}&response_type=token&client_id=self&redirect_uri={1}",
+    "apiUris.externalLogins": "/account/external-logins?returnUrl={0}",
     "apiUris.localAccessToken": "account/local-access-token",
     "apiUris.registerExternal":  "account/register-external",
     

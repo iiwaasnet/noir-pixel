@@ -1,21 +1,6 @@
-﻿<form name="signInForm" ng-submit="ctrl .signIn(signInForm.$valid)" novalidate>
-    <!--<label np-i18n="UserName"></label>-->
-    <input name="userName" ng-model="ctrl.userName" placeholder="{{'EditHint_UserName'|npi18n}}" required ng-minlength="5" />
-    <div ng-messages="signInForm.userName.$error" style="color:maroon">
-        <div ng-message="required">You did not enter a field</div>
-        <div ng-message="minlength">Your password is too short</div>
-    </div>
-
-    <!--<label np-i18n="Password"></label>-->
-    <input name="password" type="password" ng-model="ctrl.password" placeholder="{{'EditHint_Password'|npi18n}}" required ng-minlength="5" />
-    <div ng-messages="signInForm.password.$error" ng-messages-multiple style="color:maroon">
-        <div ng-message="required">You did not enter a field</div>
-        <div ng-message="minlength">Your password is too short</div>
-    </div>
-
-    <input type="submit" np-i18n="SignIn" ng-disabled="signInForm.$invalid || !ctrl.signInAllowed" />
-</form>
-
-<input type="button" value="Google Sign In" ng-click="ctrl.googleSignIn()"/>
-<input type="button" value="Get Google Sign In URI" ng-click="ctrl.getGoogleSignIn()"/>
-<div ng-model="::ctrl.signInUri"></div>
+﻿<div np-i18n="Signin"></div>
+<div>
+    <a ng-href="{{login.url}}" ng-repeat="login in ctrl.availableLogins">
+        {{login.provider}}
+    </a>
+</div>

@@ -16,6 +16,7 @@
         service.authenticated = authenticated;
         service.registerExternal = registerExternal;
         service.getLocalToken = getLocalToken;
+        service.getAvailableLogins = getAvailableLogins;
 
         service.getUserInfo = getUserInfo;
 
@@ -27,6 +28,30 @@
             saveLoginRedirectState(redirectState);
 
             return getApiExternalLoginUrl('GooglePlus');
+        }
+
+        function getAvailableLogins() {
+            var externalSignIn = $state.get('externalSignIn').url.split('?')[0],
+                redirectUrl = Url.build(Config.siteBaseUri, externalSignIn);
+            var url = Url.build(Config.apiUris.base, Config.apiUris.externalLogins.format(encodeURIComponent(redirectUrl)));
+
+            var deferred = $q.defer();
+            $http.get(url).then(function(response) { getAvailableLoginsSuccess(response, deferred); });
+
+            return deferred.promise;
+        }
+
+        function getAvailableLoginsSuccess(response, deferred) {
+            var logins = [];
+
+            angular.forEach(response.data, function (login) {
+                logins.push({
+                    provider: login.name,
+                    url: Url.build(Config.apiUris.base, login.url)
+                });
+            });
+
+            deferred.resolve(logins);
         }
 
         function getApiExternalLoginUrl(provider) {
@@ -45,7 +70,7 @@
 
             $http.post(url,
                     data,
-                    {headers: { 'Content-Type': 'application/x-www-form-urlencoded' }})
+                    { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
                 .success(function(response) { signInSuccess(response, deferred); })
                 .error(function(err, status) { signInError(err, status, deferred); });
 

@@ -141,8 +141,8 @@
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
-  <data name="SignIn" xml:space="preserve">
-    <value>Sign in</value>
+  <data name="Signin" xml:space="preserve">
+    <value>Signin</value>
   </data>
   <data name="UserName" xml:space="preserve">
     <value>User name</value>

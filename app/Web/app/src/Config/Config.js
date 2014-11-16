@@ -8,7 +8,7 @@
         apiUris: {
             base: 'api.noir-pixel.com',
             signin: 'token',
-            externalLogin: '/account/external-login?provider={0}&response_type=token&client_id=self&redirect_uri={1}',
+            externalLogins: '/account/external-logins?returnUrl={0}',
             localAccessToken: 'account/local-access-token',
             registerExternal: 'account/register-external'
         },

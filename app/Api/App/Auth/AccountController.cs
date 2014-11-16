@@ -124,7 +124,7 @@ namespace Api.App.Auth
             if (verifiedAccessToken == null)
             {
                 return BadRequest("Invalid Provider or External Access Token");
-            }            
+            }
 
             var user = await userManager.FindAsync(new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
 
@@ -213,6 +213,45 @@ namespace Api.App.Auth
             }
 
             return BadRequest("User is not registered!");
+        }
+
+        [AllowAnonymous]
+        [Route("external-logins")]
+        public IEnumerable<ExternalLoginViewModel> GetExternalLogins(string returnUrl, bool generateState = false)
+        {
+            var state = GenerateState(generateState);
+
+            return GetAuthentication()
+                .GetExternalAuthenticationTypes()
+                .Select(p => CerateLoginProviderDescription(returnUrl, p, state))
+                .ToArray();
+        }
+
+        private ExternalLoginViewModel CerateLoginProviderDescription(string returnUrl, AuthenticationDescription p, string state)
+        {
+            return new ExternalLoginViewModel
+                   {
+                       Name = p.Caption,
+                       Url = Url.Route("ExternalLogin",
+                                       new
+                                       {
+                                           provider = p.AuthenticationType,
+                                           response_type = "token",
+                                           client_id = authOptions.PublicClientId,
+                                           redirect_uri = new Uri(Request.RequestUri, returnUrl).AbsoluteUri,
+                                           state = state
+                                       }),
+                       State = state
+                   };
+        }
+
+        private static string GenerateState(bool generateState)
+        {
+            const int strengthInBits = 256;
+
+            return (generateState)
+                       ? RandomOAuthStateGenerator.Generate(strengthInBits)
+                       : null;
         }
 
         private string GetRedirectUri(HttpRequestMessage request)
@@ -399,49 +438,6 @@ namespace Api.App.Auth
 
         // GET account/external-login
 
-        
-
-        [AllowAnonymous]
-        [Route("external-logins")]
-        public IEnumerable<ExternalLoginViewModel> GetExternalLogins(string returnUrl, bool generateState = false)
-        {
-            var descriptions = GetAuthentication().GetExternalAuthenticationTypes();
-            var logins = new List<ExternalLoginViewModel>();
-
-            string state;
-
-            if (generateState)
-            {
-                const int strengthInBits = 256;
-                state = RandomOAuthStateGenerator.Generate(strengthInBits);
-            }
-            else
-            {
-                state = null;
-            }
-
-            foreach (var description in descriptions)
-            {
-                var login = new ExternalLoginViewModel
-                            {
-                                Name = description.Caption,
-                                Url = Url.Route("ExternalLogin",
-                                                new
-                                                {
-                                                    provider = description.AuthenticationType,
-                                                    response_type = "token",
-                                                    client_id = authOptions.PublicClientId,
-                                                    redirect_uri = new Uri(Request.RequestUri, returnUrl).AbsoluteUri,
-                                                    state = state
-                                                }),
-                                State = state
-                            };
-                logins.Add(login);
-            }
-
-            return logins;
-        }
-
         private async Task<ParsedExternalAccessToken> VerifyExternalAccessToken(string provider, string accessToken)
         {
             ParsedExternalAccessToken parsedToken = null;
@@ -574,8 +570,6 @@ namespace Api.App.Auth
         //    //TODO: If response.IsSuccessStatusCode == false, then re-authentication needed
         //    return token;
         //}
-
-        
 
         private static ExternalLoginInfo GetExternalLoginInfo(AuthenticateResult result)
         {

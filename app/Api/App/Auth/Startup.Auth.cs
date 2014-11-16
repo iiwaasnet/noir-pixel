@@ -26,12 +26,8 @@ namespace Api.App.Auth
             //    consumerKey: "",
             //    consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //    appId: "",
-            //    appSecret: "");
-
-            //app.UseGoogleAuthentication(authOptions.GoogleAuthOptions);
             app.UseGooglePlusAuthentication(authOptions.GooglePlusAuthOptions);
+            app.UseFacebookAuthentication(authOptions.FacebookAuthOptions);
         }
     }
 }

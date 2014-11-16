@@ -9,6 +9,7 @@
     function signInController($stateParams, $location, $http, $window, $scope, Auth) {
         var ctrl = this,
             redirectTo = $stateParams.redirectTo || '';
+        ctrl.availableLogins = [];
         ctrl.signIn = signIn;
         ctrl.googleSignIn = googleSignIn;
         ctrl.getGoogleSignIn = getGoogleSignIn;
@@ -17,6 +18,35 @@
         ctrl.password = '';
         ctrl.signInUri = '';
         ctrl.signInAllowed = true;
+
+        activate();
+
+        function activate() {
+            Auth.getAvailableLogins().then(getAvailableLoginsSuccess, getAvailableLoginsError);
+        }
+
+        function getAvailableLoginsSuccess(data) {
+            ctrl.availableLogins = orderLogins(data);
+        }
+
+        function orderLogins(logins) {
+            angular.forEach(logins, assignOrder);
+            return logins;
+        }
+
+        function assignOrder(login) {
+            switch (login.provider) {
+            case 'Facebook':
+                login.displayOrder = 0;
+            case 'GooglePlus':
+                login.displayOrder = 1;
+            default:
+            }
+        }
+
+        function getAvailableLoginsError(error) {
+
+        }
 
         function alert(msg) {
             alert(msg);
