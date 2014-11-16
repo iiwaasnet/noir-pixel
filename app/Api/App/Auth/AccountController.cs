@@ -31,11 +31,13 @@ namespace Api.App.Auth
         private const string LocalLoginProvider = "Local";
         private readonly ApplicationUserManager userManager;
         private readonly AuthOptions authOptions;
+        private readonly IExternalAccountsManager externalAccountsManager;
 
-        public AccountController(ApplicationUserManager userManager, AuthOptions authOptions)
+        public AccountController(ApplicationUserManager userManager, AuthOptions authOptions, IExternalAccountsManager externalAccountsManager)
         {
             this.userManager = userManager;
             this.authOptions = authOptions;
+            this.externalAccountsManager = externalAccountsManager;
         }
 
         [AllowAnonymous]
@@ -118,7 +120,8 @@ namespace Api.App.Auth
                 return BadRequest(ModelState);
             }
 
-            var verifiedAccessToken = await VerifyExternalAccessToken(model.Provider, model.ExternalAccessToken);
+            var verifiedAccessToken = await externalAccountsManager.VerfiyAccessToken(model.Provider, model.ExternalAccessToken);
+            //var verifiedAccessToken = await VerifyExternalAccessToken(model.Provider, model.ExternalAccessToken);
             if (verifiedAccessToken == null)
             {
                 return BadRequest("Invalid Provider or External Access Token");
@@ -133,7 +136,7 @@ namespace Api.App.Auth
                 return BadRequest("External user is already registered");
             }
 
-            var externalUserInfo = await GetExternalUserInfo(model.Provider, verifiedAccessToken.user_id, model.ExternalAccessToken);
+            var externalUserInfo = await externalAccountsManager.GetUserInfo(model.Provider, verifiedAccessToken.user_id, model.ExternalAccessToken);
 
             user = new ApplicationUser
                    {
@@ -173,7 +176,8 @@ namespace Api.App.Auth
                 return BadRequest("Provider or external access token is not sent");
             }
 
-            var verifiedAccessToken = await VerifyExternalAccessToken(model.Provider, model.ExternalAccessToken);
+            var verifiedAccessToken = await externalAccountsManager.VerfiyAccessToken(model.Provider, model.ExternalAccessToken);
+            //var verifiedAccessToken = await VerifyExternalAccessToken(model.Provider, model.ExternalAccessToken);
             if (verifiedAccessToken == null)
             {
                 return BadRequest("Invalid Provider or External Access Token");
@@ -500,81 +504,78 @@ namespace Api.App.Auth
             return parsedToken;
         }
 
-        private async Task<ExternalUserInfo.ExternalUserInfo> GetExternalUserInfo(string provider, string user_id, string accessToken)
-        {
-            ExternalUserInfo.ExternalUserInfo token = null;
+        //private async Task<ExternalUserInfo.ExternalUserInfo> GetExternalUserInfo(string provider, string user_id, string accessToken)
+        //{
+        //    ExternalUserInfo.ExternalUserInfo token = null;
 
-            var endPoint = "";
+        //    var endPoint = "";
 
-            if (provider == "Facebook")
-            {
-                //You can get it from here: https://developers.facebook.com/tools/accesstoken/
-                //More about debug_tokn here: http://stackoverflow.com/questions/16641083/how-does-one-get-the-app-access-token-for-debug-token-inspection-on-facebook
-                var appToken = "xxxxxx";
-                endPoint = string.Format("https://graph.facebook.com/debug_token?input_token={0}&access_token={1}", accessToken, appToken);
-            }
-            else if (provider == "GooglePlus")
-            {
-                endPoint = string.Format("https://www.googleapis.com/plus/v1/people/{0}?access_token={1}", user_id, accessToken);
-            }
-            else
-            {
-                return null;
-            }
+        //    if (provider == "Facebook")
+        //    {
+        //        //You can get it from here: https://developers.facebook.com/tools/accesstoken/
+        //        //More about debug_tokn here: http://stackoverflow.com/questions/16641083/how-does-one-get-the-app-access-token-for-debug-token-inspection-on-facebook
+        //        var appToken = "xxxxxx";
+        //        endPoint = string.Format("https://graph.facebook.com/debug_token?input_token={0}&access_token={1}", accessToken, appToken);
+        //    }
+        //    else if (provider == "GooglePlus")
+        //    {
+        //        endPoint = string.Format("https://www.googleapis.com/plus/v1/people/{0}?access_token={1}", user_id, accessToken);
+        //    }
+        //    else
+        //    {
+        //        return null;
+        //    }
 
-            var client = new HttpClient();
-            var uri = new Uri(endPoint);
-            var response = await client.GetAsync(uri);
+        //    var client = new HttpClient();
+        //    var uri = new Uri(endPoint);
+        //    var response = await client.GetAsync(uri);
 
-            if (response.IsSuccessStatusCode)
-            {
-                var content = await response.Content.ReadAsStringAsync();
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        var content = await response.Content.ReadAsStringAsync();
 
-                dynamic jObj = JsonConvert.DeserializeObject(content);
+        //        dynamic jObj = JsonConvert.DeserializeObject(content);
 
-                token = new ExternalUserInfo.ExternalUserInfo();
+        //        token = new ExternalUserInfo.ExternalUserInfo();
 
-                //if (provider == "Facebook")
-                //{
-                //    token.user_id = jObj["data"]["user_id"];
-                //    token.app_id = jObj["data"]["app_id"];
+        //        //if (provider == "Facebook")
+        //        //{
+        //        //    token.user_id = jObj["data"]["user_id"];
+        //        //    token.app_id = jObj["data"]["app_id"];
 
-                //    //TODO: Uncomment and fix!!!!
-                //    //if (!string.Equals(Startup.facebookAuthOptions.AppId, parsedToken.app_id, StringComparison.OrdinalIgnoreCase))
-                //    //{
-                //    //    return null;
-                //    //}
-                //}
+        //        //    //TODO: Uncomment and fix!!!!
+        //        //    //if (!string.Equals(Startup.facebookAuthOptions.AppId, parsedToken.app_id, StringComparison.OrdinalIgnoreCase))
+        //        //    //{
+        //        //    //    return null;
+        //        //    //}
+        //        //}
 
-                if (provider == "GooglePlus")
-                {
-                    token.Person = new PersonInfo
-                                   {
-                                       Id = jObj.id,
-                                       DisplayName = jObj.displayName,
-                                       FirstName = jObj.name.givenName,
-                                       LastName = jObj.name.familyName,
-                                       Gender = jObj.gender,
-                                       Image = jObj.image.url
-                                   };
-                    token.Emails = GetEmails(jObj.emails);
-                    //token.Links;
+        //        if (provider == "GooglePlus")
+        //        {
+        //            token.Person = new PersonInfo
+        //                           {
+        //                               Id = jObj.id,
+        //                               DisplayName = jObj.displayName,
+        //                               FirstName = jObj.name.givenName,
+        //                               LastName = jObj.name.familyName,
+        //                               Gender = jObj.gender,
+        //                               Image = jObj.image.url
+        //                           };
+        //            token.Emails = GetEmails(jObj.emails);
+        //            //token.Links;
 
-                    if (!string.Equals(user_id, token.Person.Id, StringComparison.OrdinalIgnoreCase))
-                    {
-                        return null;
-                    }
-                }
-            }
+        //            if (!string.Equals(user_id, token.Person.Id, StringComparison.OrdinalIgnoreCase))
+        //            {
+        //                return null;
+        //            }
+        //        }
+        //    }
 
-            //TODO: If response.IsSuccessStatusCode == false, then re-authentication needed
-            return token;
-        }
+        //    //TODO: If response.IsSuccessStatusCode == false, then re-authentication needed
+        //    return token;
+        //}
 
-        private IEnumerable<EmailInfo> GetEmails(IEnumerable<dynamic> emails)
-        {
-            return emails.Select(m => new EmailInfo{Address = m.value, Type = m.type});
-        }
+        
 
         private static ExternalLoginInfo GetExternalLoginInfo(AuthenticateResult result)
         {

@@ -1,8 +1,11 @@
-﻿using Api.Models;
+﻿using Api.App.Auth.ExternalUserInfo;
+using Api.App.Auth.ExternalUserInfo.GPlus;
+using Api.Models;
 using AspNet.Identity.MongoDB;
 using Autofac;
 using JsonConfigurationProvider;
 using Microsoft.AspNet.Identity;
+using Owin.Security.Providers.GooglePlus;
 
 namespace Api.App.Auth
 {
@@ -28,6 +31,16 @@ namespace Api.App.Auth
                    .SingleInstance();
             builder.Register(c => new RoleStore<IdentityRole>(c.Resolve<ApplicationIdentityContext>()))
                    .As<IRoleStore<IdentityRole, string>>()
+                   .SingleInstance();
+
+            builder.RegisterType<GooglePlusAccountProvider>()
+                   .As<ISocialAccountProvider>()
+                   .SingleInstance();
+            builder.RegisterType<ExternalAccountsManager>()
+                   .As<IExternalAccountsManager>()
+                   .SingleInstance();
+            builder.Register(c => c.Resolve<AuthOptions>().GooglePlusAuthOptions)
+                   .As<GooglePlusAuthenticationOptions>()
                    .SingleInstance();
         }
     }
