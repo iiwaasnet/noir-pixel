@@ -228,6 +228,7 @@
     <Compile Include="App\Auth\ExternalUserInfo\EmailInfo.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\ExternalAccountsManager.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\ExternalUserInfo.cs" />
+    <Compile Include="App\Auth\ExternalUserInfo\GPlus\FacebookAccountProvider.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\GPlus\GooglePlusAccountProvider.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\IExternalAccountsManager.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\ISocialAccountProvider.cs" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using Api.Providers;
 using Microsoft.Owin;
+using Microsoft.Owin.Security.Facebook;
 using Microsoft.Owin.Security.OAuth;
 using Owin.Security.Providers.GooglePlus;
 
@@ -23,13 +24,18 @@ namespace Api.App.Auth
                                     {
                                         ClientId = "180426522882-j68nln4atebaf3r1ddb6lgc7h4im2c7j.apps.googleusercontent.com",
                                         ClientSecret = "yg_imJKvQIjYu40L01d23QZ4",
-                                        CallbackPath = new PathString("/signin-googleplus"),
                                         Provider = new GooglePlusAuthProvider()
                                     };
+            FacebookAuthOptions = new FacebookAuthenticationOptions
+                                  {
+                                      AppId = "FacebookAuthenticationOptions",
+                                      AppSecret = "31f3b43ced1fe56d21222f34e350dc42"
+                                  };
         }
 
         public OAuthAuthorizationServerOptions AuthServerOptions { get; private set; }
         public GooglePlusAuthenticationOptions GooglePlusAuthOptions { get; private set; }
+        public FacebookAuthenticationOptions FacebookAuthOptions { get; private set; }
         public string PublicClientId { get; private set; }
     }
 }

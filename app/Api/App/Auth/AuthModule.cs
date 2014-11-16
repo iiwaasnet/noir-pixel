@@ -5,6 +5,7 @@ using AspNet.Identity.MongoDB;
 using Autofac;
 using JsonConfigurationProvider;
 using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security.Facebook;
 using Owin.Security.Providers.GooglePlus;
 
 namespace Api.App.Auth
@@ -36,11 +37,18 @@ namespace Api.App.Auth
             builder.RegisterType<GooglePlusAccountProvider>()
                    .As<ISocialAccountProvider>()
                    .SingleInstance();
+            builder.RegisterType<FacebookAccountProvider>()
+                   .As<ISocialAccountProvider>()
+                   .SingleInstance();
+
             builder.RegisterType<ExternalAccountsManager>()
                    .As<IExternalAccountsManager>()
                    .SingleInstance();
             builder.Register(c => c.Resolve<AuthOptions>().GooglePlusAuthOptions)
                    .As<GooglePlusAuthenticationOptions>()
+                   .SingleInstance();
+            builder.Register(c => c.Resolve<AuthOptions>().FacebookAuthOptions)
+                   .As<FacebookAuthenticationOptions>()
                    .SingleInstance();
         }
     }

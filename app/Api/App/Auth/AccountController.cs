@@ -121,7 +121,6 @@ namespace Api.App.Auth
             }
 
             var verifiedAccessToken = await externalAccountsManager.VerfiyAccessToken(model.Provider, model.ExternalAccessToken);
-            //var verifiedAccessToken = await VerifyExternalAccessToken(model.Provider, model.ExternalAccessToken);
             if (verifiedAccessToken == null)
             {
                 return BadRequest("Invalid Provider or External Access Token");
@@ -177,7 +176,6 @@ namespace Api.App.Auth
             }
 
             var verifiedAccessToken = await externalAccountsManager.VerfiyAccessToken(model.Provider, model.ExternalAccessToken);
-            //var verifiedAccessToken = await VerifyExternalAccessToken(model.Provider, model.ExternalAccessToken);
             if (verifiedAccessToken == null)
             {
                 return BadRequest("Invalid Provider or External Access Token");
@@ -215,6 +213,41 @@ namespace Api.App.Auth
             }
 
             return BadRequest("User is not registered!");
+        }
+
+        private string GetRedirectUri(HttpRequestMessage request)
+        {
+            Uri redirectUri;
+
+            var redirectUriString = GetQueryString(request, "redirect_uri");
+
+            if (string.IsNullOrWhiteSpace(redirectUriString))
+            {
+                return "redirect_uri is required";
+            }
+
+            if (!Uri.TryCreate(redirectUriString, UriKind.Absolute, out redirectUri))
+            {
+                return "redirect_uri is invalid";
+            }
+
+            return redirectUri.AbsoluteUri;
+        }
+
+        private string GetQueryString(HttpRequestMessage request, string key)
+        {
+            var queryStrings = request.GetQueryNameValuePairs();
+            if (queryStrings != null)
+            {
+                var match = queryStrings.FirstOrDefault(keyValue => String.Compare(keyValue.Key, key, StringComparison.OrdinalIgnoreCase) == 0);
+
+                if (!string.IsNullOrWhiteSpace(match.Value))
+                {
+                    return match.Value;
+                }
+            }
+
+            return null;
         }
 
         //===========================================================================================
@@ -366,40 +399,7 @@ namespace Api.App.Auth
 
         // GET account/external-login
 
-        private string GetRedirectUri(HttpRequestMessage request)
-        {
-            Uri redirectUri;
-
-            var redirectUriString = GetQueryString(request, "redirect_uri");
-
-            if (string.IsNullOrWhiteSpace(redirectUriString))
-            {
-                return "redirect_uri is required";
-            }
-
-            if (!Uri.TryCreate(redirectUriString, UriKind.Absolute, out redirectUri))
-            {
-                return "redirect_uri is invalid";
-            }
-
-            return redirectUri.AbsoluteUri;
-        }
-
-        private string GetQueryString(HttpRequestMessage request, string key)
-        {
-            var queryStrings = request.GetQueryNameValuePairs();
-            if (queryStrings != null)
-            {
-                var match = queryStrings.FirstOrDefault(keyValue => String.Compare(keyValue.Key, key, StringComparison.OrdinalIgnoreCase) == 0);
-
-                if (!string.IsNullOrWhiteSpace(match.Value))
-                {
-                    return match.Value;
-                }
-            }
-
-            return null;
-        }
+        
 
         [AllowAnonymous]
         [Route("external-logins")]
