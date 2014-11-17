@@ -43,7 +43,7 @@ namespace Api.App.Auth.ExternalUserInfo.GPlus
                                             Gender = jObj.gender,
                                             Image = jObj.image.url
                                         },
-                               Emails = GetEmails(jObj.emails)
+                               Email = GetEmail(jObj.emails)
                            };
                 }
             }
@@ -78,9 +78,11 @@ namespace Api.App.Auth.ExternalUserInfo.GPlus
             return null;
         }
 
-        private static IEnumerable<EmailInfo> GetEmails(IEnumerable<dynamic> emails)
+        private static string GetEmail(IEnumerable<dynamic> emails)
         {
-            return emails.Select(m => new EmailInfo {Address = m.value, Type = m.type});
+            var mail = emails.FirstOrDefault(m => m.type == "account") ?? emails.FirstOrDefault();
+
+            return (mail != null) ? mail.value : null;
         }
 
         public string Provider

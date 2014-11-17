@@ -146,7 +146,7 @@ namespace Api.App.Auth
             user = new ApplicationUser
                    {
                        UserName = CreateUserName(externalUserInfo.Person.DisplayName),
-                       Email = externalUserInfo.Emails.First(m => m.Type == "account").Address
+                       Email = externalUserInfo.Email
                    };
 
             var result = await userManager.CreateAsync(user);

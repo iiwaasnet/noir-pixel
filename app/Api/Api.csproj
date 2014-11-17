@@ -225,7 +225,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\Auth\AuthOptions.cs" />
-    <Compile Include="App\Auth\ExternalUserInfo\EmailInfo.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\ExternalAccountsManager.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\ExternalUserInfo.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\Facebook\FacebookAccountProvider.cs" />

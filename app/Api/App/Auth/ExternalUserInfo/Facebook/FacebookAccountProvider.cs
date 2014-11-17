@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Owin.Security.Facebook;
@@ -41,13 +40,12 @@ namespace Api.App.Auth.ExternalUserInfo.Facebook
                                             FirstName = jObj.first_name,
                                             LastName = jObj.last_name,
                                             Gender = jObj.gender,
-                                            Image = // TODO?
+                                            Image = string.Format("https://graph.facebook.com/me?access_token={0}", accessToken)
                                         },
-                               Emails = new[] { new EmailInfo { Address = jObj.email, Type = //TODO} }
+                               Email = jObj.email
                            };
                 }
             }
-
             //TODO: If response.IsSuccessStatusCode == false, then re-authentication needed
             return null;
         }
@@ -81,11 +79,6 @@ namespace Api.App.Auth.ExternalUserInfo.Facebook
         private string GetAccessToken()
         {
             return string.Format("{0}|{1}", authOptions.AppId, authOptions.AppSecret);
-        }
-
-        private static IEnumerable<EmailInfo> GetEmails(IEnumerable<dynamic> emails)
-        {
-            return emails.Select(m => new EmailInfo {Address = m.value, Type = m.type});
         }
 
         public string Provider
