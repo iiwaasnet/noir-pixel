@@ -14,12 +14,16 @@
 
         function activate() {
             var loginResult = getExternalLoginResult();
-            if (loginResult.registered) {
-                Auth.getLocalToken(loginResult.externalAccessToken, 'GooglePlus')
-                .then(getLocalTokenSuccess, getLocalTokenError);
+            if (loginResult.error) {
+                alert(loginResult.error);
             } else {
-                Auth.registerExternal(loginResult.externalAccessToken, 'GooglePlus')
-                .then(registerExternalSuccess, registerExternalError);
+                if (loginResult.registered) {
+                    Auth.getLocalToken(loginResult.externalAccessToken, 'GooglePlus')
+                        .then(getLocalTokenSuccess, getLocalTokenError);
+                } else {
+                    Auth.registerExternal(loginResult.externalAccessToken, 'GooglePlus')
+                        .then(registerExternalSuccess, registerExternalError);
+                }
             }
         }
 
@@ -34,6 +38,12 @@
 
         function getExternalLoginResult() {
             var params = Url.parseQueryString($location.hash());
+
+            if (params.error) {
+                return {
+                    error: params.error
+                };
+            }
 
             return {
                 externalAccessToken: params.external_access_token,

@@ -33,7 +33,7 @@
                 controllerAs: 'ctrl'
             })
             .state('externalSignIn', {
-                url: '/external-signin/?accessToken',
+                url: '/external-signin',
                 templateUrl: '/app/src/Auth/external-signin.html',
                 controller: 'ExternalSignInController',
                 controllerAs: 'ctrl'

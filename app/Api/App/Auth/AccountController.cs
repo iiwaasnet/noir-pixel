@@ -72,9 +72,13 @@ namespace Api.App.Auth
         [Route("external-login", Name = "ExternalLogin")]
         public async Task<IHttpActionResult> GetExternalLogin(string provider, string error = null)
         {
+            var redirectUri = GetRedirectUri(Request);
+
             if (error != null)
             {
-                return Redirect(Url.Content("~/") + "#error=" + Uri.EscapeDataString(error));
+                redirectUri = string.Format("{0}#error={1}", redirectUri, Uri.EscapeDataString(error));
+
+                return Redirect(redirectUri);
             }
 
             if (!User.Identity.IsAuthenticated)
@@ -101,8 +105,9 @@ namespace Api.App.Auth
             var registered = user != null;
 
             //TODO: Refactor. GetRedirectUri() should be called earlier with other checks to return proper error http response 
-            var redirectUri = string.Format("{0}#external_access_token={1}&registered={2}",
-                                            GetRedirectUri(Request),
+            
+            redirectUri = string.Format("{0}#external_access_token={1}&registered={2}",
+                                            redirectUri,
                                             externalLogin.ExternalAccessToken,
                                             registered.ToString().ToLower());
 
