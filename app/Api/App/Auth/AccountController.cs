@@ -106,10 +106,11 @@ namespace Api.App.Auth
 
             //TODO: Refactor. GetRedirectUri() should be called earlier with other checks to return proper error http response 
             
-            redirectUri = string.Format("{0}#external_access_token={1}&registered={2}",
+            redirectUri = string.Format("{0}#external_access_token={1}&registered={2}&provider={3}",
                                             redirectUri,
                                             externalLogin.ExternalAccessToken,
-                                            registered.ToString().ToLower());
+                                            registered.ToString().ToLower(),
+                                            provider);
 
             return Redirect(redirectUri);
         }

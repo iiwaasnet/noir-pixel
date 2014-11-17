@@ -18,10 +18,10 @@
                 alert(loginResult.error);
             } else {
                 if (loginResult.registered) {
-                    Auth.getLocalToken(loginResult.externalAccessToken, 'GooglePlus')
+                    Auth.getLocalToken(loginResult.externalAccessToken, loginResult.provider)
                         .then(getLocalTokenSuccess, getLocalTokenError);
                 } else {
-                    Auth.registerExternal(loginResult.externalAccessToken, 'GooglePlus')
+                    Auth.registerExternal(loginResult.externalAccessToken, loginResult.provider)
                         .then(registerExternalSuccess, registerExternalError);
                 }
             }
@@ -47,7 +47,8 @@
 
             return {
                 externalAccessToken: params.external_access_token,
-                registered: params.registered === 'true'
+                registered: params.registered === 'true',
+                provider: params.provider
             };
         }
 

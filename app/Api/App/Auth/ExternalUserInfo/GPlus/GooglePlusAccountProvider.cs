@@ -84,7 +84,7 @@ namespace Api.App.Auth.ExternalUserInfo.GPlus
 
         public string Provider
         {
-            get { return "GooglePlus"; }
+            get { return authOptions.Caption; }
         }
     }
 }

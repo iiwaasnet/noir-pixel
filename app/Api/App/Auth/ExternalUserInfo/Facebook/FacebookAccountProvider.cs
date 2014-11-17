@@ -5,9 +5,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Owin.Security.Facebook;
 using Newtonsoft.Json;
-using Owin.Security.Providers.GooglePlus;
 
-namespace Api.App.Auth.ExternalUserInfo.GPlus
+namespace Api.App.Auth.ExternalUserInfo.Facebook
 {
     public class FacebookAccountProvider : ISocialAccountProvider
     {
@@ -20,7 +19,7 @@ namespace Api.App.Auth.ExternalUserInfo.GPlus
 
         public async Task<ExternalUserInfo> GetUserInfo(string userId, string accessToken)
         {
-            var endPoint = string.Format("https://www.googleapis.com/plus/v1/people/{0}?access_token={1}", userId, accessToken);
+            var endPoint = string.Format("https://graph.facebook.com/me?access_token={0}", accessToken);
             var client = new HttpClient();
             var uri = new Uri(endPoint);
             var response = await client.GetAsync(uri);
@@ -54,7 +53,7 @@ namespace Api.App.Auth.ExternalUserInfo.GPlus
 
         public async Task<ParsedExternalAccessToken> VerifyAccessToken(string accessToken)
         {
-            var endPoint = string.Format("https://www.googleapis.com/oauth2/v1/tokeninfo?access_token={0}", accessToken);
+            var endPoint = string.Format("https://graph.facebook.com/debug_token?input_token={0}&access_token={1}", accessToken, GetAccessToken());
             var client = new HttpClient();
             var uri = new Uri(endPoint);
             var response = await client.GetAsync(uri);
@@ -64,18 +63,23 @@ namespace Api.App.Auth.ExternalUserInfo.GPlus
                 var content = await response.Content.ReadAsStringAsync();
 
                 dynamic jObj = JsonConvert.DeserializeObject(content);
-                if (string.Equals(authOptions.AppId, jObj.app_id.ToString(), StringComparison.OrdinalIgnoreCase))
+                var appId = jObj["data"]["app_id"];
+                if (string.Equals(authOptions.AppId, appId.ToString(), StringComparison.OrdinalIgnoreCase))
                 {
                     return new ParsedExternalAccessToken
                            {
-                               user_id = jObj.user_id,
-                               app_id = jObj.app_id,
-                               email = jObj.email
+                               user_id = jObj["data"]["user_id"],
+                               app_id = appId
                            };
                 }
             }
             //TODO: If response.IsSuccessStatusCode == false, then re-authentication needed
             return null;
+        }
+
+        private string GetAccessToken()
+        {
+            return string.Format("{0}|{1}", authOptions.AppId, authOptions.AppSecret);
         }
 
         private static IEnumerable<EmailInfo> GetEmails(IEnumerable<dynamic> emails)
@@ -85,7 +89,7 @@ namespace Api.App.Auth.ExternalUserInfo.GPlus
 
         public string Provider
         {
-            get { return "Facebook"; }
+            get { return authOptions.Caption; }
         }
     }
 }

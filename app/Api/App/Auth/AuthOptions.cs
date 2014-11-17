@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Linq;
+using Api.App.Auth.ExternalUserInfo.Facebook;
+using Api.App.Auth.ExternalUserInfo.GPlus;
 using Api.Providers;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Facebook;
@@ -32,6 +35,8 @@ namespace Api.App.Auth
                                       AppSecret = "a8b0b56b824359a0ff6e885d7fd3475a",
                                       Provider = new FacebookAuthProvider()
                                   };
+            FacebookAuthOptions.Scope.Add("public_profile");
+            FacebookAuthOptions.Scope.Add("email");
         }
 
         public OAuthAuthorizationServerOptions AuthServerOptions { get; private set; }

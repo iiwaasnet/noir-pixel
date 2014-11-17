@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.Owin.Security.Google;
 
-namespace Api.Providers
+namespace Api.App.Auth.ExternalUserInfo.GPlus
 {
     public class GoogleAuthProvider : IGoogleOAuth2AuthenticationProvider
 

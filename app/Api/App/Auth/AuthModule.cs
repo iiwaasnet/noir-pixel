@@ -1,4 +1,5 @@
 ﻿using Api.App.Auth.ExternalUserInfo;
+using Api.App.Auth.ExternalUserInfo.Facebook;
 using Api.App.Auth.ExternalUserInfo.GPlus;
 using Api.Models;
 using AspNet.Identity.MongoDB;

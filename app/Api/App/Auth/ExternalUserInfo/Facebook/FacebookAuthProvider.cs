@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.Owin.Security.Facebook;
 
-namespace Api.Providers
+namespace Api.App.Auth.ExternalUserInfo.Facebook
 {
     public class FacebookAuthProvider : IFacebookAuthenticationProvider
     {
