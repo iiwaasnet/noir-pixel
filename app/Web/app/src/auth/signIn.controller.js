@@ -4,22 +4,25 @@
     angular.module('np.auth')
         .controller('SignInController', signInController);
 
-    signInController.$inject = ['$stateParams', '$location', '$http', '$window', '$scope', 'Auth'];
+    signInController.$inject = ['$stateParams', '$location', '$http', '$window', '$scope', 'Storage', 'Auth'];
 
-    function signInController($stateParams, $location, $http, $window, $scope, Auth) {
+    function signInController($stateParams, $location, $http, $window, $scope, Storage, Auth) {
         var ctrl = this,
-            redirectTo = $stateParams.redirectTo || '';
+            redirectTo = $stateParams.redirectTo || '',
+            loginRedirectStorageKey = 'loginRedirectState';
         ctrl.availableLogins = [];
-        ctrl.signIn = signIn;
+        ctrl.signin = signin;
         ctrl.googleSignIn = googleSignIn;
-        ctrl.getGoogleSignIn = getGoogleSignIn;
-        $scope.alert = alert;
+        $scope.finalizeLogin = finalizeLogin;
         ctrl.userName = '';
         ctrl.password = '';
         ctrl.signInUri = '';
         ctrl.signInAllowed = true;
 
         activate();
+
+        function finalizeLogin() {
+        }
 
         function activate() {
             Auth.getAvailableLogins().then(getAvailableLoginsSuccess, getAvailableLoginsError);
@@ -48,29 +51,8 @@
 
         }
 
-        function alert(msg) {
-            alert(msg);
-        }
-
-        function boo() {
-            var subscriptions = {};
-            var evnt = 'auth';
-
-            if (!~Object.keys(subscriptions).indexOf(evnt)) {
-                subscriptions[evnt] = { signInSucceeded: signInSucceeded };
-            }
-        }
-
-
-        function getGoogleSignIn() {
-            $http.get('http://api.noir-pixel.com/account/external-logins?returnUrl=http%3A%2F%2Fnoir-pixel.com%2F&generateState=false')
-                .success(function(response) {
-                    ctrl.signInUri = response;
-                });
-        }
-
         function googleSignIn() {
-            $window.location.href = Auth.googleSignIn('home');
+
         }
 
 
@@ -80,17 +62,9 @@
         function googleSignInError(err) {
         }
 
-        function signIn(valid) {
-            boo();
-
-            if (valid) {
-                ctrl.signInAllowed = false;
-                Auth.signIn(ctrl.userName, ctrl.password)
-                    .then(signInSucceeded, signInFailed)
-                    .then(enableSignIn);
-            } else {
-                alert('Correct the errors and try again!');
-            }
+        function signin(url) {
+            $window.$scope = $scope;
+            $window.open(url, "Signin", 'width=800, height=600');
         }
 
         function signInSucceeded(data) {
@@ -106,6 +80,18 @@
 
         function enableSignIn() {
             ctrl.signInAllowed = true;
+        }
+
+        function saveLoginRedirectState(redirectState) {
+            if (redirectState !== signInState) {
+                Storage.set(loginRedirectStorageKey, redirectState);
+            }
+        }
+
+        function getLoginRedirectState() {
+            var redirectState = Storage.get(loginRedirectStorageKey);
+
+            return redirectState || 'home';
         }
     }
 })();

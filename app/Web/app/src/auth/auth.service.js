@@ -159,16 +159,16 @@
             EventsHub.publishEvent(EventsHub.events.SignedOut);
         }
 
-        function saveLoginRedirectState(redirectState) {
-            if (redirectState !== signInState) {
-                Storage.set(loginRedirectStorageKey, redirectState);
-            }
-        }
+        //function saveLoginRedirectState(redirectState) {
+        //    if (redirectState !== signInState) {
+        //        Storage.set(loginRedirectStorageKey, redirectState);
+        //    }
+        //}
 
-        function getLoginRedirectState() {
-            var redirectState = Storage.get(loginRedirectStorageKey);
+        //function getLoginRedirectState() {
+        //    var redirectState = Storage.get(loginRedirectStorageKey);
 
-            return redirectState || 'home';
-        }
+        //    return redirectState || 'home';
+        //}
     }
 })();

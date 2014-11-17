@@ -1,6 +1,6 @@
 ﻿<div np-i18n="Signin"></div>
 <div>
-    <a ng-href="{{login.url}}" ng-repeat="login in ctrl.availableLogins">
+    <a ng-click="ctrl.signin(login.url)" ng-repeat="login in ctrl.availableLogins">
         {{login.provider}}
     </a>
 </div>

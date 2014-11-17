@@ -53,6 +53,8 @@
         }
 
         function getLocalTokenSuccess() {
+            $window.opener.$scope.finalizeLogin();
+            $window.close();
         }
 
         function getLocalTokenError() {}
