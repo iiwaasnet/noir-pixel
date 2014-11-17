@@ -28,8 +28,8 @@ namespace Api.App.Auth
                                     };
             FacebookAuthOptions = new FacebookAuthenticationOptions
                                   {
-                                      AppId = "FacebookAuthenticationOptions",
-                                      AppSecret = "31f3b43ced1fe56d21222f34e350dc42"
+                                      AppId = "1513484548903273",
+                                      AppSecret = "a8b0b56b824359a0ff6e885d7fd3475a"
                                   };
         }
 
