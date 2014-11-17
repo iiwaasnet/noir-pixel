@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Owin.Security.Facebook;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Api.App.Auth.ExternalUserInfo.Facebook
 {
@@ -28,7 +29,7 @@ namespace Api.App.Auth.ExternalUserInfo.Facebook
             {
                 var content = await response.Content.ReadAsStringAsync();
 
-                dynamic jObj = JsonConvert.DeserializeObject(content);
+                dynamic jObj = JsonConvert.DeserializeObject<JObject>(content);
                 if (string.Equals(userId, jObj.id.ToString(), StringComparison.OrdinalIgnoreCase))
                 {
                     return new ExternalUserInfo
@@ -36,13 +37,13 @@ namespace Api.App.Auth.ExternalUserInfo.Facebook
                                Person = new PersonInfo
                                         {
                                             Id = jObj.id,
-                                            DisplayName = jObj.displayName,
-                                            FirstName = jObj.name.givenName,
-                                            LastName = jObj.name.familyName,
+                                            DisplayName = jObj.name,
+                                            FirstName = jObj.first_name,
+                                            LastName = jObj.last_name,
                                             Gender = jObj.gender,
-                                            Image = jObj.image.url
+                                            Image = // TODO?
                                         },
-                               Emails = GetEmails(jObj.emails)
+                               Emails = new[] { new EmailInfo { Address = jObj.email, Type = //TODO} }
                            };
                 }
             }
@@ -62,13 +63,13 @@ namespace Api.App.Auth.ExternalUserInfo.Facebook
             {
                 var content = await response.Content.ReadAsStringAsync();
 
-                dynamic jObj = JsonConvert.DeserializeObject(content);
-                var appId = jObj["data"]["app_id"];
+                dynamic jObj = JsonConvert.DeserializeObject<JObject>(content);
+                var appId = jObj.data.app_id;
                 if (string.Equals(authOptions.AppId, appId.ToString(), StringComparison.OrdinalIgnoreCase))
                 {
                     return new ParsedExternalAccessToken
                            {
-                               user_id = jObj["data"]["user_id"],
+                               user_id = jObj.data.user_id,
                                app_id = appId
                            };
                 }

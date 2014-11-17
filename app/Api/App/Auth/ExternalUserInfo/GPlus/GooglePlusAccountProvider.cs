@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Owin.Security.Providers.GooglePlus;
 
 namespace Api.App.Auth.ExternalUserInfo.GPlus
@@ -28,7 +29,7 @@ namespace Api.App.Auth.ExternalUserInfo.GPlus
             {
                 var content = await response.Content.ReadAsStringAsync();
 
-                dynamic jObj = JsonConvert.DeserializeObject(content);
+                dynamic jObj = JsonConvert.DeserializeObject<JObject>(content);
                 if (string.Equals(userId, jObj.id.ToString(), StringComparison.OrdinalIgnoreCase))
                 {
                     return new ExternalUserInfo
@@ -62,7 +63,7 @@ namespace Api.App.Auth.ExternalUserInfo.GPlus
             {
                 var content = await response.Content.ReadAsStringAsync();
 
-                dynamic jObj = JsonConvert.DeserializeObject(content);
+                dynamic jObj = JsonConvert.DeserializeObject<JObject>(content);
                 if (string.Equals(authOptions.ClientId, jObj.audience.ToString(), StringComparison.OrdinalIgnoreCase))
                 {
                     return new ParsedExternalAccessToken
