@@ -1,6 +1,10 @@
-﻿<div np-i18n="Signin"></div>
-<div>
-    <a ng-click="ctrl.signin(login.url)" ng-repeat="login in ctrl.availableLogins">
-        {{login.provider}}
-    </a>
+﻿<div id="signin">
+    <div class="push">
+        <div class="caption" np-i18n="Signin"></div>
+        <div class="signin-links">
+            <a ng-click="ctrl.signin(login.url)" ng-repeat="login in ctrl.availableLogins">
+                <div ng-class="('signin-link icon-' + login.provider | lowercase)"></div>
+            </a>
+        </div>
+    </div>
 </div>

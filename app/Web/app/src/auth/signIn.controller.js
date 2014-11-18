@@ -4,11 +4,12 @@
     angular.module('np.auth')
         .controller('SignInController', signInController);
 
-    signInController.$inject = ['$stateParams', '$location', '$http', '$window', '$scope', 'Storage', 'Auth'];
+    signInController.$inject = ['$stateParams', '$location', '$http', '$window', '$scope', '$state', 'Storage', 'Auth'];
 
-    function signInController($stateParams, $location, $http, $window, $scope, Storage, Auth) {
+    function signInController($stateParams, $location, $http, $window, $scope, $state, Storage, Auth) {
         var ctrl = this,
             redirectTo = $stateParams.redirectTo || '',
+            signInState = 'signIn',
             loginRedirectStorageKey = 'loginRedirectState';
         ctrl.availableLogins = [];
         ctrl.signin = signin;
@@ -63,15 +64,13 @@
         }
 
         function signin(url) {
+            saveLoginRedirectState(redirectTo);
             $window.$scope = $scope;
             $window.open(url, "Signin", 'width=800, height=600');
         }
 
         function signInSucceeded(data) {
-            alert('Welcome!');
-            if (redirectTo) {
-                $location.url(redirectTo);
-            }
+            $stateParams.go(getLoginRedirectState());
         }
 
         function signInFailed(err) {

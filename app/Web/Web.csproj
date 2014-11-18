@@ -201,6 +201,12 @@
     <Content Include="app\less\all.min.css">
       <DependentUpon>all.css</DependentUpon>
     </Content>
+    <Content Include="app\less\auth.css">
+      <DependentUpon>auth.less</DependentUpon>
+    </Content>
+    <Content Include="app\less\auth.min.css">
+      <DependentUpon>auth.css</DependentUpon>
+    </Content>
     <Content Include="app\less\colors.css">
       <DependentUpon>colors.less</DependentUpon>
     </Content>
@@ -264,6 +270,10 @@
     </Content>
     <Content Include="app\less\sprites32.less" />
     <Content Include="app\less\sprites64.less" />
+    <Content Include="app\less\auth.less" />
+    <Content Include="app\less\auth.css.map">
+      <DependentUpon>auth.css</DependentUpon>
+    </Content>
     <None Include="app\src\config\env\dev.json" />
     <Content Include="app\src\config\env\config.js">
       <LastGenOutput>Const1.cs</LastGenOutput>

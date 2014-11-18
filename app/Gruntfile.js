@@ -97,7 +97,7 @@ module.exports = function(grunt) {
                 src: ['web/app/images/sprites/32/*.png'],
                 destImg: 'web/app/images/sprites32.png',
                 destCSS: 'web/app/less/sprites32.less',
-                algorithm: 'binary-tree',
+                algorithm: 'alt-diagonal',
                 cssFormat: 'less',
                 imgOpts: {
                     format: 'png',
@@ -108,7 +108,7 @@ module.exports = function(grunt) {
                 src: ['web/app/images/sprites/64/*.png'],
                 destImg: 'web/app/images/sprites64.png',
                 destCSS: 'web/app/less/sprites64.less',
-                algorithm: 'binary-tree',
+                algorithm: 'alt-diagonal',
                 cssFormat: 'less',
                 imgOpts: {
                     format: 'png',
