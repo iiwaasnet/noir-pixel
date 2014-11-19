@@ -1,36 +1,36 @@
 ﻿@import (reference) "sprites64.less";
-@margin: 0.3em;
-@caption-size: 1.5em;
+@import (reference) "constants.less";
 
 #signin {
-    display: table;
-    height: 30%;
+    left: 0;
+    top: 0;
     width: 100%;
+    padding: 0 0 1em 0;
     position: absolute;
+    z-index: @menu-z-index;
+    background-color: #2C3230;
+    border: solid 1px #344C44;
+    opacity: 0.98;
+    display: none;
 
-    .caption{
-        display: table-cell;
+    .caption {
         vertical-align: top;
-        float: left;
         text-align: right;
-        width: 30%;
-        margin: @margin 0 0;
-        font-size: @caption-size;
+        margin: 1em 1em 0 0;
+        font-size: 1.5em;
     }
 
-    .signin-links{
-        float: left;
-        margin: 0 0 0 3em;
-    }
+    .signin-links {
+        text-align: right;
+        margin: 0 10em 0 0;
 
-    .push{
-        display: table-cell;
-        vertical-align: bottom;
+        a {
+            display: inline-block;
+        }
     }
 
     .signin-link {
-        float: left;
-        margin: @margin;
+        margin: 0.4em;
     }
 
     .icon-facebook {

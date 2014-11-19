@@ -1,8 +1,13 @@
 ﻿@import (reference) "colors.less";
 @import (reference) "sprites32.less";
+@import (reference) "constants.less";
+
+@header-font-size: 1.25em;
 
 header{
     position: relative;
+    font-size: @header-font-size;
+    margin: @body-offset-top @body-offset-side 0;
 }
 
 #main-menu {

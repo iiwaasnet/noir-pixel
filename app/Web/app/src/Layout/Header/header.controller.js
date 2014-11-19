@@ -10,9 +10,14 @@
         var ctrl = this;
         ctrl.mainMenu = [];
         ctrl.signInMenu = {};
-        ctrl.authenticated = Auth.authenticated(),
+        ctrl.authenticated = Auth.authenticated();
+        ctrl.signin = signin;
 
-        activate();     
+        activate();
+
+        function signin() {
+            alert('siginin');
+        }
 
         function getMainMenu() {
             var gallery = {

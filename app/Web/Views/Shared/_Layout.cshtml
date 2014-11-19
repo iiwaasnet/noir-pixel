@@ -9,40 +9,42 @@
         @Styles.Render("~/bundles/css")
         <base href="/"/>
     </head>
-<body>
-    @RenderPage("~/app/src/Layout/Header/Header.cshtml")
+    <body>
+        @{
+            Response.WriteFile("~/app/src/auth/signin.html");
+            Response.WriteFile("~/app/src/Layout/Header/header.html");
+        }
+        <main>
+            <div ui-view>
+                @RenderBody()
+            </div>
+        </main>
 
-    <main>
-        <div ui-view>
-            @RenderBody()
-        </div>
-    </main>
+        @{ Response.WriteFile("~/app/src/Layout/Footer/footer.html"); }
 
-    @RenderPage("~/app/src/Layout/Footer/Footer.cshtml")
+        @Scripts.Render("~/bundles/vendor-native")
+        @Scripts.Render("~/bundles/angular")
+        @Scripts.Render("~/bundles/vendor-ng")
+        @Scripts.Render("~/bundles/vendor-ng-min")
+        @*@Scripts.Render("~/bundles/vendor-min")*@
+        @Scripts.Render("~/bundles/app")
 
-    @Scripts.Render("~/bundles/vendor-native")
-    @Scripts.Render("~/bundles/angular")
-    @Scripts.Render("~/bundles/vendor-ng")
-    @Scripts.Render("~/bundles/vendor-ng-min")
-    @*@Scripts.Render("~/bundles/vendor-min")*@
-    @Scripts.Render("~/bundles/app")
+        <script type="text/javascript">
+            (function () {
+                var srv = angular.injector(['ng', 'np.i18n']).get('Strings');
+                srv.init()
+                    .then(function () {
+                            angular.element(document).ready(function () {
+                                angular.bootstrap(document, ['np']);
+                            });
+                        },
+                        function () {
+                            alert("Sorry, something went wrong :(");
+                        });
 
-    <script type="text/javascript">
-        (function () {
-            var srv = angular.injector(['ng', 'np.i18n']).get('Strings');
-            srv.init()
-                .then(function () {
-                    angular.element(document).ready(function () {
-                        angular.bootstrap(document, ['np']);
-                    });
-                },
-                    function () {
-                        alert("Sorry, something went wrong :(");
-                    });
+            })();
+        </script>
 
-        })();
-    </script>
-
-</body>
+    </body>
 
 </html>

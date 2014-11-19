@@ -213,6 +213,12 @@
     <Content Include="app\less\colors.min.css">
       <DependentUpon>colors.css</DependentUpon>
     </Content>
+    <Content Include="app\less\constants.css">
+      <DependentUpon>constants.less</DependentUpon>
+    </Content>
+    <Content Include="app\less\constants.min.css">
+      <DependentUpon>constants.css</DependentUpon>
+    </Content>
     <Content Include="app\less\float-layout.css">
       <DependentUpon>float-layout.less</DependentUpon>
     </Content>
@@ -239,10 +245,10 @@
     <Content Include="app\src\auth\external-signin.html" />
     <Content Include="app\src\auth\not-authorized.html" />
     <Content Include="app\src\auth\notAuthorized.controller.js" />
-    <Content Include="app\src\auth\signup.html" />
     <Content Include="app\src\auth\signin.html" />
     <Content Include="app\src\auth\externalSignIn.controller.js" />
     <Content Include="app\src\auth\signIn.controller.js" />
+    <Content Include="app\src\auth\signin.service.js" />
     <Content Include="app\src\auth\tokenStorage.service.js" />
     <Content Include="app\src\config\config.js" />
     <Content Include="app\src\config\config.module.js" />
@@ -273,6 +279,10 @@
     <Content Include="app\less\auth.less" />
     <Content Include="app\less\auth.css.map">
       <DependentUpon>auth.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\constants.less" />
+    <Content Include="app\less\constants.css.map">
+      <DependentUpon>constants.css</DependentUpon>
     </Content>
     <None Include="app\src\config\env\dev.json" />
     <Content Include="app\src\config\env\config.js">
@@ -361,10 +371,10 @@
     <Content Include="app\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\src\layout\header\header.cshtml" />
+    <Content Include="app\src\layout\header\header.html" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\src\layout\footer\footer.cshtml" />
+    <Content Include="app\src\layout\footer\footer.html" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Diagnostics\Diagnostics.csproj">

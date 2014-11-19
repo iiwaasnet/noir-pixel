@@ -19,6 +19,7 @@
         ctrl.password = '';
         ctrl.signInUri = '';
         ctrl.signInAllowed = true;
+        ctrl.show = false;
 
         activate();
 

@@ -1,5 +1,5 @@
 ﻿<header ng-controller="HeaderController as ctrl">
-    <a ui-sref="home"><img src="~/app/images/np-header-w.png" alt="noir-pixel" /></a>
+    <a ui-sref="home"><img src="app/images/np-header-w.png" alt="noir-pixel" /></a>
     <ul id="main-menu">
         <li ng-repeat="menuItem in ::ctrl.mainMenu">
             <a ui-sref="{{::menuItem.uri}}" ng-bind="::menuItem.text"></a>
@@ -7,7 +7,7 @@
     </ul>
     <ul id="auth-menu">
         <li>
-            <a ui-sref="signIn" ng-bind="::ctrl.signInMenu.signIn" ng-if="!ctrl.authenticated"></a>
+            <a ui-sref="signIn" ng-click="ctrl.signin()" ng-bind="::ctrl.signInMenu.signIn" ng-if="!ctrl.authenticated"></a>
             <a ui-sref="signOut" ng-if="ctrl.authenticated">
                 <div class="icon-user"></div>
             </a>
