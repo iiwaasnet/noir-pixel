@@ -2,13 +2,17 @@
 @import (reference) "constants.less";
 @import (reference) "colors.less";
 
-#signin {
+#signin-menu-target{
     left: 0;
     top: 0;
+    position: absolute;
+    width: 100%;
+}
+
+.signin-menu {
     width: 100%;
     padding: 0 0 1em 0;
-    position: absolute;
-    z-index: @menu-z-index;
+    z-index: @auth-menu-z-index;
     background-color: @background-color;
     border: solid 1px #344C44;
     opacity: 0.98;

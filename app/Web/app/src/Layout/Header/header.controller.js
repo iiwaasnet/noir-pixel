@@ -47,7 +47,7 @@
                 signOut: Strings.getLocalizedString('AuthMenu_SignOut'),
                 signIn: Strings.getLocalizedString('AuthMenu_SignIn'),
                 signUp: Strings.getLocalizedString('AuthMenu_SignUp')
-            }
+            };
         }
 
         function buildMenus() {

@@ -246,12 +246,23 @@
     <Content Include="app\less\ngDialog\ngDialog-theme-default.min.css">
       <DependentUpon>ngDialog-theme-default.css</DependentUpon>
     </Content>
+    <Content Include="app\less\ngDialog\ngDialog.css">
+      <DependentUpon>ngDialog.less</DependentUpon>
+    </Content>
+    <Content Include="app\less\ngDialog\ngDialog.min.css">
+      <DependentUpon>ngDialog.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\progress.css">
+      <DependentUpon>progress.less</DependentUpon>
+    </Content>
+    <Content Include="app\less\progress.min.css">
+      <DependentUpon>progress.css</DependentUpon>
+    </Content>
     <Content Include="app\src\auth\auth.module.js" />
     <Content Include="app\src\auth\auth.service.js" />
     <Content Include="app\src\auth\external-signin.html" />
     <Content Include="app\src\auth\not-authorized.html" />
     <Content Include="app\src\auth\notAuthorized.controller.js" />
-    <Content Include="app\src\auth\np-signin.directive.js" />
     <Content Include="app\src\auth\signin.html" />
     <Content Include="app\src\auth\externalSignIn.controller.js" />
     <Content Include="app\src\auth\signIn.controller.js" />
@@ -296,6 +307,14 @@
     <Content Include="app\less\ngDialog\ngDialog-theme-default.css.map">
       <DependentUpon>ngDialog-theme-default.css</DependentUpon>
     </Content>
+    <Content Include="app\less\ngDialog\ngDialog.css.map">
+      <DependentUpon>ngDialog.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\progress.less" />
+    <Content Include="app\less\progress.css.map">
+      <DependentUpon>progress.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\progress.scss" />
     <None Include="app\src\config\env\dev.json" />
     <Content Include="app\src\config\env\config.js">
       <LastGenOutput>Const1.cs</LastGenOutput>
@@ -318,6 +337,8 @@
     <Content Include="app\src\logging\logging.module.js" />
     <Content Include="app\src\logging\trace.factory.js" />
     <Content Include="app\src\events\eventsHub.service.js" />
+    <Content Include="app\src\progress\progress.module.js" />
+    <Content Include="app\src\progress\progress.service.js" />
     <Content Include="app\src\storage\storage.module.js" />
     <Content Include="app\src\storage\storage.service.js" />
     <Content Include="app\src\utils\moment.factory.js" />

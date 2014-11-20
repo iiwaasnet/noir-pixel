@@ -133,7 +133,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Signin.
+        ///   Looks up a localized string similar to Sign in.
         /// </summary>
         public static string Signin {
             get {

@@ -13,21 +13,11 @@
         function signin() {
             ngDialog.open({
                 template: 'app/src/auth/signin.html',
-                appendTo: '#main-menu-target',
-                controller: 'SignInController as ctrl'
+                appendTo: '#signin-menu-target',
+                cache: true,
+                controller: 'SignInController as ctrl',
+                showClose: false
             });
-
-            //$http.get('http://noir-pixel.com/app/src/auth/signin.html').then(getViewSuccess, getViewError);
-            //var ctor = $injector.invoke('SignInController');
-            //var ctrl = $controller('SignInController', { $scope: $rootScope.$new() });
-        }
-
-        function getViewSuccess(response) {
-            //var target = angular.element(document.getElementById('main-menu-target'));
-            //target.html(response.data);
-        }
-
-        function getViewError(err) {
         }
     }
 })();

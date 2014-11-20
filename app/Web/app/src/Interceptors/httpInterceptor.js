@@ -26,8 +26,8 @@
             response: response
         };
 
-        function response(response) {
-            return response;
+        function response(resp) {
+            return resp;
         }
 
         function request(config) {
@@ -39,20 +39,20 @@
             return config;
         }
 
-        function responseError(response) {
-            if (response && ~HttpProviderConfig.interceptStatuses.indexOf(response.status)) {
-                ApplicationLogging.error(createError(response));
+        function responseError(resp) {
+            if (resp && ~HttpProviderConfig.interceptStatuses.indexOf(resp.status)) {
+                ApplicationLogging.error(createError(resp));
             }
 
-            return $q.reject(response);
+            return $q.reject(resp);
         }
 
-        function createError(response) {
+        function createError(resp) {
             var error = {
-                method: response.config.method,
-                url: response.config.url,
-                message: (response.data && response.data.toString()) || '',
-                status: response.status,
+                method: resp.config.method,
+                url: resp.config.url,
+                message: (resp.data && resp.data.toString()) || '',
+                status: resp.status,
                 toString: toString
             };
 
