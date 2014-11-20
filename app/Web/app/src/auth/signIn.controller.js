@@ -4,9 +4,10 @@
     angular.module('np.auth')
         .controller('SignInController', signInController);
 
-    signInController.$inject = ['$stateParams', '$location', '$http', '$window', '$scope', '$state', 'Storage', 'Auth'];
+    signInController.$inject = ['$stateParams', '$location', '$http', '$window', '$scope', '$state', 'Storage', 'Auth', 'Signin'];
 
     function signInController($stateParams, $location, $http, $window, $scope, $state, Storage, Auth) {
+        debugger;
         var ctrl = this,
             redirectTo = $stateParams.redirectTo || '',
             signInState = 'signIn',

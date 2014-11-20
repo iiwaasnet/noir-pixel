@@ -4,9 +4,9 @@
     angular.module('np.layout')
         .controller('HeaderController', headerController);
 
-    headerController.$inject = ['$scope', 'Strings', 'Auth', 'EventsHub'];
+    headerController.$inject = ['$scope', 'Strings', 'Auth', 'EventsHub', 'Signin'];
 
-    function headerController($scope, Strings, Auth, EventsHub) {
+    function headerController($scope, Strings, Auth, EventsHub, Signin) {
         var ctrl = this;
         ctrl.mainMenu = [];
         ctrl.signInMenu = {};
@@ -16,7 +16,7 @@
         activate();
 
         function signin() {
-            alert('siginin');
+            Signin.signin();
         }
 
         function getMainMenu() {

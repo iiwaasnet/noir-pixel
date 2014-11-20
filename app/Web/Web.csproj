@@ -245,6 +245,7 @@
     <Content Include="app\src\auth\external-signin.html" />
     <Content Include="app\src\auth\not-authorized.html" />
     <Content Include="app\src\auth\notAuthorized.controller.js" />
+    <Content Include="app\src\auth\np-signin.directive.js" />
     <Content Include="app\src\auth\signin.html" />
     <Content Include="app\src\auth\externalSignIn.controller.js" />
     <Content Include="app\src\auth\signIn.controller.js" />
