@@ -10,13 +10,11 @@
         var srv = this;
         srv.signin = signin;
 
-        function signin(scope) {
-            debugger;
+        function signin() {
             ngDialog.open({
                 template: 'app/src/auth/signin.html',
                 appendTo: '#main-menu-target',
-                controller: 'SignInController as ctrl',
-                scope: scope
+                controller: 'SignInController as ctrl'
             });
 
             //$http.get('http://noir-pixel.com/app/src/auth/signin.html').then(getViewSuccess, getViewError);
@@ -25,7 +23,6 @@
         }
 
         function getViewSuccess(response) {
-            debugger;
             //var target = angular.element(document.getElementById('main-menu-target'));
             //target.html(response.data);
         }

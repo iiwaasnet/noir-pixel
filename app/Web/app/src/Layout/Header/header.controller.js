@@ -16,8 +16,7 @@
         activate();
 
         function signin() {
-            debugger;
-            Signin.signin($scope);
+            Signin.signin();
         }
 
         function getMainMenu() {
