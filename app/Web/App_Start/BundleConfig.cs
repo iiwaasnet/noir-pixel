@@ -46,6 +46,7 @@ namespace Web
 
             bundles.Add(new ScriptBundle("~/bundles/vendor-ng")
                             .Include("~/app/vendor/angular-webstorage.js")
+                            .Include("~/app/vendor/ngDialog.js")
                 );
 
             var vendorNgMin = new Bundle("~/bundles/vendor-ng-min")

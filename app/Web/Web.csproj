@@ -240,6 +240,8 @@
     <Content Include="app\less\main-elements.min.css">
       <DependentUpon>main-elements.css</DependentUpon>
     </Content>
+    <Content Include="app\less\ngDialog-theme-default.css" />
+    <Content Include="app\less\ngDialog.css" />
     <Content Include="app\src\auth\auth.module.js" />
     <Content Include="app\src\auth\auth.service.js" />
     <Content Include="app\src\auth\external-signin.html" />
@@ -328,6 +330,8 @@
     <Content Include="app\vendor\bindonce.min.js" />
     <Content Include="app\vendor\moment.js" />
     <Content Include="app\vendor\moment.min.js" />
+    <Content Include="app\vendor\ngDialog.js" />
+    <Content Include="app\vendor\ngDialog.min.js" />
     <Content Include="app\vendor\stacktrace.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
