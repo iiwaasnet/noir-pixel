@@ -19,7 +19,8 @@
 
         function getViewSuccess(response) {
             debugger;
-            var target = angular.find('#main-menu-target');
+            var target = angular.element(document.getElementById('main-menu-target'));
+            target.html(response.data);
         }
 
         function getViewError(err) {
