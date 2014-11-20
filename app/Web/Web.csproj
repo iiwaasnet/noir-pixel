@@ -240,8 +240,12 @@
     <Content Include="app\less\main-elements.min.css">
       <DependentUpon>main-elements.css</DependentUpon>
     </Content>
-    <Content Include="app\less\ngDialog-theme-default.css" />
-    <Content Include="app\less\ngDialog.css" />
+    <Content Include="app\less\ngDialog\ngDialog-theme-default.css">
+      <DependentUpon>ngDialog-theme-default.less</DependentUpon>
+    </Content>
+    <Content Include="app\less\ngDialog\ngDialog-theme-default.min.css">
+      <DependentUpon>ngDialog-theme-default.css</DependentUpon>
+    </Content>
     <Content Include="app\src\auth\auth.module.js" />
     <Content Include="app\src\auth\auth.service.js" />
     <Content Include="app\src\auth\external-signin.html" />
@@ -286,6 +290,11 @@
     <Content Include="app\less\constants.less" />
     <Content Include="app\less\constants.css.map">
       <DependentUpon>constants.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\ngDialog\ngDialog-theme-default.less" />
+    <Content Include="app\less\ngDialog\ngDialog.less" />
+    <Content Include="app\less\ngDialog\ngDialog-theme-default.css.map">
+      <DependentUpon>ngDialog-theme-default.css</DependentUpon>
     </Content>
     <None Include="app\src\config\env\dev.json" />
     <Content Include="app\src\config\env\config.js">
