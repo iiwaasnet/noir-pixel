@@ -72,7 +72,15 @@ namespace Web
                             .Include(EventsAssets().ToArray())
                             .Include(VanillaJs().ToArray())
                             .Include(Progress().ToArray())
+                            .Include(SysMessages().ToArray())
                 );
+        }
+
+        private static IEnumerable<string> SysMessages()
+        {
+            yield return "~/app/src/sys-messages/messages.module.js";
+            yield return "~/app/src/sys-messages/messages.service.js";
+            yield return "~/app/src/sys-messages/error.controller.js";
         }
 
         private static IEnumerable<string> Progress()
@@ -167,9 +175,9 @@ namespace Web
         {
             yield return "~/app/src/logging/logging.module.js";
             yield return "~/app/src/logging/trace.factory.js";
-            yield return "~/app/src/logging/application-logging.factory.js";
-            yield return "~/app/src/logging/exception-logging.factory.js";
-            yield return "~/app/src/logging/exception-handler.js";
+            yield return "~/app/src/logging/applicationLogging.factory.js";
+            yield return "~/app/src/logging/exceptionLogging.factory.js";
+            yield return "~/app/src/logging/exceptionHandler.js";
         }
 
         private static IEnumerable<String> UtilsAssets()

@@ -4,8 +4,14 @@
     angular.module('np.home')
         .controller('HomeController', homeController);
 
-    function homeController(/*userInfo*/) {
+    homeController.$inject = ['Messages'];
+
+    function homeController(Messages) {
         var ctrl = this;
-            //tmp = userInfo;
+        ctrl.error = error;
+
+        function error() {
+            Messages.error();
+        }
     }
 })();
