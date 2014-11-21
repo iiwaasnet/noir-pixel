@@ -41,6 +41,7 @@ namespace Web
 
             bundles.Add(new ScriptBundle("~/bundles/vendor-native")
                             .Include("~/app/vendor/stacktrace.js")
+                            .Include("~/app/vendor/nprogress.js")
                             .Include("~/app/vendor/moment.js")
                 );
 
@@ -51,6 +52,7 @@ namespace Web
 
             var vendorNgMin = new Bundle("~/bundles/vendor-ng-min")
                 .Include("~/app/vendor/angular-ui-router.min.js")
+                .Include("~/app/vendor/loading-bar.min.js")
                 .Include("~/app/vendor/bindonce.min.js");
             vendorNgMin.Transforms.Clear();
             bundles.Add(vendorNgMin);
@@ -71,7 +73,14 @@ namespace Web
                             .Include(AuthAssets().ToArray())
                             .Include(EventsAssets().ToArray())
                             .Include(VanillaJs().ToArray())
+                            .Include(Progress().ToArray())
                 );
+        }
+
+        private static IEnumerable<string> Progress()
+        {
+            yield return "~/app/src/progress/progress.module.js";
+            yield return "~/app/src/progress/progress.service.js";
         }
 
         private static IEnumerable<string> StorageAssets()
