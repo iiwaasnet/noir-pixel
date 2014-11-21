@@ -262,18 +262,6 @@
     <Content Include="app\less\nprogress.min.css">
       <DependentUpon>nprogress.css</DependentUpon>
     </Content>
-    <Content Include="app\less\progress.css">
-      <DependentUpon>progress.less</DependentUpon>
-    </Content>
-    <Content Include="app\less\progress.min.css">
-      <DependentUpon>progress.css</DependentUpon>
-    </Content>
-    <Content Include="app\less\progress1.css">
-      <DependentUpon>progress1.less</DependentUpon>
-    </Content>
-    <Content Include="app\less\progress1.min.css">
-      <DependentUpon>progress1.css</DependentUpon>
-    </Content>
     <Content Include="app\src\auth\auth.module.js" />
     <Content Include="app\src\auth\auth.service.js" />
     <Content Include="app\src\auth\external-signin.html" />
@@ -326,14 +314,6 @@
     <Content Include="app\less\ngDialog.css.map">
       <DependentUpon>ngDialog.css</DependentUpon>
     </Content>
-    <Content Include="app\less\progress.less" />
-    <Content Include="app\less\progress.css.map">
-      <DependentUpon>progress.css</DependentUpon>
-    </Content>
-    <Content Include="app\less\progress1.less" />
-    <Content Include="app\less\progress1.css.map">
-      <DependentUpon>progress1.css</DependentUpon>
-    </Content>
     <None Include="app\src\config\env\dev.json" />
     <Content Include="app\src\config\env\config.js">
       <LastGenOutput>Const1.cs</LastGenOutput>
@@ -375,10 +355,6 @@
     <Content Include="app\vendor\angular-webstorage.min.js" />
     <Content Include="app\vendor\angular.js" />
     <Content Include="app\vendor\angular.min.js" />
-    <Content Include="app\vendor\bindonce.js" />
-    <Content Include="app\vendor\bindonce.min.js" />
-    <Content Include="app\vendor\loading-bar.js" />
-    <Content Include="app\vendor\loading-bar.min.js" />
     <Content Include="app\vendor\moment.js" />
     <Content Include="app\vendor\moment.min.js" />
     <Content Include="app\vendor\ngDialog.js" />

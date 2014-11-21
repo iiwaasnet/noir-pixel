@@ -12,7 +12,10 @@
 
         function signin() {
             Progress.start();
+            Auth.preCacheAvailableLogins().then(preCacheAvailableLoginsSuccess, preCacheAvailableLoginsError);
+        }
 
+        function preCacheAvailableLoginsSuccess() {
             ngDialog.open({
                 template: 'app/src/auth/signin.html',
                 appendTo: '#signin-menu-target',
@@ -20,6 +23,12 @@
                 controller: 'SignInController as ctrl',
                 showClose: false
             });
+
+            Progress.stop();
+        }
+
+        function preCacheAvailableLoginsError() {
+            Progress.stop();
         }
     }
 })();

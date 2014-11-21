@@ -9,7 +9,8 @@
     function authService($http, $q, $state, Storage, Config, Url, TokenStorage, EventsHub) {
         var service = this,
             signInState = 'signIn',
-            loginRedirectStorageKey = 'loginRedirectState';
+            loginRedirectStorageKey = 'loginRedirectState',
+            availableLogins = [];
         service.signIn = signIn;
         service.googleSignIn = googleSignIn;
         service.signOut = signOut;
@@ -17,7 +18,7 @@
         service.registerExternal = registerExternal;
         service.getLocalToken = getLocalToken;
         service.getAvailableLogins = getAvailableLogins;
-
+        service.preCacheAvailableLogins = preCacheAvailableLogins;
         service.getUserInfo = getUserInfo;
 
         function authenticated() {
@@ -30,28 +31,42 @@
             return getApiExternalLoginUrl('GooglePlus');
         }
 
-        function getAvailableLogins() {
+        function getLoginsFromServer() {
             var externalSignIn = $state.get('externalSignIn').url.split('?')[0],
                 redirectUrl = Url.build(Config.siteBaseUri, externalSignIn);
             var url = Url.build(Config.apiUris.base, Config.apiUris.externalLogins.format(encodeURIComponent(redirectUrl)));
 
             var deferred = $q.defer();
-            $http.get(url).then(function(response) { getAvailableLoginsSuccess(response, deferred); });
+            $http.get(url).then(function (response) { getAvailableLoginsSuccess(response, deferred); });
 
             return deferred.promise;
         }
 
+        function preCacheAvailableLogins() {
+            return getAvailableLogins();
+        }
+
+        function getAvailableLogins() {
+            if (availableLogins.length > 0) {
+                var deferred = $q.defer();
+                deferred.resolve(availableLogins);
+                return deferred.promise;
+            }
+
+            return getLoginsFromServer();
+        }
+
         function getAvailableLoginsSuccess(response, deferred) {
-            var logins = [];
+            availableLogins = [];
 
             angular.forEach(response.data, function (login) {
-                logins.push({
+                availableLogins.push({
                     provider: login.name,
                     url: Url.build(Config.apiUris.base, login.url)
                 });
             });
 
-            deferred.resolve(logins);
+            deferred.resolve(availableLogins);
         }
 
         function getApiExternalLoginUrl(provider) {

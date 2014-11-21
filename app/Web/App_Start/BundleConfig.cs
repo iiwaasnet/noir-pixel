@@ -51,9 +51,7 @@ namespace Web
                 );
 
             var vendorNgMin = new Bundle("~/bundles/vendor-ng-min")
-                .Include("~/app/vendor/angular-ui-router.min.js")
-                .Include("~/app/vendor/loading-bar.min.js")
-                .Include("~/app/vendor/bindonce.min.js");
+                .Include("~/app/vendor/angular-ui-router.min.js");
             vendorNgMin.Transforms.Clear();
             bundles.Add(vendorNgMin);
 

@@ -9,20 +9,9 @@
 
     function config(NProgress) {
         NProgress.configure({
-            showSpinner: false,
-            //parent: '#loading-progress',
+            showSpinner: true,
             trickleRate: 0.2,
             trickleSpeed: 800
         });
     }
-
-    //angular.module('np.progress', ['angular-loading-bar'])
-    //.config(config);
-
-    //config.$inject = ['cfpLoadingBarProvider'];
-
-    //function config(cfpLoadingBarProvider) {
-    //    cfpLoadingBarProvider.latencyThreshold = 500;
-    //    cfpLoadingBarProvider.includeSpinner = false;
-    //}
 })();
