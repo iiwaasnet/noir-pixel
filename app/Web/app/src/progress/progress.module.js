@@ -10,7 +10,7 @@
     function config(NProgress) {
         NProgress.configure({
             showSpinner: false,
-            parent: '#loading-progress',
+            //parent: '#loading-progress',
             trickleRate: 0.2,
             trickleSpeed: 800
         });
