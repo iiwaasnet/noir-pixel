@@ -252,7 +252,16 @@
     <Content Include="app\less\ngDialog.min.css">
       <DependentUpon>ngDialog.css</DependentUpon>
     </Content>
+    <Content Include="app\less\nprogress.css.map">
+      <DependentUpon>nprogress.css</DependentUpon>
+    </Content>
     <None Include="app\less\nprogress.less" />
+    <Content Include="app\less\nprogress.css">
+      <DependentUpon>nprogress.less</DependentUpon>
+    </Content>
+    <Content Include="app\less\nprogress.min.css">
+      <DependentUpon>nprogress.css</DependentUpon>
+    </Content>
     <Content Include="app\less\progress.css">
       <DependentUpon>progress.less</DependentUpon>
     </Content>
