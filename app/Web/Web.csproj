@@ -240,16 +240,10 @@
     <Content Include="app\less\main-elements.min.css">
       <DependentUpon>main-elements.css</DependentUpon>
     </Content>
-    <Content Include="app\less\ngDialog\ngDialog-theme-default.css">
-      <DependentUpon>ngDialog-theme-default.less</DependentUpon>
-    </Content>
-    <Content Include="app\less\ngDialog\ngDialog-theme-default.min.css">
-      <DependentUpon>ngDialog-theme-default.css</DependentUpon>
-    </Content>
-    <Content Include="app\less\ngDialog\ngDialog.css">
+    <Content Include="app\less\ngDialog.css">
       <DependentUpon>ngDialog.less</DependentUpon>
     </Content>
-    <Content Include="app\less\ngDialog\ngDialog.min.css">
+    <Content Include="app\less\ngDialog.min.css">
       <DependentUpon>ngDialog.css</DependentUpon>
     </Content>
     <Content Include="app\less\progress.css">
@@ -302,12 +296,8 @@
     <Content Include="app\less\constants.css.map">
       <DependentUpon>constants.css</DependentUpon>
     </Content>
-    <Content Include="app\less\ngDialog\ngDialog-theme-default.less" />
-    <Content Include="app\less\ngDialog\ngDialog.less" />
-    <Content Include="app\less\ngDialog\ngDialog-theme-default.css.map">
-      <DependentUpon>ngDialog-theme-default.css</DependentUpon>
-    </Content>
-    <Content Include="app\less\ngDialog\ngDialog.css.map">
+    <Content Include="app\less\ngDialog.less" />
+    <Content Include="app\less\ngDialog.css.map">
       <DependentUpon>ngDialog.css</DependentUpon>
     </Content>
     <Content Include="app\less\progress.less" />
