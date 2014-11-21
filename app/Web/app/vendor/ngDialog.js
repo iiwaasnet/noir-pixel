@@ -205,10 +205,12 @@
 							}
 
 							if (options.controller && (angular.isString(options.controller) || angular.isArray(options.controller) || angular.isFunction(options.controller))) {
-								var controllerInstance = $controller(options.controller, {
-									$scope: scope,
-									$element: $dialog
-								});
+							    var params = {
+							        $scope: scope,
+							        $element: $dialog
+							    };
+							    angular.extend(params, options.locals);
+								var controllerInstance = $controller(options.controller, params);
 								$dialog.data('$ngDialogControllerController', controllerInstance);
 							}
 
