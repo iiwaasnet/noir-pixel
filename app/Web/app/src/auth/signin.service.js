@@ -18,7 +18,6 @@
         function getAvailableLoginsSuccess(response) {
             ngDialog.open({
                 template: 'app/src/auth/signin.html',
-                appendTo: '#signin-menu-target',
                 cache: true,
                 className: 'dialog-theme-contextmenu',
                 controller: 'SignInController as ctrl',
