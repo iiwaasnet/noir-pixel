@@ -18,7 +18,6 @@
         service.registerExternal = registerExternal;
         service.getLocalToken = getLocalToken;
         service.getAvailableLogins = getAvailableLogins;
-        service.preCacheAvailableLogins = preCacheAvailableLogins;
         service.getUserInfo = getUserInfo;
 
         function authenticated() {
@@ -40,10 +39,6 @@
             $http.get(url).then(function (response) { getAvailableLoginsSuccess(response, deferred); });
 
             return deferred.promise;
-        }
-
-        function preCacheAvailableLogins() {
-            return getAvailableLogins();
         }
 
         function getAvailableLogins() {

@@ -12,23 +12,26 @@
 
         function signin() {
             Progress.start();
-            Auth.preCacheAvailableLogins().then(preCacheAvailableLoginsSuccess, preCacheAvailableLoginsError);
+            Auth.getAvailableLogins().then(getAvailableLoginsSuccess, getAvailableLoginsError);
         }
 
-        function preCacheAvailableLoginsSuccess() {
+        function getAvailableLoginsSuccess(response) {
             ngDialog.open({
                 template: 'app/src/auth/signin.html',
                 appendTo: '#signin-menu-target',
                 cache: true,
                 className: 'dialog-theme-contextmenu',
                 controller: 'SignInController as ctrl',
-                showClose: false
+                showClose: false,
+                locals: {
+                    loginOptions: response
+                }
             });
 
             Progress.stop();
         }
 
-        function preCacheAvailableLoginsError() {
+        function getAvailableLoginsError() {
             Progress.stop();
         }
     }

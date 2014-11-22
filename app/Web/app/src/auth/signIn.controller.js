@@ -4,9 +4,9 @@
     angular.module('np.auth')
         .controller('SignInController', signInController);
 
-    signInController.$inject = ['$stateParams', '$location', '$http', '$window', '$scope', '$state', 'Storage', 'Auth'];
+    signInController.$inject = ['$stateParams', '$location', '$http', '$window', '$scope', '$state', 'Storage', 'loginOptions'];
 
-    function signInController($stateParams, $location, $http, $window, $scope, $state, Storage, Auth) {
+    function signInController($stateParams, $location, $http, $window, $scope, $state, Storage, loginOptions) {
         var ctrl = this,
             redirectTo = $stateParams.redirectTo || '',
             signInState = 'signIn',
@@ -27,11 +27,7 @@
         }
 
         function activate() {
-            Auth.getAvailableLogins().then(getAvailableLoginsSuccess, getAvailableLoginsError);
-        }
-
-        function getAvailableLoginsSuccess(data) {
-            ctrl.availableLogins = orderLogins(data);
+            ctrl.availableLogins = orderLogins(loginOptions);
         }
 
         function orderLogins(logins) {
