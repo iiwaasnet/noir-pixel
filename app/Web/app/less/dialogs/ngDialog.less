@@ -1,5 +1,25 @@
 @import (reference) "../constants.css";
 
+.fadeout(@delay){
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-animation: ngdialog-fadeout @delay;
+    -moz-animation: ngdialog-fadeout @delay;
+    -o-animation: ngdialog-fadeout @delay;
+    animation: ngdialog-fadeout @delay;
+}
+
+.fadein(@delay){
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-animation: ngdialog-fadein @delay;
+    -moz-animation: ngdialog-fadein @delay;
+    -o-animation: ngdialog-fadein @delay;
+    animation: ngdialog-fadein @delay;
+}
+
 @-webkit-keyframes ngdialog-fadeout {
   0% {
     opacity: 1;
@@ -77,44 +97,19 @@
     right: 0;
     bottom: 0;
     left: 0;
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-animation: ngdialog-fadein 0.5s;
-    -moz-animation: ngdialog-fadein 0.5s;
-    -o-animation: ngdialog-fadein 0.5s;
-    animation: ngdialog-fadein 0.5s;
+    .fadein(0.5s)
 }
 
 .ngdialog.ngdialog-closing .ngdialog-overlay {
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-animation: ngdialog-fadeout 0.5s;
-    -moz-animation: ngdialog-fadeout 0.5s;
-    -o-animation: ngdialog-fadeout 0.5s;
-    animation: ngdialog-fadeout 0.5s;
+    .fadeout(0.5s);
 }
 
 .ngdialog-content {
-    /*background: white;*/
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-animation: ngdialog-fadein 0.5s;
-    -moz-animation: ngdialog-fadein 0.5s;
-    -o-animation: ngdialog-fadein 0.5s;
-    animation: ngdialog-fadein 0.5s;
+    .fadeout(0.5s);
 }
 
 .ngdialog.ngdialog-closing .ngdialog-content {
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-animation: ngdialog-fadeout 0.5s;
-    -moz-animation: ngdialog-fadeout 0.5s;
-    -o-animation: ngdialog-fadeout 0.5s;
-    animation: ngdialog-fadeout 0.5s;
+    .fadeout(0.5s);
 }
 
 .ngdialog-close:before {

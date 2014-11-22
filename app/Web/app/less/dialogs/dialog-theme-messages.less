@@ -16,6 +16,15 @@
     animation: ngdialog-flyin @delay;
 }
 
+.keyframe(@y, @opacity){
+    opacity: @opacity;
+    -webkit-transform: translateY(@y);
+    -ms-transform: translateY(@y);
+    -moz-transform: translateY(@y);
+    -o-transform: translateY(@y);
+    transform: translateY(@y);
+}
+
 .dialog-content(@background-color, @border-color){
     .flyin(0.5s);
     background: @background-color;
@@ -23,7 +32,7 @@
     border: solid 1px @border-color;
     margin: 0 auto;
     max-width: 100%;
-    padding: 0.5em 1em;
+    padding: 0.5em 1.5em;
     position: relative;
     width: 50%;
     font-weight: 100;
@@ -54,101 +63,51 @@
 
 @-webkit-keyframes ngdialog-flyin {
     0% {
-        opacity: 0;
-        -webkit-transform: translateY(-40px);
-        -moz-transform: translateY(-40px);
-        -ms-transform: translateY(-40px);
-        -o-transform: translateY(-40px);
-        transform: translateY(-40px);
+        .keyframe(-40px, 0);
     }
 
     100% {
-        opacity: 1;
-        -webkit-transform: translateY(0);
-        -moz-transform: translateY(0);
-        -ms-transform: translateY(0);
-        -o-transform: translateY(0);
-        transform: translateY(0);
+        .keyframe(0, 1);
     }
 }
 
 @keyframes ngdialog-flyin {
     0% {
-        opacity: 0;
-        -webkit-transform: translateY(-40px);
-        -ms-transform: translateY(-40px);
-        -moz-transform: translateY(-40px);
-        -o-transform: translateY(-40px);
-        transform: translateY(-40px);
+        .keyframe(-40px, 0);
     }
 
     100% {
-        opacity: 1;
-        -webkit-transform: translateY(0);
-        -ms-transform: translateY(0);
-        -moz-transform: translateY(0);
-        -o-transform: translateY(0);
-        transform: translateY(0);
+        .keyframe(0, 1);
     }
 }
 
 @-webkit-keyframes ngdialog-flyout {
     0% {
-        opacity: 1;
-        -webkit-transform: translateY(0);
-        -moz-transform: translateY(0);
-        -ms-transform: translateY(0);
-        -o-transform: translateY(0);
-        transform: translateY(0);
+        .keyframe(0, 1);
     }
 
     100% {
-        opacity: 0;
-        -webkit-transform: translateY(-40px);
-        -moz-transform: translateY(-40px);
-        -ms-transform: translateY(-40px);
-        -o-transform: translateY(-40px);
-        transform: translateY(-40px);
+        .keyframe(-40px, 0);
     }
 }
 
 @-moz-keyframes ngdialog-flyout {
     0% {
-        opacity: 1;
-        -webkit-transform: translateY(0);
-        -ms-transform: translateY(0);
-        -moz-transform: translateY(0);
-        -o-transform: translateY(0);
-        transform: translateY(0);
+        .keyframe(0, 1);
     }
 
     100% {
-        opacity: 0;
-        -webkit-transform: translateY(-40px);
-        -ms-transform: translateY(-40px);
-        -moz-transform: translateY(-40px);
-        -o-transform: translateY(-40px);
-        transform: translateY(-40px);
+        .keyframe(-40px, 0);
     }
 }
 
 @keyframes ngdialog-flyout {
     0% {
-        opacity: 1;
-        -webkit-transform: translateY(0);
-        -ms-transform: translateY(0);
-        -moz-transform: translateY(0);
-        -o-transform: translateY(0);
-        transform: translateY(0);
+        .keyframe(0, 1);
     }
 
     100% {
-        opacity: 0;
-        -webkit-transform: translateY(-40px);
-        -ms-transform: translateY(-40px);
-        -moz-transform: translateY(-40px);
-        -o-transform: translateY(-40px);
-        transform: translateY(-40px);
+        .keyframe(-40px, 0);
     }
 }
 

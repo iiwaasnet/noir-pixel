@@ -273,7 +273,6 @@
       <DependentUpon>dialog-theme-messages.css</DependentUpon>
     </Content>
     <None Include="app\less\dialogs\ngDialog-theme-default.less" />
-    <None Include="app\less\dialogs\ngDialog-theme-plain.less" />
     <Content Include="app\less\dialogs\ngDialog.css.map">
       <DependentUpon>ngDialog.css</DependentUpon>
     </Content>

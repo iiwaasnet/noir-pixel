@@ -9,9 +9,14 @@
     function homeController(Messages) {
         var ctrl = this;
         ctrl.error = error;
+        ctrl.message = message;
 
         function error() {
-            Messages.message({header: 'Simple error message'});
+            Messages.error({header: 'Simple error message'});
+        }
+
+        function message() {
+            Messages.message({header: 'Simple text message'});
         }
     }
 })();
