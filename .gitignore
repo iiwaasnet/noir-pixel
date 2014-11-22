@@ -22,9 +22,9 @@ packages/
 
 
 # Ignore /less/{*.css, *.min.css, *.css.map} files
-/**/less/*.css
-/**/less/*.min.css
-/**/less/*.css.map
+/**/less/**/*.css
+/**/less/**/*.min.css
+/**/less/**/*.css.map
 
 
 # Ignore node modules
