@@ -1,100 +1,53 @@
+@import (reference) "dialog-mixins.less";
+
+
 @-webkit-keyframes ngdialog-flyin {
     0% {
-        opacity: 0;
-        -webkit-transform: translateY(-40px);
-        -moz-transform: translateY(-40px);
-        -ms-transform: translateY(-40px);
-        -o-transform: translateY(-40px);
-        transform: translateY(-40px);
+        .keyframe(-40px, 0);
     }
 
     100% {
-        opacity: 1;
-        -webkit-transform: translateY(0);
-        -moz-transform: translateY(0);
-        -ms-transform: translateY(0);
-        -o-transform: translateY(0);
-        transform: translateY(0);
+        .keyframe(0, 1);
     }
 }
 
 @-moz-keyframes ngdialog-flyin {
     0% {
-        opacity: 0;
-        -webkit-transform: translateY(-40px);
-        -ms-transform: translateY(-40px);
-        -moz-transform: translateY(-40px);
-        -o-transform: translateY(-40px);
-        transform: translateY(-40px);
+        .keyframe(-40px, 0);
     }
 
     100% {
-        opacity: 1;
-        -webkit-transform: translateY(0);
-        -ms-transform: translateY(0);
-        -moz-transform: translateY(0);
-        -o-transform: translateY(0);
-        transform: translateY(0);
+        .keyframe(0, 1);
     }
 }
 
 @keyframes ngdialog-flyin {
     0% {
-        opacity: 0;
-        -webkit-transform: translateY(-40px);
-        -ms-transform: translateY(-40px);
-        -moz-transform: translateY(-40px);
-        -o-transform: translateY(-40px);
-        transform: translateY(-40px);
+        .keyframe(-40px, 0);
     }
 
     100% {
-        opacity: 1;
-        -webkit-transform: translateY(0);
-        -ms-transform: translateY(0);
-        -moz-transform: translateY(0);
-        -o-transform: translateY(0);
-        transform: translateY(0);
+        .keyframe(0, 1);
     }
 }
 
 @-webkit-keyframes ngdialog-flyout {
     0% {
-        opacity: 1;
-        -webkit-transform: translateY(0);
-        -moz-transform: translateY(0);
-        -ms-transform: translateY(0);
-        -o-transform: translateY(0);
-        transform: translateY(0);
+        .keyframe(0, 1);
     }
 
     100% {
-        opacity: 0;
-        -webkit-transform: translateY(-40px);
-        -moz-transform: translateY(-40px);
-        -ms-transform: translateY(-40px);
-        -o-transform: translateY(-40px);
-        transform: translateY(-40px);
+        .keyframe(-40px, 0);
     }
 }
 
 @keyframes ngdialog-flyout {
     0% {
-        opacity: 1;
-        -webkit-transform: translateY(0);
-        -ms-transform: translateY(0);
-        -moz-transform: translateY(0);
-        -o-transform: translateY(0);
-        transform: translateY(0);
+        .keyframe(0, 1);
     }
 
     100% {
-        opacity: 0;
-        -webkit-transform: translateY(-40px);
-        -ms-transform: translateY(-40px);
-        -moz-transform: translateY(-40px);
-        -o-transform: translateY(-40px);
-        transform: translateY(-40px);
+        .keyframe(-40px, 0);
     }
 }
 
@@ -102,17 +55,11 @@
 }
 
 .ngdialog.dialog-theme-contextmenu.ngdialog-closing .ngdialog-content {
-    -webkit-animation: ngdialog-flyout .5s;
-    -moz-animation: ngdialog-flyout .5s;
-    -o-animation: ngdialog-flyout .5s;
-    animation: ngdialog-flyout .5s;
+    .flyout(.5s)
 }
 
 .ngdialog.dialog-theme-contextmenu .ngdialog-content {
-    -webkit-animation: ngdialog-flyin .5s;
-    -moz-animation: ngdialog-flyin .5s;
-    -o-animation: ngdialog-flyin .5s;
-    animation: ngdialog-flyin .5s;
+    .flyin(.5s);
     margin: 0 auto;
     max-width: 100%;
 }

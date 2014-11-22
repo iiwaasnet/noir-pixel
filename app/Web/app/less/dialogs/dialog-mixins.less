@@ -1,0 +1,22 @@
+﻿.flyout(@delay){
+    -webkit-animation: ngdialog-flyout @delay;
+    -moz-animation: ngdialog-flyout @delay;
+    -o-animation: ngdialog-flyout @delay;
+    animation: ngdialog-flyout @delay;
+}
+
+.flyin(@delay){
+    -webkit-animation: ngdialog-flyin @delay;
+    -moz-animation: ngdialog-flyin @delay;
+    -o-animation: ngdialog-flyin @delay;
+    animation: ngdialog-flyin @delay;
+}
+
+.keyframe(@y, @opacity){
+    opacity: @opacity;
+    -webkit-transform: translateY(@y);
+    -ms-transform: translateY(@y);
+    -moz-transform: translateY(@y);
+    -o-transform: translateY(@y);
+    transform: translateY(@y);
+}
