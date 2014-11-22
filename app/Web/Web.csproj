@@ -219,6 +219,24 @@
     <Content Include="app\less\constants.min.css">
       <DependentUpon>constants.css</DependentUpon>
     </Content>
+    <Content Include="app\less\dialogs\dialog-theme-contextmenu.css">
+      <DependentUpon>dialog-theme-contextmenu.less</DependentUpon>
+    </Content>
+    <Content Include="app\less\dialogs\dialog-theme-contextmenu.min.css">
+      <DependentUpon>dialog-theme-contextmenu.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\dialogs\dialog-theme-messages.css">
+      <DependentUpon>dialog-theme-messages.less</DependentUpon>
+    </Content>
+    <Content Include="app\less\dialogs\dialog-theme-messages.min.css">
+      <DependentUpon>dialog-theme-messages.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\dialogs\ngDialog.css">
+      <DependentUpon>ngDialog.less</DependentUpon>
+    </Content>
+    <Content Include="app\less\dialogs\ngDialog.min.css">
+      <DependentUpon>ngDialog.css</DependentUpon>
+    </Content>
     <Content Include="app\less\float-layout.css">
       <DependentUpon>float-layout.less</DependentUpon>
     </Content>
@@ -246,12 +264,24 @@
     <Content Include="app\less\main-elements.min.css">
       <DependentUpon>main-elements.css</DependentUpon>
     </Content>
+    <Content Include="app\less\dialogs\dialog-theme-contextmenu.less" />
+    <Content Include="app\less\dialogs\dialog-theme-contextmenu.css.map">
+      <DependentUpon>dialog-theme-contextmenu.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\dialogs\dialog-theme-messages.less" />
+    <Content Include="app\less\dialogs\dialog-theme-messages.css.map">
+      <DependentUpon>dialog-theme-messages.css</DependentUpon>
+    </Content>
     <None Include="app\less\dialogs\ngDialog-theme-default.less" />
     <None Include="app\less\dialogs\ngDialog-theme-plain.less" />
+    <Content Include="app\less\dialogs\ngDialog.css.map">
+      <DependentUpon>ngDialog.css</DependentUpon>
+    </Content>
     <None Include="app\less\dialogs\ngDialog.less" />
     <Content Include="app\less\nprogress.css.map">
       <DependentUpon>nprogress.css</DependentUpon>
     </Content>
+    <Content Include="app\less\mixins.less" />
     <None Include="app\less\nprogress.less" />
     <Content Include="app\less\nprogress.css">
       <DependentUpon>nprogress.less</DependentUpon>

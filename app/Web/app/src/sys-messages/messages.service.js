@@ -16,6 +16,7 @@
                 template: 'app/src/sys-messages/error.html',
                 cache: true,
                 controller: 'ErrorController as ctrl',
+                className: 'dialog-theme-messages error',
                 showClose: true,
                 locals: {
                     error: { header: 'Simple error message' }

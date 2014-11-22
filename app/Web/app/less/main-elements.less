@@ -1,5 +1,6 @@
 ﻿@import (reference) "colors.less";
 @import (reference) "fonts.less";
+@import (reference) "mixins.less";
 
 body {
     background-color: @background-color;
@@ -16,12 +17,7 @@ a {
     cursor: pointer;
 
     &:hover {
-        color: lighten(@main-text-color, 80%);
-        text-shadow: -1px 1px 20px rgba(255, 255, 255, 0.6), 1px -1px 20px rgba(255, 255, 255, 0.6);
-        -webkit-transition: 50ms linear 0s;
-        -moz-transition: 50ms linear 0s;
-        -o-transition: 50ms linear 0s;
-        transition: 50ms linear 0s;
+        .glow-hover();
     }
 }
 
