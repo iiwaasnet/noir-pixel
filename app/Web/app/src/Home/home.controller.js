@@ -11,7 +11,7 @@
         ctrl.error = error;
 
         function error() {
-            Messages.error();
+            Messages.message({header: 'Simple error message'});
         }
     }
 })();

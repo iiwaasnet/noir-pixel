@@ -1,3 +1,5 @@
+@import (reference) "../constants.css";
+
 @-webkit-keyframes ngdialog-fadeout {
   0% {
     opacity: 1;
@@ -61,7 +63,7 @@
   position: fixed;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
-  z-index: 10000;
+  z-index: @messages-z-index;
   top: 0;
   right: 0;
   bottom: 0;

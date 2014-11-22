@@ -11,7 +11,7 @@
         srv.error = error;
         srv.message = message;
 
-        function error(errorMsg) {
+        function error(err) {
             ngDialog.open({
                 template: 'app/src/sys-messages/error.html',
                 cache: true,
@@ -19,11 +19,22 @@
                 className: 'dialog-theme-messages error',
                 showClose: true,
                 locals: {
-                    error: { header: 'Simple error message' }
+                    error: err
                 }
             });
         }
 
-        function message(){}
+        function message(msg) {
+            ngDialog.open({
+                template: 'app/src/sys-messages/error.html',
+                cache: true,
+                controller: 'ErrorController as ctrl',
+                className: 'dialog-theme-messages info',
+                showClose: true,
+                locals: {
+                    error: {header: 'Simple message'}
+                }
+            });
+        }
     }
 })();
