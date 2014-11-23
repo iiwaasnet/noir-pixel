@@ -4,9 +4,9 @@
     angular.module('np.auth')
         .controller('SignInController', signInController);
 
-    signInController.$inject = ['$stateParams', '$location', '$http', '$window', '$scope', '$state', 'Storage', 'Messages', 'loginOptions'];
+    signInController.$inject = ['$stateParams', '$window', '$scope', '$state', 'Storage', 'Messages', 'Signin', 'loginOptions'];
 
-    function signInController($stateParams, $location, $http, $window, $scope, $state, Storage, Messages, loginOptions) {
+    function signInController($stateParams, $window, $scope, $state, Storage, Messages, Signin, loginOptions) {
         var ctrl = this,
             redirectTo = $stateParams.redirectTo || '',
             signInState = 'signIn',
@@ -28,6 +28,7 @@
 
         function finalizeLogin(result) {
             if (result.succeeded) {
+                Signin.close();
                 //$stateParams.go(getLoginRedirectState());
             } else {
                 Messages.error({ main: { id: result.error } });

@@ -4,16 +4,27 @@
     angular.module('np.auth')
         .service('Signin', signinService);
 
-    signinService.$inject = ['$controller', '$rootScope', '$injector', '$http', '$window', 'Auth', 'ngDialog', 'Progress', 'Messages'];
+    signinService.$inject = ['$window', 'Auth', 'ngDialog', 'Progress', 'Messages'];
 
-    function signinService($controller, $rootScope, $injector, $http, $window, Auth, ngDialog, Progress, Messages) {
-        var srv = this;
-        srv.signin = signin;
+    function signinService($window, Auth, ngDialog, Progress, Messages) {
+        var srv = this,
+            ui = null;
+        srv.open = open;
+        srv.close = close;
         srv.externalSignin = externalSignin;
 
-        function signin() {
-            Progress.start();
-            Auth.getAvailableLogins().then(getAvailableLoginsSuccess, getAvailableLoginsError);
+        function open() {
+            if (!ui) {
+                Progress.start();
+                Auth.getAvailableLogins().then(getAvailableLoginsSuccess, getAvailableLoginsError);
+            }
+        }
+
+        function close() {
+            if (ui) {
+                ui.close();
+                ui = null;
+            }
         }
 
         function externalSignin(loginResult) {
@@ -37,18 +48,23 @@
         }
 
         function getAvailableLoginsSuccess(response) {
-            ngDialog.open({
+            ui = ngDialog.open({
                 template: 'app/src/auth/signin.html',
                 cache: true,
                 className: 'dialog-theme-contextmenu',
                 controller: 'SignInController as ctrl',
                 showClose: false,
+                preCloseCallback: onUIClose,
                 locals: {
                     loginOptions: response
                 }
             });
 
             Progress.stop();
+        }
+
+        function onUIClose() {
+            ui = null;
         }
 
         function getAvailableLoginsError() {

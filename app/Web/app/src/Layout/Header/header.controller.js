@@ -16,7 +16,7 @@
         activate();
 
         function signin() {
-            Signin.signin();
+            Signin.open();
         }
 
         function getMainMenu() {
