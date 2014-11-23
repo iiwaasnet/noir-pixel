@@ -80,7 +80,7 @@ namespace Web
         {
             yield return "~/app/src/sys-messages/messages.module.js";
             yield return "~/app/src/sys-messages/messages.service.js";
-            yield return "~/app/src/sys-messages/error.controller.js";
+            yield return "~/app/src/sys-messages/message.controller.js";
         }
 
         private static IEnumerable<string> Progress()

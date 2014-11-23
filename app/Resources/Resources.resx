@@ -132,6 +132,9 @@
   <data name="EditHint_UserName" xml:space="preserve">
     <value>User name or email</value>
   </data>
+  <data name="Err_Auth_Unknown" xml:space="preserve">
+    <value>An error occurred while trying to Sign you in. Please, try one more time later.</value>
+  </data>
   <data name="MainMenu_Exhibitions" xml:space="preserve">
     <value>Exhibitions</value>
   </data>

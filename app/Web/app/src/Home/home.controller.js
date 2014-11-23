@@ -12,11 +12,19 @@
         ctrl.message = message;
 
         function error() {
-            Messages.error({header: 'Simple error message'});
+            Messages.error({
+                main: {
+                    text: 'Simple error message'
+                }
+            });
         }
 
         function message() {
-            Messages.message({header: 'Simple text message'});
+            Messages.message({
+                main: {
+                    text: 'Simple text message'
+                }
+            });
         }
     }
 })();
