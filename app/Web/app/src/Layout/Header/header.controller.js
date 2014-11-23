@@ -45,8 +45,7 @@
         function getSignInMenu() {
             return {
                 signOut: Strings.getLocalizedString('AuthMenu_SignOut'),
-                signIn: Strings.getLocalizedString('AuthMenu_SignIn'),
-                signUp: Strings.getLocalizedString('AuthMenu_SignUp')
+                signIn: Strings.getLocalizedString('AuthMenu_SignIn')
             };
         }
 
@@ -59,7 +58,7 @@
             buildMenus();
         }
 
-        function activate() {
+        function activate() {            
             buildMenus();
 
             EventsHub.addListener(EventsHub.events.SignedIn, onSignStatuesChanged);

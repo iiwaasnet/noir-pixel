@@ -458,7 +458,6 @@
     <Content Include="app\src\logging\exceptionLogging.factory.js" />
     <Content Include="app\src\layout\header\header.controller.js" />
     <Content Include="app\src\layout\header\mainMenu.service.js" />
-    <Content Include="app\src\layout\header\signMenu.service.js" />
     <Content Include="app\vendor\angular-messages.min.js.map" />
     <Content Include="config\Environment.config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

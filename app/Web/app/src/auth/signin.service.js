@@ -67,11 +67,9 @@
             ui = null;
         }
 
-        function getAvailableLoginsError() {
+        function getAvailableLoginsError(error) {
             Progress.stop();
-            Messages.error({
-                main: { id: 'Err_Auth_Unknown' }
-            });
+            Messages.error(error);
         }
 
         function finalizeSigninError(error) {

@@ -137,7 +137,6 @@ namespace Web
         {
             yield return "~/app/src/layout/layout.module.js";
             yield return "~/app/src/layout/header/mainMenu.service.js";
-            yield return "~/app/src/layout/header/signMenu.service.js";
             yield return "~/app/src/layout/header/header.controller.js";
         }
 
