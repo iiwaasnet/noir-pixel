@@ -19,7 +19,7 @@
                 className: 'dialog-theme-messages error',
                 showClose: true,
                 locals: {
-                    message: convertToError(err)
+                    message: convertToMessage(err)
                 }
             });
         }
@@ -37,23 +37,15 @@
             });
         }
 
-        function convertToError(err) {
-            var tmp = {
-                main: err.main.text ? err.main.text : Strings.getLocalizedString(err.main.id)
-            };
-            if (err.aux) {
-                tmp.aux = err.aux.text ? err.aux.text : Strings.getLocalizedString(err.aux.id);
+        function convertToMessage(obj) {
+            var tmp = { main: obj };
+            if (obj.main) {
+                tmp.main = obj.main.text ? obj.main.text : Strings.getLocalizedString(obj.main.id);
+                if (obj.aux) {
+                    tmp.aux = obj.aux.text ? obj.aux.text : Strings.getLocalizedString(obj.aux.id);
+                }
             }
-            return tmp;
-        }
 
-        function convertToMessage(msg) {
-            var tmp = {
-                main: msg.main.text ? msg.main.text : Strings.getLocalizedString(msg.main.id)
-            };
-            if (msg.aux) {
-                tmp.aux = msg.aux.text ? msg.aux.text : Strings.getLocalizedString(msg.aux.id);
-            }
             return tmp;
         }
     }

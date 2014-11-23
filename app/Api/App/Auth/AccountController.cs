@@ -9,10 +9,12 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Http.Results;
 using Api.App.Auth.ExternalUserInfo;
+using Api.Errors;
 using Api.Models;
 using Api.Providers;
 using Api.Results;
 using AspNet.Identity.MongoDB;
+using Diagnostics;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -32,9 +34,14 @@ namespace Api.App.Auth
         private readonly ApplicationUserManager userManager;
         private readonly AuthOptions authOptions;
         private readonly IExternalAccountsManager externalAccountsManager;
+        private readonly ILogger logger;
 
-        public AccountController(ApplicationUserManager userManager, AuthOptions authOptions, IExternalAccountsManager externalAccountsManager)
+        public AccountController(ApplicationUserManager userManager,
+                                 AuthOptions authOptions,
+                                 IExternalAccountsManager externalAccountsManager,
+                                 ILogger logger)
         {
+            this.logger = logger;
             this.userManager = userManager;
             this.authOptions = authOptions;
             this.externalAccountsManager = externalAccountsManager;
@@ -77,41 +84,48 @@ namespace Api.App.Auth
             if (error != null)
             {
                 redirectUri = string.Format("{0}#error={1}", redirectUri, Uri.EscapeDataString(error));
-
-                return Redirect(redirectUri);
             }
-
-            if (!User.Identity.IsAuthenticated)
+            else
             {
-                return new ChallengeResult(provider, this);
+                try
+                {
+                    if (!User.Identity.IsAuthenticated)
+                    {
+                        return new ChallengeResult(provider, this);
+                    }
+
+                    var externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+
+                    if (externalLogin == null)
+                    {
+                        return InternalServerError();
+                    }
+
+                    if (externalLogin.LoginProvider != provider)
+                    {
+                        GetAuthentication().SignOut(DefaultAuthenticationTypes.ExternalCookie);
+                        return new ChallengeResult(provider, this);
+                    }
+
+                    var user = await userManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
+                                                                             externalLogin.ProviderKey));
+
+                    var registered = user != null;
+
+                    //TODO: Refactor. GetRedirectUri() should be called earlier with other checks to return proper error http response 
+
+                    redirectUri = string.Format("{0}#external_access_token={1}&registered={2}&provider={3}",
+                                                redirectUri,
+                                                externalLogin.ExternalAccessToken,
+                                                registered.ToString().ToLower(),
+                                                provider);
+                }
+                catch (Exception err)
+                {
+                    logger.Error(err);
+                    redirectUri = string.Format("{0}#error={1}", redirectUri, Uri.EscapeDataString(ApiErrors.AuthUnknownError));
+                }
             }
-
-            var externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
-
-            if (externalLogin == null)
-            {
-                return InternalServerError();
-            }
-
-            if (externalLogin.LoginProvider != provider)
-            {
-                GetAuthentication().SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                return new ChallengeResult(provider, this);
-            }
-
-            var user = await userManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
-                                                                     externalLogin.ProviderKey));
-
-            var registered = user != null;
-
-            //TODO: Refactor. GetRedirectUri() should be called earlier with other checks to return proper error http response 
-            
-            redirectUri = string.Format("{0}#external_access_token={1}&registered={2}&provider={3}",
-                                            redirectUri,
-                                            externalLogin.ExternalAccessToken,
-                                            registered.ToString().ToLower(),
-                                            provider);
-
             return Redirect(redirectUri);
         }
 

@@ -4,9 +4,9 @@
     angular.module('np.auth')
         .service('Signin', signinService);
 
-    signinService.$inject = ['$controller', '$rootScope', '$injector', '$http', 'Auth', 'ngDialog', 'Progress', 'Messages'];
+    signinService.$inject = ['$controller', '$rootScope', '$injector', '$http', '$window', 'Auth', 'ngDialog', 'Progress', 'Messages'];
 
-    function signinService($controller, $rootScope, $injector, $http, Auth, ngDialog, Progress, Messages) {
+    function signinService($controller, $rootScope, $injector, $http, $window, Auth, ngDialog, Progress, Messages) {
         var srv = this;
         srv.signin = signin;
         srv.externalSignin = externalSignin;
@@ -16,8 +16,24 @@
             Auth.getAvailableLogins().then(getAvailableLoginsSuccess, getAvailableLoginsError);
         }
 
-        function externalSignin() {
+        function externalSignin(loginResult) {
+            Progress.start();
+            if (loginResult.error) {
+                finalizeSigninError(loginResult.error);
+            } else {
+                if (loginResult.registered) {
+                    Auth.getLocalToken(loginResult.externalAccessToken, loginResult.provider)
+                        .then(finalizeSigninSuccess, finalizeSigninError);
+                } else {
+                    Auth.registerExternal(loginResult.externalAccessToken, loginResult.provider)
+                        .then(registerExternalSuccess, finalizeSigninError);
+                }
+            }
+        }
 
+        function registerExternalSuccess(externalToken) {
+            Auth.getLocalToken(externalToken, 'GooglePlus')
+                .then(finalizeSigninSuccess, finalizeSigninError);
         }
 
         function getAvailableLoginsSuccess(response) {
@@ -40,6 +56,21 @@
             Messages.error({
                 main: { id: 'Err_Auth_Unknown' }
             });
+        }
+
+        function finalizeSigninError(error) {
+            $window.opener.$scope.finalizeLogin({
+                succeeded: false,
+                error: error
+            });
+            $window.close();
+        }
+
+        function finalizeSigninSuccess() {
+            $window.opener.$scope.finalizeLogin({
+                succeeded: true
+            });
+            $window.close();
         }
     }
 })();

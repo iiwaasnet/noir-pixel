@@ -1,6 +1,7 @@
 ﻿@import (reference) "sprites64.less";
 @import (reference) "constants.less";
 @import (reference) "colors.less";
+@import (reference) "fonts.less";
 
 #signin-menu-target{
     left: 0;
@@ -42,5 +43,17 @@
 
     .icon-googleplus {
         .sprite(@google);
+    }
+}
+
+#external-signin{
+    display: table-row;
+
+    .content{
+        font-size: 1.5em;
+        position: absolute;
+        top: 30%;
+        text-align: center;
+        width: 100%;
     }
 }

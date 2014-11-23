@@ -4,41 +4,19 @@
     angular.module('np.auth')
         .controller('ExternalSignInController', externalSignInController);
 
-    externalSignInController.$inject = ['$location', '$window', 'Auth', 'Url'];
+    externalSignInController.$inject = ['$location', '$window', 'Url', 'Signin'];
 
-    function externalSignInController($location, $window, Auth, Url) {
-        var ctrl = this;
-            
+    function externalSignInController($location, $window, Url, Signin) {
         activate();
        
-
         function activate() {
             var loginResult = getExternalLoginResult();
-            if (loginResult.error) {
-                alert(loginResult.error);
-            } else {
-                if (loginResult.registered) {
-                    Auth.getLocalToken(loginResult.externalAccessToken, loginResult.provider)
-                        .then(getLocalTokenSuccess, getLocalTokenError);
-                } else {
-                    Auth.registerExternal(loginResult.externalAccessToken, loginResult.provider)
-                        .then(registerExternalSuccess, registerExternalError);
-                }
-            }
-        }
-
-        function registerExternalSuccess(externalToken) {
-            Auth.getLocalToken(externalToken, 'GooglePlus')
-            .then(getLocalTokenSuccess, getLocalTokenError);
-        }
-
-        function registerExternalError(err) {
+            Signin.externalSignin(loginResult);
             
         }
 
         function getExternalLoginResult() {
             var params = Url.parseQueryString($location.hash());
-
             if (params.error) {
                 return {
                     error: params.error
@@ -51,12 +29,5 @@
                 provider: params.provider
             };
         }
-
-        function getLocalTokenSuccess() {
-            $window.opener.$scope.finalizeLogin();
-            $window.close();
-        }
-
-        function getLocalTokenError() {}
     }
 })();

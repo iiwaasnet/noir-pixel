@@ -88,6 +88,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occurred while trying to Sign you in. Please, try one more time later..
+        /// </summary>
+        public static string EAPI_Auth_Unknown {
+            get {
+                return ResourceManager.GetString("EAPI_Auth_Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string EditHint_Password {
@@ -102,15 +111,6 @@ namespace Resources {
         public static string EditHint_UserName {
             get {
                 return ResourceManager.GetString("EditHint_UserName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to An error occurred while trying to Sign you in. Please, try one more time later..
-        /// </summary>
-        public static string Err_Auth_Unknown {
-            get {
-                return ResourceManager.GetString("Err_Auth_Unknown", resourceCulture);
             }
         }
         
@@ -147,6 +147,15 @@ namespace Resources {
         public static string Signin {
             get {
                 return ResourceManager.GetString("Signin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Signing in....
+        /// </summary>
+        public static string SignIn_FinalizeSignin {
+            get {
+                return ResourceManager.GetString("SignIn_FinalizeSignin", resourceCulture);
             }
         }
         

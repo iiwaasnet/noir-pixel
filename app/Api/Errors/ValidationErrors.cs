@@ -2,8 +2,8 @@
 {
     public class ValidationErrors
     {
-        public const string RequiredField = "EV_REQUIRED";
-        public const string NotSame = "EV_NOTSAME";
-        public const string InvalidEmail = "EV_INVALIDEMAIL";
+        public const string RequiredField = "EV_Required";
+        public const string NotSame = "EV_NotSame";
+        public const string InvalidEmail = "EV_InvalideMail";
     }
 }
