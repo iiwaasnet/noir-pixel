@@ -26,12 +26,6 @@
                 controller: 'HomeController',
                 controllerAs: 'ctrl'
             })
-            //.state('signIn', {
-            //    url: '/signin?redirectTo',
-            //    templateUrl: '/app/src/Auth/signin.html',
-            //    controller: 'SignInController',
-            //    controllerAs: 'ctrl'
-            //})
             .state('externalSignIn', {
                 url: '/external-signin',
                 templateUrl: '/app/src/Auth/external-signin.html',

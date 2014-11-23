@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Web.Components.Common
+<!DOCTYPE html>
 @*<html ng-app="np">*@
 <html>
     <head>
@@ -11,7 +12,10 @@
     </head>
     <body>
         @{
-            Response.WriteFile("~/app/src/Layout/Header/header.html");
+            if (Request.ShowHeader())
+            {
+                Response.WriteFile("~/app/src/Layout/Header/header.html");
+            }
         }
         <main>
             <div ui-view>
@@ -19,7 +23,12 @@
             </div>
         </main>
 
-        @{ Response.WriteFile("~/app/src/Layout/Footer/footer.html"); }
+        @{
+            if (Request.ShowHFooter())
+            {
+                Response.WriteFile("~/app/src/Layout/Footer/footer.html");
+            }
+        }
 
         @Scripts.Render("~/bundles/vendor-native")
         @Scripts.Render("~/bundles/angular")

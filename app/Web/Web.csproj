@@ -158,6 +158,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\MainModule.cs" />
+    <Compile Include="Components\Common\RequestExtensions.cs" />
     <Compile Include="Components\Configuration\ConfigurationModule.cs" />
     <Compile Include="Components\DeviceDetection\DeviceDetection.cs" />
     <Compile Include="Components\DeviceDetection\DeviceDetectionModule.cs" />
