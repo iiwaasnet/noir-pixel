@@ -20,7 +20,6 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WebGrease.Css.Extensions;
 
@@ -111,8 +110,6 @@ namespace Api.App.Auth
                                                                              externalLogin.ProviderKey));
 
                     var registered = user != null;
-
-                    //TODO: Refactor. GetRedirectUri() should be called earlier with other checks to return proper error http response 
 
                     redirectUri = string.Format("{0}#external_access_token={1}&registered={2}&provider={3}",
                                                 redirectUri,
@@ -455,141 +452,6 @@ namespace Api.App.Auth
 
             return GetIdentityResult(result);
         }
-
-        // GET account/external-login
-
-        private async Task<ParsedExternalAccessToken> VerifyExternalAccessToken(string provider, string accessToken)
-        {
-            ParsedExternalAccessToken parsedToken = null;
-
-            var endPoint = "";
-
-            if (provider == "Facebook")
-            {
-                //You can get it from here: https://developers.facebook.com/tools/accesstoken/
-                //More about debug_tokn here: http://stackoverflow.com/questions/16641083/how-does-one-get-the-app-access-token-for-debug-token-inspection-on-facebook
-                var appToken = "xxxxxx";
-                endPoint = string.Format("https://graph.facebook.com/debug_token?input_token={0}&access_token={1}", accessToken, appToken);
-            }
-            else if (provider == "GooglePlus")
-            {
-                endPoint = string.Format("https://www.googleapis.com/oauth2/v1/tokeninfo?access_token={0}", accessToken);
-            }
-            else
-            {
-                return null;
-            }
-
-            var client = new HttpClient();
-            var uri = new Uri(endPoint);
-            var response = await client.GetAsync(uri);
-
-            if (response.IsSuccessStatusCode)
-            {
-                var content = await response.Content.ReadAsStringAsync();
-
-                dynamic jObj = JsonConvert.DeserializeObject(content);
-
-                parsedToken = new ParsedExternalAccessToken();
-
-                if (provider == "Facebook")
-                {
-                    parsedToken.user_id = jObj["data"]["user_id"];
-                    parsedToken.app_id = jObj["data"]["app_id"];
-
-                    //TODO: Uncomment and fix!!!!
-                    //if (!string.Equals(Startup.facebookAuthOptions.AppId, parsedToken.app_id, StringComparison.OrdinalIgnoreCase))
-                    //{
-                    //    return null;
-                    //}
-                }
-                else if (provider == "GooglePlus")
-                {
-                    parsedToken.user_id = jObj.user_id;
-                    parsedToken.app_id = jObj.audience;
-                    parsedToken.email = jObj.email;
-
-                    if (!string.Equals(authOptions.GooglePlusAuthOptions.ClientId, parsedToken.app_id, StringComparison.OrdinalIgnoreCase))
-                    {
-                        return null;
-                    }
-                }
-            }
-
-            //TODO: If response.IsSuccessStatusCode == false, then re-authentication needed
-            return parsedToken;
-        }
-
-        //private async Task<ExternalUserInfo.ExternalUserInfo> GetExternalUserInfo(string provider, string user_id, string accessToken)
-        //{
-        //    ExternalUserInfo.ExternalUserInfo token = null;
-
-        //    var endPoint = "";
-
-        //    if (provider == "Facebook")
-        //    {
-        //        //You can get it from here: https://developers.facebook.com/tools/accesstoken/
-        //        //More about debug_tokn here: http://stackoverflow.com/questions/16641083/how-does-one-get-the-app-access-token-for-debug-token-inspection-on-facebook
-        //        var appToken = "xxxxxx";
-        //        endPoint = string.Format("https://graph.facebook.com/debug_token?input_token={0}&access_token={1}", accessToken, appToken);
-        //    }
-        //    else if (provider == "GooglePlus")
-        //    {
-        //        endPoint = string.Format("https://www.googleapis.com/plus/v1/people/{0}?access_token={1}", user_id, accessToken);
-        //    }
-        //    else
-        //    {
-        //        return null;
-        //    }
-
-        //    var client = new HttpClient();
-        //    var uri = new Uri(endPoint);
-        //    var response = await client.GetAsync(uri);
-
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        var content = await response.Content.ReadAsStringAsync();
-
-        //        dynamic jObj = JsonConvert.DeserializeObject(content);
-
-        //        token = new ExternalUserInfo.ExternalUserInfo();
-
-        //        //if (provider == "Facebook")
-        //        //{
-        //        //    token.user_id = jObj["data"]["user_id"];
-        //        //    token.app_id = jObj["data"]["app_id"];
-
-        //        //    //TODO: Uncomment and fix!!!!
-        //        //    //if (!string.Equals(Startup.facebookAuthOptions.AppId, parsedToken.app_id, StringComparison.OrdinalIgnoreCase))
-        //        //    //{
-        //        //    //    return null;
-        //        //    //}
-        //        //}
-
-        //        if (provider == "GooglePlus")
-        //        {
-        //            token.Person = new PersonInfo
-        //                           {
-        //                               Id = jObj.id,
-        //                               DisplayName = jObj.displayName,
-        //                               FirstName = jObj.name.givenName,
-        //                               LastName = jObj.name.familyName,
-        //                               Gender = jObj.gender,
-        //                               Image = jObj.image.url
-        //                           };
-        //            token.Emails = GetEmails(jObj.emails);
-        //            //token.Links;
-
-        //            if (!string.Equals(user_id, token.Person.Id, StringComparison.OrdinalIgnoreCase))
-        //            {
-        //                return null;
-        //            }
-        //        }
-        //    }
-
-        //    //TODO: If response.IsSuccessStatusCode == false, then re-authentication needed
-        //    return token;
-        //}
 
         private static ExternalLoginInfo GetExternalLoginInfo(AuthenticateResult result)
         {
