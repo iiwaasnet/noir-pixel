@@ -16,20 +16,8 @@ namespace Api.App.Auth
         public ApplicationUserManager(IUserStore<ApplicationUser> store)
             : base(store)
         {
-            UserValidator = new UserValidator<ApplicationUser>(this)
-                            {
-                                AllowOnlyAlphanumericUserNames = false,
-                                RequireUniqueEmail = true
-                            };
-            // Configure validation logic for passwords
-            PasswordValidator = new PasswordValidator
-                                {
-                                    RequiredLength = 6,
-                                    RequireNonLetterOrDigit = false,
-                                    RequireDigit = false,
-                                    RequireLowercase = false,
-                                    RequireUppercase = false,
-                                };
+            UserValidator = CreateUserValidator();
+            PasswordValidator = CreatePasswordValidator();
 
             var provider = new DpapiDataProtectionProvider("np");
             UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser, string>(provider.Create("Web.Api Identity"));
@@ -41,7 +29,7 @@ namespace Api.App.Auth
         /// <param name="userId">user id</param>
         /// <param name="roles">list of role names</param>
         /// <returns></returns>
-        public virtual async Task<IdentityResult> AddUserToRolesAsync(string userId, IList<string> roles)
+        public virtual async Task<IdentityResult> AddUserToRolesAsync(string userId, IEnumerable<string> roles)
         {
             var userRoleStore = (IUserRoleStore<ApplicationUser, string>) Store;
 
@@ -68,7 +56,7 @@ namespace Api.App.Auth
         /// <param name="userId">user id</param>
         /// <param name="roles">list of role names</param>
         /// <returns></returns>
-        public virtual async Task<IdentityResult> RemoveUserFromRolesAsync(string userId, IList<string> roles)
+        public virtual async Task<IdentityResult> RemoveUserFromRolesAsync(string userId, IEnumerable<string> roles)
         {
             var userRoleStore = (IUserRoleStore<ApplicationUser, string>) Store;
 
@@ -87,6 +75,27 @@ namespace Api.App.Auth
 
             // Call update once when all roles are removed
             return await UpdateAsync(user).ConfigureAwait(false);
+        }
+
+        private static PasswordValidator CreatePasswordValidator()
+        {
+            return new PasswordValidator
+                   {
+                       RequiredLength = 6,
+                       RequireNonLetterOrDigit = false,
+                       RequireDigit = false,
+                       RequireLowercase = false,
+                       RequireUppercase = false,
+                   };
+        }
+
+        private UserValidator<ApplicationUser> CreateUserValidator()
+        {
+            return new UserValidator<ApplicationUser>(this)
+                   {
+                       AllowOnlyAlphanumericUserNames = false,
+                       RequireUniqueEmail = true
+                   };
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Api.Errors
+﻿namespace Api.App.Errors
 {
     public class ValidationErrors
     {

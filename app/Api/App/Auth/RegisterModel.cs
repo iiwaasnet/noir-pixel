@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using Api.Errors;
+using Api.App.Errors;
 
 namespace Api.App.Auth
 {

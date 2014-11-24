@@ -9,7 +9,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Http.Results;
 using Api.App.Auth.ExternalUserInfo;
-using Api.Errors;
+using Api.App.Errors;
 using Api.Models;
 using Api.Providers;
 using Api.Results;

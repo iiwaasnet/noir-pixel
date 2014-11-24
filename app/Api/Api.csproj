@@ -283,8 +283,8 @@
     <Compile Include="App\Auth\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="Errors\ApiErrors.cs" />
-    <Compile Include="Errors\ValidationErrors.cs" />
+    <Compile Include="App\Errors\ApiErrors.cs" />
+    <Compile Include="App\Errors\ValidationErrors.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
