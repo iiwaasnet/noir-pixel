@@ -4,19 +4,20 @@
     angular.module('np.home')
         .controller('HomeController', homeController);
 
-    homeController.$inject = ['Messages'];
+    homeController.$inject = ['Messages', 'Progress'];
 
-    function homeController(Messages) {
+    function homeController(Messages, Progress) {
         var ctrl = this;
         ctrl.error = error;
         ctrl.message = message;
 
         function error() {
-            Messages.error({
-                main: {
-                    text: 'Simple error message'
-                }
-            });
+            Progress.start();
+            //Messages.error({
+            //    main: {
+            //        text: 'Simple error message'
+            //    }
+            //});
         }
 
         function message() {

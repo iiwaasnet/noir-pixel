@@ -10,50 +10,61 @@
         @Styles.Render("~/bundles/css")
         <base href="/"/>
     </head>
-    <body>
-        <div class="body-content" ng-cloak>
-            @{
-                if (Request.ShowHeader())
-                {
-                    Html.RenderPartial("~/app/src/layout/header/header.cshtml");
-                }
-            }
-            <main>
-                <div ui-view>
-                    @RenderBody()
-                </div>
-            </main>
-
-            @{
-                if (Request.ShowFooter())
-                {
-                    Html.RenderPartial("~/app/src/layout/footer/footer.cshtml");
-                }
-}
+<body>
+    <div id="splash" ng-if="false">
+        <div class="message">Loading...</div>
+        <div id="nprogress" class="nprogress-custom-parent">
+            <div class="spinner" role="spinner">
+                <div class="spinner-icon"></div>
+            </div>
         </div>
-        @Scripts.Render("~/bundles/vendor-native")
-        @Scripts.Render("~/bundles/angular")
-        @Scripts.Render("~/bundles/vendor-ng")
-        @Scripts.Render("~/bundles/vendor-ng-min")
-        @*@Scripts.Render("~/bundles/vendor-min")*@
-        @Scripts.Render("~/bundles/app")
 
-        <script type="text/javascript">
-            (function() {
-                var srv = angular.injector(['ng', 'np.i18n']).get('Strings');
-                srv.init()
-                    .then(function() {
-                            angular.element(document).ready(function() {
-                                angular.bootstrap(document, ['np']);
-                            });
-                        },
-                        function() {
-                            alert("Sorry, something went wrong :(");
-                        });
+    </div>
+    <div ng-cloak>
+        @{
+            if (Request.ShowHeader())
+            {
+                Html.RenderPartial("~/app/src/layout/header/header.cshtml");
+            }
+        }
+        <main>
+            <div ui-view>
+                @RenderBody()
+            </div>
+        </main>
 
-            })();
-        </script>
+        @{
+            if (Request.ShowFooter())
+            {
+                Html.RenderPartial("~/app/src/layout/footer/footer.cshtml");
+            }
+        }
+    </div>
+    @Scripts.Render("~/bundles/vendor-native")
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/vendor-ng")
+    @Scripts.Render("~/bundles/vendor-ng-min")
+    @*@Scripts.Render("~/bundles/vendor-min")*@
+    @Scripts.Render("~/bundles/app")
 
-    </body>
+    <script type="text/javascript">
+        (function () {
+            var srv = angular.injector(['ng', 'np.i18n']).get('Strings');
+            srv.init()
+                .then(function () {
+                    angular.element(document).ready(function () {
+                        angular.bootstrap(document, ['np']);
+                    });
+                },
+                    function () {
+                        alert("Sorry, something went wrong :(");
+                    });
+
+        })();
+    </script>
+
+</body>
+
+
 
 </html>

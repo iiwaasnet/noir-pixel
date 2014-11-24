@@ -274,6 +274,7 @@
       <DependentUpon>dialog-theme-messages.css</DependentUpon>
     </Content>
     <Content Include="app\less\dialogs\dialog-mixins.less" />
+    <Content Include="app\less\cloak.less" />
     <None Include="app\less\dialogs\ngDialog-theme-default.less" />
     <Content Include="app\less\dialogs\ngDialog.css.map">
       <DependentUpon>ngDialog.css</DependentUpon>
