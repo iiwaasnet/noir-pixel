@@ -8,7 +8,7 @@
 
     function signinService($window, Auth, ngDialog, Progress, Messages) {
         var srv = this,
-            ui = null;
+            ui = undefined;
         srv.open = open;
         srv.close = close;
         srv.externalSignin = externalSignin;
@@ -23,7 +23,7 @@
         function close() {
             if (ui) {
                 ui.close();
-                ui = null;
+                ui = undefined;
             }
         }
 
@@ -64,7 +64,7 @@
         }
 
         function onUIClose() {
-            ui = null;
+            ui = undefined;
         }
 
         function getAvailableLoginsError(error) {
