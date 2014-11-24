@@ -11,25 +11,26 @@
         <base href="/"/>
     </head>
     <body>
-        @{
-            if (Request.ShowHeader())
-            {
-                Response.WriteFile("~/app/src/Layout/Header/header.html");
+        <div class="body-content" ng-cloak>
+            @{
+                if (Request.ShowHeader())
+                {
+                    Html.RenderPartial("~/app/src/layout/header/header.cshtml");
+                }
             }
-        }
-        <main>
-            <div ui-view>
-                @RenderBody()
-            </div>
-        </main>
+            <main>
+                <div ui-view>
+                    @RenderBody()
+                </div>
+            </main>
 
-        @{
-            if (Request.ShowHFooter())
-            {
-                Response.WriteFile("~/app/src/Layout/Footer/footer.html");
-            }
-        }
-
+            @{
+                if (Request.ShowFooter())
+                {
+                    Html.RenderPartial("~/app/src/layout/footer/footer.cshtml");
+                }
+}
+        </div>
         @Scripts.Render("~/bundles/vendor-native")
         @Scripts.Render("~/bundles/angular")
         @Scripts.Render("~/bundles/vendor-ng")

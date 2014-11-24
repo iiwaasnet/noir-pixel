@@ -11,7 +11,7 @@ namespace Web.Components.Common
             return request.Path.ToLower() != ExternalSignin;
         }
         
-        public static bool ShowHFooter(this HttpRequestBase request)
+        public static bool ShowFooter(this HttpRequestBase request)
         {
             return request.Path.ToLower() != ExternalSignin;
         }

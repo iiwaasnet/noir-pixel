@@ -432,10 +432,10 @@
     <Content Include="app\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\src\layout\header\header.html" />
+    <None Include="app\src\layout\header\header.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\src\layout\footer\footer.html" />
+    <None Include="app\src\layout\footer\footer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Diagnostics\Diagnostics.csproj">
