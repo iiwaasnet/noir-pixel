@@ -11,8 +11,6 @@
             signInState = 'signIn',
             loginRedirectStorageKey = 'loginRedirectState',
             availableLogins = [];
-        service.signIn = signIn;
-        service.googleSignIn = googleSignIn;
         service.signOut = signOut;
         service.authenticated = authenticated;
         service.registerExternal = registerExternal;
@@ -23,13 +21,7 @@
         function authenticated() {
             return !!TokenStorage.getToken();
         }
-
-        function googleSignIn(redirectState) {
-            saveLoginRedirectState(redirectState);
-
-            return getApiExternalLoginUrl('GooglePlus');
-        }
-
+       
         function getLoginsFromServer() {
             var externalSignIn = $state.get('externalSignIn').url.split('?')[0],
                 redirectUrl = Url.build(Config.siteBaseUri, externalSignIn);
@@ -63,30 +55,6 @@
 
             deferred.resolve(availableLogins);
         }
-
-        function getApiExternalLoginUrl(provider) {
-            var externalSignIn = $state.get('externalSignIn').url.split('?')[0],
-                redirectUrl = Url.build(Config.siteBaseUri, externalSignIn);
-
-            return Url.build(Config.apiUris.base, Config.apiUris.externalLogin.format(provider, encodeURIComponent(redirectUrl)));
-        }
-
-        function signIn(userName, pwd, redirectState) {
-            saveLoginRedirectState(redirectState);
-
-            var url = Url.build(Config.apiUris.base, Config.apiUris.signin),
-                data = "grant_type=password&username={0}&password={1}".format(userName, pwd),
-                deferred = $q.defer();
-
-            $http.post(url,
-                    data,
-                    { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
-                .success(function(response) { signInSuccess(response, deferred); })
-                .error(function(err, status) { signInError(err, status, deferred); });
-
-            return deferred.promise;
-        }
-
 
         function getLocalToken(externalToken, provider) {
             var url = Url.build(Config.apiUris.base, Config.apiUris.localAccessToken),
