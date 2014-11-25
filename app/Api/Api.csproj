@@ -240,8 +240,8 @@
     <Compile Include="App\Auth\ApplicationIdentityContext.cs" />
     <Compile Include="App\Auth\ApplicationRoleManager.cs" />
     <Compile Include="App\Auth\AuthModule.cs" />
+    <Compile Include="App\Db\DbServerConfiguration.cs" />
     <Compile Include="App\Db\DbConfiguration.cs" />
-    <Compile Include="App\Db\IdentityDbConfiguration.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\ConfigurationModule.cs" />
     <Compile Include="App_Start\CustomExceptionLogger.cs" />
@@ -366,6 +366,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Api.Core\Api.Core.csproj">
+      <Project>{50a6ff75-22bc-493d-8b93-fca6c0c9af92}</Project>
+      <Name>Api.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Diagnostics\Diagnostics.csproj">
       <Project>{fa2d348c-a9d9-45ef-8059-1ab5d1554e67}</Project>
       <Name>Diagnostics</Name>

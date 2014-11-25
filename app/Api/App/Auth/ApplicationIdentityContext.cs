@@ -15,7 +15,7 @@ namespace Api.App.Auth
 
         public static ApplicationIdentityContext Create(IConfigProvider configProvider)
         {
-            var config = configProvider.GetConfiguration<DbConfiguration>();
+            var config = configProvider.GetConfiguration<DbServerConfiguration>();
 
             var client = new MongoClient(config.Server);
             var database = client.GetServer().GetDatabase(config.Identity.Database);
