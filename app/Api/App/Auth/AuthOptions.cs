@@ -25,7 +25,7 @@ namespace Api.App.Auth
                                     TokenEndpointPath = new PathString("/token"),
                                     AccessTokenExpireTimeSpan = authConfig.AccessTokenExpirationTime,
                                     AuthorizeEndpointPath = new PathString("/account/external-login"),
-                                    Provider = new ApplicationOAuthProvider(PublicClientId, configProvider)
+                                    Provider = new ApplicationOAuthProvider(configProvider)
                                 };
             GooglePlusAuthOptions = new GooglePlusAuthenticationOptions
                                     {

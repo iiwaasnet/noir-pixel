@@ -1,26 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Api.App.Auth.Config;
 using JsonConfigurationProvider;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
+using Shared;
 
 namespace Api.App.Auth
 {
     public class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
     {
         private readonly string publicClientId;
+        private readonly string allowedOrigin;
 
-        public ApplicationOAuthProvider(string publicClientId, IConfigProvider configProvider)
+        public ApplicationOAuthProvider(IConfigProvider configProvider)
         {
-            if (publicClientId == null)
+            // TODO: Add HTTPS support, if needed
+            allowedOrigin = string.Format("http://{0}", configProvider.GetConfiguration<SiteConfiguration>().SiteUrl);
+            publicClientId = configProvider.GetConfiguration<AuthConfiguration>().PublicClientId;
+
+            AssertPublicClientIdNotNull();
+        }
+
+        private void AssertPublicClientIdNotNull()
+        {
+            if (string.IsNullOrWhiteSpace(publicClientId))
             {
                 throw new ArgumentNullException("publicClientId");
             }
-
-            this.publicClientId = publicClientId;
         }
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
@@ -46,12 +56,11 @@ namespace Api.App.Auth
             context.Request.Context.Authentication.SignIn(cookiesIdentity);
         }
 
-        private static void EnableCors(OAuthGrantResourceOwnerCredentialsContext context)
+        private void EnableCors(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            //TODO: Get web-site name from config
-            var allowedOrigin = context.OwinContext.Get<string>("as:clientAllowedOrigin") ?? "http://noir-pixel.com";
-            
-            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] {allowedOrigin});
+            var allowedClientOrigin = context.OwinContext.Get<string>("as:clientAllowedOrigin") ?? allowedOrigin;
+
+            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] {allowedClientOrigin});
         }
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)
@@ -66,7 +75,6 @@ namespace Api.App.Auth
 
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
-            // Resource owner password credentials does not provide a client ID.
             if (context.ClientId == null)
             {
                 context.Validated();
@@ -77,15 +85,12 @@ namespace Api.App.Auth
 
         public override Task ValidateClientRedirectUri(OAuthValidateClientRedirectUriContext context)
         {
-            //TODO: Check if client comes from allowed domains
             if (context.ClientId == publicClientId)
             {
-                //var expectedRootUri = new Uri(context.Request.Uri, "/");
-
-                //if (expectedRootUri.AbsoluteUri == context.RedirectUri)
-                //{
+                if (context.RedirectUri.StartsWith(allowedOrigin))
+                {
                     context.Validated();
-                //}
+                }
             }
 
             return Task.FromResult<object>(null);
