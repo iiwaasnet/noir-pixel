@@ -471,6 +471,7 @@
     </None>
     <Content Include="config\env\prod.json" />
     <Content Include="config\env\dev.json" />
+    <Content Include="config\Site.config.json" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

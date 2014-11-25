@@ -2,7 +2,7 @@
 using Diagnostics;
 using JsonConfigurationProvider;
 
-namespace Web.Components.Configuration
+namespace Api.App.Configuration
 {
     public class ConfigurationModule : Module
     {

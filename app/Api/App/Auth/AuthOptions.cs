@@ -1,42 +1,45 @@
 ﻿using System;
 using System.Linq;
+using Api.App.Auth.Config;
 using Api.App.Auth.ExternalUserInfo.Facebook;
 using Api.App.Auth.ExternalUserInfo.GPlus;
-using Api.Providers;
+using JsonConfigurationProvider;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Facebook;
 using Microsoft.Owin.Security.OAuth;
 using Owin.Security.Providers.GooglePlus;
+using WebGrease.Css.Extensions;
 
 namespace Api.App.Auth
 {
     public class AuthOptions
     {
-        public AuthOptions()
+        public AuthOptions(IConfigProvider configProvider)
         {
-            PublicClientId = "self";
+            var authConfig = configProvider.GetConfiguration<AuthConfiguration>();
+
+            PublicClientId = authConfig.PublicClientId;
             AuthServerOptions = new OAuthAuthorizationServerOptions
                                 {
                                     AllowInsecureHttp = true,
                                     TokenEndpointPath = new PathString("/token"),
-                                    AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
+                                    AccessTokenExpireTimeSpan = authConfig.AccessTokenExpirationTime,
                                     AuthorizeEndpointPath = new PathString("/account/external-login"),
-                                    Provider = new ApplicationOAuthProvider(PublicClientId)
+                                    Provider = new ApplicationOAuthProvider(PublicClientId, configProvider)
                                 };
             GooglePlusAuthOptions = new GooglePlusAuthenticationOptions
                                     {
-                                        ClientId = "180426522882-j68nln4atebaf3r1ddb6lgc7h4im2c7j.apps.googleusercontent.com",
-                                        ClientSecret = "yg_imJKvQIjYu40L01d23QZ4",
+                                        ClientId = authConfig.GooglePlus.ClientId,
+                                        ClientSecret = authConfig.GooglePlus.ClientSecret,
                                         Provider = new GooglePlusAuthProvider()
                                     };
             FacebookAuthOptions = new FacebookAuthenticationOptions
                                   {
-                                      AppId = "1513484548903273",
-                                      AppSecret = "a8b0b56b824359a0ff6e885d7fd3475a",
+                                      AppId = authConfig.Facebook.AppId,
+                                      AppSecret = authConfig.Facebook.AppSecret,
                                       Provider = new FacebookAuthProvider()
                                   };
-            FacebookAuthOptions.Scope.Add("public_profile");
-            FacebookAuthOptions.Scope.Add("email");
+            authConfig.Facebook.UserScope.ForEach(FacebookAuthOptions.Scope.Add);
         }
 
         public OAuthAuthorizationServerOptions AuthServerOptions { get; private set; }

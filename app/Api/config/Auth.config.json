@@ -1,0 +1,20 @@
+﻿[
+    {
+        "dev": {
+            publicClientId:  "self",
+            "accessTokenExpirationTime": "14.00:00:00",
+            "googlePlus": {
+                "clientId": "180426522882-j68nln4atebaf3r1ddb6lgc7h4im2c7j.apps.googleusercontent.com",
+                "clientSecret": "yg_imJKvQIjYu40L01d23QZ4"
+            },
+            "facebook": {
+                "appId": "1513484548903273",
+                "appSecret": "a8b0b56b824359a0ff6e885d7fd3475a",
+                "userScope": [
+                    "public_profile",
+                    "email"
+                ]
+            }
+        }
+    }
+]

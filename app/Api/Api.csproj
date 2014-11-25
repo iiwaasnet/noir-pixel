@@ -224,7 +224,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App\Auth\Config\AuthConfiguration.cs" />
     <Compile Include="App\Auth\AuthOptions.cs" />
+    <Compile Include="App\Auth\Config\FacebookConfiguration.cs" />
+    <Compile Include="App\Auth\Config\GooglePlusConfiguration.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\ExternalAccountsManager.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\ExternalUserInfo.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\Facebook\FacebookAccountProvider.cs" />
@@ -240,8 +243,9 @@
     <Compile Include="App\Auth\ApplicationIdentityContext.cs" />
     <Compile Include="App\Auth\ApplicationRoleManager.cs" />
     <Compile Include="App\Auth\AuthModule.cs" />
-    <Compile Include="App\Db\DbServerConfiguration.cs" />
+    <Compile Include="App\Configuration\ConfigurationModule.cs" />
     <Compile Include="App\Db\DbConfiguration.cs" />
+    <Compile Include="App\Db\DbServerConfiguration.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\ConfigurationModule.cs" />
     <Compile Include="App_Start\CustomExceptionLogger.cs" />
@@ -293,7 +297,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\ParsedExternalAccessToken.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\ApplicationOAuthProvider.cs" />
+    <Compile Include="App\Auth\ApplicationOAuthProvider.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\Facebook\FacebookAuthProvider.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\GPlus\GooglePlusAuthProvider.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\GPlus\GoogleAuthProvider.cs" />
@@ -345,6 +349,13 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="..\Web\config\Site.config.json">
+      <Link>config\Site.config.json</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="config\Auth.config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="config\Db.config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -377,6 +388,10 @@
     <ProjectReference Include="..\JsonConfigurationProvider\JsonConfigurationProvider.csproj">
       <Project>{7baef581-a42b-4a8a-af73-e9b1f52c1ffa}</Project>
       <Name>JsonConfigurationProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared\Shared.csproj">
+      <Project>{57171eff-d3d2-4abb-ba72-3d561594595b}</Project>
+      <Name>Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

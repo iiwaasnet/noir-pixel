@@ -11,7 +11,6 @@ using System.Web.Http.Results;
 using Api.App.Auth.ExternalUserInfo;
 using Api.App.Errors;
 using Api.Models;
-using Api.Providers;
 using Api.Results;
 using AspNet.Identity.MongoDB;
 using Diagnostics;
