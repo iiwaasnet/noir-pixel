@@ -28,7 +28,8 @@ namespace JsonConfigurationProvider
             jsonSerializerSettings = new JsonSerializerSettings
                                      {
                                          ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                                         Converters = {new JavaScriptDateTimeConverter()}
+                                         Converters = {new JavaScriptDateTimeConverter()},
+                                         MissingMemberHandling = MissingMemberHandling.Error
                                      };
         }
 
