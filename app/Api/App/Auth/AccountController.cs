@@ -221,7 +221,7 @@ namespace Api.App.Auth
                     new JProperty("userName", user.UserName),
                     new JProperty("access_token", accessToken),
                     new JProperty("token_type", "bearer"),
-                    //new JProperty("expires_in", tokenExpiration.TotalSeconds.ToString()),
+                    new JProperty("expires_in", authOptions.AuthServerOptions.AccessTokenExpireTimeSpan.TotalSeconds.ToString()),
                     new JProperty(".issued", ticket.Properties.IssuedUtc.ToString()),
                     new JProperty(".expires", ticket.Properties.ExpiresUtc.ToString())
                     );
