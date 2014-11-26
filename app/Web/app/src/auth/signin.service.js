@@ -42,8 +42,8 @@
             }
         }
 
-        function registerExternalSuccess(externalToken) {
-            Auth.getLocalToken(externalToken, 'GooglePlus')
+        function registerExternalSuccess(response) {
+            Auth.getLocalToken(response.access_token, response.provider)
                 .then(finalizeSigninSuccess, finalizeSigninError);
         }
 

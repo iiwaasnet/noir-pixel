@@ -171,7 +171,10 @@ namespace Api.App.Auth
                 return GetIdentityErrorResult(result);
             }
 
-            return Ok(new JObject(new JProperty("access_token", model.ExternalAccessToken)));
+            return Ok(new JObject(
+                new JProperty("access_token", model.ExternalAccessToken),
+                new JProperty("provider", model.Provider)
+                ));
         }
 
         private string CreateUserName(string displayName)

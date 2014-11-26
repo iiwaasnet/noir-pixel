@@ -83,28 +83,14 @@
         }
 
         function registerExternal(externalToken, provider) {
-            var url = Url.build(Config.apiUris.base, Config.apiUris.registerExternal),
-                deferred = $q.defer();
+            var url = Url.build(Config.apiUris.base, Config.apiUris.registerExternal);
 
-            $http.post(url,
+            return $http.post(url,
                 {
                     provider: provider,
                     externalAccessToken: externalToken
                 },
-                { headers: { 'Authorization': 'Bearer ' + externalToken } })
-                .success(function(response) { registerExternalSuccess(response, deferred); })
-                .error(function(err, status) { registerExternalError(err, status, deferred); });
-
-            return deferred.promise;
-        }
-
-
-        function registerExternalSuccess(response, deferred) {
-            deferred.resolve(response.access_token);
-        }
-
-        function registerExternalError(err, status, deferred) {
-            deferred.reject();
+                { headers: { 'Authorization': 'Bearer ' + externalToken } });
         }
 
         function signInSuccess(response, deferred) {
