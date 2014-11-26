@@ -1,7 +1,7 @@
 ﻿[
     {
         "dev": {
-            publicClientId:  "self",
+            "publicClientId": "self",
             "accessTokenExpirationTime": "14.00:00:00",
             "googlePlus": {
                 "clientId": "180426522882-j68nln4atebaf3r1ddb6lgc7h4im2c7j.apps.googleusercontent.com",
@@ -14,6 +14,10 @@
                     "public_profile",
                     "email"
                 ]
+            },
+            "twitter": {
+                "consumerKey": "QhLCzmIZokjGR3gOYw2Q717t7",
+                "consumerSecret": "xenykXM9gWTdWUnlyMjAnyDznHVmgc3GbtvcIvqPlj2rGgrgVY"
             }
         }
     }

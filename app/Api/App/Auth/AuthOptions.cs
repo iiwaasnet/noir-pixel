@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
-using Api.App.Auth.Config;
+﻿using Api.App.Auth.Config;
 using Api.App.Auth.ExternalUserInfo.Facebook;
 using Api.App.Auth.ExternalUserInfo.GPlus;
+using Api.App.Auth.ExternalUserInfo.Twitter;
 using JsonConfigurationProvider;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Facebook;
 using Microsoft.Owin.Security.OAuth;
+using Microsoft.Owin.Security.Twitter;
 using Owin.Security.Providers.GooglePlus;
 using WebGrease.Css.Extensions;
 
@@ -40,11 +40,19 @@ namespace Api.App.Auth
                                       Provider = new FacebookAuthProvider()
                                   };
             authConfig.Facebook.UserScope.ForEach(FacebookAuthOptions.Scope.Add);
+            Twitter = new TwitterAuthenticationOptions
+                      {
+                          ConsumerKey = authConfig.Twitter.CoinsumerKey,
+                          ConsumerSecret = authConfig.Twitter.ConsumerSecret,
+                          Provider = new TwitterAuthProvider()
+                      };
         }
 
         public OAuthAuthorizationServerOptions AuthServerOptions { get; private set; }
         public GooglePlusAuthenticationOptions GooglePlusAuthOptions { get; private set; }
         public FacebookAuthenticationOptions FacebookAuthOptions { get; private set; }
+        public TwitterAuthenticationOptions Twitter { get; private set; }
+
         public string PublicClientId { get; private set; }
     }
 }

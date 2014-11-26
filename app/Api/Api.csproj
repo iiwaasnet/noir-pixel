@@ -228,6 +228,7 @@
     <Compile Include="App\Auth\AuthOptions.cs" />
     <Compile Include="App\Auth\Config\FacebookConfiguration.cs" />
     <Compile Include="App\Auth\Config\GooglePlusConfiguration.cs" />
+    <Compile Include="App\Auth\Config\TwitterConfiguration.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\ExternalAccountsManager.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\ExternalUserInfo.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\Facebook\FacebookAccountProvider.cs" />
@@ -236,6 +237,7 @@
     <Compile Include="App\Auth\ExternalUserInfo\ISocialAccountProvider.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\IExternalUserInfoParser.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\LinkInfo.cs" />
+    <Compile Include="App\Auth\ExternalUserInfo\Twitter\TwitterAccountProvider.cs" />
     <Compile Include="App\Auth\LocalAccessTokenModel.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\PersonInfo.cs" />
     <Compile Include="App\Auth\RegisterExternalModel.cs" />
@@ -243,6 +245,7 @@
     <Compile Include="App\Auth\ApplicationIdentityContext.cs" />
     <Compile Include="App\Auth\ApplicationRoleManager.cs" />
     <Compile Include="App\Auth\AuthModule.cs" />
+    <Compile Include="App\Auth\ExternalUserInfo\Twitter\TwitterAuthProvider.cs" />
     <Compile Include="App\Configuration\ConfigurationModule.cs" />
     <Compile Include="App\Db\DbConfiguration.cs" />
     <Compile Include="App\Db\DbServerConfiguration.cs" />
@@ -300,7 +303,6 @@
     <Compile Include="App\Auth\ApplicationOAuthProvider.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\Facebook\FacebookAuthProvider.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\GPlus\GooglePlusAuthProvider.cs" />
-    <Compile Include="App\Auth\ExternalUserInfo\GPlus\GoogleAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Validation\PrefixlessModelValidator.cs" />
