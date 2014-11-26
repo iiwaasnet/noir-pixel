@@ -210,7 +210,8 @@ namespace Api.App.Auth
                 var cookieIdentity = await user.GenerateUserIdentityAsync(userManager,
                                                                           CookieAuthenticationDefaults.AuthenticationType);
 
-                var properties = ApplicationOAuthProvider.CreateProperties(user.UserName);
+                var expiresIn = authOptions.AuthServerOptions.AccessTokenExpireTimeSpan;
+                var properties = CreateAuthenticationProperties(user, expiresIn);
                 GetAuthentication().SignIn(properties, oAuthIdentity, cookieIdentity);
 
                 var ticket = new AuthenticationTicket(oAuthIdentity, properties);
@@ -221,7 +222,7 @@ namespace Api.App.Auth
                     new JProperty("userName", user.UserName),
                     new JProperty("access_token", accessToken),
                     new JProperty("token_type", "bearer"),
-                    new JProperty("expires_in", authOptions.AuthServerOptions.AccessTokenExpireTimeSpan.TotalSeconds.ToString()),
+                    new JProperty("expires_in", expiresIn.TotalSeconds.ToString()),
                     new JProperty(".issued", ticket.Properties.IssuedUtc.ToString()),
                     new JProperty(".expires", ticket.Properties.ExpiresUtc.ToString())
                     );
@@ -229,6 +230,18 @@ namespace Api.App.Auth
             }
 
             return BadRequest("User is not registered!");
+        }
+
+        private static AuthenticationProperties CreateAuthenticationProperties(ApplicationUser user, TimeSpan expiresIn)
+        {
+            return new AuthenticationProperties(new Dictionary<string, string>
+                                                {
+                                                    {"userName", user.UserName}
+                                                })
+                   {
+                       IssuedUtc = DateTime.UtcNow,
+                       ExpiresUtc = DateTime.UtcNow.Add(expiresIn)
+                   };
         }
 
         [AllowAnonymous]
