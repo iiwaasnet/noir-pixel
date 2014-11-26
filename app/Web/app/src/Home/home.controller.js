@@ -4,20 +4,31 @@
     angular.module('np.home')
         .controller('HomeController', homeController);
 
-    homeController.$inject = ['Messages', 'Progress'];
+    homeController.$inject = ['$http', 'Messages', 'Progress', 'Url', 'Config'];
 
-    function homeController(Messages, Progress) {
+    function homeController($http, Messages, Progress, Url, Config) {
         var ctrl = this;
         ctrl.error = error;
         ctrl.message = message;
+        ctrl.userInfo = userInfo;
+
+        function userInfo() {
+            $http.get(Url.build(Config.apiUris.base, 'account/user-info'))
+            .then(userInfoSuccess, userInfoError);
+        }
+
+        function userInfoSuccess(response) {
+            debugger;
+            alert(response.data);
+        }
+
+        function userInfoError(error) {
+            debugger;
+            alert(error);
+        }
 
         function error() {
             Progress.start();
-            //Messages.error({
-            //    main: {
-            //        text: 'Simple error message'
-            //    }
-            //});
         }
 
         function message() {
