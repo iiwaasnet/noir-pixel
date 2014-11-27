@@ -249,6 +249,7 @@
     <Compile Include="App\Configuration\ConfigurationModule.cs" />
     <Compile Include="App\Db\DbConfiguration.cs" />
     <Compile Include="App\Db\DbServerConfiguration.cs" />
+    <Compile Include="App\Errors\ApiError.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\ConfigurationModule.cs" />
     <Compile Include="App_Start\CustomExceptionLogger.cs" />
