@@ -43,7 +43,7 @@
         }
 
         function registerExternalSuccess(response) {
-            Auth.getLocalToken(response.access_token, response.provider)
+            Auth.getLocalToken(response.data.access_token, response.data.provider)
                 .then(finalizeSigninSuccess, finalizeSigninError);
         }
 

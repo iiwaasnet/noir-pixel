@@ -82,7 +82,6 @@
         function getLocalTokenSuccess(response, deferred) {
             TokenStorage.setToken(response.access_token);
             deferred.resolve(response);
-            $state.go(getLoginRedirectState());
         }
 
         function getLocalTokenError(err, status, deferred) {
