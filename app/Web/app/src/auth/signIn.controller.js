@@ -44,8 +44,13 @@
             switch (login.provider) {
                 case 'Facebook':
                     login.displayOrder = 0;
+                    break;
                 case 'GooglePlus':
                     login.displayOrder = 1;
+                    break;
+                case 'Twitter':
+                    login.displayOrder = 2;
+                    break;
                 default:
             }
         }

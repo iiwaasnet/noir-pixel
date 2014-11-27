@@ -28,6 +28,7 @@ namespace Api.App.Auth
 
             app.UseGooglePlusAuthentication(authOptions.GooglePlusAuthOptions);
             app.UseFacebookAuthentication(authOptions.FacebookAuthOptions);
+            app.UseTwitterAuthentication(authOptions.Twitter);
         }
     }
 }

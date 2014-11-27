@@ -1,7 +1,7 @@
 ﻿<div class="signin-menu">
     <div class="caption" np-i18n="Signin"></div>
     <div class="signin-links">
-        <a ng-click="ctrl.signin(login.url)" ng-repeat="login in ctrl.availableLogins">
+        <a ng-click="ctrl.signin(login.url)" ng-repeat="login in ctrl.availableLogins | orderBy:'displayOrder'">
             <div ng-class="('signin-link icon-' + login.provider | lowercase)"></div>
         </a>
     </div>
