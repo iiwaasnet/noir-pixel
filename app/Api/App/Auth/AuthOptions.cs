@@ -42,7 +42,7 @@ namespace Api.App.Auth
             authConfig.Facebook.UserScope.ForEach(FacebookAuthOptions.Scope.Add);
             Twitter = new TwitterAuthenticationOptions
                       {
-                          ConsumerKey = authConfig.Twitter.CoinsumerKey,
+                          ConsumerKey = authConfig.Twitter.ConsumerKey,
                           ConsumerSecret = authConfig.Twitter.ConsumerSecret,
                           Provider = new TwitterAuthProvider()
                       };

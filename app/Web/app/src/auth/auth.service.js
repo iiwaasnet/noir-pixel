@@ -21,17 +21,6 @@
         function authenticated() {
             return !!TokenStorage.getToken();
         }
-       
-        function getLoginsFromServer() {
-            var externalSignIn = $state.get('externalSignIn').url.split('?')[0],
-                redirectUrl = Url.build(Config.siteBaseUri, externalSignIn);
-            var url = Url.build(Config.apiUris.base, Config.apiUris.externalLogins.format(encodeURIComponent(redirectUrl)));
-
-            var deferred = $q.defer();
-            $http.get(url).then(function (response) { getAvailableLoginsSuccess(response, deferred); });
-
-            return deferred.promise;
-        }
 
         function getAvailableLogins() {
             if (availableLogins.length > 0) {
@@ -43,10 +32,24 @@
             return getLoginsFromServer();
         }
 
+        function getLoginsFromServer() {
+            var externalSignIn = $state.get('externalSignIn').url.split('?')[0],
+                redirectUrl = Url.build(Config.siteBaseUri, externalSignIn);
+            var url = Url.build(Config.apiUris.base, Config.apiUris.externalLogins.format(encodeURIComponent(redirectUrl)));
+
+            var deferred = $q.defer();
+            $http.get(url).then(
+                function(response) { getAvailableLoginsSuccess(response, deferred); },
+                function(error) { getAvailableLoginsError(error, deferred); }
+            );
+
+            return deferred.promise;
+        }
+
         function getAvailableLoginsSuccess(response, deferred) {
             availableLogins = [];
 
-            angular.forEach(response.data, function (login) {
+            angular.forEach(response.data, function(login) {
                 availableLogins.push({
                     provider: login.name,
                     url: Url.build(Config.apiUris.base, login.url)
@@ -54,6 +57,10 @@
             });
 
             deferred.resolve(availableLogins);
+        }
+
+        function getAvailableLoginsError(error, deferred) {
+            deferred.reject(error);
         }
 
         function getLocalToken(externalToken, provider) {
@@ -86,11 +93,11 @@
             var url = Url.build(Config.apiUris.base, Config.apiUris.registerExternal);
 
             return $http.post(url,
-                {
-                    provider: provider,
-                    externalAccessToken: externalToken
-                },
-                { headers: { 'Authorization': 'Bearer ' + externalToken } });
+            {
+                provider: provider,
+                externalAccessToken: externalToken
+            },
+            { headers: { 'Authorization': 'Bearer ' + externalToken } });
         }
 
         function signInSuccess(response, deferred) {
