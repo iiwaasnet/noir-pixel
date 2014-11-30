@@ -63,14 +63,15 @@
             deferred.reject(error);
         }
 
-        function getLocalToken(externalToken, provider) {
+        function getLocalToken(externalToken, accessTokenSecret, provider) {
             var url = Url.build(Config.apiUris.base, Config.apiUris.localAccessToken),
                 deferred = $q.defer();
 
             $http.post(url,
                 {
                     provider: provider,
-                    externalAccessToken: externalToken
+                    externalAccessToken: externalToken,
+                    accessTokenSecret: accessTokenSecret
                 },
                 { headers: { 'Authorization': 'Bearer ' + externalToken } })
                 .success(function(response) { getLocalTokenSuccess(response, deferred); })
@@ -88,13 +89,14 @@
             deferred.reject(err);
         }
 
-        function registerExternal(externalToken, provider) {
+        function registerExternal(externalToken, accessTokenSecret, provider) {
             var url = Url.build(Config.apiUris.base, Config.apiUris.registerExternal);
 
             return $http.post(url,
             {
                 provider: provider,
-                externalAccessToken: externalToken
+                externalAccessToken: externalToken,
+                accessTokenSecret: accessTokenSecret
             },
             { headers: { 'Authorization': 'Bearer ' + externalToken } });
         }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Owin.Security.Facebook;
@@ -17,7 +16,7 @@ namespace Api.App.Auth.ExternalUserInfo.Facebook
             this.authOptions = authOptions;
         }
 
-        public async Task<ExternalUserInfo> GetUserInfo(string userId, string accessToken)
+        public async Task<ExternalUserInfo> GetUserInfo(string userId, string accessToken, string _)
         {
             var endPoint = string.Format("https://graph.facebook.com/me?access_token={0}", accessToken);
             var client = new HttpClient();
@@ -50,7 +49,7 @@ namespace Api.App.Auth.ExternalUserInfo.Facebook
             return null;
         }
 
-        public async Task<ParsedExternalAccessToken> VerifyAccessToken(string accessToken)
+        public async Task<ParsedExternalAccessToken> VerifyAccessToken(string accessToken, string _)
         {
             var endPoint = string.Format("https://graph.facebook.com/debug_token?input_token={0}&access_token={1}", accessToken, GetAccessToken());
             var client = new HttpClient();

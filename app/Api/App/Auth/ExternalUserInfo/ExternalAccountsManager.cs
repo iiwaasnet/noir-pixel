@@ -13,21 +13,21 @@ namespace Api.App.Auth.ExternalUserInfo
             this.socialAccountProviders = CreateSocialAccountProviders(socialAccountProviders);
         }
 
-        public Task<ExternalUserInfo> GetUserInfo(string provider, string userId, string accessToken)
+        public Task<ExternalUserInfo> GetUserInfo(string provider, string userId, string accessToken, string accessTokenSecret)
         {
             if (socialAccountProviders.ContainsKey(provider))
             {
-                return socialAccountProviders[provider].GetUserInfo(userId, accessToken);
+                return socialAccountProviders[provider].GetUserInfo(userId, accessToken, accessTokenSecret);
             }
 
             throw new KeyNotFoundException(provider);
         }
 
-        public Task<ParsedExternalAccessToken> VerfiyAccessToken(string provider, string accessToken)
+        public Task<ParsedExternalAccessToken> VerfiyAccessToken(string provider, string accessToken, string accessTokenSecret)
         {
             if (socialAccountProviders.ContainsKey(provider))
             {
-                return socialAccountProviders[provider].VerifyAccessToken(accessToken);
+                return socialAccountProviders[provider].VerifyAccessToken(accessToken, accessTokenSecret);
             }
 
             throw new KeyNotFoundException(provider);

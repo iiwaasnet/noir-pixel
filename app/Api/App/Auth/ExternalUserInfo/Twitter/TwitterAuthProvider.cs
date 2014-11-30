@@ -9,6 +9,7 @@ namespace Api.App.Auth.ExternalUserInfo.Twitter
         public Task Authenticated(TwitterAuthenticatedContext context)
         {
             context.Identity.AddClaim(new Claim("ExternalAccessToken", context.AccessToken));
+            context.Identity.AddClaim(new Claim("AccessTokenSecret", context.AccessTokenSecret));
             return Task.FromResult<object>(null);
         }
 

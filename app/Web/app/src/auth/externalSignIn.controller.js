@@ -25,6 +25,7 @@
 
             return {
                 externalAccessToken: params.external_access_token,
+                accessTokenSecret: params.access_token_secret,
                 registered: params.registered === 'true',
                 provider: params.provider
             };

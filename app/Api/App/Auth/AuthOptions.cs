@@ -40,7 +40,7 @@ namespace Api.App.Auth
                                       Provider = new FacebookAuthProvider()
                                   };
             authConfig.Facebook.UserScope.ForEach(FacebookAuthOptions.Scope.Add);
-            Twitter = new TwitterAuthenticationOptions
+            TwitterAuthOptions = new TwitterAuthenticationOptions
                       {
                           ConsumerKey = authConfig.Twitter.ConsumerKey,
                           ConsumerSecret = authConfig.Twitter.ConsumerSecret,
@@ -51,7 +51,7 @@ namespace Api.App.Auth
         public OAuthAuthorizationServerOptions AuthServerOptions { get; private set; }
         public GooglePlusAuthenticationOptions GooglePlusAuthOptions { get; private set; }
         public FacebookAuthenticationOptions FacebookAuthOptions { get; private set; }
-        public TwitterAuthenticationOptions Twitter { get; private set; }
+        public TwitterAuthenticationOptions TwitterAuthOptions { get; private set; }
 
         public string PublicClientId { get; private set; }
     }

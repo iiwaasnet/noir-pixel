@@ -18,7 +18,7 @@ namespace Api.App.Auth.ExternalUserInfo.GPlus
             this.authOptions = authOptions;
         }
 
-        public async Task<ExternalUserInfo> GetUserInfo(string userId, string accessToken)
+        public async Task<ExternalUserInfo> GetUserInfo(string userId, string accessToken, string _)
         {
             var endPoint = string.Format("https://www.googleapis.com/plus/v1/people/{0}?access_token={1}", userId, accessToken);
             var client = new HttpClient();
@@ -52,7 +52,7 @@ namespace Api.App.Auth.ExternalUserInfo.GPlus
             return null;
         }
 
-        public async Task<ParsedExternalAccessToken> VerifyAccessToken(string accessToken)
+        public async Task<ParsedExternalAccessToken> VerifyAccessToken(string accessToken, string _)
         {
             var endPoint = string.Format("https://www.googleapis.com/oauth2/v1/tokeninfo?access_token={0}", accessToken);
             var client = new HttpClient();

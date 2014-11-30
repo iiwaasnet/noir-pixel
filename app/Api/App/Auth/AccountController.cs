@@ -110,9 +110,10 @@ namespace Api.App.Auth
 
                     var registered = user != null;
 
-                    redirectUri = string.Format("{0}#external_access_token={1}&registered={2}&provider={3}",
+                    redirectUri = string.Format("{0}#external_access_token={1}&access_token_secret={2}&registered={3}&provider={4}",
                                                 redirectUri,
                                                 externalLogin.ExternalAccessToken,
+                                                externalLogin.AccessTokenSecret,
                                                 registered.ToString().ToLower(),
                                                 provider);
                 }
@@ -136,7 +137,7 @@ namespace Api.App.Auth
                 return BadRequest(ModelState);
             }
 
-            var verifiedAccessToken = await externalAccountsManager.VerfiyAccessToken(model.Provider, model.ExternalAccessToken);
+            var verifiedAccessToken = await externalAccountsManager.VerfiyAccessToken(model.Provider, model.ExternalAccessToken, model.AccessTokenSecret);
             if (verifiedAccessToken == null)
             {
                 return BadRequest("Invalid Provider or External Access Token");
@@ -151,7 +152,7 @@ namespace Api.App.Auth
                 return BadRequest("External user is already registered");
             }
 
-            var externalUserInfo = await externalAccountsManager.GetUserInfo(model.Provider, verifiedAccessToken.user_id, model.ExternalAccessToken);
+            var externalUserInfo = await externalAccountsManager.GetUserInfo(model.Provider, verifiedAccessToken.user_id, model.ExternalAccessToken, model.AccessTokenSecret);
 
             user = new ApplicationUser
                    {
@@ -194,7 +195,7 @@ namespace Api.App.Auth
                 return BadRequest("Provider or external access token is not sent");
             }
 
-            var verifiedAccessToken = await externalAccountsManager.VerfiyAccessToken(model.Provider, model.ExternalAccessToken);
+            var verifiedAccessToken = await externalAccountsManager.VerfiyAccessToken(model.Provider, model.ExternalAccessToken, model.AccessTokenSecret);
             if (verifiedAccessToken == null)
             {
                 return BadRequest("Invalid Provider or External Access Token");
@@ -540,6 +541,7 @@ namespace Api.App.Auth
             public string ProviderKey { get; set; }
             public string UserName { get; set; }
             public string ExternalAccessToken { get; set; }
+            public string AccessTokenSecret { get; set; }
 
             public IList<Claim> GetClaims()
             {
@@ -579,7 +581,8 @@ namespace Api.App.Auth
                            LoginProvider = providerKeyClaim.Issuer,
                            ProviderKey = providerKeyClaim.Value,
                            UserName = identity.FindFirstValue(ClaimTypes.Name),
-                           ExternalAccessToken = identity.FindFirstValue("ExternalAccessToken")
+                           ExternalAccessToken = identity.FindFirstValue("ExternalAccessToken"),
+                           AccessTokenSecret = identity.FindFirstValue("AccessTokenSecret")
                        };
             }
         }

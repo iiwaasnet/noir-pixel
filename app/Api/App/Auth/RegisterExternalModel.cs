@@ -4,5 +4,6 @@ namespace Api.App.Auth
     {
         public string Provider { get; set; }
         public string ExternalAccessToken { get; set; }
+        public string AccessTokenSecret { get; set; }
     }
 }

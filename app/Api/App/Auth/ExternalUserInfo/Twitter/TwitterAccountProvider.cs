@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.Owin.Security.Twitter;
 using Newtonsoft.Json;
@@ -16,10 +18,16 @@ namespace Api.App.Auth.ExternalUserInfo.Twitter
             this.authOptions = authOptions;
         }
 
-        public async Task<ExternalUserInfo> GetUserInfo(string userId, string accessToken)
+        public async Task<ExternalUserInfo> GetUserInfo(string userId, string accessToken, string accessTokenSecret)
         {
-            var endPoint = string.Format("https://api.twitter.com/1.1/users/show.json?user_id={0}", userId);
+            var baseUrl = "https://api.twitter.com/1.1/users/show.json";
+            var queryString = new Dictionary<string, string> {{"user_id", userId}};
+            var requestAuth = new AuthorizeRequest(authOptions);
+            var authHeader = requestAuth.CreateAuthHeader("GET", baseUrl, accessToken, accessTokenSecret, queryString);
+
+            var endPoint = string.Format("{0}?user_id={1}", baseUrl, userId);
             var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Authorization", authHeader);
             var uri = new Uri(endPoint);
             var response = await client.GetAsync(uri);
 
@@ -49,10 +57,17 @@ namespace Api.App.Auth.ExternalUserInfo.Twitter
             return null;
         }
 
-        public async Task<ParsedExternalAccessToken> VerifyAccessToken(string accessToken)
+        public async Task<ParsedExternalAccessToken> VerifyAccessToken(string accessToken, string accessTokenSecret)
         {
-            var endPoint = string.Format("https://graph.facebook.com/debug_token?input_token={0}&access_token={1}", accessToken, GetAccessToken());
+            var userId = "iiwaasnet";
+            var baseUrl = "https://api.twitter.com/1.1/users/show.json";
+            var queryString = new Dictionary<string, string> { { "screen_name", userId } };
+            var requestAuth = new AuthorizeRequest(authOptions);
+            var authHeader = requestAuth.CreateAuthHeader("GET", baseUrl, accessToken, accessTokenSecret, queryString);
+
+            var endPoint = string.Format("{0}?screen_name={1}", baseUrl, userId);
             var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("OAuth", authHeader);
             var uri = new Uri(endPoint);
             var response = await client.GetAsync(uri);
 
@@ -61,15 +76,15 @@ namespace Api.App.Auth.ExternalUserInfo.Twitter
                 var content = await response.Content.ReadAsStringAsync();
 
                 dynamic jObj = JsonConvert.DeserializeObject<JObject>(content);
-                var appId = jObj.data.app_id;
-                //if (string.Equals(authOptions.AppId, appId.ToString(), StringComparison.OrdinalIgnoreCase))
-                //{
-                //    return new ParsedExternalAccessToken
-                //           {
-                //               user_id = jObj.data.user_id,
-                //               app_id = appId
-                //           };
-                //}
+                if (string.Equals(authOptions.ConsumerKey, jObj.audience.ToString(), StringComparison.OrdinalIgnoreCase))
+                {
+                    return new ParsedExternalAccessToken
+                    {
+                        user_id = jObj.id,
+                        app_id = jObj.audience,
+                        email = jObj.email
+                    };
+                }
             }
             //TODO: If response.IsSuccessStatusCode == false, then re-authentication needed
             return null;

@@ -33,10 +33,10 @@
                 finalizeSigninError(loginResult.error);
             } else {
                 if (loginResult.registered) {
-                    Auth.getLocalToken(loginResult.externalAccessToken, loginResult.provider)
+                    Auth.getLocalToken(loginResult.externalAccessToken, loginResult.accessTokenSecret, loginResult.provider)
                         .then(finalizeSigninSuccess, finalizeSigninError);
                 } else {
-                    Auth.registerExternal(loginResult.externalAccessToken, loginResult.provider)
+                    Auth.registerExternal(loginResult.externalAccessToken, loginResult.accessTokenSecret, loginResult.provider)
                         .then(registerExternalSuccess, finalizeSigninError);
                 }
             }
