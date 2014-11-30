@@ -80,7 +80,7 @@ namespace Api.App.Auth.ExternalUserInfo.Twitter
                 {
                     return new ParsedExternalAccessToken
                     {
-                        user_id = jObj.id,
+                        user_id = jObj.id_str,
                         app_id = jObj.audience,
                         email = jObj.email
                     };
