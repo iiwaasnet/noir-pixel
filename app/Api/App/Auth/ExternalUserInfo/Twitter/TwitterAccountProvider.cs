@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -59,13 +60,10 @@ namespace Api.App.Auth.ExternalUserInfo.Twitter
 
         public async Task<ParsedExternalAccessToken> VerifyAccessToken(string accessToken, string accessTokenSecret)
         {
-            var userId = "iiwaasnet";
-            var baseUrl = "https://api.twitter.com/1.1/users/show.json";
-            var queryString = new Dictionary<string, string> { { "screen_name", userId } };
+            var endPoint = "https://api.twitter.com/1.1/account/verify_credentials.json";
             var requestAuth = new AuthorizeRequest(authOptions);
-            var authHeader = requestAuth.CreateAuthHeader("GET", baseUrl, accessToken, accessTokenSecret, queryString);
+            var authHeader = requestAuth.CreateAuthHeader("GET", endPoint, accessToken, accessTokenSecret, EmptyQueryString());
 
-            var endPoint = string.Format("{0}?screen_name={1}", baseUrl, userId);
             var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("OAuth", authHeader);
             var uri = new Uri(endPoint);
@@ -74,26 +72,17 @@ namespace Api.App.Auth.ExternalUserInfo.Twitter
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-
                 dynamic jObj = JsonConvert.DeserializeObject<JObject>(content);
-                if (string.Equals(authOptions.ConsumerKey, jObj.audience.ToString(), StringComparison.OrdinalIgnoreCase))
-                {
-                    return new ParsedExternalAccessToken
-                    {
-                        user_id = jObj.id_str,
-                        app_id = jObj.audience,
-                        email = jObj.email
-                    };
-                }
+
+                return new ParsedExternalAccessToken {user_id = jObj.id_str};
             }
             //TODO: If response.IsSuccessStatusCode == false, then re-authentication needed
             return null;
         }
 
-        private string GetAccessToken()
+        private static IEnumerable<KeyValuePair<string, string>> EmptyQueryString()
         {
-            return "";
-            //return string.Format("{0}|{1}", authOptions.AppId, authOptions.AppSecret);
+            return Enumerable.Empty<KeyValuePair<string, string>>();
         }
 
         public string Provider
