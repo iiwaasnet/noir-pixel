@@ -7,7 +7,8 @@
     messagesService.$inject = ['ngDialog', 'Strings'];
 
     function messagesService(ngDialog, Strings) {
-        var srv = this;
+        var srv = this,
+            EAPI_Unknown = 'EAPI_Unknown';
         srv.error = error;
         srv.message = message;
 
@@ -44,6 +45,9 @@
                 if (obj.aux) {
                     tmp.aux = obj.aux.text ? obj.aux.text : Strings.getLocalizedString(obj.aux.id);
                 }
+            }
+            if (!tmp.main.text) {
+                tmp.main.text = Strings.getLocalizedString(EAPI_Unknown);
             }
 
             return tmp;

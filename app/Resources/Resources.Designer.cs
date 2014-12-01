@@ -97,6 +97,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to We have encountered an error, while trying to execute your request :( Please, try one more time..
+        /// </summary>
+        public static string EAPI_Unknown {
+            get {
+                return ResourceManager.GetString("EAPI_Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string EditHint_Password {
