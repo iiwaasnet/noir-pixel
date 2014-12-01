@@ -174,6 +174,7 @@ namespace Api.App.Auth
 
             return Ok(new JObject(
                 new JProperty("access_token", model.ExternalAccessToken),
+                new JProperty("access_token_secret", model.AccessTokenSecret),
                 new JProperty("provider", model.Provider)
                 ));
         }
