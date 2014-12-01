@@ -4,14 +4,13 @@ using Api.App.Auth.ExternalUserInfo.GPlus;
 using Api.App.Auth.ExternalUserInfo.Twitter;
 using Api.App.Auth.ExternalUserInfo.Yahoo;
 using JsonConfigurationProvider;
-using JY.Owin.Security.Yahoo;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Facebook;
 using Microsoft.Owin.Security.OAuth;
 using Microsoft.Owin.Security.Twitter;
 using Owin.Security.Providers.GooglePlus;
+using Owin.Security.Providers.Yahoo;
 using WebGrease.Css.Extensions;
-using YahooAuthenticationOptions = Owin.Security.Providers.Yahoo.YahooAuthenticationOptions;
 
 namespace Api.App.Auth
 {
@@ -44,24 +43,17 @@ namespace Api.App.Auth
                                   };
             authConfig.Facebook.UserScope.ForEach(FacebookAuthOptions.Scope.Add);
             TwitterAuthOptions = new TwitterAuthenticationOptions
-                      {
-                          ConsumerKey = authConfig.Twitter.ConsumerKey,
-                          ConsumerSecret = authConfig.Twitter.ConsumerSecret,
-                          Provider = new TwitterAuthProvider()
-                      };
-            YahooAuthOptions =
-                new YahooAuthenticationOptions
-            {
-                ConsumerKey = authConfig.Yahoo.ConsumerKey,
-                ConsumerSecret = authConfig.Yahoo.ConsumerSecret,
-                Provider = new YahooAuthProvider()
-            };
-            //new JY.Owin.Security.Yahoo.YahooAuthenticationOptions
-            //{
-            //    ConsumerKey = authConfig.Yahoo.ConsumerKey,
-            //    ConsumerSecret = authConfig.Yahoo.ConsumerSecret,
-            //    Provider = new YahooAuthProvider()
-            //};
+                                 {
+                                     ConsumerKey = authConfig.Twitter.ConsumerKey,
+                                     ConsumerSecret = authConfig.Twitter.ConsumerSecret,
+                                     Provider = new TwitterAuthProvider()
+                                 };
+            //YahooAuthOptions = new YahooAuthenticationOptions
+            //                   {
+            //                       ConsumerKey = authConfig.Yahoo.ConsumerKey,
+            //                       ConsumerSecret = authConfig.Yahoo.ConsumerSecret,
+            //                       Provider = new YahooAuthProvider()
+            //                   };
         }
 
         public OAuthAuthorizationServerOptions AuthServerOptions { get; private set; }
