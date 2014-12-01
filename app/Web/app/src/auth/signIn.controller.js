@@ -59,7 +59,7 @@
         }
 
         function signin(url) {
-            saveLoginRedirectState(redirectTo);
+            //saveLoginRedirectState(redirectTo);
             $window.$scope = $scope;
             $window.open(url, "Signin", 'width=800, height=600');
         }
