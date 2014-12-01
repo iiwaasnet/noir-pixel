@@ -11,6 +11,7 @@ namespace Api.App.Auth.ExternalUserInfo.Twitter
     public class AuthorizeRequest
     {
         private readonly TwitterAuthenticationOptions authOptions;
+        private static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
 
         public AuthorizeRequest(TwitterAuthenticationOptions authOptions)
         {
@@ -88,7 +89,7 @@ namespace Api.App.Auth.ExternalUserInfo.Twitter
 
         private string GenerateTimestamp()
         {
-            var timeSpan = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0);
+            var timeSpan = DateTime.UtcNow - UnixEpoch;
             return Convert.ToInt64(timeSpan.TotalSeconds).ToString(CultureInfo.InvariantCulture);
         }
     }

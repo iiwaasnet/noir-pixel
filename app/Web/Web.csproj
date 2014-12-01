@@ -220,12 +220,6 @@
     <Content Include="app\less\constants.min.css">
       <DependentUpon>constants.css</DependentUpon>
     </Content>
-    <Content Include="app\less\dialogs\dialog-theme-contextmenu.css">
-      <DependentUpon>dialog-theme-contextmenu.less</DependentUpon>
-    </Content>
-    <Content Include="app\less\dialogs\dialog-theme-contextmenu.min.css">
-      <DependentUpon>dialog-theme-contextmenu.css</DependentUpon>
-    </Content>
     <Content Include="app\less\dialogs\dialog-theme-messages.css">
       <DependentUpon>dialog-theme-messages.less</DependentUpon>
     </Content>
@@ -266,9 +260,6 @@
       <DependentUpon>main-elements.css</DependentUpon>
     </Content>
     <Content Include="app\less\dialogs\dialog-theme-contextmenu.less" />
-    <Content Include="app\less\dialogs\dialog-theme-contextmenu.css.map">
-      <DependentUpon>dialog-theme-contextmenu.css</DependentUpon>
-    </Content>
     <Content Include="app\less\dialogs\dialog-theme-messages.less" />
     <Content Include="app\less\dialogs\dialog-theme-messages.css.map">
       <DependentUpon>dialog-theme-messages.css</DependentUpon>

@@ -94,7 +94,7 @@ namespace Api.App.Auth
             return new UserValidator<ApplicationUser>(this)
                    {
                        AllowOnlyAlphanumericUserNames = false,
-                       RequireUniqueEmail = true
+                       RequireUniqueEmail = false
                    };
         }
     }

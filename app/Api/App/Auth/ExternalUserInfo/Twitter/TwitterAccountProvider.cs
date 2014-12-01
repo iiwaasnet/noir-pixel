@@ -28,7 +28,7 @@ namespace Api.App.Auth.ExternalUserInfo.Twitter
 
             var endPoint = string.Format("{0}?user_id={1}", baseUrl, userId);
             var client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Authorization", authHeader);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("OAuth", authHeader);
             var uri = new Uri(endPoint);
             var response = await client.GetAsync(uri);
 
@@ -37,20 +37,17 @@ namespace Api.App.Auth.ExternalUserInfo.Twitter
                 var content = await response.Content.ReadAsStringAsync();
 
                 dynamic jObj = JsonConvert.DeserializeObject<JObject>(content);
-                if (string.Equals(userId, jObj.id.ToString(), StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(userId, jObj.id_str.ToString(), StringComparison.OrdinalIgnoreCase))
                 {
                     return new ExternalUserInfo
                            {
                                Person = new PersonInfo
                                         {
-                                            Id = jObj.id,
-                                            DisplayName = jObj.name,
-                                            FirstName = jObj.first_name,
-                                            LastName = jObj.last_name,
-                                            Gender = jObj.gender,
-                                            Image = string.Format("https://graph.facebook.com/me?access_token={0}", accessToken)
-                                        },
-                               Email = jObj.email
+                                            Id = jObj.id_str,
+                                            DisplayName = jObj.screen_name,
+                                            FullName = jObj.name,
+                                            Image = jObj.profile_image_url
+                                        }
                            };
                 }
             }
