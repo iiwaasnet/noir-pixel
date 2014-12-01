@@ -51,6 +51,9 @@
                 case 'Twitter':
                     login.displayOrder = 2;
                     break;
+                case 'Yahoo':
+                    login.displayOrder = 3;
+                    break;
                 default:
             }
         }

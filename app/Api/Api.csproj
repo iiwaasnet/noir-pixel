@@ -228,6 +228,7 @@
     <Compile Include="App\Auth\AuthOptions.cs" />
     <Compile Include="App\Auth\Config\FacebookConfiguration.cs" />
     <Compile Include="App\Auth\Config\GooglePlusConfiguration.cs" />
+    <Compile Include="App\Auth\Config\YahooConfiguration.cs" />
     <Compile Include="App\Auth\Config\TwitterConfiguration.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\ExternalAccountsManager.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\ExternalUserInfo.cs" />
@@ -247,6 +248,7 @@
     <Compile Include="App\Auth\ApplicationRoleManager.cs" />
     <Compile Include="App\Auth\AuthModule.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\Twitter\TwitterAuthProvider.cs" />
+    <Compile Include="App\Auth\ExternalUserInfo\Yahoo\YahooAuthProvider.cs" />
     <Compile Include="App\Configuration\ConfigurationModule.cs" />
     <Compile Include="App\Db\DbConfiguration.cs" />
     <Compile Include="App\Db\DbServerConfiguration.cs" />

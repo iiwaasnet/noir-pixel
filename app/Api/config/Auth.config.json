@@ -18,6 +18,11 @@
             "twitter": {
                 "consumerKey": "QhLCzmIZokjGR3gOYw2Q717t7",
                 "consumerSecret": "xenykXM9gWTdWUnlyMjAnyDznHVmgc3GbtvcIvqPlj2rGgrgVY"
+            },
+            "yahoo": {
+                "appId": "eUy7WP5g",
+                "consumerKey": "dj0yJmk9NGQ1aHl1bzVHRVo2JmQ9WVdrOVpWVjVOMWRRTldjbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD1jZQ--",
+                "consumerSecret": "b03bb9da5d8243e8b953a20336087a39ed963969"
             }
         }
     }

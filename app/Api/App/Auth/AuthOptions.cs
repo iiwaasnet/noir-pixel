@@ -2,13 +2,16 @@
 using Api.App.Auth.ExternalUserInfo.Facebook;
 using Api.App.Auth.ExternalUserInfo.GPlus;
 using Api.App.Auth.ExternalUserInfo.Twitter;
+using Api.App.Auth.ExternalUserInfo.Yahoo;
 using JsonConfigurationProvider;
+using JY.Owin.Security.Yahoo;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Facebook;
 using Microsoft.Owin.Security.OAuth;
 using Microsoft.Owin.Security.Twitter;
 using Owin.Security.Providers.GooglePlus;
 using WebGrease.Css.Extensions;
+using YahooAuthenticationOptions = Owin.Security.Providers.Yahoo.YahooAuthenticationOptions;
 
 namespace Api.App.Auth
 {
@@ -46,12 +49,26 @@ namespace Api.App.Auth
                           ConsumerSecret = authConfig.Twitter.ConsumerSecret,
                           Provider = new TwitterAuthProvider()
                       };
+            YahooAuthOptions =
+                new YahooAuthenticationOptions
+            {
+                ConsumerKey = authConfig.Yahoo.ConsumerKey,
+                ConsumerSecret = authConfig.Yahoo.ConsumerSecret,
+                Provider = new YahooAuthProvider()
+            };
+            //new JY.Owin.Security.Yahoo.YahooAuthenticationOptions
+            //{
+            //    ConsumerKey = authConfig.Yahoo.ConsumerKey,
+            //    ConsumerSecret = authConfig.Yahoo.ConsumerSecret,
+            //    Provider = new YahooAuthProvider()
+            //};
         }
 
         public OAuthAuthorizationServerOptions AuthServerOptions { get; private set; }
         public GooglePlusAuthenticationOptions GooglePlusAuthOptions { get; private set; }
         public FacebookAuthenticationOptions FacebookAuthOptions { get; private set; }
         public TwitterAuthenticationOptions TwitterAuthOptions { get; private set; }
+        public YahooAuthenticationOptions YahooAuthOptions { get; private set; }
 
         public string PublicClientId { get; private set; }
     }

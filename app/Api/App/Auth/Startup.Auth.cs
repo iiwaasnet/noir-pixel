@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security.Cookies;
 using Owin.Security.Providers.GooglePlus;
 using Owin;
+using Owin.Security.Providers.Yahoo;
 
 namespace Api.App.Auth
 {
@@ -21,14 +22,11 @@ namespace Api.App.Auth
             app.UseCookieAuthentication(new CookieAuthenticationOptions());
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
-            // Uncomment the following lines to enable logging in with third party login providers
-            //app.UseTwitterAuthentication(
-            //    consumerKey: "",
-            //    consumerSecret: "");
-
+         
             app.UseGooglePlusAuthentication(authOptions.GooglePlusAuthOptions);
             app.UseFacebookAuthentication(authOptions.FacebookAuthOptions);
             app.UseTwitterAuthentication(authOptions.TwitterAuthOptions);
+            app.UseYahooAuthentication(authOptions.YahooAuthOptions);
         }
     }
 }

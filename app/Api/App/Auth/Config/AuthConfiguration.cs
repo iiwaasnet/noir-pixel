@@ -9,5 +9,6 @@ namespace Api.App.Auth.Config
         public GooglePlusConfiguration GooglePlus { get; set; }
         public FacebookConfiguration Facebook { get; set; }
         public TwitterConfiguration Twitter { get; set; }
+        public YahooConfiguration Yahoo { get; set; }
     }
 }
