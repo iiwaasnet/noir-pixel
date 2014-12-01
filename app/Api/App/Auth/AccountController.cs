@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -134,7 +135,8 @@ namespace Api.App.Auth
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                logger.Error(model, "Invalid model state!");
+                return new NegotiatedContentResult<ApiError>(HttpStatusCode.BadRequest, new ApiError { Main = new ApiError.StringResource { Id = ApiErrors.AuthUnknownError } }, this);
             }
 
             var verifiedAccessToken = await externalAccountsManager.VerfiyAccessToken(model.Provider, model.ExternalAccessToken, model.AccessTokenSecret);
