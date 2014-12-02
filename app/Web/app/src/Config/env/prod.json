@@ -4,9 +4,9 @@
     
     "apiUris.base": "api.noir-pixel.com",
     "apiUris.signin": "token",
-    "apiUris.externalLogins": "/account/external-logins?returnUrl={0}",
-    "apiUris.localAccessToken": "account/local-access-token",
-    "apiUris.registerExternal":  "account/register-external",
+    "apiUris.externalLogins": "/accounts/external-logins?returnUrl={0}",
+    "apiUris.localAccessToken": "accounts/local-access-token",
+    "apiUris.registerExternal":  "accounts/register-external",
     
     "strings.invalidationTimeout": "01:00:00",
     "strings.versionsUri": "/strings/versions",

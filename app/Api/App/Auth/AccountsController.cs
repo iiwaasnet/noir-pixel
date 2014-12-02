@@ -26,8 +26,8 @@ using WebGrease.Css.Extensions;
 namespace Api.App.Auth
 {
     [Authorize]
-    [RoutePrefix("account")]
-    public class AccountController : ApiBaseController
+    [RoutePrefix("accounts")]
+    public class AccountsController : ApiBaseController
     {
         private const string LocalLoginProvider = "Local";
         private readonly ApplicationUserManager userManager;
@@ -36,7 +36,7 @@ namespace Api.App.Auth
         private readonly IApiStringsProvider stringsProvider;
         private readonly ILogger logger;
 
-        public AccountController(ApplicationUserManager userManager,
+        public AccountsController(ApplicationUserManager userManager,
                                  AuthOptions authOptions,
                                  IExternalAccountsManager externalAccountsManager,
                                  IApiStringsProvider stringsProvider,

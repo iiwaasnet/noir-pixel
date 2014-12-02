@@ -8,9 +8,9 @@
         apiUris: {
             base: 'api.noir-pixel.com',
             signin: 'token',
-            externalLogins: '/account/external-logins?returnUrl={0}',
-            localAccessToken: 'account/local-access-token',
-            registerExternal: 'account/register-external'
+            externalLogins: '/accounts/external-logins?returnUrl={0}',
+            localAccessToken: 'accounts/local-access-token',
+            registerExternal: 'accounts/register-external'
         },
         strings: {
             invalidationTimeout: '00:10:00',
