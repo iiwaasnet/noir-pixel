@@ -108,7 +108,7 @@ namespace Api.App.Auth
                 var externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
                 if (externalLogin == null)
                 {
-                    logger.Error(stringsProvider.GetString(ApiErrors.Auth.ExternalLoginDataNotFound).AppendFormatting(), User.Identity);
+                    logger.Error("External login not found".AppendFormatting(), User.Identity);
                     return RedirectWithError(redirectUri, ApiErrors.Auth.ExternalLoginDataNotFound);
                 }
 
@@ -152,10 +152,10 @@ namespace Api.App.Auth
         {
             if (!ModelState.IsValid)
             {
-                var message = stringsProvider.GetString(ApiErrors.InvalidModelState);
-                logger.Error(message.AppendFormatting(), model);
-
-                return BadRequest(message);
+                logger.Error("Invalid model state".AppendFormatting(), model);
+                //TODO: Decide on how to transform ModelState errors to ValidationError
+                // Proceed from here
+                return BadRequest(ApiErrors.InvalidModelState)
             }
 
             var verifiedAccessToken = await externalAccountsManager.VerfiyAccessToken(model.Provider, model.ExternalAccessToken, model.AccessTokenSecret);
