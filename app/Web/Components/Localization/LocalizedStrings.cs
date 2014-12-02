@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Resources;
+using Resources.Client;
 
 namespace Web.Components.Localization
 {
     public class LocalizedStrings : ILocalizedStrings
     {
         private const string DefaultLocale = "en";
-        private readonly IStringsProvider stringsProvider;
-        public LocalizedStrings(IStringsProvider stringsProvider)
+        private readonly IClientStringsProvider clientStringsProvider;
+        public LocalizedStrings(IClientStringsProvider clientStringsProvider)
         {
-            this.stringsProvider = stringsProvider;
+            this.clientStringsProvider = clientStringsProvider;
         }
 
 
@@ -20,7 +21,7 @@ namespace Web.Components.Localization
                    {
                        Locale = locale,
                        Version = "1",
-                       Strings = stringsProvider
+                       Strings = clientStringsProvider
                            .GetLocalizedStrings(locale)
                            .Select(str => new LocalizedString {Key = str.Key, Value = str.Value})
                            .ToArray()

@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 
-namespace Resources
+namespace Resources.Client
 {
-    public interface IStringsProvider
+    public interface IClientStringsProvider
     {
         IEnumerable<KeyValuePair<string, string>> GetLocalizedStrings(string lang);
-        string GetString(string id);
     }
 }

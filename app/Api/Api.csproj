@@ -245,6 +245,8 @@
     <Compile Include="App\Db\DbConfiguration.cs" />
     <Compile Include="App\Db\DbServerConfiguration.cs" />
     <Compile Include="App\Errors\ApiError.cs" />
+    <Compile Include="App\Errors\FieldValidationError.cs" />
+    <Compile Include="App\Errors\ValidationError.cs" />
     <Compile Include="App\Resources\Strings.cs" />
     <Compile Include="App\Resources\StringsModule.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />

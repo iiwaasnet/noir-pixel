@@ -4,21 +4,16 @@ using System.Globalization;
 using System.Linq;
 using System.Resources;
 
-namespace Resources
+namespace Resources.Client
 {
-    public class StringsProvider : IStringsProvider
+    public class ClientStringsProvider : IClientStringsProvider
     {
         public IEnumerable<KeyValuePair<string, string>> GetLocalizedStrings(string lang)
         {
             var cultureInfo = CultureInfo.CreateSpecificCulture(lang);
-            var resourceSet = Rs.ResourceManager.GetResourceSet(cultureInfo, true, true);
+            var resourceSet = Strings.ResourceManager.GetResourceSet(cultureInfo, true, true);
 
             return GetStringsFromResourceSet(resourceSet).ToArray();
-        }
-
-        public string GetString(string id)
-        {
-            return Rs.ResourceManager.GetString(id);
         }
 
         private IEnumerable<KeyValuePair<string, string>> GetStringsFromResourceSet(ResourceSet resourceSet)

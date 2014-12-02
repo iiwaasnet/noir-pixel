@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Resources;
+using Resources.Client;
 
 namespace Web.Components.Localization
 {
@@ -7,7 +8,7 @@ namespace Web.Components.Localization
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<StringsProvider>().As<IStringsProvider>().SingleInstance();
+            builder.RegisterType<ClientStringsProvider>().As<IClientStringsProvider>().SingleInstance();
             builder.RegisterType<LocalizedStrings>().As<ILocalizedStrings>().SingleInstance();
         }
     }

@@ -20,7 +20,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Linq;
-using Resources;
+using Resources.Api;
 using WebGrease.Css.Extensions;
 
 namespace Api.App.Auth
@@ -33,13 +33,13 @@ namespace Api.App.Auth
         private readonly ApplicationUserManager userManager;
         private readonly AuthOptions authOptions;
         private readonly IExternalAccountsManager externalAccountsManager;
-        private IStringsProvider stringsProvider;
+        private readonly IApiStringsProvider stringsProvider;
         private readonly ILogger logger;
 
         public AccountController(ApplicationUserManager userManager,
                                  AuthOptions authOptions,
                                  IExternalAccountsManager externalAccountsManager,
-                                 IStringsProvider stringsProvider,
+                                 IApiStringsProvider stringsProvider,
                                  ILogger logger)
         {
             this.logger = logger;
@@ -179,11 +179,17 @@ namespace Api.App.Auth
                 return GetIdentityErrorResult(result);
             }
 
-            return Ok(new JObject(
-                          new JProperty("access_token", model.ExternalAccessToken),
-                          new JProperty("access_token_secret", model.AccessTokenSecret),
-                          new JProperty("provider", model.Provider)
-                          ));
+            //return Ok(new JObject(
+            //              new JProperty("access_token", model.ExternalAccessToken),
+            //              new JProperty("access_token_secret", model.AccessTokenSecret),
+            //              new JProperty("provider", model.Provider)
+            //              ));
+            return Ok(new
+                      {
+                          access_token = model.ExternalAccessToken,
+                          access_token_secret = model.AccessTokenSecret,
+                          provider = model.Provider
+                      });
         }
 
         private string CreateUserName(string displayName)
