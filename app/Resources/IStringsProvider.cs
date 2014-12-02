@@ -5,5 +5,6 @@ namespace Resources
     public interface IStringsProvider
     {
         IEnumerable<KeyValuePair<string, string>> GetLocalizedStrings(string lang);
+        string GetString(string id);
     }
 }

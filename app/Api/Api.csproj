@@ -245,6 +245,8 @@
     <Compile Include="App\Db\DbConfiguration.cs" />
     <Compile Include="App\Db\DbServerConfiguration.cs" />
     <Compile Include="App\Errors\ApiError.cs" />
+    <Compile Include="App\Resources\Strings.cs" />
+    <Compile Include="App\Resources\StringsModule.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\ConfigurationModule.cs" />
     <Compile Include="App_Start\CustomExceptionLogger.cs" />
@@ -385,6 +387,10 @@
     <ProjectReference Include="..\JsonConfigurationProvider\JsonConfigurationProvider.csproj">
       <Project>{7baef581-a42b-4a8a-af73-e9b1f52c1ffa}</Project>
       <Name>JsonConfigurationProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resources\Resources.csproj">
+      <Project>{87c1faee-88e4-41f9-a66d-2e52a37e27b5}</Project>
+      <Name>Resources</Name>
     </ProjectReference>
     <ProjectReference Include="..\Shared\Shared.csproj">
       <Project>{57171eff-d3d2-4abb-ba72-3d561594595b}</Project>

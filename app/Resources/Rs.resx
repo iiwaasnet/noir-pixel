@@ -156,4 +156,7 @@
   <data name="EAPI_Unknown" xml:space="preserve">
     <value>We have encountered an error, while trying to execute your request :( Please, try one more time.</value>
   </data>
+  <data name="EAPI_InvalidModelState" xml:space="preserve">
+    <value>Invalid model state</value>
+  </data>
 </root>

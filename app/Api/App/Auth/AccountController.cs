@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -21,6 +20,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Linq;
+using Resources;
 using WebGrease.Css.Extensions;
 
 namespace Api.App.Auth
@@ -33,16 +33,19 @@ namespace Api.App.Auth
         private readonly ApplicationUserManager userManager;
         private readonly AuthOptions authOptions;
         private readonly IExternalAccountsManager externalAccountsManager;
+        private IStringsProvider stringsProvider;
         private readonly ILogger logger;
 
         public AccountController(ApplicationUserManager userManager,
                                  AuthOptions authOptions,
                                  IExternalAccountsManager externalAccountsManager,
+                                 IStringsProvider stringsProvider,
                                  ILogger logger)
         {
             this.logger = logger;
             this.userManager = userManager;
             this.authOptions = authOptions;
+            this.stringsProvider = stringsProvider;
             this.externalAccountsManager = externalAccountsManager;
         }
 
@@ -121,7 +124,7 @@ namespace Api.App.Auth
                 catch (Exception err)
                 {
                     logger.Error(err);
-                    redirectUri = string.Format("{0}#error={1}", redirectUri, Uri.EscapeDataString(ApiErrors.AuthUnknownError));
+                    redirectUri = string.Format("{0}#error={1}", redirectUri, Uri.EscapeDataString(ApiErrors.Auth.UnknownError));
                 }
             }
             return Redirect(redirectUri);
@@ -135,8 +138,10 @@ namespace Api.App.Auth
         {
             if (!ModelState.IsValid)
             {
-                logger.Error(model, "Invalid model state!");
-                return new NegotiatedContentResult<ApiError>(HttpStatusCode.BadRequest, new ApiError { Main = new ApiError.StringResource { Id = ApiErrors.AuthUnknownError } }, this);
+                var message = stringsProvider.GetString(ApiErrors.InvalidModelState);
+                logger.Error(model, message);
+
+                return BadRequest(message);
             }
 
             var verifiedAccessToken = await externalAccountsManager.VerfiyAccessToken(model.Provider, model.ExternalAccessToken, model.AccessTokenSecret);
@@ -175,10 +180,10 @@ namespace Api.App.Auth
             }
 
             return Ok(new JObject(
-                new JProperty("access_token", model.ExternalAccessToken),
-                new JProperty("access_token_secret", model.AccessTokenSecret),
-                new JProperty("provider", model.Provider)
-                ));
+                          new JProperty("access_token", model.ExternalAccessToken),
+                          new JProperty("access_token_secret", model.AccessTokenSecret),
+                          new JProperty("provider", model.Provider)
+                          ));
         }
 
         private string CreateUserName(string displayName)

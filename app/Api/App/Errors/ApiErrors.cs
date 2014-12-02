@@ -2,6 +2,11 @@
 {
     public class ApiErrors
     {
-        public const string AuthUnknownError = "EAPI_Auth_Unknown";
+        public class Auth
+        {
+            public const string UnknownError = "EAPI_Auth_Unknown";
+        }
+
+        public const string InvalidModelState = "EAPI_InvalidModelState";
     }
 }
