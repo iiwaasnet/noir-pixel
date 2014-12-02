@@ -37,7 +37,7 @@ namespace Api.Logging.Controllers
                         logger.Error(entry);
                         return;
                     default:
-                        logger.Warn(entry, "UNCATEGORIZED LOG ENTRY");
+                        logger.Warn("UNCATEGORIZED LOG ENTRY", entry);
                         return;
                 }
             }

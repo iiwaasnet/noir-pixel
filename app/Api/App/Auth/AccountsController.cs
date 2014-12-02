@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Results;
+using Api.App.Auth.Extensions;
 using Api.App.Auth.ExternalUserInfo;
 using Api.App.Errors;
 using Api.Models;
@@ -21,6 +23,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Linq;
 using Resources.Api;
+using Shared.Extensions;
 using WebGrease.Css.Extensions;
 
 namespace Api.App.Auth
@@ -81,11 +84,18 @@ namespace Api.App.Auth
         [Route("external-login", Name = "ExternalLogin")]
         public async Task<IHttpActionResult> GetExternalLogin(string provider, string error = null)
         {
-            var redirectUri = GetRedirectUri(Request);
+            var redirectUriResult = Request.GetRedirectUri();
+            if (!redirectUriResult.Parsed)
+            {
+                logger.Error("Error executing external login".AppendFormatting(), redirectUriResult.Error);
+                return ApiError(HttpStatusCode.BadRequest, redirectUriResult.Error);
+            }
+
+            var redirectUri = redirectUriResult.Uri;
 
             if (error != null)
             {
-                logger.Error("Error executing external login: {0}", error);
+                logger.Error("Error executing external login".AppendFormatting(), error);
                 return RedirectWithError(redirectUri, error);
             }
             try
@@ -98,7 +108,7 @@ namespace Api.App.Auth
                 var externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
                 if (externalLogin == null)
                 {
-                    logger.Error(User.Identity, stringsProvider.GetString(ApiErrors.Auth.ExternalLoginDataNotFound));
+                    logger.Error(stringsProvider.GetString(ApiErrors.Auth.ExternalLoginDataNotFound).AppendFormatting(), User.Identity);
                     return RedirectWithError(redirectUri, ApiErrors.Auth.ExternalLoginDataNotFound);
                 }
 
@@ -143,7 +153,7 @@ namespace Api.App.Auth
             if (!ModelState.IsValid)
             {
                 var message = stringsProvider.GetString(ApiErrors.InvalidModelState);
-                logger.Error(model, message);
+                logger.Error(message.AppendFormatting(), model);
 
                 return BadRequest(message);
             }
@@ -300,40 +310,7 @@ namespace Api.App.Auth
                        : null;
         }
 
-        private string GetRedirectUri(HttpRequestMessage request)
-        {
-            Uri redirectUri;
-
-            var redirectUriString = GetQueryString(request, "redirect_uri");
-
-            if (string.IsNullOrWhiteSpace(redirectUriString))
-            {
-                return "redirect_uri is required";
-            }
-
-            if (!Uri.TryCreate(redirectUriString, UriKind.Absolute, out redirectUri))
-            {
-                return "redirect_uri is invalid";
-            }
-
-            return redirectUri.AbsoluteUri;
-        }
-
-        private string GetQueryString(HttpRequestMessage request, string key)
-        {
-            var queryStrings = request.GetQueryNameValuePairs();
-            if (queryStrings != null)
-            {
-                var match = queryStrings.FirstOrDefault(keyValue => String.Compare(keyValue.Key, key, StringComparison.OrdinalIgnoreCase) == 0);
-
-                if (!string.IsNullOrWhiteSpace(match.Value))
-                {
-                    return match.Value;
-                }
-            }
-
-            return null;
-        }
+        
 
         //===========================================================================================
         //===========================================================================================

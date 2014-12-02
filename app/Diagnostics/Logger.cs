@@ -1,58 +1,73 @@
-﻿using NLog;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
+using NLog;
 
 namespace Diagnostics
 {
     public class Logger : ILogger
     {
         private readonly NLog.Logger logger;
+        private readonly JsonSerializerSettings jsonSerializerSettings;
+
         public Logger()
+            : this(LogManager.GetCurrentClassLogger())
         {
-            logger = LogManager.GetCurrentClassLogger();
         }
 
         public Logger(string name)
+            : this(LogManager.GetLogger(name))
         {
-            logger = LogManager.GetLogger(name);
         }
 
-        public void Debug(object obj, string message)
+        private Logger(NLog.Logger logger)
         {
-            logger.Debug(message, obj);
+            this.logger = logger;
+            jsonSerializerSettings = new JsonSerializerSettings
+                                     {
+                                         ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                                         Converters = {new JavaScriptDateTimeConverter()}
+                                     };
+        }
+
+        public void Debug(string formatMessage, object obj)
+        {
+            logger.Debug(formatMessage, JsonConvert.SerializeObject(obj, jsonSerializerSettings));
         }
 
         public void Debug(object obj)
         {
-            logger.Debug(obj);
+            logger.Debug(JsonConvert.SerializeObject(obj, jsonSerializerSettings));
         }
 
-        public void Error(object obj, string message)
+        public void Error(string formatMessage, object obj)
         {
-            logger.Error(message, obj);
+            logger.Error(formatMessage, JsonConvert.SerializeObject(obj, jsonSerializerSettings));
         }
 
         public void Error(object obj)
         {
-            logger.Error(obj);
+            logger.Error(JsonConvert.SerializeObject(obj, jsonSerializerSettings));
         }
 
-        public void Warn(object obj, string message)
+        public void Warn(string formatMessage, object obj)
         {
-            logger.Warn(message, obj);
+            logger.Warn(formatMessage, JsonConvert.SerializeObject(obj, jsonSerializerSettings));
         }
 
         public void Warn(object obj)
         {
-            logger.Warn(obj);
+            logger.Warn(JsonConvert.SerializeObject(obj, jsonSerializerSettings));
         }
 
-        public void Info(object obj, string message)
+        public void Info(string formatMessage, object obj)
         {
-            logger.Info(message, obj);
+            logger.Info(formatMessage, JsonConvert.SerializeObject(obj, jsonSerializerSettings));
         }
 
         public void Info(object obj)
         {
-            logger.Info(obj);
+            logger.Info(JsonConvert.SerializeObject(obj, jsonSerializerSettings));
         }
     }
 }

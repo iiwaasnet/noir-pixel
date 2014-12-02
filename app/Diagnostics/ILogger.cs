@@ -2,13 +2,13 @@
 {
     public interface ILogger
     {
-        void Debug(object obj, string message);
+        void Debug(string formatMessage, object obj);
         void Debug(object obj);
-        void Error(object obj, string message);
+        void Error(string formatMessage, object obj);
         void Error(object obj);
-        void Warn(object obj, string message);
+        void Warn(string formatMessage, object obj);
         void Warn(object obj);
-        void Info(object obj, string message);
+        void Info(string formatMessage, object obj);
         void Info(object obj);
     }
 }

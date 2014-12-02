@@ -224,6 +224,7 @@
     <Compile Include="App\Auth\Config\GooglePlusConfiguration.cs" />
     <Compile Include="App\Auth\Config\YahooConfiguration.cs" />
     <Compile Include="App\Auth\Config\TwitterConfiguration.cs" />
+    <Compile Include="App\Auth\Extensions\UriParseResult.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\ExternalAccountsManager.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\ExternalUserInfo.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\Facebook\FacebookAccountProvider.cs" />
@@ -234,6 +235,7 @@
     <Compile Include="App\Auth\ExternalUserInfo\LinkInfo.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\Twitter\AuthorizeRequest.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\Twitter\TwitterAccountProvider.cs" />
+    <Compile Include="App\Auth\Extensions\HttpRequestExtensions.cs" />
     <Compile Include="App\Auth\LocalAccessTokenModel.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\PersonInfo.cs" />
     <Compile Include="App\Auth\RegisterExternalModel.cs" />

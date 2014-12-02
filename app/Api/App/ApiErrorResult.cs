@@ -34,7 +34,8 @@ namespace Api.App
         {
             var result = contentNegotiator.Negotiate(typeof (T), request, formatters);
 
-            using (var response = new HttpResponseMessage())
+            var response = new HttpResponseMessage();
+            try
             {
                 if (result == null)
                 {
@@ -47,8 +48,14 @@ namespace Api.App
                 }
 
                 response.RequestMessage = request;
-                return response;
             }
+            catch
+            {
+                response.Dispose();
+                throw;
+            }
+
+            return response;
         }
     }
 }
