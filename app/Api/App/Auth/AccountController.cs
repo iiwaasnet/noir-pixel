@@ -27,7 +27,7 @@ namespace Api.App.Auth
 {
     [Authorize]
     [RoutePrefix("account")]
-    public class AccountController : ApiController
+    public class AccountController : ApiBaseController
     {
         private const string LocalLoginProvider = "Local";
         private readonly ApplicationUserManager userManager;
@@ -85,49 +85,53 @@ namespace Api.App.Auth
 
             if (error != null)
             {
-                redirectUri = string.Format("{0}#error={1}", redirectUri, Uri.EscapeDataString(error));
+                logger.Error("Error executing external login: {0}", error);
+                return RedirectWithError(redirectUri, error);
             }
-            else
+            try
             {
-                try
+                if (!User.Identity.IsAuthenticated)
                 {
-                    if (!User.Identity.IsAuthenticated)
-                    {
-                        return new ChallengeResult(provider, this);
-                    }
-
-                    var externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
-
-                    if (externalLogin == null)
-                    {
-                        return InternalServerError();
-                    }
-
-                    if (externalLogin.LoginProvider != provider)
-                    {
-                        GetAuthentication().SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                        return new ChallengeResult(provider, this);
-                    }
-
-                    var user = await userManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
-                                                                             externalLogin.ProviderKey));
-
-                    var registered = user != null;
-
-                    redirectUri = string.Format("{0}#external_access_token={1}&access_token_secret={2}&registered={3}&provider={4}",
-                                                redirectUri,
-                                                externalLogin.ExternalAccessToken,
-                                                externalLogin.AccessTokenSecret,
-                                                registered.ToString().ToLower(),
-                                                provider);
+                    return new ChallengeResult(provider, this);
                 }
-                catch (Exception err)
+
+                var externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+                if (externalLogin == null)
                 {
-                    logger.Error(err);
-                    redirectUri = string.Format("{0}#error={1}", redirectUri, Uri.EscapeDataString(ApiErrors.Auth.UnknownError));
+                    logger.Error(User.Identity, stringsProvider.GetString(ApiErrors.Auth.ExternalLoginDataNotFound));
+                    return RedirectWithError(redirectUri, ApiErrors.Auth.ExternalLoginDataNotFound);
                 }
+
+                if (externalLogin.LoginProvider != provider)
+                {
+                    GetAuthentication().SignOut(DefaultAuthenticationTypes.ExternalCookie);
+                    return new ChallengeResult(provider, this);
+                }
+
+                var user = await userManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
+                                                                         externalLogin.ProviderKey));
+
+                var registered = user != null;
+
+                redirectUri = string.Format("{0}#external_access_token={1}&access_token_secret={2}&registered={3}&provider={4}",
+                                            redirectUri,
+                                            externalLogin.ExternalAccessToken,
+                                            externalLogin.AccessTokenSecret,
+                                            registered.ToString().ToLower(),
+                                            provider);
+
+                return Redirect(redirectUri);
             }
-            return Redirect(redirectUri);
+            catch (Exception err)
+            {
+                logger.Error(err);
+                return RedirectWithError(redirectUri, ApiErrors.InternalError);
+            }
+        }
+
+        private IHttpActionResult RedirectWithError(string redirectUri, string error)
+        {
+            return Redirect(string.Format("{0}#error={1}", redirectUri, Uri.EscapeDataString(error)));
         }
 
         [OverrideAuthentication]
@@ -179,11 +183,6 @@ namespace Api.App.Auth
                 return GetIdentityErrorResult(result);
             }
 
-            //return Ok(new JObject(
-            //              new JProperty("access_token", model.ExternalAccessToken),
-            //              new JProperty("access_token_secret", model.AccessTokenSecret),
-            //              new JProperty("provider", model.Provider)
-            //              ));
             return Ok(new
                       {
                           access_token = model.ExternalAccessToken,
@@ -579,7 +578,8 @@ namespace Api.App.Auth
 
                 var providerKeyClaim = identity.FindFirst(ClaimTypes.NameIdentifier);
 
-                if (providerKeyClaim == null || String.IsNullOrEmpty(providerKeyClaim.Issuer)
+                if (providerKeyClaim == null
+                    || String.IsNullOrEmpty(providerKeyClaim.Issuer)
                     || String.IsNullOrEmpty(providerKeyClaim.Value))
                 {
                     return null;
