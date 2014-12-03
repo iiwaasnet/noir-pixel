@@ -12,6 +12,7 @@ using System.Web.Http.Results;
 using Api.App.Auth.Extensions;
 using Api.App.Auth.ExternalUserInfo;
 using Api.App.Errors;
+using Api.App.Errors.Extensions;
 using Api.Models;
 using Api.Results;
 using AspNet.Identity.MongoDB;
@@ -108,7 +109,7 @@ namespace Api.App.Auth
                 var externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
                 if (externalLogin == null)
                 {
-                    logger.Error("External login not found".AppendFormatting(), User.Identity);
+                    logger.Error(stringsProvider.GetString(ApiErrors.Auth.ExternalLoginDataNotFound).AppendFormatting(), User.Identity);
                     return RedirectWithError(redirectUri, ApiErrors.Auth.ExternalLoginDataNotFound);
                 }
 
@@ -152,16 +153,19 @@ namespace Api.App.Auth
         {
             if (!ModelState.IsValid)
             {
-                logger.Error("Invalid model state".AppendFormatting(), model);
-                //TODO: Decide on how to transform ModelState errors to ValidationError
-                // Proceed from here
-                return BadRequest(ApiErrors.InvalidModelState)
+                logger.Error(stringsProvider.GetString(ApiErrors.Validation.InvalidModelState).AppendFormatting(), model);
+                return ApiError(HttpStatusCode.BadRequest, ModelState.ToValidationError(stringsProvider));
             }
 
             var verifiedAccessToken = await externalAccountsManager.VerfiyAccessToken(model.Provider, model.ExternalAccessToken, model.AccessTokenSecret);
             if (verifiedAccessToken == null)
             {
-                return BadRequest("Invalid Provider or External Access Token");
+                logger.Error(stringsProvider.GetString(ApiErrors.Auth.InvalidProviderOrAccessToken).AppendFormatting(), model);
+                return ApiError(HttpStatusCode.BadRequest, new ApiError
+                                                           {
+                                                               Code = ApiErrors.Auth.InvalidProviderOrAccessToken,
+                                                               Message = stringsProvider.GetString(ApiErrors.Auth.InvalidProviderOrAccessToken)
+                                                           });
             }
 
             var user = await userManager.FindAsync(new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));

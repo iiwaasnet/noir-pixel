@@ -20,8 +20,9 @@ namespace Api.App.Auth.Extensions
                            Parsed = false,
                            Error = new ValidationError
                                    {
-                                       Code = ApiErrors.InvalidModelState,
-                                       Message = "redirect_uri is required"
+                                       Code = ApiErrors.Validation.InvalidModelState,
+                                       Message = "redirect_uri is required",
+                                       Errors = new[] {new FieldValidationError {Code = ApiErrors.Validation.ValueRequired, Field = "redirect_uri"}}
                                    }
                        };
             }
@@ -33,8 +34,9 @@ namespace Api.App.Auth.Extensions
                            Parsed = false,
                            Error = new ValidationError
                                    {
-                                       Code = ApiErrors.InvalidModelState,
-                                       Message = "redirect_uri is invalid"
+                                       Code = ApiErrors.Validation.InvalidModelState,
+                                       Message = "redirect_uri is invalid",
+                                       Errors = new[] {new FieldValidationError {Code = ApiErrors.Validation.InvalidValue, Field = "redirect_uri"}}
                                    }
                        };
             }

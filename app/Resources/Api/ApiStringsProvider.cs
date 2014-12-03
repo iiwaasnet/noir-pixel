@@ -4,7 +4,9 @@
     {
         public string GetString(string id)
         {
-            return Strings.ResourceManager.GetString(id);
+            var str = Strings.ResourceManager.GetString(id);
+
+            return (!string.IsNullOrWhiteSpace(str)) ? str : id;
         }
     }
 }
