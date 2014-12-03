@@ -22,7 +22,7 @@ namespace Api.App.Auth.Extensions
                                    {
                                        Code = ApiErrors.Validation.InvalidModelState,
                                        Message = "redirect_uri is required",
-                                       Errors = new[] {new FieldValidationError {Code = ApiErrors.Validation.ValueRequired, Field = "redirect_uri"}}
+                                       Errors = new[] {new FieldValidationError {Code = ApiErrors.Validation.RequiredValue, Field = "redirect_uri"}}
                                    }
                        };
             }

@@ -11,8 +11,10 @@
         public class Validation
         {
             public const string InvalidModelState = "EAPI_InvalidModelState";
-            public const string ValueRequired = "EAPI_ValueRequired";
+            public const string RequiredValue = "EAPI_ValueRequired";
             public const string InvalidValue = "EAPI_InvalidValue";
+            public const string NotSame = "EAPI_NotSame";
+            public const string InvalidEmail = "EAPI_InvalidMail";
         }
 
         public const string UnknownError = "EAPI_UnknownError";
