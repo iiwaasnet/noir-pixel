@@ -309,7 +309,6 @@
     <Compile Include="App\Auth\ExternalUserInfo\GPlus\GooglePlusAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Validation\MinLengthAttribute.cs" />
     <Compile Include="Validation\PrefixlessModelValidator.cs" />
   </ItemGroup>
   <ItemGroup>
