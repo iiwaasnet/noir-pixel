@@ -63,6 +63,13 @@
     <Reference Include="Autofac.Integration.WebApi">
       <HintPath>..\packages\Autofac.WebApi2.3.4.0\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
     </Reference>
+    <Reference Include="FluentValidation, Version=5.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation.WebApi">
+      <HintPath>..\Dependencies\FluentValidation.WebApi.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin">
       <HintPath>..\packages\Microsoft.Owin.3.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
@@ -252,6 +259,8 @@
     <Compile Include="App\Errors\Extensions\ModelStateExtensions.cs" />
     <Compile Include="App\Errors\FieldValidationError.cs" />
     <Compile Include="App\Errors\ValidationError.cs" />
+    <Compile Include="Validation\ValidatorActivator.cs" />
+    <Compile Include="Validation\ApiResourceBuilder.cs" />
     <Compile Include="App\Resources\Strings.cs" />
     <Compile Include="App\Resources\StringsModule.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -309,7 +318,12 @@
     <Compile Include="App\Auth\ExternalUserInfo\GPlus\GooglePlusAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Validation\IValidatorActivator.cs" />
     <Compile Include="Validation\PrefixlessModelValidator.cs" />
+    <Compile Include="Validation\ValidationModule.cs" />
+    <Compile Include="Validation\ValidatorCache.cs" />
+    <Compile Include="Validation\WebApiValidation.cs" />
+    <Compile Include="Validation\WebApiValidatorFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
