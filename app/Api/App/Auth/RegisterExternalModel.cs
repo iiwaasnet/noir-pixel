@@ -1,7 +1,7 @@
 using Api.App.Errors;
-using FluentValidation;
-using FluentValidation.Attributes;
-using FluentValidation.Resources;
+using Ext.FluentValidation;
+using Ext.FluentValidation.Attributes;
+using Ext.FluentValidation.Resources;
 
 namespace Api.App.Auth
 {

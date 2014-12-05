@@ -1,6 +1,6 @@
 ﻿using System;
-using FluentValidation;
-using FluentValidation.Attributes;
+using Ext.FluentValidation;
+using Ext.FluentValidation.Attributes;
 
 namespace Api.Validation
 {

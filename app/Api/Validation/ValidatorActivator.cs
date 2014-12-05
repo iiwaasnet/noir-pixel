@@ -1,5 +1,5 @@
 ﻿using System;
-using FluentValidation.Resources;
+using Ext.FluentValidation.Resources;
 
 namespace Api.Validation
 {

@@ -1,8 +1,8 @@
 ﻿using System;
 using Autofac;
-using FluentValidation;
-using FluentValidation.Resources;
-using FluentValidation.WebApi;
+using Ext.FluentValidation;
+using Ext.FluentValidation.Resources;
+using Ext.FluentValidation.WebApi;
 
 namespace Api.Validation
 {

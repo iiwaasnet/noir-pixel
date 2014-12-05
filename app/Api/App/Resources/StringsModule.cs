@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using FluentValidation.Resources;
 using Resources.Api;
 
 namespace Api.App.Resources

@@ -6,7 +6,7 @@ using System.Web.Http.ExceptionHandling;
 using System.Web.Http.Validation;
 using Api.Validation;
 using Autofac;
-using FluentValidation.WebApi;
+using Ext.FluentValidation.WebApi;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 

@@ -1,5 +1,5 @@
-﻿using FluentValidation;
-using FluentValidation.WebApi;
+﻿using Ext.FluentValidation;
+using Ext.FluentValidation.WebApi;
 
 namespace Api.Validation
 {
