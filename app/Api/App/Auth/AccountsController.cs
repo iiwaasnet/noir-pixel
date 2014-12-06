@@ -191,7 +191,7 @@ namespace Api.App.Auth
                                                            verifiedAccessToken.user_id)
                                };
                 logger.Error(apiError);
-                return ApiError(HttpStatusCode.BadRequest, apiError);
+                return ApiError(HttpStatusCode.Conflict, apiError);
             }
 
             var externalUserInfo = await externalAccountsManager.GetUserInfo(model.Provider, verifiedAccessToken.user_id, model.ExternalAccessToken, model.AccessTokenSecret);
@@ -290,7 +290,7 @@ namespace Api.App.Auth
                                                         verifiedAccessToken.user_id)
                             };
                 logger.Error(error);
-                return ApiError(HttpStatusCode.BadRequest, error);
+                return ApiError(HttpStatusCode.NotFound, error);
             }
         }
 
