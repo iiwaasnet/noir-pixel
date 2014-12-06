@@ -46,8 +46,8 @@
                     tmp.aux = obj.aux.text ? obj.aux.text : Strings.getLocalizedString(obj.aux.id);
                 }
             }
-            if (!tmp.main.text) {
-                tmp.main.text = Strings.getLocalizedString(EAPI_Unknown);
+            if (!tmp.main) {
+                tmp.main = Strings.getLocalizedString(EAPI_Unknown);
             }
 
             return tmp;

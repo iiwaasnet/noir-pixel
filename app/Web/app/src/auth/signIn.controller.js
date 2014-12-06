@@ -27,11 +27,15 @@
         }
 
         function finalizeLogin(result) {
-            if (result.succeeded) {
-                Signin.close();
-                //$stateParams.go(getLoginRedirectState());
-            } else {
-                Messages.error({ main: { id: result.error } });
+            try {
+                if (result.succeeded) {
+                    Signin.close();
+                    //$stateParams.go(getLoginRedirectState());
+                } else {
+                    Messages.error({ main: { id: result.error } });
+                }
+            } catch (e) {
+
             }
         }
 
@@ -42,19 +46,19 @@
 
         function assignOrder(login) {
             switch (login.provider) {
-                case 'Facebook':
-                    login.displayOrder = 0;
-                    break;
-                case 'GooglePlus':
-                    login.displayOrder = 1;
-                    break;
-                case 'Twitter':
-                    login.displayOrder = 2;
-                    break;
-                case 'Yahoo':
-                    login.displayOrder = 3;
-                    break;
-                default:
+            case 'Facebook':
+                login.displayOrder = 0;
+                break;
+            case 'GooglePlus':
+                login.displayOrder = 1;
+                break;
+            case 'Twitter':
+                login.displayOrder = 2;
+                break;
+            case 'Yahoo':
+                login.displayOrder = 3;
+                break;
+            default:
             }
         }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http.ModelBinding;
+using Ext.FluentValidation.WebApi;
 using Resources.Api;
 
 namespace Api.App.Errors.Extensions
@@ -21,12 +22,20 @@ namespace Api.App.Errors.Extensions
         {
             return modelState.SelectMany(prop => prop.Value
                                                      .Errors
-                                                     .Select(e => new FieldValidationError
-                                                                  {
-                                                                      Field = prop.Key,
-                                                                      Code = e.ErrorMessage,
-                                                                      Message = stringsProvider.GetString(e.ErrorMessage)
-                                                                  }));
+                                                     .Select(e => CreateFieldValidationError(stringsProvider, prop, e)));
+        }
+
+        private static FieldValidationError CreateFieldValidationError(IApiStringsProvider stringsProvider, KeyValuePair<string, ModelState> prop, ModelError e)
+        {
+            var fluentError = e as FluentValidationModelError;
+            var errorCode = (fluentError != null) ? fluentError.ErrorCode : e.ErrorMessage;
+
+            return new FieldValidationError
+                   {
+                       Field = prop.Key,
+                       Code = errorCode,
+                       Message = stringsProvider.GetString(errorCode)
+                   };
         }
     }
 }

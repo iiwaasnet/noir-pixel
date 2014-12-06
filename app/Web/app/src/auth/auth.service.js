@@ -95,7 +95,7 @@
             return $http.post(url,
             {
                 provider: provider,
-                //externalAccessToken: externalToken,
+                externalAccessToken: externalToken,
                 accessTokenSecret: accessTokenSecret
             },
             { headers: { 'Authorization': 'Bearer ' + externalToken } });

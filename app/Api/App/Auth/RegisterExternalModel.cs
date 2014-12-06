@@ -17,8 +17,8 @@ namespace Api.App.Auth
     {
         public RegisterExternalModelValidator(IResourceAccessorBuilder resourceAccessor)
         {
-            RuleFor(m => m.ExternalAccessToken).NotEmpty().WithLocalizedMessage(() => ApiErrors.Validation.RequiredValue, resourceAccessor);
-            RuleFor(m => m.Provider).NotEmpty().WithLocalizedMessage(() => ApiErrors.Validation.RequiredValue, resourceAccessor);
+            RuleFor(m => m.ExternalAccessToken).NotEmpty().WithLocalizedMessage(ApiErrors.Validation.RequiredValue, resourceAccessor);
+            RuleFor(m => m.Provider).NotEmpty().WithLocalizedMessage(ApiErrors.Validation.RequiredValue, resourceAccessor);
         }
     }
 }
