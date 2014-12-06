@@ -3,6 +3,7 @@ using Autofac;
 using Ext.FluentValidation;
 using Ext.FluentValidation.Resources;
 using Ext.FluentValidation.WebApi;
+using Resources.Api;
 
 namespace Api.Validation
 {
@@ -10,6 +11,9 @@ namespace Api.Validation
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<ApiStringsProvider>()
+                   .As<IApiStringsProvider>()
+                   .SingleInstance();
             builder.RegisterType<ApiResourceBuilder>()
                    .As<IResourceAccessorBuilder>()
                    .SingleInstance();

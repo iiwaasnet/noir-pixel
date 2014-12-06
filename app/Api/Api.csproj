@@ -254,8 +254,6 @@
     <Compile Include="App\Errors\ValidationError.cs" />
     <Compile Include="Validation\ValidatorActivator.cs" />
     <Compile Include="Validation\ApiResourceBuilder.cs" />
-    <Compile Include="App\Resources\Strings.cs" />
-    <Compile Include="App\Resources\StringsModule.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\ConfigurationModule.cs" />
     <Compile Include="App_Start\CustomExceptionLogger.cs" />
