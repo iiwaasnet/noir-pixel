@@ -14,27 +14,29 @@ namespace Api.App.Errors.Extensions
                    {
                        Code = ApiErrors.Validation.InvalidModelState,
                        Message = stringsProvider.GetString(ApiErrors.Validation.InvalidModelState),
-                       Errors = CreateValidationErrors(modelState, stringsProvider)
+                       Errors = CreateValidationErrors(modelState)
                    };
         }
 
-        private static IEnumerable<FieldValidationError> CreateValidationErrors(IEnumerable<KeyValuePair<string, ModelState>> modelState, IApiStringsProvider stringsProvider)
+        private static IEnumerable<FieldValidationError> CreateValidationErrors(IEnumerable<KeyValuePair<string, ModelState>> modelState)
         {
             return modelState.SelectMany(prop => prop.Value
                                                      .Errors
-                                                     .Select(e => CreateFieldValidationError(stringsProvider, prop, e)));
+                                                     .Select(e => CreateFieldValidationError(prop, e)));
         }
 
-        private static FieldValidationError CreateFieldValidationError(IApiStringsProvider stringsProvider, KeyValuePair<string, ModelState> prop, ModelError e)
+        private static FieldValidationError CreateFieldValidationError(KeyValuePair<string, ModelState> prop, ModelError e)
         {
             var fluentError = e as FluentValidationModelError;
             var errorCode = (fluentError != null) ? fluentError.ErrorCode : e.ErrorMessage;
+            var placeholders = (fluentError != null) ? fluentError.PlaceholderValues : null;
 
             return new FieldValidationError
                    {
                        Field = prop.Key,
                        Code = errorCode,
-                       Message = stringsProvider.GetString(errorCode)
+                       Message = e.ErrorMessage,
+                       PlaceholderValues = placeholders
                    };
         }
     }

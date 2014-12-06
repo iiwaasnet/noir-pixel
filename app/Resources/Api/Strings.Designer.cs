@@ -59,5 +59,14 @@ namespace Resources.Api {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Field {PropertyName} is required.
+        /// </summary>
+        internal static string EAPI_ValueRequired {
+            get {
+                return ResourceManager.GetString("EAPI_ValueRequired", resourceCulture);
+            }
+        }
     }
 }
