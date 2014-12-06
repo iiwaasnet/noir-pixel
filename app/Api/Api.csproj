@@ -63,11 +63,13 @@
     <Reference Include="Autofac.Integration.WebApi">
       <HintPath>..\packages\Autofac.WebApi2.3.4.0\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
     </Reference>
-    <Reference Include="Ext.FluentValidation">
-      <HintPath>..\packages\Ext.FluentValidation.5.6.0.1\lib\Net45\Ext.FluentValidation.dll</HintPath>
+    <Reference Include="Ext.FluentValidation, Version=5.6.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ext.FluentValidation.5.6.0.2\lib\Net45\Ext.FluentValidation.dll</HintPath>
     </Reference>
-    <Reference Include="Ext.FluentValidation.WebApi">
-      <HintPath>..\packages\Ext.FluentValidation.WebApi.5.6.0.1\lib\Net45\Ext.FluentValidation.WebApi.dll</HintPath>
+    <Reference Include="Ext.FluentValidation.WebApi, Version=5.6.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ext.FluentValidation.WebApi.5.6.0.2\lib\Net45\Ext.FluentValidation.WebApi.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin">
@@ -119,10 +121,6 @@
     </Reference>
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.3.1.0.0\lib\net45\NLog.dll</HintPath>
-    </Reference>
-    <Reference Include="Owin.Security.Providers, Version=1.12.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Owin.Security.Providers.1.12.0\lib\net45\Owin.Security.Providers.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
