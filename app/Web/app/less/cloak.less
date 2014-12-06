@@ -1,13 +1,27 @@
-﻿#splash {
-    .message{
-        display: table;
-        font-size: 1.5em;
-        margin: .7em auto;
+﻿#init-loading {
+    display: table-row;
+    height: 100%;
+    width: 100%;
+
+    .container {
+        position: absolute;
+        top: 30%;
+        width: 100%;
+        text-align: center;
+
+        .message{
+            font-size: 2.5em;
+            height: 1.5em;
+        }
+        .spinner{
+            margin: auto auto;
+        }
     }
-}
+}   
+
 
 [ng\:cloak],
 [ng-cloak],
-.ng-cloak{
+.ng-cloak {
     display: none !important;
 }

@@ -208,6 +208,12 @@
     <Content Include="app\less\auth.min.css">
       <DependentUpon>auth.css</DependentUpon>
     </Content>
+    <Content Include="app\less\cloak.css">
+      <DependentUpon>cloak.less</DependentUpon>
+    </Content>
+    <Content Include="app\less\cloak.min.css">
+      <DependentUpon>cloak.css</DependentUpon>
+    </Content>
     <Content Include="app\less\colors.css">
       <DependentUpon>colors.less</DependentUpon>
     </Content>
@@ -266,6 +272,9 @@
     </Content>
     <Content Include="app\less\dialogs\dialog-mixins.less" />
     <Content Include="app\less\cloak.less" />
+    <Content Include="app\less\cloak.css.map">
+      <DependentUpon>cloak.css</DependentUpon>
+    </Content>
     <None Include="app\less\dialogs\ngDialog-theme-default.less" />
     <Content Include="app\less\dialogs\ngDialog.css.map">
       <DependentUpon>ngDialog.css</DependentUpon>
@@ -281,6 +290,12 @@
     </Content>
     <Content Include="app\less\nprogress.min.css">
       <DependentUpon>nprogress.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\spinner.css">
+      <DependentUpon>spinner.less</DependentUpon>
+    </Content>
+    <Content Include="app\less\spinner.min.css">
+      <DependentUpon>spinner.css</DependentUpon>
     </Content>
     <Content Include="app\src\auth\auth.module.js" />
     <Content Include="app\src\auth\auth.service.js" />
@@ -329,6 +344,10 @@
     <Content Include="app\less\constants.less" />
     <Content Include="app\less\constants.css.map">
       <DependentUpon>constants.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\spinner.less" />
+    <Content Include="app\less\spinner.css.map">
+      <DependentUpon>spinner.css</DependentUpon>
     </Content>
     <None Include="app\src\config\env\dev.json" />
     <Content Include="app\src\config\env\config.js">

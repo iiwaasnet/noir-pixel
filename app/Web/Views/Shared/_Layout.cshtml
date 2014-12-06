@@ -11,14 +11,14 @@
         <base href="/"/>
     </head>
     <body>
-        <div id="splash" ng-if="false">
-            <div class="message">Loading...</div>
-            <div id="nprogress" class="nprogress-custom-parent">
-                <div class="spinner" role="spinner">
-                    <div class="spinner-icon"></div>
+        <div id="init-loading" ng-if="false">
+            <div class="container">
+                <div class="message">Loading...</div>
+                <div class="spinner">
+                    <div class="double-bounce1"></div>
+                    <div class="double-bounce2"></div>
                 </div>
             </div>
-
         </div>
         <div ng-cloak>
             @{
