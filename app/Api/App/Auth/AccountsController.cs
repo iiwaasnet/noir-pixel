@@ -25,7 +25,6 @@ using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Linq;
 using Resources.Api;
 using Shared.Extensions;
-using WebGrease.Css.Extensions;
 
 namespace Api.App.Auth
 {
@@ -41,10 +40,10 @@ namespace Api.App.Auth
         private readonly ILogger logger;
 
         public AccountsController(ApplicationUserManager userManager,
-                                 AuthOptions authOptions,
-                                 IExternalAccountsManager externalAccountsManager,
-                                 IApiStringsProvider stringsProvider,
-                                 ILogger logger)
+                                  AuthOptions authOptions,
+                                  IExternalAccountsManager externalAccountsManager,
+                                  IApiStringsProvider stringsProvider,
+                                  ILogger logger)
         {
             this.logger = logger;
             this.userManager = userManager;
@@ -85,18 +84,16 @@ namespace Api.App.Auth
         [Route("external-login", Name = "ExternalLogin")]
         public async Task<IHttpActionResult> GetExternalLogin(string provider, string error = null)
         {
-            var redirectUriResult = Request.GetRedirectUri();
-            if (!redirectUriResult.Parsed)
+            var result = ParseRedirectUrl();
+            if (!result.Succeeded)
             {
-                logger.Error("Error executing external login".AppendFormatting(), redirectUriResult.Error);
-                return ApiError(HttpStatusCode.BadRequest, redirectUriResult.Error);
+                return result.Error;
             }
-
-            var redirectUri = redirectUriResult.Uri;
+            var redirectUri = result.Data.Uri;
 
             if (error != null)
             {
-                logger.Error("Error executing external login".AppendFormatting(), error);
+                logger.Error(ApiErrors.Auth.AuthError.AddFormatting(), error);
                 return RedirectWithError(redirectUri, error);
             }
             try
@@ -109,7 +106,7 @@ namespace Api.App.Auth
                 var externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
                 if (externalLogin == null)
                 {
-                    logger.Error(stringsProvider.GetString(ApiErrors.Auth.ExternalLoginDataNotFound).AppendFormatting(), User.Identity);
+                    logger.Error(stringsProvider.GetString(ApiErrors.Auth.ExternalLoginDataNotFound).AddFormatting(), User.Identity);
                     return RedirectWithError(redirectUri, ApiErrors.Auth.ExternalLoginDataNotFound);
                 }
 
@@ -140,6 +137,18 @@ namespace Api.App.Auth
             }
         }
 
+        private MethodExecutionResult<UriParseResult> ParseRedirectUrl()
+        {
+            var redirectUriResult = Request.GetRedirectUri();
+            if (!redirectUriResult.Parsed)
+            {
+                logger.Error(ApiErrors.Auth.AuthError.AddFormatting(), redirectUriResult.Error);
+                return new MethodExecutionResult<UriParseResult>(ApiError(HttpStatusCode.BadRequest, redirectUriResult.Error));
+            }
+
+            return new MethodExecutionResult<UriParseResult>(redirectUriResult);
+        }
+
         private IHttpActionResult RedirectWithError(string redirectUri, string error)
         {
             return Redirect(string.Format("{0}#error={1}", redirectUri, Uri.EscapeDataString(error)));
@@ -151,50 +160,57 @@ namespace Api.App.Auth
         [Route("register-external")]
         public async Task<IHttpActionResult> RegisterExternal(RegisterExternalModel model)
         {
-            if (!ModelState.IsValid)
+            var result = CheckModelState();
+            if (!result.Succeeded)
             {
-                logger.Error(stringsProvider.GetString(ApiErrors.Validation.InvalidModelState).AppendFormatting(), model);
-                return ApiError(HttpStatusCode.BadRequest, ModelState.ToValidationError(stringsProvider));
+                return result.Error;
             }
 
             var verifiedAccessToken = await externalAccountsManager.VerfiyAccessToken(model.Provider, model.ExternalAccessToken, model.AccessTokenSecret);
             if (verifiedAccessToken == null)
             {
-                logger.Error(stringsProvider.GetString(ApiErrors.Auth.InvalidProviderOrAccessToken).AppendFormatting(), model);
-                return ApiError(HttpStatusCode.BadRequest, new ApiError
-                                                           {
-                                                               Code = ApiErrors.Auth.InvalidProviderOrAccessToken,
-                                                               Message = stringsProvider.GetString(ApiErrors.Auth.InvalidProviderOrAccessToken)
-                                                           });
+                var apiError = new ApiError
+                               {
+                                   Code = ApiErrors.Auth.InvalidProviderOrAccessToken,
+                                   Message = stringsProvider.GetString(ApiErrors.Auth.InvalidProviderOrAccessToken)
+                               };
+                logger.Error(apiError);
+                return ApiError(HttpStatusCode.BadRequest, apiError);
             }
 
             var user = await userManager.FindAsync(new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
-
             var hasRegistered = user != null;
-
             if (hasRegistered)
             {
-                return BadRequest("External user is already registered");
+                var apiError = new ApiError
+                               {
+                                   Code = ApiErrors.Auth.UserAlreadyRegistered,
+                                   Message = string.Format(stringsProvider.GetString(ApiErrors.Auth.UserAlreadyRegistered)
+                                                                          .AddFormatting(2),
+                                                           model.Provider,
+                                                           verifiedAccessToken.user_id)
+                               };
+                logger.Error(apiError);
+                return ApiError(HttpStatusCode.BadRequest, apiError);
             }
 
             var externalUserInfo = await externalAccountsManager.GetUserInfo(model.Provider, verifiedAccessToken.user_id, model.ExternalAccessToken, model.AccessTokenSecret);
-
             user = new ApplicationUser
                    {
                        UserName = CreateUserName(externalUserInfo.Person.DisplayName),
                        Email = externalUserInfo.Email
                    };
 
-            var result = await userManager.CreateAsync(user);
-            if (!result.Succeeded)
+            var identityResult = await userManager.CreateAsync(user);
+            if (!identityResult.Succeeded)
             {
-                return GetIdentityErrorResult(result);
+                return GetIdentityErrorResult(identityResult);
             }
 
-            result = await userManager.AddLoginAsync(user.Id, new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
+            identityResult = await userManager.AddLoginAsync(user.Id, new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
             if (!result.Succeeded)
             {
-                return GetIdentityErrorResult(result);
+                return GetIdentityErrorResult(identityResult);
             }
 
             return Ok(new
@@ -217,9 +233,10 @@ namespace Api.App.Auth
         [Route("local-access-token")]
         public async Task<IHttpActionResult> LocalAccessToken(LocalAccessTokenModel model)
         {
-            if (string.IsNullOrWhiteSpace(model.Provider) || string.IsNullOrWhiteSpace(model.ExternalAccessToken))
+            var result = CheckModelState();
+            if (!result.Succeeded)
             {
-                return BadRequest("Provider or external access token is not sent");
+                return result.Error;
             }
 
             var verifiedAccessToken = await externalAccountsManager.VerfiyAccessToken(model.Provider, model.ExternalAccessToken, model.AccessTokenSecret);
@@ -261,6 +278,18 @@ namespace Api.App.Auth
             }
 
             return BadRequest("User is not registered!");
+        }
+
+        private MethodExecutionResult<bool> CheckModelState()
+        {
+            if (!ModelState.IsValid)
+            {
+                var validationError = ModelState.ToValidationError(stringsProvider);
+                logger.Error(validationError);
+                return new MethodExecutionResult<bool>(ApiError(HttpStatusCode.BadRequest, validationError));
+            }
+
+            return new MethodExecutionResult<bool>(true);
         }
 
         private static AuthenticationProperties CreateAuthenticationProperties(ApplicationUser user, TimeSpan expiresIn)
@@ -313,8 +342,6 @@ namespace Api.App.Auth
                        ? RandomOAuthStateGenerator.Generate(strengthInBits)
                        : null;
         }
-
-        
 
         //===========================================================================================
         //===========================================================================================
@@ -506,27 +533,41 @@ namespace Api.App.Auth
 
         private IHttpActionResult GetIdentityErrorResult(IdentityResult result)
         {
-            if (result == null)
+            if (ResultFailed(result))
             {
-                return InternalServerError();
+                if (result == null)
+                {
+                    var apiError = new ApiError
+                                   {
+                                       Code = ApiErrors.Auth.AuthError,
+                                       Message = string.Format(stringsProvider.GetString(ApiErrors.Auth.AuthError).AddFormatting(), "Failed creating IdentityResult")
+                                   };
+                    logger.Error(apiError);
+                    return ApiError(HttpStatusCode.InternalServerError, apiError);
+                }
+                else
+                {
+                    var apiError = new ApiError
+                                   {
+                                       Code = ApiErrors.Auth.AuthError,
+                                       Message = stringsProvider.GetString(ApiErrors.Auth.AuthError)
+                                   };
+                    if (result.Errors != null)
+                    {
+                        apiError.Message = string.Format(apiError.Message.AddFormatting(), result.Errors.FirstOrDefault());
+                    }
+
+                    logger.Error(apiError);
+                    return ApiError(HttpStatusCode.BadRequest, apiError);
+                }
             }
 
-            if (!result.Succeeded)
-            {
-                if (result.Errors != null)
-                {
-                    result.Errors.ForEach(e => ModelState.AddModelError("", e));
-                }
+            return Ok();
+        }
 
-                if (ModelState.IsValid)
-                {
-                    return BadRequest();
-                }
-
-                return BadRequest(ModelState);
-            }
-
-            return null;
+        private static bool ResultFailed(IdentityResult result)
+        {
+            return result == null || !result.Succeeded;
         }
 
         private class ExternalLoginData

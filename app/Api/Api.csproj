@@ -252,6 +252,7 @@
     <Compile Include="App\Errors\Extensions\ModelStateExtensions.cs" />
     <Compile Include="App\Errors\FieldValidationError.cs" />
     <Compile Include="App\Errors\ValidationError.cs" />
+    <Compile Include="App\MethodExecutionResult.cs" />
     <Compile Include="Validation\ValidatorActivator.cs" />
     <Compile Include="Validation\ApiResourceBuilder.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
