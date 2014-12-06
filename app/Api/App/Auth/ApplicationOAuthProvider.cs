@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Api.App.Auth.Config;
-using Api.Models;
 using JsonConfigurationProvider;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;

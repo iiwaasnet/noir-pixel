@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Api.Validation
+namespace Api.App.Validation
 {
     public interface IValidatorActivator
     {

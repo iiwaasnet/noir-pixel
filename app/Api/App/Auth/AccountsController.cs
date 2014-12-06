@@ -9,12 +9,8 @@ using Api.App.Auth.Extensions;
 using Api.App.Auth.ExternalUserInfo;
 using Api.App.Errors;
 using Api.App.Errors.Extensions;
-using Api.Models;
-using Api.Results;
-using AspNet.Identity.MongoDB;
 using Diagnostics;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
@@ -48,31 +44,6 @@ namespace Api.App.Auth
             this.externalAccountsManager = externalAccountsManager;
         }
 
-        //[AllowAnonymous]
-        //[Route("register")]
-        //public async Task<IHttpActionResult> Register(RegisterModel model)
-        //{
-        //    var result = CheckModelState();
-        //    if (!result.Succeeded)
-        //    {
-        //        return result.Error;
-        //    }
-
-        //    var existingUser = await userManager.FindByNameAsync(model.UserName);
-        //    if (existingUser != null)
-        //    {
-        //        return new ConflictResult(this);
-        //    }
-
-        //    var identityResult = await userManager.CreateAsync(new ApplicationUser
-        //                                               {
-        //                                                   UserName = model.UserName,
-        //                                                   Email = model.Email
-        //                                               },
-        //                                               model.Password);
-
-        //    return GetIdentityResult(identityResult);
-        //}
 
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
@@ -366,173 +337,6 @@ namespace Api.App.Auth
             return (generateState)
                        ? RandomOAuthStateGenerator.Generate(strengthInBits)
                        : null;
-        }
-
-        //===========================================================================================
-        //===========================================================================================
-        //===========================================================================================
-
-        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-        [Route("user-info")]
-        public UserInfoViewModel GetUserInfo()
-        {
-            var externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
-
-            return new UserInfoViewModel
-                   {
-                       Email = User.Identity.GetUserName(),
-                       HasRegistered = externalLogin == null,
-                       LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
-                   };
-        }
-
-        //GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
-        [Route("ManageInfo")]
-        public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)
-        {
-            IdentityUser user = await userManager.FindByIdAsync(User.Identity.GetUserId());
-
-            if (user == null)
-            {
-                return null;
-            }
-
-            var logins = new List<UserLoginInfo>();
-
-            foreach (var linkedAccount in user.Logins)
-            {
-                logins.Add(new UserLoginInfo(
-                               loginProvider: linkedAccount.LoginProvider,
-                               providerKey: linkedAccount.ProviderKey
-                               ));
-            }
-
-            if (user.PasswordHash != null)
-            {
-                logins.Add(new UserLoginInfo
-                               (
-                               loginProvider: LocalLoginProvider,
-                               providerKey: user.UserName
-                               ));
-            }
-
-            return new ManageInfoViewModel
-                   {
-                       LocalLoginProvider = LocalLoginProvider,
-                       Email = user.UserName,
-                       Logins = logins,
-                       ExternalLoginProviders = GetExternalLogins(returnUrl, generateState)
-                   };
-        }
-
-        [Route("change-password")]
-        public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var result = await userManager.ChangePasswordAsync(User.Identity.GetUserId(),
-                                                               model.OldPassword,
-                                                               model.NewPassword);
-
-            return GetIdentityResult(result);
-        }
-
-        [Route("set-password")]
-        public async Task<IHttpActionResult> SetPassword(SetPasswordBindingModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var result = await userManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
-
-            return GetIdentityResult(result);
-        }
-
-        [Route("AddExternalLogin")]
-        public async Task<IHttpActionResult> AddExternalLogin(AddExternalLoginBindingModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            GetAuthentication().SignOut(DefaultAuthenticationTypes.ExternalCookie);
-
-            var ticket = authOptions.AuthServerOptions.AccessTokenFormat.Unprotect(model.ExternalAccessToken);
-
-            if (ticket == null || ticket.Identity == null || (ticket.Properties != null
-                                                              && ticket.Properties.ExpiresUtc.HasValue
-                                                              && ticket.Properties.ExpiresUtc.Value < DateTimeOffset.UtcNow))
-            {
-                return BadRequest("External login failure.");
-            }
-
-            var externalData = ExternalLoginData.FromIdentity(ticket.Identity);
-
-            if (externalData == null)
-            {
-                return BadRequest("The external login is already associated with an account.");
-            }
-
-            var result = await userManager.AddLoginAsync(User.Identity.GetUserId(),
-                                                         new UserLoginInfo(externalData.LoginProvider, externalData.ProviderKey));
-
-            return GetIdentityResult(result);
-        }
-
-        [Route("remove-login")]
-        public async Task<IHttpActionResult> RemoveLogin(RemoveLoginBindingModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            IdentityResult result;
-
-            if (model.LoginProvider == LocalLoginProvider)
-            {
-                result = await userManager.RemovePasswordAsync(User.Identity.GetUserId());
-            }
-            else
-            {
-                result = await userManager.RemoveLoginAsync(User.Identity.GetUserId(),
-                                                            new UserLoginInfo(model.LoginProvider, model.ProviderKey));
-            }
-
-            return GetIdentityResult(result);
-        }
-
-        private static ExternalLoginInfo GetExternalLoginInfo(AuthenticateResult result)
-        {
-            if (result == null || result.Identity == null)
-            {
-                return null;
-            }
-            var idClaim = result.Identity.FindFirst(ClaimTypes.NameIdentifier);
-            if (idClaim == null)
-            {
-                return null;
-            }
-            // By default we don't allow spaces in user names
-            var name = result.Identity.Name;
-            if (name != null)
-            {
-                name = name.Replace(" ", "");
-            }
-            var email = result.Identity.FindFirstValue(ClaimTypes.Email);
-            return new ExternalLoginInfo
-                   {
-                       ExternalIdentity = result.Identity,
-                       Login = new UserLoginInfo(idClaim.Issuer, idClaim.Value),
-                       DefaultUserName = name,
-                       Email = email
-                   };
         }
     }
 }

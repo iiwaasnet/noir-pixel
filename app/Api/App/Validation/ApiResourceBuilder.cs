@@ -2,7 +2,7 @@
 using Ext.FluentValidation.Resources;
 using Resources.Api;
 
-namespace Api.Validation
+namespace Api.App.Validation
 {
     public class ApiResourceBuilder : IResourceAccessorBuilder
     {

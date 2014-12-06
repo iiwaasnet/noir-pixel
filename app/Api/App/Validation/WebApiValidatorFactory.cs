@@ -2,7 +2,7 @@
 using Ext.FluentValidation;
 using Ext.FluentValidation.Attributes;
 
-namespace Api.Validation
+namespace Api.App.Validation
 {
     public class WebApiValidatorFactory : IValidatorFactory
     {

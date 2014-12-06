@@ -5,7 +5,7 @@ using Ext.FluentValidation.Resources;
 using Ext.FluentValidation.WebApi;
 using Resources.Api;
 
-namespace Api.Validation
+namespace Api.App.Validation
 {
     public class ValidationModule : Module
     {

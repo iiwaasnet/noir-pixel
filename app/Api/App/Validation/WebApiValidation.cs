@@ -1,7 +1,7 @@
 ﻿using Ext.FluentValidation;
 using Ext.FluentValidation.WebApi;
 
-namespace Api.Validation
+namespace Api.App.Validation
 {
     public class WebApiValidation
     {

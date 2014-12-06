@@ -2,7 +2,6 @@
 using Api.App.Auth.ExternalUserInfo.Facebook;
 using Api.App.Auth.ExternalUserInfo.GPlus;
 using Api.App.Auth.ExternalUserInfo.Twitter;
-using Api.Models;
 using AspNet.Identity.MongoDB;
 using Autofac;
 using JsonConfigurationProvider;

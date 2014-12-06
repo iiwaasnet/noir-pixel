@@ -4,7 +4,7 @@ using System.Net.Http.Formatting;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
 using System.Web.Http.Validation;
-using Api.Validation;
+using Api.App.Validation;
 using Autofac;
 using Ext.FluentValidation.WebApi;
 using Microsoft.Owin.Security.OAuth;

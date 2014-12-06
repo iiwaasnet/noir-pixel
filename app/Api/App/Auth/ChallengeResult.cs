@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace Api.Results
+namespace Api.App.Auth
 {
     public class ChallengeResult : IHttpActionResult
     {
@@ -14,16 +14,18 @@ namespace Api.Results
             Request = controller.Request;
         }
 
-        public string LoginProvider { get; set; }
-        public HttpRequestMessage Request { get; set; }
-
         public Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
         {
             Request.GetOwinContext().Authentication.Challenge(LoginProvider);
 
-            var response = new HttpResponseMessage(HttpStatusCode.Unauthorized);
-            response.RequestMessage = Request;
+            var response = new HttpResponseMessage(HttpStatusCode.Unauthorized)
+                           {
+                               RequestMessage = Request
+                           };
             return Task.FromResult(response);
         }
+
+        public string LoginProvider { get; set; }
+        public HttpRequestMessage Request { get; set; }
     }
 }

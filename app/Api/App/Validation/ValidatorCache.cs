@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 
-namespace Api.Validation
+namespace Api.App.Validation
 {
     public class ValidatorCache
     {

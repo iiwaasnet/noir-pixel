@@ -3,7 +3,7 @@ using System.Web.Http.Controllers;
 using System.Web.Http.Metadata;
 using System.Web.Http.Validation;
 
-namespace Api.Validation
+namespace Api.App.Validation
 {
     public class PrefixlessModelValidator : IBodyModelValidator
     {

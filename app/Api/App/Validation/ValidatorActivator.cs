@@ -1,7 +1,7 @@
 ﻿using System;
 using Ext.FluentValidation.Resources;
 
-namespace Api.Validation
+namespace Api.App.Validation
 {
     public class ValidatorActivator : IValidatorActivator
     {
