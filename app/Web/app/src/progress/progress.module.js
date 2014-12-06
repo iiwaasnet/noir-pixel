@@ -9,7 +9,7 @@
 
     function config(NProgress) {
         NProgress.configure({
-            showSpinner: true,
+            showSpinner: false,
             trickleRate: 0.2,
             trickleSpeed: 800
         });
