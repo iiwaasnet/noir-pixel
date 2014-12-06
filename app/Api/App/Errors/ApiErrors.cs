@@ -9,7 +9,9 @@
         {
             public const string ExternalLoginDataNotFound = "EAPI_Auth_ExternalLoginDataNotFound";
             public const string InvalidProviderOrAccessToken = "EAPI_Auth_InvalidProviderOrAccessToken";
+            public const string InvalidExternalAccessToken = "EAPI_Auth_InvalidExternalAccessToken";
             public const string UserAlreadyRegistered = "EAPI_Auth_UserAlreadyRegistered";
+            public const string UserNotRegistered = "EAPI_Auth_UserNotRegistered";
             public const string AuthError = "EAPI_Auth_Error";
         }
 

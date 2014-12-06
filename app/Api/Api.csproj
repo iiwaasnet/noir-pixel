@@ -364,6 +364,7 @@
     <Content Include="config\Auth.config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Compile Include="App\Auth\AccountsController.Helpers.cs" />
     <None Include="config\Db.config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
