@@ -2,13 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Security.Claims;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
-using System.Web.Http.Results;
 using Api.App.Auth.Extensions;
 using Api.App.Auth.ExternalUserInfo;
 using Api.App.Errors;
@@ -52,31 +48,31 @@ namespace Api.App.Auth
             this.externalAccountsManager = externalAccountsManager;
         }
 
-        [AllowAnonymous]
-        [Route("register")]
-        public async Task<IHttpActionResult> Register(RegisterModel model)
-        {
-            var result = CheckModelState();
-            if (!result.Succeeded)
-            {
-                return result.Error;
-            }
+        //[AllowAnonymous]
+        //[Route("register")]
+        //public async Task<IHttpActionResult> Register(RegisterModel model)
+        //{
+        //    var result = CheckModelState();
+        //    if (!result.Succeeded)
+        //    {
+        //        return result.Error;
+        //    }
 
-            var existingUser = await userManager.FindByNameAsync(model.UserName);
-            if (existingUser != null)
-            {
-                return new ConflictResult(this);
-            }
+        //    var existingUser = await userManager.FindByNameAsync(model.UserName);
+        //    if (existingUser != null)
+        //    {
+        //        return new ConflictResult(this);
+        //    }
 
-            var identityResult = await userManager.CreateAsync(new ApplicationUser
-                                                       {
-                                                           UserName = model.UserName,
-                                                           Email = model.Email
-                                                       },
-                                                       model.Password);
+        //    var identityResult = await userManager.CreateAsync(new ApplicationUser
+        //                                               {
+        //                                                   UserName = model.UserName,
+        //                                                   Email = model.Email
+        //                                               },
+        //                                               model.Password);
 
-            return GetIdentityResult(identityResult);
-        }
+        //    return GetIdentityResult(identityResult);
+        //}
 
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
@@ -330,6 +326,21 @@ namespace Api.App.Auth
                 .ToArray();
         }
 
+        [Route("logout")]
+        public IHttpActionResult Logout()
+        {
+            try
+            {
+                GetAuthentication().SignOut(CookieAuthenticationDefaults.AuthenticationType);
+            }
+            catch (Exception err)
+            {
+                logger.Error(err);
+            }
+
+            return Ok();
+        }
+
         private ExternalLoginViewModel CerateLoginProviderDescription(string returnUrl, AuthenticationDescription p, string state)
         {
             return new ExternalLoginViewModel
@@ -373,13 +384,6 @@ namespace Api.App.Auth
                        HasRegistered = externalLogin == null,
                        LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
                    };
-        }
-
-        [Route("logout")]
-        public IHttpActionResult Logout()
-        {
-            GetAuthentication().SignOut(CookieAuthenticationDefaults.AuthenticationType);
-            return Ok();
         }
 
         //GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
