@@ -299,11 +299,13 @@
     </Content>
     <Content Include="app\src\auth\auth.module.js" />
     <Content Include="app\src\auth\auth.service.js" />
+    <Content Include="app\src\auth\external-register.html" />
     <Content Include="app\src\auth\external-signin.html" />
     <Content Include="app\less\loading-bar.css.map">
       <DependentUpon>loading-bar.css</DependentUpon>
     </Content>
     <None Include="app\less\loading-bar.less" />
+    <Content Include="app\src\auth\externalRegister.controller.js" />
     <Content Include="app\src\auth\not-authorized.html" />
     <Content Include="app\src\auth\notAuthorized.controller.js" />
     <Content Include="app\src\auth\signin.html" />

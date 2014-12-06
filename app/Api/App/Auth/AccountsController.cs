@@ -145,7 +145,7 @@ namespace Api.App.Auth
                 return ApiError(HttpStatusCode.BadRequest, apiError);
             }
 
-            var user = await userManager.FindAsync(new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
+            var user = await userManager.FindAsync(new UserLoginInfo(model.Provider, model.UserName));
             var hasRegistered = user != null;
             if (hasRegistered)
             {
@@ -164,7 +164,7 @@ namespace Api.App.Auth
             var externalUserInfo = await externalAccountsManager.GetUserInfo(model.Provider, verifiedAccessToken.user_id, model.ExternalAccessToken, model.AccessTokenSecret);
             user = new ApplicationUser
                    {
-                       UserName = CreateUserName(externalUserInfo.Person.DisplayName),
+                       UserName = model.UserName,
                        Email = externalUserInfo.Email
                    };
 

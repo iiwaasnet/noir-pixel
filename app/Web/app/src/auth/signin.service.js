@@ -12,6 +12,7 @@
         srv.open = open;
         srv.close = close;
         srv.externalSignin = externalSignin;
+        srv.registerExternal = registerExternal;
 
         function open() {
             if (!ui) {
@@ -27,24 +28,34 @@
             }
         }
 
-        function externalSignin(loginResult) {
+        function registerExternal(loginResult, userName) {
             Progress.start();
+            //TODO: Probably move finalizeSigninError to externalSignin.controller
             if (loginResult.error) {
                 finalizeSigninError(loginResult.error);
             } else {
-                if (loginResult.registered) {
-                    Auth.getLocalToken(loginResult.externalAccessToken, loginResult.accessTokenSecret, loginResult.provider)
-                        .then(finalizeSigninSuccess, finalizeSigninError);
-                } else {
-                    Auth.registerExternal(loginResult.externalAccessToken, loginResult.accessTokenSecret, loginResult.provider)
-                        .then(registerExternalSuccess, finalizeSigninError);
-                }
+                Auth.registerExternal(loginResult.externalAccessToken, loginResult.accessTokenSecret, loginResult.provider, userName)
+                    .then(registerExternalSuccess, finalizeSigninError);
             }
         }
 
-        function registerExternalSuccess(response) {
-            Auth.getLocalToken(response.data.access_token, response.data.access_token_secret, response.data.provider)
+        function externalSignin(loginResult) {
+            Progress.start();
+            //TODO: Probably move finalizeSigninError to externalSignin.controller
+            if (loginResult.error) {
+                finalizeSigninError(loginResult.error);
+            } else {
+                getLocalToken(loginResult.externalAccessToken, loginResult.accessTokenSecret, loginResult.provider);
+            }
+        }
+
+        function getLocalToken(externalAccessToken, accessTokenSecret, provider) {
+            Auth.getLocalToken(externalAccessToken, accessTokenSecret, provider)
                 .then(finalizeSigninSuccess, finalizeSigninError);
+        }
+
+        function registerExternalSuccess(response) {
+            getLocalToken(response.data.access_token, response.data.access_token_secret, response.data.provider);
         }
 
         function getAvailableLoginsSuccess(response) {

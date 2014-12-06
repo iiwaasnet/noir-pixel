@@ -4,15 +4,25 @@
     angular.module('np.auth')
         .controller('ExternalSignInController', externalSignInController);
 
-    externalSignInController.$inject = ['$location', '$window', 'Url', 'Signin'];
+    externalSignInController.$inject = ['$location', '$window', '$state', 'Url', 'Signin'];
 
-    function externalSignInController($location, $window, Url, Signin) {
+    function externalSignInController($location, $window, $state, Url, Signin) {
         activate();
-       
+
         function activate() {
             var loginResult = getExternalLoginResult();
-            Signin.externalSignin(loginResult);
-            
+
+            if (loginResult.registered) {
+                Signin.externalSignin(loginResult);
+            } else {
+                $state.go('externalRegister',
+                {
+                    //TODO: Get additionaly userName with server response, to suggest it as a username??
+                    external_access_token: loginResult.externalAccessToken,
+                    access_token_secret: loginResult.accessTokenSecret,
+                    provider: loginResult.provider
+                });
+            }
         }
 
         function getExternalLoginResult() {

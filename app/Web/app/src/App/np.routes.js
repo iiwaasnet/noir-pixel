@@ -13,12 +13,6 @@
                 templateUrl: '/app/src/Home/home.html',
                 controller: 'HomeController',
                 controllerAs: 'ctrl',
-                //resolve: {
-                //    Auth: 'Auth',
-                //    userInfo: function (Auth) {
-                //        return Auth.getUserInfo();
-                //    }
-                //}
             })
             .state('gallery', {
                 url: '/',
@@ -30,6 +24,12 @@
                 url: '/external-signin',
                 templateUrl: '/app/src/Auth/external-signin.html',
                 controller: 'ExternalSignInController',
+                controllerAs: 'ctrl'
+            })
+            .state('externalRegister', {
+                url: '/external-register?external_access_token&provider&access_token_secret',
+                templateUrl: '/app/src/Auth/external-register.html',
+                controller: 'ExternalRegisterController',
                 controllerAs: 'ctrl'
             })
             .state('notAuthorized', {

@@ -11,6 +11,7 @@ namespace Api.App.Auth
         public string Provider { get; set; }
         public string ExternalAccessToken { get; set; }
         public string AccessTokenSecret { get; set; }
+        public string UserName { get; set; }
     }
 
     public class RegisterExternalModelValidator : AbstractValidator<RegisterExternalModel>
@@ -19,6 +20,7 @@ namespace Api.App.Auth
         {
             RuleFor(m => m.ExternalAccessToken).NotEmpty().WithLocalizedMessage(ApiErrors.Validation.RequiredValue, resourceAccessor);
             RuleFor(m => m.Provider).NotEmpty().WithLocalizedMessage(ApiErrors.Validation.RequiredValue, resourceAccessor);
+            RuleFor(m => m.UserName).NotEmpty().WithLocalizedMessage(ApiErrors.Validation.RequiredValue, resourceAccessor);
         }
     }
 }

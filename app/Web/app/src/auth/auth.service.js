@@ -89,14 +89,15 @@
             deferred.reject(err);
         }
 
-        function registerExternal(externalToken, accessTokenSecret, provider) {
+        function registerExternal(externalToken, accessTokenSecret, provider, userName) {
             var url = Url.build(Config.apiUris.base, Config.apiUris.registerExternal);
 
             return $http.post(url,
             {
                 provider: provider,
                 externalAccessToken: externalToken,
-                accessTokenSecret: accessTokenSecret
+                accessTokenSecret: accessTokenSecret,
+                userName: userName
             },
             { headers: { 'Authorization': 'Bearer ' + externalToken } });
         }

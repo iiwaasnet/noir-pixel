@@ -30,7 +30,7 @@
             try {
                 if (result.succeeded) {
                     Signin.close();
-                    //$stateParams.go(getLoginRedirectState());
+                    //$state.go(getLoginRedirectState());
                 } else {
                     Messages.error({ main: { id: result.error } });
                 }
