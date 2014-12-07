@@ -208,6 +208,12 @@
     <Content Include="app\less\auth.min.css">
       <DependentUpon>auth.css</DependentUpon>
     </Content>
+    <Content Include="app\less\buttons.css">
+      <DependentUpon>buttons.less</DependentUpon>
+    </Content>
+    <Content Include="app\less\buttons.min.css">
+      <DependentUpon>buttons.css</DependentUpon>
+    </Content>
     <Content Include="app\less\cloak.css">
       <DependentUpon>cloak.less</DependentUpon>
     </Content>
@@ -275,15 +281,28 @@
     <Content Include="app\less\cloak.css.map">
       <DependentUpon>cloak.css</DependentUpon>
     </Content>
+    <Content Include="app\less\buttons.less" />
+    <Content Include="app\less\buttons.css.map">
+      <DependentUpon>buttons.css</DependentUpon>
+    </Content>
     <None Include="app\less\dialogs\ngDialog-theme-default.less" />
     <Content Include="app\less\dialogs\ngDialog.css.map">
       <DependentUpon>ngDialog.css</DependentUpon>
     </Content>
     <None Include="app\less\dialogs\ngDialog.less" />
+    <Content Include="app\less\mixins.css">
+      <DependentUpon>mixins.less</DependentUpon>
+    </Content>
+    <Content Include="app\less\mixins.min.css">
+      <DependentUpon>mixins.css</DependentUpon>
+    </Content>
     <Content Include="app\less\nprogress.css.map">
       <DependentUpon>nprogress.css</DependentUpon>
     </Content>
     <Content Include="app\less\mixins.less" />
+    <Content Include="app\less\mixins.css.map">
+      <DependentUpon>mixins.css</DependentUpon>
+    </Content>
     <None Include="app\less\nprogress.less" />
     <Content Include="app\less\nprogress.css">
       <DependentUpon>nprogress.less</DependentUpon>

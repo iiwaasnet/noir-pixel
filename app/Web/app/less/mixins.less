@@ -1,10 +1,33 @@
 ﻿@import (reference) "colors.less";
 
-.glow-hover(){
+.glow-hover() {
     color: lighten(@main-text-color, 80%);
     text-shadow: -1px 1px 20px rgba(255, 255, 255, 0.6), 1px -1px 20px rgba(255, 255, 255, 0.6);
     -webkit-transition: 50ms linear 0s;
     -moz-transition: 50ms linear 0s;
     -o-transition: 50ms linear 0s;
     transition: 50ms linear 0s;
+}
+
+/*centrering content*/
+.centered-outer {
+    display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.centered-middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.centered-inner {
+    .centered-inner-flex(50%);
+}
+
+.centered-inner-flex(@contentWidth) {
+    margin-left: auto;
+    margin-right: auto;
+    width: @contentWidth;
 }

@@ -29,18 +29,19 @@ a, img{
 
 /*edit*/
 input{
-    background-color: #2C2E32;
-    color: #ACCFCC;
-    border: 1px solid #344C44;
+    background-color: @edit-background-color;
+    color: @edit-text-color;
+    border: 1px solid @edit-border-color;
     padding: 0.45em 0.4em;
+    margin: .5em 0 0;
 }
 
 input[type=button],
 input[type=submit]
 {
-    background-color: #2C3230;
-    color: #F6F6E8;
-    border: 1px  solid #F6F6E8;
+    background-color: @button-background-color;
+    color: @button-color;
+    border: 1px  solid @button-color;
     padding: 1em 1.5em;
 }
 

@@ -1,6 +1,15 @@
-﻿<div id="external-register">
-    <div>You are almost done!</div>
-    <div>Please, select your user name:</div>
-    <input type="text" ng-model="ctrl.userName"/>
-    <input type="button" ng-click="ctrl.register()" value="Register" ng-disabled="!ctrl.userName"/>
+﻿<div id="external-register" class="centered-outer">
+    <div class="centered-middle">
+        <div class="content centered-inner">
+            <h1>You are almost done!</h1>
+            <div>Please, select your user name:</div>
+            <div>
+                <input type="text" ng-model="ctrl.userName" />
+                <div>
+                    <input type="button" class="default-action" ng-click="ctrl.register()" value="Register" ng-disabled="!ctrl.userName" /><!--
+                    --><input type="button" ng-click="ctrl.register()" value="Cancel" />
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
