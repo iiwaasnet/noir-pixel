@@ -88,6 +88,24 @@ namespace Resources.Client {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Btn_Cancel {
+            get {
+                return ResourceManager.GetString("Btn_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register!.
+        /// </summary>
+        public static string Btn_Register {
+            get {
+                return ResourceManager.GetString("Btn_Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occurred while trying to Sign you in. Please, try one more time later..
         /// </summary>
         public static string EAPI_Auth_Unknown {
@@ -160,20 +178,38 @@ namespace Resources.Client {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sign in.
+        ///   Looks up a localized string similar to You are almost done!.
         /// </summary>
-        public static string Signin {
+        public static string Reg_AlmostDone {
             get {
-                return ResourceManager.GetString("Signin", resourceCulture);
+                return ResourceManager.GetString("Reg_AlmostDone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please, select your user name:.
+        /// </summary>
+        public static string Reg_SelectUserName {
+            get {
+                return ResourceManager.GetString("Reg_SelectUserName", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Signing in....
         /// </summary>
-        public static string SignIn_FinalizeSignin {
+        public static string SignIin_FinalizeSignin {
             get {
-                return ResourceManager.GetString("SignIn_FinalizeSignin", resourceCulture);
+                return ResourceManager.GetString("SignIin_FinalizeSignin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sign in.
+        /// </summary>
+        public static string Signin_Signin {
+            get {
+                return ResourceManager.GetString("Signin_Signin", resourceCulture);
             }
         }
         
