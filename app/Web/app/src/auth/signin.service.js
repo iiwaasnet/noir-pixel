@@ -28,29 +28,29 @@
             }
         }
 
-        function registerExternal(loginResult, userName) {
+        function registerExternal(externalLogin, userName) {
             Progress.start();
             //TODO: Probably move finalizeSigninError to externalSignin.controller
-            if (loginResult.error) {
-                finalizeSigninError(loginResult.error);
+            if (externalLogin.error) {
+                finalizeSigninError(externalLogin.error);
             } else {
-                Auth.registerExternal(loginResult.externalAccessToken, loginResult.accessTokenSecret, loginResult.provider, userName)
+                Auth.registerExternal(externalLogin, userName)
                     .then(registerExternalSuccess, finalizeSigninError);
             }
         }
 
-        function externalSignin(loginResult) {
+        function externalSignin(externalLogin) {
             Progress.start();
             //TODO: Probably move finalizeSigninError to externalSignin.controller
-            if (loginResult.error) {
-                finalizeSigninError(loginResult.error);
+            if (externalLogin.error) {
+                finalizeSigninError(externalLogin.error);
             } else {
-                getLocalToken(loginResult.externalAccessToken, loginResult.accessTokenSecret, loginResult.provider);
+                getLocalToken(externalLogin);
             }
         }
 
-        function getLocalToken(externalAccessToken, accessTokenSecret, provider) {
-            Auth.getLocalToken(externalAccessToken, accessTokenSecret, provider)
+        function getLocalToken(externalLogin) {
+            Auth.getLocalToken(externalLogin)
                 .then(finalizeSigninSuccess, finalizeSigninError);
         }
 

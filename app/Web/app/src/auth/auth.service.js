@@ -63,17 +63,17 @@
             deferred.reject(error);
         }
 
-        function getLocalToken(externalToken, accessTokenSecret, provider) {
+        function getLocalToken(externalLogin) {
             var url = Url.build(Config.apiUris.base, Config.apiUris.localAccessToken),
                 deferred = $q.defer();
 
             $http.post(url,
                 {
-                    provider: provider,
-                    externalAccessToken: externalToken,
-                    accessTokenSecret: accessTokenSecret
+                    provider: externalLogin.provider,
+                    externalAccessToken: externalLogin.externalAccessToken,
+                    accessTokenSecret: externalLogin.accessTokenSecret,
                 },
-                { headers: { 'Authorization': 'Bearer ' + externalToken } })
+                { headers: { 'Authorization': 'Bearer ' + externalLogin.externalAccessToken } })
                 .success(function(response) { getLocalTokenSuccess(response, deferred); })
                 .error(function(err, status) { getLocalTokenError(err, status, deferred); });
 
@@ -89,17 +89,17 @@
             deferred.reject(err);
         }
 
-        function registerExternal(externalToken, accessTokenSecret, provider, userName) {
+        function registerExternal(externalLogin, userName) {
             var url = Url.build(Config.apiUris.base, Config.apiUris.registerExternal);
 
             return $http.post(url,
             {
-                provider: provider,
-                externalAccessToken: externalToken,
-                accessTokenSecret: accessTokenSecret,
+                provider: externalLogin.provider,
+                externalAccessToken: externalLogin.externalAccessToken,
+                accessTokenSecret: externalLogin.accessTokenSecret,
                 userName: userName
             },
-            { headers: { 'Authorization': 'Bearer ' + externalToken } });
+            { headers: { 'Authorization': 'Bearer ' + externalLogin.externalAccessToken } });
         }
 
         function signInSuccess(response, deferred) {

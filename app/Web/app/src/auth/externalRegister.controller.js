@@ -14,14 +14,14 @@
         activate();
 
         function activate() {
-            ctrl.externalProviderToken = getExternalProviderToken();
+            ctrl.externalLogin = getExternalLoginData();
         }
 
         function register() {
-            Signin.registerExternal(ctrl.externalProviderToken, ctrl.userName);
+            Signin.registerExternal(ctrl.externalLogin, ctrl.userName);
         }
 
-        function getExternalProviderToken() {
+        function getExternalLoginData() {
             return {
                 externalAccessToken: $stateParams.external_access_token,
                 accessTokenSecret: $stateParams.access_token_secret,
