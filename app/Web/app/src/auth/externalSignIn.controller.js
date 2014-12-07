@@ -12,6 +12,10 @@
         function activate() {
             var loginResult = getExternalLoginResult();
 
+            if (loginResult.error) {
+                Signin.finalizeSigninError(loginResult.error);
+            }
+
             if (loginResult.registered) {
                 Signin.externalSignin(loginResult);
             } else {

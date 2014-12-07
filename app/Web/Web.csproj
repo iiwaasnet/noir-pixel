@@ -374,12 +374,14 @@
     <Content Include="app\src\config\env\config.js">
       <LastGenOutput>Const1.cs</LastGenOutput>
     </Content>
+    <Content Include="app\src\constants\const.module.js" />
     <Content Include="app\src\events\events.const.js" />
     <Content Include="app\src\events\events.module.js" />
     <Content Include="app\src\home\home.html" />
     <Content Include="app\src\home\home.controller.js" />
     <Content Include="app\src\home\home.module.js" />
     <Content Include="app\src\layout\layout.module.js" />
+    <Content Include="app\src\constants\errors.constants.js" />
     <Content Include="app\src\localization\i18n.module.js" />
     <Content Include="app\src\localization\np-i18n.filter.js" />
     <Content Include="app\src\localization\strings.service.js" />

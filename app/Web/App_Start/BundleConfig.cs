@@ -74,7 +74,14 @@ namespace Web
                             .Include(Progress().ToArray())
                             .Include(SysMessages().ToArray())
                             .Include(Directives().ToArray())
+                            .Include(Constants().ToArray())
                 );
+        }
+
+        private static IEnumerable<string> Constants()
+        {
+            yield return "~/app/src/constants/const.module.js";
+            yield return "~/app/src/constants/errors.constants.js";
         }
 
         private static IEnumerable<string> Directives()

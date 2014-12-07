@@ -171,4 +171,7 @@
   <data name="Reg_SelectUserName" xml:space="preserve">
     <value>Please, select your user name:</value>
   </data>
+  <data name="EAPI_Auth_UserAlreadyRegistered" xml:space="preserve">
+    <value>Name {0} is already taken. Please, select a different one.</value>
+  </data>
 </root>

@@ -115,6 +115,15 @@ namespace Resources.Client {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name {0} is already taken. Please, select a different one..
+        /// </summary>
+        public static string EAPI_Auth_UserAlreadyRegistered {
+            get {
+                return ResourceManager.GetString("EAPI_Auth_UserAlreadyRegistered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid model state.
         /// </summary>
         public static string EAPI_InvalidModelState {

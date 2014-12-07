@@ -4,15 +4,17 @@
     angular.module('np.auth')
         .service('Signin', signinService);
 
-    signinService.$inject = ['$window', 'Auth', 'ngDialog', 'Progress', 'Messages'];
+    signinService.$inject = ['$q', '$window', 'Auth', 'ngDialog', 'Progress', 'Messages', 'ApplicationLogging'];
 
-    function signinService($window, Auth, ngDialog, Progress, Messages) {
+    function signinService($q, $window, Auth, ngDialog, Progress, Messages, ApplicationLogging) {
         var srv = this,
             ui = undefined;
         srv.open = open;
         srv.close = close;
         srv.externalSignin = externalSignin;
         srv.registerExternal = registerExternal;
+        srv.finalizeSigninSuccess = finalizeSigninSuccess;
+        srv.finalizeSigninError = finalizeSigninError;
 
         function open() {
             if (!ui) {
@@ -30,23 +32,18 @@
 
         function registerExternal(externalLogin, userName) {
             Progress.start();
-            //TODO: Probably move finalizeSigninError to externalSignin.controller
-            if (externalLogin.error) {
-                finalizeSigninError(externalLogin.error);
-            } else {
-                Auth.registerExternal(externalLogin, userName)
-                    .then(registerExternalSuccess, finalizeSigninError);
-            }
+            return Auth.registerExternal(externalLogin, userName)
+                .then(registerExternalSuccess, registerExternalError);
+        }
+
+        function registerExternalError(error) {
+            Progress.stop();
+            return $q.reject(error);
         }
 
         function externalSignin(externalLogin) {
             Progress.start();
-            //TODO: Probably move finalizeSigninError to externalSignin.controller
-            if (externalLogin.error) {
-                finalizeSigninError(externalLogin.error);
-            } else {
-                getLocalToken(externalLogin);
-            }
+            getLocalToken(externalLogin);
         }
 
         function getLocalToken(externalLogin) {
@@ -56,10 +53,10 @@
 
         function registerExternalSuccess(response) {
             getLocalToken({
-                    externalAccessToken: response.data.access_token,
-                    accessTokenSecret: response.data.access_token_secret,
-                    provider: response.data.provider
-                });
+                externalAccessToken: response.data.access_token,
+                accessTokenSecret: response.data.access_token_secret,
+                provider: response.data.provider
+            });
         }
 
         function getAvailableLoginsSuccess(response) {
@@ -92,6 +89,8 @@
                 succeeded: false,
                 error: error
             });
+            ApplicationLogging.error(error);
+
             $window.close();
         }
 

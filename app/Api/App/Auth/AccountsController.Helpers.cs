@@ -36,31 +36,56 @@ namespace Api.App.Auth
                 if (result == null)
                 {
                     var apiError = new ApiError
-                    {
-                        Code = ApiErrors.Auth.AuthError,
-                        Message = string.Format(stringsProvider.GetString(ApiErrors.Auth.AuthError).AddFormatting(), "Failed creating IdentityResult")
-                    };
+                                   {
+                                       Code = ApiErrors.Auth.AuthError,
+                                       Message = string.Format(stringsProvider.GetString(ApiErrors.Auth.AuthError).AddFormatting(), "Failed creating IdentityResult")
+                                   };
                     logger.Error(apiError);
                     return ApiError(HttpStatusCode.InternalServerError, apiError);
                 }
                 else
                 {
-                    var apiError = new ApiError
-                    {
-                        Code = ApiErrors.Auth.AuthError,
-                        Message = stringsProvider.GetString(ApiErrors.Auth.AuthError)
-                    };
-                    if (result.Errors != null)
-                    {
-                        apiError.Message = string.Format(apiError.Message.AddFormatting(), result.Errors.FirstOrDefault());
-                    }
+                    var apiError = CreateApiError(result);
 
                     logger.Error(apiError);
-                    return ApiError(HttpStatusCode.BadRequest, apiError);
+                    return ApiError(GetHttpErrorCode(apiError.Code), apiError);
                 }
             }
 
             return Ok();
+        }
+
+        private HttpStatusCode GetHttpErrorCode(string code)
+        {
+            switch (code)
+            {
+                case ApiErrors.Auth.UserAlreadyRegistered:
+                    return HttpStatusCode.Conflict;
+                default:
+                    return HttpStatusCode.BadRequest;
+            }
+        }
+
+        private ApiError CreateApiError(IdentityResult result)
+        {
+            var apiError = new ApiError
+                           {
+                               Code = ApiErrors.Auth.AuthError,
+                               Message = stringsProvider.GetString(ApiErrors.Auth.AuthError)
+                           };
+
+            if (result.Errors != null && !result.Errors.Any(string.IsNullOrWhiteSpace))
+            {
+                var errorMessage = result.Errors.First(e => !string.IsNullOrWhiteSpace(e));
+                apiError.Message = errorMessage;
+
+                if (errorMessage.Contains("is already taken"))
+                {
+                    apiError.Code = ApiErrors.Auth.UserAlreadyRegistered;
+                }
+            }
+
+            return apiError;
         }
 
         private static bool ResultFailed(IdentityResult result)
@@ -111,13 +136,13 @@ namespace Api.App.Auth
                 }
 
                 return new ExternalLoginData
-                {
-                    LoginProvider = providerKeyClaim.Issuer,
-                    ProviderKey = providerKeyClaim.Value,
-                    UserName = identity.FindFirstValue(ClaimTypes.Name),
-                    ExternalAccessToken = identity.FindFirstValue("ExternalAccessToken"),
-                    AccessTokenSecret = identity.FindFirstValue("AccessTokenSecret")
-                };
+                       {
+                           LoginProvider = providerKeyClaim.Issuer,
+                           ProviderKey = providerKeyClaim.Value,
+                           UserName = identity.FindFirstValue(ClaimTypes.Name),
+                           ExternalAccessToken = identity.FindFirstValue("ExternalAccessToken"),
+                           AccessTokenSecret = identity.FindFirstValue("AccessTokenSecret")
+                       };
             }
         }
 

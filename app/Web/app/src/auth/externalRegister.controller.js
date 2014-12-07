@@ -14,14 +14,31 @@
         activate();
 
         function activate() {
-            ctrl.externalLogin = getExternalLoginData();
+            var externalLogin = getExternalLoginData();
+
+            if(externalLogin.error){
+                Signin.finalizeSigninError(externalLogin.error);
+            }
+
+            ctrl.externalLogin = externalLogin;
         }
 
         function register() {
-            Signin.registerExternal(ctrl.externalLogin, ctrl.userName);
+            Signin.registerExternal(ctrl.externalLogin, ctrl.userName)
+            .then(function() {}, registerExternalError);
+        }
+
+        function registerExternalError(error) {
+            debugger;
         }
 
         function getExternalLoginData() {
+            if (!$stateParams.external_access_token || !$stateParams.provider) {
+                return {
+                    error: 'Missing external_access_token or provider'
+                };
+            }
+
             return {
                 externalAccessToken: $stateParams.external_access_token,
                 accessTokenSecret: $stateParams.access_token_secret,
