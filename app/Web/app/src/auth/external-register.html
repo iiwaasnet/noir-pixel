@@ -1,13 +1,13 @@
-﻿<div id="external-register" class="centered-outer">
+﻿<div id="external-register" ng-form="external-register" class="centered-outer">
     <div class="centered-middle">
         <div class="content centered-inner">
             <h1 np-i18n="Reg_AlmostDone"></h1>
             <div np-i18n="Reg_SelectUserName"></div>
             <div>
-                <input type="text" ng-model="ctrl.userName" />
-                <div>
-                    <input type="button" class="default-action" ng-click="ctrl.register()" np-i18n="Btn_Register" ng-disabled="!ctrl.userName" /><!--
-                    --><input type="button" ng-click="ctrl.register()" np-i18n="Btn_Cancel" />
+                <input type="text" ng-model="ctrl.userName" autofocus/>
+                <div class="buttons-block">
+                    <input type="button" class="default-action" ng-click="ctrl.register()" np-i18n="Btn_Register" ng-disabled="!ctrl.userName" />
+                    <input type="button" ng-click="ctrl.register()" np-i18n="Btn_Cancel" />
                 </div>
             </div>
         </div>

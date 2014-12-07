@@ -73,7 +73,13 @@ namespace Web
                             .Include(VanillaJs().ToArray())
                             .Include(Progress().ToArray())
                             .Include(SysMessages().ToArray())
+                            .Include(Directives().ToArray())
                 );
+        }
+
+        private static IEnumerable<string> Directives()
+        {
+            yield return "~/app/src/directives/directives.module.js";
         }
 
         private static IEnumerable<string> SysMessages()

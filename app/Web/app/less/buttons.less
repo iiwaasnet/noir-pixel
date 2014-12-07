@@ -1,7 +1,20 @@
 ﻿@import (reference) "colors.less";
 
 input[type=button].default-action,
-input[type=submit].default-action
-{
+input[type=submit].default-action {
     background-color: @button-default-action-background-color;
+}
+
+input[type=button][disabled].default-action,
+input[type=submit][disabled].default-action {
+    opacity: .3;
+}
+
+
+.buttons-block {
+    input[type=button],
+    input[type=submit] {
+        display: block;
+        float: left;
+    }
 }
