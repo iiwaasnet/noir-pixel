@@ -55,7 +55,11 @@
         }
 
         function registerExternalSuccess(response) {
-            getLocalToken(response.data.access_token, response.data.access_token_secret, response.data.provider);
+            getLocalToken({
+                    externalAccessToken: response.data.access_token,
+                    accessTokenSecret: response.data.access_token_secret,
+                    provider: response.data.provider
+                });
         }
 
         function getAvailableLoginsSuccess(response) {
