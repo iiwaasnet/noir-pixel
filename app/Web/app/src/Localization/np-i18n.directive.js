@@ -16,7 +16,7 @@
         return dir;
 
         function updateText(elm, token, attrs) {
-            var values = token.split('|');
+            var values = token.split('|').map(function(v) { return v.trim(); });
             if (values.length >= 1) {
                 // construct the tag to insert into the element
                 var localizedTemplate = Strings.getLocalizedString(values[0]);
