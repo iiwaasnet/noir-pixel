@@ -41,9 +41,9 @@
         function convertToMessage(obj) {
             var tmp = { main: obj };
             if (obj.main) {
-                tmp.main = obj.main.text ? obj.main.text : Strings.getLocalizedString(obj.main.id);
+                tmp.main = obj.main.message ? obj.main.message : Strings.getLocalizedString(obj.main.code);
                 if (obj.aux) {
-                    tmp.aux = obj.aux.text ? obj.aux.text : Strings.getLocalizedString(obj.aux.id);
+                    tmp.aux = obj.aux.message ? obj.aux.message : Strings.getLocalizedString(obj.aux.code);
                 }
             }
             if (!tmp.main) {

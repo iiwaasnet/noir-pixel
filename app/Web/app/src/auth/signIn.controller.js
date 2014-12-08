@@ -32,7 +32,7 @@
                     Signin.close();
                     //$state.go(getLoginRedirectState());
                 } else {
-                    Messages.error({ main: { id: result.error } });
+                    Messages.error({ main: { code: result.error } });
                 }
             } catch (e) {
 
