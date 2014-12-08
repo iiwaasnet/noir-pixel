@@ -4,9 +4,9 @@
     angular.module('np.auth')
         .controller('ExternalRegisterController', externalRegisterController);
 
-    externalRegisterController.$inject = ['$location', '$scope', '$window', '$stateParams', 'Url', 'Signin', 'Validation'];
+    externalRegisterController.$inject = ['$location', '$scope', '$window', '$stateParams', 'Url', 'Signin', 'Validation', 'Errors'];
 
-    function externalRegisterController($location, $scope, $window, $stateParams, Url, Signin, Validation) {
+    function externalRegisterController($location, $scope, $window, $stateParams, Url, Signin, Validation, Errors) {
         var ctrl = this;
         ctrl.scope = $scope;
         ctrl.register = register;
@@ -36,7 +36,12 @@
                 Validation.setValidationErrors(ctrl.scope.externalRegister, error.errors);
             }
             else {
-                ctrl.scope.externalRegister.UserName.$error[error.code] = true;
+                if (Validation.knownError(error.code)) {
+                    ctrl.scope.externalRegister.UserName.$error[error.code] = true;
+                }
+                else {
+                    ctrl.scope.externalRegister.UserName.$error[Errors.Auth.RegistrationError] = true;
+                }
             }
         }
 

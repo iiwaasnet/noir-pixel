@@ -290,6 +290,12 @@
       <DependentUpon>ngDialog.css</DependentUpon>
     </Content>
     <None Include="app\less\dialogs\ngDialog.less" />
+    <Content Include="app\less\messages.css">
+      <DependentUpon>messages.less</DependentUpon>
+    </Content>
+    <Content Include="app\less\messages.min.css">
+      <DependentUpon>messages.css</DependentUpon>
+    </Content>
     <Content Include="app\less\mixins.css">
       <DependentUpon>mixins.less</DependentUpon>
     </Content>
@@ -302,6 +308,10 @@
     <Content Include="app\less\mixins.less" />
     <Content Include="app\less\mixins.css.map">
       <DependentUpon>mixins.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\messages.less" />
+    <Content Include="app\less\messages.css.map">
+      <DependentUpon>messages.css</DependentUpon>
     </Content>
     <None Include="app\less\nprogress.less" />
     <Content Include="app\less\nprogress.css">

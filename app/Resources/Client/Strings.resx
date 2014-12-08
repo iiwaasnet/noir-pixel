@@ -126,9 +126,6 @@
   <data name="AuthMenu_SignUp" xml:space="preserve">
     <value>Sign up</value>
   </data>
-  <data name="EAPI_Auth_Unknown" xml:space="preserve">
-    <value>An error occurred while trying to Sign you in. Please, try one more time later.</value>
-  </data>
   <data name="EditHint_Password" xml:space="preserve">
     <value>Password</value>
   </data>
@@ -176,5 +173,8 @@
   </data>
   <data name="EAPI_ValueRequired" xml:space="preserve">
     <value>Please, provide a value.</value>
+  </data>
+  <data name="EAPI_Auth_RegistrationError" xml:space="preserve">
+    <value>An error occurred while trying to register you in. Please, try one more time later.</value>
   </data>
 </root>

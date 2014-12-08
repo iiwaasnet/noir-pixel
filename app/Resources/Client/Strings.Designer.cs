@@ -106,11 +106,11 @@ namespace Resources.Client {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An error occurred while trying to Sign you in. Please, try one more time later..
+        ///   Looks up a localized string similar to An error occurred while trying to register you in. Please, try one more time later..
         /// </summary>
-        public static string EAPI_Auth_Unknown {
+        public static string EAPI_Auth_RegistrationError {
             get {
-                return ResourceManager.GetString("EAPI_Auth_Unknown", resourceCulture);
+                return ResourceManager.GetString("EAPI_Auth_RegistrationError", resourceCulture);
             }
         }
         
