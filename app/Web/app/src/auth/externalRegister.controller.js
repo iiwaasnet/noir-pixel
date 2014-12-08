@@ -10,6 +10,7 @@
         var ctrl = this;
         ctrl.register = register;
         ctrl.userName = '';
+        ctrl.errors = {};
 
         activate();
 
@@ -29,7 +30,7 @@
         }
 
         function registerExternalError(error) {
-            debugger;
+            ctrl.errors[error.code] = true;
         }
 
         function getExternalLoginData() {

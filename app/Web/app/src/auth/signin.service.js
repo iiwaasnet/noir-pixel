@@ -38,7 +38,7 @@
 
         function registerExternalError(error) {
             Progress.stop();
-            return $q.reject(error);
+            return $q.reject(error.data);
         }
 
         function externalSignin(externalLogin) {
