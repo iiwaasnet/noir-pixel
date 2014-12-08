@@ -75,7 +75,14 @@ namespace Web
                             .Include(SysMessages().ToArray())
                             .Include(Directives().ToArray())
                             .Include(Constants().ToArray())
+                            .Include(Validation().ToArray())
                 );
+        }
+
+        private static IEnumerable<string> Validation()
+        {
+            yield return "~/app/src/validation/validation.module.js";
+            yield return "~/app/src/validation/validation.service.js";
         }
 
         private static IEnumerable<string> Constants()
@@ -198,7 +205,6 @@ namespace Web
             yield return "~/app/src/utils/utils.module.js";
             yield return "~/app/src/utils/moment.factory.js";
             yield return "~/app/src/utils/url.service.js";            
-            yield return "~/app/src/utils/validation.service.js";            
         }
     }
 }

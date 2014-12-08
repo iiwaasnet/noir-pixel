@@ -1,7 +1,7 @@
 ﻿(function() {
     'use strict';
 
-    angular.module('np.utils')
+    angular.module('np.validation')
         .service('Validation', validation);
 
 
