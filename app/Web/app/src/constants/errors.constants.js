@@ -4,6 +4,9 @@
     var errors = {
         Auth: {
             UserAlreadyRegistered: 'EAPI_Auth_UserAlreadyRegistered'
+        },
+        Validation: {
+            RequiredValue: "EAPI_ValueRequired"
         }
     };
 

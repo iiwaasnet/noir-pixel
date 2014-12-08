@@ -4,12 +4,13 @@
     angular.module('np.auth')
         .controller('ExternalRegisterController', externalRegisterController);
 
-    externalRegisterController.$inject = ['$location', '$window', '$stateParams', 'Url', 'Signin'];
+    externalRegisterController.$inject = ['$location', '$scope', '$window', '$stateParams', 'Url', 'Signin', 'Validation'];
 
-    function externalRegisterController($location, $window, $stateParams, Url, Signin) {
+    function externalRegisterController($location, $scope, $window, $stateParams, Url, Signin, Validation) {
         var ctrl = this;
+        ctrl.scope = $scope;
         ctrl.register = register;
-        ctrl.userName = '';
+        ctrl.userName = 'iiwaasnet';
         ctrl.errors = {};
 
         activate();
@@ -24,13 +25,19 @@
             ctrl.externalLogin = externalLogin;
         }
 
+
         function register() {
             Signin.registerExternal(ctrl.externalLogin, ctrl.userName)
             .then(function() {}, registerExternalError);
         }
 
         function registerExternalError(error) {
-            ctrl.errors[error.code] = true;
+            if (error.errors) {
+                Validation.setValidationErrors(ctrl.scope.externalRegister, error.errors);
+            }
+            else {
+                ctrl.scope.externalRegister.UserName.$error[error.code] = true;
+            }
         }
 
         function getExternalLoginData() {

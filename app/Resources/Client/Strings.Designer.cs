@@ -142,6 +142,15 @@ namespace Resources.Client {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please, provide a value..
+        /// </summary>
+        public static string EAPI_ValueRequired {
+            get {
+                return ResourceManager.GetString("EAPI_ValueRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string EditHint_Password {

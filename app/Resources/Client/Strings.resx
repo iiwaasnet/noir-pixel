@@ -174,4 +174,7 @@
   <data name="EAPI_Auth_UserAlreadyRegistered" xml:space="preserve">
     <value>Name {0} is already taken. Please, select a different one.</value>
   </data>
+  <data name="EAPI_ValueRequired" xml:space="preserve">
+    <value>Please, provide a value.</value>
+  </data>
 </root>

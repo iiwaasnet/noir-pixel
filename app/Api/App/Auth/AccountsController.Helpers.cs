@@ -22,13 +22,6 @@ namespace Api.App.Auth
             return Request.GetOwinContext().Authentication;
         }
 
-        private IHttpActionResult GetIdentityResult(IdentityResult result)
-        {
-            return (result.Succeeded)
-                       ? Ok()
-                       : GetIdentityErrorResult(result);
-        }
-
         private IHttpActionResult GetIdentityErrorResult(IdentityResult result)
         {
             if (ResultFailed(result))

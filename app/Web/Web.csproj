@@ -406,6 +406,7 @@
     <Content Include="app\src\utils\string.format.js" />
     <Content Include="app\src\utils\url.service.js" />
     <Content Include="app\src\utils\utils.module.js" />
+    <Content Include="app\src\utils\validation.service.js" />
     <Content Include="app\vendor\angular-messages.js" />
     <Content Include="app\vendor\angular-messages.min.js" />
     <Content Include="app\vendor\angular-mocks.js" />

@@ -1,20 +1,23 @@
-﻿<div id="external-register" ng-form="external-register" class="centered-outer">
+﻿<form id="external-register" name="externalRegister" class="centered-outer">
     <div class="centered-middle">
         <div class="content centered-inner">
             <h1 np-i18n="Reg_AlmostDone"></h1>
             <div np-i18n="Reg_SelectUserName"></div>
             <div>
-                <input type="text" ng-model="ctrl.userName" autofocus/>
-                <div ng-messages="ctrl.errors">
+                <input type="text" ng-model="ctrl.userName" name="UserName" autofocus required />
+                <div ng-messages="externalRegister.UserName.$error">
                     <div ng-message="EAPI_Auth_UserAlreadyRegistered">
                         <pre np-i18n="EAPI_Auth_UserAlreadyRegistered | {{ctrl.userName}}"></pre>
                     </div>
+                    <div ng-message="EAPI_ValueRequired">
+                        <pre np-i18n="EAPI_ValueRequired"></pre>
+                    </div>
                 </div>
                 <div class="buttons-block">
-                    <input type="button" class="default-action" ng-click="ctrl.register()" np-i18n="Btn_Register" ng-disabled="!ctrl.userName" />
+                    <input type="submit" class="default-action" ng-click="ctrl.register()" np-i18n="Btn_Register" />
                     <input type="button" ng-click="ctrl.register()" np-i18n="Btn_Cancel" />
                 </div>
             </div>
         </div>
     </div>
-</div>
+</form>
