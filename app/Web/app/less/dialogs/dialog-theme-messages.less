@@ -3,6 +3,7 @@
 @import (reference) "../constants.less";
 @import (reference) "dialog-mixins.less";
 
+@message-window-width: 75%;
 
 .dialog-content(@background-color, @border-color){
     .flyin(0.5s);
@@ -13,7 +14,7 @@
     max-width: 100%;
     padding: .5em 2.5em .5em 1em;
     position: relative;
-    width: 35%;
+    width: @message-window-width;
     font-weight: 100;
     text-align: center;
 

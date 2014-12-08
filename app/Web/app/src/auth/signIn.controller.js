@@ -30,12 +30,14 @@
             try {
                 if (result.succeeded) {
                     Signin.close();
+                    //TODO: Refresh current view?
+                    // registerExternal.controller has a close method, which means, user didn't register
+                    // Refreshing current view might not make sense. Think of providing TRUE/FALSE to distinguish...
                     //$state.go(getLoginRedirectState());
                 } else {
                     Messages.error({ main: { code: result.error } });
                 }
             } catch (e) {
-
             }
         }
 

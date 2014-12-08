@@ -10,6 +10,7 @@
         var ctrl = this;
         ctrl.scope = $scope;
         ctrl.register = register;
+        ctrl.close = close;
         ctrl.userName = 'iiwaasnet';
         ctrl.errors = {};
 
@@ -25,6 +26,9 @@
             ctrl.externalLogin = externalLogin;
         }
 
+        function close() {
+            Signin.finalizeSigninSuccess();
+        }
 
         function register() {
             Signin.registerExternal(ctrl.externalLogin, ctrl.userName)
