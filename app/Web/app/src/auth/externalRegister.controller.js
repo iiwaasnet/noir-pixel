@@ -11,8 +11,7 @@
         ctrl.scope = $scope;
         ctrl.register = register;
         ctrl.close = close;
-        ctrl.userName = 'iiwaasnet';
-        ctrl.errors = {};
+        ctrl.userName = '';
 
         activate();
 

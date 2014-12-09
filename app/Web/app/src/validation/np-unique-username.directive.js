@@ -2,11 +2,11 @@
     'use strict';
 
     angular.module('np.validation')
-        .directive('npValidateUsername', npValidateUsername);
+        .directive('npUniqueUsername', npUniqueUsername);
 
-    npValidateUsername.$inject = ['$q', 'Auth'];
+    npUniqueUsername.$inject = ['$q', 'Auth'];
 
-    function npValidateUsername($q, Auth) {
+    function npUniqueUsername($q, Auth) {
         var dir = {
             require: 'ngModel',
             restrict: 'A',
@@ -16,11 +16,9 @@
         return dir;
 
         function link(scope, element, attrs, ngModel) {
-            ngModel.$asyncValidators.username = validateUserName;
+            ngModel.$asyncValidators.npUniqueUsername = checkUserNameUnique;
 
-            function validateUserName(modelValue, viewValue) {
-                //ngModel.$setValidity('username', true);
-
+            function checkUserNameUnique(modelValue, viewValue) {
                 return Auth.userExists(viewValue)
                     .then(userExistsSuccess, userExistsError);
             }

@@ -83,7 +83,7 @@ namespace Web
         {
             yield return "~/app/src/validation/validation.module.js";
             yield return "~/app/src/validation/validation.service.js";
-            yield return "~/app/src/validation/np-validate-username.directive.js";
+            yield return "~/app/src/validation/np-unique-username.directive.js";
         }
 
         private static IEnumerable<string> Constants()
