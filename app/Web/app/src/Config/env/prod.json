@@ -6,7 +6,8 @@
     "apiUris.signin": "token",
     "apiUris.externalLogins": "/accounts/external-logins?returnUrl={0}",
     "apiUris.localAccessToken": "accounts/local-access-token",
-    "apiUris.registerExternal":  "accounts/register-external",
+    "apiUris.registerExternal": "accounts/register-external",
+    "apiUris.userExists": "accounts/exists/{userName}",
     
     "strings.invalidationTimeout": "01:00:00",
     "strings.versionsUri": "/strings/versions",

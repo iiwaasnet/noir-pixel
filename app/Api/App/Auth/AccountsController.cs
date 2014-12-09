@@ -5,6 +5,7 @@ using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Results;
 using Api.App.Auth.Extensions;
 using Api.App.Auth.ExternalUserInfo;
 using Api.App.Errors;
@@ -43,7 +44,6 @@ namespace Api.App.Auth
             this.stringsProvider = stringsProvider;
             this.externalAccountsManager = externalAccountsManager;
         }
-
 
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
@@ -283,6 +283,22 @@ namespace Api.App.Auth
                        IssuedUtc = DateTime.UtcNow,
                        ExpiresUtc = DateTime.UtcNow.Add(expiresIn)
                    };
+        }
+
+        [AllowAnonymous]
+        [Route("exists/{userName}")]
+        [HttpGet]
+        public async Task<IHttpActionResult> Exists(string userName)
+        {
+            //TODO: Unhandled exceptions handling with attributes
+            if (string.IsNullOrWhiteSpace(userName))
+            {
+                return BadRequest();
+            }
+
+            var user = await userManager.FindByNameAsync(userName);
+
+            return Ok(user != null);
         }
 
         [AllowAnonymous]

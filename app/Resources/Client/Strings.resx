@@ -177,4 +177,7 @@
   <data name="EAPI_Auth_RegistrationError" xml:space="preserve">
     <value>An error occurred while trying to register you in. Please, try one more time later.</value>
   </data>
+  <data name="EC_Auth_UserAlreadyRegistered" xml:space="preserve">
+    <value>This name is already taken. Please, select a different one.</value>
+  </data>
 </root>

@@ -16,7 +16,7 @@
         service.registerExternal = registerExternal;
         service.getLocalToken = getLocalToken;
         service.getAvailableLogins = getAvailableLogins;
-        service.getUserInfo = getUserInfo;
+        service.userExists = userExists;
 
         function authenticated() {
             return !!TokenStorage.getToken();
@@ -114,17 +114,10 @@
             deferred.reject(err);
         }
 
-        function getUserInfo() {
-            var url = Url.build(Config.apiUris.base, 'account/user-info');
+        function userExists(userName) {
+            var url = Url.build(Config.apiUris.base, Config.apiUris.userExists).formatNamed({userName: userName});
 
-            var deferred = $q.defer();
-
-            $http.get(url)
-                .then(
-                    function(response) { deferred.resolve(response.data); },
-                    function(error) { deferred.reject(error); });
-
-            return deferred.promise;
+            return $http.get(url);
         }
 
         function signOut() {

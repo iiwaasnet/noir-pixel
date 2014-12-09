@@ -10,7 +10,8 @@
             signin: '@@apiUris.signin',
             externalLogins: '@@apiUris.externalLogins',
             localAccessToken: '@@apiUris.localAccessToken',
-            registerExternal: '@@apiUris.registerExternal'
+            registerExternal: '@@apiUris.registerExternal',
+            userExists: '@@apiUris.userExists'
         },
         strings: {
             invalidationTimeout: '@@strings.invalidationTimeout',

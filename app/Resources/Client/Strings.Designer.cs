@@ -151,6 +151,15 @@ namespace Resources.Client {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This name is already taken. Please, select a different one..
+        /// </summary>
+        public static string EC_Auth_UserAlreadyRegistered {
+            get {
+                return ResourceManager.GetString("EC_Auth_UserAlreadyRegistered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string EditHint_Password {
