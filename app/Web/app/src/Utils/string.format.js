@@ -9,3 +9,17 @@
         });
     };
 }
+
+if (!String.prototype.formatNamed) {
+    String.prototype.formatNamed = function (nameValueDict) {
+        return this.replace(/{([A-Za-z0-9_-]+)}/g, function (match, key) {
+            var val = nameValueDict[key]
+                || nameValueDict[key.charAt(0).toUpperCase() + key.slice(1)]
+                || nameValueDict[key.charAt(0).toLowerCase() + key.slice(1)];
+            return val != 'undefined'
+              ? val
+              : match
+            ;
+        });
+    };
+}

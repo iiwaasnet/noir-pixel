@@ -115,7 +115,7 @@ namespace Resources.Client {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name {0} is already taken. Please, select a different one..
+        ///   Looks up a localized string similar to Name {UserName} is already taken. Please, select a different one..
         /// </summary>
         public static string EAPI_Auth_UserAlreadyRegistered {
             get {

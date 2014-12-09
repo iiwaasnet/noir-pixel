@@ -19,7 +19,7 @@
         function activate() {
             var externalLogin = getExternalLoginData();
 
-            if(externalLogin.error){
+            if (externalLogin.error) {
                 Signin.finalizeSigninError(externalLogin.error);
             }
 
@@ -32,21 +32,23 @@
 
         function register() {
             Signin.registerExternal(ctrl.externalLogin, ctrl.userName)
-            .then(function() {}, registerExternalError);
+                .then(function() {}, registerExternalError);
         }
 
         function registerExternalError(error) {
             var errorCode = error.code;
+            var placeholders = error.placeholderValues;
 
             if (!Validation.knownError(errorCode)) {
                 errorCode = Errors.Auth.RegistrationError;
             }
             if (error.errors && error.errors.length > 0) {
-                errorCode = error.errors[0].code;               
+                errorCode = error.errors[0].code;
+                placeholders = error.errors[0].code.placeholderValues;
             }
 
             //TODO: Provide PlacehodelValues and do formatting in Messages.error()
-            Messages.error({ main: { code: errorCode } });
+            Messages.error({ main: { code: errorCode } }, placeholders);
         }
 
         function getExternalLoginData() {

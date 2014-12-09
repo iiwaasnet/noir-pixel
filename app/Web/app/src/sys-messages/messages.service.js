@@ -12,7 +12,7 @@
         srv.error = error;
         srv.message = message;
 
-        function error(err) {
+        function error(err, palceholders) {
             ngDialog.open({
                 template: 'app/src/sys-messages/message.html',
                 cache: true,
@@ -20,7 +20,7 @@
                 className: 'dialog-theme-messages error',
                 showClose: true,
                 locals: {
-                    message: convertToMessage(err)
+                    message: convertToMessage(err, palceholders)
                 }
             });
         }
@@ -38,10 +38,13 @@
             });
         }
 
-        function convertToMessage(obj) {
+        function convertToMessage(obj, palceholders) {
             var tmp = { main: obj };
             if (obj.main) {
                 tmp.main = obj.main.message ? obj.main.message : Strings.getLocalizedString(obj.main.code);
+                if (palceholders) {
+                    tmp.main = tmp.main.formatNamed(palceholders);
+                }
                 if (obj.aux) {
                     tmp.aux = obj.aux.message ? obj.aux.message : Strings.getLocalizedString(obj.aux.code);
                 }
