@@ -36,18 +36,16 @@
         }
 
         function registerExternalError(error) {
-            if (error.errors) {
-                Validation.setValidationErrors(ctrl.scope.externalRegister, error.errors);
+            var errorCode = error.code;
+
+            if (!Validation.knownError(errorCode)) {
+                errorCode = Errors.Auth.RegistrationError;
             }
-            else {
-                if (Validation.knownError(error.code)) {
-                    ctrl.scope.externalRegister.UserName.$error[error.code] = true;
-                }
-                else {
-                    //TODO: make error object simplier
-                    Messages.error({ main: { code: Errors.Auth.RegistrationError } });
-                }
+            if (error.errors && error.errors.length > 0) {
+                errorCode = error.errors[0].code;               
             }
+
+            Messages.error({ main: { code: errorCode } });
         }
 
         function getExternalLoginData() {

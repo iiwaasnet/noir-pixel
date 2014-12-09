@@ -22,7 +22,7 @@ namespace Api.App.Auth
             return Request.GetOwinContext().Authentication;
         }
 
-        private IHttpActionResult GetIdentityErrorResult(IdentityResult result)
+        private IHttpActionResult GetIdentityErrorResult(IdentityResult result, ApplicationUser user)
         {
             if (ResultFailed(result))
             {
@@ -38,7 +38,7 @@ namespace Api.App.Auth
                 }
                 else
                 {
-                    var apiError = CreateApiError(result);
+                    var apiError = CreateApiError(result, user);
 
                     logger.Error(apiError);
                     return ApiError(GetHttpErrorCode(apiError.Code), apiError);
@@ -59,7 +59,7 @@ namespace Api.App.Auth
             }
         }
 
-        private ApiError CreateApiError(IdentityResult result)
+        private ApiError CreateApiError(IdentityResult result, ApplicationUser user)
         {
             var apiError = new ApiError
                            {
@@ -75,6 +75,7 @@ namespace Api.App.Auth
                 if (errorMessage.Contains("is already taken"))
                 {
                     apiError.Code = ApiErrors.Auth.UserAlreadyRegistered;
+                    apiError.PlaceholderValues = new Dictionary<string, object>{{"UserName", user.UserName}};
                 }
             }
 

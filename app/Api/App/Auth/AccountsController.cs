@@ -171,13 +171,13 @@ namespace Api.App.Auth
             var identityResult = await userManager.CreateAsync(user);
             if (!identityResult.Succeeded)
             {
-                return GetIdentityErrorResult(identityResult);
+                return GetIdentityErrorResult(identityResult, user);
             }
 
             identityResult = await userManager.AddLoginAsync(user.Id, new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
             if (!result.Succeeded)
             {
-                return GetIdentityErrorResult(identityResult);
+                return GetIdentityErrorResult(identityResult, user);
             }
 
             return Ok(new
