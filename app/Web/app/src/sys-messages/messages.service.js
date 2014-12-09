@@ -12,7 +12,7 @@
         srv.error = error;
         srv.message = message;
 
-        function error(err, palceholders) {
+        function error(err, placeholders) {
             ngDialog.open({
                 template: 'app/src/sys-messages/message.html',
                 cache: true,
@@ -20,12 +20,12 @@
                 className: 'dialog-theme-messages error',
                 showClose: true,
                 locals: {
-                    message: convertToMessage(err, palceholders)
+                    message: convertToMessage(err, placeholders)
                 }
             });
         }
 
-        function message(msg) {
+        function message(msg, placeholders) {
             ngDialog.open({
                 template: 'app/src/sys-messages/message.html',
                 cache: true,
@@ -33,17 +33,17 @@
                 className: 'dialog-theme-messages info',
                 showClose: true,
                 locals: {
-                    message: convertToMessage(msg)
+                    message: convertToMessage(msg, placeholders)
                 }
             });
         }
 
-        function convertToMessage(obj, palceholders) {
+        function convertToMessage(obj, placeholders) {
             var tmp = { main: obj };
             if (obj.main) {
                 tmp.main = obj.main.message ? obj.main.message : Strings.getLocalizedString(obj.main.code);
-                if (palceholders) {
-                    tmp.main = tmp.main.formatNamed(palceholders);
+                if (placeholders) {
+                    tmp.main = tmp.main.formatNamed(placeholders);
                 }
                 if (obj.aux) {
                     tmp.aux = obj.aux.message ? obj.aux.message : Strings.getLocalizedString(obj.aux.code);
