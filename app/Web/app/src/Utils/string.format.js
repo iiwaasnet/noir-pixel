@@ -13,7 +13,6 @@
 if (!String.prototype.formatNamed) {
     String.prototype.formatNamed = function (nameValueDict) {
         return this.replace(/{([a-z0-9_\-]+)}/gi, function (match, key) {
-            debugger;
             var val = nameValueDict[key]
                 || nameValueDict[key.charAt(0).toUpperCase() + key.slice(1)]
                 || nameValueDict[key.charAt(0).toLowerCase() + key.slice(1)];

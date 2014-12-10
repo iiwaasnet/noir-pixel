@@ -172,12 +172,18 @@
     <value>Name {UserName} is already taken. Please, select a different one.</value>
   </data>
   <data name="EAPI_ValueRequired" xml:space="preserve">
-    <value>Please, provide a value.</value>
+    <value>Please, provide a value!</value>
   </data>
   <data name="EAPI_Auth_RegistrationError" xml:space="preserve">
     <value>An error occurred while trying to register you in. Please, try one more time later.</value>
   </data>
   <data name="EC_Auth_UserAlreadyRegistered" xml:space="preserve">
     <value>This name is already taken. Please, select a different one.</value>
+  </data>
+  <data name="EAPI_InvalidValue" xml:space="preserve">
+    <value>The value(s) you provided is invalid!</value>
+  </data>
+  <data name="EC_Auth_InvalidUserName" xml:space="preserve">
+    <value>Only letters A-Z, a-z, numbers, dash and underscore are allowed! </value>
   </data>
 </root>

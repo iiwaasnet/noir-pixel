@@ -133,6 +133,15 @@ namespace Resources.Client {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The value(s) you provided is invalid!.
+        /// </summary>
+        public static string EAPI_InvalidValue {
+            get {
+                return ResourceManager.GetString("EAPI_InvalidValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to We have encountered an error, while trying to execute your request :( Please, try one more time..
         /// </summary>
         public static string EAPI_Unknown {
@@ -142,11 +151,20 @@ namespace Resources.Client {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please, provide a value..
+        ///   Looks up a localized string similar to Please, provide a value!.
         /// </summary>
         public static string EAPI_ValueRequired {
             get {
                 return ResourceManager.GetString("EAPI_ValueRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only letters A-Z, a-z, numbers, dash and underscore are allowed! .
+        /// </summary>
+        public static string EC_Auth_InvalidUserName {
+            get {
+                return ResourceManager.GetString("EC_Auth_InvalidUserName", resourceCulture);
             }
         }
         

@@ -19,7 +19,7 @@ namespace Api.App.Auth
     {
         public RegisterExternalModelValidator(IResourceAccessorBuilder resourceAccessor)
         {
-            var regex = new Regex(@"([a-z0-9_\-]+)", RegexOptions.IgnoreCase);
+            var regex = new Regex(@"(^\b[a-z0-9_\-]+\b$)", RegexOptions.IgnoreCase);
 
             RuleFor(m => m.ExternalAccessToken).NotEmpty().WithLocalizedMessage(ApiErrors.Validation.RequiredValue, resourceAccessor);
             RuleFor(m => m.Provider).NotEmpty().WithLocalizedMessage(ApiErrors.Validation.RequiredValue, resourceAccessor);
@@ -29,11 +29,9 @@ namespace Api.App.Auth
 
         }
 
-        private bool ContainValidChars(string val, Regex regex)
+        private static bool ContainValidChars(string val, Regex regex)
         {
-            var matchResult = regex.Matches(val);
-
-            return matchResult.Count == 1;
+            return regex.Match(val).Success;
         }
     }
 }

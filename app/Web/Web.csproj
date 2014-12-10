@@ -253,6 +253,9 @@
     <Content Include="app\less\fonts.css">
       <DependentUpon>fonts.less</DependentUpon>
     </Content>
+    <Content Include="app\less\fonts.min.css">
+      <DependentUpon>fonts.css</DependentUpon>
+    </Content>
     <Content Include="app\less\header.css">
       <DependentUpon>header.less</DependentUpon>
     </Content>
@@ -312,6 +315,9 @@
     <Content Include="app\less\messages.less" />
     <Content Include="app\less\messages.css.map">
       <DependentUpon>messages.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\fonts.css.map">
+      <DependentUpon>fonts.css</DependentUpon>
     </Content>
     <None Include="app\less\nprogress.less" />
     <Content Include="app\less\nprogress.css">
