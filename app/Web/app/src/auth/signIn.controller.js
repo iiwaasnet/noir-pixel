@@ -30,6 +30,9 @@
             try {
                 if (result.succeeded) {
                     Signin.close();
+                    if (result.newRegistration) {
+                        Messages.message({main: {message: 'Welcome, my dear friend!'} });
+                    }
                     //TODO: Refresh current view?
                     // registerExternal.controller has a close method, which means, user didn't register
                     // Refreshing current view might not make sense. Think of providing TRUE/FALSE to distinguish...

@@ -48,14 +48,15 @@
 
         function getLocalToken(externalLogin) {
             Auth.getLocalToken(externalLogin)
-                .then(finalizeSigninSuccess, finalizeSigninError);
+                .then(function() { finalizeSigninSuccess(externalLogin.newRegistration); }, finalizeSigninError);
         }
 
         function registerExternalSuccess(response) {
             getLocalToken({
                 externalAccessToken: response.data.access_token,
                 accessTokenSecret: response.data.access_token_secret,
-                provider: response.data.provider
+                provider: response.data.provider,
+                newRegistration: true
             });
         }
 
@@ -94,8 +95,9 @@
             $window.close();
         }
 
-        function finalizeSigninSuccess() {
+        function finalizeSigninSuccess(newRegitration) {
             $window.opener.$scope.finalizeLogin({
+                newRegistration: newRegitration,
                 succeeded: true
             });
             $window.close();
