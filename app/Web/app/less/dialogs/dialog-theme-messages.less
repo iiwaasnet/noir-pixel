@@ -4,6 +4,7 @@
 @import (reference) "dialog-mixins.less";
 
 @message-window-width: 75%;
+@messages-background-color: @button-default-action-background-color;
 
 .dialog-content(@background-color, @border-color){
     .flyin(0.5s);
@@ -99,7 +100,7 @@
 }
 
 .ngdialog.dialog-theme-messages.info .ngdialog-content {
-    .dialog-content(@background-color, @edit-border-color);
+    .dialog-content(@messages-background-color, @edit-border-color);
 }
 
 .ngdialog.dialog-theme-messages.error.ngdialog-closing .ngdialog-content,
