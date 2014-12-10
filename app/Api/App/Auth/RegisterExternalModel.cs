@@ -3,7 +3,6 @@ using Api.App.Errors;
 using Ext.FluentValidation;
 using Ext.FluentValidation.Attributes;
 using Ext.FluentValidation.Resources;
-using Microsoft.Ajax.Utilities;
 
 namespace Api.App.Auth
 {
@@ -32,9 +31,9 @@ namespace Api.App.Auth
 
         private bool ContainValidChars(string val, Regex regex)
         {
-            var matchResult = regex.Match(val);
+            var matchResult = regex.Matches(val);
 
-            return matchResult.Success && matchResult.Captures.Count == 1;
+            return matchResult.Count == 1;
         }
     }
 }

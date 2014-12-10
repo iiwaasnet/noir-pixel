@@ -35,7 +35,7 @@
         }
 
         function registerExternalError(error) {
-            var errorCode = error.code;
+            var errorCode = error.code || '';
             var placeholders = error.placeholderValues;
 
             if (!Validation.knownError(errorCode)) {
