@@ -26,7 +26,7 @@ namespace Api.App.Auth
             RuleFor(m => m.UserName)
                 .NotEmpty().WithLocalizedMessage(ApiErrors.Validation.RequiredValue, resourceAccessor)
                 .Must(val => ContainValidChars(val, regex)).WithLocalizedMessage(ApiErrors.Validation.InvalidValue, resourceAccessor)
-                .Length(2, 20);
+                .Length(2, 20).WithLocalizedMessage(ApiErrors.Validation.ValueLength, resourceAccessor);
 
         }
 

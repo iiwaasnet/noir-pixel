@@ -7,8 +7,9 @@
             RegistrationError: 'EAPI_Auth_RegistrationError'
         },
         Validation: {
-            RequiredValue: "EAPI_ValueRequired",
-            InvalidValue: "EAPI_InvalidValue"
+            RequiredValue: 'EAPI_ValueRequired',
+            InvalidValue: 'EAPI_InvalidValue',
+            ValueLength: 'EAPI_ValueLength'
         }
     };
 

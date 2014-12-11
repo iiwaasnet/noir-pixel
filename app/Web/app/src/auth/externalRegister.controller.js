@@ -43,7 +43,7 @@
             }
             if (error.errors && error.errors.length > 0) {
                 errorCode = error.errors[0].code;
-                placeholders = error.errors[0].code.placeholderValues;
+                placeholders = error.errors[0].placeholderValues;
             }
 
             //TODO: Provide PlacehodelValues and do formatting in Messages.error()

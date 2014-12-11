@@ -151,6 +151,15 @@ namespace Resources.Client {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Value length should be min. {MinLength} and max. {MaxLength} characters long..
+        /// </summary>
+        public static string EAPI_ValueLength {
+            get {
+                return ResourceManager.GetString("EAPI_ValueLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please, provide a value!.
         /// </summary>
         public static string EAPI_ValueRequired {

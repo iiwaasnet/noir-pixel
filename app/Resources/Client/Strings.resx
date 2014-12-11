@@ -189,4 +189,7 @@
   <data name="EC_Auth_UserNameLength" xml:space="preserve">
     <value>User name should be min. 2 and max. 20 characters long.</value>
   </data>
+  <data name="EAPI_ValueLength" xml:space="preserve">
+    <value>Value length should be min. {MinLength} and max. {MaxLength} characters long.</value>
+  </data>
 </root>
