@@ -184,6 +184,9 @@
     <value>The value(s) you provided is invalid!</value>
   </data>
   <data name="EC_Auth_InvalidUserName" xml:space="preserve">
-    <value>Only letters A-Z, a-z, numbers, dash and underscore are allowed! </value>
+    <value>Only letters A-Z, a-z, numbers 0-9, dash and underscore are allowed! </value>
+  </data>
+  <data name="EC_Auth_UserNameLength" xml:space="preserve">
+    <value>User name should be min. 2 and max. 20 characters long.</value>
   </data>
 </root>

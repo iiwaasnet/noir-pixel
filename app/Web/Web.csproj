@@ -422,7 +422,7 @@
     <Content Include="app\src\utils\string.format.js" />
     <Content Include="app\src\utils\url.service.js" />
     <Content Include="app\src\utils\utils.module.js" />
-    <Content Include="app\src\validation\error-messages.html" />
+    <Content Include="app\src\auth\error-messages.html" />
     <Content Include="app\src\validation\np-unique-username.directive.js" />
     <Content Include="app\src\validation\validation.module.js" />
     <Content Include="app\src\validation\validation.service.js" />

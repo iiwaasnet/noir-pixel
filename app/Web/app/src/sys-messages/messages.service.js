@@ -8,12 +8,14 @@
 
     function messagesService(ngDialog, Strings) {
         var srv = this,
-            EAPI_Unknown = 'EAPI_Unknown';
+            EAPI_Unknown = 'EAPI_Unknown',
+            currentDialog;
         srv.error = error;
         srv.message = message;
 
         function error(err, placeholders) {
-            ngDialog.open({
+            closeCurrent();
+            currentDialog = ngDialog.open({
                 template: 'app/src/sys-messages/message.html',
                 cache: true,
                 controller: 'MessageController as ctrl',
@@ -26,7 +28,7 @@
         }
 
         function message(msg, placeholders) {
-            ngDialog.open({
+            currentDialog = ngDialog.open({
                 template: 'app/src/sys-messages/message.html',
                 cache: true,
                 controller: 'MessageController as ctrl',
@@ -54,6 +56,12 @@
             }
 
             return tmp;
+        }
+
+        function closeCurrent() {
+            if(currentDialog) {
+                currentDialog.close();
+            }
         }
     }
 })();

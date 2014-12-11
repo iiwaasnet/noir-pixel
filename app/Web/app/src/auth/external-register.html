@@ -3,16 +3,19 @@
         <div class="content centered-inner">
             <h1 np-i18n="Reg_AlmostDone"></h1>
             <div np-i18n="Reg_SelectUserName"></div>
-            <input type="text" ng-model="ctrl.userName" name="UserName" autofocus autocomplete="off"
-                   required np-unique-username ng-trim ng-pattern="/(^\b[a-z0-9_\-]+\b$)/"
-                   ng-model-options="{allowInvalid: true, updateOn: 'default blur', debounce: {'default': 600, 'blur': 0}}" />
-            <div ng-messages="externalRegister.UserName.$error" multiple ng-messages-include="/app/src/validation/error-messages.html">
-                <div ng-message="pattern" class="error">
-                    <p np-i18n="EC_Auth_InvalidUserName"></p>
-                </div>
+            <input type="text" ng-model="ctrl.userName" name="userName"
+                   autofocus 
+                   autocomplete="off"
+                   ng-required="externalRegister.userName.$dirty" 
+                   np-unique-username
+                   ng-trim
+                   ng-pattern="/((^\B|^\b)[a-z0-9_\-]+(\B$|\b$))/"
+                   ng-minlength="2" ng-maxlength="20"
+                   ng-model-options="{allowInvalid: true, updateOn: 'default blur', debounce: {'default': 300, 'blur': 0}}" />
+            <div ng-messages="externalRegister.userName.$error" multiple ng-messages-include="/app/src/auth/error-messages.html">
             </div>
             <div class="buttons-block">
-                <input type="submit" class="default-action" ng-click="ctrl.register()" np-i18n="Btn_Register" />
+                <input type="submit" class="default-action" ng-click="ctrl.register()" np-i18n="Btn_Register" ng-disabled="!externalRegister.$valid"/>
                 <input type="button" ng-click="ctrl.close()" np-i18n="Btn_Cancel" />
             </div>
         </div>

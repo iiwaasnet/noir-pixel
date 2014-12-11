@@ -160,7 +160,7 @@ namespace Resources.Client {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Only letters A-Z, a-z, numbers, dash and underscore are allowed! .
+        ///   Looks up a localized string similar to Only letters A-Z, a-z, numbers 0-9, dash and underscore are allowed! .
         /// </summary>
         public static string EC_Auth_InvalidUserName {
             get {
@@ -174,6 +174,15 @@ namespace Resources.Client {
         public static string EC_Auth_UserAlreadyRegistered {
             get {
                 return ResourceManager.GetString("EC_Auth_UserAlreadyRegistered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User name should be min. 2 and max. 20 characters long..
+        /// </summary>
+        public static string EC_Auth_UserNameLength {
+            get {
+                return ResourceManager.GetString("EC_Auth_UserNameLength", resourceCulture);
             }
         }
         
