@@ -4,52 +4,30 @@
     angular.module('np.validation')
         .service('Validation', validation);
 
-    validation.$inject = ['Errors'];
+    validation.$inject = [];
 
-    function validation(Errors) {
-        var srv = this,
-            existingErrors = getExistingErrors();
-        srv.setValidationErrors = setValidationErrors;
-        srv.knownError = knownError;
+    function validation() {
+        var srv = this;
+        srv.tryParseError = tryParseError;
 
+        function tryParseError(error) {
+            var errorCode = '';
+            var placeholders = {};
 
-        function knownError(errorCode) {
-            return ~existingErrors.indexOf(errorCode);
-        }
+            if (error) {
+                errorCode = error.code || errorCode;
+                placeholders = error.placeholderValues || placeholders;
 
-        function setValidationErrors(form, errors) {
-            if (form) {
-                angular.forEach(errors, function(e) { setModelError(form, e); });
-            }
-        }
-
-        function getExistingErrors() {
-            var errorCodes = [];
-            angular.forEach(Object.keys(Errors), function(key) { getKeyValue(Errors, key, errorCodes); });
-
-            return errorCodes;
-        }
-
-        function getKeyValue(obj, key, array) {
-            var val = obj[key];
-
-            var keys = (typeof(val) === 'object')
-                ? Object.keys(val)
-                : [];
-            if (keys.length === 0) {
-                array.push(val);
-            } else {
-                angular.forEach(keys, function(k) { getKeyValue(val, k, array); });
-            }
-        }
-
-        function setModelError(form, error) {
-            if (error.field && error.code) {
-                var control = form[error.field];
-                if (control) {
-                    control.$error[error.code] = true;
+                if (error.errors && error.errors.length > 0) {
+                    errorCode = error.errors[0].code || errorCode;
+                    placeholders = error.errors[0].placeholderValues || placeholders;
                 }
             }
+
+            return {
+                errorCode: errorCode,
+                placeholders: placeholders
+            };
         }
     }
 })();

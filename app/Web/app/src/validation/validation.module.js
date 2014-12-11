@@ -1,5 +1,5 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('np.validation', ['np.const']);
+    angular.module('np.validation', []);
 })();

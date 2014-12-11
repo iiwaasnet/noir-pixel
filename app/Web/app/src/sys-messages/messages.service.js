@@ -13,7 +13,7 @@
         srv.error = error;
         srv.message = message;
 
-        function error(err, placeholders) {
+        function error(err, placeholders, fallbackErrCode) {
             closeCurrent();
             currentDialog = ngDialog.open({
                 template: 'app/src/sys-messages/message.html',
@@ -22,12 +22,12 @@
                 className: 'dialog-theme-messages error',
                 showClose: true,
                 locals: {
-                    message: convertToMessage(err, placeholders)
+                    message: convertToMessage(err, placeholders, fallbackErrCode)
                 }
             });
         }
 
-        function message(msg, placeholders) {
+        function message(msg, placeholders, fallbackMsgCode) {
             currentDialog = ngDialog.open({
                 template: 'app/src/sys-messages/message.html',
                 cache: true,
@@ -35,12 +35,12 @@
                 className: 'dialog-theme-messages info',
                 showClose: true,
                 locals: {
-                    message: convertToMessage(msg, placeholders)
+                    message: convertToMessage(msg, placeholders, fallbackMsgCode)
                 }
             });
         }
 
-        function convertToMessage(obj, placeholders) {
+        function convertToMessage(obj, placeholders, fallbackMsgCode) {
             var tmp = { main: obj };
             if (obj.main) {
                 tmp.main = obj.main.message ? obj.main.message : Strings.getLocalizedString(obj.main.code);
@@ -52,7 +52,7 @@
                 }
             }
             if (!tmp.main) {
-                tmp.main = Strings.getLocalizedString(EAPI_Unknown);
+                tmp.main = Strings.getLocalizedString(fallbackMsgCode) || Strings.getLocalizedString(EAPI_Unknown);
             }
 
             return tmp;

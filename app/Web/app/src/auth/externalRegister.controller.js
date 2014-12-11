@@ -4,10 +4,11 @@
     angular.module('np.auth')
         .controller('ExternalRegisterController', externalRegisterController);
 
-    externalRegisterController.$inject = ['$location', '$scope', '$window', '$stateParams', 'Url', 'Signin', 'Validation', 'Errors', 'Messages'];
+    externalRegisterController.$inject = ['$location', '$scope', '$window', '$stateParams', 'Url', 'Signin', 'Validation', 'Messages'];
 
-    function externalRegisterController($location, $scope, $window, $stateParams, Url, Signin, Validation, Errors, Messages) {
-        var ctrl = this;
+    function externalRegisterController($location, $scope, $window, $stateParams, Url, Signin, Validation, Messages) {
+        var ctrl = this,
+            EAPI_Auth_RegistrationError = 'EAPI_Auth_RegistrationError';
         ctrl.scope = $scope;
         ctrl.register = register;
         ctrl.close = close;
@@ -35,19 +36,9 @@
         }
 
         function registerExternalError(error) {
-            var errorCode = error.code || '';
-            var placeholders = error.placeholderValues;
+            var parsed = Validation.tryParseError(error);
 
-            if (!Validation.knownError(errorCode)) {
-                errorCode = Errors.Auth.RegistrationError;
-            }
-            if (error.errors && error.errors.length > 0) {
-                errorCode = error.errors[0].code;
-                placeholders = error.errors[0].placeholderValues;
-            }
-
-            //TODO: Provide PlacehodelValues and do formatting in Messages.error()
-            Messages.error({ main: { code: errorCode } }, placeholders);
+            Messages.error({ main: { code: parsed.errorCode } }, parsed.placeholders, EAPI_Auth_RegistrationError);
         }
 
         function getExternalLoginData() {

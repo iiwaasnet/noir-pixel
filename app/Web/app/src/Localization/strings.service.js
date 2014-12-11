@@ -45,7 +45,7 @@
 
         function getLocalizedString(value) {
             var cache = dictionary[service.getCurrentLanguage()];
-            if (cache && Object.keys(cache.strings).length > 0) {
+            if (value && cache && Object.keys(cache.strings).length > 0) {
                 return cache.strings[value];
             }
 
