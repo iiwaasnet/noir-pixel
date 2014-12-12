@@ -4,12 +4,12 @@
             <h1 np-i18n="Reg_AlmostDone"></h1>
             <div np-i18n="Reg_SelectUserName"></div>
             <input type="text" ng-model="ctrl.userName" name="userName"
-                   autofocus 
+                   autofocus
                    autocomplete="off"
-                   ng-required="externalRegister.userName.$dirty" 
+                   ng-required="externalRegister.userName.$dirty"
                    np-unique-username
                    ng-trim
-                   ng-pattern="//"
+                   ng-pattern="::ctrl.userNameValidationregEx"
                    ng-minlength="2" ng-maxlength="20"
                    ng-model-options="{allowInvalid: true, updateOn: 'default blur', debounce: {'default': 300, 'blur': 0}}" />
             <div ng-messages="externalRegister.userName.$error" multiple ng-messages-include="/app/src/auth/error-messages.html">
