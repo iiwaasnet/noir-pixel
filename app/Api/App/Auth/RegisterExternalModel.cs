@@ -1,8 +1,10 @@
 using System.Text.RegularExpressions;
+using Api.App.Auth.Config;
 using Api.App.Errors;
 using Ext.FluentValidation;
 using Ext.FluentValidation.Attributes;
 using Ext.FluentValidation.Resources;
+using JsonConfigurationProvider;
 
 namespace Api.App.Auth
 {
@@ -17,16 +19,18 @@ namespace Api.App.Auth
 
     public class RegisterExternalModelValidator : AbstractValidator<RegisterExternalModel>
     {
-        public RegisterExternalModelValidator(IResourceAccessorBuilder resourceAccessor)
+        public RegisterExternalModelValidator(IResourceAccessorBuilder resourceAccessor, IConfigProvider configProvider)
         {
-            var regex = new Regex(@"((^\B|^\b)[a-z0-9_\-]+(\B$|\b$))", RegexOptions.IgnoreCase);
+            var authConfig = configProvider.GetConfiguration<AuthConfiguration>();
+
+            var regex = new Regex(authConfig.UserValidation.NameValidationRegEx, RegexOptions.IgnoreCase);
 
             RuleFor(m => m.ExternalAccessToken).NotEmpty().WithLocalizedMessage(ApiErrors.Validation.RequiredValue, resourceAccessor);
             RuleFor(m => m.Provider).NotEmpty().WithLocalizedMessage(ApiErrors.Validation.RequiredValue, resourceAccessor);
             RuleFor(m => m.UserName)
                 .NotEmpty().WithLocalizedMessage(ApiErrors.Validation.RequiredValue, resourceAccessor)
                 .Must(val => ContainValidChars(val, regex)).WithLocalizedMessage(ApiErrors.Validation.InvalidValue, resourceAccessor)
-                .Length(2, 20).WithLocalizedMessage(ApiErrors.Validation.ValueLength, resourceAccessor);
+                .Length(authConfig.UserValidation.MinUserNameLength, authConfig.UserValidation.MaxUSerNameLength).WithLocalizedMessage(ApiErrors.Validation.ValueLength, resourceAccessor);
 
         }
 

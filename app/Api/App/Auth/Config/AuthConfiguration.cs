@@ -10,5 +10,6 @@ namespace Api.App.Auth.Config
         public FacebookConfiguration Facebook { get; set; }
         public TwitterConfiguration Twitter { get; set; }
         public YahooConfiguration Yahoo { get; set; }
+        public UserValidation UserValidation { get; set; }
     }
 }

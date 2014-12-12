@@ -224,6 +224,7 @@
     <Compile Include="App\Auth\AuthOptions.cs" />
     <Compile Include="App\Auth\Config\FacebookConfiguration.cs" />
     <Compile Include="App\Auth\Config\GooglePlusConfiguration.cs" />
+    <Compile Include="App\Auth\Config\UserValidation.cs" />
     <Compile Include="App\Auth\Config\YahooConfiguration.cs" />
     <Compile Include="App\Auth\Config\TwitterConfiguration.cs" />
     <Compile Include="App\Auth\Extensions\UriParseResult.cs" />
@@ -381,9 +382,7 @@
     <Content Include="config\Site.config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="config\env\Auth.config.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="config\env\Auth.config.json" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
