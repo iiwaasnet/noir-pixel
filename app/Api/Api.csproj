@@ -394,6 +394,10 @@
       <Project>{50a6ff75-22bc-493d-8b93-fca6c0c9af92}</Project>
       <Name>Api.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{57171eff-d3d2-4abb-ba72-3d561594595b}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Diagnostics\Diagnostics.csproj">
       <Project>{fa2d348c-a9d9-45ef-8059-1ab5d1554e67}</Project>
       <Name>Diagnostics</Name>
@@ -405,10 +409,6 @@
     <ProjectReference Include="..\Resources\Resources.csproj">
       <Project>{87c1faee-88e4-41f9-a66d-2e52a37e27b5}</Project>
       <Name>Resources</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Shared\Shared.csproj">
-      <Project>{57171eff-d3d2-4abb-ba72-3d561594595b}</Project>
-      <Name>Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
