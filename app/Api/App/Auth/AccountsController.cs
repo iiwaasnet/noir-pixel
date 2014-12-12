@@ -133,6 +133,7 @@ namespace Api.App.Auth
                 return result.Error;
             }
 
+            model.UserName = model.UserName.Trim();
             var verifiedAccessToken = await externalAccountsManager.VerfiyAccessToken(model.Provider, model.ExternalAccessToken, model.AccessTokenSecret);
             if (verifiedAccessToken == null)
             {
