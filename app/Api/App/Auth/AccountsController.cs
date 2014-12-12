@@ -10,6 +10,7 @@ using Api.App.Auth.Extensions;
 using Api.App.Auth.ExternalUserInfo;
 using Api.App.Errors;
 using Api.App.Errors.Extensions;
+using Common.Extensions;
 using Diagnostics;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
@@ -17,7 +18,6 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Linq;
 using Resources.Api;
-using Shared.Extensions;
 
 namespace Api.App.Auth
 {

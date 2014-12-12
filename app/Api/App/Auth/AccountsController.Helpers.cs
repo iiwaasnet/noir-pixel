@@ -8,9 +8,9 @@ using System.Security.Cryptography;
 using System.Web;
 using System.Web.Http;
 using Api.App.Errors;
+using Common.Extensions;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
-using Shared.Extensions;
 
 namespace Api.App.Auth
 {
