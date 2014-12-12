@@ -13,7 +13,11 @@
         ctrl.register = register;
         ctrl.close = close;
         ctrl.userName = '';
-        ctrl.userNameValidationRegEx = new RegExp(('/((^\\B|^\\b)[a-z0-9_\\-]+(\\B$|\\b$))/').slice(1, -1));
+        ctrl.userNameValidation = {
+            regEx: new RegExp(('/((^\\B|^\\b)[a-z0-9_\\-]+(\\B$|\\b$))/').slice(1, -1), 'i'),
+            minLength: 2,
+            maxLength: 20
+        };
 
         activate();
 
