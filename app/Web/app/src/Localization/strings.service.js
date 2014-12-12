@@ -40,7 +40,7 @@
         }
 
         function getCurrentLanguage() {
-            return uiLanguage;
+            return strLanguage;
         }
 
         function getLocalizedString(value) {
