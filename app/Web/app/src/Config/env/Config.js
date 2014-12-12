@@ -17,7 +17,12 @@
             invalidationTimeout: '@@strings.invalidationTimeout',
             versionsUri: '@@strings.versionsUri',
             localizedUri: '@@strings.localizedUri'
-        }
+        },
+        auth: {
+            userNameValidationRegEx: '@@userNameValidationRegEx',
+            minUserNameLength: '@@minUserNameLength',
+            maxUserNameLength: '@@maxUserNameLength'
+            }
     };
 
     angular.module('np.config')

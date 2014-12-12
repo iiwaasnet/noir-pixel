@@ -1,4 +1,4 @@
-[
+﻿[
     {
         "dev": {
             "publicClientId": "self",
@@ -25,9 +25,9 @@
                 "consumerSecret": "b03bb9da5d8243e8b953a20336087a39ed963969"
             },
             "userValidation": {
-                "nameValidationRegEx": "((^\\B|^\\b)[a-z0-9_\\-]+(\\B$|\\b$))",
-                "minUserNameLength": "2",
-                "maxUserNameLength": "20"
+                "nameValidationRegEx": "@@userNameValidationRegEx",
+                "minUserNameLength": "@@minUserNameLength",
+                "maxUserNameLength": "@@maxUserNameLength"
             }
         }
     }

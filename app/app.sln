@@ -32,6 +32,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Core", "Api.Core\Api.Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{57171EFF-D3D2-4ABB-BA72-3D561594595B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config.shared", "config.shared", "{58FDCDDF-1EA5-4772-B283-0B1DAF70A3D1}"
+	ProjectSection(SolutionItems) = preProject
+		config.shared\dev.json = config.shared\dev.json
+		config.shared\prod.json = config.shared\prod.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

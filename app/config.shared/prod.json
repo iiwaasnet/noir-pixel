@@ -1,0 +1,5 @@
+{
+    "userNameValidationRegEx": "((^\\\\B|^\\\\b)[a-z0-9_\\\\-]+(\\\\B$|\\\\b$))",
+    "minUserNameLength": "2",
+    "maxUserNameLength": "20"
+}

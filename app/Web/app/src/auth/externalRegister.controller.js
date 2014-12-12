@@ -4,9 +4,9 @@
     angular.module('np.auth')
         .controller('ExternalRegisterController', externalRegisterController);
 
-    externalRegisterController.$inject = ['$location', '$scope', '$window', '$stateParams', 'Url', 'Signin', 'Validation', 'Messages'];
+    externalRegisterController.$inject = ['$location', '$scope', '$window', '$stateParams', 'Url', 'Signin', 'Validation', 'Messages', 'Config'];
 
-    function externalRegisterController($location, $scope, $window, $stateParams, Url, Signin, Validation, Messages) {
+    function externalRegisterController($location, $scope, $window, $stateParams, Url, Signin, Validation, Messages, Config) {
         var ctrl = this,
             EAPI_Auth_RegistrationError = 'EAPI_Auth_RegistrationError';
         ctrl.scope = $scope;
@@ -14,9 +14,9 @@
         ctrl.close = close;
         ctrl.userName = '';
         ctrl.userNameValidation = {
-            regEx: new RegExp(('/((^\\B|^\\b)[a-z0-9_\\-]+(\\B$|\\b$))/').slice(1, -1), 'i'),
-            minLength: 2,
-            maxLength: 20
+            regEx: new RegExp(('/{0}/').format(Config.auth.userNameValidationRegEx).slice(1, -1), 'i'),
+            minLength: Config.auth.minUserNameLength,
+            maxLength: Config.auth.maxUserNameLength
         };
 
         activate();

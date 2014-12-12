@@ -2,7 +2,7 @@
     'use strict';
 
     var config = {
-        environment: 'PROD',
+        environment: 'DEV',
         siteBaseUri: 'noir-pixel.com',
         loggingApiUri: 'api.logging.noir-pixel.com/log/add',
         apiUris: {
@@ -14,10 +14,15 @@
             userExists: 'accounts/exists/{userName}'
         },
         strings: {
-            invalidationTimeout: '01:00:00',
+            invalidationTimeout: '00:10:00',
             versionsUri: '/strings/versions',
             localizedUri: '/strings/localized/'
-        }
+        },
+        auth: {
+            userNameValidationRegEx: '((^\\B|^\\b)[a-z0-9_\\-]+(\\B$|\\b$))',
+            minUserNameLength: '2',
+            maxUserNameLength: '20'
+            }
     };
 
     angular.module('np.config')
