@@ -16,9 +16,11 @@ namespace Api
             builder.RegisterType<Logger>()
                    .As<ILogger>()
                    .SingleInstance();
-
-            builder.RegisterType<CustomExceptionLogger>()
+            builder.RegisterType<ApiExceptionLogger>()
                    .As<IExceptionLogger>()
+                   .SingleInstance();
+            builder.RegisterType<ApiExceptionHandler>()
+                   .As<IExceptionHandler>()
                    .SingleInstance();
         }
     }

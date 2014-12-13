@@ -255,12 +255,14 @@
     <Compile Include="App\Errors\Extensions\ModelStateExtensions.cs" />
     <Compile Include="App\Errors\FieldValidationError.cs" />
     <Compile Include="App\Errors\ValidationError.cs" />
+    <Compile Include="App\HttpContextDependencyProvider.cs" />
+    <Compile Include="App\IHttpContextDependencyProvider.cs" />
     <Compile Include="App\MethodExecutionResult.cs" />
     <Compile Include="App\Validation\ValidatorActivator.cs" />
     <Compile Include="App\Validation\ApiResourceBuilder.cs" />
+    <Compile Include="App_Start\ApiExceptionHandler.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\ConfigurationModule.cs" />
-    <Compile Include="App_Start\CustomExceptionLogger.cs" />
+    <Compile Include="App_Start\ApiExceptionLogger.cs" />
     <Compile Include="App_Start\DependencyInjection.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App\Auth\ApplicationUserManager.cs" />

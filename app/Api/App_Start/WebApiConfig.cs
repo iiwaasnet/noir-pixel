@@ -18,7 +18,8 @@ namespace Api
         {
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
-            config.Services.Add(typeof (IExceptionLogger), DependencyInjection.GetContainer().Resolve<IExceptionLogger>());
+            config.Services.Replace(typeof (IExceptionLogger), DependencyInjection.GetContainer().Resolve<IExceptionLogger>());
+            config.Services.Replace(typeof (IExceptionHandler), DependencyInjection.GetContainer().Resolve<IExceptionHandler>());
 
             var formatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
             formatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();

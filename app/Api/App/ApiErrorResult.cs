@@ -16,6 +16,15 @@ namespace Api.App
         private readonly HttpRequestMessage request;
         private readonly HttpStatusCode statusCode;
 
+        internal ApiErrorResult(HttpStatusCode statusCode, T content, IHttpContextDependencyProvider dependencyProvider)
+        {
+            contentNegotiator = dependencyProvider.ContentNegotiator;
+            formatters = dependencyProvider.Formatters;
+            request = dependencyProvider.Request;
+            this.statusCode = statusCode;
+            this.content = content;
+        }
+
         public ApiErrorResult(HttpStatusCode statusCode, T content, ApiController controller)
         {
             this.content = content;
