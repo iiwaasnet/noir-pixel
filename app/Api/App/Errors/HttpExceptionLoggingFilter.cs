@@ -3,24 +3,30 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http.Filters;
 using Antlr.Runtime.Misc;
+using Api.App.Diagnostics.Config;
 using Diagnostics;
+using JsonConfigurationProvider;
 
 namespace Api.App.Errors
 {
     public class HttpExceptionLoggingFilter : ActionFilterAttribute
     {
         private readonly ILogger logger;
+        private readonly LoggingConfiguration config;
 
-        public HttpExceptionLoggingFilter(ILogger logger)
+        public HttpExceptionLoggingFilter(ILogger logger, IConfigProvider configProvider)
         {
             this.logger = logger;
+            config = configProvider.GetConfiguration<DiagnosticsConfiguration>().Logging;
         }
 
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
             base.OnActionExecuted(actionExecutedContext);
 
-            if (actionExecutedContext.Response != null && actionExecutedContext.Response.StatusCode >= HttpStatusCode.BadRequest)
+            if (config.LogAllHttpErrors
+                && actionExecutedContext.Response != null
+                && actionExecutedContext.Response.StatusCode >= HttpStatusCode.BadRequest)
             {
                 foreach (var contentConverter in ContentConverters())
                 {
@@ -28,6 +34,8 @@ namespace Api.App.Errors
                     if (httpError != null)
                     {
                         logger.Error(httpError);
+
+                        return;
                     }
                 }
             }

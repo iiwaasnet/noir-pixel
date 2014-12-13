@@ -19,8 +19,7 @@ namespace Api
         {
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
-            // TODO: Uncomment if every HttpError needs to be logged
-            //config.Filters.Add(DependencyInjection.GetContainer().Resolve<IActionFilter>());
+            config.Filters.Add(DependencyInjection.GetContainer().Resolve<IActionFilter>());
             config.Services.Replace(typeof (IExceptionLogger), DependencyInjection.GetContainer().Resolve<IExceptionLogger>());
             config.Services.Replace(typeof (IExceptionHandler), DependencyInjection.GetContainer().Resolve<IExceptionHandler>());
 

@@ -1,7 +1,4 @@
 ﻿using System.Reflection;
-using System.Web.Http.ExceptionHandling;
-using System.Web.Http.Filters;
-using Api.App.Errors;
 using Autofac;
 using Autofac.Integration.WebApi;
 using Diagnostics;
@@ -17,15 +14,6 @@ namespace Api
 
             builder.RegisterType<Logger>()
                    .As<ILogger>()
-                   .SingleInstance();
-            builder.RegisterType<ApiExceptionLogger>()
-                   .As<IExceptionLogger>()
-                   .SingleInstance();
-            builder.RegisterType<ApiExceptionHandler>()
-                   .As<IExceptionHandler>()
-                   .SingleInstance();
-            builder.RegisterType<HttpExceptionLoggingFilter>()
-                   .As<IActionFilter>()
                    .SingleInstance();
         }
     }
