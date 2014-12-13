@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Results;
+using System.Web.Http.Description;
 using Api.App.Auth.Extensions;
 using Api.App.Auth.ExternalUserInfo;
 using Api.App.Errors;
-using Api.App.Errors.Extensions;
 using Common.Extensions;
 using Diagnostics;
 using Microsoft.AspNet.Identity;
@@ -104,17 +104,6 @@ namespace Api.App.Auth
             }
         }
 
-        private MethodExecutionResult<UriParseResult> ParseRedirectUrl()
-        {
-            var redirectUriResult = Request.GetRedirectUri();
-            if (!redirectUriResult.Parsed)
-            {
-                logger.Error(ApiErrors.Auth.AuthError.AddFormatting(), redirectUriResult.Error);
-                return new MethodExecutionResult<UriParseResult>(ApiError(HttpStatusCode.BadRequest, redirectUriResult.Error));
-            }
-
-            return new MethodExecutionResult<UriParseResult>(redirectUriResult);
-        }
 
         private IHttpActionResult RedirectWithError(string redirectUri, string error)
         {
@@ -127,11 +116,7 @@ namespace Api.App.Auth
         [Route("register-external")]
         public async Task<IHttpActionResult> RegisterExternal(RegisterExternalModel model)
         {
-            var result = CheckModelState();
-            if (!result.Succeeded)
-            {
-                return result.Error;
-            }
+            AssertModelStateValid();
 
             model.UserName = model.UserName.Trim();
             var verifiedAccessToken = await externalAccountsManager.VerfiyAccessToken(model.Provider, model.ExternalAccessToken, model.AccessTokenSecret);
@@ -143,7 +128,7 @@ namespace Api.App.Auth
                                    Message = stringsProvider.GetString(ApiErrors.Auth.InvalidProviderOrAccessToken)
                                };
                 logger.Error(apiError);
-                return ApiError(HttpStatusCode.BadRequest, apiError);
+                ApiException(HttpStatusCode.BadRequest, apiError);
             }
 
             var user = await userManager.FindAsync(new UserLoginInfo(model.Provider, model.UserName));
@@ -159,7 +144,7 @@ namespace Api.App.Auth
                                                            verifiedAccessToken.user_id)
                                };
                 logger.Error(apiError);
-                return ApiError(HttpStatusCode.Conflict, apiError);
+                ApiException(HttpStatusCode.Conflict, apiError);
             }
 
             var externalUserInfo = await externalAccountsManager.GetUserInfo(model.Provider, verifiedAccessToken.user_id, model.ExternalAccessToken, model.AccessTokenSecret);
@@ -170,16 +155,10 @@ namespace Api.App.Auth
                    };
 
             var identityResult = await userManager.CreateAsync(user);
-            if (!identityResult.Succeeded)
-            {
-                return GetIdentityErrorResult(identityResult, user);
-            }
+            AssertIdentityResult(identityResult, user);
 
             identityResult = await userManager.AddLoginAsync(user.Id, new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
-            if (!result.Succeeded)
-            {
-                return GetIdentityErrorResult(identityResult, user);
-            }
+            AssertIdentityResult(identityResult, user);
 
             return Ok(new
                       {
@@ -189,11 +168,6 @@ namespace Api.App.Auth
                       });
         }
 
-        private string CreateUserName(string displayName)
-        {
-            return displayName.ToLower().Replace(' ', '-');
-        }
-
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
         [AllowAnonymous]
@@ -201,11 +175,7 @@ namespace Api.App.Auth
         [Route("local-access-token")]
         public async Task<IHttpActionResult> LocalAccessToken(LocalAccessTokenModel model)
         {
-            var result = CheckModelState();
-            if (!result.Succeeded)
-            {
-                return result.Error;
-            }
+            AssertModelStateValid();
 
             var verifiedAccessToken = await externalAccountsManager.VerfiyAccessToken(model.Provider, model.ExternalAccessToken, model.AccessTokenSecret);
             if (verifiedAccessToken == null)
@@ -216,39 +186,11 @@ namespace Api.App.Auth
                                 Message = stringsProvider.GetString(ApiErrors.Auth.InvalidExternalAccessToken)
                             };
                 logger.Error(error);
-                return ApiError(HttpStatusCode.BadRequest, error);
+                ApiException(HttpStatusCode.BadRequest, error);
             }
 
             var user = await userManager.FindAsync(new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
-
-            var hasRegistered = user != null;
-
-            if (hasRegistered)
-            {
-                GetAuthentication().SignOut(DefaultAuthenticationTypes.ExternalCookie);
-
-                var oAuthIdentity = await user.GenerateUserIdentityAsync(userManager, OAuthDefaults.AuthenticationType);
-                var cookieIdentity = await user.GenerateUserIdentityAsync(userManager, CookieAuthenticationDefaults.AuthenticationType);
-
-                var expiresIn = authOptions.AuthServerOptions.AccessTokenExpireTimeSpan;
-                var properties = CreateAuthenticationProperties(user, expiresIn);
-                GetAuthentication().SignIn(properties, oAuthIdentity, cookieIdentity);
-
-                var ticket = new AuthenticationTicket(oAuthIdentity, properties);
-
-                var accessToken = authOptions.AuthServerOptions.AccessTokenFormat.Protect(ticket);
-
-                var tokenResponse = new JObject(
-                    new JProperty("userName", user.UserName),
-                    new JProperty("access_token", accessToken),
-                    new JProperty("token_type", "bearer"),
-                    new JProperty("expires_in", expiresIn.TotalSeconds.ToString()),
-                    new JProperty(".issued", ticket.Properties.IssuedUtc.ToString()),
-                    new JProperty(".expires", ticket.Properties.ExpiresUtc.ToString())
-                    );
-                return Ok(tokenResponse);
-            }
-            else
+            if (user == null)
             {
                 var error = new ApiError
                             {
@@ -258,32 +200,31 @@ namespace Api.App.Auth
                                                         verifiedAccessToken.user_id)
                             };
                 logger.Error(error);
-                return ApiError(HttpStatusCode.NotFound, error);
-            }
-        }
-
-        private MethodExecutionResult<bool> CheckModelState()
-        {
-            if (!ModelState.IsValid)
-            {
-                var validationError = ModelState.ToValidationError(stringsProvider);
-                logger.Error(validationError);
-                return new MethodExecutionResult<bool>(ApiError(HttpStatusCode.BadRequest, validationError));
+                ApiException(HttpStatusCode.NotFound, error);
             }
 
-            return new MethodExecutionResult<bool>(true);
-        }
+            GetAuthentication().SignOut(DefaultAuthenticationTypes.ExternalCookie);
 
-        private static AuthenticationProperties CreateAuthenticationProperties(ApplicationUser user, TimeSpan expiresIn)
-        {
-            return new AuthenticationProperties(new Dictionary<string, string>
-                                                {
-                                                    {"userName", user.UserName}
-                                                })
-                   {
-                       IssuedUtc = DateTime.UtcNow,
-                       ExpiresUtc = DateTime.UtcNow.Add(expiresIn)
-                   };
+            var oAuthIdentity = await user.GenerateUserIdentityAsync(userManager, OAuthDefaults.AuthenticationType);
+            var cookieIdentity = await user.GenerateUserIdentityAsync(userManager, CookieAuthenticationDefaults.AuthenticationType);
+
+            var expiresIn = authOptions.AuthServerOptions.AccessTokenExpireTimeSpan;
+            var properties = CreateAuthenticationProperties(user, expiresIn);
+            GetAuthentication().SignIn(properties, oAuthIdentity, cookieIdentity);
+
+            var ticket = new AuthenticationTicket(oAuthIdentity, properties);
+
+            var accessToken = authOptions.AuthServerOptions.AccessTokenFormat.Protect(ticket);
+
+            var tokenResponse = new JObject(
+                new JProperty("userName", user.UserName),
+                new JProperty("access_token", accessToken),
+                new JProperty("token_type", "bearer"),
+                new JProperty("expires_in", expiresIn.TotalSeconds.ToString()),
+                new JProperty(".issued", ticket.Properties.IssuedUtc.ToString()),
+                new JProperty(".expires", ticket.Properties.ExpiresUtc.ToString())
+                );
+            return Ok(tokenResponse);
         }
 
         [AllowAnonymous]
@@ -291,6 +232,7 @@ namespace Api.App.Auth
         [HttpGet]
         public async Task<IHttpActionResult> Exists(string userName)
         {
+            //TODO: Finish changing throw new HttpResponseException instead of returning a response
             //TODO: Unhandled exceptions handling with attributes
             if (string.IsNullOrWhiteSpace(userName))
             {

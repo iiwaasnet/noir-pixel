@@ -7,7 +7,9 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Web;
 using System.Web.Http;
+using Api.App.Auth.Extensions;
 using Api.App.Errors;
+using Api.App.Errors.Extensions;
 using Common.Extensions;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
@@ -22,7 +24,7 @@ namespace Api.App.Auth
             return Request.GetOwinContext().Authentication;
         }
 
-        private IHttpActionResult GetIdentityErrorResult(IdentityResult result, ApplicationUser user)
+        private void AssertIdentityResult(IdentityResult result, ApplicationUser user)
         {
             if (ResultFailed(result))
             {
@@ -34,18 +36,21 @@ namespace Api.App.Auth
                                        Message = string.Format(stringsProvider.GetString(ApiErrors.Auth.AuthError).AddFormatting(), "Failed creating IdentityResult")
                                    };
                     logger.Error(apiError);
-                    return ApiError(HttpStatusCode.InternalServerError, apiError);
+                    ApiException(HttpStatusCode.InternalServerError, apiError);
                 }
                 else
                 {
                     var apiError = CreateApiError(result, user);
 
                     logger.Error(apiError);
-                    return ApiError(GetHttpErrorCode(apiError.Code), apiError);
+                    ApiException(GetHttpErrorCode(apiError.Code), apiError);
                 }
             }
+        }
 
-            return Ok();
+        private static bool ResultFailed(IdentityResult result)
+        {
+            return result == null || !result.Succeeded;
         }
 
         private HttpStatusCode GetHttpErrorCode(string code)
@@ -75,16 +80,46 @@ namespace Api.App.Auth
                 if (errorMessage.Contains("is already taken"))
                 {
                     apiError.Code = ApiErrors.Auth.UserAlreadyRegistered;
-                    apiError.PlaceholderValues = new Dictionary<string, object>{{"UserName", user.UserName}};
+                    apiError.PlaceholderValues = new Dictionary<string, object> {{"UserName", user.UserName}};
                 }
             }
 
             return apiError;
         }
 
-        private static bool ResultFailed(IdentityResult result)
+        private void AssertModelStateValid()
         {
-            return result == null || !result.Succeeded;
+            if (!ModelState.IsValid)
+            {
+                var validationError = ModelState.ToValidationError(stringsProvider);
+                logger.Error(validationError);
+
+                ApiException(HttpStatusCode.BadRequest, validationError);
+            }
+        }
+
+        private static AuthenticationProperties CreateAuthenticationProperties(ApplicationUser user, TimeSpan expiresIn)
+        {
+            return new AuthenticationProperties(new Dictionary<string, string>
+                                                {
+                                                    {"userName", user.UserName}
+                                                })
+                   {
+                       IssuedUtc = DateTime.UtcNow,
+                       ExpiresUtc = DateTime.UtcNow.Add(expiresIn)
+                   };
+        }
+
+        private MethodExecutionResult<UriParseResult> ParseRedirectUrl()
+        {
+            var redirectUriResult = Request.GetRedirectUri();
+            if (!redirectUriResult.Parsed)
+            {
+                logger.Error(ApiErrors.Auth.AuthError.AddFormatting(), redirectUriResult.Error);
+                return new MethodExecutionResult<UriParseResult>(ApiError(HttpStatusCode.BadRequest, redirectUriResult.Error));
+            }
+
+            return new MethodExecutionResult<UriParseResult>(redirectUriResult);
         }
 
         private class ExternalLoginData

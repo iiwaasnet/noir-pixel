@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 
 namespace Api.App
@@ -8,6 +9,11 @@ namespace Api.App
         protected ApiErrorResult<T> ApiError<T>(HttpStatusCode statusCode, T content)
         {
             return new ApiErrorResult<T>(statusCode, content, this);
+        }
+
+        protected void ApiException<T>(HttpStatusCode statusCode, T error)
+        {
+            throw new HttpResponseException(Request.CreateResponse(statusCode, error));
         }
     }
 }

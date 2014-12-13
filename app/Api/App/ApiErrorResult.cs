@@ -30,6 +30,7 @@ namespace Api.App
             return Task.FromResult(Execute());
         }
 
+
         private HttpResponseMessage Execute()
         {
             var result = contentNegotiator.Negotiate(typeof (T), request, formatters);
