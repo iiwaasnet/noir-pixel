@@ -232,8 +232,6 @@ namespace Api.App.Auth
         [HttpGet]
         public async Task<IHttpActionResult> Exists(string userName)
         {
-            //TODO: Finish changing throw new HttpResponseException instead of returning a response
-            //TODO: Unhandled exceptions handling with attributes
             if (string.IsNullOrWhiteSpace(userName))
             {
                 return BadRequest();

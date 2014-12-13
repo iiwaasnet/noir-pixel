@@ -2,9 +2,8 @@
 using System.Net;
 using System.Net.Http.Formatting;
 using System.Web.Http.ExceptionHandling;
-using Api.App;
 
-namespace Api
+namespace Api.App.Errors
 {
     public class ApiExceptionHandler : ExceptionHandler
     {

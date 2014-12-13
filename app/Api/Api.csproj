@@ -252,6 +252,7 @@
     <Compile Include="App\Db\DbConfiguration.cs" />
     <Compile Include="App\Db\DbServerConfiguration.cs" />
     <Compile Include="App\Errors\ApiError.cs" />
+    <Compile Include="App\Errors\HttpExceptionLoggingFilter.cs" />
     <Compile Include="App\Errors\Extensions\ModelStateExtensions.cs" />
     <Compile Include="App\Errors\FieldValidationError.cs" />
     <Compile Include="App\Errors\ValidationError.cs" />
@@ -260,9 +261,9 @@
     <Compile Include="App\MethodExecutionResult.cs" />
     <Compile Include="App\Validation\ValidatorActivator.cs" />
     <Compile Include="App\Validation\ApiResourceBuilder.cs" />
-    <Compile Include="App_Start\ApiExceptionHandler.cs" />
+    <Compile Include="App\Errors\ApiExceptionHandler.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\ApiExceptionLogger.cs" />
+    <Compile Include="App\Errors\ApiExceptionLogger.cs" />
     <Compile Include="App_Start\DependencyInjection.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App\Auth\ApplicationUserManager.cs" />

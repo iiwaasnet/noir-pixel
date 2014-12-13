@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
+using System.Web.Http.Filters;
 using System.Web.Http.Validation;
 using Api.App.Validation;
 using Autofac;
@@ -18,6 +19,8 @@ namespace Api
         {
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
+            // TODO: Uncomment if every HttpError needs to be logged
+            //config.Filters.Add(DependencyInjection.GetContainer().Resolve<IActionFilter>());
             config.Services.Replace(typeof (IExceptionLogger), DependencyInjection.GetContainer().Resolve<IExceptionLogger>());
             config.Services.Replace(typeof (IExceptionHandler), DependencyInjection.GetContainer().Resolve<IExceptionHandler>());
 
