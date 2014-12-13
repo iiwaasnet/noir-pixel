@@ -119,6 +119,7 @@ namespace Api.App.Auth
             AssertModelStateValid();
 
             model.UserName = model.UserName.Trim();
+
             var verifiedAccessToken = await externalAccountsManager.VerfiyAccessToken(model.Provider, model.ExternalAccessToken, model.AccessTokenSecret);
             if (verifiedAccessToken == null)
             {
@@ -164,7 +165,8 @@ namespace Api.App.Auth
                       {
                           access_token = model.ExternalAccessToken,
                           access_token_secret = model.AccessTokenSecret,
-                          provider = model.Provider
+                          provider = model.Provider,
+                          user_name = user.UserName
                       });
         }
 

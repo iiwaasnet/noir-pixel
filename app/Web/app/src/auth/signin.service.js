@@ -56,7 +56,9 @@
                 externalAccessToken: response.data.access_token,
                 accessTokenSecret: response.data.access_token_secret,
                 provider: response.data.provider,
-                newRegistration: true
+                newRegistration: {
+                    userName: response.data.user_name
+                }
             });
         }
 
