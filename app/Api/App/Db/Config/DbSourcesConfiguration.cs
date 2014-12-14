@@ -1,8 +1,7 @@
-﻿namespace Api.App.Db
+﻿namespace Api.App.Db.Config
 {
-    public class DbServerConfiguration
+    public class DbSourcesConfiguration
     {
-        public string Server { get; set; }
         public DbConfiguration Identity { get; set; }
         public DbConfiguration Application { get; set; }
     }

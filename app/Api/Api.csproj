@@ -250,8 +250,10 @@
     <Compile Include="App\Auth\ExternalUserInfo\Twitter\TwitterAuthProvider.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\Yahoo\YahooAuthProvider.cs" />
     <Compile Include="App\Configuration\ConfigurationModule.cs" />
-    <Compile Include="App\Db\DbConfiguration.cs" />
-    <Compile Include="App\Db\DbServerConfiguration.cs" />
+    <Compile Include="App\Db\Config\DbConfiguration.cs" />
+    <Compile Include="App\Db\Config\DbSourcesConfiguration.cs" />
+    <Compile Include="App\Db\DbProvider.cs" />
+    <Compile Include="App\Db\IDbProvider.cs" />
     <Compile Include="App\Diagnostics\Config\DiagnosticsConfiguration.cs" />
     <Compile Include="App\Diagnostics\Config\LoggingConfiguration.cs" />
     <Compile Include="App\Errors\ApiError.cs" />
@@ -263,7 +265,10 @@
     <Compile Include="App\HttpContextDependencyProvider.cs" />
     <Compile Include="App\IHttpContextDependencyProvider.cs" />
     <Compile Include="App\MethodExecutionResult.cs" />
+    <Compile Include="App\Users\IUserManager.cs" />
+    <Compile Include="App\Users\UserHome.cs" />
     <Compile Include="App\Users\UsersController.cs" />
+    <Compile Include="App\Users\UsersManager.cs" />
     <Compile Include="App\Validation\ValidatorActivator.cs" />
     <Compile Include="App\Validation\ApiResourceBuilder.cs" />
     <Compile Include="App\Errors\ApiExceptionHandler.cs" />
@@ -403,10 +408,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Api.Core\Api.Core.csproj">
-      <Project>{50a6ff75-22bc-493d-8b93-fca6c0c9af92}</Project>
-      <Name>Api.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{57171eff-d3d2-4abb-ba72-3d561594595b}</Project>
       <Name>Common</Name>
