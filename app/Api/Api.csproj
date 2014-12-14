@@ -263,6 +263,7 @@
     <Compile Include="App\HttpContextDependencyProvider.cs" />
     <Compile Include="App\IHttpContextDependencyProvider.cs" />
     <Compile Include="App\MethodExecutionResult.cs" />
+    <Compile Include="App\Users\UsersController.cs" />
     <Compile Include="App\Validation\ValidatorActivator.cs" />
     <Compile Include="App\Validation\ApiResourceBuilder.cs" />
     <Compile Include="App\Errors\ApiExceptionHandler.cs" />
