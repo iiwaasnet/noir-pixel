@@ -24,9 +24,7 @@ namespace Api.App.Errors
         {
             base.OnActionExecuted(actionExecutedContext);
 
-            if (config.LogAllHttpErrors
-                && actionExecutedContext.Response != null
-                && actionExecutedContext.Response.StatusCode >= HttpStatusCode.BadRequest)
+            if (ShouldLog(actionExecutedContext))
             {
                 foreach (var contentConverter in ContentConverters())
                 {
@@ -41,12 +39,32 @@ namespace Api.App.Errors
             }
         }
 
+        private bool ShouldLog(HttpActionExecutedContext actionExecutedContext)
+        {
+            return actionExecutedContext.Response != null
+                   &&
+                   (config.LogAllHttpErrors && actionExecutedContext.Response.StatusCode >= HttpStatusCode.BadRequest
+                    || actionExecutedContext.Response.StatusCode >= HttpStatusCode.InternalServerError);
+        }
+
         private IEnumerable<Func<HttpResponseMessage, object>> ContentConverters()
         {
-            yield return (response) => response.Content as ObjectContent<ApiError>;
-            yield return (response) => response.Content as ObjectContent<ValidationError>;
-            yield return (response) => response.Content as ObjectContent;
+            yield return (response) => ObjectContentValue<ApiError>(response);
+            yield return (response) => ObjectContentValue<ValidationError>(response);
+            yield return (response) => ObjectContentValue(response);
             yield return (response) => response.ReasonPhrase;
+        }
+
+        private static object ObjectContentValue(HttpResponseMessage response)
+        {
+            var content = response.Content as ObjectContent;
+            return (content != null) ? content.Value : null;
+        }
+
+        private static object ObjectContentValue<T>(HttpResponseMessage response)
+        {
+            var content = response.Content as ObjectContent<T>;
+            return (content != null) ? content.Value : null;
         }
     }
 }

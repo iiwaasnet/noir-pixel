@@ -1,6 +1,6 @@
 ﻿[
     {
-        "dev": { 
+        "prod": { 
             siteUrl: "noir-pixel.com"
         }
     }

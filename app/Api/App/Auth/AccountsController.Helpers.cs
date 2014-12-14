@@ -35,14 +35,12 @@ namespace Api.App.Auth
                                        Code = ApiErrors.Auth.AuthError,
                                        Message = string.Format(stringsProvider.GetString(ApiErrors.Auth.AuthError).AddFormatting(), "Failed creating IdentityResult")
                                    };
-                    logger.Error(apiError);
                     ApiException(HttpStatusCode.InternalServerError, apiError);
                 }
                 else
                 {
                     var apiError = CreateApiError(result, user);
 
-                    logger.Error(apiError);
                     ApiException(GetHttpErrorCode(apiError.Code), apiError);
                 }
             }
@@ -92,7 +90,6 @@ namespace Api.App.Auth
             if (!ModelState.IsValid)
             {
                 var validationError = ModelState.ToValidationError(stringsProvider);
-                logger.Error(validationError);
 
                 ApiException(HttpStatusCode.BadRequest, validationError);
             }

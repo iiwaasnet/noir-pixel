@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Description;
-using Api.App.Auth.Extensions;
 using Api.App.Auth.ExternalUserInfo;
 using Api.App.Errors;
 using Common.Extensions;
@@ -25,7 +22,6 @@ namespace Api.App.Auth
     [RoutePrefix("accounts")]
     public partial class AccountsController : ApiBaseController
     {
-        private const string LocalLoginProvider = "Local";
         private readonly ApplicationUserManager userManager;
         private readonly AuthOptions authOptions;
         private readonly IExternalAccountsManager externalAccountsManager;
@@ -104,7 +100,6 @@ namespace Api.App.Auth
             }
         }
 
-
         private IHttpActionResult RedirectWithError(string redirectUri, string error)
         {
             return Redirect(string.Format("{0}#error={1}", redirectUri, Uri.EscapeDataString(error)));
@@ -128,7 +123,6 @@ namespace Api.App.Auth
                                    Code = ApiErrors.Auth.InvalidProviderOrAccessToken,
                                    Message = stringsProvider.GetString(ApiErrors.Auth.InvalidProviderOrAccessToken)
                                };
-                logger.Error(apiError);
                 ApiException(HttpStatusCode.BadRequest, apiError);
             }
 
@@ -139,12 +133,10 @@ namespace Api.App.Auth
                 var apiError = new ApiError
                                {
                                    Code = ApiErrors.Auth.UserAlreadyRegistered,
-                                   Message = string.Format(stringsProvider.GetString(ApiErrors.Auth.UserAlreadyRegistered)
-                                                                          .AddFormatting(2),
+                                   Message = string.Format(stringsProvider.GetString(ApiErrors.Auth.UserAlreadyRegistered).AddFormatting(2),
                                                            model.Provider,
                                                            verifiedAccessToken.user_id)
                                };
-                logger.Error(apiError);
                 ApiException(HttpStatusCode.Conflict, apiError);
             }
 
@@ -188,7 +180,6 @@ namespace Api.App.Auth
                                 Code = ApiErrors.Auth.InvalidExternalAccessToken,
                                 Message = stringsProvider.GetString(ApiErrors.Auth.InvalidExternalAccessToken)
                             };
-                logger.Error(error);
                 ApiException(HttpStatusCode.BadRequest, error);
             }
 
@@ -202,7 +193,6 @@ namespace Api.App.Auth
                                                         model.Provider,
                                                         verifiedAccessToken.user_id)
                             };
-                logger.Error(error);
                 ApiException(HttpStatusCode.NotFound, error);
             }
 
