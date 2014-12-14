@@ -152,7 +152,8 @@ namespace Api.App.Auth
             user = new ApplicationUser
                    {
                        UserName = model.UserName,
-                       Email = externalUserInfo.Email
+                       Email = externalUserInfo.Email,
+                       Roles = new[] {AppRoles.User}.ToList()
                    };
 
             var identityResult = await userManager.CreateAsync(user);

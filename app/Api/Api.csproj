@@ -220,6 +220,7 @@
   <ItemGroup>
     <Compile Include="App\ApiBaseController.cs" />
     <Compile Include="App\ApiErrorResult.cs" />
+    <Compile Include="App\Auth\AppRoles.cs" />
     <Compile Include="App\Auth\Config\AuthConfiguration.cs" />
     <Compile Include="App\Auth\AuthOptions.cs" />
     <Compile Include="App\Auth\Config\FacebookConfiguration.cs" />
