@@ -45,7 +45,8 @@ namespace Api.App.Auth
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
         [AllowAnonymous]
         [Route("external-login", Name = "ExternalLogin")]
-        public async Task<IHttpActionResult> GetExternalLogin(string provider, string error = null)
+        [HttpGet]
+        public async Task<IHttpActionResult> ExternalLogin(string provider, string error = null)
         {
             var result = ParseRedirectUrl();
             if (!result.Succeeded)
@@ -109,6 +110,7 @@ namespace Api.App.Auth
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [AllowAnonymous]
         [Route("register-external")]
+        [HttpPost]
         public async Task<IHttpActionResult> RegisterExternal(RegisterExternalModel model)
         {
             AssertModelStateValid();
