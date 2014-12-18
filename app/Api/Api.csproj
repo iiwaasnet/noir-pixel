@@ -252,10 +252,13 @@
     <Compile Include="App\Configuration\ConfigurationModule.cs" />
     <Compile Include="App\Db\Config\DbConfiguration.cs" />
     <Compile Include="App\Db\Config\DbSourcesConfiguration.cs" />
+    <Compile Include="App\Db\DbModule.cs" />
     <Compile Include="App\Db\DbProvider.cs" />
+    <Compile Include="App\Db\DbConfigurationProvider.cs" />
     <Compile Include="App\Db\IDbProvider.cs" />
     <Compile Include="App\Diagnostics\Config\DiagnosticsConfiguration.cs" />
     <Compile Include="App\Diagnostics\Config\LoggingConfiguration.cs" />
+    <Compile Include="App\Entities\IEntity.cs" />
     <Compile Include="App\Errors\ApiError.cs" />
     <Compile Include="App\Errors\HttpExceptionLoggingFilter.cs" />
     <Compile Include="App\Errors\Extensions\ModelStateExtensions.cs" />
@@ -265,8 +268,11 @@
     <Compile Include="App\HttpContextDependencyProvider.cs" />
     <Compile Include="App\IHttpContextDependencyProvider.cs" />
     <Compile Include="App\MethodExecutionResult.cs" />
+    <Compile Include="App\Users\Geo.cs" />
     <Compile Include="App\Users\IUserManager.cs" />
+    <Compile Include="App\Users\User.cs" />
     <Compile Include="App\Users\UserHome.cs" />
+    <Compile Include="App\Users\UserImage.cs" />
     <Compile Include="App\Users\UsersController.cs" />
     <Compile Include="App\Users\UsersManager.cs" />
     <Compile Include="App\Validation\ValidatorActivator.cs" />
