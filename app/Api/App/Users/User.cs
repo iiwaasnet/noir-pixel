@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using Api.App.Entities;
+using MongoDB.Bson;
 
 namespace Api.App.Users
 {
     public class User : IEntity
     {
-        public string _id { get; set; }
+        public const string CollectionName = "users";
+
+        public ObjectId _id { get; set; }
         public string UserId { get; set; }
         public string UserName { get; set; }
         public string FirstName { get; set; }

@@ -1,7 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Net;
 using System.Web.Http;
-using Microsoft.AspNet.Identity;
+using Api.App.Db;
+using Api.App.Users.Extensions;
+using MongoDB.Driver;
 
 namespace Api.App.Users
 {
@@ -9,17 +10,24 @@ namespace Api.App.Users
     [RoutePrefix("users")]
     public class UsersController : ApiBaseController
     {
-        [AllowAnonymous]
-        [Route("{userName}")]
-        [HttpGet]
-        public Task<IHttpActionResult> GetUserInfo(string userName)
+        private readonly IUserManager userManager;
+
+        public UsersController(IUserManager userManager)
         {
-            if (User.Identity.IsAuthenticated && User.Identity.GetUserName().Equals(userName, StringComparison.InvariantCultureIgnoreCase))
+            this.userManager = userManager;
+        }
+
+        [AllowAnonymous]
+        [Route("home/{userName}")]
+        [HttpGet]
+        public IHttpActionResult GetUserHome(string userName)
+        {
+            if (User.Identity.Self(userName))
             {
-                var i = 1;
+                var user = userManager.GetUserHome(userName);
             }
 
-            return null;
+            return ApiError(HttpStatusCode.Forbidden);
         }
     }
 }

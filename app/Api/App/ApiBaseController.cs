@@ -11,6 +11,11 @@ namespace Api.App
             return new ApiErrorResult<T>(statusCode, content, this);
         }
 
+        protected IHttpActionResult ApiError(HttpStatusCode statusCode)
+        {
+            return new ErrorResult(statusCode, this);
+        }
+
         protected void ApiException<T>(HttpStatusCode statusCode, T error)
         {
             throw new HttpResponseException(Request.CreateResponse(statusCode, error));

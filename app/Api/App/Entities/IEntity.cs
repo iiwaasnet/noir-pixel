@@ -1,7 +1,9 @@
-﻿namespace Api.App.Entities
+﻿using MongoDB.Bson;
+
+namespace Api.App.Entities
 {
     public interface IEntity
     {
-        string _id { get; set; }        
+        ObjectId _id { get; set; }        
     }
 }

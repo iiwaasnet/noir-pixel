@@ -1,7 +1,9 @@
-﻿namespace Api.App.Users
+﻿using System.Threading.Tasks;
+
+namespace Api.App.Users
 {
     public interface IUserManager
     {
-        UserHome GetUserHome(string userName);
+        Task<UserHome> GetUserHome(string userName);
     }
 }

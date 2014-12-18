@@ -219,6 +219,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\ApiBaseController.cs" />
+    <Compile Include="App\Db\IAppDbProvider.cs" />
+    <Compile Include="App\Db\IIdentityDbProvider.cs" />
+    <Compile Include="App\ErrorResult.cs" />
     <Compile Include="App\ApiErrorResult.cs" />
     <Compile Include="App\Auth\AppRoles.cs" />
     <Compile Include="App\Auth\Config\AuthConfiguration.cs" />
@@ -254,7 +257,6 @@
     <Compile Include="App\Db\Config\DbSourcesConfiguration.cs" />
     <Compile Include="App\Db\DbModule.cs" />
     <Compile Include="App\Db\DbProvider.cs" />
-    <Compile Include="App\Db\DbConfigurationProvider.cs" />
     <Compile Include="App\Db\IDbProvider.cs" />
     <Compile Include="App\Diagnostics\Config\DiagnosticsConfiguration.cs" />
     <Compile Include="App\Diagnostics\Config\LoggingConfiguration.cs" />
@@ -265,9 +267,11 @@
     <Compile Include="App\Errors\FieldValidationError.cs" />
     <Compile Include="App\Errors\ErrorsModule.cs" />
     <Compile Include="App\Errors\ValidationError.cs" />
+    <Compile Include="App\Exceptions\NotFoundException.cs" />
     <Compile Include="App\HttpContextDependencyProvider.cs" />
     <Compile Include="App\IHttpContextDependencyProvider.cs" />
     <Compile Include="App\MethodExecutionResult.cs" />
+    <Compile Include="App\Users\Extensions\IdentityExtensions.cs" />
     <Compile Include="App\Users\Geo.cs" />
     <Compile Include="App\Users\IUserManager.cs" />
     <Compile Include="App\Users\User.cs" />
