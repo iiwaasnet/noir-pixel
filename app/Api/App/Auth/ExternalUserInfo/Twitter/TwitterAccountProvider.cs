@@ -46,7 +46,8 @@ namespace Api.App.Auth.ExternalUserInfo.Twitter
                                             Id = jObj.id_str,
                                             DisplayName = jObj.screen_name,
                                             FullName = jObj.name,
-                                            Image = jObj.profile_image_url
+                                            AvatarImage = jObj.profile_image_url,
+                                            //ThumbnailImage = 
                                         }
                            };
                 }

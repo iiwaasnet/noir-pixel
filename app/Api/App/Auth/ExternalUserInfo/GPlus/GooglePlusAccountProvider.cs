@@ -32,6 +32,8 @@ namespace Api.App.Auth.ExternalUserInfo.GPlus
                 dynamic jObj = JsonConvert.DeserializeObject<JObject>(content);
                 if (string.Equals(userId, jObj.id.ToString(), StringComparison.OrdinalIgnoreCase))
                 {
+                    var imageUrl = (string)jObj.image.url;
+
                     return new ExternalUserInfo
                            {
                                Person = new PersonInfo
@@ -41,7 +43,8 @@ namespace Api.App.Auth.ExternalUserInfo.GPlus
                                             FirstName = jObj.name.givenName,
                                             LastName = jObj.name.familyName,
                                             Gender = jObj.gender,
-                                            Image = jObj.image.url
+                                            AvatarImage = imageUrl.AvatarUrl(200),
+                                            ThumbnailImage = imageUrl.ThumbnailUrl(40)
                                         },
                                Email = GetEmail(jObj.emails)
                            };

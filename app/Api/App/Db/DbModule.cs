@@ -15,10 +15,10 @@ namespace Api.App.Db
                    .Named<DbConfiguration>(Databases.Identity)
                    .SingleInstance();
 
-            builder.Register(c => new DbProvider(c.ResolveNamed<DbConfiguration>(Databases.Identity)))
+            builder.Register(c => (IIdentityDbProvider)new DbProvider(c.ResolveNamed<DbConfiguration>(Databases.Identity)))
                    .As<IIdentityDbProvider>()
                    .SingleInstance();
-            builder.Register(c => new DbProvider(c.ResolveNamed<DbConfiguration>(Databases.Application)))
+            builder.Register(c => (IAppDbProvider)new DbProvider(c.ResolveNamed<DbConfiguration>(Databases.Application)))
                    .As<IAppDbProvider>()
                    .SingleInstance();
         }

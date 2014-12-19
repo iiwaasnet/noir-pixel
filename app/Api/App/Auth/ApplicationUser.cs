@@ -14,5 +14,8 @@ namespace Api.App.Auth
 
             return userIdentity;
         }
+
+        public string AvatarImage { get; set; }
+        public string ThumbnailImage { get; set; }
     }
 }

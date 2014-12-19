@@ -19,8 +19,15 @@ namespace Api.App.Auth.ExternalUserInfo.Facebook
         public async Task<ExternalUserInfo> GetUserInfo(string userId, string accessToken, string _)
         {
             var endPoint = string.Format("https://graph.facebook.com/me?access_token={0}", accessToken);
+            var profileImage = "https://graph.facebook.com/{0}/picture?height={1}&type=normal&width={2}";
             var client = new HttpClient();
             var uri = new Uri(endPoint);
+            //TODO: Move setting to a proper object
+            var avatarWidth = 200;
+            var avatarHeight = avatarWidth;
+            var thumbnailWidth = 40;
+            var thumbnailHeight = thumbnailWidth;
+
             var response = await client.GetAsync(uri);
 
             if (response.IsSuccessStatusCode)
@@ -39,7 +46,8 @@ namespace Api.App.Auth.ExternalUserInfo.Facebook
                                             FirstName = jObj.first_name,
                                             LastName = jObj.last_name,
                                             Gender = jObj.gender,
-                                            Image = string.Format("https://graph.facebook.com/me?access_token={0}", accessToken)
+                                            AvatarImage = string.Format(profileImage, jObj.id, avatarHeight, avatarWidth),
+                                            ThumbnailImage = string.Format(profileImage, jObj.id, thumbnailHeight, thumbnailWidth)
                                         },
                                Email = jObj.email
                            };

@@ -219,6 +219,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\ApiBaseController.cs" />
+    <Compile Include="App\Auth\ExternalUserInfo\GPlus\GoogleProfileImageUrlBuilder.cs" />
     <Compile Include="App\Db\IAppDbProvider.cs" />
     <Compile Include="App\Db\IIdentityDbProvider.cs" />
     <Compile Include="App\ErrorResult.cs" />

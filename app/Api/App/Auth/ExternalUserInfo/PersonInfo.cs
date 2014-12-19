@@ -7,7 +7,8 @@ namespace Api.App.Auth.ExternalUserInfo
         public string LastName { get; set; }
         public string FullName { get; set; }
         public string Gender { get; set; }
-        public string Image { get; set; }
+        public string AvatarImage { get; set; }
+        public string ThumbnailImage { get; set; }
         public string Id { get; set; }
     }
 }

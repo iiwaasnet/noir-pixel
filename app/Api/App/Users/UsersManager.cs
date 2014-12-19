@@ -1,4 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Api.App.Auth;
 using Api.App.Db;
 using Api.App.Exceptions;
@@ -34,7 +37,8 @@ namespace Api.App.Users
                 user = new User
                        {
                            UserName = login.UserName,
-                           UserId = login.Id
+                           UserId = login.Id,
+                           UserImages = CreateDefaultUserImages()
                        };
                 var res = users.Insert(user);
                 CheckResult(res);
@@ -43,13 +47,34 @@ namespace Api.App.Users
             return new UserHome
                    {
                        UserName = user.UserName,
+                       Thumbnail = GetAvatarThumbnail(user)
                    };
+        }
+
+        private IEnumerable<UserImage> CreateDefaultUserImages()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private UserImage GetAvatarThumbnail(User user)
+        {
+            if (user.UserImages != null)
+            {
+                var thumbnail = user.UserImages.FirstOrDefault(i => i.ImageType == UserImageType.Thumbnail);
+                if (thumbnail == null)
+                {
+                    //TODO: Hence images might come from external logins, i.e. Facebook, Google, etc., not all image types could be set
+                    //thumbnail = CreateDefaultUserThumbnail();
+                }
+            }
+            throw new NotImplementedException();
         }
 
         private void CheckResult(WriteConcernResult res)
         {
             if (!res.Ok)
             {
+                //TODO: Create an extension method for logging WriteConcernResult responses
                 var msg = string.Format("Insert failed! Collection: {0}, errorCode: {1}, errorMessage {2}", User.CollectionName, res.Code, res.ErrorMessage);
                 logger.Error(msg);
             }
