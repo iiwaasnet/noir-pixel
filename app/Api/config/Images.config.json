@@ -1,0 +1,32 @@
+﻿[
+    {
+        "prod": {
+            "profileImages": {
+                "avatar": {
+                    "width": "200",
+                    "height": "200"
+                },
+                "thumbnail": {
+                    "width": "48",
+                    "height": "48"
+                }
+            },
+            "photos": {
+                "fullView": {
+                    "maxHeight": "800",
+                    "maxWidth": "800",
+                    "minHeight": "200",
+                    "minWidth": "200"
+                },
+                "preview": {
+                    "width": "300",
+                    "height": "300"
+                },
+                "thumbnail": {
+                    "width": "60",
+                    "height": "60"
+                }
+            }
+        }
+    }
+]

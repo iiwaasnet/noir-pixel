@@ -271,6 +271,14 @@
     <Compile Include="App\Exceptions\NotFoundException.cs" />
     <Compile Include="App\HttpContextDependencyProvider.cs" />
     <Compile Include="App\IHttpContextDependencyProvider.cs" />
+    <Compile Include="App\Images\Config\Dimensions.cs" />
+    <Compile Include="App\Images\Config\ImagesConfiguration.cs" />
+    <Compile Include="App\Images\Config\PhotosConfiguration.cs" />
+    <Compile Include="App\Images\Config\ProfileImagesConfiguration.cs" />
+    <Compile Include="App\Images\Config\SizeConstraints.cs" />
+    <Compile Include="App\Images\ImagesModule.cs" />
+    <Compile Include="App\Images\IProfileImageManager.cs" />
+    <Compile Include="App\Images\ProfileImageManager.cs" />
     <Compile Include="App\MethodExecutionResult.cs" />
     <Compile Include="App\Users\Extensions\IdentityExtensions.cs" />
     <Compile Include="App\Users\Geo.cs" />
@@ -410,6 +418,7 @@
     <Content Include="config\Diagnostics.config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="config\Images.config.json" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

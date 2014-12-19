@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Api.App.Images;
 using Microsoft.Owin.Security.Facebook;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -10,10 +11,12 @@ namespace Api.App.Auth.ExternalUserInfo.Facebook
     public class FacebookAccountProvider : ISocialAccountProvider
     {
         private readonly FacebookAuthenticationOptions authOptions;
+        private readonly IProfileImageManager profileImageManager;
 
-        public FacebookAccountProvider(FacebookAuthenticationOptions authOptions)
+        public FacebookAccountProvider(FacebookAuthenticationOptions authOptions, IProfileImageManager profileImageManager)
         {
             this.authOptions = authOptions;
+            this.profileImageManager = profileImageManager;
         }
 
         public async Task<ExternalUserInfo> GetUserInfo(string userId, string accessToken, string _)
@@ -22,12 +25,6 @@ namespace Api.App.Auth.ExternalUserInfo.Facebook
             var profileImage = "https://graph.facebook.com/{0}/picture?height={1}&type=normal&width={2}";
             var client = new HttpClient();
             var uri = new Uri(endPoint);
-            //TODO: Move setting to a proper object
-            var avatarWidth = 200;
-            var avatarHeight = avatarWidth;
-            var thumbnailWidth = 40;
-            var thumbnailHeight = thumbnailWidth;
-
             var response = await client.GetAsync(uri);
 
             if (response.IsSuccessStatusCode)
@@ -46,8 +43,10 @@ namespace Api.App.Auth.ExternalUserInfo.Facebook
                                             FirstName = jObj.first_name,
                                             LastName = jObj.last_name,
                                             Gender = jObj.gender,
-                                            AvatarImage = string.Format(profileImage, jObj.id, avatarHeight, avatarWidth),
-                                            ThumbnailImage = string.Format(profileImage, jObj.id, thumbnailHeight, thumbnailWidth)
+                                            ThumbnailImage = string.Format(profileImage,
+                                                                           jObj.id,
+                                                                           profileImageManager.ThumbnailSize().Height,
+                                                                           profileImageManager.ThumbnailSize().Width)
                                         },
                                Email = jObj.email
                            };

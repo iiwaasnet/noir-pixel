@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Api.App.Images;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Owin.Security.Providers.GooglePlus;
@@ -12,10 +13,12 @@ namespace Api.App.Auth.ExternalUserInfo.GPlus
     public class GooglePlusAccountProvider : ISocialAccountProvider
     {
         private readonly GooglePlusAuthenticationOptions authOptions;
+        private readonly IProfileImageManager profileImageManager;
 
-        public GooglePlusAccountProvider(GooglePlusAuthenticationOptions authOptions)
+        public GooglePlusAccountProvider(GooglePlusAuthenticationOptions authOptions, IProfileImageManager profileImageManager)
         {
             this.authOptions = authOptions;
+            this.profileImageManager = profileImageManager;
         }
 
         public async Task<ExternalUserInfo> GetUserInfo(string userId, string accessToken, string _)
@@ -32,7 +35,7 @@ namespace Api.App.Auth.ExternalUserInfo.GPlus
                 dynamic jObj = JsonConvert.DeserializeObject<JObject>(content);
                 if (string.Equals(userId, jObj.id.ToString(), StringComparison.OrdinalIgnoreCase))
                 {
-                    var imageUrl = (string)jObj.image.url;
+                    var imageUrl = (string) jObj.image.url;
 
                     return new ExternalUserInfo
                            {
@@ -43,8 +46,7 @@ namespace Api.App.Auth.ExternalUserInfo.GPlus
                                             FirstName = jObj.name.givenName,
                                             LastName = jObj.name.familyName,
                                             Gender = jObj.gender,
-                                            AvatarImage = imageUrl.AvatarUrl(200),
-                                            ThumbnailImage = imageUrl.ThumbnailUrl(40)
+                                            ThumbnailImage = imageUrl.ThumbnailUrl(profileImageManager.ThumbnailSize().Width)
                                         },
                                Email = GetEmail(jObj.emails)
                            };

@@ -147,7 +147,6 @@ namespace Api.App.Auth
                    {
                        UserName = model.UserName,
                        Email = externalUserInfo.Email,
-                       AvatarImage = externalUserInfo.Person.AvatarImage,
                        ThumbnailImage = externalUserInfo.Person.ThumbnailImage,
                        Roles = new[] {AppRoles.User}.ToList()
                    };
