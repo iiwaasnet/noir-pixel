@@ -15,7 +15,6 @@
         service.events = Events;
 
         function publishEvent(event, data) {
-            debugger;
             var eventHandlers = handlers[event] || {};
             Object.keys(eventHandlers).forEach(function(handler) {
                 eventHandlers[handler](data);

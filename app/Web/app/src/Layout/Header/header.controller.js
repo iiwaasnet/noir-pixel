@@ -61,7 +61,6 @@
         function activate() {            
             buildMenus();
 
-            EventsHub.addListener(EventsHub.events.SignedIn, onSignStatuesChanged);
             EventsHub.addListener(EventsHub.events.Auth.SignedIn, onSignStatuesChanged);
             EventsHub.addListener(EventsHub.events.Auth.SignedOut, onSignStatuesChanged);
 
