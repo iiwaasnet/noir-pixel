@@ -60,7 +60,7 @@
         function checkStringVersions() {
             var deferred = $q.defer();
 
-            $http({ method: "GET", url: Config.strings.versionsUri, cache: false })
+            $http({ method: "GET", url: Config.Strings.VersionsUri, cache: false })
                 .success(function(data) { deferred.resolve(data.versions); })
                 .error(deferred.reject);
 
@@ -131,13 +131,13 @@
         }
        
         function scheduleCacheInvalidation() {
-            var interval = Moment.duration(Config.strings.invalidationTimeout).asMilliseconds();
+            var interval = Moment.duration(Config.Strings.InvalidationTimeout).asMilliseconds();
             $interval(initStringResources, interval, 0, false);
         }
 
 
         function loadStringsForLocale(locale) {
-            return $http({ method: "GET", url: Config.strings.localizedUri + locale, cache: false })
+            return $http({ method: "GET", url: Config.Strings.LocalizedUri + locale, cache: false })
                 .success(function(data) {
                     saveStringsToStorage(locale, data);
                 })

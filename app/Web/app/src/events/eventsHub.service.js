@@ -15,6 +15,7 @@
         service.events = Events;
 
         function publishEvent(event, data) {
+            debugger;
             var eventHandlers = handlers[event] || {};
             Object.keys(eventHandlers).forEach(function(handler) {
                 eventHandlers[handler](data);
@@ -22,6 +23,9 @@
         }
 
         function addListener(event, delegate) {
+            if (event === undefined) {
+                throw 'event is undefined!';
+            }
             var eventHandlers = handlers[event] || [];
             
             if (!~eventHandlers.indexOf(delegate)) {

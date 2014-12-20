@@ -62,11 +62,12 @@
             buildMenus();
 
             EventsHub.addListener(EventsHub.events.SignedIn, onSignStatuesChanged);
-            EventsHub.addListener(EventsHub.events.SignedOut, onSignStatuesChanged);
+            EventsHub.addListener(EventsHub.events.Auth.SignedIn, onSignStatuesChanged);
+            EventsHub.addListener(EventsHub.events.Auth.SignedOut, onSignStatuesChanged);
 
             $scope.$on('$destroy', function() {
-                EventsHub.removeListener(EventsHub.events.SignedIn, onSignStatuesChanged);
-                EventsHub.removeListener(EventsHub.events.SignedOut, onSignStatuesChanged);
+                EventsHub.removeListener(EventsHub.events.Auth.SignedIn, onSignStatuesChanged);
+                EventsHub.removeListener(EventsHub.events.Auth.SignedOut, onSignStatuesChanged);
             });
         }
     }

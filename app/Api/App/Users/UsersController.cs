@@ -1,8 +1,7 @@
 ﻿using System.Net;
 using System.Web.Http;
-using Api.App.Db;
+using Api.App.Exceptions;
 using Api.App.Users.Extensions;
-using MongoDB.Driver;
 
 namespace Api.App.Users
 {
@@ -22,12 +21,21 @@ namespace Api.App.Users
         [HttpGet]
         public IHttpActionResult GetUserHome(string userName)
         {
-            if (User.Identity.Self(userName))
+            try
             {
-                var user = userManager.GetUserHome(userName);
-            }
+                if (User.Identity.Self(userName))
+                {
+                    var user = userManager.GetUserHome(userName);
 
-            return ApiError(HttpStatusCode.Forbidden);
+                    return Ok(user);
+                }
+
+                return ApiError(HttpStatusCode.Forbidden);
+            }
+            catch (NotFoundException)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
         }
     }
 }

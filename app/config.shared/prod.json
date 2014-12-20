@@ -1,5 +1,5 @@
 {
-    "userNameValidationRegEx": "((^\\\\B|^\\\\b)[a-z0-9_\\\\-]+(\\\\B$|\\\\b$))",
-    "minUserNameLength": "2",
-    "maxUserNameLength": "20"
+    "Auth.UserNameValidationRegEx": "((^\\\\B|^\\\\b)[a-z0-9_\\\\-]+(\\\\B$|\\\\b$))",
+    "Auth.MinUserNameLength": "2",
+    "Auth.MaxUserNameLength": "20"
 }

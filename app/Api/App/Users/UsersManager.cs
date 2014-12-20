@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Api.App.Auth;
 using Api.App.Db;
+using Api.App.Db.Extensions;
 using Api.App.Exceptions;
+using Api.App.Images;
 using Diagnostics;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
@@ -16,11 +17,13 @@ namespace Api.App.Users
         private readonly MongoDatabase db;
         private readonly ApplicationUserManager userManager;
         private readonly ILogger logger;
+        private readonly IProfileImageManager profileImageManager;
 
-        public UsersManager(IAppDbProvider appDbProvider, ApplicationUserManager userManager, ILogger logger)
+        public UsersManager(IAppDbProvider appDbProvider, ApplicationUserManager userManager, IProfileImageManager profileImageManager, ILogger logger)
         {
             db = appDbProvider.GetDatabase();
             this.userManager = userManager;
+            this.profileImageManager = profileImageManager;
             this.logger = logger;
         }
 
@@ -38,10 +41,9 @@ namespace Api.App.Users
                        {
                            UserName = login.UserName,
                            UserId = login.Id,
-                           UserImages = CreateDefaultUserImages()
+                           UserImages = CreateProfileImages(login)
                        };
-                var res = users.Insert(user);
-                CheckResult(res);
+                users.Insert(user).LogCommandResult(logger);
             }
 
             return new UserHome
@@ -51,33 +53,55 @@ namespace Api.App.Users
                    };
         }
 
-        private IEnumerable<UserImage> CreateDefaultUserImages()
+        private IEnumerable<UserImage> CreateProfileImages(ApplicationUser login)
         {
-            throw new System.NotImplementedException();
+            if (!string.IsNullOrWhiteSpace(login.ThumbnailImage))
+            {
+                yield return new UserImage
+                             {
+                                 ImageType = UserImageType.Thumbnail,
+                                 Url = login.ThumbnailImage,
+                                 UserDefined = true
+                             };
+            }
+            else
+            {
+                yield return new UserImage
+                             {
+                                 ImageType = UserImageType.Thumbnail,
+                                 Url = profileImageManager.DefaultThumbnailUri().AbsoluteUri,
+                                 UserDefined = false
+                             };
+            }
+            yield return new UserImage
+                         {
+                             ImageType = UserImageType.Avatar,
+                             Url = profileImageManager.DefaultAvatarUri().AbsoluteUri,
+                             UserDefined = false
+                         };
         }
 
         private UserImage GetAvatarThumbnail(User user)
         {
-            if (user.UserImages != null)
-            {
-                var thumbnail = user.UserImages.FirstOrDefault(i => i.ImageType == UserImageType.Thumbnail);
-                if (thumbnail == null)
-                {
-                    //TODO: Hence images might come from external logins, i.e. Facebook, Google, etc., not all image types could be set
-                    //thumbnail = CreateDefaultUserThumbnail();
-                }
-            }
-            throw new NotImplementedException();
-        }
+            var userImages = (user.UserImages != null)
+                                 ? user.UserImages.ToList()
+                                 : new List<UserImage>();
 
-        private void CheckResult(WriteConcernResult res)
-        {
-            if (!res.Ok)
+            var thumbnail = userImages.FirstOrDefault(i => i.ImageType == UserImageType.Thumbnail);
+            if (thumbnail == null)
             {
-                //TODO: Create an extension method for logging WriteConcernResult responses
-                var msg = string.Format("Insert failed! Collection: {0}, errorCode: {1}, errorMessage {2}", User.CollectionName, res.Code, res.ErrorMessage);
-                logger.Error(msg);
+                thumbnail = new UserImage
+                            {
+                                ImageType = UserImageType.Thumbnail,
+                                Url = profileImageManager.DefaultThumbnailUri().AbsoluteUri,
+                                UserDefined = false
+                            };
+                userImages.Add(thumbnail);
+                user.UserImages = userImages;
+                db.GetCollection<User>(User.CollectionName).Save(user).LogCommandResult(logger);
             }
+
+            return thumbnail;
         }
 
         private void AssertUserIsRegistered(ApplicationUser login)

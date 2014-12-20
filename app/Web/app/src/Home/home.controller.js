@@ -13,7 +13,7 @@
         ctrl.userInfo = userInfo;
 
         function userInfo() {
-            $http.get(Url.build(Config.apiUris.base, 'account/user-info'))
+            $http.get(Url.build(Config.ApiUris.Base, 'account/user-info'))
             .then(userInfoSuccess, userInfoError);
         }
 

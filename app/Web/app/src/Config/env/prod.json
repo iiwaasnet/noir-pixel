@@ -1,15 +1,15 @@
 ﻿{
-    "siteBaseUri": "noir-pixel.com",
-    "loggingApiUri": "api.logging.noir-pixel.com/log/add",
+    "SiteBaseUri": "noir-pixel.com",
+    "LoggingApiUri": "api.logging.noir-pixel.com/log/add",
+
+    "ApiUris.Base": "api.noir-pixel.com",
+    "ApiUris.Accounts.Signin": "token",
+    "ApiUris.Accounts.ExternalLogins": "/accounts/external-logins?returnUrl={0}",
+    "ApiUris.Accounts.LocalAccessToken": "accounts/local-access-token",
+    "ApiUris.Accounts.RegisterExternal": "accounts/register-external",
+    "ApiUris.Accounts.UserExists": "accounts/exists/{userName}",
     
-    "apiUris.base": "api.noir-pixel.com",
-    "apiUris.signin": "token",
-    "apiUris.externalLogins": "/accounts/external-logins?returnUrl={0}",
-    "apiUris.localAccessToken": "accounts/local-access-token",
-    "apiUris.registerExternal": "accounts/register-external",
-    "apiUris.userExists": "accounts/exists/{userName}",
-    
-    "strings.invalidationTimeout": "01:00:00",
-    "strings.versionsUri": "/strings/versions",
-    "strings.localizedUri": "/strings/localized/"
+    "Strings.InvalidationTimeout": "01:00:00",
+    "Strings.VersionsUri": "/strings/versions",
+    "Strings.LocalizedUri": "/strings/localized/"
 }

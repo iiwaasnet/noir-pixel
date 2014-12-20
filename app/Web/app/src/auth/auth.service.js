@@ -34,8 +34,8 @@
 
         function getLoginsFromServer() {
             var externalSignIn = $state.get('externalSignIn').url.split('?')[0],
-                redirectUrl = Url.build(Config.siteBaseUri, externalSignIn);
-            var url = Url.build(Config.apiUris.base, Config.apiUris.externalLogins.format(encodeURIComponent(redirectUrl)));
+                redirectUrl = Url.build(Config.SiteBaseUri, externalSignIn);
+            var url = Url.build(Config.ApiUris.Base, Config.ApiUris.Accounts.ExternalLogins.format(encodeURIComponent(redirectUrl)));
 
             var deferred = $q.defer();
             $http.get(url).then(
@@ -52,7 +52,7 @@
             angular.forEach(response.data, function(login) {
                 availableLogins.push({
                     provider: login.name,
-                    url: Url.build(Config.apiUris.base, login.url)
+                    url: Url.build(Config.ApiUris.Base, login.url)
                 });
             });
 
@@ -64,7 +64,7 @@
         }
 
         function getLocalToken(externalLogin) {
-            var url = Url.build(Config.apiUris.base, Config.apiUris.localAccessToken),
+            var url = Url.build(Config.ApiUris.Base, Config.ApiUris.Accounts.LocalAccessToken),
                 deferred = $q.defer();
 
             $http.post(url,
@@ -90,7 +90,7 @@
         }
 
         function registerExternal(externalLogin, userName) {
-            var url = Url.build(Config.apiUris.base, Config.apiUris.registerExternal);
+            var url = Url.build(Config.ApiUris.Base, Config.ApiUris.Accounts.RegisterExternal);
 
             return $http.post(url,
             {
@@ -115,7 +115,7 @@
         }
 
         function userExists(userName) {
-            var url = Url.build(Config.apiUris.base, Config.apiUris.userExists).formatNamed({userName: userName});
+            var url = Url.build(Config.ApiUris.Base, Config.ApiUris.Accounts.UserExists).formatNamed({ userName: userName });
 
             return $http.get(url);
         }

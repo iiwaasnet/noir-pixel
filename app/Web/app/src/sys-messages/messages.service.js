@@ -14,6 +14,8 @@
         srv.message = message;
 
         function error(err, placeholders, fallbackErrCode) {
+            //TODO: fix flickering
+            //May be, if the dialog is already opened, just replace the message
             closeCurrent();
             currentDialog = ngDialog.open({
                 template: 'app/src/sys-messages/message.html',

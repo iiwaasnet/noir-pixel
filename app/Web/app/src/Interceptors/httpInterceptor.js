@@ -2,8 +2,8 @@
     'use strict';
 
     var httpProviderConfig = {
-        interceptStatuses: [500],
-        maxDataLength: 200
+        InterceptStatuses: [500],
+        MaxDataLength: 200
     };
 
     angular.module('np')
@@ -40,7 +40,7 @@
         }
 
         function responseError(resp) {
-            if (resp && ~HttpProviderConfig.interceptStatuses.indexOf(resp.status)) {
+            if (resp && ~HttpProviderConfig.InterceptStatuses.indexOf(resp.status)) {
                 ApplicationLogging.error(createError(resp));
             }
 
@@ -62,7 +62,7 @@
                 return 'method: ' + error.method.toUpperCase()
                     + ' url: ' + error.url
                     + ' status: ' + error.status
-                    + ' data: ' + error.message.substring(0, HttpProviderConfig.maxDataLength);
+                    + ' data: ' + error.message.substring(0, HttpProviderConfig.MaxDataLength);
             }
         }
     }

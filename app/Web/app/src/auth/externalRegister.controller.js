@@ -14,9 +14,9 @@
         ctrl.close = close;
         ctrl.userName = '';
         ctrl.userNameValidation = {
-            regEx: new RegExp(('/{0}/').format(Config.auth.userNameValidationRegEx).slice(1, -1), 'i'),
-            minLength: Config.auth.minUserNameLength,
-            maxLength: Config.auth.maxUserNameLength
+            regEx: new RegExp(('/{0}/').format(Config.Auth.UserNameValidationRegEx).slice(1, -1), 'i'),
+            minLength: Config.Auth.MinUserNameLength,
+            maxLength: Config.Auth.MaxUserNameLength
         };
 
         activate();

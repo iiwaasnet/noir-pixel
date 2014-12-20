@@ -2,26 +2,28 @@
     'use strict';
 
     var config = {
-        environment: '@@environment',
-        siteBaseUri: '@@siteBaseUri',
-        loggingApiUri: '@@loggingApiUri',
-        apiUris: {
-            base: '@@apiUris.base',
-            signin: '@@apiUris.signin',
-            externalLogins: '@@apiUris.externalLogins',
-            localAccessToken: '@@apiUris.localAccessToken',
-            registerExternal: '@@apiUris.registerExternal',
-            userExists: '@@apiUris.userExists'
+        Environment: '@@Environment',
+        SiteBaseUri: '@@SiteBaseUri',
+        LoggingApiUri: '@@LoggingApiUri',
+        ApiUris: {
+            Base: '@@ApiUris.Base',
+            Accounts: {
+                Signin: '@@ApiUris.Accounts.Signin',
+                ExternalLogins: '@@ApiUris.Accounts.ExternalLogins',
+                LocalAccessToken: '@@ApiUris.Accounts.LocalAccessToken',
+                RegisterExternal: '@@ApiUris.Accounts.RegisterExternal',
+                UserExists: '@@ApiUris.Accounts.UserExists'
+            }
         },
-        strings: {
-            invalidationTimeout: '@@strings.invalidationTimeout',
-            versionsUri: '@@strings.versionsUri',
-            localizedUri: '@@strings.localizedUri'
+        Strings: {
+            InvalidationTimeout: '@@Strings.InvalidationTimeout',
+            VersionsUri: '@@Strings.VersionsUri',
+            LocalizedUri: '@@Strings.LocalizedUri'
         },
-        auth: {
-            userNameValidationRegEx: '@@userNameValidationRegEx',
-            minUserNameLength: '@@minUserNameLength',
-            maxUserNameLength: '@@maxUserNameLength'
+        Auth: {
+            UserNameValidationRegEx: '@@Auth.UserNameValidationRegEx',
+            MinUserNameLength: '@@Auth.MinUserNameLength',
+            MaxUserNameLength: '@@Auth.MaxUserNameLength'
             }
     };
 

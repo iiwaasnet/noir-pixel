@@ -26,12 +26,12 @@ namespace Api.App.Images
 
         public Uri DefaultAvatarUri()
         {
-            throw new NotImplementedException();
+            return new Uri("http://default-avatar");
         }
 
         public Uri DefaultThumbnailUri()
         {
-            throw new NotImplementedException();
+            return new Uri("http://default-thunbnail");
         }
     }
 }

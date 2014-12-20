@@ -4,9 +4,9 @@
     angular.module('np.auth')
         .controller('SignInController', signInController);
 
-    signInController.$inject = ['$stateParams', '$window', '$scope', '$state', 'Storage', 'Messages', 'Signin', 'loginOptions'];
+    signInController.$inject = ['$stateParams', '$window', '$scope', '$state', 'Storage', 'Messages', 'Signin', 'EventsHub', 'loginOptions'];
 
-    function signInController($stateParams, $window, $scope, $state, Storage, Messages, Signin, loginOptions) {
+    function signInController($stateParams, $window, $scope, $state, Storage, Messages, Signin, EventsHub, loginOptions) {
         var ctrl = this,
             redirectTo = $stateParams.redirectTo || '',
             signInState = 'signIn',
@@ -29,9 +29,10 @@
         function finalizeLogin(result) {
             try {
                 if (result.succeeded) {
+                    EventsHub.publishEvent(EventsHub.events.Auth.SignedIn, result.login);
                     Signin.close();
-                    if (result.newRegistration) {
-                        Messages.message({ main: { message: 'Welcome, {0}!'.format(result.newRegistration.userName) } });
+                    if (result.login.newRegitration) {
+                        Messages.message({ main: { message: 'Welcome, {0}!'.format(result.login.userName) } });
                     }
                     //TODO: Refresh current view?
                     // registerExternal.controller has a close method, which means, user didn't register

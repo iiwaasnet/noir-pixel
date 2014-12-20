@@ -25,9 +25,9 @@
                 "consumerSecret": "b03bb9da5d8243e8b953a20336087a39ed963969"
             },
             "userValidation": {
-                "nameValidationRegEx": "@@userNameValidationRegEx",
-                "minUserNameLength": "@@minUserNameLength",
-                "maxUserNameLength": "@@maxUserNameLength"
+                "nameValidationRegEx": "@@Auth.UserNameValidationRegEx",
+                "minUserNameLength": "@@Auth.MinUserNameLength",
+                "maxUserNameLength": "@@Auth.MaxUserNameLength"
             }
         }
     }

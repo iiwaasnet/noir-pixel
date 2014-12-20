@@ -2,26 +2,28 @@
     'use strict';
 
     var config = {
-        environment: 'DEV',
-        siteBaseUri: 'noir-pixel.com',
-        loggingApiUri: 'api.logging.noir-pixel.com/log/add',
-        apiUris: {
-            base: 'api.noir-pixel.com',
-            signin: 'token',
-            externalLogins: '/accounts/external-logins?returnUrl={0}',
-            localAccessToken: 'accounts/local-access-token',
-            registerExternal: 'accounts/register-external',
-            userExists: 'accounts/exists/{userName}'
+        Environment: 'DEV',
+        SiteBaseUri: 'noir-pixel.com',
+        LoggingApiUri: 'api.logging.noir-pixel.com/log/add',
+        ApiUris: {
+            Base: 'api.noir-pixel.com',
+            Accounts: {
+                Signin: 'token',
+                ExternalLogins: '/accounts/external-logins?returnUrl={0}',
+                LocalAccessToken: 'accounts/local-access-token',
+                RegisterExternal: 'accounts/register-external',
+                UserExists: 'accounts/exists/{userName}'
+            }
         },
-        strings: {
-            invalidationTimeout: '00:10:00',
-            versionsUri: '/strings/versions',
-            localizedUri: '/strings/localized/'
+        Strings: {
+            InvalidationTimeout: '00:10:00',
+            VersionsUri: '/strings/versions',
+            LocalizedUri: '/strings/localized/'
         },
-        auth: {
-            userNameValidationRegEx: '((^\\B|^\\b)[a-z0-9_\\-]+(\\B$|\\b$))',
-            minUserNameLength: '2',
-            maxUserNameLength: '20'
+        Auth: {
+            UserNameValidationRegEx: '((^\\B|^\\b)[a-z0-9_\\-]+(\\B$|\\b$))',
+            MinUserNameLength: '2',
+            MaxUserNameLength: '20'
             }
     };
 
