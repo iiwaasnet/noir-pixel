@@ -4,9 +4,9 @@
     angular.module('np.messages')
         .service('Messages', messagesService);
 
-    messagesService.$inject = ['ngDialog', 'Strings'];
+    messagesService.$inject = ['$q', 'ngDialog', 'Strings'];
 
-    function messagesService(ngDialog, Strings) {
+    function messagesService($q, ngDialog, Strings) {
         var srv = this,
             EAPI_Unknown = 'EAPI_Unknown',
             currentDialog;
@@ -14,30 +14,33 @@
         srv.message = message;
 
         function error(err, placeholders, fallbackErrCode) {
-            //TODO: fix flickering
-            //May be, if the dialog is already opened, just replace the message
-            closeCurrent();
-            currentDialog = ngDialog.open({
-                template: 'app/src/sys-messages/message.html',
-                cache: true,
-                controller: 'MessageController as ctrl',
-                className: 'dialog-theme-messages error',
-                showClose: true,
-                locals: {
-                    message: convertToMessage(err, placeholders, fallbackErrCode)
-                }
+            closeCurrent().then(function (data) {
+                openDialog(err, placeholders, fallbackErrCode);
             });
         }
 
         function message(msg, placeholders, fallbackMsgCode) {
             currentDialog = ngDialog.open({
-                template: 'app/src/sys-messages/message.html',
+                template: 'app/src/messages/message.html',
                 cache: true,
                 controller: 'MessageController as ctrl',
                 className: 'dialog-theme-messages info',
                 showClose: true,
                 locals: {
                     message: convertToMessage(msg, placeholders, fallbackMsgCode)
+                }
+            });
+        }
+
+        function openDialog(err, placeholders, fallbackErrCode) {
+            currentDialog = ngDialog.open({
+                template: 'app/src/messages/message.html',
+                cache: true,
+                controller: 'MessageController as ctrl',
+                className: 'dialog-theme-messages error',
+                showClose: true,
+                locals: {
+                    message: convertToMessage(err, placeholders, fallbackErrCode)
                 }
             });
         }
@@ -61,9 +64,13 @@
         }
 
         function closeCurrent() {
-            if(currentDialog) {
+            if (currentDialog) {                
                 currentDialog.close();
+                return currentDialog.closePromise;
             }
+            var deferred = $q.defer();
+            deferred.resolve();
+            return deferred.promise;
         }
     }
 })();

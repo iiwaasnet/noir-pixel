@@ -414,10 +414,10 @@
     <Content Include="app\src\progress\progress.service.js" />
     <Content Include="app\src\storage\storage.module.js" />
     <Content Include="app\src\storage\storage.service.js" />
-    <Content Include="app\src\sys-messages\message.controller.js" />
-    <Content Include="app\src\sys-messages\message.html" />
-    <Content Include="app\src\sys-messages\messages.service.js" />
-    <Content Include="app\src\sys-messages\messages.module.js" />
+    <Content Include="app\src\messages\message.controller.js" />
+    <Content Include="app\src\messages\message.html" />
+    <Content Include="app\src\messages\messages.service.js" />
+    <Content Include="app\src\messages\messages.module.js" />
     <Content Include="app\src\utils\moment.factory.js" />
     <Content Include="app\src\utils\string.format.js" />
     <Content Include="app\src\utils\url.service.js" />

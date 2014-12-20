@@ -72,7 +72,7 @@ namespace Web
                             .Include(EventsAssets().ToArray())
                             .Include(VanillaJs().ToArray())
                             .Include(Progress().ToArray())
-                            .Include(SysMessages().ToArray())
+                            .Include(Messages().ToArray())
                             .Include(Directives().ToArray())
                             .Include(Constants().ToArray())
                             .Include(Validation().ToArray())
@@ -97,11 +97,11 @@ namespace Web
             yield return "~/app/src/directives/directives.module.js";
         }
 
-        private static IEnumerable<string> SysMessages()
+        private static IEnumerable<string> Messages()
         {
-            yield return "~/app/src/sys-messages/messages.module.js";
-            yield return "~/app/src/sys-messages/messages.service.js";
-            yield return "~/app/src/sys-messages/message.controller.js";
+            yield return "~/app/src/messages/messages.module.js";
+            yield return "~/app/src/messages/messages.service.js";
+            yield return "~/app/src/messages/message.controller.js";
         }
 
         private static IEnumerable<string> Progress()
