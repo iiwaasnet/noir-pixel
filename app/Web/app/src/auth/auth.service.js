@@ -4,10 +4,11 @@
     angular.module('np.auth')
         .service('Auth', authService);
 
-    authService.$inject = ['$http', '$q', '$state', 'Storage', 'Config', 'Url', 'TokenStorage', 'EventsHub'];
+    authService.$inject = ['$http', '$q', '$state', 'Config', 'Url', 'Storage', 'TokenStorage', 'EventsHub'];
 
-    function authService($http, $q, $state, Storage, Config, Url, TokenStorage, EventsHub) {
+    function authService($http, $q, $state, Config, Url, Storage, TokenStorage, EventsHub) {
         var service = this,
+            loginDataStorageKey = 'loginData',
             signInState = 'signIn',
             loginRedirectStorageKey = 'loginRedirectState',
             availableLogins = [];
@@ -16,7 +17,22 @@
         service.registerExternal = registerExternal;
         service.getLocalToken = getLocalToken;
         service.getAvailableLogins = getAvailableLogins;
+        service.saveLoginData = saveLoginData;
+        service.getLoginData = getLoginData;
         service.userExists = userExists;
+
+        function getLoginData() {
+            if (service.authenticated()) {
+                return Storage.get(loginDataStorageKey);
+            }
+            return undefined;
+        }
+
+        function saveLoginData(loginData) {
+            var saved = Storage.get(loginDataStorageKey);
+            saved = angular.extend(saved, loginData);
+            Storage.set(loginDataStorageKey, saved);
+        }
 
         function authenticated() {
             return !!TokenStorage.getToken();
@@ -82,6 +98,7 @@
 
         function getLocalTokenSuccess(response, deferred) {
             TokenStorage.setToken(response.access_token);
+            Storage.set(loginDataStorageKey, {userName: response.userName});
             deferred.resolve(response);
         }
 
@@ -102,18 +119,6 @@
             { headers: { 'Authorization': 'Bearer ' + externalLogin.externalAccessToken } });
         }
 
-        function signInSuccess(response, deferred) {
-            TokenStorage.setToken(response.access_token);
-            EventsHub.publishEvent(EventsHub.events.SignedIn);
-
-            deferred.resolve(response);
-        }
-
-        function signInError(err, status, deferred) {
-            TokenStorage.deleteToken();
-            deferred.reject(err);
-        }
-
         function userExists(userName) {
             var url = Url.build(Config.ApiUris.Base, Config.ApiUris.Accounts.UserExists).formatNamed({ userName: userName });
 
@@ -122,7 +127,8 @@
 
         function signOut() {
             TokenStorage.deleteToken();
-            EventsHub.publishEvent(EventsHub.events.SignedOut);
+            Storage.remove(loginDataStorageKey);
+            EventsHub.publishEvent(EventsHub.events.Auth.SignedOut);
         }
 
         //function saveLoginRedirectState(redirectState) {

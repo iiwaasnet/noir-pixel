@@ -4,9 +4,9 @@
     angular.module('np.events')
         .service('EventsHub', eventsHubService);
 
-    eventsHubService.$inject = ['Events'];
+    eventsHubService.$inject = ['Events', 'ApplicationLogging'];
 
-    function eventsHubService(Events) {
+    function eventsHubService(Events, ApplicationLogging) {
         var service = this,
             handlers = {};
         service.addListener = addListener;
@@ -16,8 +16,12 @@
 
         function publishEvent(event, data) {
             var eventHandlers = handlers[event] || {};
-            Object.keys(eventHandlers).forEach(function(handler) {
-                eventHandlers[handler](data);
+            Object.keys(eventHandlers).forEach(function (handler) {
+                try {
+                    eventHandlers[handler](data);
+                } catch (e) {
+                    ApplicationLogging.error(e);
+                } 
             });
         }
 

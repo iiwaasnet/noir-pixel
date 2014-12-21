@@ -10,13 +10,17 @@
         var ctrl = this;
         ctrl.mainMenu = [];
         ctrl.signInMenu = {};
-        ctrl.authenticated = Auth.authenticated();
         ctrl.signin = signin;
+        ctrl.signout = signout;
 
         activate();
 
         function signin() {
             Signin.open();
+        }
+
+        function signout() {
+            Auth.signOut();
         }
 
         function getMainMenu() {
@@ -59,25 +63,45 @@
         }
 
         function signedIn(data) {
-            var uri = Url.build(Config.ApiUris.Base, Config.ApiUris.Users.Home.formatNamed({ userName: data.userName }));
+            getHome(data.userName);
+        }
+
+        function signedOut() {
+            ctrl.login.authenticated = Auth.authenticated();
+        }
+
+        function getHome(userName) {
+            var uri = Url.build(Config.ApiUris.Base, Config.ApiUris.Users.Home).formatNamed({ userName: userName });
             $http.get(uri).then(getHomeSuccess);
         }
 
         function getHomeSuccess(response) {
-            debugger;
-            ctrl.profileThumbnail = response.data.thumbnail.url;
-            ctrl.authenticated = Auth.authenticated();
+            ctrl.login.profileThumbnail = response.data.thumbnail.url;
+            ctrl.login.userName = response.data.userName;
+            ctrl.login.authenticated = Auth.authenticated();
+            Auth.saveLoginData({ profileThumbnail: response.data.thumbnail.url });
         }
 
-        function activate() {            
+        function activate() {
+            if (Auth.authenticated()) {
+                var loginData = Auth.getLoginData();
+                if (loginData && loginData.userName) {
+                    getHome(loginData.userName);
+                } else {
+                    Auth.signOut();
+                }
+            }
+            ctrl.login = {
+                authenticated: Auth.authenticated()
+            };
             buildMenus();
 
             EventsHub.addListener(EventsHub.events.Auth.SignedIn, signedIn);
-            EventsHub.addListener(EventsHub.events.Auth.SignedOut, onSignStatuesChanged);
+            EventsHub.addListener(EventsHub.events.Auth.SignedOut, signedOut);
 
             $scope.$on('$destroy', function() {
-                EventsHub.removeListener(EventsHub.events.Auth.SignedIn, onSignStatuesChanged);
-                EventsHub.removeListener(EventsHub.events.Auth.SignedOut, onSignStatuesChanged);
+                EventsHub.removeListener(EventsHub.events.Auth.SignedIn, signedIn);
+                EventsHub.removeListener(EventsHub.events.Auth.SignedOut, signedOut);
             });
         }
     }

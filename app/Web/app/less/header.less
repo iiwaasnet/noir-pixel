@@ -2,7 +2,9 @@
 @import (reference) "sprites32.less";
 @import (reference) "constants.less";
 
-header{
+@profile-thumbnail-border: 2px;
+
+header {
     position: relative;
     font-size: @header-font-size;
     margin: @body-offset-top @body-offset-side 0;
@@ -14,7 +16,8 @@ header{
     display: inline-block;
     padding: 0;
     margin: 0 0 0 2.5em;
-    li{
+
+    li {
         display: inline;
         margin: 0 1.5em 0 0;
     }
@@ -22,22 +25,59 @@ header{
 
 #auth-menu {
     position: absolute;
-    bottom: 0;
     right: 0;
     list-style: none;
     list-style-type: none;
     display: inline-block;
-    padding: 0;
-    margin: 0 0 0 2.5em;
-    li{
-        display: inline;
-        margin: 0;
-        a{
+
+    .signin {
+        color: @link-color-imp;
+        display: block;
+        margin: 1em 0 0;
+    }
+
+    .menu-block {
+        display: table;
+
+        ul {
+            display: table-cell;
+            margin: 0;
+            padding: 0 1.1em 0 0;
+            text-align: right;
+            list-style: none;
+            list-style-type: none;
+        }
+
+        .signout {
             color: @link-color-imp;
+            font-size: @header-font-size - 0.5em;
+        }
+
+        li {
+            display: block;
+            margin: 0.4em 0 0 0;
+        }
+
+        .profile {
+            display: table-cell;
+
+            .resizer {
+                overflow: hidden;
+                width: @profile-thumbnail-size;
+                height: @profile-thumbnail-size;
+                border-radius: (@profile-thumbnail-size + 2 * @profile-thumbnail-border) / 2 + 2;
+                border: solid @profile-thumbnail-border @attention-dark-color;
+            }
+
+            img {
+                vertical-align: middle;
+                width: @profile-thumbnail-size;
+                height: @profile-thumbnail-size;
+            }
         }
     }
 }
 
-.icon-user{
+.icon-user {
     .sprite(@user);
 }

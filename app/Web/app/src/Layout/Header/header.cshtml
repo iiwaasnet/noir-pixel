@@ -5,14 +5,22 @@
             <a ui-sref="{{::menuItem.uri}}" ng-bind="::menuItem.text"></a>
         </li>
     </ul>
-    <ul id="auth-menu">
-        <li>
-            <a ng-click="ctrl.signin()" ng-bind="::ctrl.signInMenu.signIn" ng-if="!ctrl.authenticated"></a>
-            <a ui-sref="signOut" ng-if="ctrl.authenticated">
-                <div class="icon-user">
-                    <img ng-src="{{ctrl.profileThumbnail}}"/>
+    <div id="auth-menu">
+        <a class="signin" ng-click="ctrl.signin()" ng-bind="::ctrl.signInMenu.signIn" ng-if="!ctrl.login.authenticated"></a>
+        <div class="menu-block" ng-if="ctrl.login.authenticated">
+            <ul>
+                <li>
+                    <a ng-bind="ctrl.login.userName"></a>
+                </li>
+                <li>
+                    <a class="signout" ng-click="ctrl.signout()" ng-bind="::ctrl.signInMenu.signOut"></a>
+                </li>
+            </ul>
+            <div class="profile">
+                <div class="resizer">
+                    <a><img ng-src="{{ctrl.login.profileThumbnail}}" alt="{{ctrl.login.userName}}" /></a>
                 </div>
-            </a>
-        </li>
-    </ul>
+            </div>
+        </div>
+    </div>
 </header>
