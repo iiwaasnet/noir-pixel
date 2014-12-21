@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Threading.Tasks;
 using System.Web.Http;
 using Api.App.Exceptions;
 using Api.App.Users.Extensions;
@@ -19,13 +20,13 @@ namespace Api.App.Users
         [AllowAnonymous]
         [Route("home/{userName}")]
         [HttpGet]
-        public IHttpActionResult GetUserHome(string userName)
+        public async Task<IHttpActionResult> GetUserHome(string userName)
         {
             try
             {
                 if (User.Identity.Self(userName))
                 {
-                    var user = userManager.GetUserHome(userName);
+                    var user = await userManager.GetUserHome(userName);
 
                     return Ok(user);
                 }

@@ -223,6 +223,7 @@
     <Compile Include="App\Db\Extensions\CommandResultExtensions.cs" />
     <Compile Include="App\Db\IAppDbProvider.cs" />
     <Compile Include="App\Db\IIdentityDbProvider.cs" />
+    <Compile Include="App\Entities\Entity.cs" />
     <Compile Include="App\ErrorResult.cs" />
     <Compile Include="App\ApiErrorResult.cs" />
     <Compile Include="App\Auth\AppRoles.cs" />
@@ -289,6 +290,7 @@
     <Compile Include="App\Users\UserImage.cs" />
     <Compile Include="App\Users\UsersController.cs" />
     <Compile Include="App\Users\UsersManager.cs" />
+    <Compile Include="App\Users\UsersModule.cs" />
     <Compile Include="App\Validation\ValidatorActivator.cs" />
     <Compile Include="App\Validation\ApiResourceBuilder.cs" />
     <Compile Include="App\Errors\ApiExceptionHandler.cs" />

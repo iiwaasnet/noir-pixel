@@ -6,19 +6,22 @@ namespace Api.App.Db
 {
     public class DbModule : Module
     {
+        private const string Identity = "Identity";
+        private const string Application = "Application";
+
         protected override void Load(ContainerBuilder builder)
         {
             builder.Register(c => GetDbConfigurations(c).Application)
-                   .Named<DbConfiguration>(Databases.Application)
+                   .Named<DbConfiguration>(Application)
                    .SingleInstance();
             builder.Register(c => GetDbConfigurations(c).Identity)
-                   .Named<DbConfiguration>(Databases.Identity)
+                   .Named<DbConfiguration>(Identity)
                    .SingleInstance();
 
-            builder.Register(c => (IIdentityDbProvider)new DbProvider(c.ResolveNamed<DbConfiguration>(Databases.Identity)))
+            builder.Register(c => new IdentityDbProvider(c.ResolveNamed<DbConfiguration>(Identity)))
                    .As<IIdentityDbProvider>()
                    .SingleInstance();
-            builder.Register(c => (IAppDbProvider)new DbProvider(c.ResolveNamed<DbConfiguration>(Databases.Application)))
+            builder.Register(c => new AppDbProvider(c.ResolveNamed<DbConfiguration>(Application)))
                    .As<IAppDbProvider>()
                    .SingleInstance();
         }
@@ -27,11 +30,5 @@ namespace Api.App.Db
         {
             return c.Resolve<IConfigProvider>().GetConfiguration<DbSourcesConfiguration>();
         }
-    }
-
-    public class Databases
-    {
-        public const string Identity = "Identity";
-        public const string Application = "Application";
     }
 }

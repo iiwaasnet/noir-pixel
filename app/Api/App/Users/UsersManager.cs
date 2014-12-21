@@ -7,6 +7,7 @@ using Api.App.Db.Extensions;
 using Api.App.Exceptions;
 using Api.App.Images;
 using Diagnostics;
+using Microsoft.AspNet.Identity;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 

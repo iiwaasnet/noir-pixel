@@ -8,7 +8,9 @@
     "ApiUris.Accounts.LocalAccessToken": "accounts/local-access-token",
     "ApiUris.Accounts.RegisterExternal": "accounts/register-external",
     "ApiUris.Accounts.UserExists": "accounts/exists/{userName}",
-    
+
+    "ApiUris.Users.Home": "users/home/{userName}",
+
     "Strings.InvalidationTimeout": "01:00:00",
     "Strings.VersionsUri": "/strings/versions",
     "Strings.LocalizedUri": "/strings/localized/"

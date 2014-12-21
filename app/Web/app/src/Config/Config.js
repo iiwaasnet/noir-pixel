@@ -13,7 +13,10 @@
                 LocalAccessToken: 'accounts/local-access-token',
                 RegisterExternal: 'accounts/register-external',
                 UserExists: 'accounts/exists/{userName}'
-            }
+            },
+            Users: {
+                Home: 'users/home/{userName}'
+            },
         },
         Strings: {
             InvalidationTimeout: '00:10:00',

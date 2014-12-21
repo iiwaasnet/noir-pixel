@@ -13,7 +13,10 @@
                 LocalAccessToken: '@@ApiUris.Accounts.LocalAccessToken',
                 RegisterExternal: '@@ApiUris.Accounts.RegisterExternal',
                 UserExists: '@@ApiUris.Accounts.UserExists'
-            }
+            },
+            Users: {
+                Home: '@@ApiUris.Users.Home'
+            },
         },
         Strings: {
             InvalidationTimeout: '@@Strings.InvalidationTimeout',

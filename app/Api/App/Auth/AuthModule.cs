@@ -2,9 +2,9 @@
 using Api.App.Auth.ExternalUserInfo.Facebook;
 using Api.App.Auth.ExternalUserInfo.GPlus;
 using Api.App.Auth.ExternalUserInfo.Twitter;
+using Api.App.Db;
 using AspNet.Identity.MongoDB;
 using Autofac;
-using JsonConfigurationProvider;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security.Facebook;
 using Microsoft.Owin.Security.Twitter;
@@ -26,7 +26,7 @@ namespace Api.App.Auth
                                       c.Resolve<ApplicationIdentityContext>()))
                    .As<IUserStore<ApplicationUser>>()
                    .SingleInstance();
-            builder.Register(c => ApplicationIdentityContext.Create(c.Resolve<IConfigProvider>()))
+            builder.Register(c => ApplicationIdentityContext.Create(c.Resolve<IIdentityDbProvider>()))
                    .As<ApplicationIdentityContext>()
                    .SingleInstance();
             builder.RegisterType<ApplicationRoleManager>()
@@ -41,7 +41,7 @@ namespace Api.App.Auth
                    .SingleInstance();
             builder.RegisterType<FacebookAccountProvider>()
                    .As<ISocialAccountProvider>()
-                   .SingleInstance(); 
+                   .SingleInstance();
             builder.RegisterType<TwitterAccountProvider>()
                    .As<ISocialAccountProvider>()
                    .SingleInstance();
