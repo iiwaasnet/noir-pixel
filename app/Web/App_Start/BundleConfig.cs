@@ -30,6 +30,7 @@ namespace Web
 #if DEBUG
             var angular = new Bundle("~/bundles/angular")
                 .Include("~/app/vendor/angular.js")
+                .Include("~/app/vendor/angular-animate.js")
                 .Include("~/app/vendor/angular-messages.js");
 #else
             var angular = new Bundle("~/bundles/angular")

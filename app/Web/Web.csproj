@@ -202,6 +202,12 @@
     <Content Include="app\less\all.min.css">
       <DependentUpon>all.css</DependentUpon>
     </Content>
+    <Content Include="app\less\animations.css">
+      <DependentUpon>animations.less</DependentUpon>
+    </Content>
+    <Content Include="app\less\animations.min.css">
+      <DependentUpon>animations.css</DependentUpon>
+    </Content>
     <Content Include="app\less\auth.css">
       <DependentUpon>auth.less</DependentUpon>
     </Content>
@@ -287,6 +293,10 @@
     <Content Include="app\less\buttons.less" />
     <Content Include="app\less\buttons.css.map">
       <DependentUpon>buttons.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\animations.less" />
+    <Content Include="app\less\animations.css.map">
+      <DependentUpon>animations.css</DependentUpon>
     </Content>
     <None Include="app\less\dialogs\ngDialog-theme-default.less" />
     <Content Include="app\less\dialogs\ngDialog.css.map">
@@ -426,6 +436,8 @@
     <Content Include="app\src\validation\np-unique-username.directive.js" />
     <Content Include="app\src\validation\validation.module.js" />
     <Content Include="app\src\validation\validation.service.js" />
+    <Content Include="app\vendor\angular-animate.js" />
+    <Content Include="app\vendor\angular-animate.min.js" />
     <Content Include="app\vendor\angular-messages.js" />
     <Content Include="app\vendor\angular-messages.min.js" />
     <Content Include="app\vendor\angular-mocks.js" />
@@ -520,6 +532,7 @@
     <Content Include="app\vendor\ngDialog.min.js.map">
       <DependentUpon>ngDialog.min.js</DependentUpon>
     </Content>
+    <Content Include="app\vendor\angular-animate.min.js.map" />
     <None Include="config\env\Environment.config.json">
       <LastGenOutput>Environment.config1.cs</LastGenOutput>
     </None>
