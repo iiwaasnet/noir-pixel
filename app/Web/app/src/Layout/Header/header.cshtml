@@ -5,25 +5,26 @@
             <a ui-sref="{{::menuItem.uri}}" ng-bind="::menuItem.text"></a>
         </li>
     </ul>
-    <div id="auth-menu">
-        <div ng-if="!ctrl.login.authenticated" class="zoom">
+    <div id="auth-menu" ng-if="ctrl.login.authenticated !== undefined">
+        <div ng-if="!ctrl.login.authenticated" class="at-view-slide-in-top at-view-slide-out-top">
             <a class="signin" ng-click="ctrl.signin()" ng-bind="::ctrl.signInMenu.signIn"></a>
         </div>
-        <div class="menu-block zoom" ng-if="ctrl.login.authenticated">
-            <ul>
-                <li>
-                    <a ng-bind="ctrl.login.userName"></a>
-                </li>
-                <li>
-                    <a class="signout" ng-click="ctrl.signout()" ng-bind="::ctrl.signInMenu.signOut"></a>
-                </li>
-            </ul>
-            <div class="profile">
-                <div class="resizer">
-                    <a><img ng-src="{{ctrl.login.profileThumbnail}}" alt="{{ctrl.login.userName}}" /></a>
+        <div ng-if="ctrl.login.authenticated" class="at-view-slide-in-top at-view-slide-out-top">
+            <div class="menu-block">
+                <ul>
+                    <li>
+                        <a ng-bind="ctrl.login.userName"></a>
+                    </li>
+                    <li>
+                        <a class="signout" ng-click="ctrl.signout()" ng-bind="::ctrl.signInMenu.signOut"></a>
+                    </li>
+                </ul>
+                <div class="profile">
+                    <div class="resizer">
+                        <a><img ng-src="{{ctrl.login.profileThumbnail}}" alt="{{ctrl.login.userName}}" /></a>
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
 </header>
