@@ -6,8 +6,10 @@
         </li>
     </ul>
     <div id="auth-menu">
-        <a class="signin" ng-click="ctrl.signin()" ng-bind="::ctrl.signInMenu.signIn" ng-show="!ctrl.login.authenticated" ng-animate="'slide-down'"></a>
-        <div class="menu-block" ng-show="ctrl.login.authenticated" ng-animate="'slide-down'">
+        <div ng-if="!ctrl.login.authenticated" class="zoom">
+            <a class="signin" ng-click="ctrl.signin()" ng-bind="::ctrl.signInMenu.signIn"></a>
+        </div>
+        <div class="menu-block zoom" ng-if="ctrl.login.authenticated">
             <ul>
                 <li>
                     <a ng-bind="ctrl.login.userName"></a>
@@ -22,5 +24,6 @@
                 </div>
             </div>
         </div>
+
     </div>
 </header>

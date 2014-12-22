@@ -1,11 +1,14 @@
-﻿.slide-enter, .slide-leave {
-transition: 500ms ease-in all;
-position: relative;
-display: block;
-} 
-.slide-enter.slide-enter-active, .slide-leave {
-left: 0;
-}
-.slide-leave.slide-leave-active, .slide-enter {
-left: 500px;
-}
+﻿.zoom.ng-enter {
+   transition: 0.5s linear all;
+   position: relative;
+   top: -100px;
+   opacity: 0;
+ }
+ 
+ // This is the state that it will be in when it is 'visible' - (eg: ng-if
+ // evaluates to true)
+ //
+ .zoom.ng-enter-active {
+   top: 0;
+   opacity: 1;
+ }
