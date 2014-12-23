@@ -77,7 +77,14 @@ namespace Web
                             .Include(Directives().ToArray())
                             .Include(Constants().ToArray())
                             .Include(Validation().ToArray())
+                            .Include(Images().ToArray())
                 );
+        }
+
+        private static IEnumerable<string> Images()
+        {
+            yield return "~/app/src/images/images.module.js";
+            yield return "~/app/src/images/np-img-cloak.directive.js";
         }
 
         private static IEnumerable<string> Validation()

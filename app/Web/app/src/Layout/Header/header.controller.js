@@ -84,8 +84,6 @@
         }
 
         function activate() {
-            ctrl.login.authenticated = Auth.authenticated();
-
             if (Auth.authenticated()) {
                 var loginData = Auth.getLoginData();
                 if (loginData && loginData.userName) {
@@ -93,6 +91,9 @@
                 } else {
                     Auth.signOut();
                 }
+            }
+            else {
+                ctrl.login.authenticated = Auth.authenticated();
             }
             
             buildMenus();
