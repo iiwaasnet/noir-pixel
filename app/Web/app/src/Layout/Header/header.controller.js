@@ -12,6 +12,7 @@
         ctrl.signInMenu = {};
         ctrl.signin = signin;
         ctrl.signout = signout;
+        ctrl.login = {};
 
         activate();
 
@@ -83,6 +84,8 @@
         }
 
         function activate() {
+            ctrl.login.authenticated = Auth.authenticated();
+
             if (Auth.authenticated()) {
                 var loginData = Auth.getLoginData();
                 if (loginData && loginData.userName) {
@@ -91,9 +94,7 @@
                     Auth.signOut();
                 }
             }
-            ctrl.login = {
-                authenticated: Auth.authenticated()
-            };
+            
             buildMenus();
 
             EventsHub.addListener(EventsHub.events.Auth.SignedIn, signedIn);
