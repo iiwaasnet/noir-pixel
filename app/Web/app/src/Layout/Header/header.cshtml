@@ -11,14 +11,12 @@
         </div>
         <div ng-if="ctrl.login.authenticated" class="at-view-scale-in at-view-fade-out">
             <div class="menu-block">
-                <ul>
-                    <li>
-                        <a ng-bind="ctrl.login.userName"></a>
-                    </li>
-                    <li>
-                        <a class="signout" ng-click="ctrl.signout()" ng-bind="::ctrl.signInMenu.signOut"></a>
-                    </li>
-                </ul>
+                <div class="menu-item">
+                    <a ng-bind="ctrl.login.userName"></a>
+                </div>
+                <div class="menu-item">
+                    <a class="signout" ng-click="ctrl.signout()" ng-bind="::ctrl.signInMenu.signOut"></a>
+                </div>
                 <div class="thumbnail">
                     <div class="resizer">
                         <a><img ng-src="{{ctrl.login.profileThumbnail}}" alt="{{ctrl.login.userName}}" /></a>
