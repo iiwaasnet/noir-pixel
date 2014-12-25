@@ -3,15 +3,15 @@
 
 @switch (Response.Cookies.GetDeviceType())
 {
-    case DeviceType.Mobile:
-        Layout = "~/Views/Shared/_Layout.m.cshtml";
-        break;
-    case DeviceType.Tablet:
-        Layout = "~/Views/Shared/_Layout.t.cshtml";
-        break;
     case DeviceType.Desktop:
         Layout = "~/Views/Shared/_Layout.cshtml";
         break;
+    //case DeviceType.Mobile:
+    //    Layout = "~/Views/Shared/_Layout.m.cshtml";
+    //    break;
+    //case DeviceType.Tablet:
+    //    Layout = "~/Views/Shared/_Layout.t.cshtml";
+    //    break;
     default:
         Layout = "~/Views/Shared/_Layout.cshtml";
         break;
