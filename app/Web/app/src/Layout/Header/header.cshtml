@@ -1,10 +1,8 @@
 ﻿<header ng-controller="HeaderController as ctrl">
     <a ui-sref="home"><img src="app/images/np-header-w.png" alt="noir-pixel" /></a>
-    <ul id="main-menu">
-        <li ng-repeat="menuItem in ::ctrl.mainMenu">
-            <a ui-sref="{{::menuItem.uri}}" ng-bind="::menuItem.text"></a>
-        </li>
-    </ul>
+    <nav id="main-menu">
+        <a ng-repeat="menuItem in ::ctrl.mainMenu" ui-sref="{{::menuItem.uri}}" ng-bind="::menuItem.text"></a>
+    </nav>
     <div id="auth-menu" ng-show="ctrl.login.authenticated !== undefined">
         <div ng-if="!ctrl.login.authenticated" class="at-view-scale-in at-view-fade-out">
             <a class="signin" ng-click="ctrl.signin()" ng-bind="::ctrl.signInMenu.signIn"></a>
