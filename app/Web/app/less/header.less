@@ -27,19 +27,19 @@ header {
 #auth-menu {
     position: absolute;
     right: 0;
-    list-style: none;
-    list-style-type: none;
-    display: inline-block;
-
+    top: 0;
     .signin {
         color: @link-color-imp;
         display: block;
-        margin: 1em 0 0;
     }
 
     .menu-block {
+        display: table;
+        text-align: right;
+
         .links {
-            float: left;
+            display: table-cell;
+            text-align: right;
 
             .menu-item {
                 padding: 0.4em 0.7em 0 0;
@@ -59,7 +59,7 @@ header {
         }
 
         .thumbnail {
-            float: right;
+            display: table-cell;
 
             .resizer {
                 overflow: hidden;
@@ -67,12 +67,16 @@ header {
                 height: @profile-thumbnail-size;
                 border-radius: (@profile-thumbnail-size + 2 * @profile-thumbnail-border) / 2 + 2;
                 border: solid @profile-thumbnail-border @edit-border-color;
-            }
 
-            img {
-                vertical-align: middle;
-                width: @profile-thumbnail-size;
-                height: @profile-thumbnail-size;
+                img {
+                    vertical-align: middle;
+                    width: @profile-thumbnail-size;
+                    height: @profile-thumbnail-size;
+                }
+
+                a {
+                    padding: 0;
+                }
             }
         }
     }
