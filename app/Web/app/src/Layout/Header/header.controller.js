@@ -17,10 +17,14 @@
         activate();
 
         function signin() {
+            ctrl.login.authenticated = !ctrl.login.authenticated;
+            return;
             Signin.open();
         }
 
         function signout() {
+            ctrl.login.authenticated = !ctrl.login.authenticated;
+            return;
             Auth.signOut();
         }
 
