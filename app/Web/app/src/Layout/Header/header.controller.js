@@ -13,18 +13,25 @@
         ctrl.signin = signin;
         ctrl.signout = signout;
         ctrl.login = {};
+        ctrl.showPopup = showPopup;
+        ctrl.popupVisible = false;
 
         activate();
 
+        function showPopup() {
+            ctrl.popupVisible = true;
+        }
+
         function signin() {
-            ctrl.login.authenticated = !ctrl.login.authenticated;
-            return;
+            //ctrl.login.authenticated = !ctrl.login.authenticated;
+            //return;
             Signin.open();
         }
 
         function signout() {
-            ctrl.login.authenticated = !ctrl.login.authenticated;
-            return;
+            //ctrl.login.authenticated = !ctrl.login.authenticated;
+            ctrl.popupVisible = false;
+            //return;
             Auth.signOut();
         }
 
