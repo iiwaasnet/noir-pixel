@@ -250,6 +250,12 @@
     <Content Include="app\less\dialogs\ngDialog.min.css">
       <DependentUpon>ngDialog.css</DependentUpon>
     </Content>
+    <Content Include="app\less\dropdown.css">
+      <DependentUpon>dropdown.less</DependentUpon>
+    </Content>
+    <Content Include="app\less\dropdown.min.css">
+      <DependentUpon>dropdown.css</DependentUpon>
+    </Content>
     <Content Include="app\less\float-layout.css">
       <DependentUpon>float-layout.less</DependentUpon>
     </Content>
@@ -328,6 +334,10 @@
     </Content>
     <Content Include="app\less\fonts.css.map">
       <DependentUpon>fonts.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\dropdown.less" />
+    <Content Include="app\less\dropdown.css.map">
+      <DependentUpon>dropdown.css</DependentUpon>
     </Content>
     <None Include="app\less\nprogress.less" />
     <Content Include="app\less\nprogress.css">

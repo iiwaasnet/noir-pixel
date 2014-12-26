@@ -1,0 +1,26 @@
+﻿@import (reference) "colors.less";
+
+.dropdown {
+    position: absolute;
+    list-style: none;
+    margin: 0;
+    border-left: solid 1px @edit-border-color;
+    border-right: solid 1px @edit-border-color;
+    border-radius: 5px;
+
+    li {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+}
+.arrow-up {
+    position: absolute;
+    content: "";
+	width: 0; 
+	height: 0; 
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	
+	border-bottom: 5px solid @edit-border-color;
+}
