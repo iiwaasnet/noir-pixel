@@ -23,15 +23,11 @@
         }
 
         function signin() {
-            //ctrl.login.authenticated = !ctrl.login.authenticated;
-            //return;
             Signin.open();
         }
 
         function signout() {
-            //ctrl.login.authenticated = !ctrl.login.authenticated;
             ctrl.popupVisible = false;
-            //return;
             Auth.signOut();
         }
 
@@ -70,10 +66,6 @@
             ctrl.signInMenu = getSignInMenu();
         }
 
-        function onSignStatuesChanged() {
-            buildMenus();
-        }
-
         function signedIn(data) {
             getHome(data.userName);
         }
@@ -84,7 +76,11 @@
 
         function getHome(userName) {
             var uri = Url.build(Config.ApiUris.Base, Config.ApiUris.Users.Home).formatNamed({ userName: userName });
-            $http.get(uri).then(getHomeSuccess);
+            $http.get(uri).then(getHomeSuccess, getHomeError);
+        }
+
+        function getHomeError() {
+            Auth.signOut();
         }
 
         function getHomeSuccess(response) {
