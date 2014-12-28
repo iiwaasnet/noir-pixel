@@ -4,6 +4,7 @@
 @import (reference) "mixins.less";
 
 @profile-thumbnail-border: 2px;
+@auth-menu-offset-top: @body-offset-top + 0.2;
 
 header {
     position: relative;
@@ -26,11 +27,12 @@ header {
 
 #auth-menu {
     float: right;
+    padding: @auth-menu-offset-top 0 0;
 
     .top-level.sync-fade-out.ng-leave{
         position: absolute;
         right: 0;
-        top: 0;
+        top: @auth-menu-offset-top;
     }
 
     .signin {
