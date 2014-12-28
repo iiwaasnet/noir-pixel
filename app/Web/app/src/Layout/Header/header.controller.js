@@ -13,21 +13,21 @@
         ctrl.signin = signin;
         ctrl.signout = signout;
         ctrl.login = {};
-        ctrl.showPopup = showPopup;
-        ctrl.popupVisible = false;
+        //ctrl.togglePopup = togglePopup;
+        //ctrl.popupVisible = false;
 
         activate();
 
-        function showPopup() {
-            ctrl.popupVisible = true;
-        }
+        //function togglePopup() {
+        //    ctrl.popupVisible = !ctrl.popupVisible;
+        //}
 
         function signin() {
             Signin.open();
         }
 
         function signout() {
-            ctrl.popupVisible = false;
+            //ctrl.popupVisible = false;
             Auth.signOut();
         }
 

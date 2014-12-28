@@ -74,7 +74,7 @@ namespace Web
                             .Include(VanillaJs().ToArray())
                             .Include(Progress().ToArray())
                             .Include(Messages().ToArray())
-                            .Include(Directives().ToArray())
+                            .Include(UIElements().ToArray())
                             .Include(Constants().ToArray())
                             .Include(Validation().ToArray())
                             .Include(Images().ToArray())
@@ -100,9 +100,11 @@ namespace Web
             yield return "~/app/src/constants/errors.constants.js";
         }
 
-        private static IEnumerable<string> Directives()
+        private static IEnumerable<string> UIElements()
         {
-            yield return "~/app/src/directives/directives.module.js";
+            yield return "~/app/src/ui-elements/ui-elements.module.js";
+            yield return "~/app/src/ui-elements/np-dropdown.directive.js";
+            yield return "~/app/src/ui-elements/np-dropdown-toggle.directive.js";
         }
 
         private static IEnumerable<string> Messages()

@@ -1,5 +1,6 @@
-﻿/*scale in-out*/
-.at-view-fade-out.ng-leave {
+﻿
+.sync-fade-out.ng-leave
+ {
     -webkit-transition-property: opacity;
     -moz-transition-property: opacity;
     -o-transition-property: opacity;
@@ -8,17 +9,16 @@
     -moz-transition-duration: 0.3s;
     -o-transition-duration: 0.3s;
     transition-duration: 0.3s;
-    position: absolute;
-    top: 0;
-    left: 0;
+    opacity: 1;
+}
+
+.sync-fade-out.ng-leave-active
+ {
     opacity: 0;
 }
 
-.at-view-fade-out.ng-leave-active {
-    opacity: 0.1;
-}
-
-.at-view-scale-in.ng-enter {
+.sync-scale-in.ng-enter
+ {
     -webkit-transition-property: opacity, -webkit-transform;
     -moz-transition-property: opacity, -moz-transform;
     -o-transition-property: opacity, -o-transform;
@@ -37,14 +37,45 @@
     -ms-transform: scale(0, 0);
     -o-transform: scale(0, 0);
     transform: scale(0, 0);
-    opacity: 0.3;
+    opacity: 0;
 }
 
-.at-view-scale-in.ng-enter-active {
+.sync-scale-in.ng-enter-active
+ {
     -webkit-transform: scale(1, 1);
     -moz-transform: scale(1, 1);
     -ms-transform: scale(1, 1);
     -o-transform: scale(1, 1);
     transform: scale(1, 1);
     opacity: 1;
+}
+
+/*=============================*/
+.scale-in-out
+ {
+    -webkit-transform: scale(1, 1);
+    -moz-transform: scale(1, 1);
+    -ms-transform: scale(1, 1);
+    -o-transform: scale(1, 1);
+    transform: scale(1, 1);
+    opacity: 1;
+}
+
+.scale-in-out.ng-hide-add-active,
+.scale-in-out.ng-hide-remove-active
+ {
+    -moz-transition: 0.2s ease-out all;
+    -o-transition: 0.2s ease-out all;
+    -webkit-transition: 0.2s ease-out all;
+    transition: 0.2s ease-out all;
+}
+
+.scale-in-out.ng-hide
+ {
+    -webkit-transform: scale(0, 0);
+    -moz-transform: scale(0, 0);
+    -ms-transform: scale(0, 0);
+    -o-transform: scale(0, 0);
+    transform: scale(0, 0);
+    opacity: 0;
 }

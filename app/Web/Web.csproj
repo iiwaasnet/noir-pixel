@@ -440,6 +440,9 @@
     <Content Include="app\src\messages\message.html" />
     <Content Include="app\src\messages\messages.service.js" />
     <Content Include="app\src\messages\messages.module.js" />
+    <Content Include="app\src\ui-elements\np-dropdown-toggle.directive.js" />
+    <Content Include="app\src\ui-elements\np-dropdown.directive.js" />
+    <Content Include="app\src\ui-elements\ui-elements.module.js" />
     <Content Include="app\src\utils\moment.factory.js" />
     <Content Include="app\src\utils\string.format.js" />
     <Content Include="app\src\utils\url.service.js" />
@@ -510,7 +513,6 @@
     <Content Include="app\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\src\directives\directives.module.js" />
     <None Include="app\src\layout\header\header.cshtml" />
   </ItemGroup>
   <ItemGroup>

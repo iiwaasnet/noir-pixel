@@ -27,9 +27,10 @@ header {
 #auth-menu {
     float: right;
 
-    .at-view-fade-out.ng-leave {
+    .top-level.sync-fade-out.ng-leave{
+        position: absolute;
         right: 0;
-        left: 100%;
+        top: 0;
     }
 
     .signin {
@@ -50,6 +51,7 @@ header {
             a {
                 padding: 0;
             }
+
             img {
                 vertical-align: middle;
                 width: @profile-thumbnail-size;
@@ -57,9 +59,10 @@ header {
             }
         }
 
-        .arrow-up{
+        .arrow-up {
             right: 50%;
         }
+
         .dropdown {
             text-align: right;
             right: 0;
