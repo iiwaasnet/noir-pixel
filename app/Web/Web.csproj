@@ -232,12 +232,6 @@
     <Content Include="app\less\colors.min.css">
       <DependentUpon>colors.css</DependentUpon>
     </Content>
-    <Content Include="app\less\constants.css">
-      <DependentUpon>constants.less</DependentUpon>
-    </Content>
-    <Content Include="app\less\constants.min.css">
-      <DependentUpon>constants.css</DependentUpon>
-    </Content>
     <Content Include="app\less\dialogs\dialog-theme-messages.css">
       <DependentUpon>dialog-theme-messages.less</DependentUpon>
     </Content>
@@ -304,6 +298,7 @@
     <Content Include="app\less\animations.css.map">
       <DependentUpon>animations.css</DependentUpon>
     </Content>
+    <Content Include="app\less\body.less" />
     <None Include="app\less\dialogs\ngDialog-theme-default.less" />
     <Content Include="app\less\dialogs\ngDialog.css.map">
       <DependentUpon>ngDialog.css</DependentUpon>
@@ -397,10 +392,6 @@
     <Content Include="app\less\auth.less" />
     <Content Include="app\less\auth.css.map">
       <DependentUpon>auth.css</DependentUpon>
-    </Content>
-    <Content Include="app\less\constants.less" />
-    <Content Include="app\less\constants.css.map">
-      <DependentUpon>constants.css</DependentUpon>
     </Content>
     <Content Include="app\less\spinner.less" />
     <Content Include="app\less\spinner.css.map">
