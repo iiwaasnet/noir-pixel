@@ -1,0 +1,15 @@
+﻿@import (reference) "colors.less";
+@import (reference) "mixins.less";
+
+a {
+    color: @ecru-white;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 0.4em;
+    border: none;
+    outline: none;
+
+    &:hover {
+        .glow-hover();
+    }
+}

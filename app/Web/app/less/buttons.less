@@ -1,9 +1,23 @@
 ﻿@import (reference) "colors.less";
 @import (reference) "fonts.less";
 
+
+@test: #797979;
+
+input[type=button],
+input[type=submit]
+{
+    font-family: @content-font-family;
+    background-color: @rangoon-green;
+    color: @ecru-white;
+    border: 1px solid @cape-cod;
+    padding: 1em 1.5em;
+}
+
 input[type=button].default-action,
 input[type=submit].default-action {
-    background-color: @button-default-action-background-color;
+    background-color: @olive-drab;
+    border: 1px solid @ecru-white;
 }
 
 input[type=button][disabled].default-action,

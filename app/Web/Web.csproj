@@ -214,6 +214,9 @@
     <Content Include="app\less\auth.min.css">
       <DependentUpon>auth.css</DependentUpon>
     </Content>
+    <Content Include="app\less\body.css">
+      <DependentUpon>body.less</DependentUpon>
+    </Content>
     <Content Include="app\less\buttons.css">
       <DependentUpon>buttons.less</DependentUpon>
     </Content>
@@ -231,6 +234,12 @@
     </Content>
     <Content Include="app\less\colors.min.css">
       <DependentUpon>colors.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\dialogs\dialog-theme-contextmenu.css">
+      <DependentUpon>dialog-theme-contextmenu.less</DependentUpon>
+    </Content>
+    <Content Include="app\less\dialogs\dialog-theme-contextmenu.min.css">
+      <DependentUpon>dialog-theme-contextmenu.css</DependentUpon>
     </Content>
     <Content Include="app\less\dialogs\dialog-theme-messages.css">
       <DependentUpon>dialog-theme-messages.less</DependentUpon>
@@ -250,6 +259,9 @@
     <Content Include="app\less\dropdown.min.css">
       <DependentUpon>dropdown.css</DependentUpon>
     </Content>
+    <Content Include="app\less\edits.css">
+      <DependentUpon>edits.less</DependentUpon>
+    </Content>
     <Content Include="app\less\float-layout.css">
       <DependentUpon>float-layout.less</DependentUpon>
     </Content>
@@ -268,6 +280,15 @@
     <Content Include="app\less\header.min.css">
       <DependentUpon>header.css</DependentUpon>
     </Content>
+    <Content Include="app\less\images.css">
+      <DependentUpon>images.less</DependentUpon>
+    </Content>
+    <Content Include="app\less\links.css">
+      <DependentUpon>links.less</DependentUpon>
+    </Content>
+    <Content Include="app\less\links.min.css">
+      <DependentUpon>links.css</DependentUpon>
+    </Content>
     <Content Include="app\less\loading-bar.css">
       <DependentUpon>loading-bar.less</DependentUpon>
     </Content>
@@ -275,7 +296,7 @@
       <DependentUpon>loading-bar.css</DependentUpon>
     </Content>
     <Content Include="app\less\main-elements.css">
-      <DependentUpon>main-elements.less</DependentUpon>
+      <DependentUpon>edits.less</DependentUpon>
     </Content>
     <Content Include="app\less\main-elements.min.css">
       <DependentUpon>main-elements.css</DependentUpon>
@@ -299,6 +320,12 @@
       <DependentUpon>animations.css</DependentUpon>
     </Content>
     <Content Include="app\less\body.less" />
+    <Content Include="app\less\dialogs\dialog-theme-contextmenu.css.map">
+      <DependentUpon>dialog-theme-contextmenu.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\body.css.map">
+      <DependentUpon>body.css</DependentUpon>
+    </Content>
     <None Include="app\less\dialogs\ngDialog-theme-default.less" />
     <Content Include="app\less\dialogs\ngDialog.css.map">
       <DependentUpon>ngDialog.css</DependentUpon>
@@ -334,6 +361,17 @@
     <Content Include="app\less\dropdown.css.map">
       <DependentUpon>dropdown.css</DependentUpon>
     </Content>
+    <Content Include="app\less\links.less" />
+    <Content Include="app\less\links.css.map">
+      <DependentUpon>links.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\images.less" />
+    <Content Include="app\less\images.css.map">
+      <DependentUpon>images.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\edits.css.map">
+      <DependentUpon>edits.css</DependentUpon>
+    </Content>
     <None Include="app\less\nprogress.less" />
     <Content Include="app\less\nprogress.css">
       <DependentUpon>nprogress.less</DependentUpon>
@@ -368,7 +406,7 @@
     <Content Include="app\src\config\env\prod.json" />
     <Content Include="app\less\colors.less" />
     <Content Include="app\less\all.less" />
-    <Content Include="app\less\main-elements.less" />
+    <Content Include="app\less\edits.less" />
     <Content Include="app\less\main-elements.css.map">
       <DependentUpon>main-elements.css</DependentUpon>
     </Content>
@@ -538,6 +576,15 @@
       <DependentUpon>ngDialog.min.js</DependentUpon>
     </Content>
     <Content Include="app\vendor\angular-animate.min.js.map" />
+    <Content Include="app\vendor\angular-webstorage.min.js.map">
+      <DependentUpon>angular-webstorage.min.js</DependentUpon>
+    </Content>
+    <Content Include="app\vendor\angular-ui-router.min.js.map">
+      <DependentUpon>angular-ui-router.min.js</DependentUpon>
+    </Content>
+    <Content Include="app\vendor\moment.min.js.map">
+      <DependentUpon>moment.min.js</DependentUpon>
+    </Content>
     <None Include="config\env\Environment.config.json">
       <LastGenOutput>Environment.config1.cs</LastGenOutput>
     </None>

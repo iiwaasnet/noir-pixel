@@ -1,14 +1,13 @@
 @import (reference) "../colors.less";
 @import (reference) "../mixins.less";
-@import (reference) "../constants.less";
 @import (reference) "dialog-mixins.less";
 
 @message-window-width: 75%;
-@messages-background-color: @button-default-action-background-color;
+@messages-background-color: @olive-drab;
 
-.dialog-content(@background-color, @border-color){
+.dialog-content(@rangoon-green, @border-color){
     .flyin(0.5s);
-    background: @background-color;
+    background: @rangoon-green;
     border-radius: 0 0 5px 5px;
     border: solid 1px @border-color;
     margin: 0 auto;
@@ -96,11 +95,11 @@
 }
 
 .ngdialog.dialog-theme-messages.error .ngdialog-content {
-    .dialog-content(@attention-color, @attention-dark-color);
+    .dialog-content(@amaranth, @brick-red);
 }
 
 .ngdialog.dialog-theme-messages.info .ngdialog-content {
-    .dialog-content(@messages-background-color, @edit-border-color);
+    .dialog-content(@messages-background-color, @cape-cod);
 }
 
 .ngdialog.dialog-theme-messages.error.ngdialog-closing .ngdialog-content,
