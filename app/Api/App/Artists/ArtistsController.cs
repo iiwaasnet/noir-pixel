@@ -1,23 +1,22 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Api.App.Artists.Extensions;
 using Api.App.Exceptions;
-using Api.App.Users.Extensions;
 
-namespace Api.App.Users
+namespace Api.App.Artists
 {
     [Authorize]
-    [RoutePrefix("users")]
-    public class UsersController : ApiBaseController
+    [RoutePrefix("artists")]
+    public class ArtistsController : ApiBaseController
     {
-        private readonly IUserManager userManager;
+        private readonly IArtistManager artistManager;
 
-        public UsersController(IUserManager userManager)
+        public ArtistsController(IArtistManager artistManager)
         {
-            this.userManager = userManager;
+            this.artistManager = artistManager;
         }
 
-        [AllowAnonymous]
         [Route("home/{userName}")]
         [HttpGet]
         public async Task<IHttpActionResult> GetUserHome(string userName)
@@ -26,7 +25,7 @@ namespace Api.App.Users
             {
                 if (User.Identity.Self(userName))
                 {
-                    var user = await userManager.GetUserHome(userName);
+                    var user = await artistManager.GetUserHome(userName);
 
                     return Ok(user);
                 }

@@ -15,7 +15,7 @@
                 UserExists: 'accounts/exists/{userName}'
             },
             Users: {
-                Home: 'users/home/{userName}'
+                Home: 'artists/home/{userName}'
             },
         },
         Strings: {

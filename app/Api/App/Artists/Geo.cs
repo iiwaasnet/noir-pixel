@@ -1,6 +1,6 @@
 ﻿using Api.App.Entities;
 
-namespace Api.App.Users
+namespace Api.App.Artists
 {
     public class Geo : Entity
     {

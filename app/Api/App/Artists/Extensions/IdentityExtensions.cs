@@ -2,7 +2,7 @@
 using System.Security.Principal;
 using Microsoft.AspNet.Identity;
 
-namespace Api.App.Users.Extensions
+namespace Api.App.Artists.Extensions
 {
     public static class IdentityExtensions
     {

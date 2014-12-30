@@ -1,15 +1,15 @@
 ﻿using Api.App.Entities;
 
-namespace Api.App.Users
+namespace Api.App.Artists
 {
-    public class UserImage : Entity
+    public class ProfileImage : Entity
     {
-        public UserImageType ImageType { get; set; }
+        public ProfileImageType ImageType { get; set; }
         public bool UserDefined { get; set; }
         public string Url { get; set; }
     }
 
-    public enum UserImageType
+    public enum ProfileImageType
     {
         Avatar,
         Thumbnail

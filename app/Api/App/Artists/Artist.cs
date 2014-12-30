@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using Api.App.Entities;
 
-namespace Api.App.Users
+namespace Api.App.Artists
 {
-    public class User : Entity
+    public class Artist : Entity
     {
-        public const string CollectionName = "users";
+        public const string CollectionName = "artists";
 
         public string UserId { get; set; }
         public string UserName { get; set; }
@@ -17,6 +17,6 @@ namespace Api.App.Users
         public DateTime Birthdate { get; set; }
         public DateTime DateRegistered { get; set; }
         public string AboutMe { get; set; }
-        public IEnumerable<UserImage> UserImages { get; set; }
+        public IEnumerable<ProfileImage> UserImages { get; set; }
     }
 }

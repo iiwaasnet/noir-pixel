@@ -175,29 +175,8 @@ namespace Api.App.Auth
         {
             AssertModelStateValid();
 
-            var verifiedAccessToken = await externalAccountsManager.VerfiyAccessToken(model.Provider, model.ExternalAccessToken, model.AccessTokenSecret);
-            if (verifiedAccessToken == null)
-            {
-                var error = new ApiError
-                            {
-                                Code = ApiErrors.Auth.InvalidExternalAccessToken,
-                                Message = stringsProvider.GetString(ApiErrors.Auth.InvalidExternalAccessToken)
-                            };
-                ApiException(HttpStatusCode.BadRequest, error);
-            }
-
-            var user = await userManager.FindAsync(new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
-            if (user == null)
-            {
-                var error = new ApiError
-                            {
-                                Code = ApiErrors.Auth.UserNotRegistered,
-                                Message = string.Format(stringsProvider.GetString(ApiErrors.Auth.UserNotRegistered).AddFormatting(2),
-                                                        model.Provider,
-                                                        verifiedAccessToken.user_id)
-                            };
-                ApiException(HttpStatusCode.NotFound, error);
-            }
+            var verifiedAccessToken = await VarifyAccessToken(model);
+            var user = await FindUser(model, verifiedAccessToken);
 
             GetAuthentication().SignOut(DefaultAuthenticationTypes.ExternalCookie);
 
@@ -221,6 +200,38 @@ namespace Api.App.Auth
                 new JProperty(".expires", ticket.Properties.ExpiresUtc.ToString())
                 );
             return Ok(tokenResponse);
+        }
+
+        private async Task<ApplicationUser> FindUser(LocalAccessTokenModel model, ParsedExternalAccessToken verifiedAccessToken)
+        {
+            var user = await userManager.FindAsync(new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
+            if (user == null)
+            {
+                var error = new ApiError
+                            {
+                                Code = ApiErrors.Auth.UserNotRegistered,
+                                Message = string.Format(stringsProvider.GetString(ApiErrors.Auth.UserNotRegistered).AddFormatting(2),
+                                                        model.Provider,
+                                                        verifiedAccessToken.user_id)
+                            };
+                ApiException(HttpStatusCode.NotFound, error);
+            }
+            return user;
+        }
+
+        private async Task<ParsedExternalAccessToken> VarifyAccessToken(LocalAccessTokenModel model)
+        {
+            var verifiedAccessToken = await externalAccountsManager.VerfiyAccessToken(model.Provider, model.ExternalAccessToken, model.AccessTokenSecret);
+            if (verifiedAccessToken == null)
+            {
+                var error = new ApiError
+                            {
+                                Code = ApiErrors.Auth.InvalidExternalAccessToken,
+                                Message = stringsProvider.GetString(ApiErrors.Auth.InvalidExternalAccessToken)
+                            };
+                ApiException(HttpStatusCode.BadRequest, error);
+            }
+            return verifiedAccessToken;
         }
 
         [AllowAnonymous]
