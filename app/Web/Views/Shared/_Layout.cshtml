@@ -31,11 +31,11 @@
             }
             <main>
                 <div class="columns-container">
-                    <div ui-view="leftColumn" id="column-left"></div>
-                    <div ui-view id="column-center">
+                    <div ui-view="leftColumn" class="column-left layout"></div>
+                    <div ui-view class="column-center layout">
                         @RenderBody()
                     </div>
-                    <div ui-view="rightColumn" id="column-right"></div>
+                    <div ui-view="rightColumn" class="column-right layout"></div>
                 </div>
             </main>
 

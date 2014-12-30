@@ -10,3 +10,29 @@
     zoom: 1; /* Triggering "hasLayout" in IE */
     display: block; /* Element must be a block to wrap around contents. Unnecessary if only using block-level elements. */
 }
+
+
+.column-left {
+    float: left;
+
+    order: 1;
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.column-center {
+    float: left;
+    display: inline-block;
+
+    order: 2;
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.column-right {
+    float: right;
+
+    order: 3;
+    flex-grow: 1;
+    flex-shrink: 1;
+}
