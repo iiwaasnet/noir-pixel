@@ -12,6 +12,7 @@ header {
     position: relative;
     font-size: @header-font-size;
     margin: @body-offset-top @body-offset-side 0;
+    min-height: @profile-thumbnail-size * 1.3;
 }
 
 #main-menu {
@@ -31,7 +32,7 @@ header {
     float: right;
     padding: @auth-menu-offset-top 0 0;
 
-    .top-level.sync-fade-out.ng-leave{
+    .top-level.sync-fade-out.ng-leave {
         position: absolute;
         right: 0;
         top: @auth-menu-offset-top;

@@ -30,8 +30,12 @@
                 }
             }
             <main>
-                <div ui-view>
-                    @RenderBody()
+                <div class="columns-container">
+                    <div ui-view="leftColumn" id="column-left"></div>
+                    <div ui-view id="column-center">
+                        @RenderBody()
+                    </div>
+                    <div ui-view="rightColumn" id="column-right"></div>
                 </div>
             </main>
 
@@ -66,7 +70,4 @@
         </script>
 
     </body>
-
-
-
 </html>

@@ -2,8 +2,11 @@
 @import (reference) "fonts.less";
 
 @body-offset-side: 1em;
-@body-offset-top: 0.1em; 
+@body-offset-top: 0.1em;
 @body-offset-bottom: 1em;
+
+@max-side-column-width: 155px;
+@min-center-column-width: 970px;
 
 body {
     background-color: @rangoon-green;
@@ -11,4 +14,32 @@ body {
     margin: 0;
     padding: 0;
     color: @ecru-white;
+}
+
+#column-left {
+    float: left;
+
+    order: 1;
+    flex-grow: 1;
+    flex-shrink: 1;
+    max-width: @max-side-column-width;
+}
+
+#column-center {
+    float: left;
+    display: inline-block;
+
+    order: 2;
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: @min-center-column-width;
+}
+
+#column-right {
+    float: right;
+
+    order: 3;
+    flex-grow: 1;
+    flex-shrink: 1;
+    max-width: @max-side-column-width;
 }

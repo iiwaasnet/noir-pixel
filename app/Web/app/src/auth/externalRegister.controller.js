@@ -22,6 +22,7 @@
         activate();
 
         function activate() {
+            debugger;
             var externalLogin = getExternalLoginData();
 
             if (externalLogin.error) {

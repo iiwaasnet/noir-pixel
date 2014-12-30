@@ -1,4 +1,4 @@
-﻿<header ng-controller="HeaderController as ctrl">
+﻿<header ng-controller="HeaderController as ctrl" class="columns-container">
     <a ui-sref="home"><img src="app/images/np-header-w.png" alt="noir-pixel" /></a>
     <nav id="main-menu">
         <a ng-repeat="menuItem in ::ctrl.mainMenu" ui-sref="{{::menuItem.uri}}" ng-bind="::menuItem.text"></a>

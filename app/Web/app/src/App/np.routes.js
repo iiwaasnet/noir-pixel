@@ -12,12 +12,6 @@
                 url: '/',
                 templateUrl: '/app/src/home/home.html',
                 controller: 'HomeController',
-                controllerAs: 'ctrl',
-            })
-            .state('gallery', {
-                url: '/',
-                templateUrl: '/app/src/home/home.html',
-                controller: 'HomeController',
                 controllerAs: 'ctrl'
             })
             .state('externalSignIn', {
@@ -37,7 +31,7 @@
                 templateUrl: '/app/src/auth/not-authorized.html',
                 controller: 'NotAuthorizedController',
                 controllerAs: 'ctrl'
-        });
+            });
 
         $urlRouterProvider.otherwise('/');
 

@@ -1,0 +1,12 @@
+﻿.columns-container {
+    -ms-flex-direction: row;
+    flex-direction: row;
+    display: flex;
+    align-items: stretch;
+}
+
+.columns-container:after {
+    overflow: hidden; /* Clearfix! */
+    zoom: 1; /* Triggering "hasLayout" in IE */
+    display: block; /* Element must be a block to wrap around contents. Unnecessary if only using block-level elements. */
+}

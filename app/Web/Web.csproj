@@ -235,6 +235,9 @@
     <Content Include="app\less\colors.min.css">
       <DependentUpon>colors.css</DependentUpon>
     </Content>
+    <Content Include="app\less\column-layout.css">
+      <DependentUpon>column-layout.less</DependentUpon>
+    </Content>
     <Content Include="app\less\dialogs\dialog-theme-contextmenu.css">
       <DependentUpon>dialog-theme-contextmenu.less</DependentUpon>
     </Content>
@@ -261,12 +264,6 @@
     </Content>
     <Content Include="app\less\edits.css">
       <DependentUpon>edits.less</DependentUpon>
-    </Content>
-    <Content Include="app\less\float-layout.css">
-      <DependentUpon>float-layout.less</DependentUpon>
-    </Content>
-    <Content Include="app\less\float-layout.min.css">
-      <DependentUpon>float-layout.css</DependentUpon>
     </Content>
     <Content Include="app\less\fonts.css">
       <DependentUpon>fonts.less</DependentUpon>
@@ -325,6 +322,10 @@
     </Content>
     <Content Include="app\less\body.css.map">
       <DependentUpon>body.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\column-layout.less" />
+    <Content Include="app\less\column-layout.css.map">
+      <DependentUpon>column-layout.css</DependentUpon>
     </Content>
     <None Include="app\less\dialogs\ngDialog-theme-default.less" />
     <Content Include="app\less\dialogs\ngDialog.css.map">
@@ -420,10 +421,6 @@
     </Content>
     <Content Include="app\less\colors.css.map">
       <DependentUpon>colors.css</DependentUpon>
-    </Content>
-    <Content Include="app\less\float-layout.less" />
-    <Content Include="app\less\float-layout.css.map">
-      <DependentUpon>float-layout.css</DependentUpon>
     </Content>
     <Content Include="app\less\sprites32.less" />
     <Content Include="app\less\sprites64.less" />
