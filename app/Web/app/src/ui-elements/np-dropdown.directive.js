@@ -21,10 +21,14 @@
             var toggle = element[0].querySelector('[np-dropdown-toggle]');
             if (toggle) {
                 toggle = angular.element(toggle);
-                toggle.addClass(NG_HIDE_CLASS);
-                element.on('click', toggleDropdown);
-                $document.on('click', hideDropdown);
+                //toggle.addClass(NG_HIDE_CLASS);
+
+                element.css('display', 'inline-block');
+                element.css('position', 'relative');
                 element.on('$destroy', cleanup);
+                element.on('click', toggleDropdown);
+
+                $document.on('click', hideDropdown);
             }
 
             function dropdownVisible() {
