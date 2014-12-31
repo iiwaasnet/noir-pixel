@@ -6,18 +6,42 @@
 
     npDropdown.$inject = ['$document', '$animate'];
 
-    function npDropdown($document, $animate) {
+    function npDropdown($document, $animate, $scope) {
         var dir = {
             restrict: 'A',
-            link: link
+            link: link,
+            controller: ['$scope', controller]
         };
 
         return dir;
 
-        function link(scope, element, attrs) {
+        function controller($scope) {
             var NG_HIDE_CLASS = 'ng-hide';
             var NG_HIDE_IN_PROGRESS_CLASS = 'ng-hide-animate';
+            var ctrl = this;
+            ctrl.toggleDropdown = toggleDropdown;
+            ctrl.hideDropdown = hideDropdown;
 
+            function toggleDropdown(toggle) {
+                $animate[dropdownVisible(toggle) ? 'addClass' : 'removeClass'](toggle, NG_HIDE_CLASS, {
+                    tempClasses: NG_HIDE_IN_PROGRESS_CLASS
+                });
+                $scope.$apply();
+            }
+
+            function hideDropdown(toggle) {
+                $animate['addClass'](toggle, NG_HIDE_CLASS, {
+                    tempClasses: NG_HIDE_IN_PROGRESS_CLASS
+                });
+                $scope.$apply();
+            }
+
+            function dropdownVisible(toggle) {
+                return toggle && !toggle.hasClass(NG_HIDE_CLASS);
+            }
+        }
+
+        function link(scope, element, attrs, ctrl) {
             var toggle = element[0].querySelector('[np-dropdown-toggle]');
             if (toggle) {
                 toggle = angular.element(toggle);
@@ -30,24 +54,14 @@
                 $document.on('click', hideDropdown);
             }
 
-            function dropdownVisible() {
-                return toggle && !toggle.hasClass(NG_HIDE_CLASS);
-            }
-
             function hideDropdown(e) {
                 e.stopPropagation();
-                $animate['addClass'](toggle, NG_HIDE_CLASS, {
-                    tempClasses: NG_HIDE_IN_PROGRESS_CLASS
-                });
-                scope.$apply();
+                ctrl.hideDropdown(toggle);
             }
 
             function toggleDropdown(e) {
                 e.stopPropagation();
-                $animate[dropdownVisible() ? 'addClass' : 'removeClass'](toggle, NG_HIDE_CLASS, {
-                    tempClasses: NG_HIDE_IN_PROGRESS_CLASS
-                });
-                scope.$apply();
+                ctrl.toggleDropdown(toggle);
             }
 
             function cleanup() {
