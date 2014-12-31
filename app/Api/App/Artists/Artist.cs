@@ -10,13 +10,11 @@ namespace Api.App.Artists
 
         public string UserId { get; set; }
         public string UserName { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string FullName { get; set; }
         public string Email { get; set; }
         public Geo LivesIn { get; set; }
-        public DateTime Birthdate { get; set; }
         public DateTime DateRegistered { get; set; }
-        public string AboutMe { get; set; }
+        public IEnumerable<string> AboutMe { get; set; }
         public IEnumerable<ProfileImage> UserImages { get; set; }
     }
 }
