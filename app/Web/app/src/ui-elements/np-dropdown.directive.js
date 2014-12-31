@@ -4,9 +4,9 @@
     angular.module('np.ui-elements')
         .directive('npDropdown', npDropdown);
 
-    npDropdown.$inject = ['$document', '$animate'];
+    npDropdown.$inject = ['$document', '$animate', '$rootScope'];
 
-    function npDropdown($document, $animate, $scope) {
+    function npDropdown($document, $animate, $rootScope) {
         var dir = {
             restrict: 'A',
             link: link,
@@ -42,7 +42,8 @@
         }
 
         function link(scope, element, attrs, ctrl) {
-            var toggle = element[0].querySelector('[np-dropdown-toggle]');
+            var toggle = element[0].querySelector('[np-dropdown-toggle]'),
+                unsubscribeRootScope;
             if (toggle) {
                 toggle = angular.element(toggle);
 
@@ -50,7 +51,8 @@
                 element.css('position', 'relative');
                 element.on('$destroy', cleanup);
                 element.on('click', toggleDropdown);
-
+                
+                unsubscribeRootScope = $rootScope.$on('$stateChangeStart', hideDropdown);
                 $document.on('click', hideDropdown);
             }
 
@@ -66,6 +68,9 @@
 
             function cleanup() {
                 $document.off('click', hideDropdown);
+                if (unsubscribeRootScope) {
+                    unsubscribeRootScope();
+                }
             }
         }
     }
