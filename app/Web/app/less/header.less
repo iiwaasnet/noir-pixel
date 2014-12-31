@@ -1,89 +1,87 @@
 ﻿@import (reference) "colors.less";
 @import (reference) "sprites32.less";
+@import (reference) "column-layout.less";
 @import (reference) "body.less";
 @import (reference) "mixins.less";
 
 @profile-thumbnail-size: 48px;
 @header-font-size: 1.25em;
 @profile-thumbnail-border: 2px;
-@auth-menu-offset-top: @body-offset-top + 0.2;
 
 header {
-    position: relative;
     font-size: @header-font-size;
     margin: @body-offset-top @body-offset-side 0;
-    min-height: @profile-thumbnail-size * 1.3;
-}
+    height: @profile-thumbnail-size * 1.3;
 
-#main-menu {
-    list-style: none;
-    list-style-type: none;
-    display: inline-block;
-    padding: 0;
-    margin: 0 0 0 2.5em;
-
-    a {
-        display: inline;
-        margin: 0 1.5em 0 0;
-    }
-}
-
-#auth-menu {
-    float: right;
-    padding: @auth-menu-offset-top 0 0;
-
-    .top-level.sync-fade-out.ng-leave {
-        position: absolute;
-        right: 0;
-        top: @auth-menu-offset-top;
+    .site-icon {
+        flex-grow: 0;
+        align-self: flex-end;
+        padding: 0;
     }
 
-    .signin {
-        color: @beau-blue;
-        display: block;
+    #main-menu {
+        .column-left;
+        flex-grow: 1;
+        align-self: flex-end;
+        list-style: none;
+        list-style-type: none;
+        display: inline-block;
+        padding: 0;
+        margin: 0 0 0 2.5em;
+
+        a {
+            display: inline;
+            margin: 0 1.5em 0 0;
+        }
     }
 
-    .thumbnail {
-        position: relative;
+    #auth-menu {
+        .column-right;
+        align-self: flex-end;
+        flex-grow: 0;
 
-        .resizer {
-            overflow: hidden;
-            width: @profile-thumbnail-size;
-            height: @profile-thumbnail-size;
-            border-radius: (@profile-thumbnail-size + 2 * @profile-thumbnail-border) / 2 + 2;
-            border: solid @profile-thumbnail-border @plantation;
+        .signin {
+            color: @beau-blue;
+            display: inline-block;
+        }
 
-            a {
-                padding: 0;
-            }
+        .thumbnail {
 
-            img {
-                vertical-align: middle;
+            .resizer {
+                overflow: hidden;
                 width: @profile-thumbnail-size;
                 height: @profile-thumbnail-size;
-            }
-        }
+                border-radius: (@profile-thumbnail-size + 2 * @profile-thumbnail-border) / 2 + 2;
+                border: solid @profile-thumbnail-border @plantation;
 
-        .arrow-up {
-            right: 50%;
-        }
+                a {
+                    padding: 0;
+                }
 
-        .dropdown {
-            text-align: right;
-            right: 0;
-            padding-right: 0.5em;
-
-            .signout {
-                display: inline-block;
-                margin: 1em 0 0;
-                color: @beau-blue;
-                font-size: @header-font-size - 0.54em;
+                img {
+                    vertical-align: middle;
+                    width: @profile-thumbnail-size;
+                    height: @profile-thumbnail-size;
+                }
             }
 
-            .user-name {
-                font-weight: 200;
-                .cut-text(8em);
-                font-size: @header-font-size - 0.3em;
+            .dropdown {
+                text-align: right;
+                right: 0;
+                padding-right: 0.5em;
+
+                .signout {
+                    display: inline-block;
+                    margin: 1em 0 0;
+                    color: @beau-blue;
+                    font-size: @header-font-size - 0.54em;
+                }
+
+                .user-name {
+                    font-weight: 200;
+                    .cut-text(8em);
+                    font-size: @header-font-size - 0.3em;
+                }
             }
         }
     }

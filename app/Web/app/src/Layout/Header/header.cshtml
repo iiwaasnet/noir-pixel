@@ -1,13 +1,13 @@
 ﻿<header ng-controller="HeaderController as ctrl" class="columns-container">
-    <a ui-sref="home"><img src="app/images/np-header-w.png" alt="noir-pixel" /></a>
-    <nav id="main-menu">
+    <a ui-sref="home" class="column-left site-icon"><img src="app/images/np-header-w.png" alt="noir-pixel" /></a>
+    <nav id="main-menu" class="column-center">
         <a ng-repeat="menuItem in ::ctrl.mainMenu" ui-sref="{{::menuItem.uri}}" ng-bind="::menuItem.text"></a>
     </nav>
-    <nav id="auth-menu" ng-show="ctrl.login.authenticated !== undefined">
-        <div ng-if="ctrl.login.authenticated === false" class="top-level sync-scale-in sync-fade-out">
+    <nav id="auth-menu" class="column-right">
+        <div ng-if="ctrl.login.authenticated === false" class="top-level sync-scale-in">
             <a class="signin" ng-click="ctrl.signin()" ng-bind="::ctrl.signInMenu.signIn"></a>
         </div>
-        <div ng-if="ctrl.login.authenticated" class="top-level sync-scale-in sync-fade-out">
+        <div ng-if="ctrl.login.authenticated" class="top-level sync-scale-in">
             <div np-dropdown class="thumbnail">
                 <div class="resizer">
                     <a><img np-img-cloak ng-src="{{ctrl.login.profileThumbnail}}" alt="{{ctrl.login.userName}}" /></a>
