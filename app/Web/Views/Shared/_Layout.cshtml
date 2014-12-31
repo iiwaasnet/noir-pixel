@@ -2,72 +2,72 @@
 <!DOCTYPE html>
 @*<html ng-app="np">*@
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Noir Pixel</title>
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300&subset=cyrillic,latin' rel='stylesheet' type='text/css'>
-        @Styles.Render("~/bundles/css")
-        <base href="/"/>
-    </head>
-    <body>
-        <div id="init-loading" class="centered-outer" ng-if="false">
-            <div class="centered-middle">
-                <div class="centered-inner">
-                    <div class="message">Loading...</div>
-                    <div class="spinner">
-                        <div class="double-bounce1"></div>
-                        <div class="double-bounce2"></div>
-                    </div>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noir Pixel</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300&subset=cyrillic,latin' rel='stylesheet' type='text/css'>
+    @Styles.Render("~/bundles/css")
+    <base href="/" />
+</head>
+<body>
+    <div id="init-loading" class="centered-outer" ng-if="false">
+        <div class="centered-middle">
+            <div class="centered-inner">
+                <div class="message">Loading...</div>
+                <div class="spinner">
+                    <div class="double-bounce1"></div>
+                    <div class="double-bounce2"></div>
                 </div>
             </div>
         </div>
-        <div ng-cloak>
-            @{
-                if (Request.ShowHeader())
-                {
-                    Html.RenderPartial("~/app/src/layout/header/header.cshtml");
-                }
+    </div>
+    <div ng-cloak>
+        @{
+            if (Request.ShowHeader())
+            {
+                Html.RenderPartial("~/app/src/layout/header/header.cshtml");
             }
-            <main>
-                <div class="columns-container">
-                    <div ui-view="leftColumn" class="column-left layout"></div>
-                    <div ui-view class="column-center layout">
-                        @RenderBody()
-                    </div>
-                    <div ui-view="rightColumn" class="column-right layout"></div>
+        }
+        <main>
+            <div class="columns-container">
+                <div ui-view="leftColumn" class="column-left layout"></div>
+                <div ui-view class="column-center layout">
+                    @RenderBody()
                 </div>
-            </main>
+                <div ui-view="rightColumn" class="column-right layout"></div>
+            </div>
+        </main>
 
-            @{
-                if (Request.ShowFooter())
-                {
-                    Html.RenderPartial("~/app/src/layout/footer/footer.cshtml");
-                }
+        @{
+            if (Request.ShowFooter())
+            {
+                Html.RenderPartial("~/app/src/layout/footer/footer.cshtml");
             }
-        </div>
-        @Scripts.Render("~/bundles/vendor-native")
-        @Scripts.Render("~/bundles/angular")
-        @Scripts.Render("~/bundles/vendor-ng")
-        @Scripts.Render("~/bundles/vendor-ng-min")
-        @*@Scripts.Render("~/bundles/vendor-min")*@
-        @Scripts.Render("~/bundles/app")
+        }
+    </div>
+    @Scripts.Render("~/bundles/vendor-native")
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/vendor-ng")
+    @Scripts.Render("~/bundles/vendor-ng-min")
+    @*@Scripts.Render("~/bundles/vendor-min")*@
+    @Scripts.Render("~/bundles/app")
 
-        <script type="text/javascript">
-            (function() {
-                var srv = angular.injector(['ng', 'np.i18n']).get('Strings');
-                srv.init()
-                    .then(function() {
-                            angular.element(document).ready(function() {
-                                angular.bootstrap(document, ['np']);
-                            });
-                        },
-                        function() {
-                            alert("Sorry, something went wrong :(");
-                        });
+    <script type="text/javascript">
+        (function () {
+            var srv = angular.injector(['ng', 'np.i18n']).get('Strings');
+            srv.init()
+                .then(function () {
+                    angular.element(document).ready(function () {
+                        angular.bootstrap(document, ['np']);
+                    });
+                },
+                    function () {
+                        alert("Sorry, something went wrong :(");
+                    });
 
-            })();
-        </script>
+        })();
+    </script>
 
-    </body>
+</body>
 </html>
