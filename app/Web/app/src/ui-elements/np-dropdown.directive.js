@@ -21,7 +21,6 @@
             var toggle = element[0].querySelector('[np-dropdown-toggle]');
             if (toggle) {
                 toggle = angular.element(toggle);
-                //toggle.addClass(NG_HIDE_CLASS);
 
                 element.css('display', 'inline-block');
                 element.css('position', 'relative');
