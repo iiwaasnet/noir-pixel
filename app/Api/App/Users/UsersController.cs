@@ -1,20 +1,20 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
-using Api.App.Artists.Extensions;
 using Api.App.Exceptions;
+using Api.App.Users.Extensions;
 
-namespace Api.App.Artists
+namespace Api.App.Users
 {
     [Authorize]
-    [RoutePrefix("artists")]
-    public class ArtistsController : ApiBaseController
+    [RoutePrefix("users")]
+    public class UsersController : ApiBaseController
     {
-        private readonly IArtistManager artistManager;
+        private readonly IUsersManager usersManager;
 
-        public ArtistsController(IArtistManager artistManager)
+        public UsersController(IUsersManager usersManager)
         {
-            this.artistManager = artistManager;
+            this.usersManager = usersManager;
         }
 
         [Route("home/{userName}")]
@@ -25,7 +25,7 @@ namespace Api.App.Artists
             {
                 if (User.Identity.Self(userName))
                 {
-                    var user = await artistManager.GetUserHome(userName);
+                    var user = await usersManager.GetUserHome(userName);
 
                     return Ok(user);
                 }
@@ -37,5 +37,11 @@ namespace Api.App.Artists
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
         }
+
+        //[Route("profile/{userName}")]
+        //[HttpGet]
+        //public IHttpActionResult GetUserProfile(string userName)
+        //{
+        //}
     }
 }

@@ -6,20 +6,21 @@ using Api.App.Db;
 using Api.App.Db.Extensions;
 using Api.App.Exceptions;
 using Api.App.Images;
+using Api.App.Users.Entities;
 using Diagnostics;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 
-namespace Api.App.Artists
+namespace Api.App.Users
 {
-    public class ArtistsManager : IArtistManager
+    public class UsersesManager : IUsersManager
     {
         private readonly MongoDatabase db;
         private readonly ApplicationUserManager userManager;
         private readonly ILogger logger;
         private readonly IProfileImageManager profileImageManager;
 
-        public ArtistsManager(IAppDbProvider appDbProvider, ApplicationUserManager userManager, IProfileImageManager profileImageManager, ILogger logger)
+        public UsersesManager(IAppDbProvider appDbProvider, ApplicationUserManager userManager, IProfileImageManager profileImageManager, ILogger logger)
         {
             db = appDbProvider.GetDatabase();
             this.userManager = userManager;
@@ -27,9 +28,9 @@ namespace Api.App.Artists
             this.logger = logger;
         }
 
-        public async Task<ArtistHome> GetUserHome(string userName)
+        public async Task<UserHome> GetUserHome(string userName)
         {
-            var users = db.GetCollection<Artist>(Artist.CollectionName);
+            var users = db.GetCollection<User>(User.CollectionName);
             var user = users.FindOne(Query.EQ("UserName", userName));
 
             if (user == null)
@@ -37,7 +38,7 @@ namespace Api.App.Artists
                 var login = await userManager.FindByNameAsync(userName);
                 AssertUserIsRegistered(login);
 
-                user = new Artist
+                user = new User
                        {
                            UserName = login.UserName,
                            UserId = login.Id,
@@ -46,7 +47,7 @@ namespace Api.App.Artists
                 users.Insert(user).LogCommandResult(logger);
             }
 
-            return new ArtistHome
+            return new UserHome
                    {
                        UserName = user.UserName,
                        Thumbnail = GetAvatarThumbnail(user)
@@ -81,10 +82,10 @@ namespace Api.App.Artists
                          };
         }
 
-        private ProfileImage GetAvatarThumbnail(Artist artist)
+        private ProfileImage GetAvatarThumbnail(User user)
         {
-            var userImages = (artist.UserImages != null)
-                                 ? artist.UserImages.ToList()
+            var userImages = (user.UserImages != null)
+                                 ? user.UserImages.ToList()
                                  : new List<ProfileImage>();
 
             var thumbnail = userImages.FirstOrDefault(i => i.ImageType == ProfileImageType.Thumbnail);
@@ -97,8 +98,8 @@ namespace Api.App.Artists
                                 UserDefined = false
                             };
                 userImages.Add(thumbnail);
-                artist.UserImages = userImages;
-                db.GetCollection<Artist>(Artist.CollectionName).Save(artist).LogCommandResult(logger);
+                user.UserImages = userImages;
+                db.GetCollection<User>(User.CollectionName).Save(user).LogCommandResult(logger);
             }
 
             return thumbnail;

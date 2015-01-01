@@ -1,6 +1,8 @@
-namespace Api.App.Artists
+using Api.App.Users.Entities;
+
+namespace Api.App.Users
 {
-    public class ArtistHome
+    public class UserHome
     {
         public string HomePageUrl { get; set; }
         public ProfileImage Thumbnail { get; set; }

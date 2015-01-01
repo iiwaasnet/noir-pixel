@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using Api.App.Entities;
 
-namespace Api.App.Artists
+namespace Api.App.Users.Entities
 {
-    public class Artist : Entity
+    public class User : Entity
     {
-        public const string CollectionName = "artists";
+        public const string CollectionName = "users";
 
         public string UserId { get; set; }
         public string UserName { get; set; }
