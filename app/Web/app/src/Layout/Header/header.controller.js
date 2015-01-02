@@ -4,9 +4,9 @@
     angular.module('np.layout')
         .controller('HeaderController', headerController);
 
-    headerController.$inject = ['$scope', '$http', 'Strings', 'Auth', 'EventsHub', 'Signin', 'Config', 'Url'];
+    headerController.$inject = ['$scope', '$http', 'Strings', 'Auth', 'EventsHub', 'Signin', 'Config', 'Url', 'User'];
 
-    function headerController($scope, $http, Strings, Auth, EventsHub, Signin, Config, Url) {
+    function headerController($scope, $http, Strings, Auth, EventsHub, Signin, Config, Url, User) {
         var ctrl = this;
         ctrl.mainMenu = [];
         ctrl.signInMenu = {};
@@ -87,14 +87,14 @@
             ctrl.login.profileThumbnail = response.data.thumbnail.url;
             ctrl.login.userName = response.data.user.userName;
             ctrl.login.authenticated = Auth.authenticated();
-            Auth.saveLoginData({ profileThumbnail: response.data.thumbnail.url });
+            User.updateUserData({ thumbnail: response.data.thumbnail.url });
         }
 
         function activate() {
             if (Auth.authenticated()) {
-                var loginData = Auth.getLoginData();
-                if (loginData && loginData.userName) {
-                    getHome(loginData.userName);
+                var userData = User.getUserData();
+                if (userData && userData.userName) {
+                    getHome(userData.userName);
                 } else {
                     Auth.signOut();
                 }

@@ -4,11 +4,10 @@
     angular.module('np.auth')
         .service('Auth', authService);
 
-    authService.$inject = ['$http', '$q', '$state', 'Config', 'Url', 'Storage', 'TokenStorage', 'EventsHub'];
+    authService.$inject = ['$http', '$q', '$state', 'Config', 'Url', 'Storage', 'TokenStorage', 'EventsHub', 'User'];
 
-    function authService($http, $q, $state, Config, Url, Storage, TokenStorage, EventsHub) {
+    function authService($http, $q, $state, Config, Url, Storage, TokenStorage, EventsHub, User) {
         var service = this,
-            loginDataStorageKey = 'loginData',
             signInState = 'signIn',
             loginRedirectStorageKey = 'loginRedirectState',
             availableLogins = [];
@@ -17,22 +16,7 @@
         service.registerExternal = registerExternal;
         service.getLocalToken = getLocalToken;
         service.getAvailableLogins = getAvailableLogins;
-        service.saveLoginData = saveLoginData;
-        service.getLoginData = getLoginData;
         service.userExists = userExists;
-
-        function getLoginData() {
-            if (service.authenticated()) {
-                return Storage.get(loginDataStorageKey);
-            }
-            return undefined;
-        }
-
-        function saveLoginData(loginData) {
-            var saved = Storage.get(loginDataStorageKey);
-            saved = angular.extend(saved, loginData);
-            Storage.set(loginDataStorageKey, saved);
-        }
 
         function authenticated() {
             return !!TokenStorage.getToken();
@@ -98,7 +82,7 @@
 
         function getLocalTokenSuccess(response, deferred) {
             TokenStorage.setToken(response.access_token);
-            Storage.set(loginDataStorageKey, {userName: response.userName});
+            User.saveUserData({userName: response.userName});
             deferred.resolve(response);
         }
 
@@ -127,7 +111,6 @@
 
         function signOut() {
             TokenStorage.deleteToken();
-            Storage.remove(loginDataStorageKey);
             EventsHub.publishEvent(EventsHub.events.Auth.SignedOut);
         }
 

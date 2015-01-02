@@ -14,6 +14,7 @@
                 controller: 'HomeController',
                 controllerAs: 'ctrl'
             })
+            //.state('userProfile')
             .state('externalSignIn', {
                 url: '/external-signin',
                 templateUrl: '/app/src/auth/external-signin.html',

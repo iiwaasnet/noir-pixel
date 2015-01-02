@@ -78,7 +78,14 @@ namespace Web
                             .Include(Constants().ToArray())
                             .Include(Validation().ToArray())
                             .Include(Images().ToArray())
+                            .Include(User().ToArray())
                 );
+        }
+
+        private static IEnumerable<string> User()
+        {
+            yield return "~/app/src/user/user.module.js";
+            yield return "~/app/src/user/user.service.js";
         }
 
         private static IEnumerable<string> Images()
