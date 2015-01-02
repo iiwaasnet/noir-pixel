@@ -38,10 +38,14 @@ namespace Api.App.Users
             }
         }
 
-        //[Route("profile/{userName}")]
-        //[HttpGet]
-        //public IHttpActionResult GetUserProfile(string userName)
-        //{
-        //}
+        [Route("profile/{userName}")]
+        [HttpGet]
+        public IHttpActionResult GetUserProfile(string userName)
+        {
+            var includePrivateData = User.Identity.Self(userName);
+            var profile = usersManager.GetUserProfile(userName, includePrivateData);
+
+            return null;
+        }
     }
 }

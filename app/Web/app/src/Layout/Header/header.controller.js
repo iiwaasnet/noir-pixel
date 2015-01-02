@@ -85,7 +85,7 @@
 
         function getHomeSuccess(response) {
             ctrl.login.profileThumbnail = response.data.thumbnail.url;
-            ctrl.login.userName = response.data.userName;
+            ctrl.login.userName = response.data.user.userName;
             ctrl.login.authenticated = Auth.authenticated();
             Auth.saveLoginData({ profileThumbnail: response.data.thumbnail.url });
         }

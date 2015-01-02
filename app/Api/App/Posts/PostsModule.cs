@@ -1,13 +1,13 @@
 ﻿using Autofac;
 
-namespace Api.App.Users
+namespace Api.App.Posts
 {
-    public class UsersModule : Module
+    public class PostsModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<UsersManager>()
-                   .As<IUsersManager>()
+            builder.RegisterType<PostsManager>()
+                   .As<IPostsManager>()
                    .SingleInstance();
         }
     }

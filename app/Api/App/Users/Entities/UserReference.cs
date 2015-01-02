@@ -7,7 +7,10 @@ namespace Api.App.Users.Entities
     {
         [BsonRepresentation(BsonType.ObjectId)]
         public ObjectId UserId { get; set; }
+
         public string UserName { get; set; }
+
+        [BsonIgnoreIfNull]
         public string FullName { get; set; }
     }
 }

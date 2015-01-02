@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Api.App.Users.Entities
+namespace Api.App.Posts.Entities
 {
     public class PostTargetReference
     {

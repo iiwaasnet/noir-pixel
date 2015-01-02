@@ -117,10 +117,11 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.7\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NLog">
-      <HintPath>..\packages\NLog.3.1.0.0\lib\net45\NLog.dll</HintPath>
+    <Reference Include="NLog, Version=3.2.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NLog.3.2.0.0\lib\net45\NLog.dll</HintPath>
     </Reference>
     <Reference Include="Owin.Security.Providers, Version=1.12.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -282,23 +283,31 @@
     <Compile Include="App\Images\IProfileImageManager.cs" />
     <Compile Include="App\Images\ProfileImageManager.cs" />
     <Compile Include="App\MethodExecutionResult.cs" />
-    <Compile Include="App\Users\Entities\DiscussionPost.cs" />
-    <Compile Include="App\Users\Entities\Post.cs" />
-    <Compile Include="App\Users\Entities\PostTargetReference.cs" />
+    <Compile Include="App\Posts\DataPage.cs" />
+    <Compile Include="App\Posts\Entities\Reply.cs" />
+    <Compile Include="App\Posts\Entities\Post.cs" />
+    <Compile Include="App\Posts\Entities\PostTargetReference.cs" />
+    <Compile Include="App\Posts\IPostsManager.cs" />
+    <Compile Include="App\Posts\PostsManager.cs" />
+    <Compile Include="App\Posts\PostsModule.cs" />
+    <Compile Include="App\Posts\Reply.cs" />
+    <Compile Include="App\Posts\WallPosts.cs" />
     <Compile Include="App\Users\Entities\UserReference.cs" />
     <Compile Include="App\Users\Extensions\IdentityExtensions.cs" />
     <Compile Include="App\Users\Entities\Geo.cs" />
     <Compile Include="App\Users\IUsersManager.cs" />
     <Compile Include="App\Users\Entities\User.cs" />
+    <Compile Include="App\Users\ProfileImage.cs" />
     <Compile Include="App\Users\UserHome.cs" />
     <Compile Include="App\Users\Entities\ProfileImage.cs" />
     <Compile Include="App\Users\UserPrivateInfo.cs" />
     <Compile Include="App\Users\UserProfile.cs" />
     <Compile Include="App\Users\UserPublicInfo.cs" />
+    <Compile Include="App\Users\UserReference.cs" />
     <Compile Include="App\Users\UsersController.cs" />
-    <Compile Include="App\Users\UsersesManager.cs" />
+    <Compile Include="App\Users\UsersManager.cs" />
     <Compile Include="App\Users\UsersModule.cs" />
-    <Compile Include="App\Users\WallPost.cs" />
+    <Compile Include="App\Posts\Post.cs" />
     <Compile Include="App\Validation\ValidatorActivator.cs" />
     <Compile Include="App\Validation\ApiResourceBuilder.cs" />
     <Compile Include="App\Errors\ApiExceptionHandler.cs" />
