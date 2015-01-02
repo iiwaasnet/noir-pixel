@@ -82,7 +82,10 @@
 
         function getLocalTokenSuccess(response, deferred) {
             TokenStorage.setToken(response.access_token);
-            User.saveUserData({userName: response.userName});
+            User.saveUserData({
+                userName: response.userName,
+                roles: response.roles
+            });
             deferred.resolve(response);
         }
 

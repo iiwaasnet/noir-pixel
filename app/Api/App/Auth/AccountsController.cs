@@ -193,6 +193,7 @@ namespace Api.App.Auth
 
             var tokenResponse = new JObject(
                 new JProperty("userName", user.UserName),
+                new JProperty("roles", user.Roles),
                 new JProperty("access_token", accessToken),
                 new JProperty("token_type", "bearer"),
                 new JProperty("expires_in", expiresIn.TotalSeconds.ToString()),
