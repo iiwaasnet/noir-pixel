@@ -13,11 +13,11 @@
             var loginResult = getExternalLoginResult();
 
             if (loginResult.error) {
-                Signin.finalizeSigninError(loginResult.error);
+                Signin.finalizeSigninFailed(loginResult.error);
             }
 
             if (loginResult.registered) {
-                Signin.externalSignin(loginResult);
+                Signin.finalizeSignin(loginResult);
             } else {
                 $state.go('externalRegister',
                 {

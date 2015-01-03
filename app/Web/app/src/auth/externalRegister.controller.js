@@ -25,7 +25,7 @@
             var externalLogin = getExternalLoginData();
 
             if (externalLogin.error) {
-                Signin.finalizeSigninError(externalLogin.error);
+                Signin.finalizeSigninFailed(externalLogin.error);
             }
 
             ctrl.externalLogin = externalLogin;
@@ -37,7 +37,17 @@
 
         function register() {
             Signin.registerExternal(ctrl.externalLogin, ctrl.userName)
-                .then(function() {}, registerExternalError);
+                .then(registerExternalSuccess, registerExternalError);
+        }
+
+        function registerExternalSuccess(response) {
+            debugger;
+            Signin.finalizeSignin({
+                externalAccessToken: response.data.access_token,
+                accessTokenSecret: response.data.access_token_secret,
+                provider: response.data.provider,
+                newRegistration: true
+            });
         }
 
         function registerExternalError(error) {

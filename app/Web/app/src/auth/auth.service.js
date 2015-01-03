@@ -94,6 +94,8 @@
                 roles: response.roles
             });
 
+            EventsHub.publishEvent(EventsHub.events.Auth.SignedIn);
+
             deferred.resolve(response);
         }
 

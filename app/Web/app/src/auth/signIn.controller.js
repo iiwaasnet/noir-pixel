@@ -29,11 +29,9 @@
         function finalizeLogin(result) {
             try {
                 if (result.succeeded) {
-                    EventsHub.publishEvent(EventsHub.events.Auth.SignedIn);
-                    Signin.close();
-                    if (result.login.newRegitration) {
-                        Messages.message({ main: { message: 'Welcome, {0}!'.format(result.login.userName) } });
-                    }
+                    Signin.signin(result)
+                        .then(function(response) { signinSuccess(response, result.newRegistration); }, signinError);
+
                     //TODO: Refresh current view?
                     // registerExternal.controller has a close method, which means, user didn't register
                     // Refreshing current view might not make sense. Think of providing TRUE/FALSE to distinguish...
@@ -72,6 +70,17 @@
             //saveLoginRedirectState(redirectTo);
             $window.$scope = $scope;
             $window.open(url, "Signin", 'width=800, height=600');
+        }
+
+        function signinSuccess(result, newRegistration) {
+            Signin.close();
+            if (newRegistration) {
+                Messages.message({ main: { message: 'Welcome, {0}!'.format(result.userName) } });
+            }
+        }
+
+        function signinError(error) {
+            Messages.error({ main: { code: error } });
         }
 
         function enableSignIn() {

@@ -11,16 +11,20 @@
             ui = undefined;
         srv.open = open;
         srv.close = close;
-        srv.externalSignin = externalSignin;
         srv.registerExternal = registerExternal;
-        srv.finalizeSigninSuccess = finalizeSigninSuccess;
-        srv.finalizeSigninError = finalizeSigninError;
+        srv.finalizeSignin = finalizeSignin;
+        srv.finalizeSigninFailed = finalizeSigninFailed;
+        srv.signin = signin;
 
         function open() {
             if (!ui) {
                 Progress.start();
                 Auth.getAvailableLogins().then(getAvailableLoginsSuccess, getAvailableLoginsError);
             }
+        }
+
+        function signin(externalLogin) {
+            return getLocalToken(externalLogin);
         }
 
         function close() {
@@ -32,32 +36,42 @@
 
         function registerExternal(externalLogin, userName) {
             Progress.start();
+
             return Auth.registerExternal(externalLogin, userName)
                 .then(registerExternalSuccess, registerExternalError);
         }
 
         function registerExternalError(error) {
             Progress.stop();
+
             return $q.reject(error.data);
         }
 
-        function externalSignin(externalLogin) {
-            Progress.start();
-            getLocalToken(externalLogin);
+        function finalizeSigninFailed(error) {
+            $window.opener.$scope.finalizeLogin({
+                succeeded: false,
+                error: error
+            });
+            ApplicationLogging.error(error);
+            $window.close();
+        }
+
+        function finalizeSignin(externalLogin) {
+            externalLogin.succeeded = true;
+            $window.opener.$scope.finalizeLogin(externalLogin);
+            $window.close();
         }
 
         function getLocalToken(externalLogin) {
-            Auth.getLocalToken(externalLogin)
-                .then(function(result) { finalizeSigninSuccess(result, externalLogin.newRegistration); }, finalizeSigninError);
+            Progress.start();
+            return Auth.getLocalToken(externalLogin)
+                .then(getLocalTokenSuccess, getLocalTokenFailed);
         }
 
         function registerExternalSuccess(response) {
-            getLocalToken({
-                externalAccessToken: response.data.access_token,
-                accessTokenSecret: response.data.access_token_secret,
-                provider: response.data.provider,
-                newRegistration: true
-            });
+            Progress.stop();
+
+            return response;
         }
 
         function getAvailableLoginsSuccess(response) {
@@ -85,26 +99,17 @@
             Messages.error(error);
         }
 
-        function finalizeSigninError(error) {
-            $window.opener.$scope.finalizeLogin({
-                succeeded: false,
-                error: error
-            });
-            ApplicationLogging.error(error);
+        function getLocalTokenSuccess(response) {
+            Progress.stop();
 
-            $window.close();
+            return response;
         }
 
-        function finalizeSigninSuccess(result, newRegitration) {
-            var data = {
-                login: {
-                    newRegitration: newRegitration,
-                    userName: result.userName
-                },
-                succeeded: true
-            };
-            $window.opener.$scope.finalizeLogin(data);
-            $window.close();
+        function getLocalTokenFailed(error) {
+            Progress.stop();
+            ApplicationLogging.error(error);
+
+            return $q.reject(error);
         }
     }
 })();
