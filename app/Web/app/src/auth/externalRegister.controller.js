@@ -22,7 +22,6 @@
         activate();
 
         function activate() {
-            debugger;
             var externalLogin = getExternalLoginData();
 
             if (externalLogin.error) {
@@ -33,7 +32,7 @@
         }
 
         function close() {
-            Signin.finalizeSigninSuccess();
+            $window.close();
         }
 
         function register() {

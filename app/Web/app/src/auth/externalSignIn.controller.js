@@ -10,7 +10,6 @@
         activate();
 
         function activate() {
-            debugger;
             var loginResult = getExternalLoginResult();
 
             if (loginResult.error) {
