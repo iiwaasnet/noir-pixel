@@ -115,7 +115,7 @@ namespace Api.App.Auth
         {
             AssertModelStateValid();
 
-            model.UserName = model.UserName.Trim();
+            model.UserName = model.UserName.Trim().ToLower();
 
             var verifiedAccessToken = await externalAccountsManager.VerfiyAccessToken(model.Provider, model.ExternalAccessToken, model.AccessTokenSecret);
             if (verifiedAccessToken == null)
@@ -245,7 +245,7 @@ namespace Api.App.Auth
                 return BadRequest();
             }
 
-            var user = await userManager.FindByNameAsync(userName);
+            var user = await userManager.FindByNameAsync(userName.Trim().ToLower());
 
             return Ok(user != null);
         }
