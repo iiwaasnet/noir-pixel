@@ -29,7 +29,7 @@
         function finalizeLogin(result) {
             try {
                 if (result.succeeded) {
-                    EventsHub.publishEvent(EventsHub.events.Auth.SignedIn, result.login);
+                    EventsHub.publishEvent(EventsHub.events.Auth.SignedIn);
                     Signin.close();
                     if (result.login.newRegitration) {
                         Messages.message({ main: { message: 'Welcome, {0}!'.format(result.login.userName) } });

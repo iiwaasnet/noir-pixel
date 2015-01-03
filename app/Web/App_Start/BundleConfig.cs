@@ -79,7 +79,14 @@ namespace Web
                             .Include(Validation().ToArray())
                             .Include(Images().ToArray())
                             .Include(User().ToArray())
+                            .Include(Roles().ToArray())
                 );
+        }
+
+        private static IEnumerable<string> Roles()
+        {
+            yield return "~/app/src/roles/roles.module.js";
+            yield return "~/app/src/roles/roles.service.js";
         }
 
         private static IEnumerable<string> User()

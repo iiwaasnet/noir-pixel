@@ -66,15 +66,16 @@
             ctrl.signInMenu = getSignInMenu();
         }
 
-        function signedIn(data) {
-            getHome(data.userName);
+        function signedIn() {
+            getHome();
         }
 
         function signedOut() {
             ctrl.login.authenticated = Auth.authenticated();
         }
 
-        function getHome(userName) {
+        function getHome() {
+            var userName = User.getUserData().userName;
             var uri = Url.build(Config.ApiUris.Base, Config.ApiUris.Users.Home).formatNamed({ userName: userName });
             $http.get(uri).then(getHomeSuccess, getHomeError);
         }

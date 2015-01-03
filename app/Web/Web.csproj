@@ -329,6 +329,8 @@
     <Content Include="app\less\column-layout.css.map">
       <DependentUpon>column-layout.css</DependentUpon>
     </Content>
+    <Content Include="app\src\roles\roles.module.js" />
+    <Content Include="app\src\roles\roles.service.js" />
     <Content Include="app\src\user\user.module.js" />
     <Content Include="app\src\user\user.service.js" />
     <Content Include="COPYING.txt" />

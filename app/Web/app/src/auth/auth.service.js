@@ -7,16 +7,23 @@
     authService.$inject = ['$http', '$q', '$state', 'Config', 'Url', 'Storage', 'TokenStorage', 'EventsHub', 'User'];
 
     function authService($http, $q, $state, Config, Url, Storage, TokenStorage, EventsHub, User) {
-        var service = this,
-            signInState = 'signIn',
-            loginRedirectStorageKey = 'loginRedirectState',
+        var srv = this,
             availableLogins = [];
-        service.signOut = signOut;
-        service.authenticated = authenticated;
-        service.registerExternal = registerExternal;
-        service.getLocalToken = getLocalToken;
-        service.getAvailableLogins = getAvailableLogins;
-        service.userExists = userExists;
+        srv.signOut = signOut;
+        srv.authenticated = authenticated;
+        srv.registerExternal = registerExternal;
+        srv.getLocalToken = getLocalToken;
+        srv.getAvailableLogins = getAvailableLogins;
+        srv.userExists = userExists;
+        srv.isSelf = isSelf;
+
+        function isSelf(userName) {
+            var userData = User.getUserData();
+            return authenticated()
+                && userData
+                && userData.userName
+                && userData.userName.toLowerCase() === userName.toLowerCase();
+        }
 
         function authenticated() {
             return !!TokenStorage.getToken();
@@ -86,6 +93,7 @@
                 userName: response.userName,
                 roles: response.roles
             });
+
             deferred.resolve(response);
         }
 
