@@ -52,7 +52,7 @@
                 element.on('$destroy', cleanup);
                 element.on('click', toggleDropdown);
                 
-                unsubscribeRootScope = $rootScope.$on('$stateChangeStart', hideDropdown);
+                unsubscribeRootScope = $rootScope.$on('$stateChangeStart', function () { ctrl.hideDropdown(toggle); });
                 $document.on('click', hideDropdown);
             }
 
