@@ -23,17 +23,19 @@
             ctrl.hideDropdown = hideDropdown;
 
             function toggleDropdown(toggle) {
-                $animate[dropdownVisible(toggle) ? 'addClass' : 'removeClass'](toggle, NG_HIDE_CLASS, {
-                    tempClasses: NG_HIDE_IN_PROGRESS_CLASS
+                $scope.$evalAsync(function() {
+                    $animate[dropdownVisible(toggle) ? 'addClass' : 'removeClass'](toggle, NG_HIDE_CLASS, {
+                        tempClasses: NG_HIDE_IN_PROGRESS_CLASS
+                    });
                 });
-                $scope.$apply();
             }
 
             function hideDropdown(toggle) {
-                $animate['addClass'](toggle, NG_HIDE_CLASS, {
-                    tempClasses: NG_HIDE_IN_PROGRESS_CLASS
+                $scope.$evalAsync(function() {
+                    $animate['addClass'](toggle, NG_HIDE_CLASS, {
+                        tempClasses: NG_HIDE_IN_PROGRESS_CLASS
+                    });
                 });
-                $scope.$apply();
             }
 
             function dropdownVisible(toggle) {
@@ -51,8 +53,8 @@
                 element.css('position', 'relative');
                 element.on('$destroy', cleanup);
                 element.on('click', toggleDropdown);
-                
-                unsubscribeRootScope = $rootScope.$on('$stateChangeStart', function () { ctrl.hideDropdown(toggle); });
+
+                unsubscribeRootScope = $rootScope.$on('$stateChangeStart', function() { ctrl.hideDropdown(toggle); });
                 $document.on('click', hideDropdown);
             }
 
