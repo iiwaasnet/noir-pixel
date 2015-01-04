@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('np.user-home')
-        .controller('Profile', profileController);
+        .controller('ProfileController', profileController);
 
     function profileController() {
         

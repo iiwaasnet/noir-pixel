@@ -4,17 +4,37 @@
     angular.module('np.view-resolver')
         .service('ViewResolver', viewResolverService);
 
-    viewResolverService.$inject = ['Roles'];
+    viewResolverService.$inject = ['$templateFactory', 'Roles', 'User'];
 
-    function viewResolverService(Roles) {
+    function viewResolverService($templateFactory, Roles, User) {
         var srv = this;
         srv.resolveTemplateUrl = resolveTemplateUrl;
         srv.resolveController = resolveController;
 
-        function resolveTemplateUrl(state) {
+        function resolveTemplateUrl(state, stateParams) {
+            switch (state) {
+            case 'userHome':
+                return $templateFactory.fromUrl('/app/src/user-home/user-home.html', stateParams);
+            case 'userHome.profile':
+                return $templateFactory.fromUrl('/app/src/user-home/profile/profile.html', stateParams);
+            case 'userHome.photos':
+                return $templateFactory.fromUrl('/app/src/user-home/photos/photos.html', stateParams);
+            default:
+                return $templateFactory.fromUrl('/app/src/errors/404.html', stateParams);
+            }
         }
 
-        function resolveController(state) {
+        function resolveController(state, stateParams) {
+            switch (state) {
+            case 'userHome':
+                return 'UserHomeController';
+            case 'userHome.profile':
+                return 'ProfileController';
+            case 'userHome.photos':
+                return '';
+            default:
+                return '';
+            }
         }
     }
 })();

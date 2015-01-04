@@ -15,15 +15,6 @@
         srv.getLocalToken = getLocalToken;
         srv.getAvailableLogins = getAvailableLogins;
         srv.userExists = userExists;
-        srv.isSelf = isSelf;
-
-        function isSelf(userName) {
-            var userData = User.getUserData();
-            return authenticated()
-                && userData
-                && userData.userName
-                && userData.userName.toLowerCase() === userName.toLowerCase();
-        }
 
         function authenticated() {
             return !!TokenStorage.getToken();

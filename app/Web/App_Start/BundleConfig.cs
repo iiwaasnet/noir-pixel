@@ -88,6 +88,7 @@ namespace Web
         private static IEnumerable<string> UserHome()
         {
             yield return "~/app/src/user-home/user-home.module.js";
+            yield return "~/app/src/user-home/user-home.controller.js";
             yield return "~/app/src/user-home/profile/profile.controller.js";
         }
 

@@ -11,9 +11,18 @@
         srv.saveUserData = saveUserData;
         srv.getUserData = getUserData;
         srv.updateUserData = updateUserData;
+        srv.isSelf = isSelf;
+
         var userDataStorageKey = 'userData';
 
         activate();
+
+        function isSelf(userName) {
+            var userData = srv.getUserData();
+            return userData
+                && userData.userName
+                && userData.userName.toLowerCase() === userName.toLowerCase();
+        }
 
         function saveUserData(userData) {
             Storage.set(userDataStorageKey, createUserDataObject(userData));
