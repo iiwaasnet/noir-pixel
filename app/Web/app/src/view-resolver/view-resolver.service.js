@@ -13,11 +13,11 @@
 
         function resolveTemplateUrl(state, stateParams) {
             switch (state) {
-            case 'userHome':
+            case 'user':
                 return $templateFactory.fromUrl('/app/src/user-home/user-home.html', stateParams);
-            case 'userHome.profile':
+            case 'user.profile':
                 return $templateFactory.fromUrl('/app/src/user-home/profile/profile.html', stateParams);
-            case 'userHome.photos':
+            case 'user.photos':
                 return $templateFactory.fromUrl('/app/src/user-home/photos/photos.html', stateParams);
             default:
                 return $templateFactory.fromUrl('/app/src/errors/404.html', stateParams);
@@ -26,11 +26,11 @@
 
         function resolveController(state, stateParams) {
             switch (state) {
-            case 'userHome':
+            case 'user':
                 return 'UserHomeController';
-            case 'userHome.profile':
+            case 'user.profile':
                 return 'ProfileController';
-            case 'userHome.photos':
+            case 'user.photos':
                 return '';
             default:
                 return '';

@@ -14,23 +14,23 @@
                 controller: 'HomeController',
                 controllerAs: 'ctrl'
             })
-            .state('userHome', {
-                url: '/home',
+            .state('user', {
+                url: '/people',
                 abstract: true,
-                templateProvider: ['ViewResolver', '$stateParams', function(ViewResolver, $stateParams) { return ViewResolver.resolveTemplateUrl('userHome', $stateParams); }],
-                controllerProvider: ['ViewResolver', '$stateParams', function(ViewResolver) { return ViewResolver.resolveController('userHome'); }],
+                templateProvider: ['ViewResolver', '$stateParams', function(ViewResolver, $stateParams) { return ViewResolver.resolveTemplateUrl('user', $stateParams); }],
+                controllerProvider: ['ViewResolver', '$stateParams', function(ViewResolver) { return ViewResolver.resolveController('user'); }],
                 controllerAs: 'ctrl'
             })
-            .state('userHome.profile', {
+            .state('user.profile', {
                 url: '/:userName',
-                templateProvider: ['ViewResolver', '$stateParams', function(ViewResolver, $stateParams) { return ViewResolver.resolveTemplateUrl('userHome.profile', $stateParams); }],
-                controllerProvider: ['ViewResolver', '$stateParams', function(ViewResolver) { return ViewResolver.resolveController('userHome.profile'); }],
+                templateProvider: ['ViewResolver', '$stateParams', function(ViewResolver, $stateParams) { return ViewResolver.resolveTemplateUrl('user.profile', $stateParams); }],
+                controllerProvider: ['ViewResolver', '$stateParams', function(ViewResolver) { return ViewResolver.resolveController('user.profile'); }],
                 controllerAs: 'profileCtrl'
             })
-            .state('userHome.photos', {
+            .state('user.photos', {
                 url: '/:userName/photos',
-                templateProvider: ['ViewResolver', '$stateParams', function(ViewResolver, $stateParams) { return ViewResolver.resolveTemplateUrl('userHome.photos', $stateParams); }],
-                controllerProvider: ['ViewResolver', '$stateParams', function(ViewResolver) { return ViewResolver.resolveController('userHome.photos'); }],
+                templateProvider: ['ViewResolver', '$stateParams', function(ViewResolver, $stateParams) { return ViewResolver.resolveTemplateUrl('user.photos', $stateParams); }],
+                controllerProvider: ['ViewResolver', '$stateParams', function(ViewResolver) { return ViewResolver.resolveController('user.photos'); }],
                 controllerAs: 'photosCtrl'
             })
             .state('externalSignIn', {
