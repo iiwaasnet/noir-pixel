@@ -331,10 +331,12 @@
     </Content>
     <Content Include="app\src\roles\roles.module.js" />
     <Content Include="app\src\roles\roles.service.js" />
+    <Content Include="app\src\user-home\profile\profile.controller.js" />
+    <Content Include="app\src\user-home\profile\profile.html" />
+    <Content Include="app\src\view-resolver\view-resolver.module.js" />
+    <Content Include="app\src\view-resolver\view-resolver.service.js" />
     <Content Include="app\src\user\user.module.js" />
     <Content Include="app\src\user\user.service.js" />
-    <Content Include="COPYING.txt" />
-    <Content Include="WURFL AGPL License.txt" />
     <None Include="app\less\dialogs\ngDialog-theme-default.less" />
     <Content Include="app\less\dialogs\ngDialog.css.map">
       <DependentUpon>ngDialog.css</DependentUpon>
@@ -523,6 +525,7 @@
     <Content Include="Introspector\Introspector.ashx" />
     <Content Include="App_Readme\WURFL-v1.5.3.chm" />
     <Content Include="App_Data\wurfl-latest.zip" />
+    <Content Include="app\src\user-home\user-home.module.js" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

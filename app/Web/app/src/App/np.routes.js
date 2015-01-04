@@ -14,7 +14,12 @@
                 controller: 'HomeController',
                 controllerAs: 'ctrl'
             })
-            //.state('userProfile')
+            .state('userProfile', {
+                url: '/profile/:userName',
+                templateUrlProvider: ['ViewResolver', function (ViewResolver) { return ViewResolver.resolveTemplateUrl('userProfile'); }],
+                controllerProvider: ['ViewResolver', function (ViewResolver) { return ViewResolver.resolveController('userProfile'); }],
+                controllerAs: 'ctrl'
+            })
             .state('externalSignIn', {
                 url: '/external-signin',
                 templateUrl: '/app/src/auth/external-signin.html',

@@ -80,7 +80,21 @@ namespace Web
                             .Include(Images().ToArray())
                             .Include(User().ToArray())
                             .Include(Roles().ToArray())
+                            .Include(ViewResolver().ToArray())
+                            .Include(UserHome().ToArray())
                 );
+        }
+
+        private static IEnumerable<string> UserHome()
+        {
+            yield return "~/app/src/user-home/user-home.module.js";
+            yield return "~/app/src/user-home/profile/profile.controller.js";
+        }
+
+        private static IEnumerable<string> ViewResolver()
+        {
+            yield return "~/app/src/view-resolver/view-resolver.module.js";
+            yield return "~/app/src/view-resolver/view-resolver.service.js";
         }
 
         private static IEnumerable<string> Roles()
