@@ -191,7 +191,9 @@
     <Content Include="app\images\np-header-w.png" />
     <Content Include="app\images\sprites32.png" />
     <Content Include="app\images\sprites64.png" />
+    <Content Include="app\images\sprites\32\gallery.png" />
     <Content Include="app\images\sprites\32\user.png" />
+    <Content Include="app\images\sprites\48\gallery.png" />
     <Content Include="app\images\sprites\64\facebook.png" />
     <Content Include="app\images\sprites\64\google.png" />
     <Content Include="app\images\sprites\64\instagram.png" />
@@ -329,9 +331,18 @@
     <Content Include="app\less\column-layout.css.map">
       <DependentUpon>column-layout.css</DependentUpon>
     </Content>
+    <Content Include="app\less\tabs.css">
+      <DependentUpon>tabs.less</DependentUpon>
+    </Content>
+    <Content Include="app\less\user-home.css">
+      <DependentUpon>user-home.less</DependentUpon>
+    </Content>
     <Content Include="app\src\errors\404.html" />
     <Content Include="app\src\roles\roles.module.js" />
     <Content Include="app\src\roles\roles.service.js" />
+    <Content Include="app\src\ui-elements\tabs\np-tab.directive.js" />
+    <Content Include="app\src\ui-elements\tabs\np-tabs.directive.js" />
+    <Content Include="app\src\ui-elements\tabs\tabs.html" />
     <Content Include="app\src\user-home\user-home.html" />
     <Content Include="app\src\user-home\photos\photos.html" />
     <Content Include="app\src\user-home\profile\profile.controller.js" />
@@ -446,6 +457,15 @@
     <Content Include="app\less\spinner.css.map">
       <DependentUpon>spinner.css</DependentUpon>
     </Content>
+    <Content Include="app\less\user-home.less" />
+    <Content Include="app\less\user-home.css.map">
+      <DependentUpon>user-home.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\sprites48.less" />
+    <Content Include="app\less\tabs.less" />
+    <Content Include="app\less\tabs.css.map">
+      <DependentUpon>tabs.css</DependentUpon>
+    </Content>
     <None Include="app\src\config\env\dev.json" />
     <Content Include="app\src\config\env\config.js">
       <LastGenOutput>Const1.cs</LastGenOutput>
@@ -480,8 +500,8 @@
     <Content Include="app\src\messages\message.html" />
     <Content Include="app\src\messages\messages.service.js" />
     <Content Include="app\src\messages\messages.module.js" />
-    <Content Include="app\src\ui-elements\np-dropdown-toggle.directive.js" />
-    <Content Include="app\src\ui-elements\np-dropdown.directive.js" />
+    <Content Include="app\src\ui-elements\dropdown\np-dropdown-toggle.directive.js" />
+    <Content Include="app\src\ui-elements\dropdown\np-dropdown.directive.js" />
     <Content Include="app\src\ui-elements\ui-elements.module.js" />
     <Content Include="app\src\utils\moment.factory.js" />
     <Content Include="app\src\utils\string.format.js" />

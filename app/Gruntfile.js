@@ -113,6 +113,17 @@ module.exports = function(grunt) {
                     quality: 100
                 },
             },
+            48: {
+                src: ['web/app/images/sprites/48/*.png'],
+                destImg: 'web/app/images/sprites48.png',
+                destCSS: 'web/app/less/sprites48.less',
+                algorithm: 'alt-diagonal',
+                cssFormat: 'less',
+                imgOpts: {
+                    format: 'png',
+                    quality: 100
+                },
+            },
             64: {
                 src: ['web/app/images/sprites/64/*.png'],
                 destImg: 'web/app/images/sprites64.png',
@@ -132,5 +143,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-spritesmith');
 
-    grunt.registerTask('transform', ['replace:dev', 'less:dev', 'sprite:32', 'sprite:64']);
+    grunt.registerTask('transform', ['replace:dev', 'sprite:32', 'sprite:48', 'sprite:64', 'less:dev']);
 };

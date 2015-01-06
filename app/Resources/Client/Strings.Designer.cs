@@ -277,6 +277,24 @@ namespace Resources.Client {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Favorites.
+        /// </summary>
+        public static string UserHome_Tab_Favorites {
+            get {
+                return ResourceManager.GetString("UserHome_Tab_Favorites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gallery.
+        /// </summary>
+        public static string UserHome_Tab_Gallery {
+            get {
+                return ResourceManager.GetString("UserHome_Tab_Gallery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User name.
         /// </summary>
         public static string UserName {

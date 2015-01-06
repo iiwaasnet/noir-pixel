@@ -132,8 +132,10 @@ namespace Web
         private static IEnumerable<string> UIElements()
         {
             yield return "~/app/src/ui-elements/ui-elements.module.js";
-            yield return "~/app/src/ui-elements/np-dropdown.directive.js";
-            yield return "~/app/src/ui-elements/np-dropdown-toggle.directive.js";
+            yield return "~/app/src/ui-elements/dropdown/np-dropdown.directive.js";
+            yield return "~/app/src/ui-elements/dropdown/np-dropdown-toggle.directive.js";
+            yield return "~/app/src/ui-elements/tabs/np-tabs.directive.js";
+            yield return "~/app/src/ui-elements/tabs/np-tab.directive.js";
         }
 
         private static IEnumerable<string> Messages()

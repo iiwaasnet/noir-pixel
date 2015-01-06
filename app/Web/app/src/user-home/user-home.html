@@ -1,7 +1,11 @@
-﻿<p>
-    <a ui-sref="user.profile({userName: ctrl.user.userName})">Profile</a>
-    <a ui-sref="user.photos({userName: ctrl.user.userName})">Photos</a>
-</p>
-<p>{{ctrl.time}}</p>
-<p ui-view> 
-</p>
+﻿<div id="user-home" class="columns-container">
+    <div class="column-left">
+    </div>
+    <div class="column-center">
+        <div>
+            <div np-tabs="ctrl.tabs"></div>
+        </div>
+        <div ui-view></div>
+    </div>
+    <div class="column-right"></div>
+</div>

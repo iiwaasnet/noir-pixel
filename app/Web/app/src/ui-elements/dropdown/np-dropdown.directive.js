@@ -45,7 +45,7 @@
 
         function link(scope, element, attrs, ctrl) {
             var toggle = element[0].querySelector('[np-dropdown-toggle]'),
-                unsubscribeRootScope;
+                unsubscribe;
             if (toggle) {
                 toggle = angular.element(toggle);
 
@@ -54,7 +54,7 @@
                 element.on('$destroy', cleanup);
                 element.on('click', toggleDropdown);
 
-                unsubscribeRootScope = $rootScope.$on('$stateChangeStart', function() { ctrl.hideDropdown(toggle); });
+                unsubscribe = $rootScope.$on('$stateChangeStart', function() { ctrl.hideDropdown(toggle); });
                 $document.on('click', hideDropdown);
             }
 
@@ -70,8 +70,8 @@
 
             function cleanup() {
                 $document.off('click', hideDropdown);
-                if (unsubscribeRootScope) {
-                    unsubscribeRootScope();
+                if (unsubscribe) {
+                    unsubscribe();
                 }
             }
         }

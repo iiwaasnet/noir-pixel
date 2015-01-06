@@ -1,0 +1,4 @@
+﻿<div np-tab="tab" ng-repeat="tab in npTabs" ng-click="tab.handler(tab.text)" ng-class="{active: tab.active}">
+    <div class="image" ng-class="tab.image"></div>
+    <div class="text" np-i18n="{{tab.text}}"></div>
+</div>

@@ -1,0 +1,36 @@
+﻿@import (reference) "colors.less";
+@import (reference) "mixins.less";
+
+*[np-tabs] {
+    *[np-tab] {
+        display: inline-block;
+        margin: 0 0 0 4em;
+        cursor: pointer;
+
+        &.active {
+            color: @bright-cerulean;
+        }
+
+        .image {
+            display: table-cell;
+
+            &:hover {
+                .glow-hover();
+            }
+        }
+
+        .text {
+            display: table-cell;
+            vertical-align: middle;
+            padding: 0 0 0 1em;
+
+            &:hover {
+                .glow-hover();
+            }
+        }
+    }
+
+    *[np-tab]:first-of-type {
+        margin: 0;
+    }
+}
