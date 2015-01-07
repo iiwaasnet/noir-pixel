@@ -190,10 +190,11 @@
     <Content Include="app\images\np-header.png" />
     <Content Include="app\images\sprites32.png" />
     <Content Include="app\images\sprites64.png" />
-    <Content Include="app\images\sprites\16\house58.png" />
-    <Content Include="app\images\sprites\32\gallery-a.png" />
-    <Content Include="app\images\sprites\32\gallery.png" />
-    <Content Include="app\images\sprites\32\user.png" />
+    <Content Include="app\images\sprites\16\home16.png" />
+    <Content Include="app\images\sprites\16\logout16.png" />
+    <Content Include="app\images\sprites\32\gallery32-a.png" />
+    <Content Include="app\images\sprites\32\gallery32.png" />
+    <Content Include="app\images\sprites\32\user32.png" />
     <Content Include="app\images\sprites\64\facebook.png" />
     <Content Include="app\images\sprites\64\google.png" />
     <Content Include="app\images\sprites\64\instagram.png" />
@@ -331,6 +332,9 @@
     <Content Include="app\less\column-layout.css.map">
       <DependentUpon>column-layout.css</DependentUpon>
     </Content>
+    <Content Include="app\less\resets.css">
+      <DependentUpon>resets.less</DependentUpon>
+    </Content>
     <Content Include="app\less\tabs.css">
       <DependentUpon>tabs.less</DependentUpon>
     </Content>
@@ -467,6 +471,10 @@
       <DependentUpon>tabs.css</DependentUpon>
     </Content>
     <Content Include="app\less\sprites16.less" />
+    <Content Include="app\less\resets.less" />
+    <Content Include="app\less\resets.css.map">
+      <DependentUpon>resets.css</DependentUpon>
+    </Content>
     <None Include="app\src\config\env\dev.json" />
     <Content Include="app\src\config\env\config.js">
       <LastGenOutput>Const1.cs</LastGenOutput>

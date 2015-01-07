@@ -33,7 +33,6 @@ header {
 
         list-style: none;
         list-style-type: none;
-        display: inline-block;
         padding: 0;
         margin: 0 0 0 2.5em;
 
@@ -54,11 +53,10 @@ header {
 
         .signin {
             color: @beau-blue;
-            display: inline-block;
         }
 
         .thumbnail {
-
+            font-weight: 200;
             .resizer {
                 overflow: hidden;
                 width: @profile-thumbnail-size;
@@ -80,18 +78,16 @@ header {
             .dropdown {
                 text-align: right;
                 right: 0;
-                padding-right: 0.5em;
 
-                .signout {
-                    font-weight: 200;
-                    display: inline-block;
-                    margin: 0.4em 0 0;
-                    color: @beau-blue;
+                .column-left{
+                    margin: 0 2em 0 0;
                 }
 
                 .user-name {
-                    font-weight: 200;
                     .cut-text(8em);
+                }
+                .signout {
+                    margin: 1em 0 0;
                 }
             }
         }
@@ -99,9 +95,13 @@ header {
 }
 
 .icon-user {
-    .sprite(@user);
+    .sprite(@user32);
 }
 
 .icon-home{
-    .sprite(@house58);
+    .sprite(@home16);
+}
+
+.icon-signout{
+    .sprite(@logout16);
 }
