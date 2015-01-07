@@ -6,7 +6,7 @@
 @import (reference) "images.less";
 
 @profile-thumbnail-size: @main-icon-size;
-@header-font-size: 1.2em;
+@header-font-size: @content-font-size * 1.5;
 @profile-thumbnail-border: 2px;
 
 header {
@@ -25,7 +25,7 @@ header {
         }
     }
 
-    #main-menu {
+    #main-menu {       
         -webkit-align-self: flex-end;
         -ms-flex-item-align: end;
         align-self: flex-end;
@@ -39,6 +39,10 @@ header {
         a {
             display: inline;
             margin: 0 1.5em 0 0;
+            color: @test;
+            &:hover{
+                color: @ecru-white;
+            }
         }
     }
 
@@ -80,15 +84,13 @@ header {
                 .signout {
                     font-weight: 200;
                     display: inline-block;
-                    margin: 1em 0 0;
+                    margin: 0.4em 0 0;
                     color: @beau-blue;
-                    font-size: @header-font-size - 0.3em;
                 }
 
                 .user-name {
                     font-weight: 200;
                     .cut-text(8em);
-                    font-size: @header-font-size - 0.3em;
                 }
             }
         }

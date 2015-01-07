@@ -1,4 +1,7 @@
 ﻿@import (reference) "colors.less";
+@import (reference) "fonts.less";
+
+@dropdown-font-size: @content-font-size * 1.2;
 
 .dropdown {
     list-style: none;
@@ -14,6 +17,7 @@
     box-shadow: -1px -1px 25px 0 rgba(0,0,0,0.75);
     box-shadow: 1px 1px 25px 0 rgba(0,0,0,0.75);
     opacity: 0.95;
+    font-size: @dropdown-font-size;
 
     li {
         list-style: none;

@@ -1,11 +1,16 @@
 ﻿@import (reference) "colors.less";
 @import (reference) "mixins.less";
+@import (reference) "fonts.less";
+
+
+@tab-font-size: @content-font-size * 1.9;
 
 *[np-tabs] {
     *[np-tab] {
         display: inline-block;
         margin: 0 0 0 4em;
         cursor: pointer;
+        padding: 0.3em;
 
         &.active {
             color: @bright-cerulean;
@@ -13,16 +18,18 @@
 
         .image {
             display: table-cell;
-
-            &:hover {
-                .glow-hover();
-            }
+            -moz-transform: scale(0.8);
+            -ms-transform: scale(0.8);
+            -o-transform: scale(0.8);
+            -webkit-transform: scale(0.8);
+            transform: scale(0.8);
         }
 
         .text {
             display: table-cell;
             vertical-align: middle;
-            padding: 0 0 0 1em;
+            padding: 0 0 0 0.7em;
+            font-size: @tab-font-size;
 
             &:hover {
                 .glow-hover();
