@@ -3,7 +3,7 @@
 @import (reference) "fonts.less";
 
 
-@tab-font-size: @content-font-size * 1.9;
+@tab-font-size: 160%;
 
 *[np-tabs] {
     *[np-tab] {
@@ -18,17 +18,12 @@
 
         .image {
             display: table-cell;
-            -moz-transform: scale(0.8);
-            -ms-transform: scale(0.8);
-            -o-transform: scale(0.8);
-            -webkit-transform: scale(0.8);
-            transform: scale(0.8);
         }
 
         .text {
             display: table-cell;
             vertical-align: middle;
-            padding: 0 0 0 0.7em;
+            padding: 0 0 0 0.4em;
             font-size: @tab-font-size;
 
             &:hover {

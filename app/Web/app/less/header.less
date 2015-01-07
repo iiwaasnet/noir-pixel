@@ -1,12 +1,13 @@
 ﻿@import (reference) "colors.less";
 @import (reference) "sprites32.less";
+@import (reference) "sprites16.less";
 @import (reference) "column-layout.less";
 @import (reference) "body.less";
 @import (reference) "mixins.less";
 @import (reference) "images.less";
 
 @profile-thumbnail-size: @main-icon-size;
-@header-font-size: @content-font-size * 1.5;
+@header-font-size: 120%;
 @profile-thumbnail-border: 2px;
 
 header {
@@ -99,4 +100,8 @@ header {
 
 .icon-user {
     .sprite(@user);
+}
+
+.icon-home{
+    .sprite(@house58);
 }

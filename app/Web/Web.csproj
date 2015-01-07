@@ -187,13 +187,13 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\images\np-header-b.png" />
-    <Content Include="app\images\np-header-w.png" />
+    <Content Include="app\images\np-header.png" />
     <Content Include="app\images\sprites32.png" />
     <Content Include="app\images\sprites64.png" />
+    <Content Include="app\images\sprites\16\house58.png" />
+    <Content Include="app\images\sprites\32\gallery-a.png" />
     <Content Include="app\images\sprites\32\gallery.png" />
     <Content Include="app\images\sprites\32\user.png" />
-    <Content Include="app\images\sprites\48\gallery.png" />
     <Content Include="app\images\sprites\64\facebook.png" />
     <Content Include="app\images\sprites\64\google.png" />
     <Content Include="app\images\sprites\64\instagram.png" />
@@ -466,6 +466,7 @@
     <Content Include="app\less\tabs.css.map">
       <DependentUpon>tabs.css</DependentUpon>
     </Content>
+    <Content Include="app\less\sprites16.less" />
     <None Include="app\src\config\env\dev.json" />
     <Content Include="app\src\config\env\config.js">
       <LastGenOutput>Const1.cs</LastGenOutput>
@@ -554,7 +555,9 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="app\images\sprites\48\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
