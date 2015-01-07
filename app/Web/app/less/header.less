@@ -3,22 +3,26 @@
 @import (reference) "column-layout.less";
 @import (reference) "body.less";
 @import (reference) "mixins.less";
+@import (reference) "images.less";
 
-@profile-thumbnail-size: 48px;
-@header-font-size: 1.25em;
+@profile-thumbnail-size: @main-icon-size;
+@header-font-size: 1.2em;
 @profile-thumbnail-border: 2px;
 
 header {
     font-size: @header-font-size;
-    margin: @body-offset-top @body-offset-side 0;
+    margin: 0.2em @body-offset-side 0;
     height: @profile-thumbnail-size * 1.3;
 
     .site-icon {
         -webkit-align-self: flex-end;
         -ms-flex-item-align: end;
-        align-self: flex-end;
-
+        align-self: flex-end;        
         padding: 0;
+        img{
+            width: @main-icon-size;
+            height: @main-icon-size;
+        }
     }
 
     #main-menu {
@@ -74,10 +78,11 @@ header {
                 padding-right: 0.5em;
 
                 .signout {
+                    font-weight: 200;
                     display: inline-block;
                     margin: 1em 0 0;
                     color: @beau-blue;
-                    font-size: @header-font-size - 0.54em;
+                    font-size: @header-font-size - 0.3em;
                 }
 
                 .user-name {
