@@ -10,7 +10,5 @@ namespace Api.App.Images
         Size ThumbnailSize();
 
         Uri DefaultAvatarUri();
-
-        Uri DefaultThumbnailUri();
     }
 }

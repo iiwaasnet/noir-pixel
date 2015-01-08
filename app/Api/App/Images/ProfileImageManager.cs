@@ -28,10 +28,5 @@ namespace Api.App.Images
         {
             return new Uri("http://default-avatar");
         }
-
-        public Uri DefaultThumbnailUri()
-        {
-            return new Uri("http://default-thunbnail");
-        }
     }
 }

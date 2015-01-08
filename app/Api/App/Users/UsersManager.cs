@@ -59,11 +59,13 @@ namespace Api.App.Users
                                   UserName = user.UserName,
                                   FullName = user.FullName
                               },
-                       Thumbnail = new ProfileImage
-                                   {
-                                       Url = thumbnail.Url,
-                                       UserDefined = thumbnail.UserDefined
-                                   }
+                       Thumbnail = (thumbnail != null)
+                                       ? new ProfileImage
+                                         {
+                                             Url = thumbnail.Url,
+                                             UserDefined = thumbnail.UserDefined
+                                         }
+                                       : null
                    };
         }
 
@@ -88,11 +90,13 @@ namespace Api.App.Users
                                                             Url = avatar.Url,
                                                             UserDefined = avatar.UserDefined
                                                         },
-                                               Thumbnail = new ProfileImage
-                                                           {
-                                                               Url = thumbnail.Url,
-                                                               UserDefined = thumbnail.UserDefined
-                                                           },
+                                               Thumbnail = (thumbnail != null)
+                                                               ? new ProfileImage
+                                                                 {
+                                                                     Url = thumbnail.Url,
+                                                                     UserDefined = thumbnail.UserDefined
+                                                                 }
+                                                               : null,
                                                AboutMe = user.AboutMe
                                            },
                               PrivateInfo = (includePrivateData)
@@ -114,21 +118,8 @@ namespace Api.App.Users
                                  UserDefined = true
                              };
             }
-            else
-            {
-                yield return CreateDefaultAvatarThumbnail();
-            }
-            yield return CreateDefaultAvatar();
-        }
 
-        private Entities.ProfileImage CreateDefaultAvatarThumbnail()
-        {
-            return new Entities.ProfileImage
-                   {
-                       ImageType = ProfileImageType.Thumbnail,
-                       Url = profileImageManager.DefaultThumbnailUri().AbsoluteUri,
-                       UserDefined = false
-                   };
+            yield return CreateDefaultAvatar();
         }
 
         private Entities.ProfileImage CreateDefaultAvatar()
@@ -143,7 +134,7 @@ namespace Api.App.Users
 
         private Entities.ProfileImage GetAvatarThumbnail(User user)
         {
-            return GetProfileImage(user, ProfileImageType.Thumbnail, CreateDefaultAvatarThumbnail);
+            return GetProfileImage(user, ProfileImageType.Thumbnail, null);
         }
 
         private Entities.ProfileImage GetAvatar(User user)
@@ -158,7 +149,7 @@ namespace Api.App.Users
                                  : new List<Entities.ProfileImage>();
 
             var profileImage = userImages.FirstOrDefault(i => i.ImageType == immageType);
-            if (profileImage == null)
+            if (profileImage == null && @default != null)
             {
                 profileImage = @default();
                 userImages.Add(profileImage);
