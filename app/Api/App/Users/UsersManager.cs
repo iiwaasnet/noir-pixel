@@ -60,11 +60,7 @@ namespace Api.App.Users
                                   FullName = user.FullName
                               },
                        Thumbnail = (thumbnail != null)
-                                       ? new ProfileImage
-                                         {
-                                             Url = thumbnail.Url,
-                                             UserDefined = thumbnail.UserDefined
-                                         }
+                                       ? thumbnail.Url
                                        : null
                    };
         }

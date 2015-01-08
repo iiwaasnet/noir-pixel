@@ -85,10 +85,10 @@
         }
 
         function getHomeSuccess(response) {
-            ctrl.login.profileThumbnail = response.data.thumbnail.url;
+            ctrl.login.profileThumbnail = response.data.thumbnail;
             ctrl.login.userName = response.data.user.userName;
             ctrl.login.authenticated = Auth.authenticated();
-            User.updateUserData({ thumbnail: response.data.thumbnail.url });
+            User.updateUserData({ thumbnail: response.data.thumbnail });
         }
 
         function activate() {
