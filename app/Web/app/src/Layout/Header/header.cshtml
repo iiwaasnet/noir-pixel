@@ -8,24 +8,28 @@
             <a class="signin" ng-click="ctrl.signin()" ng-bind="::ctrl.signInMenu.signIn"></a>
         </div>
         <div ng-if="ctrl.login.authenticated" class="sync-scale-in">
-            <div np-dropdown class="thumbnail">
-                <div class="resizer">
-                    <a><img np-img-cloak ng-src="{{ctrl.login.profileThumbnail}}" alt="{{ctrl.login.userName}}" /></a>
+            <div np-dropdown>
+                <div class="thumbnail">
+                    <div class="resizer">
+                        <a><img np-img-cloak ng-src="{{ctrl.login.profileThumbnail}}" alt="{{ctrl.login.userName}}" /></a>
+                    </div>                    
                 </div>
-                <ul np-dropdown-toggle class="dropdown scale-in-out" role="menu">
-                    <li>
-                        <a class="columns-container" ui-sref="userHome.profile({userName: ctrl.login.userName})">
-                            <p class="icon-home column-left"></p>
-                            <p class="column-center user-name" ng-bind="ctrl.login.userName"></p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="signout columns-container" ng-click="ctrl.signout()">
-                            <p class="icon-signout column-left"></p>
-                            <p class="column-center" ng-bind="::ctrl.signInMenu.signOut"></p>
-                        </a>
-                    </li>
-                </ul>
+                <div np-dropdown-toggle class="scale-in-out">
+                    <ul class="dropdown" role="menu">
+                        <li>
+                            <a class="columns-container" ui-sref="userHome.profile({userName: ctrl.login.userName})">
+                                <p class="icon-home column-left"></p>
+                                <p class="column-center user-name" ng-bind="ctrl.login.userName"></p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="signout columns-container" ng-click="ctrl.signout()">
+                                <p class="icon-signout column-left"></p>
+                                <p class="column-center" ng-bind="::ctrl.signInMenu.signOut"></p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
