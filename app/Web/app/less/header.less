@@ -16,19 +16,19 @@ header {
     .site-icon {
         -webkit-align-self: flex-end;
         -ms-flex-item-align: end;
-        align-self: flex-end;        
+        align-self: flex-end;
         padding: 0;
-        img{
+
+        img {
             width: @main-icon-size;
             height: @main-icon-size;
         }
     }
 
-    #main-menu {       
+    #main-menu {
         -webkit-align-self: flex-end;
         -ms-flex-item-align: end;
         align-self: flex-end;
-
         list-style: none;
         list-style-type: none;
         padding: 0;
@@ -38,7 +38,8 @@ header {
         a {
             display: inline;
             margin: 0 1.5em 0 0;
-            &:hover{
+
+            &:hover {
                 color: @ecru-white;
             }
         }
@@ -55,6 +56,7 @@ header {
 
         .thumbnail {
             font-weight: 200;
+
             .resizer {
                 overflow: hidden;
                 width: @profile-thumbnail-size;
@@ -75,17 +77,26 @@ header {
         }
 
         .dropdown {
-                .column-left{
-                    margin: 0 2em 0 0;
-                }
-
-                .user-name {
-                    .cut-text(8em);
-                }
-                .signout {
-                    margin: 1em 0 0;
-                }
+            li {
+                margin: 0.5em 0 0;
             }
+
+            li:first-of-type {
+                margin: 0;
+            }
+
+            li:last-of-type{
+                margin: 2em 0 0;
+            }
+
+            .column-left {
+                margin: 0 2em 0 0;
+            }
+
+            .user-name {
+                .cut-text(8em);
+            }
+        }
     }
 }
 
@@ -93,10 +104,14 @@ header {
     .sprite(@user32);
 }
 
-.icon-home{
+.icon-home {
     .sprite(@home16);
 }
 
-.icon-signout{
+.icon-signout {
     .sprite(@logout16);
+}
+
+.icon-public {
+    .sprite(@public16);
 }

@@ -79,11 +79,11 @@ namespace Resources.Client {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sign up.
+        ///   Looks up a localized string similar to My home.
         /// </summary>
-        public static string AuthMenu_SignUp {
+        public static string AuthMenu_UserHome {
             get {
-                return ResourceManager.GetString("AuthMenu_SignUp", resourceCulture);
+                return ResourceManager.GetString("AuthMenu_UserHome", resourceCulture);
             }
         }
         

@@ -5,7 +5,7 @@
     </nav>
     <nav id="auth-menu" class="column-right">
         <div ng-if="ctrl.login.authenticated === false" class="top-level sync-scale-in">
-            <a class="signin" ng-click="ctrl.signin()" ng-bind="::ctrl.signInMenu.signIn"></a>
+            <a class="signin" ng-click="ctrl.signin()" np-i18n="AuthMenu_SignIn"></a>
         </div>
         <div ng-if="ctrl.login.authenticated" class="sync-scale-in">
             <div np-dropdown>
@@ -19,14 +19,20 @@
                     <ul class="dropdown" role="menu">
                         <li>
                             <a class="columns-container" ui-sref="userHome.profile({userName: ctrl.login.userName})">
-                                <p class="icon-home column-left"></p>
+                                <p class="icon-public column-left"></p>
                                 <p class="column-center user-name" ng-bind="ctrl.login.userName"></p>
                             </a>
                         </li>
                         <li>
-                            <a class="signout columns-container" ng-click="ctrl.signout()">
+                            <a class="columns-container" ui-sref="userHome.profile({userName: ctrl.login.userName})">
+                                <p class="icon-home column-left"></p>
+                                <p class="column-center" np-i18n="AuthMenu_UserHome"></p>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="columns-container" ng-click="ctrl.signout()">
                                 <p class="icon-signout column-left"></p>
-                                <p class="column-center" ng-bind="::ctrl.signInMenu.signOut"></p>
+                                <p class="column-center" np-i18n="AuthMenu_SignOut"></p>
                             </a>
                         </li>
                     </ul>

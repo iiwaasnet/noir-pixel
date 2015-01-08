@@ -9,7 +9,6 @@
     function headerController($scope, $http, Strings, Auth, EventsHub, Signin, Config, Url, User) {
         var ctrl = this;
         ctrl.mainMenu = [];
-        ctrl.signInMenu = {};
         ctrl.signin = signin;
         ctrl.signout = signout;
         ctrl.login = {};
@@ -63,7 +62,6 @@
 
         function buildMenus() {
             ctrl.mainMenu = getMainMenu();
-            ctrl.signInMenu = getSignInMenu();
         }
 
         function signedIn() {

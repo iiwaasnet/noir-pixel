@@ -123,8 +123,8 @@
   <data name="AuthMenu_SignOut" xml:space="preserve">
     <value>Sign out</value>
   </data>
-  <data name="AuthMenu_SignUp" xml:space="preserve">
-    <value>Sign up</value>
+  <data name="AuthMenu_UserHome" xml:space="preserve">
+    <value>My home</value>
   </data>
   <data name="EditHint_Password" xml:space="preserve">
     <value>Password</value>
