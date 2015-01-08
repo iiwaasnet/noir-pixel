@@ -55,6 +55,9 @@
             if (userData.thumbnail) {
                 obj.thumbnail = userData.thumbnail;
             }
+            if (userData.fullName) {
+                obj.fullName = userData.fullName;
+            }
             if (userData.roles && userData.roles instanceof Array) {
                 obj.roles = userData.roles;
             }
