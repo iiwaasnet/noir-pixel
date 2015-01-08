@@ -103,7 +103,7 @@ module.exports = function(grunt) {
         },
         sprite: {
             16: {
-                src: ['web/app/images/sprites/16/*.png'],
+                src: ['../graphics/src/16/*.png'],
                 destImg: 'web/app/images/sprites16.png',
                 destCSS: 'web/app/less/sprites16.less',
                 algorithm: 'alt-diagonal',
@@ -114,7 +114,7 @@ module.exports = function(grunt) {
                 },
             },
             32: {
-                src: ['web/app/images/sprites/32/*.png'],
+                src: ['../graphics/src/32/*.png'],
                 destImg: 'web/app/images/sprites32.png',
                 destCSS: 'web/app/less/sprites32.less',
                 algorithm: 'alt-diagonal',
@@ -124,21 +124,10 @@ module.exports = function(grunt) {
                     quality: 100
                 },
             },
-            48: {
-                src: ['web/app/images/sprites/48/*.png'],
-                destImg: 'web/app/images/sprites48.png',
-                destCSS: 'web/app/less/sprites48.less',
-                algorithm: 'alt-diagonal',
-                cssFormat: 'less',
-                imgOpts: {
-                    format: 'png',
-                    quality: 100
-                },
-            },
-            64: {
-                src: ['web/app/images/sprites/64/*.png'],
-                destImg: 'web/app/images/sprites64.png',
-                destCSS: 'web/app/less/sprites64.less',
+            login: {
+                src: ['../graphics/src/login/*.png'],
+                destImg: 'web/app/images/sprites-login.png',
+                destCSS: 'web/app/less/sprites-login.less',
                 algorithm: 'alt-diagonal',
                 cssFormat: 'less',
                 imgOpts: {
@@ -154,5 +143,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-spritesmith');
 
-    grunt.registerTask('transform', ['replace:dev', 'sprite:16', 'sprite:32', 'sprite:48', 'sprite:64', 'less:dev']);
+    grunt.registerTask('transform', ['replace:dev', 'sprite:16', 'sprite:32', 'sprite:login', 'less:dev']);
 };

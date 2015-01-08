@@ -188,19 +188,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\images\np-header.png" />
+    <Content Include="app\images\sprites-login.png" />
+    <Content Include="app\images\sprites16.png" />
     <Content Include="app\images\sprites32.png" />
-    <Content Include="app\images\sprites64.png" />
-    <Content Include="app\images\sprites\16\home16.png" />
-    <Content Include="app\images\sprites\16\logout16.png" />
-    <Content Include="app\images\sprites\32\gallery32-a.png" />
-    <Content Include="app\images\sprites\32\gallery32.png" />
-    <Content Include="app\images\sprites\32\user32.png" />
-    <Content Include="app\images\sprites\64\facebook.png" />
-    <Content Include="app\images\sprites\64\google.png" />
-    <Content Include="app\images\sprites\64\instagram.png" />
-    <Content Include="app\images\sprites\64\pinterest.png" />
-    <Content Include="app\images\sprites\64\twitter.png" />
-    <Content Include="app\images\sprites\64\yahoo.png" />
     <Content Include="app\less\all.css">
       <DependentUpon>all.less</DependentUpon>
     </Content>
@@ -451,8 +441,6 @@
     <Content Include="app\less\colors.css.map">
       <DependentUpon>colors.css</DependentUpon>
     </Content>
-    <Content Include="app\less\sprites32.less" />
-    <Content Include="app\less\sprites64.less" />
     <Content Include="app\less\auth.less" />
     <Content Include="app\less\auth.css.map">
       <DependentUpon>auth.css</DependentUpon>
@@ -465,16 +453,17 @@
     <Content Include="app\less\user-home.css.map">
       <DependentUpon>user-home.css</DependentUpon>
     </Content>
-    <Content Include="app\less\sprites48.less" />
     <Content Include="app\less\tabs.less" />
     <Content Include="app\less\tabs.css.map">
       <DependentUpon>tabs.css</DependentUpon>
     </Content>
-    <Content Include="app\less\sprites16.less" />
     <Content Include="app\less\resets.less" />
     <Content Include="app\less\resets.css.map">
       <DependentUpon>resets.css</DependentUpon>
     </Content>
+    <Content Include="app\less\sprites-login.less" />
+    <Content Include="app\less\sprites16.less" />
+    <Content Include="app\less\sprites32.less" />
     <None Include="app\src\config\env\dev.json" />
     <Content Include="app\src\config\env\config.js">
       <LastGenOutput>Const1.cs</LastGenOutput>
@@ -563,9 +552,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="app\images\sprites\48\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

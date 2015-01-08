@@ -3,13 +3,9 @@
 
 @dropdown-font-size: 90%;
 
-.dropdown {
-    list-style: none;
-    margin: 0;
-    padding: 0.5em 1em;
-    border-left: solid 1px @plantation;
-    border-right: solid 1px @plantation;
-    border-radius: 5px;
+*[np-dropdown-toggle] {
+    right: 0;
+    padding: 0.5em;
     background-color: @rangoon-green;
     -webkit-box-shadow: 1px 1px 25px 0 rgba(0,0,0,0.75);
     -moz-box-shadow: 1px 1px 25px 0 rgba(0,0,0,0.75);
@@ -20,10 +16,19 @@
     opacity: 0.95;
     font-size: @dropdown-font-size;
 
-    li {
+    .dropdown {
         list-style: none;
-        padding: 0;
         margin: 0;
+        padding: 0.5em 1em;
+        border-left: solid 1px @plantation;
+        border-right: solid 1px @plantation;
+        text-align: right;
+
+        li {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
     }
 }
 
