@@ -21,36 +21,42 @@
         return dir;
 
         function link(scope, element, attrs, ctrl, transcludeFn) {
-            var userData = User.getUserData();
+            var transclusionScope,
+                transcludedContent = [],
+                userData = User.getUserData() || {};
+
             scope.image = scope.image || userData.thumbnail;
             scope.displayName = scope.displayName || userData.fullName || userData.userName;
-            //scope.image = '';
-            var transclusionScope,
-                transcludedContent = [];
-            transcludeFn(scope, cloneFunc);
+
+            if (transcludeFn) {
+                transcludeFn(scope, cloneFunc);
+            }
 
             function cloneFunc(clone, transScope) {
                 $templateFactory.fromUrl(dir.templateUrl)
-                    .then(function(template) {
-                        template = angular.element(template);
-                        var transcluded = template[0].querySelectorAll('[transclude]');
+                    .then(function(template) { transcludeDirective(template, clone, transScope); });
+            }
 
-                        transclusionScope = transScope;
-                        transcludedContent = cloneElement(clone, transcluded.length);
+            function transcludeDirective(template, clone, transScope) {
+                template = angular.element(template);
+                var transcluded = template[0].querySelectorAll('[transclude]');
 
-                        angular.forEach(transcluded, function(el, i) {
-                            debugger;
-                            var content = transcludedContent[i];
-                            el = angular.element(el);
-                            var parent = el.parent();
-                            parent.append(content.append(el));
-                        });
+                transclusionScope = transScope;
+                transcludedContent = cloneElement(clone, transcluded.length);
 
-                        $compile(template)(scope);
-                        element.replaceWith(template);
+                angular.forEach(transcluded, transcludeElement);
 
-                        element.on('$destroy', cleanup);
-                    });
+                $compile(template)(scope);
+                element.replaceWith(template);
+
+                element.on('$destroy', cleanup);
+            }
+
+            function transcludeElement(el, i) {
+                var content = transcludedContent[i];
+                el = angular.element(el);
+                var parent = el.parent();
+                parent.append(content.append(el));
             }
 
             function cloneElement(clone, times) {
@@ -63,7 +69,6 @@
             }
 
             function cleanup() {
-                debugger;
                 if (transclusionScope) {
                     transclusionScope.$destroy();
                 }
