@@ -6,12 +6,9 @@
 @import (reference) "mixins.less";
 @import (reference) "images.less";
 
-@profile-thumbnail-size: @main-icon-size;
-@profile-thumbnail-border: 2px;
-
 header {
     margin: 0.2em @body-offset-side 0;
-    height: @profile-thumbnail-size * 1.3;
+    /*height: @profile-thumbnail-size * 1.3;*/
 
     .site-icon {
         -webkit-align-self: flex-end;
@@ -52,28 +49,6 @@ header {
 
         .signin {
             color: @beau-blue;
-        }
-
-        .thumbnail {
-            font-weight: 200;
-
-            .resizer {
-                overflow: hidden;
-                width: @profile-thumbnail-size;
-                height: @profile-thumbnail-size;
-                border-radius: (@profile-thumbnail-size + 2 * @profile-thumbnail-border) / 2 + 2;
-                border: solid @profile-thumbnail-border @plantation;
-
-                a {
-                    padding: 0;
-                }
-
-                img {
-                    vertical-align: middle;
-                    width: @profile-thumbnail-size;
-                    height: @profile-thumbnail-size;
-                }
-            }
         }
 
         .dropdown {

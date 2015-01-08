@@ -328,15 +328,20 @@
     <Content Include="app\less\tabs.css">
       <DependentUpon>tabs.less</DependentUpon>
     </Content>
+    <Content Include="app\less\this-user.css">
+      <DependentUpon>this-user.less</DependentUpon>
+    </Content>
     <Content Include="app\less\user-home.css">
       <DependentUpon>user-home.less</DependentUpon>
     </Content>
     <Content Include="app\src\errors\404.html" />
     <Content Include="app\src\roles\roles.module.js" />
     <Content Include="app\src\roles\roles.service.js" />
+    <Content Include="app\src\ui-elements\this-user\np-this-user.directive.js" />
     <Content Include="app\src\ui-elements\tabs\np-tab.directive.js" />
     <Content Include="app\src\ui-elements\tabs\np-tabs.directive.js" />
     <Content Include="app\src\ui-elements\tabs\tabs.html" />
+    <Content Include="app\src\ui-elements\this-user\this-user.html" />
     <Content Include="app\src\user-home\user-home.html" />
     <Content Include="app\src\user-home\photos\photos.html" />
     <Content Include="app\src\user-home\profile\profile.controller.js" />
@@ -464,6 +469,10 @@
     <Content Include="app\less\sprites-login.less" />
     <Content Include="app\less\sprites16.less" />
     <Content Include="app\less\sprites32.less" />
+    <Content Include="app\less\this-user.less" />
+    <Content Include="app\less\this-user.css.map">
+      <DependentUpon>this-user.css</DependentUpon>
+    </Content>
     <None Include="app\src\config\env\dev.json" />
     <Content Include="app\src\config\env\config.js">
       <LastGenOutput>Const1.cs</LastGenOutput>

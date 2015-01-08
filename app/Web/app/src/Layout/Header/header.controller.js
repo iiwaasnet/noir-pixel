@@ -86,7 +86,10 @@
             ctrl.login.profileThumbnail = response.data.thumbnail;
             ctrl.login.userName = response.data.user.userName;
             ctrl.login.authenticated = Auth.authenticated();
-            User.updateUserData({ thumbnail: response.data.thumbnail });
+            User.updateUserData({
+                thumbnail: response.data.thumbnail,
+                fullName: response.data.user.fullName
+            });
         }
 
         function activate() {

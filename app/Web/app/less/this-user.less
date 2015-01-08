@@ -1,0 +1,27 @@
+﻿@import (reference) "mixins.less";
+
+@profile-thumbnail-size: 32px;
+@profile-thumbnail-border: 2px;
+
+
+.user-thumbnail {
+    font-weight: 200;
+
+    .resizer {
+        overflow: hidden;
+        width: @profile-thumbnail-size;
+        height: @profile-thumbnail-size;
+        border-radius: (@profile-thumbnail-size + 2 * @profile-thumbnail-border) / 2 + 2;
+        border: solid @profile-thumbnail-border @plantation;
+
+        a {
+            padding: 0;
+        }
+
+        img {
+            vertical-align: middle;
+            width: @profile-thumbnail-size;
+            height: @profile-thumbnail-size;
+        }
+    }
+}
