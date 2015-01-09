@@ -9,8 +9,37 @@ a {
     border: none;
     outline: none;
     font-weight: 400;
+}
 
-    &:hover {       
-        .glow-hover();
-    }
+
+.dotted-hover {
+    position: relative;
+}
+
+.dotted-hover::before {
+    position: absolute;
+    top: 63%;
+    left: 50%;
+    color: transparent;
+    content: '•';
+    text-shadow: 0 0 transparent;
+    font-size: 90%;
+    -webkit-transition: text-shadow 0.3s, color 0.3s;
+    -moz-transition: text-shadow 0.3s, color 0.3s;
+    -o-transition: text-shadow 0.3s, color 0.3s;
+    transition: text-shadow 0.3s, color 0.3s;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+@dot-color: rgba(255, 255, 255, 0.3);
+
+.dotted-hover:hover::before,
+.dotted-hover:focus::before {
+    color: @dot-color;
+    text-shadow: 15px 0 @dot-color, -15px 0 @dot-color;
 }

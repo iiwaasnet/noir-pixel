@@ -1,8 +1,7 @@
 ﻿@import (reference) "colors.less";
 
 .glow-hover() {
-
-    text-shadow: -1px 1px 15px rgba(255, 255, 255, 0.9), 1px -1px 15px rgba(255, 255, 255, 0.9);
+    text-shadow: 0 0 9px rgba(255, 255, 255, 0.9);
     -webkit-transition: 50ms linear 0s;
     -moz-transition: 50ms linear 0s;
     -o-transition: 50ms linear 0s;
@@ -37,8 +36,8 @@
     max-width: @max-width;
     display: inline-block;
     white-space: nowrap;
-    -ms-text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
-    text-overflow: ellipsis;
+    -ms-text-overflow: clip ellipsis;
+    -o-text-overflow: clip ellipsis;
+    text-overflow: clip ellipsis;
     overflow: hidden;
 }
