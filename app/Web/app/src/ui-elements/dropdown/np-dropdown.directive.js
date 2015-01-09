@@ -49,8 +49,6 @@
             if (toggle) {
                 toggle = angular.element(toggle);
 
-                element.css('display', 'inline-block');
-                element.css('position', 'relative');
                 element.on('$destroy', cleanup);
                 element.on('click', toggleDropdown);
 
