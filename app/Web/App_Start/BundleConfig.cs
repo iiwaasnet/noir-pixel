@@ -136,7 +136,7 @@ namespace Web
             yield return "~/app/src/ui-elements/dropdown/np-dropdown-toggle.directive.js";
             yield return "~/app/src/ui-elements/tabs/np-tabs.directive.js";
             yield return "~/app/src/ui-elements/tabs/np-tab.directive.js";
-            yield return "~/app/src/ui-elements/this-user/np-this-user.directive.js";
+            yield return "~/app/src/ui-elements/user-thumbnail/np-user-thumbnail.directive.js";
         }
 
         private static IEnumerable<string> Messages()

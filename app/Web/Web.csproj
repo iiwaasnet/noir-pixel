@@ -337,11 +337,11 @@
     <Content Include="app\src\errors\404.html" />
     <Content Include="app\src\roles\roles.module.js" />
     <Content Include="app\src\roles\roles.service.js" />
-    <Content Include="app\src\ui-elements\this-user\np-this-user.directive.js" />
+    <Content Include="app\src\ui-elements\user-thumbnail\np-user-thumbnail.directive.js" />
     <Content Include="app\src\ui-elements\tabs\np-tab.directive.js" />
     <Content Include="app\src\ui-elements\tabs\np-tabs.directive.js" />
     <Content Include="app\src\ui-elements\tabs\tabs.html" />
-    <Content Include="app\src\ui-elements\this-user\this-user.html" />
+    <Content Include="app\src\ui-elements\user-thumbnail\user-thumbnail.html" />
     <Content Include="app\src\user-home\user-home.html" />
     <Content Include="app\src\user-home\photos\photos.html" />
     <Content Include="app\src\user-home\profile\profile.controller.js" />

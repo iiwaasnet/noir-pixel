@@ -9,7 +9,7 @@
         </div>
         <div ng-if="ctrl.login.authenticated" class="sync-scale-in">
             <div np-dropdown>
-                <np-this-user image="{{ctrl.login.profileThumbnail}}" display-name="{{ctrl.login.userName}}"></np-this-user>
+                <np-user-thumbnail this-user image="{{ctrl.login.profileThumbnail}}" display-name="{{ctrl.login.userName}}"></np-user-thumbnail>
                 <div np-dropdown-toggle class="scale-in-out">
                     <ul class="dropdown" role="menu">
                         <li>

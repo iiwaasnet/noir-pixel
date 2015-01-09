@@ -2,11 +2,11 @@
     'use strict';
 
     angular.module('np.ui-elements')
-        .directive('npThisUser', thisUserDirective);
+        .directive('npUserThumbnail', userThumbnail);
 
-    thisUserDirective.$inject = ['$templateFactory', '$compile', '$rootScope', 'User'];
+    userThumbnail.$inject = ['$templateFactory', '$compile', '$rootScope', 'User'];
 
-    function thisUserDirective($templateFactory, $compile, $rootScope, User) {
+    function userThumbnail($templateFactory, $compile, $rootScope, User) {
         var dir = {
             restrict: 'EA',
             scope: {
@@ -14,7 +14,7 @@
                 image: '@'
             },
             transclude: true,
-            templateUrl: '/app/src/ui-elements/this-user/this-user.html',
+            templateUrl: '/app/src/ui-elements/user-thumbnail/user-thumbnail.html',
             link: link
         };
 
@@ -24,9 +24,16 @@
             var transclusionScope,
                 transcludedContent = [],
                 userData = User.getUserData() || {};
-
-            scope.image = scope.image || userData.thumbnail;
-            scope.displayName = scope.displayName || userData.fullName || userData.userName;
+            debugger;
+            var thisUser = attrs.thisUser !== undefined;
+            if (thisUser) {
+                scope.image = userData.thumbnail;
+                scope.displayName = userData.fullName || userData.userName;
+            } else {
+                scope.image = scope.image;
+                scope.displayName = scope.displayName;
+            }
+            
 
             if (transcludeFn) {
                 transcludeFn(scope, cloneFunc);
