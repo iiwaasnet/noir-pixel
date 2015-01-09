@@ -1,4 +1,7 @@
-﻿<div np-tab="tab" ng-repeat="tab in npTabs" ng-click="tab.handler(tab.text)" ng-class="{active: tab.active}">
-    <div class="image" ng-class="tab.image"></div>
-    <div class="text" np-i18n="{{tab.text}}"></div>
+﻿<div np-tab="tab" ng-repeat="tab in npTabs" ng-class="{active: tab.selected}"
+     text="tab.text"
+     image="tab.image"
+     state="tab.state"
+     params="tab.params"
+     before-activate="tab.beforeActivate">
 </div>

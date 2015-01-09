@@ -9,8 +9,14 @@
     function tabDirective($rootScope, $state) {
         var dir = {
             restrict: 'A',
+            templateUrl: '/app/src/ui-elements/tabs/tab.html',
             scope: {
-                npTab: '='
+                npTab: '=',
+                text: '=',
+                image: '=',
+                state: '=',
+                params: '=',
+                beforeActivate: '='
             },
             link: link
         };
@@ -20,8 +26,16 @@
         function link(scope, element, attrs) {
             element.on('$destroy', cleanup);
             var unsubscribe = $rootScope.$on('$stateChangeSuccess', onStateChange);
+            
 
             activate();
+
+            function activateTab(e) {
+                e.stopPropagation();
+                if (!scope.npTab.selected && scope.beforeActivate()) {
+                    $state.go(scope.state, scope.params);
+                }
+            }
 
             function activate() {
                 var currentState = (currentState = $state)
@@ -31,10 +45,10 @@
             }
 
             function updateTabState(stateName) {
-                if (scope.npTab.state === stateName) {
-                    scope.npTab.active = true;
+                if (scope.state === stateName) {
+                    scope.npTab.selected = true;
                 } else {
-                    scope.npTab.active = false;
+                    scope.npTab.selected = false;
                 }
             }
 
@@ -46,6 +60,7 @@
                 if (unsubscribe) {
                     unsubscribe();
                 }
+                element.off('click', activateTab);
             }
         }
     }

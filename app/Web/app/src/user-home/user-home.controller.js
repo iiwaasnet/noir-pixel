@@ -11,15 +11,18 @@
         ctrl.user = {};
         ctrl.tabs = [
             {
-                text: 'UserHome_Tab_Favorites',
-                handler: function(text) { alert(text); },
-                image: 'tab-gallery-img',
-                state: 'userHome.profile'
+                text: 'UserHome_Tab_Gallery',
+                image: 'tab-public',
+                state: 'userHome.profile',
+                params: '',
+                beforeActivate: function() { return true; }
             },
             {
-                text: 'UserHome_Tab_Gallery',
-                handler: function(text) { alert(text); },
-                image: 'tab-gallery-img'
+                text: 'UserHome_Tab_Favorites',
+                image: 'tab-gallery',
+                state: 'userHome.profile',
+                params: '',
+                beforeActivate: function () { return true; }
             }
         ];
         activate();
