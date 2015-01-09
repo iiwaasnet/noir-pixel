@@ -23,9 +23,9 @@
         function link(scope, element, attrs, ctrl, transcludeFn) {
             var transclusionScope,
                 transcludedContent = [],
-                userData = User.getUserData() || {};
-            debugger;
-            var thisUser = attrs.thisUser !== undefined;
+                userData = User.getUserData() || {},
+                thisUser = attrs.thisUser !== undefined;
+
             if (thisUser) {
                 scope.image = userData.thumbnail;
                 scope.displayName = userData.fullName || userData.userName;
