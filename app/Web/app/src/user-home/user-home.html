@@ -2,9 +2,23 @@
     <div class="column-left">
     </div>
     <div class="column-center">
-        <div>
-            <div np-tabs="ctrl.tabs"></div>
+        <div class="tabs-group">
+            <div np-tab class="tab"
+                 state="'userHome.profile'"
+                 params=""
+                 before-activate="ctrl.tabs[1].beforeActivate">
+                <div np-user-thumbnail this-user class="image"></div>
+                <div class="text user-name" ng-bind="ctrl.user.userName"></div>
+            </div>
+            <div np-tab class="tab"
+                 state="'userHome.profile'"
+                 params=""
+                 before-activate="ctrl.tabs[0].beforeActivate">
+                <div class="image tab-gallery"></div>
+                <div class="text" np-i18n="UserHome_Tab_Favorites"></div>
+            </div>
         </div>
+
         <div ui-view></div>
     </div>
     <div class="column-right"></div>
