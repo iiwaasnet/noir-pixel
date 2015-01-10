@@ -20,6 +20,7 @@
         function isSelf(userName) {
             var userData = srv.getUserData();
             return userData
+                && userName
                 && userData.userName
                 && userData.userName.toLowerCase() === userName.toLowerCase();
         }
