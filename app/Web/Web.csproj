@@ -337,7 +337,6 @@
     <Content Include="app\src\errors\404.html" />
     <Content Include="app\src\roles\roles.module.js" />
     <Content Include="app\src\roles\roles.service.js" />
-    <Content Include="app\src\ui-elements\tabs\tab.html" />
     <Content Include="app\src\ui-elements\user-thumbnail\np-user-thumbnail.directive.js" />
     <Content Include="app\src\ui-elements\tabs\np-tab.directive.js" />
     <Content Include="app\src\ui-elements\tabs\np-tabs.directive.js" />
