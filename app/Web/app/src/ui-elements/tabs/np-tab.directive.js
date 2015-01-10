@@ -20,7 +20,7 @@
 
         return dir;
 
-        function link(scope, element, attrs) {
+        function link(scope, element) {
             element.on('$destroy', cleanup);
             var unsubscribe = $rootScope.$on('$stateChangeSuccess', onStateChange);
             
@@ -43,9 +43,9 @@
 
             function updateTabState(stateName) {
                 if (scope.state === stateName) {
-                    scope.npTab.selected = true;
+                    element.addClass('active');
                 } else {
-                    scope.npTab.selected = false;
+                    element.removeClass('active');
                 }
             }
 
