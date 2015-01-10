@@ -34,10 +34,9 @@
 /*limited text length with ellipse*/
 .cut-text(@max-width) {
     max-width: @max-width;
-    display: inline-block;
     white-space: nowrap;
-    -ms-text-overflow: clip ellipsis;
-    -o-text-overflow: clip ellipsis;
-    text-overflow: clip ellipsis;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
     overflow: hidden;
 }
