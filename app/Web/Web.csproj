@@ -334,6 +334,7 @@
     <Content Include="app\less\user-home.css">
       <DependentUpon>user-home.less</DependentUpon>
     </Content>
+    <Content Include="app\src\constants\states.constants.js" />
     <Content Include="app\src\errors\404.html" />
     <Content Include="app\src\roles\roles.module.js" />
     <Content Include="app\src\roles\roles.service.js" />

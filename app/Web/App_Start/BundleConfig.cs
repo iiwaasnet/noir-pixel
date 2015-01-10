@@ -127,6 +127,7 @@ namespace Web
         {
             yield return "~/app/src/constants/const.module.js";
             yield return "~/app/src/constants/errors.constants.js";
+            yield return "~/app/src/constants/states.constants.js";
         }
 
         private static IEnumerable<string> UIElements()

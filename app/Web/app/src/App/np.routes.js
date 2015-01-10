@@ -4,27 +4,27 @@
     angular.module('np')
         .config(config);
 
-    config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
+    config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', 'States'];
 
-    function config($stateProvider, $urlRouterProvider, $locationProvider) {
+    function config($stateProvider, $urlRouterProvider, $locationProvider, States) {
         $stateProvider
-            .state('home', {
+            .state(States.Home.Name, {
                 url: '/',
                 templateUrl: '/app/src/home/home.html',
                 controller: 'HomeController',
                 controllerAs: 'ctrl'
             })
-            .state('userHome', {
+            .state(States.UserHome.Name, {
                 url: '/home',
                 abstract: true,
-                templateProvider: ['ViewResolver', '$stateParams', function(ViewResolver, $stateParams) { return ViewResolver.resolveTemplateUrl('userHome', $stateParams); }],
-                controllerProvider: ['ViewResolver', '$stateParams', function(ViewResolver) { return ViewResolver.resolveController('userHome'); }],
+                templateProvider: ['ViewResolver', '$stateParams', function(ViewResolver, $stateParams) { return ViewResolver.resolveTemplateUrl(States.UserHome.Name, $stateParams); }],
+                controllerProvider: ['ViewResolver', '$stateParams', function (ViewResolver, $stateParams) { return ViewResolver.resolveController(States.UserHome.Name, $stateParams); }],
                 controllerAs: 'ctrl'
             })
-            .state('userHome.profile', {
+            .state(States.UserHome.Profile.Name, {
                 url: '/:userName',
-                templateProvider: ['ViewResolver', '$stateParams', function (ViewResolver, $stateParams) { return ViewResolver.resolveTemplateUrl('userHome.profile', $stateParams); }],
-                controllerProvider: ['ViewResolver', '$stateParams', function (ViewResolver) { return ViewResolver.resolveController('userHome.profile'); }],
+                templateProvider: ['ViewResolver', '$stateParams', function (ViewResolver, $stateParams) { return ViewResolver.resolveTemplateUrl(States.UserHome.Profile.Name, $stateParams); }],
+                controllerProvider: ['ViewResolver', '$stateParams', function (ViewResolver, $stateParams) { return ViewResolver.resolveController(States.UserHome.Profile.Name, $stateParams); }],
                 controllerAs: 'profileCtrl'
             })
             //.state('userPublic', {
@@ -40,19 +40,19 @@
             //    controllerProvider: ['ViewResolver', '$stateParams', function(ViewResolver) { return ViewResolver.resolveController('userPublic.photos'); }],
             //    controllerAs: 'photosCtrl'
             //})
-            .state('externalSignIn', {
+            .state(States.ExternalSignIn.Name, {
                 url: '/external-signin',
                 templateUrl: '/app/src/auth/external-signin.html',
                 controller: 'ExternalSignInController',
                 controllerAs: 'ctrl'
             })
-            .state('externalRegister', {
+            .state(States.ExternalRegister.Name, {
                 url: '/external-register?external_access_token&provider&access_token_secret',
                 templateUrl: '/app/src/auth/external-register.html',
                 controller: 'ExternalRegisterController',
                 controllerAs: 'ctrl'
             })
-            .state('notAuthorized', {
+            .state(States.NotAuthorized.Name, {
                 url: '/not-authorized?redirectTo',
                 templateUrl: '/app/src/auth/not-authorized.html',
                 controller: 'NotAuthorizedController',
