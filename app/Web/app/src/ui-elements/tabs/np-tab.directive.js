@@ -12,8 +12,7 @@
             scope: {
                 npTab: '=',
                 state: '=',
-                params: '=',
-                beforeActivate: '='
+                params: '='
             },
             link: link
         };
@@ -29,7 +28,7 @@
 
             function activateTab(e) {
                 e.stopPropagation();
-                if (!scope.npTab.selected && scope.beforeActivate()) {
+                if (!scope.npTab.selected) {
                     $state.go(scope.state, scope.params);
                 }
             }
@@ -50,7 +49,7 @@
             }
 
             function onStateChange(event, toState, toParams, fromState, fromParams) {
-                updateTabState(toState);
+                updateTabState(toState.name);
             }
 
             function cleanup() {

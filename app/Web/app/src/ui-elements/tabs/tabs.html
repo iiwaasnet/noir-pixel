@@ -1,7 +1,6 @@
 ﻿<div np-tab="tab" ng-repeat="tab in npTabs" ng-class="{active: tab.selected}" class="tab"
      state="tab.state"
-     params="tab.params"
-     before-activate="tab.beforeActivate">
+     params="tab.params">
     <div class="image" ng-class="tab.image"></div>
     <div class="text" np-i18n="{{tab.text}}"></div>
 </div>
