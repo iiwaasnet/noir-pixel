@@ -25,6 +25,7 @@
                 beforeActivate: function () { return true; }
             }
         ];
+
         activate();
 
         function activate() {
