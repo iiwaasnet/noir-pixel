@@ -9,11 +9,8 @@
     function tabDirective($rootScope, $state) {
         var dir = {
             restrict: 'A',
-            templateUrl: '/app/src/ui-elements/tabs/tab.html',
             scope: {
                 npTab: '=',
-                text: '=',
-                image: '=',
                 state: '=',
                 params: '=',
                 beforeActivate: '='
