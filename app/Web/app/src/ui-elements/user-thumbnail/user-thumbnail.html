@@ -1,8 +1,7 @@
-﻿<div ng-if="!image">
-    <p transclude class="icon-user"></p>
-</div>
-<div class="user-thumbnail" ng-if="image">
-    <div class="resizer">
-        <img transclude np-img-cloak ng-src="{{image}}" alt="{{displayName}}" />
-    </div>
-</div>
+﻿<span class="user-thumbnail">
+    <span class="icon-user" ng-if="!image">
+    </span>
+    <span class="resizer" ng-if="image">
+        <img np-img-cloak ng-src="{{image}}" alt="{{displayName}}" />
+    </span>
+</span>
