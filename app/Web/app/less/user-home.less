@@ -18,10 +18,10 @@
         flex: 1 1 auto;
     }
 
-    .tab{
-         .user-name {
-                .cut-text(8em);
-            }
+    .tab {
+        .user-name {
+            .cut-text(8em);
+        }
     }
 }
 
@@ -29,18 +29,24 @@
     .sprite(@gallery32);
 }
 
-.active {
-    .tab-gallery {
-        .sprite(@gallery32-a);
-    }
-}
-
 .tab-public {
     .sprite(@public32);
 }
 
+.tab-home {
+    .sprite(@home32);
+}
+
 .active {
+    .tab-gallery {
+        .sprite(@gallery32-a);
+    }
+
     .tab-public {
         .sprite(@public32-a);
+    }
+
+    .tab-home {
+        .sprite(@home32-a);
     }
 }
