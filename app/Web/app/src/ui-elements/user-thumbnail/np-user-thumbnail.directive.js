@@ -54,7 +54,6 @@
                 angular.forEach(transcluded, transcludeElement);
 
                 $compile(template)(scope);
-                element.replaceWith(template);
 
                 element.on('$destroy', cleanup);
             }
