@@ -57,9 +57,7 @@
             }
 
             function cleanup() {
-                if (unsubscribe) {
-                    unsubscribe();
-                }
+                unsubscribe && unsubscribe();
                 element.off('click', activateTab);
             }
         }
