@@ -1,12 +1,12 @@
-﻿<div id="user-home" class="columns-container">
+﻿<div id="user-public" class="columns-container">
     <div class="column-left">
     </div>
     <div class="column-center">
-        <div class="tabs-group horizontal">
+        <div class="tabs-group">
             <div np-tab class="tab"
                  state="'userHome.profile'"
                  params="{userName: ctrl.user.userName}">
-                <div class="image tab-home"></div>
+                <div np-user-thumbnail this-user class="image"></div>
                 <div class="text user-name" ng-bind="ctrl.user.userName"></div>
             </div>
         </div>

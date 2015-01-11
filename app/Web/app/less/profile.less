@@ -1,0 +1,52 @@
+﻿@import (reference) "sprites32.less";
+@import (reference) "sprites16.less";
+@import (reference) "mixins.less";
+
+
+#profile {
+    margin: 60em/16 0 0;
+
+    .column-left {
+        -webkit-flex: 0 1 150px;
+        -ms-flex: 0 1 150px;
+        flex: 0 1 150px;
+    }
+
+    .vertical {
+        .tab {
+
+            .tab-private {
+                .sprite(@private16);
+                .animate;
+            }
+
+            .tab-public {
+                .sprite(@public16);
+                .animate;
+            }
+
+            &.active {
+                .tab-private {
+                    .sprite(@private32);
+                    .animate;
+                }
+
+                .tab-public {
+                    .sprite(@public32);
+                    .animate;
+                }
+            }
+        }
+
+        .animate {
+            -moz-transition-property: width, height;
+            -o-transition-property: width, height;
+            -webkit-transition-property: width, height;
+            transition-property: width, height;
+            -moz-transition-duration: 0.1s;
+            -o-transition-duration: 0.1s;
+            -webkit-transition-duration: 0.1s;
+            transition-duration: 0.1s;
+        }
+    }
+}

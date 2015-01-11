@@ -4,9 +4,9 @@
     angular.module('np.user-home')
         .controller('ProfileController', profileController);
 
-    profileController.$inject = ['$rootScope', '$scope', 'States'];
+    profileController.$inject = ['$rootScope', '$scope', 'States', 'profileData'];
 
-    function profileController($rootScope, $scope, States) {
+    function profileController($rootScope, $scope, States, profileData) {
         var unsubscribe;
 
         activate();
@@ -17,9 +17,9 @@
         }
 
         function stateChangeStart(event, toState, toParams, fromState, fromParams) {
-            if (fromState.name === States.UserHome.Profile.Name) {
-                event.preventDefault();
-            }
+            //if (fromState.name === States.UserHome.Profile.Name) {
+            //    event.preventDefault();
+            //}
         }
 
         function cleanup() {

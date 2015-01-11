@@ -20,6 +20,12 @@
             if (state === States.UserHome.Profile.Name && isSelf) {
                 return $templateFactory.fromUrl('/app/src/user-home/profile/profile.html', stateParams);
             }
+            if (state === States.UserHome.Profile.Public.Name && isSelf) {
+                return $templateFactory.fromUrl('/app/src/user-home/profile/profile-public.html', stateParams);
+            }
+            if (state === States.UserHome.Profile.Private.Name && isSelf) {
+                return $templateFactory.fromUrl('/app/src/user-home/profile/profile-private.html', stateParams);
+            }
             if (state === States.UserPublic.Photos.Name) {
                 return $templateFactory.fromUrl('/app/src/user-home/photos/photos.html', stateParams);
             }
@@ -35,6 +41,12 @@
             }
             if (state === States.UserHome.Profile.Name && isSelf) {
                 return 'ProfileController';
+            }
+            if (state === States.UserHome.Profile.Public.Name && isSelf) {
+                return 'ProfilePublicController';
+            }
+            if (state === States.UserHome.Profile.Private.Name && isSelf) {
+                return 'ProfilePrivateController';
             }
             return '';
         }

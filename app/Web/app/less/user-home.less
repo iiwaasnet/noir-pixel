@@ -25,28 +25,32 @@
     }
 }
 
-.tab-gallery {
-    .sprite(@gallery32);
-}
+.horizontal {
+    .tab {
+        .tab-gallery {
+            .sprite(@gallery32);
+        }
 
-.tab-public {
-    .sprite(@public32);
-}
+        .tab-public {
+            .sprite(@public32);
+        }
 
-.tab-home {
-    .sprite(@home32);
-}
+        .tab-home {
+            .sprite(@home32);
+        }
 
-.active {
-    .tab-gallery {
-        .sprite(@gallery32-a);
-    }
+        &.active {
+            .tab-gallery {
+                .sprite(@gallery32-a);
+            }
 
-    .tab-public {
-        .sprite(@public32-a);
-    }
+            .tab-public {
+                .sprite(@public32-a);
+            }
 
-    .tab-home {
-        .sprite(@home32-a);
+            .tab-home {
+                .sprite(@home32-a);
+            }
+        }
     }
 }

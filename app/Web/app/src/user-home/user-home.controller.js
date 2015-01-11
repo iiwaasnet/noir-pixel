@@ -4,34 +4,17 @@
     angular.module('np.user-home')
         .controller('UserHomeController', userHomeController);
 
-    userHomeController.$inject = ['User'];
+    userHomeController.$inject = ['User', 'Profile', 'profileData'];
 
-    function userHomeController(User) {
+    function userHomeController(User, Profile, profileData) {
         var ctrl = this;
         ctrl.user = {};
-        ctrl.tabs = [
-            {
-                text: 'UserHome_Tab_Gallery',
-                image: 'tab-public',
-                state: 'userHome.profile',
-                params: '',
-                beforeActivate: function() { return true; }
-            },
-            {
-                text: 'UserHome_Tab_Favorites',
-                image: 'tab-gallery',
-                state: 'userHome.profile',
-                params: '',
-                beforeActivate: function () { return true; }
-            }
-        ];
 
         activate();
 
         function activate() {
-            var userData = User.getUserData();
-
-            ctrl.user.userName = userData.userName;
+            ctrl.user.userName = profileData.data.user.userName;
+            ctrl.user.displayName = profileData.data.user.fullName || ctrl.user.userName;
         }
     }
 })();

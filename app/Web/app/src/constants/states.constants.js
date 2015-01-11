@@ -8,7 +8,13 @@
         UserHome: {
             Name: 'userHome',
             Profile: {
-                Name: 'userHome.profile'
+                Name: 'userHome.profile',
+                Public: {
+                    Name: 'userHome.profile.public'
+                },
+                Private: {
+                    Name: 'userHome.profile.private'
+                }
             }
         },
         ExternalSignIn: {

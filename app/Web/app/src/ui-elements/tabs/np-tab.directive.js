@@ -20,7 +20,9 @@
         return dir;
 
         function link(scope, element) {
+            var selected = false;
             element.on('$destroy', cleanup);
+            element.on('click', activateTab);
             var unsubscribe = $rootScope.$on('$stateChangeSuccess', onStateChange);
             
 
@@ -28,7 +30,7 @@
 
             function activateTab(e) {
                 e.stopPropagation();
-                if (!scope.npTab.selected) {
+                if (!selected) {
                     $state.go(scope.state, scope.params);
                 }
             }
@@ -41,9 +43,11 @@
             }
 
             function updateTabState(stateName) {
-                if (scope.state === stateName) {
+                if (~stateName.indexOf(scope.state)) {
+                    selected = true;
                     element.addClass('active');
                 } else {
+                    selected = false;
                     element.removeClass('active');
                 }
             }

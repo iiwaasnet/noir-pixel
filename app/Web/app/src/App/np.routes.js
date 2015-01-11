@@ -18,14 +18,33 @@
                 url: '/home',
                 abstract: true,
                 templateProvider: ['ViewResolver', '$stateParams', function(ViewResolver, $stateParams) { return ViewResolver.resolveTemplateUrl(States.UserHome.Name, $stateParams); }],
-                controllerProvider: ['ViewResolver', '$stateParams', function (ViewResolver, $stateParams) { return ViewResolver.resolveController(States.UserHome.Name, $stateParams); }],
-                controllerAs: 'ctrl'
+                controllerProvider: ['ViewResolver', '$stateParams', function(ViewResolver, $stateParams) { return ViewResolver.resolveController(States.UserHome.Name, $stateParams); }],
+                controllerAs: 'ctrl',
+                resolve: {
+                    profile: 'Profile',
+                    profileData: function (profile) {
+                         return profile.getOwnProfile();
+                    }
+                }
             })
             .state(States.UserHome.Profile.Name, {
                 url: '/:userName',
+                abstract: true,
                 templateProvider: ['ViewResolver', '$stateParams', function (ViewResolver, $stateParams) { return ViewResolver.resolveTemplateUrl(States.UserHome.Profile.Name, $stateParams); }],
                 controllerProvider: ['ViewResolver', '$stateParams', function (ViewResolver, $stateParams) { return ViewResolver.resolveController(States.UserHome.Profile.Name, $stateParams); }],
                 controllerAs: 'profileCtrl'
+            })
+            .state(States.UserHome.Profile.Public.Name, {
+                url: '/public',
+                templateProvider: ['ViewResolver', '$stateParams', function (ViewResolver, $stateParams) { return ViewResolver.resolveTemplateUrl(States.UserHome.Profile.Public.Name, $stateParams); }],
+                controllerProvider: ['ViewResolver', '$stateParams', function (ViewResolver, $stateParams) { return ViewResolver.resolveController(States.UserHome.Profile.Public.Name, $stateParams); }],
+                controllerAs: 'publicCtrl'
+            })
+            .state(States.UserHome.Profile.Private.Name, {
+                url: '/private',
+                templateProvider: ['ViewResolver', '$stateParams', function (ViewResolver, $stateParams) { return ViewResolver.resolveTemplateUrl(States.UserHome.Profile.Private.Name, $stateParams); }],
+                controllerProvider: ['ViewResolver', '$stateParams', function (ViewResolver, $stateParams) { return ViewResolver.resolveController(States.UserHome.Profile.Private.Name, $stateParams); }],
+                controllerAs: 'privateCtrl'
             })
             //.state('userPublic', {
             //    url: '/people',

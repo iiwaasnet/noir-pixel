@@ -97,6 +97,8 @@ namespace Web
             yield return "~/app/src/user-home/user-home.module.js";
             yield return "~/app/src/user-home/user-home.controller.js";
             yield return "~/app/src/user-home/profile/profile.controller.js";
+            yield return "~/app/src/user-home/profile/profile-public.controller.js";
+            yield return "~/app/src/user-home/profile/profile-private.controller.js";
         }
 
         private static IEnumerable<string> ViewResolver()

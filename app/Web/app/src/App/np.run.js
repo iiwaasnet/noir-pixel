@@ -71,11 +71,11 @@
         }
 
         function startLoadAnimation() {
-            body.attr('style', 'opacity: 0.4');
+            //body.attr('style', 'opacity: 0.4');
         }
 
         function endLoadAnimation() {
-            body.attr('style', 'opacity: 1');
+            //body.attr('style', 'opacity: 1');
         }
     }
 })();

@@ -20,10 +20,12 @@
             return $q.reject();
         }
 
-        function getOwnProfile(userName) {
+        function getOwnProfile() {
+            var userData = User.getUserData() || {userName: ''};
+
             var deferred = $q.defer();
 
-            getUserProfile(userName).then(
+            getUserProfile(userData.userName).then(
                 function (response) { getProfileSuccess(response, deferred); },
                 function(reason) { getProfileError(reason, deferred); });
 
