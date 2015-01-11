@@ -68,9 +68,7 @@
 
             function cleanup() {
                 $document.off('click', hideDropdown);
-                if (unsubscribe) {
-                    unsubscribe();
-                }
+                unsubscribe && unsubscribe();
             }
         }
     }
