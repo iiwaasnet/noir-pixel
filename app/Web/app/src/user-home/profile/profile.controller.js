@@ -4,26 +4,33 @@
     angular.module('np.user-home')
         .controller('ProfileController', profileController);
 
-    profileController.$inject = ['$rootScope', '$scope', 'States', 'profileData'];
+    profileController.$inject = ['States', 'profileData'];
 
-    function profileController($rootScope, $scope, States, profileData) {
-        var unsubscribe;
+    function profileController(States, profileData) {
+        var ctrl = this;
+        ctrl.tabs = [];
 
         activate();
 
         function activate() {
-            $scope.$on('$destroy', cleanup);
-            unsubscribe = $rootScope.$on('$stateChangeStart', stateChangeStart);
+            createTabs();
         }
 
-        function stateChangeStart(event, toState, toParams, fromState, fromParams) {
-            //if (fromState.name === States.UserHome.Profile.Name) {
-            //    event.preventDefault();
-            //}
-        }
+        function createTabs() {
+            var params = { userName: profileData.data.user.userName };
 
-        function cleanup() {
-            unsubscribe && unsubscribe();
+            ctrl.tabs.push({
+                state: States.UserHome.Profile.Public.Name,
+                params: params,
+                text: 'UserHome_Profile_Tab_Public',
+                image: 'tab-public'
+            });
+            ctrl.tabs.push({
+                state: States.UserHome.Profile.Private.Name,
+                params: params,
+                text: 'UserHome_Profile_Tab_Private',
+                image: 'tab-private'
+            });
         }
     }
 })();

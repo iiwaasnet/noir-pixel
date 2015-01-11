@@ -192,10 +192,19 @@
   <data name="EAPI_ValueLength" xml:space="preserve">
     <value>Value length should be min. {MinLength} and max. {MaxLength} characters long.</value>
   </data>
-  <data name="UserHome_Tab_Favorites" xml:space="preserve">
+  <data name="UserPublic_Tab_Favorites" xml:space="preserve">
     <value>Favorites</value>
   </data>
-  <data name="UserHome_Tab_Gallery" xml:space="preserve">
+  <data name="UserPublic_Tab_Gallery" xml:space="preserve">
     <value>Gallery</value>
+  </data>
+  <data name="UserHome_Profile_Tab_Private" xml:space="preserve">
+    <value>Private</value>
+  </data>
+  <data name="UserHome_Profile_Tab_Public" xml:space="preserve">
+    <value>Public</value>
+  </data>
+  <data name="UserHome_Tab_Darkroom" xml:space="preserve">
+    <value>Darkroom</value>
   </data>
 </root>

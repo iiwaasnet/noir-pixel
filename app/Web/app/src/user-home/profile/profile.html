@@ -1,17 +1,11 @@
 ﻿<div id="profile" class="columns-container">
     <div class="column-left">
         <div class="tabs-group vertical">
-            <div np-tab class="tab"
-                 state="'userHome.profile.public'"
-                 params="{userName: ctrl.user.userName}">
-                <div class="image tab-public"></div>
-                <div class="text">Public</div>
-            </div>
-            <div np-tab class="tab"
-                 state="'userHome.profile.private'"
-                 params="{userName: ctrl.user.userName}">
-                <div class="image tab-private"></div>
-                <div class="text">Private</div>
+            <div ng-repeat="tab in profileCtrl.tabs" np-tab class="tab"
+                 state="tab.state"
+                 params="tab.params">
+                <div class="image" ng-class="tab.image"></div>
+                <div class="text" np-i18n="{{tab.text}}"></div>
             </div>
         </div>
     </div>

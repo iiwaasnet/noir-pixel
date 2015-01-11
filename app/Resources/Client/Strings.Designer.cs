@@ -277,20 +277,29 @@ namespace Resources.Client {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Favorites.
+        ///   Looks up a localized string similar to Private.
         /// </summary>
-        public static string UserHome_Tab_Favorites {
+        public static string UserHome_Profile_Tab_Private {
             get {
-                return ResourceManager.GetString("UserHome_Tab_Favorites", resourceCulture);
+                return ResourceManager.GetString("UserHome_Profile_Tab_Private", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Gallery.
+        ///   Looks up a localized string similar to Public.
         /// </summary>
-        public static string UserHome_Tab_Gallery {
+        public static string UserHome_Profile_Tab_Public {
             get {
-                return ResourceManager.GetString("UserHome_Tab_Gallery", resourceCulture);
+                return ResourceManager.GetString("UserHome_Profile_Tab_Public", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Darkroom.
+        /// </summary>
+        public static string UserHome_Tab_Darkroom {
+            get {
+                return ResourceManager.GetString("UserHome_Tab_Darkroom", resourceCulture);
             }
         }
         
@@ -300,6 +309,24 @@ namespace Resources.Client {
         public static string UserName {
             get {
                 return ResourceManager.GetString("UserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Favorites.
+        /// </summary>
+        public static string UserPublic_Tab_Favorites {
+            get {
+                return ResourceManager.GetString("UserPublic_Tab_Favorites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gallery.
+        /// </summary>
+        public static string UserPublic_Tab_Gallery {
+            get {
+                return ResourceManager.GetString("UserPublic_Tab_Gallery", resourceCulture);
             }
         }
     }
