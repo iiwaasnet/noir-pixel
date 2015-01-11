@@ -4,9 +4,9 @@
     angular.module('np')
         .run(run);
 
-    run.$inject = ['$rootScope', '$state', 'Strings', 'ApplicationLogging'];
+    run.$inject = ['$rootScope', '$state', '$document', 'Strings', 'ApplicationLogging'];
 
-    function run($rootScope, $state, Strings, ApplicationLogging) {
+    function run($rootScope, $state, $document, Strings, ApplicationLogging) {
 
         //$rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
         //    console.log('$stateChangeStart to ' + toState.to + '- fired when the transition begins. toState,toParams : \n', toState, toParams);
@@ -30,10 +30,12 @@
         //    console.log(unfoundState, fromState, fromParams);
         //});
 
+        var body = angular.element($document[0].body);
 
         try {
+            $rootScope.$on('$stateChangeStart', stateChangeStart);
             $rootScope.$on('$stateChangeError', stateChangeError);
-            //$rootScope.$on('$stateChangeSuccess', stateChangeSuccess);
+            $rootScope.$on('$stateChangeSuccess', stateChangeSuccess);
 
             setDefaultLanguage();
         } catch (e) {
@@ -45,6 +47,8 @@
         }
 
         function stateChangeError(event, toState, toParams, fromState, fromParams, error) {
+            endLoadAnimation();
+
             if (error.status === 401) {
                 event.preventDefault();
                 //alert('Unauthorized!');
@@ -58,7 +62,20 @@
 
         }
 
+        function stateChangeStart(event, toState, toParams, fromState, fromParams) {
+            startLoadAnimation();
+        }
+
         function stateChangeSuccess(event, toState, toParams, fromState, fromParams) {
+            endLoadAnimation();
+        }
+
+        function startLoadAnimation() {
+            body.attr('style', 'opacity: 0.4');
+        }
+
+        function endLoadAnimation() {
+            body.attr('style', 'opacity: 1');
         }
     }
 })();
