@@ -1,4 +1,4 @@
-﻿namespace Api.App.Users
+﻿namespace Api.App.Profiles
 {
     public class UserPrivateInfo
     {

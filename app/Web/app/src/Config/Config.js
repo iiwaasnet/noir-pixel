@@ -14,8 +14,8 @@
                 RegisterExternal: 'accounts/register-external',
                 UserExists: 'accounts/exists/{userName}'
             },
-            Users: {
-                Home: 'users/home/{userName}'
+            Profiles: {
+                Profile: 'profiles/{userName}'
             },
         },
         Strings: {

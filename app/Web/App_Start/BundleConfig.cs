@@ -82,7 +82,14 @@ namespace Web
                             .Include(Roles().ToArray())
                             .Include(ViewResolver().ToArray())
                             .Include(UserHome().ToArray())
+                            .Include(Profile().ToArray())
                 );
+        }
+
+        private static IEnumerable<string> Profile()
+        {
+            yield return "~/app/src/profile/profile.module.js";
+            yield return "~/app/src/profile/profile.service.js";
         }
 
         private static IEnumerable<string> UserHome()

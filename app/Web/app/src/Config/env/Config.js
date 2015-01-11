@@ -14,8 +14,8 @@
                 RegisterExternal: '@@ApiUris.Accounts.RegisterExternal',
                 UserExists: '@@ApiUris.Accounts.UserExists'
             },
-            Users: {
-                Home: '@@ApiUris.Users.Home'
+            Profiles: {
+                Profile: '@@ApiUris.Profiles.Profile'
             },
         },
         Strings: {

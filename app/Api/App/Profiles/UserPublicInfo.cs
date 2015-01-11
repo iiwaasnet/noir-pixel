@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using Api.App.Users.Entities;
 
-namespace Api.App.Users
+namespace Api.App.Profiles
 {
     public class UserPublicInfo
     {
-        public string UserName { get; set; }
-        public string FullName { get; set; }
         public Geo LivesIn { get; set; }
         public DateTime DateRegistered { get; set; }
         public IEnumerable<string> AboutMe { get; set; }
-        public ProfileImage Avatar { get; set; }
-        public ProfileImage Thumbnail { get; set; }
+        public string Avatar { get; set; }
+        public string Thumbnail { get; set; }
     }
 }

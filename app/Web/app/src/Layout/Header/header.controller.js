@@ -4,9 +4,9 @@
     angular.module('np.layout')
         .controller('HeaderController', headerController);
 
-    headerController.$inject = ['$scope', '$http', 'Strings', 'Auth', 'EventsHub', 'Signin', 'Config', 'Url', 'User'];
+    headerController.$inject = ['$scope', '$http', 'Strings', 'Auth', 'EventsHub', 'Signin', 'User', 'Profile'];
 
-    function headerController($scope, $http, Strings, Auth, EventsHub, Signin, Config, Url, User) {
+    function headerController($scope, $http, Strings, Auth, EventsHub, Signin, User, Profile) {
         var ctrl = this;
         ctrl.mainMenu = [];
         ctrl.signin = signin;
@@ -53,50 +53,38 @@
             return menu;
         }
 
-        function getSignInMenu() {
-            return {
-                signOut: Strings.getLocalizedString('AuthMenu_SignOut'),
-                signIn: Strings.getLocalizedString('AuthMenu_SignIn')
-            };
-        }
-
         function buildMenus() {
             ctrl.mainMenu = getMainMenu();
         }
 
         function signedIn() {
-            getHome();
+            getProfile();
         }
 
         function signedOut() {
             ctrl.login.authenticated = Auth.authenticated();
         }
 
-        function getHome() {
+        function getProfile() {
             var userName = User.getUserData().userName;
-            var uri = Url.build(Config.ApiUris.Base, Config.ApiUris.Users.Home).formatNamed({ userName: userName });
-            $http.get(uri).then(getHomeSuccess, getHomeError);
+            Profile.getOwnProfile(userName).then(getProfileSuccess, getProfileError);
         }
 
-        function getHomeError() {
+        function getProfileError() {
             Auth.signOut();
         }
 
-        function getHomeSuccess(response) {
-            ctrl.login.profileThumbnail = response.data.thumbnail;
+        function getProfileSuccess(response) {
+            ctrl.login.profileThumbnail = response.data.publicInfo.thumbnail;
             ctrl.login.userName = response.data.user.userName;
             ctrl.login.authenticated = Auth.authenticated();
-            User.updateUserData({
-                thumbnail: response.data.thumbnail,
-                fullName: response.data.user.fullName
-            });
         }
 
         function activate() {
             if (Auth.authenticated()) {
                 var userData = User.getUserData();
                 if (userData && userData.userName) {
-                    getHome(userData.userName);
+                    getProfile(userData.userName);
                 } else {
                     Auth.signOut();
                 }

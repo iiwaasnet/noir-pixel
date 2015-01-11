@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using Api.App.Images.Config;
 using JsonConfigurationProvider;
 
@@ -22,11 +21,6 @@ namespace Api.App.Images
         public Size ThumbnailSize()
         {
             return new Size(config.ProfileImages.Thumbnail.Width, config.ProfileImages.Thumbnail.Height);
-        }
-
-        public Uri DefaultAvatarUri()
-        {
-            return new Uri("http://default-avatar");
         }
     }
 }

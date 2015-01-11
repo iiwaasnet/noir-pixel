@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Api.App.Users;
+using Api.App.Profiles;
 
 namespace Api.App.Posts
 {

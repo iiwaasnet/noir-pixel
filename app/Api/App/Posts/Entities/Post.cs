@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Api.App.Entities;
-using Api.App.Users.Entities;
+using Api.App.Profiles.Entities;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 

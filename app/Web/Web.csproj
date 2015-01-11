@@ -336,6 +336,8 @@
     </Content>
     <Content Include="app\src\constants\states.constants.js" />
     <Content Include="app\src\errors\404.html" />
+    <Content Include="app\src\profile\profile.module.js" />
+    <Content Include="app\src\profile\profile.service.js" />
     <Content Include="app\src\roles\roles.module.js" />
     <Content Include="app\src\roles\roles.service.js" />
     <Content Include="app\src\ui-elements\user-thumbnail\np-user-thumbnail.directive.js" />
