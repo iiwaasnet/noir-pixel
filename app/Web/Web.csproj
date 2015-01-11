@@ -322,6 +322,9 @@
     <Content Include="app\less\column-layout.css.map">
       <DependentUpon>column-layout.css</DependentUpon>
     </Content>
+    <Content Include="app\less\profile.css">
+      <DependentUpon>profile.less</DependentUpon>
+    </Content>
     <Content Include="app\less\resets.css">
       <DependentUpon>resets.less</DependentUpon>
     </Content>
@@ -345,11 +348,16 @@
     <Content Include="app\src\ui-elements\tabs\np-tabs.directive.js" />
     <Content Include="app\src\ui-elements\tabs\tabs.html" />
     <Content Include="app\src\ui-elements\user-thumbnail\user-thumbnail.html" />
+    <Content Include="app\src\user-home\profile\profile-private.html" />
+    <Content Include="app\src\user-home\profile\profile-public.html" />
+    <Content Include="app\src\user-home\profile\profile-private.controller.js" />
+    <Content Include="app\src\user-home\profile\profile-public.controller.js" />
     <Content Include="app\src\user-home\user-home.html" />
     <Content Include="app\src\user-home\photos\photos.html" />
     <Content Include="app\src\user-home\profile\profile.controller.js" />
     <Content Include="app\src\user-home\profile\profile.html" />
     <Content Include="app\src\user-home\user-home.controller.js" />
+    <Content Include="app\src\user-public\user-public.html" />
     <Content Include="app\src\view-resolver\view-resolver.module.js" />
     <Content Include="app\src\view-resolver\view-resolver.service.js" />
     <Content Include="app\src\user\user.module.js" />
@@ -475,6 +483,10 @@
     <Content Include="app\less\user-thumbnail.less" />
     <Content Include="app\less\user-thumbnail.css.map">
       <DependentUpon>user-thumbnail.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\profile.less" />
+    <Content Include="app\less\profile.css.map">
+      <DependentUpon>profile.css</DependentUpon>
     </Content>
     <None Include="app\src\config\env\dev.json" />
     <Content Include="app\src\config\env\config.js">
