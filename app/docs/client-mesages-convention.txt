@@ -1,0 +1,25 @@
+*** /Clint/Strings.resx ***
+
+* API Errors
+    EAPI_XXX_XXXX
+
+* Client Errors
+    EC_XXX_XXXX
+
+* Edit placeholder
+    Hint_XXX
+
+* Edit label
+    Label_XXXX
+
+* Menu items
+    XxxMenu_XXX   (e.g. AuthMenu_XXX, MainMenu_XXX)
+
+* Button text
+    Btn_XXX
+
+* Form text
+    <FormName>_XXXX  (e.g. Signin_FinalizeSignin)
+
+* Tab text
+    <FormName>_<SubFormName>_XXX  (e.g. UserHome_Tab_Darkroom, UserHome_Profile_Tab_Public)

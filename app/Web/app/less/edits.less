@@ -2,14 +2,53 @@
 @import (reference) "fonts.less";
 @import (reference) "mixins.less";
 
-@edit-before-after-padding: 0.45em;
-@edit-start-end-padding: 0.4em;
+/*@edit-before-after-padding: 0.4em;
+@edit-start-end-padding: 0.4em;*/
 
-input{
-    background-color: @rangoon-green;
+@edit-before-after-padding: 0.25em;
+@edit-start-end-padding: 0.45em;
+
+
+input[type=text] {
+    background-color: transparent;
     color: @jet-stream;
     border: 1px solid @plantation;
     padding: @edit-before-after-padding @edit-start-end-padding;
     margin: 0.5em 0 0;
     font-family: @content-font-family;
+    font-weight: 400;
+    font-size: 120%;
+}
+
+.edit-label {
+    display: block;
+}
+
+
+::-webkit-input-placeholder {
+    color: @jet-stream;
+    font-weight: 200;
+    font-size: 90%;
+    opacity: 0.4;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+    color: @jet-stream;
+    font-weight: 200;
+    font-size: 90%;
+    opacity: 0.4;
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+    color: @jet-stream;
+    font-weight: 200;
+    font-size: 90%;
+    opacity: 0.4;
+}
+
+:-ms-input-placeholder {
+    color: @jet-stream;
+    font-weight: 200;
+    font-size: 90%;
+    opacity: 0.4;
 }

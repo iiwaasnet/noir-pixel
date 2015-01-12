@@ -322,6 +322,9 @@
     <Content Include="app\less\column-layout.css.map">
       <DependentUpon>column-layout.css</DependentUpon>
     </Content>
+    <Content Include="app\less\profile-public.css">
+      <DependentUpon>profile-public.less</DependentUpon>
+    </Content>
     <Content Include="app\less\profile.css">
       <DependentUpon>profile.less</DependentUpon>
     </Content>
@@ -487,6 +490,10 @@
     <Content Include="app\less\profile.less" />
     <Content Include="app\less\profile.css.map">
       <DependentUpon>profile.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\profile-public.less" />
+    <Content Include="app\less\profile-public.css.map">
+      <DependentUpon>profile-public.css</DependentUpon>
     </Content>
     <None Include="app\src\config\env\dev.json" />
     <Content Include="app\src\config\env\config.js">

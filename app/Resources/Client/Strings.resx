@@ -126,29 +126,14 @@
   <data name="AuthMenu_UserHome" xml:space="preserve">
     <value>My home</value>
   </data>
-  <data name="EditHint_Password" xml:space="preserve">
-    <value>Password</value>
-  </data>
-  <data name="EditHint_UserName" xml:space="preserve">
-    <value>User name or email</value>
-  </data>
-  <data name="MainMenu_Exhibitions" xml:space="preserve">
-    <value>Exhibitions</value>
-  </data>
   <data name="MainMenu_Gallery" xml:space="preserve">
     <value>Gallery</value>
-  </data>
-  <data name="Password" xml:space="preserve">
-    <value>Password</value>
   </data>
   <data name="Signin_Signin" xml:space="preserve">
     <value>Sign in</value>
   </data>
-  <data name="SignIin_FinalizeSignin" xml:space="preserve">
+  <data name="Signin_FinalizeSignin" xml:space="preserve">
     <value>Signing in...</value>
-  </data>
-  <data name="UserName" xml:space="preserve">
-    <value>User name</value>
   </data>
   <data name="EAPI_Unknown" xml:space="preserve">
     <value>We have encountered an error, while trying to execute your request :( Please, try one more time.</value>
@@ -162,10 +147,10 @@
   <data name="Btn_Register" xml:space="preserve">
     <value>Register!</value>
   </data>
-  <data name="Reg_AlmostDone" xml:space="preserve">
+  <data name="Register_AlmostDone" xml:space="preserve">
     <value>You are almost done!</value>
   </data>
-  <data name="Reg_SelectUserName" xml:space="preserve">
+  <data name="Label_SelectUserName" xml:space="preserve">
     <value>Please, select your user name:</value>
   </data>
   <data name="EAPI_Auth_UserAlreadyRegistered" xml:space="preserve">
@@ -197,6 +182,15 @@
   </data>
   <data name="UserPublic_Tab_Gallery" xml:space="preserve">
     <value>Gallery</value>
+  </data>
+  <data name="Hint_FullName" xml:space="preserve">
+    <value>Your full name will be displayed instead of username</value>
+  </data>
+  <data name="Label_Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="Label_FullName" xml:space="preserve">
+    <value>Full name</value>
   </data>
   <data name="UserHome_Profile_Tab_Private" xml:space="preserve">
     <value>Private</value>

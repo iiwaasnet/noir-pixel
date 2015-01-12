@@ -196,29 +196,38 @@ namespace Resources.Client {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password.
+        ///   Looks up a localized string similar to Your full name will be displayed instead of username.
         /// </summary>
-        public static string EditHint_Password {
+        public static string Hint_FullName {
             get {
-                return ResourceManager.GetString("EditHint_Password", resourceCulture);
+                return ResourceManager.GetString("Hint_FullName", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User name or email.
+        ///   Looks up a localized string similar to Country.
         /// </summary>
-        public static string EditHint_UserName {
+        public static string Label_Country {
             get {
-                return ResourceManager.GetString("EditHint_UserName", resourceCulture);
+                return ResourceManager.GetString("Label_Country", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exhibitions.
+        ///   Looks up a localized string similar to Full name.
         /// </summary>
-        public static string MainMenu_Exhibitions {
+        public static string Label_FullName {
             get {
-                return ResourceManager.GetString("MainMenu_Exhibitions", resourceCulture);
+                return ResourceManager.GetString("Label_FullName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please, select your user name:.
+        /// </summary>
+        public static string Label_SelectUserName {
+            get {
+                return ResourceManager.GetString("Label_SelectUserName", resourceCulture);
             }
         }
         
@@ -232,38 +241,20 @@ namespace Resources.Client {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password.
-        /// </summary>
-        public static string Password {
-            get {
-                return ResourceManager.GetString("Password", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to You are almost done!.
         /// </summary>
-        public static string Reg_AlmostDone {
+        public static string Register_AlmostDone {
             get {
-                return ResourceManager.GetString("Reg_AlmostDone", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please, select your user name:.
-        /// </summary>
-        public static string Reg_SelectUserName {
-            get {
-                return ResourceManager.GetString("Reg_SelectUserName", resourceCulture);
+                return ResourceManager.GetString("Register_AlmostDone", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Signing in....
         /// </summary>
-        public static string SignIin_FinalizeSignin {
+        public static string Signin_FinalizeSignin {
             get {
-                return ResourceManager.GetString("SignIin_FinalizeSignin", resourceCulture);
+                return ResourceManager.GetString("Signin_FinalizeSignin", resourceCulture);
             }
         }
         
@@ -300,15 +291,6 @@ namespace Resources.Client {
         public static string UserHome_Tab_Darkroom {
             get {
                 return ResourceManager.GetString("UserHome_Tab_Darkroom", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to User name.
-        /// </summary>
-        public static string UserName {
-            get {
-                return ResourceManager.GetString("UserName", resourceCulture);
             }
         }
         

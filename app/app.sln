@@ -36,6 +36,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config.shared", "config.sha
 		config.shared\prod.json = config.shared\prod.json
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{6634BD63-C2D8-4BDE-A894-3D586770B886}"
+	ProjectSection(SolutionItems) = preProject
+		docs\client-mesages-convention.txt = docs\client-mesages-convention.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
