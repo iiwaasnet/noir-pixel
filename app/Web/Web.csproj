@@ -540,6 +540,7 @@
     <Content Include="app\src\validation\np-unique-username.directive.js" />
     <Content Include="app\src\validation\validation.module.js" />
     <Content Include="app\src\validation\validation.service.js" />
+    <Content Include="app\vendor\advanced_select.js" />
     <Content Include="app\vendor\angular-animate.js" />
     <Content Include="app\vendor\angular-animate.min.js" />
     <Content Include="app\vendor\angular-messages.js" />

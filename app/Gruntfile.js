@@ -140,17 +140,68 @@ module.exports = function(grunt) {
             all: {
                 files: {
                     'web/app/src/modules.js': 'web/app/src/**/**/*.module.js',
-                    'web/app/src/assets.js': ['web/app/src/!(config)**/**/!(*.module.js)*.js']
+                    'web/app/src/assets.js': ['web/app/src/!(config)**/**/!(*.module.js)*.js'],
+                    'web/app/src/ng.min.js': [
+                        'web/app/vendor/angular.min.js',
+                        'web/app/vendor/angular-animate.min.js',
+                        'web/app/vendor/angular-messages.min.js'
+                    ],
+                    'web/app/src/vendor.js': [
+                        'web/app/vendor/stacktrace.js',
+                        'web/app/vendor/nprogress.js'
+                    ],
+                    'web/app/src/vendor-ng.min.js': [
+                        'web/app/vendor/ngDialog.min.js',
+                        'web/app/vendor/angular-webstorage.min.js',
+                        'web/app/vendor/angular-ui-router.min.js'
+                    ]
+                }
+            },
+            nativeMin: {
+                files: {
+                    'web/app/src/vendor-native.min.js': [
+                        'web/app/vendor/moment.min.js',
+                        'web/app/src/vendor-native.tmp.js'
+                    ]
+                }
+            }
+        },
+        uglify: {
+            options: {
+                mangle: true,
+                compress: {
+                    global_defs: {
+                        "DEBUG": false
+                    },
+                    drop_console: true
+                }
+            },
+            all: {
+                files: {
+                    'web/app/src/vendor-native.tmp.js': [
+                        'web/app/vendor/stacktrace.js',
+                        'web/app/vendor/nprogress.js'
+                    ],
+                    'web/app/src/app.min.js': ['web/app/src/modules.js', 'web/app/src/assets.js']
                 }
             }
         }
     });
-
     grunt.loadNpmTasks('grunt-replace');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-spritesmith');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 
-    grunt.registerTask('transform', ['replace:dev', 'sprite:16', 'sprite:32', 'sprite:login', 'less:dev', 'concat:all']);
+    grunt.registerTask('transform', [
+        'replace:dev',
+        'sprite:16',
+        'sprite:32',
+        'sprite:login',
+        'less:dev',
+        'concat:all',
+        'uglify:all',
+        'concat:nativeMin'
+    ]);
 };

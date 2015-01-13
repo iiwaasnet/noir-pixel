@@ -9,7 +9,7 @@
 @edit-start-end-padding: 0.45em;
 
 
-input[type=text] {
+input[type=text]{
     background-color: transparent;
     color: @jet-stream;
     border: 1px solid @plantation;
@@ -51,4 +51,20 @@ input[type=text] {
     font-weight: 200;
     font-size: 90%;
     opacity: 0.4;
+}
+
+/*======== select =============*/
+select {
+    background-color: transparent;
+    color: @jet-stream;
+    border: 1px solid @plantation;
+    padding: (@edit-before-after-padding - 0.04) @edit-start-end-padding;
+    margin: 0.5em 0 0;
+    font-family: @content-font-family;
+    font-weight: 400;
+    font-size: 120%;
+
+    option{
+        border: 1px solid @plantation;
+    }
 }
