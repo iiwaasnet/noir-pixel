@@ -135,6 +135,14 @@ module.exports = function(grunt) {
                     quality: 100
                 },
             }
+        },
+        concat: {
+            all: {
+                files: {
+                    'web/app/src/modules.js': 'web/app/src/**/**/*.module.js',
+                    'web/app/src/assets.js': ['web/app/src/!(config)**/**/!(*.module.js)*.js']
+                }
+            }
         }
     });
 
@@ -142,6 +150,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-spritesmith');
+    grunt.loadNpmTasks('grunt-contrib-concat');
 
-    grunt.registerTask('transform', ['replace:dev', 'sprite:16', 'sprite:32', 'sprite:login', 'less:dev']);
+    grunt.registerTask('transform', ['replace:dev', 'sprite:16', 'sprite:32', 'sprite:login', 'less:dev', 'concat:all']);
 };
