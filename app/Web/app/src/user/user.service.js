@@ -48,8 +48,9 @@
         }
 
         function createUserDataObject(userData) {
-            var obj = {}
+            var obj = {};
             userData = userData || {};
+
             if (userData.userName) {
                 obj.userName = userData.userName;
             }

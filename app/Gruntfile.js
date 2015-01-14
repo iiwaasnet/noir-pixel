@@ -84,6 +84,13 @@ module.exports = function(grunt) {
                     '-W040': true,
                 },
                 src: ['web/app/src/**/*.js', 'web/app/src/*.js']
+            },
+            app: {
+                options: {
+                    '-W014': true,
+                    '-W040': true,
+                },
+                src: ['web/app/src/app.js']
             }
         },
         less: {

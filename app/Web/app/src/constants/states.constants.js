@@ -25,6 +25,11 @@
         },
         NotAuthorized: {
             Name: 'notAuthorized'
+        },
+        Errors: {
+            NotFound: {
+                Name: '404'
+            }
         }
     };
 

@@ -21,6 +21,7 @@
                 controllerProvider: ['ViewResolver', '$stateParams', function(ViewResolver, $stateParams) { return ViewResolver.resolveController(States.UserHome.Name, $stateParams); }],
                 controllerAs: 'ctrl',
                 resolve: {
+                    viewResolver: 'ViewResolver',
                     profile: 'Profile',
                     profileData: function (profile) {
                          return profile.getOwnProfile();
@@ -75,6 +76,12 @@
                 url: '/not-authorized?redirectTo',
                 templateUrl: '/app/src/auth/not-authorized.html',
                 controller: 'NotAuthorizedController',
+                controllerAs: 'ctrl'
+            })
+            .state(States.Errors.NotFound.Name, {
+                url: '404',
+                templateUrl: '/app/src/errors/404.html',
+                controller: 'HomeController',
                 controllerAs: 'ctrl'
             });
 
