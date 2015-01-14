@@ -148,7 +148,7 @@ module.exports = function(grunt) {
                 files: {
                     'web/app/src/app.js': [
                         'web/app/src/**/**/*.module.js',
-                        'web/app/src/!(config)**/**/!(*.module.js)*.js'
+                        'web/app/src/**/!(env)**/!(*.module.js)*.js'
                     ],
                     'web/app/src/ng.min.js': [
                         'web/app/vendor/angular.min.js',
@@ -177,7 +177,7 @@ module.exports = function(grunt) {
         },
         uglify: {
             options: {
-                mangle: true,
+                mangle: false,
                 compress: {
                     global_defs: {
                         "DEBUG": false
