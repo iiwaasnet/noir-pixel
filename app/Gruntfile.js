@@ -108,6 +108,20 @@ module.exports = function(grunt) {
                 files: { "web/app/less/all.css": "web/app/less/all.less" }
             }
         },
+        cssmin: {
+            all: {
+                options: {
+                    advanced: true
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'web/app/less',
+                    src: 'all.css',
+                    dest: 'web/app/less',
+                    ext: '.min.css'
+                }]
+            }
+        },
         sprite: {
             16: {
                 src: ['../graphics/src/16/*.png'],
@@ -190,6 +204,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-spritesmith');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
 
     grunt.registerTask('transform', [
         'replace:dev',
@@ -199,6 +214,7 @@ module.exports = function(grunt) {
         'sprite:login',
         'less:dev',
         'concat:angular',
-        'uglify:all'
+        'uglify:all',
+        'cssmin:all'
     ]);
 };
