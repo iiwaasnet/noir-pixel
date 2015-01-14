@@ -144,33 +144,12 @@ module.exports = function(grunt) {
             }
         },
         concat: {
-            all: {
+            angular: {
                 files: {
-                    'web/app/src/app.js': [
-                        'web/app/src/**/**/*.module.js',
-                        'web/app/src/**/!(env)**/!(*.module.js)*.js'
-                    ],
                     'web/app/src/ng.min.js': [
                         'web/app/vendor/angular.min.js',
                         'web/app/vendor/angular-animate.min.js',
                         'web/app/vendor/angular-messages.min.js'
-                    ],
-                    'web/app/src/vendor.js': [
-                        'web/app/vendor/stacktrace.js',
-                        'web/app/vendor/nprogress.js'
-                    ],
-                    'web/app/src/vendor-ng.min.js': [
-                        'web/app/vendor/ngDialog.min.js',
-                        'web/app/vendor/angular-webstorage.min.js',
-                        'web/app/vendor/angular-ui-router.min.js'
-                    ]
-                }
-            },
-            nativeMin: {
-                files: {
-                    'web/app/src/vendor-native.min.js': [
-                        'web/app/vendor/moment.min.js',
-                        'web/app/src/vendor-native.tmp.js'
                     ]
                 }
             }
@@ -187,11 +166,20 @@ module.exports = function(grunt) {
             },
             all: {
                 files: {
-                    'web/app/src/vendor-native.tmp.js': [
+                    'web/app/src/vendor-ng.min.js': [
+                        'web/app/vendor/ngDialog.min.js',
+                        'web/app/vendor/angular-webstorage.min.js',
+                        'web/app/vendor/angular-ui-router.min.js'
+                    ],
+                    'web/app/src/vendor-native.min.js': [
+                        'web/app/vendor/moment.min.js',
                         'web/app/vendor/stacktrace.js',
                         'web/app/vendor/nprogress.js'
                     ],
-                    'web/app/src/app.min.js': 'web/app/src/app.js'
+                    'web/app/src/app.min.js': [
+                        'web/app/src/**/**/*.module.js',
+                        'web/app/src/**/!(env)**/!(*.module.js)*.js'
+                    ]
                 }
             }
         }
@@ -206,11 +194,11 @@ module.exports = function(grunt) {
     grunt.registerTask('transform', [
         'replace:dev',
         'sprite:16',
+        'sprite:16',
         'sprite:32',
         'sprite:login',
         'less:dev',
-        'concat:all',
-        'uglify:all',
-        'concat:nativeMin'
+        'concat:angular',
+        'uglify:all'
     ]);
 };
