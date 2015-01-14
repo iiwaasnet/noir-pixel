@@ -139,8 +139,10 @@ module.exports = function(grunt) {
         concat: {
             all: {
                 files: {
-                    'web/app/src/modules.js': 'web/app/src/**/**/*.module.js',
-                    'web/app/src/assets.js': ['web/app/src/!(config)**/**/!(*.module.js)*.js'],
+                    'web/app/src/app.js': [
+                        'web/app/src/**/**/*.module.js',
+                        'web/app/src/!(config)**/**/!(*.module.js)*.js'
+                    ],
                     'web/app/src/ng.min.js': [
                         'web/app/vendor/angular.min.js',
                         'web/app/vendor/angular-animate.min.js',
@@ -182,7 +184,7 @@ module.exports = function(grunt) {
                         'web/app/vendor/stacktrace.js',
                         'web/app/vendor/nprogress.js'
                     ],
-                    'web/app/src/app.min.js': ['web/app/src/modules.js', 'web/app/src/assets.js']
+                    'web/app/src/app.min.js': 'web/app/src/app.js'
                 }
             }
         }
