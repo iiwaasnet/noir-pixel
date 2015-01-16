@@ -30,15 +30,11 @@
 /* the multiselect button */
 .multiSelect .button {
     .button;
-    display: block;
     position: relative;
     text-align: center;
     cursor: pointer;
-    /*border: 1px solid #c6c6c6;*/
-    padding: 1px 8px 1px 8px;
-    /*font-size: 14px;*/
-    min-height: 38px !important;
-    /*border-radius: 4px;*/
+    padding: 1px 8px;
+    min-height: 34px !important;
     color: rgba(181, 210, 206, 0.4); /*@jet-stream*/
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -46,24 +42,20 @@
     -o-user-select: none;
     user-select: none;
     white-space: normal;
-    /*background-color: #fff;
-    background-image: linear-gradient(#fff, #f7f7f7);*/
 }
 
 /* button: hover */
 .multiSelect .button:hover {
-    /*background-image: linear-gradient(#fff, #e9e9e9);*/
 }
 
 /* button: clicked */
 .multiSelect .buttonClicked {
-    /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15) inset, 0 1px 2px rgba(0, 0, 0, 0.05);*/
 }
 
 /* labels on the button */
 .multiSelect .buttonLabel {
     display: inline-block;
-    padding: 5px 0 5px 0;
+    padding: 5px 0;
     color: @jet-stream;
     font-weight: 400;
     font-size: 120%;
@@ -191,14 +183,8 @@
 }
 
 /* Item labels: selected - Enable this if you want to apply styling on selected items */
-/*.multiSelect .multiSelectItem:not(.multiSelectGroup).selected {
-    background-image: linear-gradient( #e9e9e9, #f1f1f1 );
-    color: #555;
-    cursor: pointer;
-    border-top: 1px solid #e4e4e4;
-    border-left: 1px solid #e4e4e4;
-    border-right: 1px solid #d9d9d9;
-}*/
+.multiSelect .multiSelectItem:not(.multiSelectGroup).selected {
+}
 
 /* item labels focus on mouse hover */
 .multiSelect .multiSelectItem:hover,
@@ -206,10 +192,7 @@
 .multiSelect .multiSelectFocus,
 .multiSelect .multiSelectItem:not(.multiSelectGroup).selected {
     background-color: @plantation;
-    /*background-image: linear-gradient( #c1c1c1, #999 ) !important;
-    color: #fff !important;*/
     cursor: pointer;
-    /*border: 1px solid #ccc !important;*/
 }
 
 .multiSelect .multiSelectItem:hover,
@@ -219,12 +202,8 @@
 }
 
 /* item labels focus using keyboard */
-/*.multiSelect .multiSelectFocus {
-    background-image: linear-gradient( #c1c1c1, #999 ) !important;
-    color: #fff !important;
-    cursor: pointer;
-    border: 1px solid #ccc !important;
-}*/
+.multiSelect .multiSelectFocus {
+}
 
 /* change mouse pointer into the pointing finger */
 .multiSelect .multiSelectItem span:hover,

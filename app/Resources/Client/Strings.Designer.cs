@@ -196,6 +196,15 @@ namespace Resources.Client {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to City.
+        /// </summary>
+        public static string Hint_City {
+            get {
+                return ResourceManager.GetString("Hint_City", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your full name will be displayed instead of username.
         /// </summary>
         public static string Hint_FullName {
@@ -228,6 +237,15 @@ namespace Resources.Client {
         public static string Label_SelectUserName {
             get {
                 return ResourceManager.GetString("Label_SelectUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Where are you from?.
+        /// </summary>
+        public static string Label_WhereDoYouLive {
+            get {
+                return ResourceManager.GetString("Label_WhereDoYouLive", resourceCulture);
             }
         }
         
