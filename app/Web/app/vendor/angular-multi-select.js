@@ -49,7 +49,7 @@ angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$
                             '</div>' +
                             '<div class="line" style="position:relative" ng-if="displayHelper( \'filter\' )">' +
                                 '<input placeholder="Search..." type="text" ng-click="select( \'filter\', $event )" ng-model="inputLabel.labelFilter" ng-change="updateFilter();$scope.getFormElements();" class="inputFilter" />' +
-                                '<button tabindex="-1" type="button" class="clearButton" ng-click="inputLabel.labelFilter=\'\';updateFilter();prepareGrouping();prepareIndex();select( \'clear\', $event )">&times;</button> ' +
+                                '<button type="button" class="clearButton" ng-click="inputLabel.labelFilter=\'\';updateFilter();prepareGrouping();prepareIndex();select( \'clear\', $event )">&times;</button> ' +
                             '</div>' +
                         '</div>' +
                         '<div class="checkBoxContainer" style="{{setHeight();}}">' +
@@ -769,9 +769,10 @@ angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$
             }
 
             $scope.selectItem = function(item, e, ng_repeat_index){
-            if(e.keyCode === 13){
-                    $scope.syncItems(item, e, ng_repeat_index);
-                }
+                if (e.keyCode === 13) {
+                $scope.syncItems(item, e, ng_repeat_index);
+                element[0].querySelector('.multiSelectButton').focus();
+            }
             }
 
             // set (add) CSS style on selected row
