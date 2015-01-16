@@ -164,6 +164,7 @@ module.exports = function(grunt) {
         uglify: {
             options: {
                 mangle: false,
+				beautify: true,
                 compress: {
                     global_defs: {
                         "DEBUG": false
@@ -176,7 +177,8 @@ module.exports = function(grunt) {
                     'web/app/src/vendor-ng.min.js': [
                         'web/app/vendor/ngDialog.min.js',
                         'web/app/vendor/angular-webstorage.min.js',
-                        'web/app/vendor/angular-ui-router.min.js'
+                        'web/app/vendor/angular-ui-router.min.js',
+                        'web/app/vendor/angular-multi-select.js'
                     ],
                     'web/app/src/vendor-native.min.js': [
                         'web/app/vendor/moment.min.js',
@@ -189,6 +191,21 @@ module.exports = function(grunt) {
                     ]
                 }
             }
+        },
+        watch: {
+            options: {
+              forever: true  
+            },
+            js: {
+                files: ['web/app/src/**/**/*.js', 
+						'web/app/vendor/**/**/*.js',
+						'web/app/less/**/**/*.less'],
+                tasks: ['concat:angular', 'uglify:all', 'less:dev', 'cssmin:all'],
+                options: {
+                    nospawn: true,
+                    event: 'all'
+                },
+            }
         }
     });
     grunt.loadNpmTasks('grunt-replace');
@@ -198,6 +215,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
     grunt.registerTask('transform', [
         'replace:dev',
@@ -210,4 +228,6 @@ module.exports = function(grunt) {
         'uglify:all',
         'cssmin:all'
     ]);
+
+    grunt.registerTask('track', ['watch']);
 };
