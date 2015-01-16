@@ -197,6 +197,13 @@
     <Content Include="app\less\all.min.css">
       <DependentUpon>all.css</DependentUpon>
     </Content>
+    <Content Include="app\less\angular-multi-select.css.map">
+      <DependentUpon>angular-multi-select.css</DependentUpon>
+    </Content>
+    <None Include="app\less\angular-multi-select.less" />
+    <Content Include="app\less\angular-multi-select.css">
+      <DependentUpon>angular-multi-select.less</DependentUpon>
+    </Content>
     <Content Include="app\less\animations.css">
       <DependentUpon>animations.less</DependentUpon>
     </Content>
@@ -540,12 +547,12 @@
     <Content Include="app\src\validation\np-unique-username.directive.js" />
     <Content Include="app\src\validation\validation.module.js" />
     <Content Include="app\src\validation\validation.service.js" />
-    <Content Include="app\vendor\advanced_select.js" />
     <Content Include="app\vendor\angular-animate.js" />
     <Content Include="app\vendor\angular-animate.min.js" />
     <Content Include="app\vendor\angular-messages.js" />
     <Content Include="app\vendor\angular-messages.min.js" />
     <Content Include="app\vendor\angular-mocks.js" />
+    <Content Include="app\vendor\angular-multi-select.js" />
     <Content Include="app\vendor\angular-route.js" />
     <Content Include="app\vendor\angular-route.min.js" />
     <Content Include="app\vendor\angular-ui-router.js" />

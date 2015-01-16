@@ -1,10 +1,17 @@
 ﻿<div id="profile-public">
-    <span class="edit-label" np-i18n="Label_FullName"></span>
-    <input class="full-name" type="text" placeholder="{{'Hint_FullName' | npi18n}}" />
-    
-    <select>
-        <option value="">Bla1</option>
-        <option value="1">Bla2</option>
-        <option value="2">Bla3</option>
-    </select>
+    <div>
+        <span class="edit-label" np-i18n="Label_FullName"></span>
+        <input class="full-name" type="text" placeholder="{{'Hint_FullName' | npi18n}}" />
+    </div>
+
+    <div>
+        <div multi-select
+             selection-mode="single"
+             helper-elements="filter"
+             input-model="publicCtrl.countries"
+             button-label="name"
+             item-label="code name"
+             tick-property="selected">
+        </div>
+    </div>
 </div>

@@ -2,8 +2,7 @@
 @import (reference) "fonts.less";
 
 
-input[type=button],
-input[type=submit] {
+.button{
     -webkit-appearance: none;
     -moz-appearance: none;
     -webkit-border-radius: 0;
@@ -13,6 +12,11 @@ input[type=submit] {
     color: @ecru-white;
     border: 1px solid @plantation;
     padding: 1em 1.5em;
+}
+
+input[type=button],
+input[type=submit] {
+    .button;
 }
 
 input[type=button].default-action,

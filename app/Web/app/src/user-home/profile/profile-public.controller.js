@@ -8,6 +8,12 @@
 
     function profilePublicController($rootScope, $scope, States, Profile, profileData) {
         var ctrl = this;
+        ctrl.countries = [
+            { code: 'UA', name: 'Ukraine' },
+            { code: 'DE', name: 'Germany' },
+            { code: 'US', name: 'United States' }
+        ];
+        ctrl.country = [{ code: null }];
 
         var unsubscribe;
 

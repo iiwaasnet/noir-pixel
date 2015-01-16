@@ -65,7 +65,7 @@
             srv.init()
                 .then(function () {
                     angular.element(document).ready(function () {
-                        angular.bootstrap(document, ['np'], { strictDi: true });
+                        angular.bootstrap(document, ['np'], { strictDi: false });
                     });
                 },
                     function () {
