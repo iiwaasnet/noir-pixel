@@ -201,4 +201,10 @@
   <data name="UserHome_Tab_Darkroom" xml:space="preserve">
     <value>Darkroom</value>
   </data>
+  <data name="Label_WhereDoYouLive" xml:space="preserve">
+    <value>Where are you from?</value>
+  </data>
+  <data name="Hint_City" xml:space="preserve">
+    <value>City</value>
+  </data>
 </root>
