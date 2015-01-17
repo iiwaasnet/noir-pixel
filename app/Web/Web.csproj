@@ -353,6 +353,7 @@
     <Content Include="app\src\profile\profile.service.js" />
     <Content Include="app\src\roles\roles.module.js" />
     <Content Include="app\src\roles\roles.service.js" />
+    <Content Include="app\src\ui-elements\autofocus\np-autofocus.directive.js" />
     <Content Include="app\src\ui-elements\user-thumbnail\np-user-thumbnail.directive.js" />
     <Content Include="app\src\ui-elements\tabs\np-tab.directive.js" />
     <Content Include="app\src\ui-elements\tabs\np-tabs.directive.js" />
