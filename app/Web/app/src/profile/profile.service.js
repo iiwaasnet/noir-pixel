@@ -10,6 +10,7 @@
         var srv = this;
         srv.getUserProfile = getUserProfile;
         srv.getOwnProfile = getOwnProfile;
+        srv.getCountries = getCountries;
 
         function getUserProfile(userName) {
             if (userName) {
@@ -18,6 +19,11 @@
             }
 
             return $q.reject();
+        }
+
+        function getCountries() {
+            var url = Url.build(Config.ApiUris.Base, Config.ApiUris.Profiles.Countries);
+            return $http.get(url);
         }
 
         function getOwnProfile() {

@@ -15,7 +15,8 @@
                 UserExists: '@@ApiUris.Accounts.UserExists'
             },
             Profiles: {
-                Profile: '@@ApiUris.Profiles.Profile'
+                Profile: '@@ApiUris.Profiles.Profile',
+                Countries: '@@ApiUris.Profiles.Countries'
             },
         },
         Strings: {

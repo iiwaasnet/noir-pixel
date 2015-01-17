@@ -10,6 +10,7 @@
     "ApiUris.Accounts.UserExists": "accounts/exists/{userName}",
 
     "ApiUris.Profiles.Profile": "profiles/{userName}",
+    "ApiUris.Profiles.Countries": "profiles/countries",
 
     "Strings.InvalidationTimeout": "01:00:00",
     "Strings.VersionsUri": "/strings/versions",

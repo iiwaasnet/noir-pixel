@@ -1,9 +1,7 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Results;
 using Api.App.Exceptions;
-using Api.App.Profiles.Entities;
 using Api.App.Profiles.Extensions;
 
 namespace Api.App.Profiles
@@ -34,6 +32,12 @@ namespace Api.App.Profiles
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
+        }
+
+        [Route("countries")]
+        public IHttpActionResult GetCountries()
+        {
+            return Ok(profilesManager.GetCountries());
         }
     }
 }

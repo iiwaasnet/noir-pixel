@@ -27,6 +27,13 @@ namespace Api.App.Profiles
             this.logger = logger;
         }
 
+        public IEnumerable<Country> GetCountries()
+        {
+            var countries = db.GetCollection<Country>(Country.CollectionName);
+
+            return countries.FindAll();
+        }
+
         public async Task<UserProfile> GetUserProfile(string userName, bool includePrivateData)
         {
             var user = await EnsureUserProfileExists(userName);

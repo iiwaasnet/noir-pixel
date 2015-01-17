@@ -15,7 +15,8 @@
                 UserExists: 'accounts/exists/{userName}'
             },
             Profiles: {
-                Profile: 'profiles/{userName}'
+                Profile: 'profiles/{userName}',
+                Countries: 'profiles/countries'
             },
         },
         Strings: {

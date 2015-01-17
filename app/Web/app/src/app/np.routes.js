@@ -25,6 +25,9 @@
                     profile: 'Profile',
                     profileData: function (profile) {
                          return profile.getOwnProfile();
+                    },
+                    countries: function(profile) {
+                        return profile.getCountries();
                     }
                 }
             })

@@ -292,6 +292,7 @@
     <Compile Include="App\Posts\PostsModule.cs" />
     <Compile Include="App\Posts\Reply.cs" />
     <Compile Include="App\Posts\WallPosts.cs" />
+    <Compile Include="App\Profiles\Entities\Country.cs" />
     <Compile Include="App\Profiles\Entities\UserReference.cs" />
     <Compile Include="App\Profiles\Extensions\IdentityExtensions.cs" />
     <Compile Include="App\Profiles\Entities\Geo.cs" />
