@@ -165,9 +165,9 @@ module.exports = function (grunt) {
             all: {
                 files: {
                     'web/app/src/ng.min.js': [
-                        'web/app/vendor/angular.min.js',
-                        'web/app/vendor/angular-animate.min.js',
-                        'web/app/vendor/angular-messages.min.js'
+                        'web/app/vendor/angular.js',
+                        'web/app/vendor/angular-animate.js',
+                        'web/app/vendor/angular-messages.js',
                     ],
                     'web/app/src/vendor-ng.min.js': [
                         'web/app/vendor/ngDialog.min.js',
