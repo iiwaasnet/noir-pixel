@@ -159,6 +159,30 @@ module.exports = function(grunt) {
                         'web/app/vendor/angular-messages.min.js'
                     ]
                 }
+            },
+            all: {
+                files: {
+                    'web/app/src/ng.min.js': [
+                       'web/app/vendor/angular.min.js',
+                       'web/app/vendor/angular-animate.min.js',
+                       'web/app/vendor/angular-messages.min.js'
+                    ],
+                    'web/app/src/vendor-ng.min.js': [
+                        'web/app/vendor/ngDialog.min.js',
+                        'web/app/vendor/angular-webstorage.min.js',
+                        'web/app/vendor/angular-ui-router.min.js',
+                        'web/app/vendor/angular-multi-select.js'
+                    ],
+                    'web/app/src/vendor-native.min.js': [
+                        'web/app/vendor/moment.min.js',
+                        'web/app/vendor/stacktrace.js',
+                        'web/app/vendor/nprogress.js'
+                    ],
+                    'web/app/src/app.min.js': [
+                        'web/app/src/**/**/*.module.js',
+                        'web/app/src/**/!(env)**/!(*.module.js)*.js'
+                    ]
+                }
             }
         },
         uglify: {
@@ -200,7 +224,7 @@ module.exports = function(grunt) {
                 files: ['web/app/src/**/**/*.js', 
 						'web/app/vendor/**/**/*.js',
 						'web/app/less/**/**/*.less'],
-                tasks: ['concat:angular', 'uglify:all', 'less:dev', 'cssmin:all'],
+                tasks: ['concat:all', 'less:dev', 'cssmin:all'],
                 options: {
                     nospawn: true,
                     event: 'all'
