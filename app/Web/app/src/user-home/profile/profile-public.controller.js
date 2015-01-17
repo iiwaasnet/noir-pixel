@@ -8,12 +8,7 @@
 
     function profilePublicController($rootScope, $scope, States, Profile, profileData) {
         var ctrl = this;
-        ctrl.countries = [
-            { code: 'UA', name: 'Ukraine' },
-            { code: 'DE', name: 'Germany' },
-            { code: 'US', name: 'United States' }
-        ];
-        ctrl.country = [{ code: null }];
+        ctrl.countries = [];
 
         var unsubscribe;
 
@@ -22,6 +17,16 @@
         function activate() {
             $scope.$on('$destroy', cleanup);
             unsubscribe = $rootScope.$on('$stateChangeStart', stateChangeStart);
+
+            populateCountries();
+        }
+
+        function populateCountries() {
+            ctrl.countries = [
+                { code: 'AX', name: '&Aring;land Islands', selected: false },
+                { code: 'UA', name: 'Ukraine', selected: false },
+                { code: 'UK', name: 'United Kingdom', selected: false }
+            ];
         }
 
         function stateChangeStart(event, toState, toParams, fromState, fromParams) {

@@ -187,6 +187,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\images\flags.png" />
     <Content Include="app\images\np-header.png" />
     <Content Include="app\images\sprites-login.png" />
     <Content Include="app\images\sprites16.png" />
@@ -266,6 +267,9 @@
     </Content>
     <Content Include="app\less\edits.css">
       <DependentUpon>edits.less</DependentUpon>
+    </Content>
+    <Content Include="app\less\flags.css">
+      <DependentUpon>flags.less</DependentUpon>
     </Content>
     <Content Include="app\less\fonts.css">
       <DependentUpon>fonts.less</DependentUpon>
@@ -418,6 +422,10 @@
     </Content>
     <Content Include="app\less\edits.css.map">
       <DependentUpon>edits.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\flags.less" />
+    <Content Include="app\less\flags.css.map">
+      <DependentUpon>flags.css</DependentUpon>
     </Content>
     <None Include="app\less\nprogress.less" />
     <Content Include="app\less\nprogress.css">

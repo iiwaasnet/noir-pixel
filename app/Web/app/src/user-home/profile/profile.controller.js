@@ -9,21 +9,11 @@
     function profileController(States, profileData) {
         var ctrl = this;
         ctrl.tabs = [];
-        ctrl.countries = []
 
         activate();
 
         function activate() {
-            createTabs();
-            populateCountries();
-        }
-
-        function populateCountries() {
-            ctrl.countries = [
-                { code: 'US', name: 'United States', selected: false },
-                { code: 'UA', name: 'Ukraine', selected: false },
-                { code: 'UK', name: 'United Kingdom', selected: false }
-            ];
+            createTabs();            
         }
 
         function createTabs() {

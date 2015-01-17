@@ -1,4 +1,4 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -84,7 +84,7 @@ module.exports = function(grunt) {
                     '-W040': true,
                 },
                 src: ['web/app/src/**/*.js', '!web/app/src/*.min.js']
-            }            
+            }
         },
         less: {
             dev: {
@@ -106,13 +106,15 @@ module.exports = function(grunt) {
                 options: {
                     advanced: true
                 },
-                files: [{
-                    expand: true,
-                    cwd: 'web/app/less',
-                    src: 'all.css',
-                    dest: 'web/app/less',
-                    ext: '.min.css'
-                }]
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'web/app/less',
+                        src: 'all.css',
+                        dest: 'web/app/less',
+                        ext: '.min.css'
+                    }
+                ]
             }
         },
         sprite: {
@@ -147,7 +149,7 @@ module.exports = function(grunt) {
                 imgOpts: {
                     format: 'png',
                     quality: 100
-                },
+                }
             }
         },
         concat: {
@@ -163,9 +165,9 @@ module.exports = function(grunt) {
             all: {
                 files: {
                     'web/app/src/ng.min.js': [
-                       'web/app/vendor/angular.min.js',
-                       'web/app/vendor/angular-animate.min.js',
-                       'web/app/vendor/angular-messages.min.js'
+                        'web/app/vendor/angular.min.js',
+                        'web/app/vendor/angular-animate.min.js',
+                        'web/app/vendor/angular-messages.min.js'
                     ],
                     'web/app/src/vendor-ng.min.js': [
                         'web/app/vendor/ngDialog.min.js',
@@ -188,7 +190,7 @@ module.exports = function(grunt) {
         uglify: {
             options: {
                 mangle: false,
-				beautify: true,
+                beautify: true,
                 compress: {
                     global_defs: {
                         "DEBUG": false
@@ -218,12 +220,14 @@ module.exports = function(grunt) {
         },
         watch: {
             options: {
-              forever: true  
+                forever: true
             },
             js: {
-                files: ['web/app/src/**/**/*.js', 
-						'web/app/vendor/**/**/*.js',
-						'web/app/less/**/**/*.less'],
+                files: [
+                    'web/app/src/**/**/*.js',
+                    'web/app/vendor/**/**/*.js',
+                    'web/app/less/**/**/*.less'
+                ],
                 tasks: ['concat:all', 'less:dev', 'cssmin:all'],
                 options: {
                     nospawn: true,
