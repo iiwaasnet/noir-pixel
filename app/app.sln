@@ -23,7 +23,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "grunt", "grunt", "{8437A769-56D6-4FAA-9B2D-436FC1F79E5E}"
 	ProjectSection(SolutionItems) = preProject
 		Gruntfile.js = Gruntfile.js
-		package.json = package.json
+		jscript-file-list.json = jscript-file-list.json
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{4EA79D6A-1DE0-41FD-966C-25511DFB2A26}"

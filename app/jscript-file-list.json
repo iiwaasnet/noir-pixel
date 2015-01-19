@@ -1,0 +1,24 @@
+{
+    "files": {
+        "web/app/src/ng.js": [
+            "web/app/vendor/angular.js",
+            "web/app/vendor/angular-animate.js",
+            "web/app/vendor/angular-messages.js"
+        ],
+        "web/app/src/vendor-ng.js": [
+            "web/app/vendor/ngDialog.min.js",
+            "web/app/vendor/angular-webstorage.min.js",
+            "web/app/vendor/angular-ui-router.min.js",
+            "web/app/vendor/angular-multi-select.js"
+        ],
+        "web/app/src/vendor-native.js": [
+            "web/app/vendor/moment.min.js",
+            "web/app/vendor/stacktrace.js",
+            "web/app/vendor/nprogress.js"
+        ],
+        "web/app/src/app.js": [
+            "web/app/src/**/**/*.module.js",
+            "web/app/src/**/!(env)**/!(*.module.js)*.js"
+        ]
+    }
+}

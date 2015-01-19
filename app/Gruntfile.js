@@ -153,39 +153,7 @@ module.exports = function (grunt) {
             }
         },
         concat: {
-            angular: {
-                files: {
-                    'web/app/src/ng.min.js': [
-                        'web/app/vendor/angular.min.js',
-                        'web/app/vendor/angular-animate.min.js',
-                        'web/app/vendor/angular-messages.min.js'
-                    ]
-                }
-            },
-            all: {
-                files: {
-                    'web/app/src/ng.min.js': [
-                        'web/app/vendor/angular.js',
-                        'web/app/vendor/angular-animate.js',
-                        'web/app/vendor/angular-messages.js',
-                    ],
-                    'web/app/src/vendor-ng.min.js': [
-                        'web/app/vendor/ngDialog.min.js',
-                        'web/app/vendor/angular-webstorage.min.js',
-                        'web/app/vendor/angular-ui-router.min.js',
-                        'web/app/vendor/angular-multi-select.js'
-                    ],
-                    'web/app/src/vendor-native.min.js': [
-                        'web/app/vendor/moment.min.js',
-                        'web/app/vendor/stacktrace.js',
-                        'web/app/vendor/nprogress.js'
-                    ],
-                    'web/app/src/app.min.js': [
-                        'web/app/src/**/**/*.module.js',
-                        'web/app/src/**/!(env)**/!(*.module.js)*.js'
-                    ]
-                }
-            }
+            all: require('./jscript-file-list.json')
         },
         uglify: {
             options: {
@@ -198,25 +166,7 @@ module.exports = function (grunt) {
                     drop_console: true
                 }
             },
-            all: {
-                files: {
-                    'web/app/src/vendor-ng.min.js': [
-                        'web/app/vendor/ngDialog.min.js',
-                        'web/app/vendor/angular-webstorage.min.js',
-                        'web/app/vendor/angular-ui-router.min.js',
-                        'web/app/vendor/angular-multi-select.js'
-                    ],
-                    'web/app/src/vendor-native.min.js': [
-                        'web/app/vendor/moment.min.js',
-                        'web/app/vendor/stacktrace.js',
-                        'web/app/vendor/nprogress.js'
-                    ],
-                    'web/app/src/app.min.js': [
-                        'web/app/src/**/**/*.module.js',
-                        'web/app/src/**/!(env)**/!(*.module.js)*.js'
-                    ]
-                }
-            }
+            all: require('./jscript-file-list.json')
         },
         watch: {
             options: {
@@ -252,7 +202,7 @@ module.exports = function (grunt) {
         'sprite:32',
         'sprite:login',
         'less:dev',
-        'concat:angular',
+        'concat:all',
         'uglify:all',
         'cssmin:all'
     ]);
