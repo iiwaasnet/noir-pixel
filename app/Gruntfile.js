@@ -153,7 +153,7 @@ module.exports = function (grunt) {
             }
         },
         concat: {
-            all: require('./jscript-file-list.json')
+            js: require('./jscript-file-list.json')
         },
         uglify: {
             options: {
@@ -172,13 +172,13 @@ module.exports = function (grunt) {
             options: {
                 forever: true
             },
-            js: {
+            assets: {
                 files: [
                     'web/app/src/**/**/*.js',
                     'web/app/vendor/**/**/*.js',
                     'web/app/less/**/**/*.less'
                 ],
-                tasks: ['concat:all', 'less:dev', 'cssmin:all'],
+                tasks: ['concat:js', 'less:dev', 'cssmin:all'],
                 options: {
                     nospawn: true,
                     event: 'all'
