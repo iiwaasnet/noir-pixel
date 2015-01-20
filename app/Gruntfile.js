@@ -202,7 +202,6 @@ module.exports = function (grunt) {
         'sprite:32',
         'sprite:login',
         'less:dev',
-        'concat:all',
         'uglify:all',
         'cssmin:all'
     ]);
