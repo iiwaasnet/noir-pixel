@@ -1,15 +1,16 @@
 {
     "files": {
         "web/app/src/ng.js": [
-            "web/app/vendor/angular.js",
-            "web/app/vendor/angular-animate.js",
-            "web/app/vendor/angular-messages.js"
+            "web/app/vendor/angular.min.js",
+            "web/app/vendor/angular-animate.min.js",
+            "web/app/vendor/angular-messages.min.js",
+            "web/app/vendor/angular-sanitize.min.js"
         ],
         "web/app/src/vendor-ng.js": [
             "web/app/vendor/ngDialog.min.js",
             "web/app/vendor/angular-webstorage.min.js",
             "web/app/vendor/angular-ui-router.min.js",
-            "web/app/vendor/angular-multi-select.js"
+            "web/app/vendor/select.min.js"
         ],
         "web/app/src/vendor-native.js": [
             "web/app/vendor/moment.min.js",

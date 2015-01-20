@@ -9,6 +9,7 @@
     function profilePublicController($rootScope, $scope, States, profileData, countries) {
         var ctrl = this;
         ctrl.countries = countries.data;
+        ctrl.country = undefined;
 
         var unsubscribe;
 

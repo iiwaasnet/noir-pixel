@@ -205,6 +205,15 @@ namespace Resources.Client {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Country....
+        /// </summary>
+        public static string Hint_Country {
+            get {
+                return ResourceManager.GetString("Hint_Country", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your full name will be displayed instead of username.
         /// </summary>
         public static string Hint_FullName {

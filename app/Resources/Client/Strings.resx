@@ -207,4 +207,7 @@
   <data name="Hint_City" xml:space="preserve">
     <value>City</value>
   </data>
+  <data name="Hint_Country" xml:space="preserve">
+    <value>Country...</value>
+  </data>
 </root>
