@@ -6,21 +6,12 @@
 
     <div class="edit-block">
         <span class="edit-label" np-i18n="Label_WhereDoYouLive"></span>
-        <ui-select ng-model="publicCtrl.country" theme="selectize" ng-disabled="disabled" style="width: 300px;">
+        <ui-select ng-model="publicCtrl.country" theme="selectize" style="width: 300px;">
             <ui-select-match placeholder="{{'Hint_Country' | npi18n}}">{{$select.selected.name}}</ui-select-match>
             <ui-select-choices repeat="country in publicCtrl.countries | filter: $select.search">
                 <span ng-bind-html="country.name | highlight: $select.search"></span>
             </ui-select-choices>
         </ui-select>
-        <!--<div multi-select
-             selection-mode="single"
-             helper-elements="filter"
-             input-model="publicCtrl.countries"
-             button-label="name"
-             item-label="name"
-             max-height="300px"
-             tick-property="selected">
-        </div>-->
         <input class="full-name" type="text" placeholder="{{'Hint_City' | npi18n}}" />
     </div>
 </div>

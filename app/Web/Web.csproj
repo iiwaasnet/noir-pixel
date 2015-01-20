@@ -338,10 +338,27 @@
     <Content Include="app\less\tabs.css">
       <DependentUpon>tabs.less</DependentUpon>
     </Content>
-    <Content Include="app\less\ui-select\selectize.default.css.map">
-      <DependentUpon>selectize.default.css</DependentUpon>
+    <Content Include="app\less\ui-select\plugins\remove_button.css">
+      <DependentUpon>remove_button.less</DependentUpon>
     </Content>
-    <None Include="app\less\ui-select\selectize.default.less" />
+    <Content Include="app\less\ui-select\select.css.map">
+      <DependentUpon>select.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\ui-select\base.less" />
+    <Content Include="app\less\ui-select\plugins\drag_drop.less" />
+    <Content Include="app\less\ui-select\plugins\dropdown_header.less" />
+    <Content Include="app\less\ui-select\plugins\optgroup_columns.less" />
+    <Content Include="app\less\ui-select\plugins\remove_button.less" />
+    <Content Include="app\less\ui-select\plugins\remove_button.css.map">
+      <DependentUpon>remove_button.css</DependentUpon>
+    </Content>
+    <None Include="app\less\ui-select\select.less" />
+    <Content Include="app\less\ui-select\select.css">
+      <DependentUpon>select.less</DependentUpon>
+    </Content>
+    <Content Include="app\less\ui-select\selectize.css">
+      <DependentUpon>selectize.less</DependentUpon>
+    </Content>
     <Content Include="app\less\ui-select\selectize.default.css">
       <DependentUpon>selectize.default.less</DependentUpon>
     </Content>
@@ -510,6 +527,14 @@
     <Content Include="app\less\profile-public.less" />
     <Content Include="app\less\profile-public.css.map">
       <DependentUpon>profile-public.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\ui-select\selectize.default.less" />
+    <Content Include="app\less\ui-select\selectize.less" />
+    <Content Include="app\less\ui-select\selectize.default.css.map">
+      <DependentUpon>selectize.default.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\ui-select\selectize.css.map">
+      <DependentUpon>selectize.css</DependentUpon>
     </Content>
     <None Include="app\src\config\env\dev.json" />
     <Content Include="app\src\config\env\config.js">
