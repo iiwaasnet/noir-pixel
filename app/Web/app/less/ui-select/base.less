@@ -1,12 +1,14 @@
-﻿@selectize-font-family: inherit;
+﻿@import (reference) "../colors.less";
+
+@selectize-font-family: inherit;
 @selectize-font-smoothing: inherit;
-@selectize-font-size: 13px;
+@selectize-font-size: 120%;
 @selectize-line-height: 18px;
 
-@selectize-color-text: #303030;
-@selectize-color-border: #d0d0d0;
-@selectize-color-highlight: rgba(125,168,208,0.2);
-@selectize-color-input: #fff;
+@selectize-color-text: @jet-stream;
+@selectize-color-border: @plantation;
+@selectize-color-highlight: @plantation;
+@selectize-color-input: @rangoon-green;
 @selectize-color-input-full: @selectize-color-input;
 @selectize-color-disabled: #fafafa;
 @selectize-color-item: #f2f2f2;
@@ -19,7 +21,7 @@
 @selectize-color-dropdown-border: @selectize-color-border;
 @selectize-color-dropdown-border-top: #f0f0f0;
 @selectize-color-dropdown-item-active: #f5fafd;
-@selectize-color-dropdown-item-active-text: #495c68;
+@selectize-color-dropdown-item-active-text: @jet-stream;
 @selectize-color-dropdown-item-create-text: rgba(red(@selectize-color-text), green(@selectize-color-text), blue(@selectize-color-text), 0.5);
 @selectize-color-dropdown-item-create-active-text: @selectize-color-dropdown-item-active-text;
 @selectize-color-optgroup: @selectize-color-dropdown;
@@ -32,13 +34,13 @@
 @selectize-shadow-input: inset 0 1px 1px rgba(0,0,0,0.1);
 @selectize-shadow-input-focus: inset 0 1px 2px rgba(0,0,0,0.15);
 @selectize-border: 1px solid @selectize-color-border;
-@selectize-border-radius: 3px;
+@selectize-border-radius: 0;
 
 @selectize-width-item-border: 0;
 @selectize-max-height-dropdown: 200px;
 
-@selectize-padding-x: 8px;
-@selectize-padding-y: 8px;
+@selectize-padding-x: 1px;
+@selectize-padding-y: 1px;
 @selectize-padding-item-x: 6px;
 @selectize-padding-item-y: 2px;
 @selectize-padding-dropdown-item-x: @selectize-padding-x;
@@ -47,7 +49,7 @@
 @selectize-margin-item-y: 3px;
 
 @selectize-arrow-size: 5px;
-@selectize-arrow-color: #808080;
+@selectize-arrow-color: @plantation;
 @selectize-arrow-offset: 15px;
 
 @selectize-caret-margin: 0 2px 0 0;
