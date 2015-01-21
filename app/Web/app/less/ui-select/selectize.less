@@ -3,6 +3,7 @@
 @import "plugins/dropdown_header.less";
 @import "plugins/optgroup_columns.less";
 @import "plugins/remove_button.less";
+@import "../mixins.less";
 
 
 .selectize-control {
@@ -153,8 +154,9 @@
     /*margin: -4px 0 0 0;*/
     border-top: 0 none;
     .selectize-box-sizing(border-box);
-    .selectize-box-shadow(0 1px 3px rgba(0,0,0,0.1));
+    /*.selectize-box-shadow(0 1px 3px rgba(0,0,0,0.1));*/
     .selectize-border-radius(0 0 @selectize-border-radius @selectize-border-radius);
+    .dropdown-shadow;
 
     [data-selectable] {
         cursor: pointer;
