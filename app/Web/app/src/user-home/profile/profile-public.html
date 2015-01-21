@@ -1,21 +1,29 @@
 ﻿<div id="profile-public">
-    <div class="edit-block">
-        <span class="edit-label" np-i18n="Label_FullName"></span>
-        <input class="full-name" type="text" placeholder="{{'Hint_FullName' | npi18n}}" np-autofocus />
-    </div>
+    <div class="columns-container">
+        <div class="column-center">
+            <div class="edit-block">
+                <span class="edit-label" np-i18n="Label_FullName"></span>
+                <input class="full-name" type="text" placeholder="{{'Hint_FullName' | npi18n}}" np-autofocus />
+            </div>
 
-    <div class="edit-block">
-        <span class="edit-label" np-i18n="Label_WhereDoYouLive"></span>
-        <div class="selectbox-wrapper country-select">
-            <ui-select ng-model="publicCtrl.country" theme="selectize">
-                <ui-select-match placeholder="{{'Hint_Country' | npi18n}}">{{$select.selected.name}}</ui-select-match>
-                <ui-select-choices repeat="country in publicCtrl.countries | filter: $select.search">
-                    <span ng-bind-html="::country.name | highlight: $select.search"></span>
-                </ui-select-choices>
-            </ui-select>
+            <div class="edit-block">
+                <span class="edit-label" np-i18n="Label_WhereDoYouLive"></span>
+                <div class="selectbox-wrapper country-select">
+                    <ui-select ng-model="publicCtrl.country" theme="selectize">
+                        <ui-select-match placeholder="{{'Hint_Country' | npi18n}}">{{$select.selected.name}}</ui-select-match>
+                        <ui-select-choices repeat="country in publicCtrl.countries | filter: $select.search">
+                            <span ng-bind-html="::country.name | highlight: $select.search"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <input type="text" placeholder="{{'Hint_City' | npi18n}}" class="city" />
+            </div>
+
+            <input type="button" class="default-action" value="Save" />
         </div>
-        <input type="text" placeholder="{{'Hint_City' | npi18n}}" class="city"/>
+        <div class="column-right">            
+            <div>PHOTO</div>
+            <img src="http://treasure.diylol.com/uploads/post/image/220171/resized_y-u-no-meme-generator-lorem-ipsum-dolor-sit-amet-y-u-no-reply-26f9a7.jpg" class="profile-image" />
+        </div>
     </div>
-
-    <input type="button" class="default-action" value="Save" />
 </div>
