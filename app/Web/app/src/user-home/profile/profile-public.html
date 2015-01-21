@@ -8,7 +8,7 @@
         <span class="edit-label" np-i18n="Label_WhereDoYouLive"></span>
         <ui-select ng-model="publicCtrl.country" theme="selectize" style="width: 300px;">
             <ui-select-match placeholder="{{'Hint_Country' | npi18n}}">{{$select.selected.name}}</ui-select-match>
-            <ui-select-choices repeat="country in ::publicCtrl.countries | filter: $select.search">
+            <ui-select-choices repeat="country in publicCtrl.countries | filter: $select.search">
                 <span ng-bind-html="::country.name | highlight: $select.search"></span>
             </ui-select-choices>
         </ui-select>
