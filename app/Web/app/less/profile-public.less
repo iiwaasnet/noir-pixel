@@ -1,5 +1,20 @@
-﻿#profile-public{
+﻿@country-select-width: 35%;
+
+#profile-public{
     .full-name{
-        width: 350em/16;
+        width: 100%;
+    }
+
+    input.default-action{
+        width: 100%;
+        margin: 15em 0 0;
+    }
+
+    .country-select{
+        width: @country-select-width;
+    }
+
+    .city{
+        width: 100% - @country-select-width - 0.7%;
     }
 }
