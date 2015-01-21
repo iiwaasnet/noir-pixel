@@ -1,5 +1,6 @@
 ﻿@import (reference) "colors.less";
-@import (reference) "fonts.less";
+@import (reference) "colors.less";
+@import (reference) "mixins.less";
 
 @dropdown-font-size: 90%;
 
@@ -11,12 +12,7 @@
         right: 0;
         padding: 0.5em;
         background-color: @rangoon-green;
-        -webkit-box-shadow: 1px 1px 25px 0 rgba(0,0,0,0.75);
-        -moz-box-shadow: 1px 1px 25px 0 rgba(0,0,0,0.75);
-        -webkit-box-shadow: -1px -1px 25px 0 rgba(0,0,0,0.75);
-        -moz-box-shadow: -1px -1px 25px 0 rgba(0,0,0,0.75);
-        box-shadow: -1px -1px 25px 0 rgba(0,0,0,0.75);
-        box-shadow: 1px 1px 25px 0 rgba(0,0,0,0.75);
+        .dropdown-shadow;
         opacity: 0.95;
         font-size: @dropdown-font-size;
         z-index: 9999;
