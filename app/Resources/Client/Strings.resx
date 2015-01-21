@@ -213,4 +213,7 @@
   <data name="Btn_Save" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="Label_ProfilePhoto" xml:space="preserve">
+    <value>Profile photo</value>
+  </data>
 </root>

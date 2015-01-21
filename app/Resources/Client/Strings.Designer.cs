@@ -250,6 +250,15 @@ namespace Resources.Client {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Profile photo.
+        /// </summary>
+        public static string Label_ProfilePhoto {
+            get {
+                return ResourceManager.GetString("Label_ProfilePhoto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please, select your user name:.
         /// </summary>
         public static string Label_SelectUserName {
