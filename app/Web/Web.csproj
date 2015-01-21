@@ -338,6 +338,9 @@
     <Content Include="app\less\tabs.css">
       <DependentUpon>tabs.less</DependentUpon>
     </Content>
+    <Content Include="app\less\ui-select\plugins\optgroup_columns.css">
+      <DependentUpon>optgroup_columns.less</DependentUpon>
+    </Content>
     <Content Include="app\less\ui-select\plugins\remove_button.css">
       <DependentUpon>remove_button.less</DependentUpon>
     </Content>
