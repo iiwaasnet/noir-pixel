@@ -9,9 +9,14 @@
             <div class="edit-block">
                 <span class="edit-label" np-i18n="Label_WhereDoYouLive"></span>
                 <div class="selectbox-wrapper country-select">
-                    <ui-select ng-model="publicCtrl.country" theme="selectize">
+                    <ui-select ng-model="publicCtrl.country"
+                               theme="selectize"
+                               reset-search-input="false">
                         <ui-select-match placeholder="{{'Hint_Country' | npi18n}}">{{$select.selected.name}}</ui-select-match>
-                        <ui-select-choices repeat="country in publicCtrl.countries | filter: $select.search">
+                        <ui-select-choices repeat="country in publicCtrl.countries | filter: $select.search" 
+                                           group-by="publicCtrl.groupCountries"
+                                           class="country-option">
+                            <span ng-class="::country.code | lowercase" class="flag"></span>
                             <span ng-bind-html="::country.name | highlight: $select.search"></span>
                         </ui-select-choices>
                     </ui-select>
@@ -19,9 +24,9 @@
                 <input type="text" placeholder="{{'Hint_City' | npi18n}}" class="city" />
             </div>
 
-            <input type="button" class="default-action" value="Save" />
+            <input type="button" class="default-action" np-i18n="Btn_Save" ng-click="publicCtrl.save()" />
         </div>
-        <div class="column-right">            
+        <div class="column-right">
             <div>PHOTO</div>
             <img src="http://treasure.diylol.com/uploads/post/image/220171/resized_y-u-no-meme-generator-lorem-ipsum-dolor-sit-amet-y-u-no-reply-26f9a7.jpg" class="profile-image" />
         </div>

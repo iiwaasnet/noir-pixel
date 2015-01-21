@@ -187,7 +187,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\images\flags.png" />
+    <Content Include="app\images\flags32.png" />
     <Content Include="app\images\np-header.png" />
     <Content Include="app\images\sprites-login.png" />
     <Content Include="app\images\sprites16.png" />

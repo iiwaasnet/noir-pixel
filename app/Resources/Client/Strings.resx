@@ -210,4 +210,7 @@
   <data name="Hint_Country" xml:space="preserve">
     <value>Country...</value>
   </data>
+  <data name="Btn_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
 </root>
