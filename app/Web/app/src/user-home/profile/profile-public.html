@@ -6,14 +6,16 @@
 
     <div class="edit-block">
         <span class="edit-label" np-i18n="Label_WhereDoYouLive"></span>
-        <div class="selectbox-wrapper">
-            <ui-select ng-model="publicCtrl.country" theme="selectize" style="width: 300px;">
+        <div class="selectbox-wrapper country-select">
+            <ui-select ng-model="publicCtrl.country" theme="selectize">
                 <ui-select-match placeholder="{{'Hint_Country' | npi18n}}">{{$select.selected.name}}</ui-select-match>
                 <ui-select-choices repeat="country in publicCtrl.countries | filter: $select.search">
                     <span ng-bind-html="::country.name | highlight: $select.search"></span>
                 </ui-select-choices>
             </ui-select>
         </div>
-        <input type="text" placeholder="{{'Hint_City' | npi18n}}" />
+        <input type="text" placeholder="{{'Hint_City' | npi18n}}" class="city"/>
     </div>
+
+    <input type="button" class="default-action" value="Save" />
 </div>
