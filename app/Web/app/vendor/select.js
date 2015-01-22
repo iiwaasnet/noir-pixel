@@ -1025,7 +1025,7 @@
           });
           focusser.bind("keydown", function(e){
 
-            if (e.which === KEY.BACKSPACE) {
+              if (e.which === KEY.BACKSPACE || e.which === KEY.DELETE) {
               e.preventDefault();
               e.stopPropagation();
               $select.select(undefined);
@@ -1048,7 +1048,7 @@
 
           focusser.bind("keyup input", function(e){
 
-            if (e.which === KEY.TAB || KEY.isControl(e) || KEY.isFunctionKey(e) || e.which === KEY.ESC || e.which == KEY.ENTER || e.which === KEY.BACKSPACE) {
+            if (e.which === KEY.TAB || KEY.isControl(e) || KEY.isFunctionKey(e) || e.which === KEY.ESC || e.which == KEY.ENTER || e.which === KEY.BACKSPACE || e.which === KEY.DELETE) {
               return;
             }
 
