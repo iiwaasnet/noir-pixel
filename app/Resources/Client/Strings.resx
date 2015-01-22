@@ -216,4 +216,13 @@
   <data name="Label_ProfilePhoto" xml:space="preserve">
     <value>Profile photo</value>
   </data>
+  <data name="Btn_Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Btn_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="ProfilePublic_ProfilePhotoDescription" xml:space="preserve">
+    <value>Your profile image will be resized and cropped to {0} pixels width and height. Image size should not exceed {1} MB.</value>
+  </data>
 </root>

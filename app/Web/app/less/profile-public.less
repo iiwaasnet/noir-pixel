@@ -1,45 +1,96 @@
-﻿@country-select-width: 60%;
+﻿@import (reference) "edits.less";
+@import (reference) "sprites16.less";
 
-#profile-public{
-    .full-name{
+@country-select-width: 60%;
+
+#profile-public {
+    .full-name {
         width: 100%;
     }
 
-    input.save{
+    input.save {
         width: 100%;
-        margin: 15em 0 0;
+        margin: 5em 0 0;
     }
 
-    .country-select{
+    .country-select {
         width: @country-select-width;
     }
 
-    .city{
+    .city {
         width: 100% - @country-select-width - 1%;
     }
 
-    .column-center{
+    .column-center {
         width: 70%;
     }
 
-    .column-right{
-         -webkit-flex: 0 1 150px;
-        -ms-flex: 0 1 150px;
-        flex: 0 1 150px;
+    .column-right {
+        -webkit-flex: 0 1 200px;
+        -ms-flex: 0 1 200px;
+        flex: 0 1 200px;
         padding: 0 0 0 3em;
     }
 
-    .profile-image{
-        width: 130px;
-        height: 130px;
-    }
 
-    .country-option{
+
+    .country-option {
         display: table;
 
-        span{
+        span {
             padding: 0 0.2em 0 0;
             vertical-align: middle;
+        }
+    }
+
+    .profile-image {
+        .image {
+            margin: @edit-before-margin 0 0;
+            width: 130px;
+            height: 130px;
+        }
+
+        .action {
+            margin: 0.5em 0 0 0;
+            cursor: pointer;
+            display: inline-block;
+
+            .text {
+                margin: 0 0 0 0.5em;
+                font-weight: 400;
+            }
+
+            &.add {
+                .image {
+                    .sprite(@camera16);
+                    display: inline-block;
+                }
+
+                .text {
+                    text-transform: uppercase;
+                }
+            }
+
+            &.delete {
+                .image {
+                    .sprite(@delete16);
+                    display: inline-block;
+                }
+
+                .text {
+                    font-size: 90%;
+                }
+            }
+        }
+
+        .action:last-of-type{
+            margin: 0.5em 0 0 4em;
+        }
+
+        .description{
+            margin: 2em 0 0;
+            opacity: 0.5; 
+            font-size: 90%;
         }
     }
 }

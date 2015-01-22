@@ -88,11 +88,29 @@ namespace Resources.Client {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string Btn_Add {
+            get {
+                return ResourceManager.GetString("Btn_Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Btn_Cancel {
             get {
                 return ResourceManager.GetString("Btn_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string Btn_Delete {
+            get {
+                return ResourceManager.GetString("Btn_Delete", resourceCulture);
             }
         }
         
@@ -282,6 +300,15 @@ namespace Resources.Client {
         public static string MainMenu_Gallery {
             get {
                 return ResourceManager.GetString("MainMenu_Gallery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your profile image will be resized and cropped to {0} pixels width and height. Image size should not exceed {1} MB..
+        /// </summary>
+        public static string ProfilePublic_ProfilePhotoDescription {
+            get {
+                return ResourceManager.GetString("ProfilePublic_ProfilePhotoDescription", resourceCulture);
             }
         }
         

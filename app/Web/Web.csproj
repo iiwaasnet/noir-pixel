@@ -605,7 +605,6 @@
     <Content Include="app\vendor\ngDialog.min.js" />
     <Content Include="app\vendor\nprogress.js" />
     <Content Include="app\vendor\select.js" />
-    <Content Include="app\vendor\select.min.js" />
     <Content Include="app\vendor\stacktrace.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />

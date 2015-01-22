@@ -13,7 +13,7 @@
                                theme="selectize"
                                reset-search-input="true">
                         <ui-select-match placeholder="{{'Hint_Country' | npi18n}}">{{$select.selected.name}}</ui-select-match>
-                        <ui-select-choices repeat="country in publicCtrl.countries | filter: $select.search" 
+                        <ui-select-choices repeat="country in publicCtrl.countries | filter: $select.search"
                                            group-by="publicCtrl.groupCountries"
                                            class="country-option">
                             <span ng-class="::country.code | lowercase" class="flag"></span>
@@ -23,11 +23,23 @@
                 </div>
                 <input type="text" placeholder="{{'Hint_City' | npi18n}}" class="city" />
             </div>
+
+            <input type="button" class="save" np-i18n="Btn_Save" ng-click="publicCtrl.save()" />
         </div>
         <div class="column-right">
-            <div class="edit-label" np-i18n="Label_ProfilePhoto"></div>
-            <img src="http://treasure.diylol.com/uploads/post/image/220171/resized_y-u-no-meme-generator-lorem-ipsum-dolor-sit-amet-y-u-no-reply-26f9a7.jpg" class="profile-image" />
+            <div class="profile-image">
+                <div class="edit-label" np-i18n="Label_ProfilePhoto"></div>
+                <img src="http://treasure.diylol.com/uploads/post/image/220171/resized_y-u-no-meme-generator-lorem-ipsum-dolor-sit-amet-y-u-no-reply-26f9a7.jpg" class="image" />
+                <div>
+                    <div class="add action">
+                        <span class="image"></span><span class="text" np-i18n="Btn_Add"></span>
+                    </div>
+                    <div class="delete action">
+                        <span class="image"></span><span class="text" np-i18n="Btn_Delete"></span>
+                    </div>
+                </div>
+                <div class="description">{{'ProfilePublic_ProfilePhotoDescription | 130 | 1' | npi18n}}</div>
+            </div>
         </div>
     </div>
-    <input type="button" class="save" np-i18n="Btn_Save" ng-click="publicCtrl.save()" />
 </div>
