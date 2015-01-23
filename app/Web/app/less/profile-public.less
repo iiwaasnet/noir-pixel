@@ -69,18 +69,6 @@
             .image {
                 width: @profile-image-size;
                 height: @profile-image-size;
-
-                &:hover {
-                    ~ .action {
-                        &.add {
-                            height: @profile-image-size * @add-to-delete-ratio !important;
-                        }
-
-                        &.delete {
-                            height: @profile-image-size * (1 - @add-to-delete-ratio) !important;
-                        }
-                    }
-                }
             }
 
             .action {
@@ -93,7 +81,6 @@
                 -moz-box-sizing: border-box;
                 -webkit-box-sizing: border-box;
                 box-sizing: border-box;
-                height: @profile-image-size * 0.2;
 
                 &:hover {
                     opacity: 0.85;
@@ -109,10 +96,7 @@
                 &.add {
                     top: 0;
                     left: 0;
-
-                    &:hover {
-                        height: @profile-image-size * @add-to-delete-ratio;
-                    }
+                    height: @profile-image-size * @add-to-delete-ratio;
 
                     .image {
                         .sprite(@camera32);
@@ -123,10 +107,7 @@
                 &.delete {
                     bottom: 0;
                     right: 0;
-
-                    &:hover {
-                        height: @profile-image-size * (1 - @add-to-delete-ratio);
-                    }
+                    height: @profile-image-size * (1 - @add-to-delete-ratio);
 
                     .image {
                         .sprite(@delete32);

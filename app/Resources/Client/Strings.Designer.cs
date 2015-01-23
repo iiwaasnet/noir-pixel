@@ -304,7 +304,7 @@ namespace Resources.Client {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your profile image will be resized and cropped to {0} pixels width and height. Image size should not exceed {1} MB..
+        ///   Looks up a localized string similar to Your profile image will be resized and cropped to {0} pixels width and height. File size should not exceed {1} MB..
         /// </summary>
         public static string ProfilePublic_ProfilePhotoDescription {
             get {

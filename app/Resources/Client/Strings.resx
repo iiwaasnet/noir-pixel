@@ -223,6 +223,6 @@
     <value>Delete</value>
   </data>
   <data name="ProfilePublic_ProfilePhotoDescription" xml:space="preserve">
-    <value>Your profile image will be resized and cropped to {0} pixels width and height. Image size should not exceed {1} MB.</value>
+    <value>Your profile image will be resized and cropped to {0} pixels width and height. File size should not exceed {1} MB.</value>
   </data>
 </root>
