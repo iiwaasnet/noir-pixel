@@ -1,7 +1,10 @@
 ﻿@import (reference) "edits.less";
-@import (reference) "sprites16.less";
+@import (reference) "sprites32.less";
 
 @country-select-width: 60%;
+@profile-image-size: 130px;
+@action-image-size: 32px;
+@add-to-delete-ratio: 0.6;
 
 #profile-public {
     .full-name {
@@ -44,53 +47,94 @@
     }
 
     .profile-image {
-        .image {
-            margin: @edit-before-margin 0 0;
-            width: 130px;
-            height: 130px;
-        }
 
-        .action {
-            margin: 0.5em 0 0 0;
-            cursor: pointer;
-            display: inline-block;
 
-            .text {
-                margin: 0 0 0 0.5em;
-                font-weight: 400;
-            }
-
-            &.add {
-                .image {
-                    .sprite(@camera16);
-                    display: inline-block;
-                }
-
-                .text {
-                    text-transform: uppercase;
-                }
-            }
-
-            &.delete {
-                .image {
-                    .sprite(@delete16);
-                    display: inline-block;
-                }
-
-                .text {
-                    font-size: 90%;
-                }
-            }
-        }
-
-        .action:last-of-type{
+        .action:last-of-type {
             margin: 0.5em 0 0 4em;
         }
 
-        .description{
+        .description {
             margin: 2em 0 0;
-            opacity: 0.5; 
+            opacity: 0.5;
             font-size: 90%;
+        }
+
+        .image-actions {
+            margin: @edit-before-margin 0 0;
+            position: relative;
+            overflow: hidden;
+            width: @profile-image-size;
+            height: @profile-image-size;
+
+            .image {
+                width: @profile-image-size;
+                height: @profile-image-size;
+
+                &:hover {
+                    ~ .action {
+                        &.add {
+                            height: @profile-image-size * @add-to-delete-ratio !important;
+                        }
+
+                        &.delete {
+                            height: @profile-image-size * (1 - @add-to-delete-ratio) !important;
+                        }
+                    }
+                }
+            }
+
+            .action {
+                position: absolute;
+                width: 100%;
+                background-color: @mine-shaft;
+                opacity: 0.2;
+                border: solid 1px @bianca;
+                cursor: pointer;
+                -moz-box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+                height: @profile-image-size * 0.2;
+
+                &:hover {
+                    opacity: 0.85;
+                }
+
+                .image {
+                    display: inline-block;
+                    opacity: 1;
+                    position: absolute;
+                    left: @profile-image-size / 2 - @action-image-size / 2;
+                }
+
+                &.add {
+                    top: 0;
+                    left: 0;
+
+                    &:hover {
+                        height: @profile-image-size * @add-to-delete-ratio;
+                    }
+
+                    .image {
+                        .sprite(@camera32);
+                        top: @profile-image-size * @add-to-delete-ratio / 2 - @action-image-size / 2;
+                    }
+                }
+
+                &.delete {
+                    bottom: 0;
+                    right: 0;
+
+                    &:hover {
+                        height: @profile-image-size * (1 - @add-to-delete-ratio);
+                    }
+
+                    .image {
+                        .sprite(@delete32);
+                        left: @profile-image-size / 2 - @action-image-size / 2;
+                        top: @profile-image-size * (1 - @add-to-delete-ratio) / 2 - @action-image-size / 2;
+                    }
+                }
+            }
         }
     }
 }
