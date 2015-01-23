@@ -35,6 +35,7 @@ namespace Api.App.Profiles
         }
 
         [Route("countries")]
+        [AllowAnonymous]
         public IHttpActionResult GetCountries()
         {
             return Ok(profilesManager.GetCountries());
