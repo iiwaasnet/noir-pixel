@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
 using Api.App.Exceptions;
-using Api.App.Media;
 using Api.App.Profiles.Extensions;
 
 namespace Api.App.Profiles
@@ -18,6 +15,7 @@ namespace Api.App.Profiles
     public class ProfilesController : ApiBaseController
     {
         private readonly IProfilesManager profilesManager;
+        private readonly string root = Path.Combine(Path.GetTempPath(), "uploads");
 
         public ProfilesController(IProfilesManager profilesManager)
         {
@@ -50,47 +48,143 @@ namespace Api.App.Profiles
             return Ok(profilesManager.GetCountries());
         }
 
-        [HttpPost]
         [HttpGet]
+        [Route("update-profile-image")]
+        public async Task<IHttpActionResult> CheckProfileImagePart()
+        {
+            var flowChunkNumber = Int32.Parse(Request.GetQueryNameValuePairs().FirstOrDefault(p => p.Key == "flowChunkNumber").Value);
+            var flowIdentifier = Request.GetQueryNameValuePairs().FirstOrDefault(p => p.Key == "flowIdentifier").Value;
+
+            if (ChunkIsHere(flowChunkNumber, flowIdentifier))
+            {
+                return Ok();
+            }
+            return ApiError(HttpStatusCode.NotFound);
+        }
+
+        [HttpPost]
         [Route("update-profile-image")]
         public async Task<IHttpActionResult> UpdateProfileImage()
         {
-            var folderName = "uploads";
-            var path = HttpContext.Current.Server.MapPath("~/" + folderName);
-            var rootUrl = Request.RequestUri.AbsoluteUri.Replace(Request.RequestUri.AbsolutePath, String.Empty);
-            if (Request.Content.IsMimeMultipartContent())
+            // Check if the request contains multipart/form-data.
+            if (!Request.Content.IsMimeMultipartContent())
             {
-                var streamProvider = await Request.Content.ReadAsMultipartAsync(new CustomMultipartFormDataStreamProvider(path));
-                
-                var fileDesc = ContinuationFunction(streamProvider, folderName, rootUrl);
-
-                return Ok(fileDesc);
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
-
-            return ApiError(HttpStatusCode.NotAcceptable);
+            if (!Directory.Exists(root))
+            {
+                Directory.CreateDirectory(root);
+            }
+            var provider = new MultipartFormDataStreamProvider(root);
+            await Request.Content.ReadAsMultipartAsync(provider);
+            var chunkNumber = Convert.ToInt32(provider.FormData["flowChunkNumber"]);
+            var totalChunks = Convert.ToInt32(provider.FormData["flowTotalChunks"]);
+            var identifier = provider.FormData["flowIdentifier"];
+            var filename = provider.FormData["flowFilename"];
+            // Rename generated file
+            var chunk = provider.FileData[0]; // Only one file in multipart message
+            RenameChunk(chunk, chunkNumber, identifier);
+            // Assemble chunks into single file if they're all here
+            TryAssembleFile(identifier, totalChunks, filename);
+            // Success
+            return Ok();
         }
 
-        private IEnumerable<FileDesc> ContinuationFunction(CustomMultipartFormDataStreamProvider streamProvider, string folderName, string rootUrl)
+        private void TryAssembleFile(string identifier, int totalChunks, string filename)
         {
+            if (AllChunksAreHere(identifier, totalChunks))
             {
-                var fileInfo = streamProvider
-                    .FileData
-                    .Select(i =>
-                            {
-                                var info = new FileInfo(i.LocalFileName);
-                                return new FileDesc
-                                       {
-                                           Name = info.Name,
-                                           Path = rootUrl + "/" + folderName + "/" + info.Name,
-                                           Size = info.Length / 1024
-                                       };
-                            });
-                return fileInfo;
+                // Create a single file
+                var consolidatedFileName = GetFileName(identifier);
+                using (var destStream = File.Create(consolidatedFileName, 15000))
+                {
+                    for (var chunkNumber = 1; chunkNumber <= totalChunks; chunkNumber++)
+                    {
+                        var chunkFileName = GetChunkFileName(chunkNumber, identifier);
+                        using (var sourceStream = File.OpenRead(chunkFileName))
+                        {
+                            sourceStream.CopyTo(destStream);
+                        }
+                    }
+                    destStream.Close();
+                }
+                // Rename consolidated with original name of upload
+                filename = Path.GetFileName(filename); // Strip to filename if directory is specified (avoid cross-directory attack)
+                var realFileName = Path.Combine(root, filename);
+                if (File.Exists(filename))
+                {
+                    File.Delete(realFileName);
+                }
+                File.Move(consolidatedFileName, realFileName);
+                // Delete chunk files
+                for (var chunkNumber = 1; chunkNumber <= totalChunks; chunkNumber++)
+                {
+                    var chunkFileName = GetChunkFileName(chunkNumber, identifier);
+                    File.Delete(chunkFileName);
+                }
             }
         }
+
+        private bool AllChunksAreHere(string identifier, int totalChunks)
+        {
+            for (var chunkNumber = 1; chunkNumber <= totalChunks; chunkNumber++)
+            {
+                if (!ChunkIsHere(chunkNumber, identifier))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private string GetFileName(string identifier)
+        {
+            return Path.Combine(root, identifier);
+        }
+
+        private void RenameChunk(MultipartFileData chunk, int chunkNumber, string identifier)
+        {
+            var generatedFileName = chunk.LocalFileName;
+            var chunkFileName = GetChunkFileName(chunkNumber, identifier);
+            if (File.Exists(chunkFileName))
+            {
+                File.Delete(chunkFileName);
+            }
+            File.Move(generatedFileName, chunkFileName);
+        }
+
+        private bool ChunkIsHere(int chunkNumber, string identifier)
+        {
+            var fileName = GetChunkFileName(chunkNumber, identifier);
+            return File.Exists(fileName);
+        }
+
+        private string GetChunkFileName(int chunkNumber, string identifier)
+        {
+            return Path.Combine(root, string.Format("{0}_{1}", identifier, chunkNumber.ToString()));
+        }
+
+        //private IEnumerable<UploadedFile> ContinuationFunction(MultipartFormDataStreamProvider streamProvider, string folderName, string rootUrl)
+        //{
+        //    {
+        //        var fileInfo = streamProvider
+        //            .FileData
+        //            .Select(i =>
+        //                    {
+        //                        var info = new FileInfo(i.LocalFileName);
+        //                        return new UploadedFile
+        //                               {
+        //                                   Name = info.Name,
+        //                                   Path = rootUrl + "/" + folderName + "/" + info.Name,
+        //                                   Size = info.Length / 1024
+        //                               };
+        //                    });
+        //        return fileInfo;
+        //    }
+        //}
     }
 
-    public class FileDesc
+    public class UploadedFile
     {
         public string Name { get; set; }
         public string Path { get; set; }
