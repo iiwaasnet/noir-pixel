@@ -282,6 +282,7 @@
     <Compile Include="App\Images\ImagesModule.cs" />
     <Compile Include="App\Images\IProfileImageManager.cs" />
     <Compile Include="App\Images\ProfileImageManager.cs" />
+    <Compile Include="App\Media\CustomMultipartFormDataStreamProvider.cs" />
     <Compile Include="App\MethodExecutionResult.cs" />
     <Compile Include="App\Posts\DataPage.cs" />
     <Compile Include="App\Posts\Entities\Reply.cs" />
@@ -350,7 +351,6 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="App\Auth\AccountsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="App\Errors\ApiErrors.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
