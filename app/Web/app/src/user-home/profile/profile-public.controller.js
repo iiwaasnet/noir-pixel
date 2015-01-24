@@ -10,7 +10,6 @@
         var ctrl = this;
         ctrl.countries = $filter('orderBy')(countries.data, 'name');
         ctrl.country = undefined;
-        ctrl.groupCountries = groupCountries;
         ctrl.save = save;
 
         var unsubscribe;
@@ -19,10 +18,6 @@
 
         function save() {
 
-        }
-
-        function groupCountries(item) {
-            return item.name[0].toUpperCase();
         }
 
         function activate() {

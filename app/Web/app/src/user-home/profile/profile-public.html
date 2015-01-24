@@ -14,7 +14,6 @@
                                reset-search-input="true">
                         <ui-select-match placeholder="{{'Hint_Country' | npi18n}}">{{$select.selected.name}}</ui-select-match>
                         <ui-select-choices repeat="country in publicCtrl.countries | filter: $select.search"
-                                           group-by="publicCtrl.groupCountries"
                                            class="country-option">
                             <span ng-class="::country.code | lowercase" class="flag"></span>
                             <span ng-bind-html="::country.name | highlight: $select.search"></span>
