@@ -1,6 +1,14 @@
 ﻿(function() {
     'use strict';
 
+    var tokenStorageProvider = {
+        $get: ['Storage', tokenStorageService]
+};
+
+    angular.module('np.auth')
+        .provider('TokenStorage', tokenStorageProvider);
+
+
     angular.module('np.auth')
         .service('TokenStorage', tokenStorageService);
 

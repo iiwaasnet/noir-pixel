@@ -51,25 +51,23 @@ namespace Api.App.Profiles
         }
 
         [HttpPost]
+        [HttpGet]
         [Route("update-profile-image")]
         public async Task<IHttpActionResult> UpdateProfileImage()
         {
             var folderName = "uploads";
-            var PATH = HttpContext.Current.Server.MapPath("~/" + folderName);
+            var path = HttpContext.Current.Server.MapPath("~/" + folderName);
             var rootUrl = Request.RequestUri.AbsoluteUri.Replace(Request.RequestUri.AbsolutePath, String.Empty);
             if (Request.Content.IsMimeMultipartContent())
             {
-                var streamProvider = await Request.Content.ReadAsMultipartAsync(new CustomMultipartFormDataStreamProvider(PATH));
-                //TODO: Process errors from previous task
-                //if (t.IsFaulted || t.IsCanceled)
-                //{
-                //    throw new HttpResponseException(HttpStatusCode.InternalServerError);
-                //}
+                var streamProvider = await Request.Content.ReadAsMultipartAsync(new CustomMultipartFormDataStreamProvider(path));
+                
                 var fileDesc = ContinuationFunction(streamProvider, folderName, rootUrl);
 
                 return Ok(fileDesc);
             }
-            throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable, "This request is not properly formatted"));
+
+            return ApiError(HttpStatusCode.NotAcceptable);
         }
 
         private IEnumerable<FileDesc> ContinuationFunction(CustomMultipartFormDataStreamProvider streamProvider, string folderName, string rootUrl)

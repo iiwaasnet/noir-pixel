@@ -28,9 +28,10 @@
         <div class="column-right">
             <div class="profile-image">
                 <div class="edit-label" np-i18n="Label_ProfilePhoto"></div>
-                <div class="image-actions" flow-init="{target: 'http://api.noir-pixel.com/profiles/upload'}">
+                <div class="image-actions"
+                     flow-init="{target: 'http://api.noir-pixel.com/profiles/update-profile-image', withCredentials: true}"
+                     flow-files-submitted="$flow.upload()">
                     <div flow-btn
-                         flow-attrs="{accept:'image/*'}"
                          class="action add">
                         <span class="image"></span>
                     </div>
