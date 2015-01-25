@@ -25,23 +25,16 @@ namespace Api.App.Media
             return ChunkIsHere(flowChunkNumber, flowIdentifier);
         }
 
-        public async Task<string> ReceiveMediaChunk(HttpRequestMessage request)
+        public async Task<MediaUploadResult> ReceiveMediaChunk(HttpRequestMessage request)
         {
             AssertRequestIsMultipart(request);
             EnsureRootUploadFolderExists();
+
             var provider = await request.Content.ReadAsMultipartAsync(new MultipartFormDataStreamProvider(config.RootUploadFolder));
+            var chunkInfo = GetChunkInfo(provider);
 
-            var chunkNumber = Convert.ToInt32(provider.FormData["flowChunkNumber"]);
-            var totalChunks = Convert.ToInt32(provider.FormData["flowTotalChunks"]);
-            var identifier = provider.FormData["flowIdentifier"];
-            var filename = provider.FormData["flowFilename"];
-            var chunk = provider.FileData[0];
-
-            RenameChunk(chunk, chunkNumber, identifier);
-
-            TryAssembleFile(identifier, totalChunks, filename);
-
-            return "";
+            RenameChunk(chunkInfo);
+            return TryAssembleFile(chunkInfo);
         }
 
         private static void AssertRequestIsMultipart(HttpRequestMessage request)
@@ -60,16 +53,20 @@ namespace Api.App.Media
             }
         }
 
-        private void TryAssembleFile(string identifier, int totalChunks, string filename)
+        private MediaUploadResult TryAssembleFile(ChunkInfo chunkInfo)
         {
-            if (AllChunksAreHere(identifier, totalChunks))
+            if (AllChunksAreHere(chunkInfo.Identifier, chunkInfo.TotalChunks))
             {
-                var consolidatedFileName = GetFileName(identifier);
+                var consolidatedFileName = GetFileName(chunkInfo.Identifier);
 
-                ConcatFileParts(identifier, totalChunks, consolidatedFileName);
-                RenameFinalFile(filename, consolidatedFileName);
-                DeleteChunks(identifier, totalChunks);
+                ConcatFileParts(chunkInfo.Identifier, chunkInfo.TotalChunks, consolidatedFileName);
+                var fileName = RenameFinalFile(chunkInfo.FileName, consolidatedFileName);
+                DeleteChunks(chunkInfo.Identifier, chunkInfo.TotalChunks);
+
+                return new MediaUploadResult {Completed = true, FileName = fileName};
             }
+
+            return new MediaUploadResult {Completed = false};
         }
 
         private void DeleteChunks(string identifier, int totalChunks)
@@ -81,15 +78,21 @@ namespace Api.App.Media
             }
         }
 
-        private void RenameFinalFile(string filename, string consolidatedFileName)
+        private string RenameFinalFile(string filename, string consolidatedFileName)
         {
-            filename = Path.GetFileName(filename); // Strip to filename if directory is specified (avoid cross-directory attack)
-            var realFileName = Path.Combine(config.RootUploadFolder, filename);
+            var realFileName = Path.Combine(config.RootUploadFolder, PreventCrossDirectoryAttack(filename));
             if (File.Exists(filename))
             {
                 File.Delete(realFileName);
             }
             File.Move(consolidatedFileName, realFileName);
+
+            return realFileName;
+        }
+
+        private static string PreventCrossDirectoryAttack(string filename)
+        {
+            return Path.GetFileName(filename);
         }
 
         private void ConcatFileParts(string identifier, int totalChunks, string consolidatedFileName)
@@ -125,10 +128,10 @@ namespace Api.App.Media
             return Path.Combine(config.RootUploadFolder, identifier);
         }
 
-        private void RenameChunk(MultipartFileData chunk, int chunkNumber, string identifier)
+        private void RenameChunk(ChunkInfo chunkInfo)
         {
-            var generatedFileName = chunk.LocalFileName;
-            var chunkFileName = GetChunkFileName(chunkNumber, identifier);
+            var generatedFileName = chunkInfo.Chunk.LocalFileName;
+            var chunkFileName = GetChunkFileName(chunkInfo.ChunkNumber, chunkInfo.Identifier);
             if (File.Exists(chunkFileName))
             {
                 File.Delete(chunkFileName);
@@ -145,6 +148,18 @@ namespace Api.App.Media
         private string GetChunkFileName(int chunkNumber, string identifier)
         {
             return Path.Combine(config.RootUploadFolder, string.Format("{0}_{1}", identifier, chunkNumber));
+        }
+
+        private static ChunkInfo GetChunkInfo(MultipartFormDataStreamProvider provider)
+        {
+            return new ChunkInfo
+                   {
+                       ChunkNumber = Convert.ToInt32(provider.FormData["flowChunkNumber"]),
+                       TotalChunks = Convert.ToInt32(provider.FormData["flowTotalChunks"]),
+                       Identifier = provider.FormData["flowIdentifier"],
+                       FileName = provider.FormData["flowFilename"],
+                       Chunk = provider.FileData[0]
+                   };
         }
     }
 }
