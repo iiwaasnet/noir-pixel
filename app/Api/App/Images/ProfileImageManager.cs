@@ -1,16 +1,34 @@
 ﻿using System.Drawing;
+using Api.App.Db;
 using Api.App.Images.Config;
+using Api.App.Profiles;
+using Api.App.Profiles.Entities;
 using JsonConfigurationProvider;
+using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 
 namespace Api.App.Images
 {
     public class ProfileImageManager : IProfileImageManager
     {
         private readonly ImagesConfiguration config;
+        private readonly MongoDatabase db;
 
-        public ProfileImageManager(IConfigProvider configProvider)
+        public ProfileImageManager(IAppDbProvider appDbProvider, IConfigProvider configProvider)
         {
             config = configProvider.GetConfiguration<ImagesConfiguration>();
+            db = appDbProvider.GetDatabase();
+        }
+
+        public string SaveImage(string userName, string fileName)
+        {
+            var profiles = db.GetCollection<Profile>(Profile.CollectionName);
+            profiles.FindOne(Query.EQ("UserName", userName));
+        }
+
+        public void DeleteImage(string userName)
+        {
+            throw new System.NotImplementedException();
         }
 
         public Size AvatarSize()
