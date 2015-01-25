@@ -1,7 +1,7 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using Api.App.Db;
 using Api.App.Images.Config;
-using Api.App.Profiles;
 using Api.App.Profiles.Entities;
 using JsonConfigurationProvider;
 using MongoDB.Driver;
@@ -23,7 +23,9 @@ namespace Api.App.Images
         public string SaveImage(string userName, string fileName)
         {
             var profiles = db.GetCollection<Profile>(Profile.CollectionName);
-            profiles.FindOne(Query.EQ("UserName", userName));
+            var profile = profiles.FindOne(Query.EQ("UserName", userName));
+
+            throw new Exception();
         }
 
         public void DeleteImage(string userName)

@@ -49,10 +49,9 @@ namespace Api.App.Profiles
 
         [HttpGet]
         [Route("update-profile-image")]
-        [AllowAnonymous]
         public IHttpActionResult CheckProfileImagePart()
         {
-            return mediaUploadManager.MediaChunkReceived(Request)
+            return mediaUploadManager.MediaChunkReceived(Request, User.Identity.Name)
                        ? Ok()
                        : ApiError(HttpStatusCode.NotFound);
         }
@@ -63,7 +62,7 @@ namespace Api.App.Profiles
         {
             try
             {
-                await mediaUploadManager.ReceiveMediaChunk(Request);
+                await mediaUploadManager.ReceiveMediaChunk(Request, User.Identity.Name);
 
                 return Ok();
             }

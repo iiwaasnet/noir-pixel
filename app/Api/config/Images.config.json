@@ -1,7 +1,7 @@
 ﻿[
     {
         "prod": {
-            "imagesRootFolder": "c:\\np-media",
+            "imagesRootFolder": "c:\\np-media\\artists\\{0}",
             "profileImages": {
                 "rootFolder": "profile",
                 "avatar": {
