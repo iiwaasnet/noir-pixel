@@ -3,6 +3,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Api.App.Exceptions;
+using Api.App.Images;
 using Api.App.Media;
 using Api.App.Profiles.Extensions;
 
@@ -14,11 +15,15 @@ namespace Api.App.Profiles
     {
         private readonly IProfilesManager profilesManager;
         private readonly IMediaUploadManager mediaUploadManager;
+        private readonly IProfileImageManager profileImageManager;
 
-        public ProfilesController(IProfilesManager profilesManager, IMediaUploadManager mediaUploadManager)
+        public ProfilesController(IProfilesManager profilesManager,
+                                  IMediaUploadManager mediaUploadManager,
+                                  IProfileImageManager profileImageManager)
         {
             this.profilesManager = profilesManager;
             this.mediaUploadManager = mediaUploadManager;
+            this.profileImageManager = profileImageManager;
         }
 
         [Route("{userName}")]
@@ -62,7 +67,11 @@ namespace Api.App.Profiles
         {
             try
             {
-                await mediaUploadManager.ReceiveMediaChunk(Request, User.Identity.Name);
+                var mediaUploadResult = await mediaUploadManager.ReceiveMediaChunk(Request, User.Identity.Name);
+                if (mediaUploadResult.Completed)
+                {
+                    profileImageManager.SaveImage()
+                }
 
                 return Ok();
             }
