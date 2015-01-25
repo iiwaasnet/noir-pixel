@@ -282,7 +282,11 @@
     <Compile Include="App\Images\ImagesModule.cs" />
     <Compile Include="App\Images\IProfileImageManager.cs" />
     <Compile Include="App\Images\ProfileImageManager.cs" />
+    <Compile Include="App\Media\Config\MediaConfiguration.cs" />
     <Compile Include="App\Media\CustomMultipartFormDataStreamProvider.cs" />
+    <Compile Include="App\Media\IMediaUploadManager.cs" />
+    <Compile Include="App\Media\MediaModule.cs" />
+    <Compile Include="App\Media\MediaUploadManager.cs" />
     <Compile Include="App\MethodExecutionResult.cs" />
     <Compile Include="App\Posts\DataPage.cs" />
     <Compile Include="App\Posts\Entities\Reply.cs" />
@@ -439,6 +443,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="config\Images.config.json" />
+    <Content Include="config\Media.config.json" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
