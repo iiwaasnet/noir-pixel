@@ -74,7 +74,7 @@ namespace Api.App.Media
                 var consolidatedFileName = GetFileName(chunkInfo.Identifier);
 
                 ConcatFileParts(chunkInfo.Identifier, chunkInfo.TotalChunks, consolidatedFileName, chunkInfo.UserId);
-                var fileName = RenameFinalFile(chunkInfo.FileName, consolidatedFileName);
+                var fileName = RenameFinalFile(chunkInfo.FileName, consolidatedFileName, chunkInfo.UserId);
                 DeleteChunks(chunkInfo.Identifier, chunkInfo.TotalChunks, chunkInfo.UserId);
 
                 return new MediaUploadResult {Completed = true, FileName = fileName};
@@ -92,10 +92,12 @@ namespace Api.App.Media
             }
         }
 
-        private string RenameFinalFile(string filename, string consolidatedFileName)
+        private string RenameFinalFile(string fileName, string consolidatedFileName, string userId)
         {
-            var realFileName = Path.Combine(config.RootUploadFolder, PreventCrossDirectoryAttack(filename));
-            if (File.Exists(filename))
+            fileName = string.Format("{0}_{1}", userId, PreventCrossDirectoryAttack(fileName));
+            var realFileName = Path.Combine(config.RootUploadFolder, fileName);
+
+            if (File.Exists(realFileName))
             {
                 File.Delete(realFileName);
             }
