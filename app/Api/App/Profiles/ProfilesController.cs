@@ -70,7 +70,9 @@ namespace Api.App.Profiles
                 var mediaUploadResult = await mediaUploadManager.ReceiveMediaChunk(Request, User.Identity.Name);
                 if (mediaUploadResult.Completed)
                 {
-                    profileImageManager.SaveImage()
+                    var url = profileImageManager.SaveImage(User.Identity.Name, mediaUploadResult.FileName);
+
+                    return Ok(url);
                 }
 
                 return Ok();
