@@ -1,7 +1,11 @@
 ﻿[
     {
         "dev": {
-            "rootUploadFolder": "c:\\np-media\\tmp"
+            "rootMediaFolder": "c:\\np-media",
+            "uploadFolder": "tmp",
+            "storageFolder": "files",
+            "profileImagesFolderTemplate": "files\\{0}\\profile",
+            "photosFolderTemplate": "files\\{0}\\photos"
         }
     }
 ]

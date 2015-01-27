@@ -1,10 +1,10 @@
 ﻿[
     {
         "prod": {
-            "imagesRootFolder": "c:\\np-media\\artists\\{0}",
             "profileImages": {
-                "rootFolder": "profile",
-                "avatar": {
+                "fullViewNameTemplate": "{0}_p",
+                "thumbnailNameTemplate": "{0}_pth",
+                "fullView": {
                     "width": "200",
                     "height": "200"
                 },
@@ -14,7 +14,9 @@
                 }
             },
             "photos": {
-                "rootFolder":  "photos",
+                "fullViewNameTemplate":  "{0}_f",
+                "thumbnailNameTemplate":  "{0}_fth",
+                "previewNameTemplate":  "{0}_fp",
                 "fullView": {
                     "maxHeight": "800",
                     "maxWidth": "800",

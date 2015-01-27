@@ -6,8 +6,8 @@ namespace Api.App.Media
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<MediaUploadManager>()
-                   .As<IMediaUploadManager>()
+            builder.RegisterType<MediaManager>()
+                   .As<IMediaManager>()
                    .SingleInstance();
         }
     }

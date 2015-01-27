@@ -4,20 +4,20 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Api.App.Db;
+using Api.App.Db.Extensions;
+using Api.App.Images;
 using Api.App.Media.Config;
-using Api.App.Profiles.Entities;
 using JsonConfigurationProvider;
 using MongoDB.Driver;
-using MongoDB.Driver.Builders;
 
 namespace Api.App.Media
 {
-    public class MediaUploadManager : IMediaUploadManager
+    public class MediaManager : IMediaManager
     {
         private readonly MediaConfiguration config;
         private readonly MongoDatabase db;
 
-        public MediaUploadManager(IAppDbProvider dbProvider, IConfigProvider configProvider)
+        public MediaManager(IAppDbProvider dbProvider, IConfigProvider configProvider)
         {
             db = dbProvider.GetDatabase();
             config = configProvider.GetConfiguration<MediaConfiguration>();
@@ -36,7 +36,7 @@ namespace Api.App.Media
             AssertRequestIsMultipart(request);
             EnsureRootUploadFolderExists();
 
-            var provider = await request.Content.ReadAsMultipartAsync(new MultipartFormDataStreamProvider(config.RootUploadFolder));
+            var provider = await request.Content.ReadAsMultipartAsync(new MultipartFormDataStreamProvider(config.UploadFolder));
             var chunkInfo = GetChunkInfo(provider, userName);
 
             RenameChunk(chunkInfo);
@@ -45,10 +45,7 @@ namespace Api.App.Media
 
         private string GetUserId(string userName)
         {
-            var profiles = db.GetCollection<Profile>(Profile.CollectionName);
-            var profile = profiles.FindOne(Query.EQ("UserName", userName));
-
-            return profile.Id;
+            return db.GetProfile(userName).Id;
         }
 
         private static void AssertRequestIsMultipart(HttpRequestMessage request)
@@ -61,9 +58,9 @@ namespace Api.App.Media
 
         private void EnsureRootUploadFolderExists()
         {
-            if (!Directory.Exists(config.RootUploadFolder))
+            if (!Directory.Exists(config.UploadFolder))
             {
-                Directory.CreateDirectory(config.RootUploadFolder);
+                Directory.CreateDirectory(config.UploadFolder);
             }
         }
 
@@ -95,7 +92,7 @@ namespace Api.App.Media
         private string RenameFinalFile(string fileName, string consolidatedFileName, string userId)
         {
             fileName = string.Format("{0}_{1}", userId, PreventCrossDirectoryAttack(fileName));
-            var realFileName = Path.Combine(config.RootUploadFolder, fileName);
+            var realFileName = Path.Combine(config.UploadFolder, fileName);
 
             if (File.Exists(realFileName))
             {
@@ -141,7 +138,7 @@ namespace Api.App.Media
 
         private string GetFileName(string identifier)
         {
-            return Path.Combine(config.RootUploadFolder, identifier);
+            return Path.Combine(config.UploadFolder, identifier);
         }
 
         private void RenameChunk(ChunkInfo chunkInfo)
@@ -163,7 +160,7 @@ namespace Api.App.Media
 
         private string GetChunkFileName(int chunkNumber, string identifier, string userId)
         {
-            return Path.Combine(config.RootUploadFolder, string.Format("{0}_{1}_{2}", userId, identifier, chunkNumber));
+            return Path.Combine(config.UploadFolder, string.Format("{0}_{1}_{2}", userId, identifier, chunkNumber));
         }
 
         private ChunkInfo GetChunkInfo(MultipartFormDataStreamProvider provider, string userName)

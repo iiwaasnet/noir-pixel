@@ -2,8 +2,9 @@
 {
     public class ProfileImagesConfiguration
     {
-        public string RootFolder { get; set; }
-        public Dimensions Avatar { get; set; }
+        public Dimensions FullView { get; set; }
         public Dimensions Thumbnail { get; set; }
+        public string FullViewNameTemplate { get; set; }
+        public string ThumbnailNameTemplate { get; set; }
     }
 }

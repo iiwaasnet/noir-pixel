@@ -222,6 +222,7 @@
     <Compile Include="App\ApiBaseController.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\GPlus\GoogleProfileImageUrlBuilder.cs" />
     <Compile Include="App\Db\Extensions\CommandResultExtensions.cs" />
+    <Compile Include="App\Db\Extensions\Profiles.cs" />
     <Compile Include="App\Db\IAppDbProvider.cs" />
     <Compile Include="App\Db\IIdentityDbProvider.cs" />
     <Compile Include="App\Entities\Entity.cs" />
@@ -272,6 +273,8 @@
     <Compile Include="App\Errors\ErrorsModule.cs" />
     <Compile Include="App\Errors\ValidationError.cs" />
     <Compile Include="App\Exceptions\NotFoundException.cs" />
+    <Compile Include="App\Framework\StaticRandom.cs" />
+    <Compile Include="App\Framework\SUIDGenerator.cs" />
     <Compile Include="App\HttpContextDependencyProvider.cs" />
     <Compile Include="App\IHttpContextDependencyProvider.cs" />
     <Compile Include="App\Images\Config\Dimensions.cs" />
@@ -285,9 +288,13 @@
     <Compile Include="App\Media\ChunkInfo.cs" />
     <Compile Include="App\Media\Config\MediaConfiguration.cs" />
     <Compile Include="App\Media\CustomMultipartFormDataStreamProvider.cs" />
-    <Compile Include="App\Media\IMediaUploadManager.cs" />
+    <Compile Include="App\Images\Entities\Photo.cs" />
+    <Compile Include="App\Media\IImageProcessor.cs" />
+    <Compile Include="App\Media\ImageInfo.cs" />
+    <Compile Include="App\Media\IMediaManager.cs" />
+    <Compile Include="App\Media\MediaController.cs" />
     <Compile Include="App\Media\MediaModule.cs" />
-    <Compile Include="App\Media\MediaUploadManager.cs" />
+    <Compile Include="App\Media\MediaManager.cs" />
     <Compile Include="App\Media\MediaUploadResult.cs" />
     <Compile Include="App\MethodExecutionResult.cs" />
     <Compile Include="App\Posts\DataPage.cs" />
@@ -306,7 +313,7 @@
     <Compile Include="App\Profiles\Geo.cs" />
     <Compile Include="App\Profiles\IProfilesManager.cs" />
     <Compile Include="App\Profiles\Entities\Profile.cs" />
-    <Compile Include="App\Profiles\Entities\ProfileImage.cs" />
+    <Compile Include="App\Images\Entities\ProfileImage.cs" />
     <Compile Include="App\Profiles\UserPrivateInfo.cs" />
     <Compile Include="App\Profiles\UserProfile.cs" />
     <Compile Include="App\Profiles\UserPublicInfo.cs" />

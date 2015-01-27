@@ -2,7 +2,9 @@
 {
     public class PhotosConfiguration
     {
-        public string RootFolder { get; set; }
+        public string FullViewNameTemplate { get; set; }
+        public string ThumbnailNameTemplate { get; set; }
+        public string PreviewNameTemplate { get; set; }
         public SizeConstraints FullView { get; set; }
         public Dimensions Preview { get; set; }
         public Dimensions Thumbnail { get; set; }

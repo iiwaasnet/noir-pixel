@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Security.Policy;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Api.App.Exceptions;
@@ -14,15 +15,15 @@ namespace Api.App.Profiles
     public class ProfilesController : ApiBaseController
     {
         private readonly IProfilesManager profilesManager;
-        private readonly IMediaUploadManager mediaUploadManager;
+        private readonly IMediaManager mediaManager;
         private readonly IProfileImageManager profileImageManager;
 
         public ProfilesController(IProfilesManager profilesManager,
-                                  IMediaUploadManager mediaUploadManager,
+                                  IMediaManager mediaManager,
                                   IProfileImageManager profileImageManager)
         {
             this.profilesManager = profilesManager;
-            this.mediaUploadManager = mediaUploadManager;
+            this.mediaManager = mediaManager;
             this.profileImageManager = profileImageManager;
         }
 
@@ -56,7 +57,7 @@ namespace Api.App.Profiles
         [Route("update-profile-image")]
         public IHttpActionResult CheckProfileImagePart()
         {
-            return mediaUploadManager.MediaChunkReceived(Request, User.Identity.Name)
+            return mediaManager.MediaChunkReceived(Request, User.Identity.Name)
                        ? Ok()
                        : ApiError(HttpStatusCode.NotFound);
         }
@@ -67,7 +68,7 @@ namespace Api.App.Profiles
         {
             try
             {
-                var mediaUploadResult = await mediaUploadManager.ReceiveMediaChunk(Request, User.Identity.Name);
+                var mediaUploadResult = await mediaManager.ReceiveMediaChunk(Request, User.Identity.Name);
                 if (mediaUploadResult.Completed)
                 {
                     var url = profileImageManager.SaveImage(User.Identity.Name, mediaUploadResult.FileName);

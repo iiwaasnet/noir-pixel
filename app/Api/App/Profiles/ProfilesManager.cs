@@ -5,6 +5,7 @@ using Api.App.Auth;
 using Api.App.Db;
 using Api.App.Db.Extensions;
 using Api.App.Exceptions;
+using Api.App.Images.Entities;
 using Api.App.Profiles.Entities;
 using Diagnostics;
 using MongoDB.Driver;
@@ -92,6 +93,7 @@ namespace Api.App.Profiles
             return user;
         }
 
+        //TODO: Move logic of profile image creation to IProfileImageManager
         private IEnumerable<ProfileImage> CreateProfileThumbnail(ApplicationUser login)
         {
             if (!string.IsNullOrWhiteSpace(login.ThumbnailImage))

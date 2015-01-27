@@ -2,7 +2,6 @@
 {
     public class ImagesConfiguration
     {
-        public string ImagesRootFolder { get; set; }
         public ProfileImagesConfiguration ProfileImages { get; set; }
         public PhotosConfiguration Photos { get; set; }
     }
