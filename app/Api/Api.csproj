@@ -282,6 +282,7 @@
     <Compile Include="App\Images\Config\PhotosConfiguration.cs" />
     <Compile Include="App\Images\Config\ProfileImagesConfiguration.cs" />
     <Compile Include="App\Images\Config\SizeConstraints.cs" />
+    <Compile Include="App\Images\Entities\MediaData.cs" />
     <Compile Include="App\Images\ImagesModule.cs" />
     <Compile Include="App\Images\IProfileImageManager.cs" />
     <Compile Include="App\Images\ProfileImageManager.cs" />
@@ -291,8 +292,10 @@
     <Compile Include="App\Images\Entities\Photo.cs" />
     <Compile Include="App\Media\IImageProcessor.cs" />
     <Compile Include="App\Media\ImageInfo.cs" />
+    <Compile Include="App\Media\ImageProcessor.cs" />
     <Compile Include="App\Media\IMediaManager.cs" />
     <Compile Include="App\Media\MediaController.cs" />
+    <Compile Include="App\Media\MediaInfo.cs" />
     <Compile Include="App\Media\MediaModule.cs" />
     <Compile Include="App\Media\MediaManager.cs" />
     <Compile Include="App\Media\MediaUploadResult.cs" />

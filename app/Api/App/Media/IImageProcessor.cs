@@ -2,11 +2,11 @@
 {
     public interface IImageProcessor
     {
-        ImageInfo CreatePhoto(string source, string destination);
-        ImageInfo CreatePhotoPreview(string source, string destination);
-        ImageInfo CreatePhotoThumbnail(string source, string destination);
+        ImageInfo CreatePhoto(string source, string destination, string ownerId);
+        ImageInfo CreatePhotoPreview(string source, string destination, string ownerId);
+        ImageInfo CreatePhotoThumbnail(string source, string destination, string ownerId);
 
-        ImageInfo CreateProfileImage(string source, string destination);
-        ImageInfo CreateProfileImageThumbnail(string source, string destination);
+        ImageInfo CreateProfileImage(string source, string destination, string ownerId);
+        ImageInfo CreateProfileImageThumbnail(string source, string destination, string ownerId);
     }
 }

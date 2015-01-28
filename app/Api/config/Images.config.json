@@ -2,8 +2,8 @@
     {
         "prod": {
             "profileImages": {
-                "fullViewNameTemplate": "{0}_p",
-                "thumbnailNameTemplate": "{0}_pth",
+                "fullViewNameTemplate": "{0}_p.{1}",
+                "thumbnailNameTemplate": "{0}_pth.{1}",
                 "fullView": {
                     "width": "200",
                     "height": "200"
@@ -14,9 +14,9 @@
                 }
             },
             "photos": {
-                "fullViewNameTemplate":  "{0}_f",
-                "thumbnailNameTemplate":  "{0}_fth",
-                "previewNameTemplate":  "{0}_fp",
+                "fullViewNameTemplate":  "{0}_f.{1}",
+                "thumbnailNameTemplate":  "{0}_fth.{1}",
+                "previewNameTemplate":  "{0}_fp.{1}",
                 "fullView": {
                     "maxHeight": "800",
                     "maxWidth": "800",

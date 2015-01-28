@@ -1,4 +1,5 @@
 using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Threading.Tasks;
 
 namespace Api.App.Media
@@ -7,5 +8,6 @@ namespace Api.App.Media
     {
         bool MediaChunkReceived(HttpRequestMessage request, string userName);
         Task<MediaUploadResult> ReceiveMediaChunk(HttpRequestMessage request, string userName);
+        MediaInfo SaveMedia(string fileName, string ownerId);
     }
 }

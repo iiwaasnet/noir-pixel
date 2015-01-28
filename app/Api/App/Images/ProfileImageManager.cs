@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using Api.App.Db;
 using Api.App.Db.Extensions;
 using Api.App.Images.Config;
 using Api.App.Images.Entities;
 using Api.App.Media;
 using Api.App.Media.Config;
-using Api.App.Profiles.Entities;
 using JsonConfigurationProvider;
 using MongoDB.Driver;
-using MongoDB.Driver.Builders;
 
 namespace Api.App.Images
 {
@@ -20,9 +19,9 @@ namespace Api.App.Images
         private readonly IImageProcessor imageProcessor;
         private readonly MongoDatabase db;
 
-        public ProfileImageManager(IAppDbProvider appDbProvider, 
-            IImageProcessor imageProcessor,
-            IConfigProvider configProvider)
+        public ProfileImageManager(IAppDbProvider appDbProvider,
+                                   IImageProcessor imageProcessor,
+                                   IConfigProvider configProvider)
         {
             config = configProvider.GetConfiguration<ImagesConfiguration>();
             mediaConfig = configProvider.GetConfiguration<MediaConfiguration>();
@@ -35,13 +34,37 @@ namespace Api.App.Images
             var profile = db.GetProfile(userName);
             var profileImage = new ProfileImage();
 
-            var destination = GenerateFullViewFileName(profile.Id);
-            var imageInfo = imageProcessor.CreateProfileImage(fileName, destination);
+            var fullViewFile = GenerateFullViewFileName(profile.Id, Path.GetExtension(fileName));
+            var thumbnailFile = GenerateThumbnailFileName(profile.Id, Path.GetExtension(fileName));
+            var imageInfo = imageProcessor.CreateProfileImage(fileName, fullViewFile, profile.Id);
+            profileImage.FullView = new MediaData
+                                    {
+                                        MediaId = imageInfo.MediaId,
+                                        Url = imageInfo.Url
+                                    };
+            imageInfo = imageProcessor.CreateProfileImageThumbnail(fileName, thumbnailFile, profile.Id);
+            profileImage.Thumbnail = new MediaData
+                                     {
+                                         MediaId = imageInfo.MediaId,
+                                         Url = imageInfo.Url
+                                     };
         }
 
-        private string GenerateFullViewFileName(string id)
+        private string GenerateThumbnailFileName(string id, string ext)
         {
-            throw new NotImplementedException();
+            return Path.Combine(GenerateProfileImagesFolder(id),
+                                string.Format(config.ProfileImages.ThumbnailNameTemplate, id, ext));
+        }
+
+        private string GenerateFullViewFileName(string id, string ext)
+        {
+            return Path.Combine(GenerateProfileImagesFolder(id),
+                                string.Format(config.ProfileImages.FullViewNameTemplate, id, ext));
+        }
+
+        private string GenerateProfileImagesFolder(string id)
+        {
+            return Path.Combine(string.Format(mediaConfig.ProfileImagesFolderTemplate, id), id);
         }
 
         public void DeleteImage(string userName)
