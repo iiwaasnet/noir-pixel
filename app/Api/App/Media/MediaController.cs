@@ -1,17 +1,28 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Web.Http;
+﻿using System.Web.Http;
 
 namespace Api.App.Media
 {
     [RoutePrefix(MediaManager.RoutePrefix)]
     public class MediaController : ApiBaseController
     {
+        private readonly IMediaManager mediaManager;
+
+        public MediaController(IMediaManager mediaManager)
+        {
+            this.mediaManager = mediaManager;
+        }
+
         [HttpGet]
         [Route("{id}")]
-        public Task<IHttpActionResult> Get(string id)
+        public IHttpActionResult Get(string id)
         {
-            throw new Exception();
+            var link = mediaManager.GetMediaLink(id);
+            if (link.Remote)
+            {
+                return Redirect(link.Path);
+            }
+
+            return Ok();
         }
     }
 }

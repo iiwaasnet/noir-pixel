@@ -9,6 +9,7 @@ using Api.App.Media.Config;
 using Api.App.Media.Entities;
 using JsonConfigurationProvider;
 using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 
 namespace Api.App.Media
 {
@@ -90,6 +91,24 @@ namespace Api.App.Media
         public void DeleteMedia(string fileName)
         {
             File.Delete(fileName);
+        }
+
+        public MediaLink GetMediaLink(string mediaId)
+        {
+            var collection = db.GetCollection<Entities.Media>(Entities.Media.CollectionName);
+            var media = collection.FindOne(Query<Entities.Media>.EQ(m => m.Id, mediaId));
+            if (media != null)
+            {
+                var remote = string.IsNullOrWhiteSpace(media.Location.LocalPath);
+
+                return new MediaLink
+                       {
+                           Path = (remote) ? media.Location.Url : media.Location.LocalPath,
+                           Remote = remote
+                       };
+            }
+
+            return null;
         }
 
         private string GenerateMediaAccessUri(string id)

@@ -1,4 +1,4 @@
-namespace Api.App.Media
+﻿namespace Api.App.Media
 {
     public class MediaInfo
     {

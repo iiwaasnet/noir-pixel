@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net;
-using System.Security.Policy;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Api.App.Exceptions;
@@ -36,6 +35,11 @@ namespace Api.App.Profiles
             {
                 var includePrivateData = User.Identity.Self(userName);
                 var profile = await profilesManager.GetUserProfile(userName, includePrivateData);
+
+                profile.PublicInfo.Thumbnail = string.Format("{0}://{1}/{2}",
+                                                             Request.RequestUri.Scheme,
+                                                             Request.RequestUri.Host,
+                                                             profile.PublicInfo.Thumbnail);
 
                 return Ok(profile);
             }

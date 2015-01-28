@@ -10,5 +10,6 @@ namespace Api.App.Media
         MediaInfo SaveMediaFile(string fileName, string ownerId);
         MediaInfo SaveMediaUrl(string url, string ownerId);
         void DeleteMedia(string fileName);
+        MediaLink GetMediaLink(string mediaId);
     }
 }
