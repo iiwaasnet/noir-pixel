@@ -283,6 +283,7 @@
     <Compile Include="App\Images\Config\ProfileImagesConfiguration.cs" />
     <Compile Include="App\Images\Config\SizeConstraints.cs" />
     <Compile Include="App\Images\Entities\MediaData.cs" />
+    <Compile Include="App\Images\ImageUtils.cs" />
     <Compile Include="App\Images\ImagesModule.cs" />
     <Compile Include="App\Images\IProfileImageManager.cs" />
     <Compile Include="App\Images\ProfileImage.cs" />

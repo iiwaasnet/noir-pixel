@@ -1,21 +1,37 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Drawing;
+using Api.App.Images;
+using Api.App.Images.Config;
+using JsonConfigurationProvider;
 
 namespace Api.App.Media
 {
     public class ImageProcessor : IImageProcessor
     {
         private readonly IMediaManager mediaManager;
+        private readonly ImagesConfiguration config;
 
-        public ImageProcessor(IMediaManager mediaManager)
+        public ImageProcessor(IMediaManager mediaManager, IConfigProvider configProvider)
         {
             this.mediaManager = mediaManager;
+            config = configProvider.GetConfiguration<ImagesConfiguration>();
         }
 
         public ImageInfo CreateProfileImage(string source, string destination, string ownerId)
         {
-            //TODO: Generate new image file
-            var mediaInfo = mediaManager.SaveMedia(destination, ownerId);
-            throw new Exception();
+            using (var image = new Bitmap(source))
+            {
+                ImageUtils.ResizeImageForCrop(image, );
+                var mediaInfo = mediaManager.SaveMedia(destination, ownerId);
+                return new ImageInfo
+                       {
+                           MediaId = mediaInfo.MediaId,
+                           Uri = mediaInfo.Uri,
+                           Height = config.ProfileImages.Thumbnail.Height,
+                           Width = config.ProfileImages.Thumbnail.Width
+                       };
+            }
         }
 
         public ImageInfo CreatePhoto(string source, string destination, string ownerId)

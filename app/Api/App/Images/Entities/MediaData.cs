@@ -7,6 +7,6 @@ namespace Api.App.Images.Entities
     {
         [BsonRepresentation(BsonType.ObjectId)]
         public string MediaId { get; set; }
-        public string Url { get; set; } 
+        public string Uri { get; set; } 
     }
 }

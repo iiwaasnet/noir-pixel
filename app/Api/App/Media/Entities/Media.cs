@@ -12,6 +12,6 @@ namespace Api.App.Media.Entities
         public string OwnerId { get; set; }
 
         public MediaLocation Location { get; set; }
-        public string AccessUri { get; set; }
+        public string Uri { get; set; }
     }
 }

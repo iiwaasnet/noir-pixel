@@ -40,19 +40,19 @@ namespace Api.App.Images
             profileImage.FullView = new MediaData
                                     {
                                         MediaId = imageInfo.MediaId,
-                                        Url = imageInfo.Url
+                                        Uri = imageInfo.Uri
                                     };
             imageInfo = imageProcessor.CreateProfileImageThumbnail(fileName, thumbnailFile, profile.Id);
             profileImage.Thumbnail = new MediaData
                                      {
                                          MediaId = imageInfo.MediaId,
-                                         Url = imageInfo.Url
+                                         Uri = imageInfo.Uri
                                      };
 
             return new ProfileImage
                    {
-                       FullViewUrl = profileImage.FullView.Url,
-                       ThumbnailUrl = profileImage.Thumbnail.Url
+                       FullViewUrl = profileImage.FullView.Uri,
+                       ThumbnailUrl = profileImage.Thumbnail.Uri
                    };
         }
 

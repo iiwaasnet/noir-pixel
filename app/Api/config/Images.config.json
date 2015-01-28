@@ -4,33 +4,21 @@
             "profileImages": {
                 "fullViewNameTemplate": "{0}_p.{1}",
                 "thumbnailNameTemplate": "{0}_pth.{1}",
-                "fullView": {
-                    "width": "200",
-                    "height": "200"
-                },
-                "thumbnail": {
-                    "width": "48",
-                    "height": "48"
-                }
+                "fullViewSize": "200",
+                "thumbnailSize": "48"
             },
             "photos": {
-                "fullViewNameTemplate":  "{0}_f.{1}",
-                "thumbnailNameTemplate":  "{0}_fth.{1}",
-                "previewNameTemplate":  "{0}_fp.{1}",
+                "fullViewNameTemplate": "{0}_f.{1}",
+                "thumbnailNameTemplate": "{0}_fth.{1}",
+                "previewNameTemplate": "{0}_fp.{1}",
                 "fullView": {
                     "maxHeight": "800",
                     "maxWidth": "800",
                     "minHeight": "200",
                     "minWidth": "200"
                 },
-                "preview": {
-                    "width": "300",
-                    "height": "300"
-                },
-                "thumbnail": {
-                    "width": "60",
-                    "height": "60"
-                }
+                "previewSize": "300",
+                "thumbnailSize": "60"
             }
         }
     }

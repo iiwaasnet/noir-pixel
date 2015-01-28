@@ -55,7 +55,7 @@ namespace Api.App.Media
                             OwnerId = ownerId,
                             Location = new MediaLocation {LocalPath = fileName}
                         };
-            media.AccessUri = GenerateMediaAccessUri(media.Id);
+            media.Uri = GenerateMediaAccessUri(media.Id);
 
             collection.Insert(media);
 
@@ -63,7 +63,7 @@ namespace Api.App.Media
                    {
                        MediaId = media.Id,
                        OwnerId = media.OwnerId,
-                       Url = media.AccessUri
+                       Uri = media.Uri
                    };
         }
 

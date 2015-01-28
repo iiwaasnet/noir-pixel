@@ -2,8 +2,8 @@
 {
     public class ProfileImagesConfiguration
     {
-        public Dimensions FullView { get; set; }
-        public Dimensions Thumbnail { get; set; }
+        public int FullViewSize { get; set; }
+        public int ThumbnailSize { get; set; }
         public string FullViewNameTemplate { get; set; }
         public string ThumbnailNameTemplate { get; set; }
     }
