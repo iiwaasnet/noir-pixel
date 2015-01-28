@@ -29,10 +29,10 @@ namespace Api.App.Images
             db = appDbProvider.GetDatabase();
         }
 
-        public string SaveImage(string userName, string fileName)
+        public ProfileImage SaveImage(string userName, string fileName)
         {
             var profile = db.GetProfile(userName);
-            var profileImage = new ProfileImage();
+            var profileImage = new Entities.ProfileImage();
 
             var fullViewFile = GenerateFullViewFileName(profile.Id, Path.GetExtension(fileName));
             var thumbnailFile = GenerateThumbnailFileName(profile.Id, Path.GetExtension(fileName));
@@ -48,6 +48,12 @@ namespace Api.App.Images
                                          MediaId = imageInfo.MediaId,
                                          Url = imageInfo.Url
                                      };
+
+            return new ProfileImage
+                   {
+                       FullViewUrl = profileImage.FullView.Url,
+                       ThumbnailUrl = profileImage.Thumbnail.Url
+                   };
         }
 
         private string GenerateThumbnailFileName(string id, string ext)

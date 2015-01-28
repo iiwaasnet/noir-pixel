@@ -5,8 +5,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Api.App.Db;
 using Api.App.Db.Extensions;
-using Api.App.Images;
 using Api.App.Media.Config;
+using Api.App.Media.Entities;
 using JsonConfigurationProvider;
 using MongoDB.Driver;
 
@@ -14,11 +14,15 @@ namespace Api.App.Media
 {
     public class MediaManager : IMediaManager
     {
+        public const string RoutePrefix = "media";
+
         private readonly MediaConfiguration config;
         private readonly MongoDatabase db;
+        private readonly string mediaAccessRoute;
 
         public MediaManager(IAppDbProvider dbProvider, IConfigProvider configProvider)
         {
+            mediaAccessRoute = RoutePrefix + "/{0}";
             db = dbProvider.GetDatabase();
             config = configProvider.GetConfiguration<MediaConfiguration>();
         }
@@ -41,6 +45,31 @@ namespace Api.App.Media
 
             RenameChunk(chunkInfo);
             return TryAssembleFile(chunkInfo);
+        }
+
+        public MediaInfo SaveMedia(string fileName, string ownerId)
+        {
+            var collection = db.GetCollection<Entities.Media>(Entities.Media.CollectionName);
+            var media = new Entities.Media
+                        {
+                            OwnerId = ownerId,
+                            Location = new MediaLocation {LocalPath = fileName}
+                        };
+            media.AccessUri = GenerateMediaAccessUri(media.Id);
+
+            collection.Insert(media);
+
+            return new MediaInfo
+                   {
+                       MediaId = media.Id,
+                       OwnerId = media.OwnerId,
+                       Url = media.AccessUri
+                   };
+        }
+
+        private string GenerateMediaAccessUri(string id)
+        {
+            return string.Format(mediaAccessRoute, id);
         }
 
         private string GetUserId(string userName)

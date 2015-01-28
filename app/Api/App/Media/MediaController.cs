@@ -4,7 +4,7 @@ using System.Web.Http;
 
 namespace Api.App.Media
 {
-    [RoutePrefix("media")]
+    [RoutePrefix(MediaManager.RoutePrefix)]
     public class MediaController : ApiBaseController
     {
         [HttpGet]

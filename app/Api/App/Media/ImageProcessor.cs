@@ -14,7 +14,7 @@ namespace Api.App.Media
         public ImageInfo CreateProfileImage(string source, string destination, string ownerId)
         {
             //TODO: Generate new image file
-            mediaManager.SaveMedia(destination, ownerId);
+            var mediaInfo = mediaManager.SaveMedia(destination, ownerId);
             throw new Exception();
         }
 

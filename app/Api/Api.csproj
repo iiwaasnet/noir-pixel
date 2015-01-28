@@ -285,11 +285,14 @@
     <Compile Include="App\Images\Entities\MediaData.cs" />
     <Compile Include="App\Images\ImagesModule.cs" />
     <Compile Include="App\Images\IProfileImageManager.cs" />
+    <Compile Include="App\Images\ProfileImage.cs" />
     <Compile Include="App\Images\ProfileImageManager.cs" />
     <Compile Include="App\Media\ChunkInfo.cs" />
     <Compile Include="App\Media\Config\MediaConfiguration.cs" />
     <Compile Include="App\Media\CustomMultipartFormDataStreamProvider.cs" />
     <Compile Include="App\Images\Entities\Photo.cs" />
+    <Compile Include="App\Media\Entities\Media.cs" />
+    <Compile Include="App\Media\Entities\MediaLocation.cs" />
     <Compile Include="App\Media\IImageProcessor.cs" />
     <Compile Include="App\Media\ImageInfo.cs" />
     <Compile Include="App\Media\ImageProcessor.cs" />
