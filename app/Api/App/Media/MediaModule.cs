@@ -9,6 +9,10 @@ namespace Api.App.Media
             builder.RegisterType<MediaManager>()
                    .As<IMediaManager>()
                    .SingleInstance();
+            
+            builder.RegisterType<ImageProcessor>()
+                   .As<IImageProcessor>()
+                   .SingleInstance();
         }
     }
 }
