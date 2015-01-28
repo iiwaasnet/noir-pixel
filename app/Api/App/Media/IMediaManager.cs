@@ -8,5 +8,6 @@ namespace Api.App.Media
         bool MediaChunkReceived(HttpRequestMessage request, string userName);
         Task<MediaUploadResult> ReceiveMediaChunk(HttpRequestMessage request, string userName);
         MediaInfo SaveMedia(string fileName, string ownerId);
+        void DeleteMedia(string fileName);
     }
 }

@@ -67,6 +67,11 @@ namespace Api.App.Media
                    };
         }
 
+        public void DeleteMedia(string fileName)
+        {
+            File.Delete(fileName);
+        }
+
         private string GenerateMediaAccessUri(string id)
         {
             return string.Format(mediaAccessRoute, id);

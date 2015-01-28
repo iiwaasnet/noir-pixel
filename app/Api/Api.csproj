@@ -290,7 +290,6 @@
     <Compile Include="App\Images\ProfileImageManager.cs" />
     <Compile Include="App\Media\ChunkInfo.cs" />
     <Compile Include="App\Media\Config\MediaConfiguration.cs" />
-    <Compile Include="App\Media\CustomMultipartFormDataStreamProvider.cs" />
     <Compile Include="App\Images\Entities\Photo.cs" />
     <Compile Include="App\Media\Entities\Media.cs" />
     <Compile Include="App\Media\Entities\MediaLocation.cs" />

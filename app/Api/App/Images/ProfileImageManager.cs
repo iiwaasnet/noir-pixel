@@ -36,6 +36,9 @@ namespace Api.App.Images
 
             var fullViewFile = GenerateFullViewFileName(profile.Id, Path.GetExtension(fileName));
             var thumbnailFile = GenerateThumbnailFileName(profile.Id, Path.GetExtension(fileName));
+
+            EnsureTargetDirectoryExists(profile.Id);
+
             var imageInfo = imageProcessor.CreateProfileImage(fileName, fullViewFile, profile.Id);
             profileImage.FullView = new MediaData
                                     {
@@ -54,6 +57,15 @@ namespace Api.App.Images
                        FullViewUrl = profileImage.FullView.Uri,
                        ThumbnailUrl = profileImage.Thumbnail.Uri
                    };
+        }
+
+        private void EnsureTargetDirectoryExists(string userId)
+        {
+            var folder = GenerateProfileImagesFolder(userId);
+            if (!Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
         }
 
         private string GenerateThumbnailFileName(string id, string ext)

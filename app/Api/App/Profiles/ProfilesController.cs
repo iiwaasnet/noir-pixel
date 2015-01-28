@@ -73,6 +73,8 @@ namespace Api.App.Profiles
                 {
                     var url = profileImageManager.SaveImage(User.Identity.Name, mediaUploadResult.FileName);
 
+                    mediaManager.DeleteMedia(mediaUploadResult.FileName);
+
                     return Ok(url);
                 }
 

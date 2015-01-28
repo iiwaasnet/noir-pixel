@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Drawing;
 using Api.App.Images;
 using Api.App.Images.Config;
@@ -22,14 +21,38 @@ namespace Api.App.Media
         {
             using (var image = new Bitmap(source))
             {
-                ImageUtils.ResizeImageForCrop(image, );
+                ImageUtils.SaveJpeg(destination,
+                                    ImageUtils.CropImage(ImageUtils.ResizeImageForCrop(image, config.ProfileImages.ThumbnailSize),
+                                                         config.ProfileImages.ThumbnailSize,
+                                                         config.ProfileImages.ThumbnailSize));
+
                 var mediaInfo = mediaManager.SaveMedia(destination, ownerId);
                 return new ImageInfo
                        {
                            MediaId = mediaInfo.MediaId,
                            Uri = mediaInfo.Uri,
-                           Height = config.ProfileImages.Thumbnail.Height,
-                           Width = config.ProfileImages.Thumbnail.Width
+                           Height = config.ProfileImages.FullViewSize,
+                           Width = config.ProfileImages.FullViewSize
+                       };
+            }
+        }
+
+        public ImageInfo CreateProfileImageThumbnail(string source, string destination, string ownerId)
+        {
+            using (var image = new Bitmap(source))
+            {
+                ImageUtils.SaveJpeg(destination,
+                                    ImageUtils.CropImage(ImageUtils.ResizeImageForCrop(image, config.ProfileImages.ThumbnailSize),
+                                                         config.ProfileImages.ThumbnailSize,
+                                                         config.ProfileImages.ThumbnailSize));
+
+                var mediaInfo = mediaManager.SaveMedia(destination, ownerId);
+                return new ImageInfo
+                       {
+                           MediaId = mediaInfo.MediaId,
+                           Uri = mediaInfo.Uri,
+                           Height = config.ProfileImages.ThumbnailSize,
+                           Width = config.ProfileImages.ThumbnailSize
                        };
             }
         }
@@ -45,11 +68,6 @@ namespace Api.App.Media
         }
 
         public ImageInfo CreatePhotoThumbnail(string source, string destination, string ownerId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ImageInfo CreateProfileImageThumbnail(string source, string destination, string ownerId)
         {
             throw new NotImplementedException();
         }

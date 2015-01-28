@@ -7,6 +7,6 @@
         public string PreviewNameTemplate { get; set; }
         public SizeConstraints FullView { get; set; }
         public int PreviewSize { get; set; }
-        public int ThumbnailSize { get; set; }
+        public int ThumbnailSize     { get; set; }
     }
 }
