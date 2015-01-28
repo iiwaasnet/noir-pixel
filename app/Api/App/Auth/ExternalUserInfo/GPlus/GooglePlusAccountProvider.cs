@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Api.App.Images;
+using Api.App.Images.Config;
+using JsonConfigurationProvider;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Owin.Security.Providers.GooglePlus;
@@ -13,12 +14,13 @@ namespace Api.App.Auth.ExternalUserInfo.GPlus
     public class GooglePlusAccountProvider : ISocialAccountProvider
     {
         private readonly GooglePlusAuthenticationOptions authOptions;
-        private readonly IProfileImageManager profileImageManager;
+        private readonly ImagesConfiguration config;
 
-        public GooglePlusAccountProvider(GooglePlusAuthenticationOptions authOptions, IProfileImageManager profileImageManager)
+        public GooglePlusAccountProvider(GooglePlusAuthenticationOptions authOptions,
+                                         IConfigProvider configProvider)
         {
             this.authOptions = authOptions;
-            this.profileImageManager = profileImageManager;
+            config = configProvider.GetConfiguration<ImagesConfiguration>();
         }
 
         public async Task<ExternalUserInfo> GetUserInfo(string userId, string accessToken, string _)
@@ -46,7 +48,7 @@ namespace Api.App.Auth.ExternalUserInfo.GPlus
                                             FirstName = jObj.name.givenName,
                                             LastName = jObj.name.familyName,
                                             Gender = jObj.gender,
-                                            ThumbnailImage = imageUrl.ThumbnailUrl(profileImageManager.ThumbnailSize().Width)
+                                            ThumbnailImage = imageUrl.ThumbnailUrl(config.ProfileImages.ThumbnailSize)
                                         },
                                Email = GetEmail(jObj.emails)
                            };

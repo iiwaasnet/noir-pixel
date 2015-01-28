@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Api.App.Auth;
 using Api.App.Db;
 using Api.App.Db.Extensions;
 using Api.App.Exceptions;
-using Api.App.Images.Entities;
+using Api.App.Images;
 using Api.App.Profiles.Entities;
 using Diagnostics;
 using MongoDB.Driver;
@@ -17,14 +16,17 @@ namespace Api.App.Profiles
     {
         private readonly MongoDatabase db;
         private readonly ApplicationUserManager accountsManager;
+        private readonly IProfileImageManager profileImageManager;
         private readonly ILogger logger;
 
         public ProfilesManager(IAppDbProvider appDbProvider,
                                ApplicationUserManager accountsManager,
+                               IProfileImageManager profileImageManager,
                                ILogger logger)
         {
             db = appDbProvider.GetDatabase();
             this.accountsManager = accountsManager;
+            this.profileImageManager = profileImageManager;
             this.logger = logger;
         }
 
@@ -37,45 +39,56 @@ namespace Api.App.Profiles
 
         public async Task<UserProfile> GetUserProfile(string userName, bool includePrivateData)
         {
-            var user = await EnsureUserProfileExists(userName);
+            var profile = await EnsureUserProfileExists(userName);
 
-            var avatar = GetProfileImage(user, ProfileImageType.Avatar);
-            var thumbnail = GetProfileImage(user, ProfileImageType.Thumbnail);
+            var userProfile = new UserProfile
+                              {
+                                  User = new UserReference
+                                         {
+                                             UserName = profile.UserName,
+                                             FullName = profile.FullName
+                                         },
+                                  PublicInfo = new UserPublicInfo
+                                               {
+                                                   DateRegistered = profile.DateRegistered,
+                                                   LivesIn = (profile.LivesIn != null)
+                                                                 ? new Geo
+                                                                   {
+                                                                       CountryCode = profile.LivesIn.CountryCode,
+                                                                       Country = profile.LivesIn.Country,
+                                                                       City = profile.LivesIn.City
+                                                                   }
+                                                                 : null,
+                                                   Avatar = GetFullViewUrl(profile),
+                                                   Thumbnail = GetThumbnailUrl(profile),
+                                                   AboutMe = profile.AboutMe
+                                               },
+                                  PrivateInfo = (includePrivateData)
+                                                    ? new UserPrivateInfo {Email = profile.Email}
+                                                    : null
+                              };
 
-            var profile = new UserProfile
-                          {
-                              User = new UserReference
-                                     {
-                                         UserName = user.UserName,
-                                         FullName = user.FullName
-                                     },
-                              PublicInfo = new UserPublicInfo
-                                           {
-                                               DateRegistered = user.DateRegistered,
-                                               LivesIn = (user.LivesIn != null)
-                                                             ? new Geo
-                                                               {
-                                                                   CountryCode = user.LivesIn.CountryCode,
-                                                                   Country = user.LivesIn.Country,
-                                                                   City = user.LivesIn.City
-                                                               }
-                                                             : null,
-                                               Avatar = (avatar != null) ? avatar.Url : null,
-                                               Thumbnail = (thumbnail != null) ? thumbnail.Url : null,
-                                               AboutMe = user.AboutMe
-                                           },
-                              PrivateInfo = (includePrivateData)
-                                                ? new UserPrivateInfo {Email = user.Email}
-                                                : null
-                          };
+            return userProfile;
+        }
 
-            return profile;
+        private string GetThumbnailUrl(Profile profile)
+        {
+            return (profile.UserImage != null && profile.UserImage.Thumbnail != null)
+                       ? profile.UserImage.Thumbnail.Uri
+                       : null;
+        }
+
+        private string GetFullViewUrl(Profile profile)
+        {
+            return (profile.UserImage != null && profile.UserImage.FullView != null)
+                       ? profile.UserImage.FullView.Uri
+                       : null;
         }
 
         private async Task<Profile> EnsureUserProfileExists(string userName)
         {
             var users = db.GetCollection<Profile>(Profile.CollectionName);
-            var user = users.FindOne(Query.EQ("UserName", userName));
+            var user = users.FindOne(Query<Profile>.EQ(p => p.UserName, userName));
 
             if (user == null)
             {
@@ -85,31 +98,20 @@ namespace Api.App.Profiles
                 user = new Profile
                        {
                            UserName = login.UserName,
-                           UserId = login.Id,
-                           UserImages = CreateProfileThumbnail(login)
+                           UserId = login.Id
                        };
                 users.Insert(user).LogCommandResult(logger);
+                CreateProfileThumbnail(login);
             }
             return user;
         }
 
-        //TODO: Move logic of profile image creation to IProfileImageManager
-        private IEnumerable<ProfileImage> CreateProfileThumbnail(ApplicationUser login)
+        private void CreateProfileThumbnail(ApplicationUser login)
         {
             if (!string.IsNullOrWhiteSpace(login.ThumbnailImage))
             {
-                yield return new ProfileImage
-                             {
-                                 ImageType = ProfileImageType.Thumbnail,
-                                 Url = login.ThumbnailImage
-                             };
+                profileImageManager.SaveThumbnailLink(login.UserName, login.ThumbnailImage);
             }
-        }
-
-        private ProfileImage GetProfileImage(Profile profile, ProfileImageType immageType)
-        {
-            return (profile.UserImages ?? Enumerable.Empty<ProfileImage>())
-                .FirstOrDefault(i => i.ImageType == immageType);
         }
 
         private void AssertUserIsRegistered(ApplicationUser login)

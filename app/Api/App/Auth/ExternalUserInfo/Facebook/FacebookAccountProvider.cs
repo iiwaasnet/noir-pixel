@@ -2,6 +2,8 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Api.App.Images;
+using Api.App.Images.Config;
+using JsonConfigurationProvider;
 using Microsoft.Owin.Security.Facebook;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -11,12 +13,13 @@ namespace Api.App.Auth.ExternalUserInfo.Facebook
     public class FacebookAccountProvider : ISocialAccountProvider
     {
         private readonly FacebookAuthenticationOptions authOptions;
-        private readonly IProfileImageManager profileImageManager;
+        private readonly ImagesConfiguration config;
 
-        public FacebookAccountProvider(FacebookAuthenticationOptions authOptions, IProfileImageManager profileImageManager)
+        public FacebookAccountProvider(FacebookAuthenticationOptions authOptions,
+                                       IConfigProvider configProvider)
         {
             this.authOptions = authOptions;
-            this.profileImageManager = profileImageManager;
+            config = configProvider.GetConfiguration<ImagesConfiguration>();
         }
 
         public async Task<ExternalUserInfo> GetUserInfo(string userId, string accessToken, string _)
@@ -45,8 +48,8 @@ namespace Api.App.Auth.ExternalUserInfo.Facebook
                                             Gender = jObj.gender,
                                             ThumbnailImage = string.Format(profileImage,
                                                                            jObj.id,
-                                                                           profileImageManager.ThumbnailSize().Height,
-                                                                           profileImageManager.ThumbnailSize().Width)
+                                                                           config.ProfileImages.ThumbnailSize,
+                                                                           config.ProfileImages.ThumbnailSize)
                                         },
                                Email = jObj.email
                            };

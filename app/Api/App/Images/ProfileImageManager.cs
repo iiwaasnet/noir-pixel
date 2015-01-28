@@ -7,8 +7,11 @@ using Api.App.Images.Config;
 using Api.App.Images.Entities;
 using Api.App.Media;
 using Api.App.Media.Config;
+using Api.App.Profiles.Entities;
+using Diagnostics;
 using JsonConfigurationProvider;
 using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 
 namespace Api.App.Images
 {
@@ -18,18 +21,24 @@ namespace Api.App.Images
         private readonly MediaConfiguration mediaConfig;
         private readonly IImageProcessor imageProcessor;
         private readonly MongoDatabase db;
+        private readonly ILogger logger;
+        private readonly IMediaManager mediaManager;
 
         public ProfileImageManager(IAppDbProvider appDbProvider,
                                    IImageProcessor imageProcessor,
-                                   IConfigProvider configProvider)
+                                   IConfigProvider configProvider,
+            IMediaManager mediaManager,
+                                   ILogger logger)
         {
+            this.logger = logger;
+            this.mediaManager = mediaManager;
             config = configProvider.GetConfiguration<ImagesConfiguration>();
             mediaConfig = configProvider.GetConfiguration<MediaConfiguration>();
             this.imageProcessor = imageProcessor;
             db = appDbProvider.GetDatabase();
         }
 
-        public ProfileImage SaveImage(string userName, string fileName)
+        public ProfileImage SaveImageFile(string userName, string fileName)
         {
             var profile = db.GetProfile(userName);
             var profileImage = new Entities.ProfileImage();
@@ -52,9 +61,37 @@ namespace Api.App.Images
                                          Uri = imageInfo.Uri
                                      };
 
+            var collection = db.GetCollection<Profile>(Profile.CollectionName);
+            collection.Update(Query<Profile>.EQ(p => p.Id, profile.Id),
+                              Update<Profile>.Set(p => p.UserImage, profileImage))
+                      .LogCommandResult(logger);
+
             return new ProfileImage
                    {
                        FullViewUrl = profileImage.FullView.Uri,
+                       ThumbnailUrl = profileImage.Thumbnail.Uri
+                   };
+        }
+
+        public ProfileImage SaveThumbnailLink(string userName, string url)
+        {
+            var profile = db.GetProfile(userName);
+            var profileImage = new Entities.ProfileImage();
+
+            var mediaInfo = mediaManager.SaveMediaUrl(url, profile.Id);
+            profileImage.Thumbnail = new MediaData
+                                     {
+                                         MediaId = mediaInfo.MediaId,
+                                         Uri = mediaInfo.Uri
+                                     };
+
+            var collection = db.GetCollection<Profile>(Profile.CollectionName);
+            collection.Update(Query<Profile>.EQ(p => p.Id, profile.Id),
+                              Update<Profile>.Set(p => p.UserImage, profileImage))
+                      .LogCommandResult(logger);
+
+            return new ProfileImage
+                   {
                        ThumbnailUrl = profileImage.Thumbnail.Uri
                    };
         }
@@ -90,14 +127,9 @@ namespace Api.App.Images
             throw new NotImplementedException();
         }
 
-        public Size AvatarSize()
+        public int ThumbnailSize()
         {
-            return new Size(config.ProfileImages.FullView.Width, config.ProfileImages.FullView.Height);
-        }
-
-        public Size ThumbnailSize()
-        {
-            return new Size(config.ProfileImages.Thumbnail.Width, config.ProfileImages.Thumbnail.Height);
+            return config.ProfileImages.ThumbnailSize;
         }
     }
 }

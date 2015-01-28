@@ -1,13 +1,10 @@
-﻿using System.Drawing;
-
-namespace Api.App.Images
+﻿namespace Api.App.Images
 {
     public interface IProfileImageManager
     {
-        ProfileImage SaveImage(string userName, string fileName);
+        ProfileImage SaveImageFile(string userName, string fileName);
+        ProfileImage SaveThumbnailLink(string userName, string url);
         void DeleteImage(string userName);
-        Size AvatarSize();
-
-        Size ThumbnailSize();
+        int ThumbnailSize();
     }
 }

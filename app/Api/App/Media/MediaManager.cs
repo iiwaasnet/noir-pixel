@@ -47,13 +47,33 @@ namespace Api.App.Media
             return TryAssembleFile(chunkInfo);
         }
 
-        public MediaInfo SaveMedia(string fileName, string ownerId)
+        public MediaInfo SaveMediaFile(string fileName, string ownerId)
         {
             var collection = db.GetCollection<Entities.Media>(Entities.Media.CollectionName);
             var media = new Entities.Media
                         {
                             OwnerId = ownerId,
                             Location = new MediaLocation {LocalPath = fileName}
+                        };
+            media.Uri = GenerateMediaAccessUri(media.Id);
+
+            collection.Insert(media);
+
+            return new MediaInfo
+                   {
+                       MediaId = media.Id,
+                       OwnerId = media.OwnerId,
+                       Uri = media.Uri
+                   };
+        }
+
+        public MediaInfo SaveMediaUrl(string url, string ownerId)
+        {
+            var collection = db.GetCollection<Entities.Media>(Entities.Media.CollectionName);
+            var media = new Entities.Media
+                        {
+                            OwnerId = ownerId,
+                            Location = new MediaLocation {Url = url}
                         };
             media.Uri = GenerateMediaAccessUri(media.Id);
 

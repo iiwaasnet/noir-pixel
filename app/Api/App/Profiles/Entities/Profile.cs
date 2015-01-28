@@ -26,6 +26,6 @@ namespace Api.App.Profiles.Entities
         [BsonIgnoreIfNull]
         public IEnumerable<string> AboutMe { get; set; }
 
-        public IEnumerable<ProfileImage> UserImages { get; set; }
+        public ProfileImage UserImage { get; set; }
     }
 }

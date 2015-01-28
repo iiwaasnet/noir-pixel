@@ -26,7 +26,7 @@ namespace Api.App.Media
                                                          config.ProfileImages.ThumbnailSize,
                                                          config.ProfileImages.ThumbnailSize));
 
-                var mediaInfo = mediaManager.SaveMedia(destination, ownerId);
+                var mediaInfo = mediaManager.SaveMediaFile(destination, ownerId);
                 return new ImageInfo
                        {
                            MediaId = mediaInfo.MediaId,
@@ -46,7 +46,7 @@ namespace Api.App.Media
                                                          config.ProfileImages.ThumbnailSize,
                                                          config.ProfileImages.ThumbnailSize));
 
-                var mediaInfo = mediaManager.SaveMedia(destination, ownerId);
+                var mediaInfo = mediaManager.SaveMediaFile(destination, ownerId);
                 return new ImageInfo
                        {
                            MediaId = mediaInfo.MediaId,
