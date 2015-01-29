@@ -4,9 +4,7 @@ namespace Api.App.Media.Entities
 {
     public class MediaLocation
     {
-        [BsonIgnoreIfNull]
-        public string LocalPath { get; set; }
-        [BsonIgnoreIfNull]
-        public string Url { get; set; }
+        public string Location { get; set; }
+        public bool Remote { get; set; }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.IO;
 using Api.App.Db;
 using Api.App.Db.Extensions;

@@ -54,7 +54,7 @@ namespace Api.App.Media
             var media = new Entities.Media
                         {
                             OwnerId = ownerId,
-                            Location = new MediaLocation {LocalPath = fileName}
+                            Location = new MediaLocation {Location = fileName, Remote = false}
                         };
             media.Uri = GenerateMediaAccessUri(media.Id);
 
@@ -74,7 +74,7 @@ namespace Api.App.Media
             var media = new Entities.Media
                         {
                             OwnerId = ownerId,
-                            Location = new MediaLocation {Url = url}
+                            Location = new MediaLocation {Location = url, Remote = true}
                         };
             media.Uri = GenerateMediaAccessUri(media.Id);
 
@@ -99,12 +99,10 @@ namespace Api.App.Media
             var media = collection.FindOne(Query<Entities.Media>.EQ(m => m.Id, mediaId));
             if (media != null)
             {
-                var remote = string.IsNullOrWhiteSpace(media.Location.LocalPath);
-
                 return new MediaLink
                        {
-                           Path = (remote) ? media.Location.Url : media.Location.LocalPath,
-                           Remote = remote
+                           Location = media.Location.Location,
+                           Remote = media.Location.Remote
                        };
             }
 

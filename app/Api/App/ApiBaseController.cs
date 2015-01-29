@@ -23,10 +23,12 @@ namespace Api.App
 
         protected string MakeAbsoluteUrl(string relativeUrl)
         {
-            return string.Format("{0}://{1}/{2}",
-                                 Request.RequestUri.Scheme,
-                                 Request.RequestUri.Host,
-                                 relativeUrl);
+            return (string.IsNullOrWhiteSpace(relativeUrl))
+                       ? relativeUrl
+                       : string.Format("{0}://{1}/{2}",
+                                       Request.RequestUri.Scheme,
+                                       Request.RequestUri.Host,
+                                       relativeUrl);
         }
     }
 }

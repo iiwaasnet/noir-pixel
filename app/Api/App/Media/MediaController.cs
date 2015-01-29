@@ -19,7 +19,7 @@ namespace Api.App.Media
             var link = mediaManager.GetMediaLink(id);
             if (link.Remote)
             {
-                return Redirect(link.Path);
+                return Redirect(link.Location);
             }
 
             return Ok();

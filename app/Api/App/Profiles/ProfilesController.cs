@@ -37,6 +37,7 @@ namespace Api.App.Profiles
                 var profile = await profilesManager.GetUserProfile(userName, includePrivateData);
 
                 profile.PublicInfo.Thumbnail = MakeAbsoluteUrl(profile.PublicInfo.Thumbnail);
+                profile.PublicInfo.Avatar = MakeAbsoluteUrl(profile.PublicInfo.Avatar);
 
                 return Ok(profile);
             }

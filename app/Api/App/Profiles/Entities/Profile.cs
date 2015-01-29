@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Api.App.Entities;
 using Api.App.Images.Entities;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace Api.App.Profiles.Entities
@@ -10,6 +11,7 @@ namespace Api.App.Profiles.Entities
     {
         public const string CollectionName = "profiles";
 
+        [BsonRepresentation(BsonType.ObjectId)]
         public string UserId { get; set; }
         public string UserName { get; set; }
 
