@@ -20,5 +20,13 @@ namespace Api.App
         {
             throw new HttpResponseException(Request.CreateResponse(statusCode, error));
         }
+
+        protected string MakeAbsoluteUrl(string relativeUrl)
+        {
+            return string.Format("{0}://{1}/{2}",
+                                 Request.RequestUri.Scheme,
+                                 Request.RequestUri.Host,
+                                 relativeUrl);
+        }
     }
 }

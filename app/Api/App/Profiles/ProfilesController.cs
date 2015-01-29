@@ -36,10 +36,7 @@ namespace Api.App.Profiles
                 var includePrivateData = User.Identity.Self(userName);
                 var profile = await profilesManager.GetUserProfile(userName, includePrivateData);
 
-                profile.PublicInfo.Thumbnail = string.Format("{0}://{1}/{2}",
-                                                             Request.RequestUri.Scheme,
-                                                             Request.RequestUri.Host,
-                                                             profile.PublicInfo.Thumbnail);
+                profile.PublicInfo.Thumbnail = MakeAbsoluteUrl(profile.PublicInfo.Thumbnail);
 
                 return Ok(profile);
             }
@@ -76,9 +73,11 @@ namespace Api.App.Profiles
                 if (mediaUploadResult.Completed)
                 {
                     var url = profileImageManager.SaveImageFile(User.Identity.Name, mediaUploadResult.FileName);
+                    url.FullViewUrl = MakeAbsoluteUrl(url.FullViewUrl);
+                    url.ThumbnailUrl = MakeAbsoluteUrl(url.ThumbnailUrl);
 
                     mediaManager.DeleteMedia(mediaUploadResult.FileName);
-
+                    
                     return Ok(url);
                 }
 
