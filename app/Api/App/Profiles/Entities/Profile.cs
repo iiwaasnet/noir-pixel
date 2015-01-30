@@ -12,7 +12,9 @@ namespace Api.App.Profiles.Entities
         public const string CollectionName = "profiles";
 
         [BsonRepresentation(BsonType.ObjectId)]
+        [BsonRequired]
         public string UserId { get; set; }
+        [BsonRequired]
         public string UserName { get; set; }
 
         [BsonIgnoreIfNull]

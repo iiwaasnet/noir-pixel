@@ -26,7 +26,7 @@ namespace Api.App.Images
         public ProfileImageManager(IAppDbProvider appDbProvider,
                                    IImageProcessor imageProcessor,
                                    IConfigProvider configProvider,
-            IMediaManager mediaManager,
+                                   IMediaManager mediaManager,
                                    ILogger logger)
         {
             this.logger = logger;

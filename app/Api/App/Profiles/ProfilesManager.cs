@@ -90,19 +90,27 @@ namespace Api.App.Profiles
             var users = db.GetCollection<Profile>(Profile.CollectionName);
             var user = users.FindOne(Query<Profile>.EQ(p => p.UserName, userName));
 
-            if (user == null)
+            try
             {
-                var login = await accountsManager.FindByNameAsync(userName);
-                AssertUserIsRegistered(login);
+                if (user == null)
+                {
+                    var login = await accountsManager.FindByNameAsync(userName);
+                    AssertUserIsRegistered(login);
 
-                user = new Profile
-                       {
-                           UserName = login.UserName,
-                           UserId = login.Id
-                       };
-                users.Insert(user).LogCommandResult(logger);
-                CreateProfileThumbnail(login);
+                    user = new Profile
+                           {
+                               UserName = login.UserName,
+                               UserId = login.Id
+                           };
+                    users.Insert(user).LogCommandResult(logger);
+                    CreateProfileThumbnail(login);
+                }
             }
+            catch (MongoDuplicateKeyException)
+            {
+                user = users.FindOne(Query<Profile>.EQ(p => p.UserName, userName));
+            }
+
             return user;
         }
 
