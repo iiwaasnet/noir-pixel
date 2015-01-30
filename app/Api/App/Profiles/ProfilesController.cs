@@ -2,6 +2,7 @@
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Api.App.ApiBase;
 using Api.App.Exceptions;
 using Api.App.Images;
 using Api.App.Media;

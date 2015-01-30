@@ -5,6 +5,7 @@ using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Api.App.ApiBase;
 using Api.App.Auth.ExternalUserInfo;
 using Api.App.Errors;
 using Common.Extensions;

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
 
-namespace Api.App
+namespace Api.App.ApiBase
 {
     public class MethodExecutionResult<T>
     {

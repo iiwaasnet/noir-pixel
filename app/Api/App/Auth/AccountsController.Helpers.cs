@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Web;
 using System.Web.Http;
+using Api.App.ApiBase;
 using Api.App.Auth.Extensions;
 using Api.App.Errors;
 using Api.App.Errors.Extensions;

@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Net.Http.Formatting;
 
-namespace Api.App
+namespace Api.App.ApiBase
 {
     internal class HttpContextDependencyProvider : IHttpContextDependencyProvider
     {

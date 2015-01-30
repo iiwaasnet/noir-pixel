@@ -219,15 +219,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App\ApiBaseController.cs" />
+    <Compile Include="App\ApiBase\ApiBaseController.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\GPlus\GoogleProfileImageUrlBuilder.cs" />
     <Compile Include="App\Db\Extensions\CommandResultExtensions.cs" />
     <Compile Include="App\Db\Extensions\Profiles.cs" />
     <Compile Include="App\Db\IAppDbProvider.cs" />
     <Compile Include="App\Db\IIdentityDbProvider.cs" />
     <Compile Include="App\Entities\Entity.cs" />
-    <Compile Include="App\ErrorResult.cs" />
-    <Compile Include="App\ApiErrorResult.cs" />
+    <Compile Include="App\ApiBase\ErrorResult.cs" />
+    <Compile Include="App\ApiBase\ApiErrorResult.cs" />
     <Compile Include="App\Auth\AppRoles.cs" />
     <Compile Include="App\Auth\Config\AuthConfiguration.cs" />
     <Compile Include="App\Auth\AuthOptions.cs" />
@@ -275,8 +275,8 @@
     <Compile Include="App\Exceptions\NotFoundException.cs" />
     <Compile Include="App\Framework\StaticRandom.cs" />
     <Compile Include="App\Framework\SUIDGenerator.cs" />
-    <Compile Include="App\HttpContextDependencyProvider.cs" />
-    <Compile Include="App\IHttpContextDependencyProvider.cs" />
+    <Compile Include="App\ApiBase\HttpContextDependencyProvider.cs" />
+    <Compile Include="App\ApiBase\IHttpContextDependencyProvider.cs" />
     <Compile Include="App\Images\Config\Dimensions.cs" />
     <Compile Include="App\Images\Config\ImagesConfiguration.cs" />
     <Compile Include="App\Images\Config\PhotosConfiguration.cs" />
@@ -303,7 +303,7 @@
     <Compile Include="App\Media\MediaManager.cs" />
     <Compile Include="App\Media\MediaUploadResult.cs" />
     <Compile Include="App\Media\MediaInfo.cs" />
-    <Compile Include="App\MethodExecutionResult.cs" />
+    <Compile Include="App\ApiBase\MethodExecutionResult.cs" />
     <Compile Include="App\Posts\DataPage.cs" />
     <Compile Include="App\Posts\Entities\Reply.cs" />
     <Compile Include="App\Posts\Entities\Post.cs" />
