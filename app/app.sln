@@ -41,6 +41,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{6634BD63-C
 		docs\client-mesages-convention.txt = docs\client-mesages-convention.txt
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "mongo-migrations", "mongo-migrations", "{7784DEED-E021-486F-86EC-6A129D19F64A}"
+	ProjectSection(SolutionItems) = preProject
+		migrations\1-indexes.js = migrations\1-indexes.js
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

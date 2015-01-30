@@ -1,0 +1,7 @@
+{
+	"host": "localhost",
+	"port": 27017,
+	"db": "np",
+	"collection": "sys.migrations",
+	"directory": "migrations"
+}
