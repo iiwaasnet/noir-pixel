@@ -42,8 +42,8 @@ namespace Api.App.Images
             var profile = db.GetProfile(userName);
             var profileImage = new Entities.ProfileImage();
 
-            var fullViewFile = GenerateFullViewFileName(profile.Id, Path.GetExtension(fileName));
-            var thumbnailFile = GenerateThumbnailFileName(profile.Id, Path.GetExtension(fileName));
+            var fullViewFile = FullViewFileName(profile.Id, GetFileExtension(fileName));
+            var thumbnailFile = ThumbnailFileName(profile.Id, GetFileExtension(fileName));
 
             EnsureTargetDirectoryExists(profile.Id);
 
@@ -65,11 +65,19 @@ namespace Api.App.Images
                               Update<Profile>.Set(p => p.UserImage, profileImage))
                       .LogCommandResult(logger);
 
+            //TODO: Delete previous profile image files and media documents
+            DeletePreviousProfileImages(profile.Id);
+
             return new ProfileImage
                    {
                        FullViewUrl = profileImage.FullView.Uri,
                        ThumbnailUrl = profileImage.Thumbnail.Uri
                    };
+        }
+
+        private static string GetFileExtension(string fileName)
+        {
+            return Path.GetExtension(fileName).TrimStart('.');
         }
 
         public ProfileImage SaveThumbnailLink(string userName, string url)
@@ -97,26 +105,42 @@ namespace Api.App.Images
 
         private void EnsureTargetDirectoryExists(string userId)
         {
-            var folder = GenerateProfileImagesFolder(userId);
+            var folder = ProfileImagesFolderName(userId);
             if (!Directory.Exists(folder))
             {
                 Directory.CreateDirectory(folder);
             }
         }
 
-        private string GenerateThumbnailFileName(string id, string ext)
+        private void DeletePreviousProfileImages(string userId)
         {
-            return Path.Combine(GenerateProfileImagesFolder(id),
+            try
+            {
+                var folder = ProfileImagesFolderName(userId);
+                if (Directory.Exists(folder))
+                {
+                    Directory.Delete(folder, true);
+                }
+            }
+            catch (Exception err)
+            {
+                logger.Error("Error deleting profile image: {0}", err);
+            }
+        }
+
+        private string ThumbnailFileName(string id, string ext)
+        {
+            return Path.Combine(ProfileImagesFolderName(id),
                                 string.Format(config.ProfileImages.ThumbnailNameTemplate, id, ext));
         }
 
-        private string GenerateFullViewFileName(string id, string ext)
+        private string FullViewFileName(string id, string ext)
         {
-            return Path.Combine(GenerateProfileImagesFolder(id),
+            return Path.Combine(ProfileImagesFolderName(id),
                                 string.Format(config.ProfileImages.FullViewNameTemplate, id, ext));
         }
 
-        private string GenerateProfileImagesFolder(string id)
+        private string ProfileImagesFolderName(string id)
         {
             return Path.Combine(string.Format(mediaConfig.ProfileImagesFolderTemplate, id), id);
         }

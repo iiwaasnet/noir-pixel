@@ -22,9 +22,9 @@ namespace Api.App.Media
             using (var image = new Bitmap(source))
             {
                 ImageUtils.SaveJpeg(destination,
-                                    ImageUtils.CropImage(ImageUtils.ResizeImageForCrop(image, config.ProfileImages.ThumbnailSize),
-                                                         config.ProfileImages.ThumbnailSize,
-                                                         config.ProfileImages.ThumbnailSize));
+                                    ImageUtils.CropImage(ImageUtils.ResizeImageForCrop(image, config.ProfileImages.FullViewSize),
+                                                         config.ProfileImages.FullViewSize,
+                                                         config.ProfileImages.FullViewSize));
 
                 var mediaInfo = mediaManager.SaveMediaFile(destination, ownerId);
                 return new ImageInfo

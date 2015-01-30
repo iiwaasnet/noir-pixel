@@ -1,4 +1,6 @@
-﻿using System.Web.Http;
+﻿using System.IO;
+using System.Net;
+using System.Web.Http;
 using Api.App.ApiBase;
 
 namespace Api.App.Media
@@ -18,12 +20,17 @@ namespace Api.App.Media
         public IHttpActionResult Get(string id)
         {
             var link = mediaManager.GetMediaLink(id);
-            if (link.Remote)
+            if (link != null)
             {
-                return Redirect(link.Location);
+                if (link.Remote)
+                {
+                    return Redirect(link.Location);
+                }
+
+                return new FileResult(link.Location);
             }
 
-            return Ok();
+            return ApiError(HttpStatusCode.NotFound);
         }
     }
 }
