@@ -16,7 +16,8 @@
             },
             Profiles: {
                 Profile: 'profiles/{userName}',
-                Countries: 'profiles/countries'
+                Countries: 'profiles/countries',
+                UpdateProfileImage: 'profiles/update-profile-image'
             },
         },
         Strings: {
