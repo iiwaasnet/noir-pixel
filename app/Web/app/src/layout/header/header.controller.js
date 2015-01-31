@@ -75,7 +75,7 @@
         }
 
         function getProfileSuccess(response) {
-            ctrl.login.profileThumbnail = response.data.publicInfo.thumbnail;
+            ctrl.login.profileThumbnail = response.data.publicInfo.profileImageThumbnail;
             ctrl.login.userName = response.data.user.userName;
             ctrl.login.authenticated = Auth.authenticated();
         }

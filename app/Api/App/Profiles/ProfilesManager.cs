@@ -59,8 +59,8 @@ namespace Api.App.Profiles
                                                                        City = profile.LivesIn.City
                                                                    }
                                                                  : null,
-                                                   Avatar = GetFullViewUrl(profile),
-                                                   Thumbnail = GetThumbnailUrl(profile),
+                                                   ProfileImage = GetFullViewUrl(profile),
+                                                   ProfileImageThumbnail = GetThumbnailUrl(profile),
                                                    AboutMe = profile.AboutMe
                                                },
                                   PrivateInfo = (includePrivateData)

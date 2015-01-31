@@ -95,12 +95,23 @@
 
                 &.add {
                     top: 0;
-                    left: 0;
+                    right: 0;
                     height: @profile-image-size * @add-to-delete-ratio;
 
                     .image {
                         .sprite(@camera32);
                         top: @profile-image-size * @add-to-delete-ratio / 2 - @action-image-size / 2;
+                    }
+
+                    &.only {
+                        bottom: 0;
+                        top: auto !important;
+                        height: 100% !important;
+
+                        .image {
+                            .sprite(@camera32);
+                            top: @profile-image-size / 2 - @action-image-size / 2 !important;
+                        }
                     }
                 }
 

@@ -37,8 +37,8 @@ namespace Api.App.Profiles
                 var includePrivateData = User.Identity.Self(userName);
                 var profile = await profilesManager.GetUserProfile(userName, includePrivateData);
 
-                profile.PublicInfo.Thumbnail = MakeAbsoluteUrl(profile.PublicInfo.Thumbnail);
-                profile.PublicInfo.Avatar = MakeAbsoluteUrl(profile.PublicInfo.Avatar);
+                profile.PublicInfo.ProfileImageThumbnail = MakeAbsoluteUrl(profile.PublicInfo.ProfileImageThumbnail);
+                profile.PublicInfo.ProfileImage = MakeAbsoluteUrl(profile.PublicInfo.ProfileImage);
 
                 return Ok(profile);
             }

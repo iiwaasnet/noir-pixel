@@ -12,7 +12,7 @@
         ctrl.country = undefined;
         ctrl.save = save;
         ctrl.upload = getUploadConfig();
-
+        ctrl.profileData = profileData.data;
         var unsubscribe;
 
         activate();
