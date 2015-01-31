@@ -11,7 +11,7 @@
         ctrl.countries = $filter('orderBy')(countries.data, 'name');
         ctrl.country = undefined;
         ctrl.save = save;
-        ctrl.upload = getUploadData();
+        ctrl.upload = getUploadConfig();
 
         var unsubscribe;
 
@@ -35,7 +35,7 @@
             unsubscribe && unsubscribe();
         }
 
-        function getUploadData() {
+        function getUploadConfig() {
             var config = {
                 endpoint: Url.build(Config.ApiUris.Base, Config.ApiUris.Profiles.UpdateProfileImage),
                 description: Strings.getLocalizedString('ProfilePublic_ProfilePhotoDescription')
