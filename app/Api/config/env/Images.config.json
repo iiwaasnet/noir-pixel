@@ -1,23 +1,23 @@
-[
+﻿[
     {
         "prod": {
             "profileImages": {
-				"maxFileSizeMB": "1",
+				"maxFileSizeMB": "@@Images.ProfileImages.MaxFileSizeMB",
                 "fullViewNameTemplate": "{0}_p.{1}",
                 "thumbnailNameTemplate": "{0}_pth.{1}",
-                "fullViewSize": "130",
-                "thumbnailSize": "32"
+                "fullViewSize": "@@Images.ProfileImages.FullViewSize",
+                "thumbnailSize": "@@Images.ProfileImages.ThumbnailSize"
             },
             "photos": {
-				"maxFileSizeMB": "3",
+				"maxFileSizeMB": "@@Images.Photos.MaxFileSizeMB",
                 "fullViewNameTemplate": "{0}_f.{1}",
                 "thumbnailNameTemplate": "{0}_fth.{1}",
                 "previewNameTemplate": "{0}_fp.{1}",
                 "fullView": {
-                    "maxHeight": "800",
-                    "maxWidth": "800",
-                    "minHeight": "200",
-                    "minWidth": "200"
+                    "maxHeight": "@@Images.Photos.MaxHeight",
+                    "maxWidth": "@@Images.Photos.MaxWidth",
+                    "minHeight": "@@Images.Photos.MinHeight",
+                    "minWidth": "@@Images.Photos.MinWidth"
                 },
                 "previewSize": "300",
                 "thumbnailSize": "60"

@@ -20,6 +20,13 @@
                 UpdateProfileImage: 'profiles/update-profile-image'
             },
         },
+        Profiles: {
+            Image: {
+                MaxFileSize: '1',
+                FullViewSize: '130',
+                ThumbnailSize: '32'
+            }
+        },
         Strings: {
             InvalidationTimeout: '00:10:00',
             VersionsUri: '/strings/versions',
@@ -29,7 +36,7 @@
             UserNameValidationRegEx: '((^\\B|^\\b)[a-z0-9_\\-]+(\\B$|\\b$))',
             MinUserNameLength: '2',
             MaxUserNameLength: '20'
-            }
+        }
     };
 
     angular.module('np.config')

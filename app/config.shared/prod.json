@@ -1,5 +1,14 @@
 {
     "Auth.UserNameValidationRegEx": "((^\\\\B|^\\\\b)[a-z0-9_\\\\-]+(\\\\B$|\\\\b$))",
     "Auth.MinUserNameLength": "2",
-    "Auth.MaxUserNameLength": "20"
+    "Auth.MaxUserNameLength": "20",
+
+    "Images.ProfileImages.MaxFileSizeMB": "1",
+    "Images.ProfileImages.FullViewSize": "130",
+    "Images.ProfileImages.ThumbnailSize": "32",
+    "Images.Photos.MaxFileSizeMB": "3",
+    "Images.Photos.MaxHeight": "800",
+    "Images.Photos.MaxWidth": "800",
+    "Images.Photos.MinHeight": "200",
+    "Images.Photos.MinWidth": "200"
 }

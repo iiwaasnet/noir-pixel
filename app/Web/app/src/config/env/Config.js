@@ -20,6 +20,13 @@
                 UpdateProfileImage: '@@ApiUris.Profiles.UpdateProfileImage'
             },
         },
+        Profiles: {
+            Image: {
+                MaxFileSize: '@@Images.ProfileImages.MaxFileSizeMB',
+                FullViewSize: '@@Images.ProfileImages.FullViewSize',
+                ThumbnailSize: '@@Images.ProfileImages.ThumbnailSize'
+            }
+        },
         Strings: {
             InvalidationTimeout: '@@Strings.InvalidationTimeout',
             VersionsUri: '@@Strings.VersionsUri',
@@ -29,7 +36,7 @@
             UserNameValidationRegEx: '@@Auth.UserNameValidationRegEx',
             MinUserNameLength: '@@Auth.MinUserNameLength',
             MaxUserNameLength: '@@Auth.MaxUserNameLength'
-            }
+        }
     };
 
     angular.module('np.config')

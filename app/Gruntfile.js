@@ -44,6 +44,11 @@ module.exports = function (grunt) {
                         flatten: false,
                         src: ['./api/config/env/Auth.config.json'],
                         dest: './api/config/Auth.config.json'
+                    }, {
+                        expand: false,
+                        flatten: false,
+                        src: ['./api/config/env/Images.config.json'],
+                        dest: './api/config/Images.config.json'
                     }
                 ]
             },
