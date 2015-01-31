@@ -2,6 +2,7 @@
 using System.IO;
 using Api.App.Db;
 using Api.App.Db.Extensions;
+using Api.App.Framework;
 using Api.App.Images.Config;
 using Api.App.Images.Entities;
 using Api.App.Media;
@@ -9,6 +10,7 @@ using Api.App.Media.Config;
 using Api.App.Profiles.Entities;
 using Diagnostics;
 using JsonConfigurationProvider;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 
@@ -40,10 +42,13 @@ namespace Api.App.Images
         public ProfileImage SaveImageFile(string userName, string fileName)
         {
             var profile = db.GetProfile(userName);
+            var currentProfileImage = profile.UserImage;
             var profileImage = new Entities.ProfileImage();
 
-            var fullViewFile = FullViewFileName(profile.Id, GetFileExtension(fileName));
-            var thumbnailFile = ThumbnailFileName(profile.Id, GetFileExtension(fileName));
+            var profileImageName = ObjectId.GenerateNewId().ToString();
+
+            var fullViewFile = FullViewFileName(profile.Id, profileImageName, GetFileExtension(fileName));
+            var thumbnailFile = ThumbnailFileName(profile.Id, profileImageName, GetFileExtension(fileName));
 
             EnsureTargetDirectoryExists(profile.Id);
 
@@ -65,8 +70,7 @@ namespace Api.App.Images
                               Update<Profile>.Set(p => p.UserImage, profileImage))
                       .LogCommandResult(logger);
 
-            //TODO: Delete previous profile image files and media documents
-            DeletePreviousProfileImages(profile.Id);
+            DeletePreviousProfileImages(currentProfileImage);
 
             return new ProfileImage
                    {
@@ -112,14 +116,14 @@ namespace Api.App.Images
             }
         }
 
-        private void DeletePreviousProfileImages(string userId)
+        private void DeletePreviousProfileImages(Entities.ProfileImage profileImage)
         {
             try
             {
-                var folder = ProfileImagesFolderName(userId);
-                if (Directory.Exists(folder))
+                if (profileImage != null)
                 {
-                    Directory.Delete(folder, true);
+                    DeleteMedia(profileImage.FullView);
+                    DeleteMedia(profileImage.Thumbnail);
                 }
             }
             catch (Exception err)
@@ -128,21 +132,29 @@ namespace Api.App.Images
             }
         }
 
-        private string ThumbnailFileName(string id, string ext)
+        private void DeleteMedia(MediaData mediaData)
         {
-            return Path.Combine(ProfileImagesFolderName(id),
-                                string.Format(config.ProfileImages.ThumbnailNameTemplate, id, ext));
+            if (mediaData != null)
+            {
+                mediaManager.DeleteMedia(mediaData.MediaId);
+            }
         }
 
-        private string FullViewFileName(string id, string ext)
+        private string ThumbnailFileName(string id, string fileName, string ext)
         {
             return Path.Combine(ProfileImagesFolderName(id),
-                                string.Format(config.ProfileImages.FullViewNameTemplate, id, ext));
+                                string.Format(config.ProfileImages.ThumbnailNameTemplate, fileName, ext));
+        }
+
+        private string FullViewFileName(string id, string fileName, string ext)
+        {
+            return Path.Combine(ProfileImagesFolderName(id),
+                                string.Format(config.ProfileImages.FullViewNameTemplate, fileName, ext));
         }
 
         private string ProfileImagesFolderName(string id)
         {
-            return Path.Combine(string.Format(mediaConfig.ProfileImagesFolderTemplate, id), id);
+            return string.Format(mediaConfig.ProfileImagesFolderTemplate, id);
         }
 
         public void DeleteImage(string userName)

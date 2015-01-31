@@ -9,7 +9,8 @@ namespace Api.App.Media
         Task<MediaUploadResult> ReceiveMediaChunk(HttpRequestMessage request, string userName);
         MediaInfo SaveMediaFile(string fileName, string ownerId);
         MediaInfo SaveMediaUrl(string url, string ownerId);
-        void DeleteMedia(string fileName);
+        void DeleteMediaFile(string fileName);
+        void DeleteMedia(string mediaId);
         MediaLink GetMediaLink(string mediaId);
     }
 }

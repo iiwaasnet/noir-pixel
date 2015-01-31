@@ -78,7 +78,7 @@ namespace Api.App.Profiles
                     url.FullViewUrl = MakeAbsoluteUrl(url.FullViewUrl);
                     url.ThumbnailUrl = MakeAbsoluteUrl(url.ThumbnailUrl);
 
-                    mediaManager.DeleteMedia(mediaUploadResult.FileName);
+                    mediaManager.DeleteMediaFile(mediaUploadResult.FileName);
                     
                     return Ok(url);
                 }

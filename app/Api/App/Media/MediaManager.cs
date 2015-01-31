@@ -88,7 +88,21 @@ namespace Api.App.Media
                    };
         }
 
-        public void DeleteMedia(string fileName)
+        public void DeleteMedia(string mediaId)
+        {
+            var collection = db.GetCollection<Entities.Media>(Entities.Media.CollectionName);
+            var media = collection.FindOne(Query<Entities.Media>.EQ(m => m.Id, mediaId));
+            if (media != null)
+            {
+                if (!media.Location.Remote)
+                {
+                    DeleteMediaFile(media.Location.Location);
+                }
+                collection.Remove(Query<Entities.Media>.EQ(m => m.Id, media.Id));
+            }
+        }
+
+        public void DeleteMediaFile(string fileName)
         {
             File.Delete(fileName);
         }
