@@ -4,15 +4,16 @@
     angular.module('np.user-home')
         .controller('ProfilePublicController', profilePublicController);
 
-    profilePublicController.$inject = ['$rootScope', '$scope', '$filter', 'States', 'Url', 'Config', 'Strings', 'profileData', 'countries'];
+    profilePublicController.$inject = ['$rootScope', '$scope', '$filter', 'States', 'Url', 'Config', 'Strings', 'Profile', 'profileData', 'countries'];
 
-    function profilePublicController($rootScope, $scope, $filter, States, Url, Config, Strings, profileData, countries) {
+    function profilePublicController($rootScope, $scope, $filter, States, Url, Config, Strings, Profile, profileData, countries) {
         var ctrl = this;
         ctrl.countries = $filter('orderBy')(countries.data, 'name');
         ctrl.country = undefined;
         ctrl.save = save;
         ctrl.upload = getUploadConfig();
         ctrl.profileData = profileData.data;
+        ctrl.refershProfileImage = refershProfileImage;
         var unsubscribe;
 
         activate();
@@ -24,6 +25,14 @@
         function activate() {
             $scope.$on('$destroy', cleanup);
             unsubscribe = $rootScope.$on('$stateChangeStart', stateChangeStart);
+        }
+
+        function refershProfileImage() {
+            Profile.getOwnProfile().then(getProfileSuccess);
+        }
+
+        function getProfileSuccess(response) {
+            ctrl.profileData.publicInfo.profileImage = response.data.publicInfo.profileImage;
         }
 
         function stateChangeStart(event, toState, toParams, fromState, fromParams) {

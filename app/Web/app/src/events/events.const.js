@@ -5,6 +5,9 @@
         Auth: {
             SignedIn: 'SignedIn',
             SignedOut: 'SignedOut'
+        },
+        Profile: {
+            Updated: 'Updated'
         }
     };
 

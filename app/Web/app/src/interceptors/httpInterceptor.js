@@ -8,10 +8,8 @@
 
     angular.module('np')
         .constant('HttpProviderConfig', httpProviderConfig)
-        .config(configHttp)
-        .config(configXhr);
+        .config(configHttp);
 
-    configXhr.$inject = ['flowFactoryProvider', 'TokenStorageProvider'];
     configHttp.$inject = ['$httpProvider'];
 
     function configHttp($httpProvider) {
@@ -66,18 +64,6 @@
                     + ' status: ' + error.status
                     + ' data: ' + error.message.substring(0, HttpProviderConfig.MaxDataLength);
             }
-        }
-    }
-
-    function configXhr(flowFactoryProvider, TokenStorageProvider) {
-        flowFactoryProvider.defaults = {
-            headers: getAuthHeader
-        };
-
-        var tokenStorage = TokenStorageProvider.$get();
-
-        function getAuthHeader() {
-            return { 'Authorization': 'Bearer ' + tokenStorage.getToken() }
         }
     }
 })();

@@ -37,6 +37,7 @@
             var saved = Storage.get(userDataStorageKey);
             saved = angular.extend(saved, createUserDataObject(userData));
             Storage.set(userDataStorageKey, saved);
+            EventsHub.publishEvent(EventsHub.events.Profile.Updated);
         }
 
         function activate() {

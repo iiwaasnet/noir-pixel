@@ -30,6 +30,7 @@
                 <div class="edit-label" np-i18n="Label_ProfilePhoto"></div>
                 <div class="image-actions"
                      flow-init="{target: publicCtrl.upload.endpoint, withCredentials: true}"
+                     flow-complete="publicCtrl.refershProfileImage()"
                      flow-files-submitted="$flow.upload()">
                     <div flow-btn
                          class="action add"
