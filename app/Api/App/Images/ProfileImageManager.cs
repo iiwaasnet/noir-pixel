@@ -154,7 +154,7 @@ namespace Api.App.Images
 
         private string ProfileImagesFolderName(string id)
         {
-            return string.Format(mediaConfig.ProfileImagesFolderTemplate, id);
+            return string.Format(mediaConfig.ProfileImageFolderTemplate, id);
         }
 
         public void DeleteImage(string userName)

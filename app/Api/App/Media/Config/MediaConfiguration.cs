@@ -6,15 +6,13 @@ namespace Api.App.Media.Config
     {
         private string rootMediaFolder;
         private string uploadFolder;
-        private string storageFolder;
-        private string profileImagesFolderTemplate;
+        private string profileImageFolderTemplate;
         private string photosFolderTemplate;
 
         private void InitProperties()
         {
             uploadFolder = PrefixedOrSelf(uploadFolder, rootMediaFolder);
-            storageFolder = PrefixedOrSelf(storageFolder, rootMediaFolder);
-            profileImagesFolderTemplate = PrefixedOrSelf(profileImagesFolderTemplate, rootMediaFolder);
+            profileImageFolderTemplate = PrefixedOrSelf(profileImageFolderTemplate, rootMediaFolder);
             photosFolderTemplate = PrefixedOrSelf(photosFolderTemplate, rootMediaFolder);
         }
 
@@ -25,7 +23,8 @@ namespace Api.App.Media.Config
                        : Path.Combine(prefix, self);
         }
 
-        public string RootMediaFolder {
+        public string RootMediaFolder
+        {
             get { return rootMediaFolder; }
             set
             {
@@ -40,16 +39,10 @@ namespace Api.App.Media.Config
             set { uploadFolder = PrefixedOrSelf(value, rootMediaFolder); }
         }
 
-        public string StorageFolder
+        public string ProfileImageFolderTemplate
         {
-            get { return storageFolder; }
-            set { storageFolder = PrefixedOrSelf(value, rootMediaFolder); }
-        }
-
-        public string ProfileImagesFolderTemplate
-        {
-            get { return profileImagesFolderTemplate; }
-            set { profileImagesFolderTemplate = PrefixedOrSelf(value, rootMediaFolder); }
+            get { return profileImageFolderTemplate; }
+            set { profileImageFolderTemplate = PrefixedOrSelf(value, rootMediaFolder); }
         }
 
         public string PhotosFolderTemplate

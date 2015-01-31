@@ -2,6 +2,7 @@
 {
     public class PhotosConfiguration
     {
+		public int MaxFileSizeMB { get; set; }
         public string FullViewNameTemplate { get; set; }
         public string ThumbnailNameTemplate { get; set; }
         public string PreviewNameTemplate { get; set; }

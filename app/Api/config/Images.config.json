@@ -2,12 +2,14 @@
     {
         "prod": {
             "profileImages": {
+				"maxFileSizeMB": "1",
                 "fullViewNameTemplate": "{0}_p.{1}",
                 "thumbnailNameTemplate": "{0}_pth.{1}",
                 "fullViewSize": "200",
                 "thumbnailSize": "48"
             },
             "photos": {
+				"maxFileSizeMB": "3",
                 "fullViewNameTemplate": "{0}_f.{1}",
                 "thumbnailNameTemplate": "{0}_fth.{1}",
                 "previewNameTemplate": "{0}_fp.{1}",
