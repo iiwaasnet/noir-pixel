@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.ExceptionHandling;
 using System.Web.Http.Filters;
 using System.Web.Http.Validation;
@@ -30,6 +31,9 @@ namespace Api
             config.Services.Replace(typeof (IBodyModelValidator), new PrefixlessModelValidator(config.Services.GetBodyModelValidator()));
 
             config.MapHttpAttributeRoutes();
+            //TODO: Read from config
+            config.EnableCors(new EnableCorsAttribute("http://noir-pixel.com", "*", "GET,POST,DELETE,OPTIONS"));
+
             config.Routes.MapHttpRoute(
                                        name: "DefaultApi",
                                        routeTemplate: "{controller}/{id}",

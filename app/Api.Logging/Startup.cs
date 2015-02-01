@@ -23,7 +23,7 @@ namespace Api.Logging
                          };
 
             app.UseWebApi(config);
-            app.UseCors(CorsOptions.AllowAll);
+            app.UseCors(new CorsOptions());
         }
     }
 }

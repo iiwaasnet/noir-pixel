@@ -39,8 +39,6 @@ namespace Api.App.Auth
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            EnableCors(context);
-
             var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
             var user = await userManager.FindAsync(context.UserName, context.Password);
@@ -70,13 +68,6 @@ namespace Api.App.Auth
                        IssuedUtc = DateTime.UtcNow,
                        ExpiresUtc = DateTime.UtcNow.Add(tokenExpirationTime)
                    };
-        }
-
-        private void EnableCors(OAuthGrantResourceOwnerCredentialsContext context)
-        {
-            var allowedClientOrigin = context.OwinContext.Get<string>("as:clientAllowedOrigin") ?? allowedOrigin;
-
-            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] {allowedClientOrigin});
         }
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)

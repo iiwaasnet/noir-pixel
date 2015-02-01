@@ -23,7 +23,7 @@ namespace Api
 
             app.ConfigureAuth();
             app.UseWebApi(config);
-            app.UseCors(CorsOptions.AllowAll);
+            app.UseCors(new CorsOptions());
         }
     }
 }
