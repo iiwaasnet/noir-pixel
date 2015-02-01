@@ -10,6 +10,7 @@
         var ctrl = this;
         ctrl.countries = $filter('orderBy')(countries.data, 'name');
         ctrl.country = undefined;
+        ctrl.city = undefined;
         ctrl.save = save;
         ctrl.imageUpload = getImageUploadConfig();
         ctrl.profileData = profileData.data;
@@ -24,11 +25,19 @@
         }
 
         function deleteProfileImageSuccess() {
-            ctrl.profileData.publicInfo.profileImage = '';
+            ctrl.profileData.profileImage = '';
         }
 
         function save() {
+            debugger;
+            var countryCode = (countryCode = ctrl.country)
+                && (countryCode = countryCode.code);
 
+            Profile.updatePublicInfo({
+                userFullName: ctrl.profileData.user.fullName,
+                countryCode: countryCode,
+                city: ctrl.city
+            });
         }
 
         function refershProfileImage() {

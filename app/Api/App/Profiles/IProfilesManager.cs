@@ -8,5 +8,6 @@ namespace Api.App.Profiles
     {
         Task<UserProfile> GetUserProfile(string userName, bool includePrivateData);
         IEnumerable<Country> GetCountries();
+        void UpdatePublicInfo(string userName, ProfilePublicInfo publicInfo);
     }
 }

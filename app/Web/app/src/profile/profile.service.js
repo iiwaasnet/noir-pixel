@@ -11,7 +11,19 @@
         srv.getUserProfile = getUserProfile;
         srv.getOwnProfile = getOwnProfile;
         srv.deleteProfileImage = deleteProfileImage;
+        srv.updatePublicInfo = updatePublicInfo;
         srv.getCountries = getCountries;
+
+        function updatePublicInfo(publicInfo) {
+            var url = Url.build(Config.ApiUris.Base, Config.ApiUris.Profiles.UpdatePublicInfo);
+            return $http.post(url, {
+                userFullName: publicInfo.userFullName,
+                livesIn: {
+                    countryCode: publicInfo.countryCode,
+                    city: publicInfo.city
+                }
+            });
+        }
 
         function deleteProfileImage() {
             var deferred = $q.defer();
@@ -51,12 +63,12 @@
         }
 
         function getOwnProfile() {
-            var userData = User.getUserData() || {userName: ''};
+            var userData = User.getUserData() || { userName: '' };
 
             var deferred = $q.defer();
 
             getUserProfile(userData.userName).then(
-                function (response) { getProfileSuccess(response, deferred); },
+                function(response) { getProfileSuccess(response, deferred); },
                 function(reason) { getProfileError(reason, deferred); });
 
             return deferred.promise;

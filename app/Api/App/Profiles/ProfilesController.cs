@@ -66,6 +66,22 @@ namespace Api.App.Profiles
         }
 
         [HttpPost]
+        [Route("update-profile/public-info")]
+        public IHttpActionResult UpdatePublicInfo(ProfilePublicInfo publicInfo)
+        {
+            try
+            {
+                profilesManager.UpdatePublicInfo(User.Identity.Name, publicInfo);
+
+                return Ok();
+            }
+            catch (NotFoundException)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+        }
+
+        [HttpPost]
         [Route("update-profile-image")]
         public async Task<IHttpActionResult> UpdateProfileImage()
         {
@@ -79,7 +95,7 @@ namespace Api.App.Profiles
                     url.ThumbnailUrl = MakeAbsoluteUrl(url.ThumbnailUrl);
 
                     mediaManager.DeleteMediaFile(mediaUploadResult.FileName);
-                    
+
                     return Ok(url);
                 }
 
