@@ -160,6 +160,11 @@ namespace Api.App.Images
         {
             var profile = db.GetProfile(userName);
             DeleteProfileImages(profile.UserImage);
+
+            var collection = db.GetCollection<Profile>(Profile.CollectionName);
+            collection.Update(Query<Profile>.EQ(p => p.Id, profile.Id),
+                              Update<Profile>.Unset(p => p.UserImage))
+                      .LogCommandResult(logger);
         }
     }
 }

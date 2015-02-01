@@ -20,7 +20,11 @@
         activate();
 
         function deleteProfileImage() {
-            Profile.deleteProfileImage();
+            Profile.deleteProfileImage().then(deleteProfileImageSuccess);
+        }
+
+        function deleteProfileImageSuccess() {
+            ctrl.profileData.publicInfo.profileImage = '';
         }
 
         function save() {

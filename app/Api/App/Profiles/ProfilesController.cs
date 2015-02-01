@@ -2,7 +2,6 @@
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Cors;
 using Api.App.ApiBase;
 using Api.App.Exceptions;
 using Api.App.Images;
@@ -12,7 +11,6 @@ using Api.App.Profiles.Extensions;
 namespace Api.App.Profiles
 {
     [Authorize]
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
     [RoutePrefix("profiles")]
     public class ProfilesController : ApiBaseController
     {
