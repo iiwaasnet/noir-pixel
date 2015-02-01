@@ -12,6 +12,7 @@
     "ApiUris.Profiles.Profile": "profiles/{userName}",
     "ApiUris.Profiles.Countries": "profiles/countries",
     "ApiUris.Profiles.UpdateProfileImage": "profiles/update-profile-image",
+    "ApiUris.Profiles.DeleteProfileImage": "profiles/delete-profile-image",
 
     "Strings.InvalidationTimeout": "01:00:00",
     "Strings.VersionsUri": "/strings/versions",

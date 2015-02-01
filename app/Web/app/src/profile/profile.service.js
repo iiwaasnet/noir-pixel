@@ -10,7 +10,31 @@
         var srv = this;
         srv.getUserProfile = getUserProfile;
         srv.getOwnProfile = getOwnProfile;
+        srv.deleteProfileImage = deleteProfileImage;
         srv.getCountries = getCountries;
+
+        function deleteProfileImage() {
+            var deferred = $q.defer();
+
+            var url = Url.build(Config.ApiUris.Base, Config.ApiUris.Profiles.DeleteProfileImage);
+            $http.delete(url).then(
+                function(response) { deleteProfileImageSuccess(deferred); },
+                function(reason) { deleteProfileImageError(reason, deferred); });
+
+            return deferred.promise;
+        }
+
+        function deleteProfileImageSuccess(deferred) {
+            User.updateUserData({
+                thumbnail: ''
+            });
+
+            deferred.resolve();
+        }
+
+        function deleteProfileImageError(reason, deferred) {
+            deferred.reject(reason);
+        }
 
         function getUserProfile(userName) {
             if (userName) {

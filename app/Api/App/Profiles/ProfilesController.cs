@@ -2,6 +2,7 @@
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using Api.App.ApiBase;
 using Api.App.Exceptions;
 using Api.App.Images;
@@ -11,6 +12,7 @@ using Api.App.Profiles.Extensions;
 namespace Api.App.Profiles
 {
     [Authorize]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     [RoutePrefix("profiles")]
     public class ProfilesController : ApiBaseController
     {
@@ -74,7 +76,7 @@ namespace Api.App.Profiles
                 var mediaUploadResult = await mediaManager.ReceiveMediaChunk(Request, User.Identity.Name);
                 if (mediaUploadResult.Completed)
                 {
-                    var url = profileImageManager.SaveImageFile(User.Identity.Name, mediaUploadResult.FileName);
+                    var url = profileImageManager.SaveImage(User.Identity.Name, mediaUploadResult.FileName);
                     url.FullViewUrl = MakeAbsoluteUrl(url.FullViewUrl);
                     url.ThumbnailUrl = MakeAbsoluteUrl(url.ThumbnailUrl);
 
@@ -89,6 +91,15 @@ namespace Api.App.Profiles
             {
                 return ApiError(HttpStatusCode.NotAcceptable);
             }
+        }
+
+        [HttpDelete]
+        [Route("delete-profile-image")]
+        public IHttpActionResult DeleteProfileImage()
+        {
+            profileImageManager.DeleteImage(User.Identity.Name);
+
+            return Ok();
         }
     }
 }

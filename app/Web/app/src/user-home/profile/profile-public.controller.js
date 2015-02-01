@@ -11,20 +11,20 @@
         ctrl.countries = $filter('orderBy')(countries.data, 'name');
         ctrl.country = undefined;
         ctrl.save = save;
-        ctrl.upload = getUploadConfig();
+        ctrl.imageUpload = getImageUploadConfig();
         ctrl.profileData = profileData.data;
         ctrl.refershProfileImage = refershProfileImage;
+        ctrl.deleteProfileImage = deleteProfileImage;
         var unsubscribe;
 
         activate();
 
-        function save() {
-
+        function deleteProfileImage() {
+            Profile.deleteProfileImage();
         }
 
-        function activate() {
-            $scope.$on('$destroy', cleanup);
-            unsubscribe = $rootScope.$on('$stateChangeStart', stateChangeStart);
+        function save() {
+
         }
 
         function refershProfileImage() {
@@ -44,7 +44,7 @@
             unsubscribe && unsubscribe();
         }
 
-        function getUploadConfig() {
+        function getImageUploadConfig() {
             var config = {
                 endpoint: Url.build(Config.ApiUris.Base, Config.ApiUris.Profiles.UpdateProfileImage),
                 description: Strings.getLocalizedString('ProfilePublic_ProfilePhotoDescription')
@@ -52,5 +52,11 @@
             };
             return config;
         }
+
+        function activate() {
+            $scope.$on('$destroy', cleanup);
+            unsubscribe = $rootScope.$on('$stateChangeStart', stateChangeStart);
+        }
+
     }
 })();

@@ -17,7 +17,8 @@
             Profiles: {
                 Profile: '@@ApiUris.Profiles.Profile',
                 Countries: '@@ApiUris.Profiles.Countries',
-                UpdateProfileImage: '@@ApiUris.Profiles.UpdateProfileImage'
+                UpdateProfileImage: '@@ApiUris.Profiles.UpdateProfileImage',
+                DeleteProfileImage: '@@ApiUris.Profiles.DeleteProfileImage'
             },
         },
         Profiles: {

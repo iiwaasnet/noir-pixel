@@ -52,13 +52,13 @@
             var obj = {};
             userData = userData || {};
 
-            if (userData.userName) {
+            if (userData.userName !== undefined) {
                 obj.userName = userData.userName;
             }
-            if (userData.thumbnail) {
+            if (userData.thumbnail !== undefined) {
                 obj.thumbnail = userData.thumbnail;
             }
-            if (userData.fullName) {
+            if (userData.fullName !== undefined) {
                 obj.fullName = userData.fullName;
             }
             if (userData.roles && userData.roles instanceof Array) {

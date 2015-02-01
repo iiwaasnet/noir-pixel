@@ -2,7 +2,6 @@
 using System.IO;
 using Api.App.Db;
 using Api.App.Db.Extensions;
-using Api.App.Framework;
 using Api.App.Images.Config;
 using Api.App.Images.Entities;
 using Api.App.Media;
@@ -39,7 +38,7 @@ namespace Api.App.Images
             db = appDbProvider.GetDatabase();
         }
 
-        public ProfileImage SaveImageFile(string userName, string fileName)
+        public ProfileImage SaveImage(string userName, string fileName)
         {
             var profile = db.GetProfile(userName);
             var currentProfileImage = profile.UserImage;
@@ -70,7 +69,7 @@ namespace Api.App.Images
                               Update<Profile>.Set(p => p.UserImage, profileImage))
                       .LogCommandResult(logger);
 
-            DeletePreviousProfileImages(currentProfileImage);
+            DeleteProfileImages(currentProfileImage);
 
             return new ProfileImage
                    {
@@ -116,7 +115,7 @@ namespace Api.App.Images
             }
         }
 
-        private void DeletePreviousProfileImages(Entities.ProfileImage profileImage)
+        private void DeleteProfileImages(Entities.ProfileImage profileImage)
         {
             try
             {
@@ -159,12 +158,8 @@ namespace Api.App.Images
 
         public void DeleteImage(string userName)
         {
-            throw new NotImplementedException();
-        }
-
-        public int ThumbnailSize()
-        {
-            return config.ProfileImages.ThumbnailSize;
+            var profile = db.GetProfile(userName);
+            DeleteProfileImages(profile.UserImage);
         }
     }
 }

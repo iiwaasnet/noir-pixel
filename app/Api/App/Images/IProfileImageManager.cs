@@ -2,9 +2,8 @@
 {
     public interface IProfileImageManager
     {
-        ProfileImage SaveImageFile(string userName, string fileName);
-        ProfileImage SaveThumbnailLink(string userName, string url);
+        ProfileImage SaveImage(string userName, string fileName);
         void DeleteImage(string userName);
-        int ThumbnailSize();
+        ProfileImage SaveThumbnailLink(string userName, string url);
     }
 }

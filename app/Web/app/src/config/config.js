@@ -17,7 +17,8 @@
             Profiles: {
                 Profile: 'profiles/{userName}',
                 Countries: 'profiles/countries',
-                UpdateProfileImage: 'profiles/update-profile-image'
+                UpdateProfileImage: 'profiles/update-profile-image',
+                DeleteProfileImage: 'profiles/delete-profile-image'
             },
         },
         Profiles: {

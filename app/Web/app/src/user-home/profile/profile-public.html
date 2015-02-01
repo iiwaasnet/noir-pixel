@@ -29,7 +29,7 @@
             <div class="profile-image">
                 <div class="edit-label" np-i18n="Label_ProfilePhoto"></div>
                 <div class="image-actions"
-                     flow-init="{target: publicCtrl.upload.endpoint, withCredentials: true}"
+                     flow-init="{target: publicCtrl.imageUpload.endpoint, withCredentials: true}"
                      flow-complete="publicCtrl.refershProfileImage()"
                      flow-files-submitted="$flow.upload()">
                     <div flow-btn
@@ -38,11 +38,13 @@
                         <span class="image"></span>
                     </div>
                     <img ng-src="{{publicCtrl.profileData.publicInfo.profileImage}}" ng-if="publicCtrl.profileData.publicInfo.profileImage" class="image" />
-                    <div ng-if="publicCtrl.profileData.publicInfo.profileImage" class="action delete">
+                    <div ng-if="publicCtrl.profileData.publicInfo.profileImage" 
+                         class="action delete"
+                         ng-click="publicCtrl.deleteProfileImage()">
                         <span class="image"></span>
                     </div>
                 </div>
-                <div class="description">{{::publicCtrl.upload.description}}</div>
+                <div class="description">{{::publicCtrl.imageUpload.description}}</div>
             </div>
         </div>
     </div>
