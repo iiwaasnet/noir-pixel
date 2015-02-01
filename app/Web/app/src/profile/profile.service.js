@@ -40,7 +40,7 @@
 
         function getProfileSuccess(response, deferred) {
             User.updateUserData({
-                thumbnail: response.data.publicInfo.thumbnail,
+                thumbnail: response.data.publicInfo.profileImageThumbnail,
                 fullName: response.data.user.fullName
             });
 

@@ -65,6 +65,10 @@
             ctrl.login.authenticated = Auth.authenticated();
         }
 
+        function profileUpdated() {
+            ctrl.login.profileThumbnail = User.getUserData().thumbnail;
+        }
+
         function getProfile() {
             var userName = User.getUserData().userName;
             Profile.getOwnProfile(userName).then(getProfileSuccess, getProfileError);
@@ -97,10 +101,12 @@
 
             EventsHub.addListener(EventsHub.events.Auth.SignedIn, signedIn);
             EventsHub.addListener(EventsHub.events.Auth.SignedOut, signedOut);
+            EventsHub.addListener(EventsHub.events.Profile.Updated, profileUpdated);
 
             $scope.$on('$destroy', function() {
                 EventsHub.removeListener(EventsHub.events.Auth.SignedIn, signedIn);
                 EventsHub.removeListener(EventsHub.events.Auth.SignedOut, signedOut);
+                EventsHub.removeListener(EventsHub.events.Profile.Updated, profileUpdated);
             });
         }
     }
