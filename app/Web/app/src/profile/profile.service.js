@@ -12,7 +12,6 @@
         srv.getOwnProfile = getOwnProfile;
         srv.deleteProfileImage = deleteProfileImage;
         srv.updatePublicInfo = updatePublicInfo;
-        srv.getCountries = getCountries;
 
         function updatePublicInfo(publicInfo) {
             var url = Url.build(Config.ApiUris.Base, Config.ApiUris.Profiles.UpdatePublicInfo);
@@ -55,11 +54,6 @@
             }
 
             return $q.reject();
-        }
-
-        function getCountries() {
-            var url = Url.build(Config.ApiUris.Base, Config.ApiUris.Profiles.Countries);
-            return $http.get(url);
         }
 
         function getOwnProfile() {

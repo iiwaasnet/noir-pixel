@@ -1,13 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Api.App.Profiles.Entities;
+﻿using System.Threading.Tasks;
 
 namespace Api.App.Profiles
 {
     public interface IProfilesManager
     {
         Task<UserProfile> GetUserProfile(string userName, bool includePrivateData);
-        IEnumerable<Country> GetCountries();
         void UpdatePublicInfo(string userName, ProfilePublicInfo publicInfo);
     }
 }

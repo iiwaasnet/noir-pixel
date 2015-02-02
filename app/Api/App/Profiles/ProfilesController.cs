@@ -48,14 +48,6 @@ namespace Api.App.Profiles
             }
         }
 
-        //TODO: Think of another controller for such data
-        [Route("countries")]
-        [AllowAnonymous]
-        public IHttpActionResult GetCountries()
-        {
-            return Ok(profilesManager.GetCountries());
-        }
-
         [HttpGet]
         [Route("update-profile-image")]
         public IHttpActionResult CheckProfileImagePart()

@@ -9,11 +9,15 @@
     function profilePublicController($rootScope, $scope, $filter, States, Url, Config, Strings, Profile, profileData, countries) {
         var ctrl = this;
         ctrl.countries = $filter('orderBy')(countries.data, 'name');
-        ctrl.country = {
-            code: profileData.data.publicInfo.livesIn.countryCode,
-            name: 'Ukraine'
-        };
-        ctrl.city = profileData.data.publicInfo.livesIn.city;
+        ctrl.country = undefined;
+        ctrl.city = undefined;
+        if (profileData.data.publicInfo.livesIn) {
+            ctrl.country = {
+                code: profileData.data.publicInfo.livesIn.countryCode,
+                name: profileData.data.publicInfo.livesIn.country
+            };
+            ctrl.city = profileData.data.publicInfo.livesIn.city;
+        }
         ctrl.save = save;
         ctrl.imageUpload = getImageUploadConfig();
         ctrl.profileData = profileData.data.publicInfo;

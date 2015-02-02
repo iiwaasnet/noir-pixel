@@ -1,6 +1,6 @@
 ﻿using Api.App.Entities;
 
-namespace Api.App.Profiles.Entities
+namespace Api.App.Geo.Entities
 {
     public class Country: Entity
     {

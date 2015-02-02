@@ -21,6 +21,9 @@
                 DeleteProfileImage: '@@ApiUris.Profiles.DeleteProfileImage',
                 UpdatePublicInfo: '@@ApiUris.Profiles.UpdatePublicInfo'
             },
+            Geo: {
+                Countries: '@@ApiUris.Geo.Countries'
+            }
         },
         Profiles: {
             Image: {

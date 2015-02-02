@@ -280,6 +280,12 @@
     <Compile Include="App\Framework\SUIDGenerator.cs" />
     <Compile Include="App\ApiBase\HttpContextDependencyProvider.cs" />
     <Compile Include="App\ApiBase\IHttpContextDependencyProvider.cs" />
+    <Compile Include="App\Geo\Country.cs" />
+    <Compile Include="App\Geo\Entities\Country.cs" />
+    <Compile Include="App\Geo\GeoController.cs" />
+    <Compile Include="App\Geo\GeoManager.cs" />
+    <Compile Include="App\Geo\GeoModule.cs" />
+    <Compile Include="App\Geo\IGeoManager.cs" />
     <Compile Include="App\Images\Config\Dimensions.cs" />
     <Compile Include="App\Images\Config\ImagesConfiguration.cs" />
     <Compile Include="App\Images\Config\PhotosConfiguration.cs" />
@@ -316,7 +322,6 @@
     <Compile Include="App\Posts\PostsModule.cs" />
     <Compile Include="App\Posts\Reply.cs" />
     <Compile Include="App\Posts\WallPosts.cs" />
-    <Compile Include="App\Profiles\Entities\Country.cs" />
     <Compile Include="App\Profiles\Entities\UserReference.cs" />
     <Compile Include="App\Profiles\Extensions\IdentityExtensions.cs" />
     <Compile Include="App\Profiles\Entities\Geo.cs" />

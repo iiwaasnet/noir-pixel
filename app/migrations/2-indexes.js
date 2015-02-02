@@ -1,4 +1,4 @@
-module.exports.id = "indexes";
+module.exports.id = "2-indexes";
 
 module.exports.up = function (done) {
  var profiles = this.db.collection('countries');

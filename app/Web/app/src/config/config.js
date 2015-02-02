@@ -21,6 +21,9 @@
                 DeleteProfileImage: 'profiles/delete-profile-image',
                 UpdatePublicInfo: 'profiles/update-profile/public-info'
             },
+            Geo: {
+                Countries: 'geo/countries'
+            }
         },
         Profiles: {
             Image: {

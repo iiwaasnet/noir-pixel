@@ -23,11 +23,12 @@
                 resolve: {
                     viewResolver: 'ViewResolver',
                     profile: 'Profile',
+                    geo: 'Geo',
                     profileData: function (profile) {
                          return profile.getOwnProfile();
                     },
-                    countries: function(profile) {
-                        return profile.getCountries();
+                    countries: function (geo) {
+                        return geo.getCountries();
                     }
                 }
             })
