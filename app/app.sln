@@ -44,6 +44,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "mongo-migrations", "mongo-migrations", "{7784DEED-E021-486F-86EC-6A129D19F64A}"
 	ProjectSection(SolutionItems) = preProject
 		migrations\1-indexes.js = migrations\1-indexes.js
+		migrations\2-indexes.js = migrations\2-indexes.js
 	EndProjectSection
 EndProject
 Global
