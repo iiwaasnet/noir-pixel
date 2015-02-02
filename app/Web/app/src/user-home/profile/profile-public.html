@@ -9,7 +9,7 @@
             <div class="edit-block">
                 <span class="edit-label" np-i18n="Label_WhereDoYouLive"></span>
                 <div class="selectbox-wrapper country-select">
-                    <ui-select ng-model="publicCtrl.country"
+                    <ui-select ng-model="publicCtrl.livesIn.country"
                                theme="selectize"
                                reset-search-input="true">
                         <ui-select-match placeholder="{{'Hint_Country' | npi18n}}">{{$select.selected.name}}</ui-select-match>
@@ -20,7 +20,7 @@
                         </ui-select-choices>
                     </ui-select>
                 </div>
-                <input type="text" ng-model="publicCtrl.city" placeholder="{{'Hint_City' | npi18n}}" class="city" />
+                <input type="text" ng-model="publicCtrl.livesIn.city" placeholder="{{'Hint_City' | npi18n}}" class="city" />
             </div>
 
             <input type="button" class="save" np-i18n="Btn_Save" ng-click="publicCtrl.save()" />

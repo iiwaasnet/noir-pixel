@@ -9,15 +9,7 @@
     function profilePublicController($rootScope, $scope, $filter, States, Url, Config, Strings, Profile, profileData, countries) {
         var ctrl = this;
         ctrl.countries = $filter('orderBy')(countries.data, 'name');
-        ctrl.country = undefined;
-        ctrl.city = undefined;
-        if (profileData.data.publicInfo.livesIn) {
-            ctrl.country = {
-                code: profileData.data.publicInfo.livesIn.countryCode,
-                name: profileData.data.publicInfo.livesIn.country
-            };
-            ctrl.city = profileData.data.publicInfo.livesIn.city;
-        }
+        ctrl.livesIn = getLivesIn();
         ctrl.save = save;
         ctrl.imageUpload = getImageUploadConfig();
         ctrl.profileData = profileData.data.publicInfo;
@@ -36,13 +28,10 @@
         }
 
         function save() {
-            var countryCode = (countryCode = ctrl.country)
-                && (countryCode = countryCode.code);
-
             Profile.updatePublicInfo({
                 userFullName: ctrl.profileData.user.fullName,
-                countryCode: countryCode,
-                city: ctrl.city
+                countryCode: ctrl.livesIn.country.code,
+                city: ctrl.livesIn.city
             });
         }
 
@@ -70,6 +59,22 @@
                     .format(Config.Profiles.Image.FullViewSize, Config.Profiles.Image.MaxFileSize)
             };
             return config;
+        }
+
+        function getLivesIn() {
+            var livesIn = {
+                city: undefined,
+                country: {
+                    code: undefined,
+                    name: undefined
+                }
+            };
+            if (profileData.data.publicInfo.livesIn) {
+                livesIn.city = profileData.data.publicInfo.livesIn.city;
+                livesIn.country.code = profileData.data.publicInfo.livesIn.countryCode;
+                livesIn.country.name = profileData.data.publicInfo.livesIn.country;
+            }
+            return livesIn;
         }
 
         function activate() {
