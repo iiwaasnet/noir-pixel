@@ -17,7 +17,7 @@
         }
 
         function createTabs() {
-            var params = { userName: profileData.data.user.userName };
+            var params = { userName: profileData.data.publicInfo.user.userName };
 
             ctrl.tabs.push({
                 state: States.UserHome.Profile.Public.Name,

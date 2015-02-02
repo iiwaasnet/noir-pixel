@@ -41,13 +41,13 @@ namespace Api.App.Profiles
 
             var userProfile = new UserProfile
                               {
-                                  User = new UserReference
-                                         {
-                                             UserName = profile.UserName,
-                                             FullName = profile.FullName
-                                         },
                                   PublicInfo = new UserPublicInfo
                                                {
+                                                   User = new UserReference
+                                                          {
+                                                              UserName = profile.UserName,
+                                                              FullName = profile.FullName
+                                                          },
                                                    DateRegistered = profile.DateRegistered,
                                                    LivesIn = (profile.LivesIn != null)
                                                                  ? new Geo
@@ -76,7 +76,8 @@ namespace Api.App.Profiles
                          {
                              Query = Query<Profile>.EQ(p => p.UserName, userName),
                              Update = Update<Profile>.Combine(Update<Profile>.Set(p => p.FullName, publicInfo.UserFullName),
-                                                              Update<Profile>.Set(p => p.LivesIn, new Entities.Geo()))
+                                                              Update<Profile>.Set(p => p.LivesIn.CountryCode, publicInfo.LivesIn.CountryCode),
+                                                              Update<Profile>.Set(p => p.LivesIn.City, publicInfo.LivesIn.City))
                          };
             collection.FindAndModify(update);
         }

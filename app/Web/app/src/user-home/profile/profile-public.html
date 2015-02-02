@@ -34,11 +34,11 @@
                      flow-files-submitted="$flow.upload()">
                     <div flow-btn
                          class="action add"
-                         ng-class="{'only': !publicCtrl.profileData.publicInfo.profileImage}">
+                         ng-class="{'only': !publicCtrl.profileData.profileImage}">
                         <span class="image"></span>
                     </div>
-                    <img ng-src="{{publicCtrl.profileData.profileImage}}" ng-if="publicCtrl.profileData.publicInfo.profileImage" class="image" />
-                    <div ng-if="publicCtrl.profileData.publicInfo.profileImage"
+                    <img ng-src="{{publicCtrl.profileData.profileImage}}" ng-if="publicCtrl.profileData.profileImage" class="image" />
+                    <div ng-if="publicCtrl.profileData.profileImage"
                          class="action delete"
                          ng-click="publicCtrl.deleteProfileImage()">
                         <span class="image"></span>

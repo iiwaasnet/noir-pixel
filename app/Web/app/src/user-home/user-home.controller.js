@@ -13,8 +13,8 @@
         activate();
 
         function activate() {
-            ctrl.user.userName = profileData.data.user.userName;
-            ctrl.user.displayName = profileData.data.user.fullName || ctrl.user.userName;
+            ctrl.user.userName = profileData.data.publicInfo.user.userName;
+            ctrl.user.displayName = profileData.data.publicInfo.user.fullName || ctrl.user.userName;
         }
     }
 })();

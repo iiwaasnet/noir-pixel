@@ -5,6 +5,7 @@ namespace Api.App.Profiles
 {
     public class UserPublicInfo
     {
+        public UserReference User { get; set; }
         public Geo LivesIn { get; set; }
         public DateTime DateRegistered { get; set; }
         public IEnumerable<string> AboutMe { get; set; }

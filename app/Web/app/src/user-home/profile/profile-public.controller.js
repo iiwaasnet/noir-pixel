@@ -9,11 +9,14 @@
     function profilePublicController($rootScope, $scope, $filter, States, Url, Config, Strings, Profile, profileData, countries) {
         var ctrl = this;
         ctrl.countries = $filter('orderBy')(countries.data, 'name');
-        ctrl.country = undefined;
-        ctrl.city = undefined;
+        ctrl.country = {
+            code: profileData.data.publicInfo.livesIn.countryCode,
+            name: 'Ukraine'
+        };
+        ctrl.city = profileData.data.publicInfo.livesIn.city;
         ctrl.save = save;
         ctrl.imageUpload = getImageUploadConfig();
-        ctrl.profileData = profileData.data;
+        ctrl.profileData = profileData.data.publicInfo;
         ctrl.refershProfileImage = refershProfileImage;
         ctrl.deleteProfileImage = deleteProfileImage;
         var unsubscribe;
@@ -29,7 +32,6 @@
         }
 
         function save() {
-            debugger;
             var countryCode = (countryCode = ctrl.country)
                 && (countryCode = countryCode.code);
 
@@ -45,7 +47,7 @@
         }
 
         function getProfileSuccess(response) {
-            ctrl.profileData.publicInfo.profileImage = response.data.publicInfo.profileImage;
+            ctrl.profileData.profileImage = response.data.publicInfo.profileImage;
         }
 
         function stateChangeStart(event, toState, toParams, fromState, fromParams) {
