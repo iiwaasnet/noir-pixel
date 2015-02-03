@@ -28,7 +28,6 @@
         }
 
         function error() {
-            Progress.start();
         }
 
         function message() {

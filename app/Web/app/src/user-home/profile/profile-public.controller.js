@@ -4,9 +4,9 @@
     angular.module('np.user-home')
         .controller('ProfilePublicController', profilePublicController);
 
-    profilePublicController.$inject = ['$rootScope', '$scope', '$filter', 'States', 'Url', 'Config', 'Strings', 'Profile', 'profileData', 'countries'];
+    profilePublicController.$inject = ['$rootScope', '$scope', '$filter', 'States', 'Url', 'Config', 'Strings', 'Profile', 'Progress', 'profileData', 'countries'];
 
-    function profilePublicController($rootScope, $scope, $filter, States, Url, Config, Strings, Profile, profileData, countries) {
+    function profilePublicController($rootScope, $scope, $filter, States, Url, Config, Strings, Profile, Progress, profileData, countries) {
         var ctrl = this;
         ctrl.countries = $filter('orderBy')(countries.data, 'name');
         ctrl.livesIn = getLivesIn();

@@ -51,7 +51,7 @@
         }
 
         function registerExternalError(error) {
-            var parsed = Validation.tryParseError(error);
+            var parsed = Validation.tryParseError(error.data);
 
             Messages.error({ main: { code: parsed.errorCode } }, parsed.placeholders, EAPI_Auth_RegistrationError);
         }

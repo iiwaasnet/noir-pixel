@@ -18,7 +18,6 @@
 
         function open() {
             if (!ui) {
-                Progress.start();
                 Auth.getAvailableLogins().then(getAvailableLoginsSuccess, getAvailableLoginsError);
             }
         }
@@ -35,16 +34,7 @@
         }
 
         function registerExternal(externalLogin, userName) {
-            Progress.start();
-
-            return Auth.registerExternal(externalLogin, userName)
-                .then(registerExternalSuccess, registerExternalError);
-        }
-
-        function registerExternalError(error) {
-            Progress.stop();
-
-            return $q.reject(error.data);
+            return Auth.registerExternal(externalLogin, userName);
         }
 
         function finalizeSigninFailed(error) {
@@ -63,15 +53,8 @@
         }
 
         function getLocalToken(externalLogin) {
-            Progress.start();
             return Auth.getLocalToken(externalLogin)
                 .then(getLocalTokenSuccess, getLocalTokenFailed);
-        }
-
-        function registerExternalSuccess(response) {
-            Progress.stop();
-
-            return response;
         }
 
         function getAvailableLoginsSuccess(response) {
@@ -86,8 +69,6 @@
                     loginOptions: response
                 }
             });
-
-            Progress.stop();
         }
 
         function onUIClose() {
@@ -95,18 +76,14 @@
         }
 
         function getAvailableLoginsError(error) {
-            Progress.stop();
             Messages.error(error);
         }
 
         function getLocalTokenSuccess(response) {
-            Progress.stop();
-
             return response;
         }
 
         function getLocalTokenFailed(error) {
-            Progress.stop();
             ApplicationLogging.error(error);
 
             return $q.reject(error);
