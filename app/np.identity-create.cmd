@@ -1,1 +1,1 @@
-.\node_modules\.bin\mm create %1% --config=np-identity-config.json
+.\node_modules\.bin\mm create %1% --config=np.identity-config.json

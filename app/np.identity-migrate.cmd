@@ -1,1 +1,1 @@
-.\node_modules\.bin\mm migrate  --config=np-identity-config.json
+.\node_modules\.bin\mm migrate  --config=np.identity-config.json
