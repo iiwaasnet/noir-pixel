@@ -4,9 +4,9 @@
     angular.module('np.auth')
         .service('Signin', signinService);
 
-    signinService.$inject = ['$q', '$window', 'Auth', 'ngDialog', 'Progress', 'Messages', 'ApplicationLogging'];
+    signinService.$inject = ['$q', '$window', 'Auth', 'ngDialog', 'Messages', 'ApplicationLogging'];
 
-    function signinService($q, $window, Auth, ngDialog, Progress, Messages, ApplicationLogging) {
+    function signinService($q, $window, Auth, ngDialog, Messages, ApplicationLogging) {
         var srv = this,
             ui = undefined;
         srv.open = open;

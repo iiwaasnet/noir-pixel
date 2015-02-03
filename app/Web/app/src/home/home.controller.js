@@ -4,9 +4,9 @@
     angular.module('np.home')
         .controller('HomeController', homeController);
 
-    homeController.$inject = ['$http', 'Messages', 'Progress', 'Url', 'Config'];
+    homeController.$inject = ['$http', 'Messages', 'Url', 'Config'];
 
-    function homeController($http, Messages, Progress, Url, Config) {
+    function homeController($http, Messages, Url, Config) {
         var ctrl = this;
         ctrl.error = error;
         ctrl.message = message;
