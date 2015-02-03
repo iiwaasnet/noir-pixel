@@ -3,5 +3,5 @@
 	"port": 27017,
 	"db": "np",
 	"collection": "sys.migrations",
-	"directory": "migrations"
+	"directory": "migrations\\np"
 }
