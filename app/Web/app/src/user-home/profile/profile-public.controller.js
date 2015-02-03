@@ -13,7 +13,8 @@
         ctrl.save = save;
         ctrl.imageUpload = getImageUploadConfig();
         ctrl.profileData = profileData.data.publicInfo;
-        ctrl.refershProfileImage = refershProfileImage;
+        ctrl.uploadProfileImage = uploadProfileImage;
+        ctrl.refreshProfileImage = refreshProfileImage;
         ctrl.deleteProfileImage = deleteProfileImage;
         var unsubscribe;
 
@@ -35,7 +36,12 @@
             });
         }
 
-        function refershProfileImage() {
+        function uploadProfileImage() {
+            Progress.start();
+        }
+
+        function refreshProfileImage() {
+            Progress.stop();
             Profile.getOwnProfile().then(getProfileSuccess);
         }
 
