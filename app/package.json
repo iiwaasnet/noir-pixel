@@ -11,7 +11,8 @@
     "grunt-replace": "^0.8.0",
     "grunt-spritesmith": "^2.20.0",
     "jshint-stylish": "^1.0.0",
-    "jshint-teamcity": "^1.0.6"
+    "jshint-teamcity": "^1.0.6",
+    "mongodb-migrations": "https://github.com/iiwaasnet/mongodb-migrations/tarball/develop"
   },
   "dependencies": {
     "grunt": "^0.4.5",
