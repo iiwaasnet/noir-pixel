@@ -235,6 +235,9 @@
     <Content Include="app\less\column-layout.css">
       <DependentUpon>column-layout.less</DependentUpon>
     </Content>
+    <Content Include="app\less\common.css">
+      <DependentUpon>common.less</DependentUpon>
+    </Content>
     <Content Include="app\less\dialogs\dialog-theme-contextmenu.css">
       <DependentUpon>dialog-theme-contextmenu.less</DependentUpon>
     </Content>
@@ -279,6 +282,9 @@
     </Content>
     <Content Include="app\less\images.css">
       <DependentUpon>images.less</DependentUpon>
+    </Content>
+    <Content Include="app\less\inline-buttons.css">
+      <DependentUpon>inline-buttons.less</DependentUpon>
     </Content>
     <Content Include="app\less\links.css">
       <DependentUpon>links.less</DependentUpon>
@@ -356,6 +362,14 @@
     <Content Include="app\less\ui-select\plugins\remove_button.css.map">
       <DependentUpon>remove_button.css</DependentUpon>
     </Content>
+    <Content Include="app\less\inline-buttons.less" />
+    <Content Include="app\less\inline-buttons.css.map">
+      <DependentUpon>inline-buttons.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\common.less" />
+    <Content Include="app\less\common.css.map">
+      <DependentUpon>common.css</DependentUpon>
+    </Content>
     <None Include="app\less\ui-select\select.less" />
     <Content Include="app\less\ui-select\select.css">
       <DependentUpon>select.less</DependentUpon>
@@ -382,6 +396,8 @@
     <Content Include="app\src\roles\roles.module.js" />
     <Content Include="app\src\roles\roles.service.js" />
     <Content Include="app\src\ui-elements\autofocus\np-autofocus.directive.js" />
+    <Content Include="app\src\ui-elements\inplace\inplace-buttons.html" />
+    <Content Include="app\src\ui-elements\inplace\np-inplace-buttons.directive.js" />
     <Content Include="app\src\ui-elements\user-thumbnail\np-user-thumbnail.directive.js" />
     <Content Include="app\src\ui-elements\tabs\np-tab.directive.js" />
     <Content Include="app\src\ui-elements\tabs\np-tabs.directive.js" />

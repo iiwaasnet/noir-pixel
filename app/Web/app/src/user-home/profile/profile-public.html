@@ -39,10 +39,13 @@
                         <span class="image"></span>
                     </div>
                     <img ng-src="{{publicCtrl.profileData.profileImage}}" ng-if="publicCtrl.profileData.profileImage" class="image" />
-                    <div ng-if="publicCtrl.profileData.profileImage"
+                    <div np-inplace-buttons
+                         inplace-buttons-yes="publicCtrl.deleteProfileImage()"
                          class="action delete"
-                         ng-click="publicCtrl.deleteProfileImage()">
-                        <span class="image"></span>
+                         ng-if="publicCtrl.profileData.profileImage">
+                        <div>
+                            <span class="image"></span>
+                        </div>
                     </div>
                 </div>
                 <div class="description">{{::publicCtrl.imageUpload.description}}</div>
