@@ -18,7 +18,7 @@
         return dir;
 
         function link(scope, element) {
-            var transcluded = angular.element(element[0].('ng-transclude')[0]);
+            var transcluded = angular.element(element[0].querySelector('[ng-transclude]'));
             var inlineButtons = angular.element(element[0].getElementsByClassName('inline-buttons'));
             transcluded.on('click', onClick);
 
