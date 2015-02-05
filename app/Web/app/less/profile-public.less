@@ -6,6 +6,29 @@
 @action-image-size: 32px;
 @add-to-delete-ratio: 0.6;
 
+.action-mixin {
+    width: 100%;
+    height: 100%;
+    background-color: @mine-shaft;
+    opacity: 0.2;
+    cursor: pointer;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+
+    &:hover {
+        opacity: 0.85;
+        border: solid 1px @bianca;
+    }
+
+    .image {
+        display: inline-block;
+        opacity: 1;
+        position: absolute;
+        left: @profile-image-size / 2 - @action-image-size / 2;
+    }
+}
+
 #profile-public {
     .full-name {
         width: 100%;
@@ -47,12 +70,6 @@
     }
 
     .profile-image {
-
-
-        .action:last-of-type {
-            margin: 0.5em 0 0 4em;
-        }
-
         .description {
             margin: 2em 0 0;
             opacity: 0.5;
@@ -71,60 +88,50 @@
                 height: @profile-image-size;
             }
 
-            .action {
+
+            .add {
                 position: absolute;
                 width: 100%;
-                background-color: @mine-shaft;
-                opacity: 0.2;
-                cursor: pointer;
-                -moz-box-sizing: border-box;
-                -webkit-box-sizing: border-box;
-                box-sizing: border-box;
+                top: 0;
+                right: 0;
+                height: @profile-image-size * @add-to-delete-ratio;
 
-                &:hover {
-                    opacity: 0.85;
-                    border: solid 1px @bianca;
+                .action{
+                    .action-mixin;
                 }
 
                 .image {
-                    display: inline-block;
-                    opacity: 1;
-                    position: absolute;
-                    left: @profile-image-size / 2 - @action-image-size / 2;
+                    .sprite(@camera32);
+                    top: @profile-image-size * @add-to-delete-ratio / 2 - @action-image-size / 2;
                 }
 
-                &.add {
-                    top: 0;
-                    right: 0;
-                    height: @profile-image-size * @add-to-delete-ratio;
+                &.only {
+                    bottom: 0;
+                    top: auto !important;
+                    height: 100% !important;
 
                     .image {
                         .sprite(@camera32);
-                        top: @profile-image-size * @add-to-delete-ratio / 2 - @action-image-size / 2;
-                    }
-
-                    &.only {
-                        bottom: 0;
-                        top: auto !important;
-                        height: 100% !important;
-
-                        .image {
-                            .sprite(@camera32);
-                            top: @profile-image-size / 2 - @action-image-size / 2 !important;
-                        }
+                        top: @profile-image-size / 2 - @action-image-size / 2 !important;
                     }
                 }
+            }
 
-                &.delete {
-                    bottom: 0;
-                    right: 0;
-                    height: @profile-image-size * (1 - @add-to-delete-ratio);
 
-                    .image {
-                        .sprite(@delete32);
-                        left: @profile-image-size / 2 - @action-image-size / 2;
-                        top: @profile-image-size * (1 - @add-to-delete-ratio) / 2 - @action-image-size / 2;
-                    }
+            .delete {
+                position: absolute;
+                width: 100%;
+                bottom: 0;
+                right: 0;
+                height: @profile-image-size * (1 - @add-to-delete-ratio);
+                .action{
+                    .action-mixin;
+                }
+
+                .image {
+                    .sprite(@delete32);
+                    left: @profile-image-size / 2 - @action-image-size / 2;
+                    top: @profile-image-size * (1 - @add-to-delete-ratio) / 2 - @action-image-size / 2;
                 }
             }
         }

@@ -225,4 +225,10 @@
   <data name="ProfilePublic_ProfilePhotoDescription" xml:space="preserve">
     <value>Your profile image will be resized and cropped to {0} pixels width and height. File size should not exceed {1} MB.</value>
   </data>
+  <data name="Btn_No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Btn_Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
 </root>

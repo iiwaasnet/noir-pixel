@@ -34,21 +34,23 @@
                      flow-complete="publicCtrl.refreshProfileImage()"
                      flow-files-submitted="$flow.upload()">
                     <div flow-btn
-                         class="action add"
+                         class="add"
                          ng-class="{'only': !publicCtrl.profileData.profileImage}">
-                        <span class="image"></span>
+                        <div class="action">
+                            <span class="image"></span>
+                        </div>
                     </div>
                     <img ng-src="{{publicCtrl.profileData.profileImage}}" ng-if="publicCtrl.profileData.profileImage" class="image" />
                     <div np-inplace-buttons
-                         inplace-buttons-yes="publicCtrl.deleteProfileImage()"
-                         class="action delete"
+                         inplace-button-yes="publicCtrl.deleteProfileImage()"
+                         class="delete"
                          ng-if="publicCtrl.profileData.profileImage">
-                        <div>
+                        <div class="action">
                             <span class="image"></span>
                         </div>
                     </div>
                 </div>
-                <div class="description">{{::publicCtrl.imageUpload.description}}</div>
+                <div class="description" ng-bind="::publicCtrl.imageUpload.description"></div>
             </div>
         </div>
     </div>
