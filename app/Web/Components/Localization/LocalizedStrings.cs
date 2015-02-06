@@ -20,7 +20,7 @@ namespace Web.Components.Localization
             return new LocalizedStringCollection
                    {
                        Locale = locale,
-                       Version = "1",
+                       Version = clientStringsProvider.GetCurrentVersion(),
                        Strings = clientStringsProvider
                            .GetLocalizedStrings(locale)
                            .Select(str => new LocalizedString {Key = str.Key, Value = str.Value})
@@ -37,6 +37,11 @@ namespace Web.Components.Localization
         {
             yield return DefaultLocale;
             yield return "ru";
+        }
+
+        public string GetCurrentVersion()
+        {
+            return clientStringsProvider.GetCurrentVersion();
         }
     }
 }

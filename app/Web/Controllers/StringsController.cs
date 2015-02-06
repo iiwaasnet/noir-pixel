@@ -56,9 +56,14 @@ namespace Web.Controllers
                    {
                        Data = new
                               {
-                                  Versions = localizedStrings.GetSupportedLocales()
-                                                             .Select(locale => new {Locale = locale, Version = "1"})
-                                                             .ToArray()
+                                  Versions = localizedStrings
+                           .GetSupportedLocales()
+                           .Select(locale => new
+                                             {
+                                                 Locale = locale,
+                                                 Version = localizedStrings.GetCurrentVersion()
+                                             })
+                           .ToArray()
                               }
                    };
         }
