@@ -4,7 +4,9 @@
     angular.module('np.ui-elements')
         .directive('npInplaceButtons', inplaceButtons);
 
-    function inplaceButtons() {
+    inplaceButtons.$inject = ['$document'];
+
+    function inplaceButtons($document) {
         var dir = {
             restrict: 'AE',
             templateUrl: '/app/src/ui-elements/inplace/inplace-buttons.html',
@@ -26,19 +28,24 @@
             var noButton = angular.element(element[0].querySelector('input.no'));
             yesButton.on('click', yesClick);
             noButton.on('click', noClick);
-            transcluded.on('click', onClick);
+            transcluded.on('click', actionClick);
 
-            function yesClick() {
+            function yesClick(e) {
+                e.stopPropagation();
+
                 if (dirScope.inplaceButtonYes && typeof (dirScope.inplaceButtonYes) == 'function') {
                     dirScope.inplaceButtonYes();
                 }
                 hideInlineButtons();
             }
-            function noClick() {
+            function noClick(e) {
+                e.stopPropagation();
+
                 hideInlineButtons();
             }
 
             function hideInlineButtons() {
+                $document.off('click', noClick);
                 transcluded.removeClass('hidden');
                 inlineButtonsContainer.addClass('hidden');
             }
@@ -46,14 +53,20 @@
             function showInlineButtons() {
                 transcluded.addClass('hidden');
                 inlineButtonsContainer.removeClass('hidden');
+                $document.on('click', noClick);
             }
 
-            function onClick() {
+            function actionClick(e) {
+                e.stopPropagation();
+
                 showInlineButtons();
             }
 
             function cleanup() {
-                transcluded.off('click', onClick);
+                yesButton.off('click', yesClick);
+                noButton.off('click', noClick);
+                transcluded.off('click', actionClick);
+                $document.off('click', noClick);
             }
         }
     }
