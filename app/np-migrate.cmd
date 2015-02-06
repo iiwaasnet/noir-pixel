@@ -1,1 +1,0 @@
-.\node_modules\.bin\mm migrate  --config=np-config.json
