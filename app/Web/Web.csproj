@@ -283,8 +283,8 @@
     <Content Include="app\less\images.css">
       <DependentUpon>images.less</DependentUpon>
     </Content>
-    <Content Include="app\less\inline-buttons.css">
-      <DependentUpon>inline-buttons.less</DependentUpon>
+    <Content Include="app\less\inplace-buttons.css">
+      <DependentUpon>inplace-buttons.less</DependentUpon>
     </Content>
     <Content Include="app\less\links.css">
       <DependentUpon>links.less</DependentUpon>
@@ -362,9 +362,9 @@
     <Content Include="app\less\ui-select\plugins\remove_button.css.map">
       <DependentUpon>remove_button.css</DependentUpon>
     </Content>
-    <Content Include="app\less\inline-buttons.less" />
-    <Content Include="app\less\inline-buttons.css.map">
-      <DependentUpon>inline-buttons.css</DependentUpon>
+    <Content Include="app\less\inplace-buttons.less" />
+    <Content Include="app\less\inplace-buttons.css.map">
+      <DependentUpon>inplace-buttons.css</DependentUpon>
     </Content>
     <Content Include="app\less\common.less" />
     <Content Include="app\less\common.css.map">
