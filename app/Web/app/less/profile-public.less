@@ -37,6 +37,13 @@
     input.save {
         width: 100%;
         margin: 5em 0 0;
+
+        &.default-action {
+            -moz-transition: background-color linear 0.5s;
+            -o-transition: background-color linear 0.5s;
+            -webkit-transition: background-color linear 0.5s;
+            transition: background-color linear 0.5s;
+        }
     }
 
     .country-select {
@@ -96,7 +103,7 @@
                 right: 0;
                 height: @profile-image-size * @add-to-delete-ratio;
 
-                .action{
+                .action {
                     .action-mixin;
                 }
 
@@ -124,7 +131,8 @@
                 bottom: 0;
                 right: 0;
                 height: @profile-image-size * (1 - @add-to-delete-ratio);
-                .action{
+
+                .action {
                     .action-mixin;
                 }
 

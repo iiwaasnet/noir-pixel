@@ -1,6 +1,6 @@
 ﻿<div id="profile-public">
     <div class="columns-container">
-        <div class="column-center">
+        <div class="column-center" ng-form="profilePublic">
             <div class="edit-block">
                 <span class="edit-label" np-i18n="Label_FullName"></span>
                 <input class="full-name" ng-model="publicCtrl.profileData.user.fullName" type="text" placeholder="{{'Hint_FullName' | npi18n}}" np-autofocus />
@@ -23,7 +23,7 @@
                 <input type="text" ng-model="publicCtrl.livesIn.city" placeholder="{{'Hint_City' | npi18n}}" class="city" />
             </div>
 
-            <input type="button" class="save default-action" np-i18n="Btn_Save" ng-click="publicCtrl.save()" />
+            <input type="button" ng-class="{'default-action': !profilePublic.$pristine}" class="save" np-i18n="Btn_Save" ng-click="publicCtrl.save()" />
         </div>
         <div class="column-right">
             <div class="profile-image">

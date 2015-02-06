@@ -30,10 +30,15 @@
 
         function save() {
             Profile.updatePublicInfo({
-                userFullName: ctrl.profileData.user.fullName,
-                countryCode: ctrl.livesIn.country.code,
-                city: ctrl.livesIn.city
-            });
+                    userFullName: ctrl.profileData.user.fullName,
+                    countryCode: ctrl.livesIn.country.code,
+                    city: ctrl.livesIn.city
+                })
+                .then(updatePublicInfoSuccess);
+        }
+
+        function updatePublicInfoSuccess() {
+            $scope.profilePublic.$setPristine();
         }
 
         function uploadProfileImage() {
