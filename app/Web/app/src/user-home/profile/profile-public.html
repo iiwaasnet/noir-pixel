@@ -27,10 +27,9 @@
             
             <div class="wall">
                 <div class="wall-header-container">
-                    <a ng-if="!publicCtrl.editingWallPost" class="add-wall-post dotted-hover" np-i18n="ProfilePublic_ShareAboutYourself" ng-click="publicCtrl.showWallPostEdit()"></a>
-                    <span ng-if="publicCtrl.editingWallPost" class="edit-label" np-i18n="ProfilePublic_ShareAboutYourself" ng-click="publicCtrl.showWallPostEdit()"></span>
+                    <a ng-if="!publicCtrl.editingWallPost" class="add-wall-post dotted-hover message" np-i18n="ProfilePublic_ShareAboutYourself" ng-click="publicCtrl.showWallPostEdit()"></a>
                 </div>
-                <textarea class="edit-post" ng-if="publicCtrl.editingWallPost"></textarea>
+                <textarea class="edit-post" ng-if="publicCtrl.editingWallPost" placeholder="{{'Hint_FullName' | npi18n}}" np-autofocus></textarea>
             </div>
         </div>
         <div class="column-right">

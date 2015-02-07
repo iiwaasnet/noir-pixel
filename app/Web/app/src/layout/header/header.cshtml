@@ -4,10 +4,10 @@
         <a class="dotted-hover" ng-repeat="menuItem in ::ctrl.mainMenu" ui-sref="{{::menuItem.uri}}" ng-bind="::menuItem.text"></a>
     </nav>
     <nav id="auth-menu" class="column-right">
-        <div ng-if="ctrl.login.authenticated === false" class="top-level sync-scale-in">
+        <div ng-if="ctrl.login.authenticated === false" class="top-level scale-in">
             <a class=" dotted-hover" ng-click="ctrl.signin()" np-i18n="AuthMenu_SignIn"></a>
         </div>
-        <div ng-if="ctrl.login.authenticated" class="sync-scale-in">
+        <div ng-if="ctrl.login.authenticated" class="scale-in">
             <div np-dropdown>
                 <np-user-thumbnail this-user image="{{ctrl.login.profileThumbnail}}" display-name="{{ctrl.login.userName}}"></np-user-thumbnail>
                 <div np-dropdown-toggle class="scale-in-out">
