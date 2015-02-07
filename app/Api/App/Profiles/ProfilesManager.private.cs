@@ -68,5 +68,19 @@ namespace Api.App.Profiles
                 throw new NotFoundException();
             }
         }
+
+        private Entities.Geo MapCountryName(ProfilePublicInfo publicInfo)
+        {
+            var country = geoManager.GetCountry(publicInfo.LivesIn.CountryCode);
+
+            var geo = new Entities.Geo { City = publicInfo.LivesIn.City };
+            if (country != null)
+            {
+                geo.CountryCode = country.Code;
+                geo.Country = country.Name;
+            }
+
+            return geo;
+        }
     }
 }

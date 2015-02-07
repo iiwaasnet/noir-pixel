@@ -59,11 +59,27 @@ namespace Api.App.Profiles
 
         [HttpPost]
         [Route("update-profile/public-info")]
-        public IHttpActionResult UpdatePublicInfo(ProfilePublicInfo publicInfo)
+        public IHttpActionResult UpdatePublicInfo(ProfilePublicInfo info)
         {
             try
             {
-                profilesManager.UpdatePublicInfo(User.Identity.Name, publicInfo);
+                profilesManager.UpdatePublicInfo(User.Identity.Name, info);
+
+                return Ok();
+            }
+            catch (NotFoundException)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+        }
+        
+        [HttpPost]
+        [Route("update-profile/private-info")]
+        public IHttpActionResult UpdatePrivateInfo(ProfilePrivateInfo info)
+        {
+            try
+            {
+                profilesManager.UpdatePrivateInfo(User.Identity.Name, info);
 
                 return Ok();
             }

@@ -12,6 +12,16 @@
         srv.getOwnProfile = getOwnProfile;
         srv.deleteProfileImage = deleteProfileImage;
         srv.updatePublicInfo = updatePublicInfo;
+        srv.updatePrivateInfo = updatePrivateInfo;
+
+
+        function updatePrivateInfo(privateInfo) {
+            var url = Url.build(Config.ApiUris.Base, Config.ApiUris.Profiles.UpdatePrivateInfo);
+            return $http.post(url, {
+                email: privateInfo.email
+            });
+        }
+
 
         function updatePublicInfo(publicInfo) {
             var url = Url.build(Config.ApiUris.Base, Config.ApiUris.Profiles.UpdatePublicInfo);

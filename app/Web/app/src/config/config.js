@@ -19,7 +19,8 @@
                 Countries: 'profiles/countries',
                 UpdateProfileImage: 'profiles/update-profile-image',
                 DeleteProfileImage: 'profiles/delete-profile-image',
-                UpdatePublicInfo: 'profiles/update-profile/public-info'
+                UpdatePublicInfo: 'profiles/update-profile/public-info',
+                UpdatePrivateInfo: 'profiles/update-profile/private-info'
             },
             Geo: {
                 Countries: 'geo/countries'

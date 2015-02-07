@@ -329,6 +329,7 @@
     <Compile Include="App\Profiles\IProfilesManager.cs" />
     <Compile Include="App\Profiles\Entities\Profile.cs" />
     <Compile Include="App\Images\Entities\ProfileImage.cs" />
+    <Compile Include="App\Profiles\ProfilePrivateInfo.cs" />
     <Compile Include="App\Profiles\ProfilePublicInfo.cs" />
     <Compile Include="App\Profiles\ProfilesManager.private.cs" />
     <Compile Include="App\Profiles\UserPrivateInfo.cs" />

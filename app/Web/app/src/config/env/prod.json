@@ -14,6 +14,7 @@
     "ApiUris.Profiles.UpdateProfileImage": "profiles/update-profile-image",
     "ApiUris.Profiles.DeleteProfileImage": "profiles/delete-profile-image",
     "ApiUris.Profiles.UpdatePublicInfo": "profiles/update-profile/public-info",
+    "ApiUris.Profiles.UpdatePrivateInfo": "profiles/update-profile/private-info",
 
     "ApiUris.Geo.Countries":  "geo/countries",
 

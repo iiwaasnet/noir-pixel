@@ -19,7 +19,8 @@
                 Countries: '@@ApiUris.Profiles.Countries',
                 UpdateProfileImage: '@@ApiUris.Profiles.UpdateProfileImage',
                 DeleteProfileImage: '@@ApiUris.Profiles.DeleteProfileImage',
-                UpdatePublicInfo: '@@ApiUris.Profiles.UpdatePublicInfo'
+                UpdatePublicInfo: '@@ApiUris.Profiles.UpdatePublicInfo',
+                UpdatePrivateInfo: '@@ApiUris.Profiles.UpdatePrivateInfo'
             },
             Geo: {
                 Countries: '@@ApiUris.Geo.Countries'

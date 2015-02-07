@@ -66,33 +66,31 @@ namespace Api.App.Profiles
             return userProfile;
         }
 
-        public void UpdatePublicInfo(string userName, ProfilePublicInfo publicInfo)
+        public void UpdatePublicInfo(string userName, ProfilePublicInfo info)
         {
             var collection = db.GetCollection<Profile>(Profile.CollectionName);
 
-            var geo = MapCountryName(publicInfo);
+            var geo = MapCountryName(info);
 
             var update = new FindAndModifyArgs
                          {
                              Query = Query<Profile>.EQ(p => p.UserName, userName),
-                             Update = Update<Profile>.Combine(Update<Profile>.Set(p => p.FullName, publicInfo.UserFullName),
+                             Update = Update<Profile>.Combine(Update<Profile>.Set(p => p.FullName, info.UserFullName),
                                                               Update<Profile>.Set(p => p.LivesIn, geo))
                          };
             collection.FindAndModify(update);
         }
 
-        private Entities.Geo MapCountryName(ProfilePublicInfo publicInfo)
+        public void UpdatePrivateInfo(string userName, ProfilePrivateInfo info)
         {
-            var country = geoManager.GetCountry(publicInfo.LivesIn.CountryCode);
+            var collection = db.GetCollection<Profile>(Profile.CollectionName);
 
-            var geo = new Entities.Geo {City = publicInfo.LivesIn.City};
-            if (country != null)
+            var update = new FindAndModifyArgs
             {
-                geo.CountryCode = country.Code;
-                geo.Country = country.Name;
-            }
-
-            return geo;
+                Query = Query<Profile>.EQ(p => p.UserName, userName),
+                Update = Update<Profile>.Combine(Update<Profile>.Set(p => p.Email, info.Email))
+            };
+            collection.FindAndModify(update);
         }
     }
 }
