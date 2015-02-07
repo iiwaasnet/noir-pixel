@@ -43,7 +43,12 @@
                 url: '/public',
                 templateProvider: ['ViewResolver', '$stateParams', function (ViewResolver, $stateParams) { return ViewResolver.resolveTemplateUrl(States.UserHome.Profile.Public.Name, $stateParams); }],
                 controllerProvider: ['ViewResolver', '$stateParams', function (ViewResolver, $stateParams) { return ViewResolver.resolveController(States.UserHome.Profile.Public.Name, $stateParams); }],
-                controllerAs: 'publicCtrl'
+                controllerAs: 'publicCtrl',
+                resolve: {
+                    countries: function (geo) {
+                        return geo.getCountries();
+                    }
+                }
             })
             .state(States.UserHome.Profile.Private.Name, {
                 url: '/private',
