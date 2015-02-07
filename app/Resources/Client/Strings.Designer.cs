@@ -250,6 +250,15 @@ namespace Resources.Client {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email address is incomplete or not valid..
+        /// </summary>
+        public static string EC_Profile_InvalidEmail {
+            get {
+                return ResourceManager.GetString("EC_Profile_InvalidEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to City.
         /// </summary>
         public static string Hint_City {
@@ -264,6 +273,15 @@ namespace Resources.Client {
         public static string Hint_Country {
             get {
                 return ResourceManager.GetString("Hint_Country", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please, provide your email.
+        /// </summary>
+        public static string Hint_EmailAddress {
+            get {
+                return ResourceManager.GetString("Hint_EmailAddress", resourceCulture);
             }
         }
         
@@ -291,6 +309,15 @@ namespace Resources.Client {
         public static string Label_Country {
             get {
                 return ResourceManager.GetString("Label_Country", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email address.
+        /// </summary>
+        public static string Label_Email {
+            get {
+                return ResourceManager.GetString("Label_Email", resourceCulture);
             }
         }
         
@@ -336,6 +363,15 @@ namespace Resources.Client {
         public static string MainMenu_Gallery {
             get {
                 return ResourceManager.GetString("MainMenu_Gallery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Having email address set up would help to resolve any problems with your profile if they happen. We will not send any promotion or other notifications until you allow us to do so..
+        /// </summary>
+        public static string ProfilePrivate_EmailDescription {
+            get {
+                return ResourceManager.GetString("ProfilePrivate_EmailDescription", resourceCulture);
             }
         }
         

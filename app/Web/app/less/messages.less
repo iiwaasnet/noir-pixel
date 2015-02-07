@@ -1,4 +1,5 @@
 ﻿@import (reference) "colors.less";
+@import (reference) "animations.less";
 @import (reference) "fonts.less";
 @import (reference) "edits.less";
 
@@ -8,5 +9,22 @@
         padding: @edit-before-after-padding @edit-start-end-padding;
         background-color: @brick-red;
         width: 100%;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    &.ng-enter {
+        -moz-animation: fade-in 0.5s;
+        -o-animation: fade-in 0.5s;
+        -webkit-animation: fade-in 0.5s;
+        animation: fade-in 0.5s;
+    }
+
+    &.ng-leave {
+        -moz-animation: fade-out 0.5s;
+        -o-animation: fade-out 0.5s;
+        -webkit-animation: fade-out 0.5s;
+        animation: fade-out 0.5s;
     }
 }

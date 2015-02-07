@@ -1,1 +1,22 @@
-﻿PRIVATE
+﻿<div id="profile-private">
+    <div class="columns-container">
+        <div class="column-center" ng-form="profilePrivate">
+            <div class="edit-block">
+                <span class="edit-label" np-i18n="Label_Email"></span>
+                <input class="email"
+                       name="email"
+                       autocomplete="off"
+                       ng-model="privateCtrl.profileData.email"
+                       type="email"
+                       placeholder="{{'Hint_EmailAddress' | npi18n}}"
+                       np-autofocus />
+            </div>
+            <div ng-messages="profilePrivate.email.$error" multiple ng-messages-include="/app/src/user-home/error-messages.html"></div>
+            <div class="email-description" np-i18n="ProfilePrivate_EmailDescription"></div>
+            <input type="button" ng-class="{'default-action': !(profilePrivate.$pristine || profilePrivate.$invalid)}" 
+                   class="save" 
+                   np-i18n="Btn_Save" 
+                   ng-click="privateCtrl.save()" />
+        </div>
+    </div>
+</div>

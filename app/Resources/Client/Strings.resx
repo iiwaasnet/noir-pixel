@@ -240,4 +240,16 @@
   <data name="Btn_Post" xml:space="preserve">
     <value>Post!</value>
   </data>
+  <data name="Hint_EmailAddress" xml:space="preserve">
+    <value>Please, provide your email</value>
+  </data>
+  <data name="Label_Email" xml:space="preserve">
+    <value>Email address</value>
+  </data>
+  <data name="ProfilePrivate_EmailDescription" xml:space="preserve">
+    <value>Having email address set up would help to resolve any problems with your profile if they happen. We will not send any promotion or other notifications until you allow us to do so.</value>
+  </data>
+  <data name="EC_Profile_InvalidEmail" xml:space="preserve">
+    <value>Email address is incomplete or not valid.</value>
+  </data>
 </root>

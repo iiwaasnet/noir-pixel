@@ -333,6 +333,9 @@
     <Content Include="app\less\column-layout.css.map">
       <DependentUpon>column-layout.css</DependentUpon>
     </Content>
+    <Content Include="app\less\profile-private.css">
+      <DependentUpon>profile-private.less</DependentUpon>
+    </Content>
     <Content Include="app\less\profile-public.css">
       <DependentUpon>profile-public.less</DependentUpon>
     </Content>
@@ -370,6 +373,10 @@
     <Content Include="app\less\common.css.map">
       <DependentUpon>common.css</DependentUpon>
     </Content>
+    <Content Include="app\less\profile-private.less" />
+    <Content Include="app\less\profile-private.css.map">
+      <DependentUpon>profile-private.css</DependentUpon>
+    </Content>
     <None Include="app\less\ui-select\select.less" />
     <Content Include="app\less\ui-select\select.css">
       <DependentUpon>select.less</DependentUpon>
@@ -404,6 +411,7 @@
     <Content Include="app\src\ui-elements\tabs\tabs.html" />
     <Content Include="app\src\ui-elements\user-thumbnail\user-thumbnail.html" />
     <Content Include="app\src\upload\flow.setup.js" />
+    <Content Include="app\src\user-home\error-messages.html" />
     <Content Include="app\src\user-home\profile\profile-private.html" />
     <Content Include="app\src\user-home\profile\profile-public.html" />
     <Content Include="app\src\user-home\profile\profile-private.controller.js" />
