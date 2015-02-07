@@ -240,7 +240,4 @@
   <data name="Btn_Post" xml:space="preserve">
     <value>Post!</value>
   </data>
-  <data name="UserHome_Profile_Tab_Wall" xml:space="preserve">
-    <value>Wall</value>
-  </data>
 </root>

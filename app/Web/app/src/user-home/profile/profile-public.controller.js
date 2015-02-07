@@ -16,25 +16,9 @@
         ctrl.uploadProfileImage = uploadProfileImage;
         ctrl.refreshProfileImage = refreshProfileImage;
         ctrl.deleteProfileImage = deleteProfileImage;
-        ctrl.startEditingPost = startEditingPost;
-        ctrl.cancelEditingPost = cancelEditingPost;
-        ctrl.addPostToWall = addPostToWall;
-        ctrl.editingWallPost = undefined;
         var unsubscribe;
 
         activate();
-
-        function addPostToWall() {
-            
-        }
-
-        function cancelEditingPost() {
-            ctrl.editingWallPost = false;
-        }
-
-        function startEditingPost() {
-            ctrl.editingWallPost = true;
-        }
 
         function deleteProfileImage() {
             Profile.deleteProfileImage().then(deleteProfileImageSuccess);

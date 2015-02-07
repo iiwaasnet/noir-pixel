@@ -45,12 +45,6 @@
                 controllerProvider: ['ViewResolver', '$stateParams', function (ViewResolver, $stateParams) { return ViewResolver.resolveController(States.UserHome.Profile.Public.Name, $stateParams); }],
                 controllerAs: 'publicCtrl'
             })
-            .state(States.UserHome.Profile.Wall.Name, {
-                url: '/wall',
-                templateProvider: ['ViewResolver', '$stateParams', function (ViewResolver, $stateParams) { return ViewResolver.resolveTemplateUrl(States.UserHome.Profile.Wall.Name, $stateParams); }],
-                controllerProvider: ['ViewResolver', '$stateParams', function (ViewResolver, $stateParams) { return ViewResolver.resolveController(States.UserHome.Profile.Wall.Name, $stateParams); }],
-                controllerAs: 'wallCtrl'
-            })
             .state(States.UserHome.Profile.Private.Name, {
                 url: '/private',
                 templateProvider: ['ViewResolver', '$stateParams', function (ViewResolver, $stateParams) { return ViewResolver.resolveTemplateUrl(States.UserHome.Profile.Private.Name, $stateParams); }],

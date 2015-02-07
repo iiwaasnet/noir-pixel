@@ -403,15 +403,6 @@ namespace Resources.Client {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wall.
-        /// </summary>
-        public static string UserHome_Profile_Tab_Wall {
-            get {
-                return ResourceManager.GetString("UserHome_Profile_Tab_Wall", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Darkroom.
         /// </summary>
         public static string UserHome_Tab_Darkroom {

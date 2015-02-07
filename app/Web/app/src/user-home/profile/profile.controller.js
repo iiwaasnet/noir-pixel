@@ -26,12 +26,6 @@
                 image: 'tab-public'
             });
             ctrl.tabs.push({
-                state: States.UserHome.Profile.Wall.Name,
-                params: params,
-                text: 'UserHome_Profile_Tab_Wall',
-                image: 'tab-wall'
-            });
-            ctrl.tabs.push({
                 state: States.UserHome.Profile.Private.Name,
                 params: params,
                 text: 'UserHome_Profile_Tab_Private',

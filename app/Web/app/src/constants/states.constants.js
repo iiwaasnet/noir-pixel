@@ -12,9 +12,6 @@
                 Public: {
                     Name: 'userHome.profile.public'
                 },
-                Wall: {
-                    Name: 'userHome.profile.wall'
-                },
                 Private: {
                     Name: 'userHome.profile.private'
                 }
