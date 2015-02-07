@@ -9,7 +9,10 @@
 @edit-start-end-padding: 0.45em;
 @edit-before-margin: 0.5em;
 
-input[type=text] {
+input[type=text],
+textarea {
+    resize: none;
+    outline: none;
     background-color: transparent;
     color: @jet-stream;
     border: 1px solid @plantation;

@@ -331,6 +331,15 @@ namespace Resources.Client {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Share something about youself. Let people know about you!.
+        /// </summary>
+        public static string ProfilePublic_ShareAboutYourself {
+            get {
+                return ResourceManager.GetString("ProfilePublic_ShareAboutYourself", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You are almost done!.
         /// </summary>
         public static string Register_AlmostDone {

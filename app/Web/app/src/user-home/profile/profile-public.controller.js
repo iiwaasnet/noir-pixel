@@ -16,9 +16,15 @@
         ctrl.uploadProfileImage = uploadProfileImage;
         ctrl.refreshProfileImage = refreshProfileImage;
         ctrl.deleteProfileImage = deleteProfileImage;
+        ctrl.showWallPostEdit = showWallPostEdit;
+        ctrl.editingWallPost = undefined;
         var unsubscribe;
 
         activate();
+
+        function showWallPostEdit() {
+            ctrl.editingWallPost = true;
+        }
 
         function deleteProfileImage() {
             Profile.deleteProfileImage().then(deleteProfileImageSuccess);

@@ -144,4 +144,100 @@
             }
         }
     }
+
+    .wall {
+        margin: 6em 0 0;
+
+        .wall-header-container{
+            position: relative; 
+            height: 2em;
+        }
+        .add-wall-post {
+            position: absolute;
+            display: block;
+            text-align: center;
+            font-size: 120%;
+            color: @beau-blue;
+
+            &.ng-leave {
+                -moz-animation: hide-add-link 1s;
+                -o-animation: hide-add-link 1s;
+                -webkit-animation: hide-add-link 1s;
+                animation: hide-add-link 1s;
+            }
+        }
+
+        .edit-post {
+            width: 100%;
+            overflow-y: auto;
+            height: 8em;
+
+            &.ng-enter {
+                -moz-animation: show-edit 0.1s;
+                -o-animation: show-edit 0.1s;
+                -webkit-animation: show-edit 0.1s;
+                animation: show-edit 0.1s;
+            }
+        }
+    }
+}
+
+@-moz-keyframes hide-add-link {
+    from {
+        font-size: 120%;
+    }
+
+    to {
+        font-size: 40%;
+    }
+}
+
+@-webkit-keyframes hide-add-link {
+    from {
+        font-size: 120%;
+    }
+
+    to {
+        font-size: 40%;
+    }
+}
+
+@keyframes hide-add-link {
+    from {
+        font-size: 120%;
+    }
+
+    to {
+        font-size: 40%;
+    }
+}
+
+@keyframes show-edit {
+    from {
+        height: 0;
+    }
+
+    to {
+        height: 8em;
+    }
+}
+
+@-webkit-keyframes show-edit {
+    from {
+        height: 0;
+    }
+
+    to {
+        height: 8em;
+    }
+}
+
+@-moz-keyframes  show-edit {
+    from {
+        height: 0;
+    }
+
+    to {
+        height: 8em;
+    }
 }

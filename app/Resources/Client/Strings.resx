@@ -231,4 +231,7 @@
   <data name="Btn_Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="ProfilePublic_ShareAboutYourself" xml:space="preserve">
+    <value>Share something about youself. Let people know about you!</value>
+  </data>
 </root>

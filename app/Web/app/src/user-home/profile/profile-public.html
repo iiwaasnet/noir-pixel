@@ -24,6 +24,14 @@
             </div>
 
             <input type="button" ng-class="{'default-action': !profilePublic.$pristine}" class="save" np-i18n="Btn_Save" ng-click="publicCtrl.save()" />
+            
+            <div class="wall">
+                <div class="wall-header-container">
+                    <a ng-if="!publicCtrl.editingWallPost" class="add-wall-post dotted-hover" np-i18n="ProfilePublic_ShareAboutYourself" ng-click="publicCtrl.showWallPostEdit()"></a>
+                    <span ng-if="publicCtrl.editingWallPost" class="edit-label" np-i18n="ProfilePublic_ShareAboutYourself" ng-click="publicCtrl.showWallPostEdit()"></span>
+                </div>
+                <textarea class="edit-post" ng-if="publicCtrl.editingWallPost"></textarea>
+            </div>
         </div>
         <div class="column-right">
             <div class="profile-image">
