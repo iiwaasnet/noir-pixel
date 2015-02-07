@@ -124,6 +124,15 @@ namespace Resources.Client {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Post!.
+        /// </summary>
+        public static string Btn_Post {
+            get {
+                return ResourceManager.GetString("Btn_Post", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Register!.
         /// </summary>
         public static string Btn_Register {
@@ -268,6 +277,15 @@ namespace Resources.Client {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to What&apos;s on your mind?.
+        /// </summary>
+        public static string Hint_WhatsOnYourMind {
+            get {
+                return ResourceManager.GetString("Hint_WhatsOnYourMind", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Country.
         /// </summary>
         public static string Label_Country {
@@ -381,6 +399,15 @@ namespace Resources.Client {
         public static string UserHome_Profile_Tab_Public {
             get {
                 return ResourceManager.GetString("UserHome_Profile_Tab_Public", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wall.
+        /// </summary>
+        public static string UserHome_Profile_Tab_Wall {
+            get {
+                return ResourceManager.GetString("UserHome_Profile_Tab_Wall", resourceCulture);
             }
         }
         

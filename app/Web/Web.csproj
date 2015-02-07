@@ -405,6 +405,8 @@
     <Content Include="app\src\ui-elements\user-thumbnail\user-thumbnail.html" />
     <Content Include="app\src\upload\flow.setup.js" />
     <Content Include="app\src\user-home\profile\profile-private.html" />
+    <Content Include="app\src\user-home\profile\profile-wall.html" />
+    <Content Include="app\src\user-home\profile\profile-wall.controller.js" />
     <Content Include="app\src\user-home\profile\profile-public.html" />
     <Content Include="app\src\user-home\profile\profile-private.controller.js" />
     <Content Include="app\src\user-home\profile\profile-public.controller.js" />

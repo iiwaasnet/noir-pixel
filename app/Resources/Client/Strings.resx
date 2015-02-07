@@ -234,4 +234,13 @@
   <data name="ProfilePublic_ShareAboutYourself" xml:space="preserve">
     <value>Share something about youself. Let people know about you!</value>
   </data>
+  <data name="Hint_WhatsOnYourMind" xml:space="preserve">
+    <value>What's on your mind?</value>
+  </data>
+  <data name="Btn_Post" xml:space="preserve">
+    <value>Post!</value>
+  </data>
+  <data name="UserHome_Profile_Tab_Wall" xml:space="preserve">
+    <value>Wall</value>
+  </data>
 </root>

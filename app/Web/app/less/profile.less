@@ -10,7 +10,7 @@
         -webkit-flex: 0 1 150px;
         -ms-flex: 0 1 150px;
         flex: 0 1 150px;
-       margin: 0 3em 0 0;
+        margin: 0 3em 0 0;
     }
 
     .vertical {
@@ -26,6 +26,11 @@
                 .animate;
             }
 
+            .tab-wall {
+                .sprite(@wall16);
+                .animate;
+            }
+
             &.active {
                 .tab-private {
                     .sprite(@private32);
@@ -34,6 +39,11 @@
 
                 .tab-public {
                     .sprite(@public32);
+                    .animate;
+                }
+
+                .tab-wall {
+                    .sprite(@wall32);
                     .animate;
                 }
             }

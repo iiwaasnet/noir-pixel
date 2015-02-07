@@ -23,6 +23,9 @@
             if (state === States.UserHome.Profile.Public.Name && isSelf) {
                 return $templateFactory.fromUrl('/app/src/user-home/profile/profile-public.html', stateParams);
             }
+            if (state === States.UserHome.Profile.Wall.Name && isSelf) {
+                return $templateFactory.fromUrl('/app/src/user-home/profile/profile-wall.html', stateParams);
+            }
             if (state === States.UserHome.Profile.Private.Name && isSelf) {
                 return $templateFactory.fromUrl('/app/src/user-home/profile/profile-private.html', stateParams);
             }
@@ -44,6 +47,9 @@
             }
             if (state === States.UserHome.Profile.Public.Name && isSelf) {
                 return 'ProfilePublicController';
+            }
+            if (state === States.UserHome.Profile.Wall.Name && isSelf) {
+                return 'ProfileWallController';
             }
             if (state === States.UserHome.Profile.Private.Name && isSelf) {
                 return 'ProfilePrivateController';

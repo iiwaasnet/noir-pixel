@@ -1,0 +1,21 @@
+﻿<div id="profile-wall">
+    <div class="columns-container">
+        <div class="column-center">
+            <div class="wall">
+                <div class="wall-header">
+                    <a ng-if="!publicCtrl.editingWallPost" 
+                       class="message dotted-hover" 
+                       np-i18n="ProfilePublic_ShareAboutYourself" 
+                       ng-click="publicCtrl.startEditingPost()"></a>
+                </div>
+                <div class="edit-container" ng-if="publicCtrl.editingWallPost">
+                    <textarea placeholder="{{'Hint_WhatsOnYourMind' | npi18n}}" np-autofocus></textarea>
+                    <div class="buttons-block">
+                        <input type="button" class="post default-action" np-i18n="Btn_Post" ng-click="publicCtrl.addPostToWall()"/>
+                        <input type="button" class="cancel" np-i18n="Btn_Cancel" ng-click="publicCtrl.cancelEditingPost()"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

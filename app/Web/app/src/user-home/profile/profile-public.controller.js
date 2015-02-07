@@ -16,13 +16,23 @@
         ctrl.uploadProfileImage = uploadProfileImage;
         ctrl.refreshProfileImage = refreshProfileImage;
         ctrl.deleteProfileImage = deleteProfileImage;
-        ctrl.showWallPostEdit = showWallPostEdit;
+        ctrl.startEditingPost = startEditingPost;
+        ctrl.cancelEditingPost = cancelEditingPost;
+        ctrl.addPostToWall = addPostToWall;
         ctrl.editingWallPost = undefined;
         var unsubscribe;
 
         activate();
 
-        function showWallPostEdit() {
+        function addPostToWall() {
+            
+        }
+
+        function cancelEditingPost() {
+            ctrl.editingWallPost = false;
+        }
+
+        function startEditingPost() {
             ctrl.editingWallPost = true;
         }
 
