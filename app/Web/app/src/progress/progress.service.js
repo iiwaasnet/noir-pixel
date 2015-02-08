@@ -12,7 +12,7 @@
             startDelay = 500,
             stopTimer = undefined,
             startTimer = undefined,
-            body = angular.element($document[0].body),
+            body = angular.element($document[0].getElementById('progress-overlay')),
             progressStarted = false;
         srv.start = start;
         srv.stop = stop;
@@ -27,7 +27,7 @@
         function internalStart() {
             if (progressStarted) {
                 NProgress.start();
-                body.attr('style', 'opacity: 0.4');
+                body.removeClass('hidden');
                 stopTimer = $interval(stop, stopCallTimeout, 1);
             }
         }
@@ -35,7 +35,7 @@
         function stop() {
             progressStarted = false;
             cancelTimer(startTimer);
-            body.attr('style', 'opacity: 1');
+            body.addClass('hidden');
             NProgress.done();
             cancelTimer(stopTimer);
         }

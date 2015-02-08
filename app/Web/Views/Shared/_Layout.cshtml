@@ -12,13 +12,15 @@
     <base href="/" />
 </head>
 <body>
-    <div id="init-loading" class="centered-outer" ng-if="false">
-        <div class="centered-middle">
-            <div class="centered-inner">
-                <div class="message">Loading...</div>
-                <div class="spinner">
-                    <div class="double-bounce1"></div>
-                    <div class="double-bounce2"></div>
+    <div id="progress-overlay" class="hidden">
+        <div id="init-loading" class="centered-outer" ng-if="false">
+            <div class="centered-middle">
+                <div class="centered-inner">
+                    <div class="message">Loading...</div>
+                    <div class="spinner">
+                        <div class="double-bounce1"></div>
+                        <div class="double-bounce2"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -53,10 +55,10 @@
     <script src="~/app/src/app.js"></script>
 
     @*@Scripts.Render("~/bundles/vendor-native")
-    @Scripts.Render("~/bundles/angular")
-    @Scripts.Render("~/bundles/vendor-ng")
-    @Scripts.Render("~/bundles/vendor-ng-min")
-    @Scripts.Render("~/bundles/app")*@
+        @Scripts.Render("~/bundles/angular")
+        @Scripts.Render("~/bundles/vendor-ng")
+        @Scripts.Render("~/bundles/vendor-ng-min")
+        @Scripts.Render("~/bundles/app")*@
 
     <script type="text/javascript">
         (function () {
