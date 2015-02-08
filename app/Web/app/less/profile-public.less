@@ -1,6 +1,7 @@
 ﻿@import (reference) "animations.less";
 @import (reference) "edits.less";
 @import (reference) "sprites32.less";
+@import (reference) "profile.less";
 
 @country-select-width: 60%;
 @profile-image-size: 130px;
@@ -56,7 +57,9 @@
     }
 
     .column-center {
-        width: 70%;
+        width: @profile-data-width;
+        -ms-flex: 0 1 auto;
+        flex: 0 1 auto;
     }
 
     .column-right {

@@ -1,4 +1,6 @@
-﻿#profile-private {
+﻿@import (reference) "profile.less";
+
+#profile-private {
     .email {
         width: 100%;
     }
@@ -22,7 +24,7 @@
     }
 
     .column-center {
-        width: 70%;
+        width: @profile-data-width;
         -ms-flex: 0 1 auto;
         flex: 0 1 auto;
     }
