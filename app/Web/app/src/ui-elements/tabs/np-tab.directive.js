@@ -12,6 +12,7 @@
             scope: {
                 npTab: '=',
                 state: '=',
+                parentState: '=',
                 params: '='
             },
             link: link
@@ -43,7 +44,7 @@
             }
 
             function updateTabState(stateName) {
-                if (~stateName.indexOf(scope.state)) {
+                if (~stateName.indexOf(scope.state) || ~stateName.indexOf(scope.parentState)) {
                     selected = true;
                     element.addClass('active');
                 } else {

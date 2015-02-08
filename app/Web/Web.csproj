@@ -411,6 +411,8 @@
     <Content Include="app\src\ui-elements\tabs\tabs.html" />
     <Content Include="app\src\ui-elements\user-thumbnail\user-thumbnail.html" />
     <Content Include="app\src\upload\flow.setup.js" />
+    <Content Include="app\src\user-home\darkroom\darkroom.controller.js" />
+    <Content Include="app\src\user-home\darkroom\darkroom.html" />
     <Content Include="app\src\user-home\error-messages.html" />
     <Content Include="app\src\user-home\profile\profile-private.html" />
     <Content Include="app\src\user-home\profile\profile-public.html" />

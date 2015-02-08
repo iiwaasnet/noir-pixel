@@ -13,7 +13,7 @@
         activate();
 
         function activate() {
-            createTabs();            
+            ctrl.tabs = createTabs();
         }
 
         function createTabs() {
@@ -31,6 +31,8 @@
                 text: 'UserHome_Profile_Tab_Private',
                 image: 'tab-private'
             });
+
+            return ctrl.tabs;
         }
     }
 })();

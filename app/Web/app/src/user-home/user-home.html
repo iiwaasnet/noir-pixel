@@ -4,10 +4,19 @@
     <div class="column-center">
         <div class="tabs-group horizontal">
             <div np-tab class="tab"
-                 state="'userHome.profile'"
+                 parent-state="'userHome.profile'"
+                 state="'userHome.profile.public'"
                  params="{userName: ctrl.user.userName}">
                 <div class="image tab-home"></div>
                 <div class="text user-name" ng-bind="ctrl.user.userName"></div>
+            </div>
+
+            <div ng-repeat="tab in ctrl.tabs" np-tab class="tab"
+                 parent-state="tab.parentState"
+                 state="tab.state"
+                 params="tab.params">
+                <div class="image" ng-class="tab.image"></div>
+                <div class="text" np-i18n="{{tab.text}}"></div>
             </div>
         </div>
 

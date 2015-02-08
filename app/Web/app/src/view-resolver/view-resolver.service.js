@@ -26,6 +26,9 @@
             if (state === States.UserHome.Profile.Private.Name && isSelf) {
                 return $templateFactory.fromUrl('/app/src/user-home/profile/profile-private.html', stateParams);
             }
+            if (state === States.UserHome.Darkroom.Name) {
+                return $templateFactory.fromUrl('/app/src/user-home/darkroom/darkroom.html', stateParams);
+            }
             if (state === States.UserPublic.Photos.Name) {
                 return $templateFactory.fromUrl('/app/src/user-home/photos/photos.html', stateParams);
             }
@@ -47,6 +50,9 @@
             }
             if (state === States.UserHome.Profile.Private.Name && isSelf) {
                 return 'ProfilePrivateController';
+            }
+            if (state === States.UserHome.Darkroom.Name) {
+                return 'DarkroomController';
             }
             return '';
         }

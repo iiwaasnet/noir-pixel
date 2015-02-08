@@ -15,7 +15,10 @@
                 Private: {
                     Name: 'userHome.profile.private'
                 }
-            }
+            },
+           Darkroom: {
+               Name: 'userHome.darkroom'
+           }
         },
         ExternalSignIn: {
             Name: 'externalSignIn'

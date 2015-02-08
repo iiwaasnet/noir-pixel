@@ -56,6 +56,12 @@
                 controllerProvider: ['ViewResolver', '$stateParams', function (ViewResolver, $stateParams) { return ViewResolver.resolveController(States.UserHome.Profile.Private.Name, $stateParams); }],
                 controllerAs: 'privateCtrl'
             })
+            .state(States.UserHome.Darkroom.Name, {
+                url: '/darkroom',
+                templateProvider: ['ViewResolver', '$stateParams', function (ViewResolver, $stateParams) { return ViewResolver.resolveTemplateUrl(States.UserHome.Darkroom.Name, $stateParams); }],
+                controllerProvider: ['ViewResolver', '$stateParams', function (ViewResolver, $stateParams) { return ViewResolver.resolveController(States.UserHome.Darkroom.Name, $stateParams); }],
+                controllerAs: 'darkroomCtrl'
+            })
             //.state('userPublic', {
             //    url: '/people',
             //    abstract: true,
