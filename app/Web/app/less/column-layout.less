@@ -1,13 +1,13 @@
 ﻿@-moz-document url-prefix() {
-.flex-container {
-    width: 100%;
-    -moz-box-sizing: border-box;
+    .flex-container {
+        width: 100%;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
     }
-
 }
 
 .columns-container {
-        display: -webkit-box;
+    display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
     display: -webkit-flex;
@@ -29,6 +29,7 @@
     justify-content: flex-start;
     -webkit-align-content: stretch;
     -ms-flex-line-pack: stretch;
+    -ms-align-content: stretch;
     align-content: stretch;
 }
 
@@ -40,7 +41,7 @@
 
 
 .column-left {
-   -webkit-box-ordinal-group: 2;
+    -webkit-box-ordinal-group: 2;
     -moz-box-ordinal-group: 2;
     -webkit-order: 1;
     -ms-flex-order: 1;
