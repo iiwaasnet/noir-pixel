@@ -348,6 +348,9 @@
     <Content Include="app\less\resets.css">
       <DependentUpon>resets.less</DependentUpon>
     </Content>
+    <Content Include="app\less\social.css">
+      <DependentUpon>social.less</DependentUpon>
+    </Content>
     <Content Include="app\less\tabs.css">
       <DependentUpon>tabs.less</DependentUpon>
     </Content>
@@ -383,6 +386,10 @@
     <Content Include="app\less\floats.less" />
     <Content Include="app\less\floats.css.map">
       <DependentUpon>floats.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\social.less" />
+    <Content Include="app\less\social.css.map">
+      <DependentUpon>social.css</DependentUpon>
     </Content>
     <None Include="app\less\ui-select\select.less" />
     <Content Include="app\less\ui-select\select.css">
