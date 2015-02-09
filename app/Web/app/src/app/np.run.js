@@ -4,9 +4,9 @@
     angular.module('np')
         .run(run);
 
-    run.$inject = ['$rootScope', '$state', '$document', 'Strings', 'ApplicationLogging'];
+    run.$inject = ['$rootScope', '$state', '$document', 'Strings', 'ApplicationLogging', 'Progress'];
 
-    function run($rootScope, $state, $document, Strings, ApplicationLogging) {
+    function run($rootScope, $state, $document, Strings, ApplicationLogging, Progress) {
 
         //$rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
         //    console.log('$stateChangeStart to ' + toState.to + '- fired when the transition begins. toState,toParams : \n', toState, toParams);
@@ -29,8 +29,6 @@
         //    console.log('$stateNotFound ' + unfoundState.to + '  - fired when a state cannot be found by its name.');
         //    console.log(unfoundState, fromState, fromParams);
         //});
-
-        var body = angular.element($document[0].body);
 
         try {
             $rootScope.$on('$stateChangeStart', stateChangeStart);
@@ -71,11 +69,11 @@
         }
 
         function startLoadAnimation() {
-            //body.attr('style', 'opacity: 0.4');
+            Progress.start();
         }
 
         function endLoadAnimation() {
-            //body.attr('style', 'opacity: 1');
+            Progress.stop();
         }
     }
 })();
