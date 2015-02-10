@@ -2,9 +2,14 @@
 @import (reference) "mixins.less";
 
 @user-home-page-width: 900px;
+@user-home-content-upper-offset: 60em/16 0 0;
 
 #user-home {
     margin: 6em 0 0;
+
+    div[ui-view]{
+        margin: @user-home-content-upper-offset 0 0;
+    }
 
     .column-center {
         width: @user-home-page-width;

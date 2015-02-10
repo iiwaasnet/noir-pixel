@@ -238,6 +238,9 @@
     <Content Include="app\less\common.css">
       <DependentUpon>common.less</DependentUpon>
     </Content>
+    <Content Include="app\less\darkroom.css">
+      <DependentUpon>darkroom.less</DependentUpon>
+    </Content>
     <Content Include="app\less\dialogs\dialog-theme-contextmenu.css">
       <DependentUpon>dialog-theme-contextmenu.less</DependentUpon>
     </Content>
@@ -390,6 +393,10 @@
     <Content Include="app\less\social.less" />
     <Content Include="app\less\social.css.map">
       <DependentUpon>social.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\darkroom.less" />
+    <Content Include="app\less\darkroom.css.map">
+      <DependentUpon>darkroom.css</DependentUpon>
     </Content>
     <None Include="app\less\ui-select\select.less" />
     <Content Include="app\less\ui-select\select.css">

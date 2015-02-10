@@ -252,4 +252,7 @@
   <data name="EC_Profile_InvalidEmail" xml:space="preserve">
     <value>Email address is incomplete or not valid.</value>
   </data>
+  <data name="Darkroom_DropZoone" xml:space="preserve">
+    <value>Drop file or click to upload photo</value>
+  </data>
 </root>

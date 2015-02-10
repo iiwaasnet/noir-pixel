@@ -160,6 +160,15 @@ namespace Resources.Client {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Drop file or click to upload photo.
+        /// </summary>
+        public static string Darkroom_DropZoone {
+            get {
+                return ResourceManager.GetString("Darkroom_DropZoone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occurred while trying to register you in. Please, try one more time later..
         /// </summary>
         public static string EAPI_Auth_RegistrationError {
