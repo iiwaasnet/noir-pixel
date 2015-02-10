@@ -1,4 +1,9 @@
-﻿@import (reference) "colors.less";
+﻿@import (reference) "mixins.less";
+@import (reference) "icons.less";
+@import (reference) "colors.less";
+
+@drop-zone-height: 3em;
+@menu-section-width: 250px;
 
 #darkroom {
     .column-left {
@@ -7,11 +12,28 @@
         flex: 0 0 auto;
     }
 
+    .menu {
+        .menu-item {
+            display: table;
+            margin: 2em 0 0;
+
+            .text,
+            .icon {
+                vertical-align: middle;
+                text-align: center;
+                display: inline-block;
+            }
+            .text{
+                margin: 0 0 0 1em;
+            }
+        }
+    }
+
     .drop-zone {
         background-color: @ecru-white;
         border-radius: 2px;
         width: 100%;
-        height: 3em;
+        height: @drop-zone-height;
         font-size: 200%;
         font-weight: 800;
         display: table;

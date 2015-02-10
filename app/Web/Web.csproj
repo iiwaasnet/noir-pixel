@@ -286,6 +286,9 @@
     <Content Include="app\less\header.min.css">
       <DependentUpon>header.css</DependentUpon>
     </Content>
+    <Content Include="app\less\icons.css">
+      <DependentUpon>icons.less</DependentUpon>
+    </Content>
     <Content Include="app\less\images.css">
       <DependentUpon>images.less</DependentUpon>
     </Content>
@@ -397,6 +400,10 @@
     <Content Include="app\less\darkroom.less" />
     <Content Include="app\less\darkroom.css.map">
       <DependentUpon>darkroom.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\icons.less" />
+    <Content Include="app\less\icons.css.map">
+      <DependentUpon>icons.css</DependentUpon>
     </Content>
     <None Include="app\less\ui-select\select.less" />
     <Content Include="app\less\ui-select\select.css">

@@ -1,5 +1,4 @@
-﻿@import (reference) "sprites32.less";
-@import (reference) "sprites16.less";
+﻿@import (reference) "icons.less";
 @import (reference) "mixins.less";
 
 @profile-data-width: 50%;
@@ -16,23 +15,23 @@
         .tab {
 
             .tab-private {
-                .sprite(@private16);
+                .icon-private-16;
                 .animate;
             }
 
             .tab-public {
-                .sprite(@public16);
+                .icon-public-16;
                 .animate;
             }
 
             &.active {
                 .tab-private {
-                    .sprite(@private32);
+                    .icon-private-32;
                     .animate;
                 }
 
                 .tab-public {
-                    .sprite(@public32);
+                    .icon-public-32;
                     .animate;
                 }
             }
