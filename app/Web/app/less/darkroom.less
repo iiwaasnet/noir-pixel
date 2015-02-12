@@ -36,6 +36,7 @@
         .menu-item {
             margin: 2em 0 0;
             cursor: pointer;
+            display: inline-block;
 
             .text,
             .icon {
@@ -66,8 +67,8 @@
     }
 
     .drop-zone {
-        background-color: @ecru-white;
         border-radius: 2px;
+        border: 2px solid @ecru-white;
         width: 100%;
         height: @drop-zone-height;
         font-size: 200%;
@@ -75,7 +76,6 @@
         display: table;
 
         .text {
-            color: @mine-shaft;
             display: table-cell;
             text-align: center;
             vertical-align: middle;
