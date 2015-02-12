@@ -19,6 +19,16 @@
         -webkit-user-select: none;
         user-select: none;
 
+        .text,
+        .icon {
+            vertical-align: middle;
+            display: inline-block;
+        }
+
+        .text {
+            margin: 0 0 0 0.5em;
+        }
+
         .sub-menu {
             display: none;
             margin: 2em 0 0 1em;
@@ -38,15 +48,7 @@
             cursor: pointer;
             display: inline-block;
 
-            .text,
-            .icon {
-                vertical-align: middle;
-                display: inline-block;
-            }
 
-            .text {
-                margin: 0 0 0 0.5em;
-            }
 
             &.selected {
                 .text {
@@ -60,7 +62,7 @@
 
                 .text,
                 .icon {
-                    opacity: 0.3;
+                    opacity: 0.2;
                 }
             }
         }
