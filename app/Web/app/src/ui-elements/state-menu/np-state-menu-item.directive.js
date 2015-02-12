@@ -15,11 +15,12 @@
         return dir;
 
         function link(scope, element, attrs, stateMenuCtrl) {
-            var selectedClassName = 'selected';
-            var disabledClassName = 'disabled';
-            var subMenu = angular.element(element[0].querySelector('*[np-state-submenu]'));
+            var selectedClassName = 'selected',
+                disabledClassName = 'disabled',
+                subMenu = angular.element(element[0].querySelector('[np-state-submenu]')),
+                resetItem = angular.element(element[0].querySelector('[np-state-menu-reset]')),
+                setItem = angular.element(element[0].querySelector('[np-state-menu-set]'));
             scope.reset = reset;
-            scope.disable = disable;
             scope.enable = enable;
 
             stateMenuCtrl.addItem(scope);
@@ -28,7 +29,7 @@
 
             function click(e) {
                 e.stopPropagation();
-                var isSet = element.hasClass(selectedClassName);
+                var isSet = setItem.hasClass(selectedClassName);
                 stateMenuCtrl.resetAll();
                 if (!isSet) {
                     set();
@@ -39,32 +40,38 @@
 
             function set() {
                 enable();
-                element.addClass(selectedClassName);
+                setItem.addClass(selectedClassName);
                 if (subMenu) {
                     subMenu.addClass(selectedClassName);
                 }
             }
 
             function enable() {
-                element.removeClass(disabledClassName);
-                element.on('click', click);
-            }
-
-            function disable() {
-                element.addClass(disabledClassName);
-                element.off('click', click);
+                setItem.removeClass(disabledClassName);
+                if (resetItem) {
+                    resetItem.on('click', click);
+                }
+                setItem.on('click', click);
             }
 
             function reset() {
-                disable();
+                setItem.addClass(disabledClassName);
                 if (subMenu) {
                     subMenu.removeClass(selectedClassName);
                 }
-                element.removeClass(selectedClassName);
+                setItem.removeClass(selectedClassName);
+
+                if (resetItem) {
+                    resetItem.off('click', click);
+                }
+                setItem.off('click', click);
             }
 
             function cleanup() {
-                element.off('click', click);
+                setItem.off('click', click);
+                if (resetItem) {
+                    resetItem.off('click', click);
+                }
             }
         }
     }

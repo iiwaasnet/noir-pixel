@@ -14,19 +14,26 @@
     <div class="columns-container">
         <div class="column-left">
             <ul class="menu" np-state-menu>
-                <li class="menu-item" np-state-menu-item>
-                    <span class="icon icon-photos-32"></span>
-                    <span class="text">Add to your Photos</span>
+                <li np-state-menu-item>
+                    <div class="menu-item" np-state-menu-set>
+                        <span class="icon icon-photos-32"></span>
+                        <span class="text">Add to your Photos</span>
+                    </div>
                 </li>
-                <li class="menu-item" np-state-menu-item>
-                    <span class="icon icon-stack-32"></span>
-                    <span class="text">Stack</span>
+                <li np-state-menu-item>
+                    <div class="menu-item" np-state-menu-set>
+                        <span class="icon icon-stack-32"></span>
+                        <span class="text">Stack</span>
+                    </div>
                 </li>
-                <li class="menu-item" np-state-menu-item>
-                    <span class="icon icon-delete-32"></span>
-                    <span class="text">Delete</span>
+                <li np-state-menu-item>
+                    <div class="menu-item" np-state-menu-set>
+                        <span class="icon icon-delete-32"></span>
+                        <span class="text">Delete</span>
+                    </div>
                     <div class="sub-menu" np-state-submenu>
-                        <span>Submenu</span>
+                        <div class="sub-menu-item">Submenu</div>
+                        <div class="sub-menu-item close" np-state-menu-reset>Close</div>
                     </div>
                 </li>
             </ul>

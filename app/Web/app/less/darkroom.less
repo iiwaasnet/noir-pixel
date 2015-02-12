@@ -19,25 +19,37 @@
         -webkit-user-select: none;
         user-select: none;
 
+        .sub-menu {
+            display: none;
+            margin: 2em 0 0 1em;
+
+            &.selected {
+                display: block;
+            }
+
+            .sub-menu-item {
+                cursor: pointer;
+                margin: 1em 0 0;
+            }
+        }
+
         .menu-item {
-            display: table;
             margin: 2em 0 0;
             cursor: pointer;
 
             .text,
             .icon {
                 vertical-align: middle;
-                text-align: center;
                 display: inline-block;
             }
 
             .text {
-                margin: 0 0 0 1em;
+                margin: 0 0 0 0.5em;
             }
 
             &.selected {
                 .text {
-                    margin: 0 0 0 0.5em;
+                    margin: 0 0 0 0.3em;
                     font-size: 140%;
                 }
             }
@@ -48,14 +60,6 @@
                 .text,
                 .icon {
                     opacity: 0.3;
-                }
-            }
-
-            .sub-menu {
-                display: none;
-
-                &.selected {
-                    display: block;
                 }
             }
         }
