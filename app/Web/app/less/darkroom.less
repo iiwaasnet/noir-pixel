@@ -1,4 +1,5 @@
 ﻿@import (reference) "mixins.less";
+@import (reference) "animations.less";
 @import (reference) "icons.less";
 @import (reference) "colors.less";
 
@@ -13,9 +14,15 @@
     }
 
     .menu {
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+
         .menu-item {
             display: table;
             margin: 2em 0 0;
+            cursor: pointer;
 
             .text,
             .icon {
@@ -28,10 +35,27 @@
                 margin: 0 0 0 1em;
             }
 
-            &.shake {
+            &.selected {
                 .text {
                     margin: 0 0 0 0.5em;
                     font-size: 140%;
+                }
+            }
+
+            &.disabled {
+                cursor: default;
+
+                .text,
+                .icon {
+                    opacity: 0.3;
+                }
+            }
+
+            .sub-menu {
+                display: none;
+
+                &.selected {
+                    display: block;
                 }
             }
         }

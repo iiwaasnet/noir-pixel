@@ -16,6 +16,7 @@
             var ctrl = this,
                 items = [];
             ctrl.resetAll = resetAll;
+            ctrl.enableAll = enableAll;
             ctrl.addItem = addItem;
 
             function addItem(item) {
@@ -24,6 +25,10 @@
 
             function resetAll() {
                 angular.forEach(items, function(item) { item.reset(); });
+            }
+
+            function enableAll() {
+                angular.forEach(items, function (item) { item.enable(); });
             }
         }
     }
