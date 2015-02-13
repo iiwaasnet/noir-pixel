@@ -5,12 +5,15 @@
             <div flow-init="{target: darkroomCtrl.imageUpload.endpoint, withCredentials: true}">
                 <div class="drop-zone"
                      flow-drop
-                     flow-file-progress="darkroomCtrl.progress($flow.progress())"
+                     flow-file-progress="darkroomCtrl.updateProgress($flow.progress())"
+                     flow-complete="darkroomCtrl.uploadCompleted()"
                      flow-files-submitted="$flow.upload()"
                      flow-btn>
                     <span class="text" np-i18n="Darkroom_DropZoone"></span>
 
-                    <div class="bar" ng-style="{'width': darkroomCtrl.loadProgress + '%' }"></div>
+                    <div class="bar"
+                         ng-style="{'width': darkroomCtrl.loadProgress + '%' }"
+                         ng-class="{'completed': darkroomCtrl.loadProgress === 0}"></div>
                 </div>
             </div>
         </div>

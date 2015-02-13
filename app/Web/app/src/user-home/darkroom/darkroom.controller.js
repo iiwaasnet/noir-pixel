@@ -4,16 +4,22 @@
     angular.module('np.user-home')
         .controller('DarkroomController', darkroomController);
 
-    darkroomController.$inject = ['$scope', 'Url', 'Config'];
+    darkroomController.$inject = ['$interval', 'Url', 'Config'];
 
-    function darkroomController($scope ,Url, Config) {
-        var ctrl = this;
-        ctrl.progress = progress;
+    function darkroomController($interval ,Url, Config) {
+        var ctrl = this,
+            progressClearDelay = 1000;
+        ctrl.updateProgress = updateProgress;
+        ctrl.uploadCompleted = uploadCompleted;
         ctrl.imageUpload = getImageUploadConfig();
-        ctrl.loadProgress = 0;
+        ctrl.loadProgress = undefined;
 
-        function progress(loaded) {
+        function updateProgress(loaded) {
             ctrl.loadProgress = loaded * 100;
+        }
+
+        function uploadCompleted() {
+            $interval(function () { ctrl.loadProgress = 0; }, progressClearDelay, 1);
         }
 
         function getImageUploadConfig() {

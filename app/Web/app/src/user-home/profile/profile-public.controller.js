@@ -14,7 +14,7 @@
         ctrl.imageUpload = getImageUploadConfig();
         ctrl.profileData = profileData.data.publicInfo;
         ctrl.uploadProfileImage = uploadProfileImage;
-        ctrl.refreshProfileImage = refreshProfileImage;
+        ctrl.uploadCompleted = uploadCompleted;
         ctrl.deleteProfileImage = deleteProfileImage;
         var unsubscribe;
 
@@ -45,7 +45,7 @@
             Progress.start();
         }
 
-        function refreshProfileImage() {
+        function uploadCompleted() {
             Progress.stop();
             Profile.getOwnProfile().then(getProfileSuccess);
         }

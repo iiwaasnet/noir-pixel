@@ -31,7 +31,7 @@
                 <div class="image-actions"
                      flow-init="{target: publicCtrl.imageUpload.endpoint, withCredentials: true}"
                      flow-files-added="publicCtrl.uploadProfileImage()"
-                     flow-complete="publicCtrl.refreshProfileImage()"
+                     flow-complete="publicCtrl.uploadCompleted()"
                      flow-files-submitted="$flow.upload()">
                     <div flow-btn
                          class="add"

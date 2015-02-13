@@ -111,6 +111,47 @@
             left: 0;
             top: 0;
             background-color: @beau-blue;
+
+            &.completed {
+                -moz-animation: slide-out-left 0.3s;
+                -o-animation: slide-out-left 0.3s;
+                -webkit-animation: slide-out-left 0.3s;
+                animation: slide-out-left 0.3s;
+                -moz-animation-fill-mode: forwards;
+                -o-animation-fill-mode: forwards;
+                -webkit-animation-fill-mode: forwards;
+                animation-fill-mode: forwards;
+            }
         }
+    }
+}
+
+@-moz-keyframes slide-out-left {
+    from {
+        width: 100%;
+    }
+
+    to {
+        width: 0;
+    }
+}
+
+@-webkit-keyframes slide-out-left {
+    from {
+        width: 100%;
+    }
+
+    to {
+        width: 0;
+    }
+}
+
+@keyframes slide-out-left {
+    from {
+        width: 100%;
+    }
+
+    to {
+        width: 0;
     }
 }
