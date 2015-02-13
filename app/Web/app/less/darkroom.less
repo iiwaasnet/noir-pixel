@@ -80,18 +80,37 @@
     }
 
     .drop-zone {
-        border-radius: 2px;
-        border: 2px solid @ecru-white;
+        border-radius: 3px;
+        border: 1px solid @ecru-white;
         width: 100%;
         height: @drop-zone-height;
         font-size: 200%;
         font-weight: 800;
         display: table;
+        cursor: pointer;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        position: relative;
+
+        &:hover {
+            border: 3px solid @ecru-white;
+        }
 
         .text {
             display: table-cell;
             text-align: center;
             vertical-align: middle;
+        }
+
+        .bar {
+            height: 100%;
+            width: 0;
+            z-index: -1;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: @beau-blue;
         }
     }
 }
