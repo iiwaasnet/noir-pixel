@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Security.Policy;
 using Api.App.Images;
 using Api.App.Images.Config;
 using JsonConfigurationProvider;
@@ -19,57 +20,57 @@ namespace Api.App.Media
 
         public ImageInfo CreateProfileImage(string source, string destination, string ownerId)
         {
-            using (var image = new Bitmap(source))
-            {
-                ImageUtils.SaveJpeg(destination,
-                                    ImageUtils.CropImage(ImageUtils.ResizeImageForCrop(image, config.ProfileImages.FullViewSize),
-                                                         config.ProfileImages.FullViewSize,
-                                                         config.ProfileImages.FullViewSize));
-
-                var mediaInfo = mediaManager.SaveMediaFile(destination, ownerId);
-                return new ImageInfo
-                       {
-                           MediaId = mediaInfo.MediaId,
-                           Uri = mediaInfo.Uri,
-                           Height = config.ProfileImages.FullViewSize,
-                           Width = config.ProfileImages.FullViewSize
-                       };
-            }
+            return CropSquareAndSaveImage(source, destination, ownerId, config.ProfileImages.FullViewSize);
         }
 
         public ImageInfo CreateProfileImageThumbnail(string source, string destination, string ownerId)
         {
-            using (var image = new Bitmap(source))
-            {
-                ImageUtils.SaveJpeg(destination,
-                                    ImageUtils.CropImage(ImageUtils.ResizeImageForCrop(image, config.ProfileImages.ThumbnailSize),
-                                                         config.ProfileImages.ThumbnailSize,
-                                                         config.ProfileImages.ThumbnailSize));
-
-                var mediaInfo = mediaManager.SaveMediaFile(destination, ownerId);
-                return new ImageInfo
-                       {
-                           MediaId = mediaInfo.MediaId,
-                           Uri = mediaInfo.Uri,
-                           Height = config.ProfileImages.ThumbnailSize,
-                           Width = config.ProfileImages.ThumbnailSize
-                       };
-            }
+            return CropSquareAndSaveImage(source, destination, ownerId, config.ProfileImages.ThumbnailSize);
         }
 
         public ImageInfo CreatePhoto(string source, string destination, string ownerId)
         {
-            throw new NotImplementedException();
+            using (var image = new Bitmap(source))
+            {
+                ImageUtils.SaveJpeg(destination, image);
+
+                var mediaInfo = mediaManager.SaveMediaFile(destination, ownerId);
+                return new ImageInfo
+                {
+                    MediaId = mediaInfo.MediaId,
+                    Uri = mediaInfo.Uri,
+                    Height = image.Height,
+                    Width = image.Width
+                };
+            }
         }
 
         public ImageInfo CreatePhotoPreview(string source, string destination, string ownerId)
         {
-            throw new NotImplementedException();
+            return CropSquareAndSaveImage(source, destination, ownerId, config.Photos.PreviewSize);
         }
 
         public ImageInfo CreatePhotoThumbnail(string source, string destination, string ownerId)
         {
-            throw new NotImplementedException();
+            return CropSquareAndSaveImage(source, destination, ownerId, config.Photos.ThumbnailSize);
+        }
+
+        private ImageInfo CropSquareAndSaveImage(string source, string destination, string ownerId, int size)
+        {
+            using (var image = new Bitmap(source))
+            {
+                ImageUtils.SaveJpeg(destination,
+                                    ImageUtils.CropImage(ImageUtils.ResizeImageForCrop(image, size), size, size));
+
+                var mediaInfo = mediaManager.SaveMediaFile(destination, ownerId);
+                return new ImageInfo
+                {
+                    MediaId = mediaInfo.MediaId,
+                    Uri = mediaInfo.Uri,
+                    Height = size,
+                    Width = size
+                };
+            }
         }
     }
 }
