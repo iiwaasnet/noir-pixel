@@ -4,11 +4,21 @@ namespace Api.App.Framework
 {
     public class SUIDGenerator
     {
+        private static DateTime UnixEpoch;
+
+        static SUIDGenerator()
+        {
+            UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        }
+
         public static string Generate()
         {
-            return Base62ToString(Rnd(6));
+            var unixDate = (uint) Math.Floor((DateTime.UtcNow.ToUniversalTime() - UnixEpoch).TotalSeconds)
+                           * (long) Math.Pow(10, 7);
+            var base62 = Base62ToString(unixDate + Rnd(7));
+            return base62;
         }
-        
+
         public static string Generate(int length)
         {
             return Base62ToString(Rnd(length));
@@ -20,7 +30,7 @@ namespace Api.App.Framework
 
             for (var i = 0; i < length; i++)
             {
-                id += StaticRandom.Instance.Next(0, 9) * (int)Math.Pow(10, i);
+                id += StaticRandom.Instance.Next(0, 9) * (int) Math.Pow(10, i);
             }
 
             return id;
@@ -59,13 +69,13 @@ namespace Api.App.Framework
         {
             if (value > 9)
             {
-                var ascii = (65 + ((int)value - 10));
+                var ascii = (65 + ((int) value - 10));
                 if (ascii > 90)
                 {
                     ascii += 6;
                 }
 
-                return (char)ascii;
+                return (char) ascii;
             }
 
             return value.ToString()[0];
