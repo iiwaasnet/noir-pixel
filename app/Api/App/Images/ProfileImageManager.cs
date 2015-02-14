@@ -6,6 +6,7 @@ using Api.App.Images.Config;
 using Api.App.Images.Entities;
 using Api.App.Media;
 using Api.App.Media.Config;
+using Api.App.Media.Extensions;
 using Api.App.Profiles.Entities;
 using Diagnostics;
 using JsonConfigurationProvider;
@@ -17,7 +18,7 @@ namespace Api.App.Images
 {
     public class ProfileImageManager : IProfileImageManager
     {
-        private readonly ImagesConfiguration config;
+        private readonly ProfileImagesConfiguration config;
         private readonly MediaConfiguration mediaConfig;
         private readonly IImageProcessor imageProcessor;
         private readonly MongoDatabase db;
@@ -32,7 +33,7 @@ namespace Api.App.Images
         {
             this.logger = logger;
             this.mediaManager = mediaManager;
-            config = configProvider.GetConfiguration<ImagesConfiguration>();
+            config = configProvider.GetConfiguration<ImagesConfiguration>().ProfileImages;
             mediaConfig = configProvider.GetConfiguration<MediaConfiguration>();
             this.imageProcessor = imageProcessor;
             db = appDbProvider.GetDatabase();
@@ -44,10 +45,10 @@ namespace Api.App.Images
             var currentProfileImage = profile.UserImage;
             var profileImage = new Entities.ProfileImage();
 
-            var profileImageName = ObjectId.GenerateNewId().ToString();
+            var profileImageId = profileImage.Id;
 
-            var fullViewFile = FullViewFileName(profile.Id, profileImageName, GetFileExtension(fileName));
-            var thumbnailFile = ThumbnailFileName(profile.Id, profileImageName, GetFileExtension(fileName));
+            var fullViewFile = FullViewFileName(profile.Id, profileImageId, fileName.GetFileExtension());
+            var thumbnailFile = ThumbnailFileName(profile.Id, profileImageId, fileName.GetFileExtension());
 
             EnsureTargetDirectoryExists(profile.Id);
 
@@ -76,11 +77,6 @@ namespace Api.App.Images
                        FullViewUrl = profileImage.FullView.Uri,
                        ThumbnailUrl = profileImage.Thumbnail.Uri
                    };
-        }
-
-        private static string GetFileExtension(string fileName)
-        {
-            return Path.GetExtension(fileName).TrimStart('.');
         }
 
         public ProfileImage SaveThumbnailLink(string userName, string url)
@@ -142,13 +138,13 @@ namespace Api.App.Images
         private string ThumbnailFileName(string id, string fileName, string ext)
         {
             return Path.Combine(ProfileImagesFolderName(id),
-                                string.Format(config.ProfileImages.ThumbnailNameTemplate, fileName, ext));
+                                string.Format(config.ThumbnailNameTemplate, fileName, ext));
         }
 
         private string FullViewFileName(string id, string fileName, string ext)
         {
             return Path.Combine(ProfileImagesFolderName(id),
-                                string.Format(config.ProfileImages.FullViewNameTemplate, fileName, ext));
+                                string.Format(config.FullViewNameTemplate, fileName, ext));
         }
 
         private string ProfileImagesFolderName(string id)

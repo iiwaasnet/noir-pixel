@@ -302,6 +302,7 @@
     <Compile Include="App\Images\Entities\Photo.cs" />
     <Compile Include="App\Media\Entities\Media.cs" />
     <Compile Include="App\Media\Entities\MediaLocation.cs" />
+    <Compile Include="App\Media\Extensions\FileNameExtensions.cs" />
     <Compile Include="App\Media\IImageProcessor.cs" />
     <Compile Include="App\Media\ImageInfo.cs" />
     <Compile Include="App\Media\ImageProcessor.cs" />
