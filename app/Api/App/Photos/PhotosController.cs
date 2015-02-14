@@ -5,7 +5,6 @@ using System.Web.Http;
 using Api.App.ApiBase;
 using Api.App.Images;
 using Api.App.Media;
-using Api.App.Profiles;
 
 namespace Api.App.Photos
 {
@@ -15,9 +14,8 @@ namespace Api.App.Photos
         private readonly IMediaManager mediaManager;
         private readonly IPhotosManager photosManager;
 
-        public PhotosController(IProfilesManager profilesManager,
-                                  IMediaManager mediaManager,
-                                  IPhotosManager photosManager)
+        public PhotosController(IMediaManager mediaManager,
+                                IPhotosManager photosManager)
         {
             this.mediaManager = mediaManager;
             this.photosManager = photosManager;

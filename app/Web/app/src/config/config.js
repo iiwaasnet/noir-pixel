@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     var config = {
@@ -24,11 +24,14 @@
             },
             Geo: {
                 Countries: 'geo/countries'
+            },
+            Photos: {
+                Upload: 'photos/upload'
             }
         },
         Profiles: {
             Image: {
-                MaxFileSize: '1',
+                MaxFileSizeMB: '1',
                 FullViewSize: '130',
                 ThumbnailSize: '32'
             }

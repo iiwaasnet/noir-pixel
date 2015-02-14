@@ -1,6 +1,4 @@
-﻿using System;
-using System.Drawing;
-using System.Security.Policy;
+﻿using System.Drawing;
 using Api.App.Images;
 using Api.App.Images.Config;
 using JsonConfigurationProvider;
@@ -36,12 +34,12 @@ namespace Api.App.Media
 
                 var mediaInfo = mediaManager.SaveMediaFile(destination, ownerId);
                 return new ImageInfo
-                {
-                    MediaId = mediaInfo.MediaId,
-                    Uri = mediaInfo.Uri,
-                    Height = image.Height,
-                    Width = image.Width
-                };
+                       {
+                           MediaId = mediaInfo.MediaId,
+                           Uri = mediaInfo.Uri,
+                           Height = image.Height,
+                           Width = image.Width
+                       };
             }
         }
 
@@ -64,12 +62,12 @@ namespace Api.App.Media
 
                 var mediaInfo = mediaManager.SaveMediaFile(destination, ownerId);
                 return new ImageInfo
-                {
-                    MediaId = mediaInfo.MediaId,
-                    Uri = mediaInfo.Uri,
-                    Height = size,
-                    Width = size
-                };
+                       {
+                           MediaId = mediaInfo.MediaId,
+                           Uri = mediaInfo.Uri,
+                           Height = size,
+                           Width = size
+                       };
             }
         }
     }

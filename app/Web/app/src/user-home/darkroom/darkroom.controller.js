@@ -11,7 +11,7 @@
             progressClearDelay = 1000;
         ctrl.updateProgress = updateProgress;
         ctrl.uploadCompleted = uploadCompleted;
-        ctrl.imageUpload = getImageUploadConfig();
+        ctrl.photoUpload = getPhotoUploadConfig();
         ctrl.loadProgress = undefined;
 
         function updateProgress(loaded) {
@@ -22,9 +22,9 @@
             $interval(function () { ctrl.loadProgress = 0; }, progressClearDelay, 1);
         }
 
-        function getImageUploadConfig() {
+        function getPhotoUploadConfig() {
             var config = {
-                endpoint: Url.build(Config.ApiUris.Base, Config.ApiUris.Profiles.UpdateProfileImage)
+                endpoint: Url.build(Config.ApiUris.Base, Config.ApiUris.Photos.Upload)
             };
             return config;
         }

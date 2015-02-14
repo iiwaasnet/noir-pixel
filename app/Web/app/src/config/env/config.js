@@ -1,4 +1,4 @@
-﻿(function() {
+﻿(function () {
     'use strict';
 
     var config = {
@@ -24,11 +24,14 @@
             },
             Geo: {
                 Countries: '@@ApiUris.Geo.Countries'
+            },
+            Photos: {
+                Upload: '@@ApiUris.Photos.Upload'
             }
         },
         Profiles: {
             Image: {
-                MaxFileSize: '@@Images.ProfileImages.MaxFileSizeMB',
+                MaxFileSizeMB: '@@Images.ProfileImages.MaxFileSizeMB',
                 FullViewSize: '@@Images.ProfileImages.FullViewSize',
                 ThumbnailSize: '@@Images.ProfileImages.ThumbnailSize'
             }

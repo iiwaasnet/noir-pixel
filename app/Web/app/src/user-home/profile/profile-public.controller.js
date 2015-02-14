@@ -67,7 +67,7 @@
             var config = {
                 endpoint: Url.build(Config.ApiUris.Base, Config.ApiUris.Profiles.UpdateProfileImage),
                 description: Strings.getLocalizedString('ProfilePublic_ProfilePhotoDescription')
-                    .format(Config.Profiles.Image.FullViewSize, Config.Profiles.Image.MaxFileSize)
+                    .format(Config.Profiles.Image.FullViewSize, Config.Profiles.Image.MaxFileSizeMB)
             };
             return config;
         }

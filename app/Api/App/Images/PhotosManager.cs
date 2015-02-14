@@ -7,11 +7,9 @@ using Api.App.Images.Entities;
 using Api.App.Media;
 using Api.App.Media.Config;
 using Api.App.Media.Extensions;
-using Api.App.Profiles.Entities;
 using Diagnostics;
 using JsonConfigurationProvider;
 using MongoDB.Driver;
-using MongoDB.Driver.Builders;
 
 namespace Api.App.Images
 {

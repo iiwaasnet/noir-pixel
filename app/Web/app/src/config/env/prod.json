@@ -16,6 +16,8 @@
     "ApiUris.Profiles.UpdatePublicInfo": "profiles/update-profile/public-info",
     "ApiUris.Profiles.UpdatePrivateInfo": "profiles/update-profile/private-info",
 
+    "ApiUris.Photos.Upload": "photos/upload",
+
     "ApiUris.Geo.Countries":  "geo/countries",
 
     "Strings.InvalidationTimeout": "01:00:00",

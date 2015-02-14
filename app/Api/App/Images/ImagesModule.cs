@@ -9,6 +9,10 @@ namespace Api.App.Images
             builder.RegisterType<ProfileImageManager>()
                    .As<IProfileImageManager>()
                    .SingleInstance();
+            
+            builder.RegisterType<PhotosManager>()
+                   .As<IPhotosManager>()
+                   .SingleInstance();
         }
     }
 }
