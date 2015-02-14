@@ -48,7 +48,7 @@ namespace Api.App.Images
             var previewFileName = FullPreviewFileName(profile.Id, photoId, fileName.GetFileExtension());
             var thumbnailFile = ThumbnailFileName(profile.Id, photoId, fileName.GetFileExtension());
 
-            EnsureTargetDirectoryExists(profile.Id);
+            EnsureTargetDirectoryExists(profile.Id, photoId);
 
             var imageInfo = imageProcessor.CreatePhoto(fileName, fullViewFile, profile.Id);
             photo.FullView = new PhotoFullViewData
@@ -83,36 +83,36 @@ namespace Api.App.Images
                    };
         }
 
-        private void EnsureTargetDirectoryExists(string userId)
+        private void EnsureTargetDirectoryExists(string userId, string photoId)
         {
-            var folder = PhotosFolderName(userId);
+            var folder = PhotosFolderName(userId, photoId);
             if (!Directory.Exists(folder))
             {
                 Directory.CreateDirectory(folder);
             }
         }
 
-        private string FullPreviewFileName(string id, string fileName, string ext)
+        private string FullPreviewFileName(string userId, string photoId, string ext)
         {
-            return Path.Combine(PhotosFolderName(id),
-                                string.Format(config.PreviewNameTemplate, fileName, ext));
+            return Path.Combine(PhotosFolderName(userId, photoId),
+                                string.Format(config.PreviewNameTemplate, photoId, ext));
         }
 
-        private string ThumbnailFileName(string id, string fileName, string ext)
+        private string ThumbnailFileName(string userId, string photoId, string ext)
         {
-            return Path.Combine(PhotosFolderName(id),
-                                string.Format(config.ThumbnailNameTemplate, fileName, ext));
+            return Path.Combine(PhotosFolderName(userId, photoId),
+                                string.Format(config.ThumbnailNameTemplate, photoId, ext));
         }
 
-        private string FullViewFileName(string id, string fileName, string ext)
+        private string FullViewFileName(string userId, string photoId, string ext)
         {
-            return Path.Combine(PhotosFolderName(id),
-                                string.Format(config.FullViewNameTemplate, fileName, ext));
+            return Path.Combine(PhotosFolderName(userId, photoId),
+                                string.Format(config.FullViewNameTemplate, photoId, ext));
         }
 
-        private string PhotosFolderName(string id)
+        private string PhotosFolderName(string userId, string photoId)
         {
-            return string.Format(mediaConfig.PhotosFolderTemplate, id);
+            return string.Format(mediaConfig.PhotosFolderTemplate, userId, photoId);
         }
     }
 }

@@ -4,7 +4,7 @@
             "rootMediaFolder": "c:\\np-media",
             "uploadFolder": "tmp",
             "profileImageFolderTemplate": "files\\{0}\\profile",
-            "photosFolderTemplate": "files\\{0}\\photos"
+            "photosFolderTemplate": "files\\{0}\\photos\\{1}"
         }
     }
 ]
