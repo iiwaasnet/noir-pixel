@@ -46,14 +46,16 @@
         }
 
         function convertToMessage(obj, placeholders, fallbackMsgCode) {
-            var tmp = { main: obj };
-            if (obj.main) {
-                tmp.main = obj.main.message ? obj.main.message : Strings.getLocalizedString(obj.main.code);
-                if (placeholders) {
-                    tmp.main = tmp.main.formatNamed(placeholders);
-                }
-                if (obj.aux) {
-                    tmp.aux = obj.aux.message ? obj.aux.message : Strings.getLocalizedString(obj.aux.code);
+            var tmp = {};
+            if (obj) {
+                if (obj.main) {
+                    tmp.main = obj.main.message ? obj.main.message : Strings.getLocalizedString(obj.main.code);
+                    if (placeholders) {
+                        tmp.main = tmp.main.formatNamed(placeholders);
+                    }
+                    if (obj.aux) {
+                        tmp.aux = obj.aux.message ? obj.aux.message : Strings.getLocalizedString(obj.aux.code);
+                    }
                 }
             }
             if (!tmp.main) {
