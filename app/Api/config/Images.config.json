@@ -13,7 +13,7 @@
                 "fullViewNameTemplate": "{0}_f.{1}",
                 "thumbnailNameTemplate": "{0}_fth.{1}",
                 "previewNameTemplate": "{0}_fp.{1}",
-                "fullView": {
+                "fullViewSize": {
                     "maxHeight": "800",
                     "maxWidth": "800",
                     "minHeight": "200",

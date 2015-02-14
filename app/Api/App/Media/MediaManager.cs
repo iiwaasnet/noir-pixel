@@ -38,6 +38,7 @@ namespace Api.App.Media
 
         public async Task<MediaUploadResult> ReceiveMediaChunk(HttpRequestMessage request, string userName)
         {
+            //TODO: Assert file size doesn't exceed the max allowed for images (profile, photos, etc.)
             AssertRequestIsMultipart(request);
             EnsureRootUploadFolderExists();
 
