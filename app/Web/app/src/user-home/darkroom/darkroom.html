@@ -4,6 +4,7 @@
         <div class="column-center">
             <div flow-init="{target: darkroomCtrl.imageUpload.endpoint, withCredentials: true}">
                 <div class="drop-zone"
+                     ng-class="dropZoneClass"
                      flow-drop
                      flow-file-progress="darkroomCtrl.updateProgress($flow.progress())"
                      flow-complete="darkroomCtrl.uploadCompleted()"
@@ -17,7 +18,7 @@
                 </div>
             </div>
         </div>
-        <div class="column-right"></div>
+        <!--<div class="column-right"></div>-->
     </div>
 
 
@@ -58,6 +59,6 @@
         <div class="column-center">
 
         </div>
-        <div class="column-right"></div>
+        <!--<div class="column-right"></div>-->
     </div>
 </div>

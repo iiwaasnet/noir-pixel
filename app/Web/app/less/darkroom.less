@@ -3,7 +3,7 @@
 @import (reference) "icons.less";
 @import (reference) "colors.less";
 
-@drop-zone-height: 3em;
+@drop-zone-height: 2.8em;
 @menu-section-width: 250px;
 
 #darkroom {
@@ -92,9 +92,13 @@
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
         position: relative;
+        padding: 0.2em;
 
-        &:hover {
-            border: 3px solid @ecru-white;
+        &.drag-over {
+            .text {
+                background-color: @ecru-white;
+                color: @mine-shaft;
+            }
         }
 
         .text {
