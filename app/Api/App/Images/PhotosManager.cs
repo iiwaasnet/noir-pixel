@@ -40,7 +40,11 @@ namespace Api.App.Images
         {
             //TODO: Assert photo dimensions
             var profile = db.GetProfile(userName);
-            var photo = new Entities.Photo {OwnerId = profile.Id};
+            var photo = new Entities.Photo
+            {
+                OwnerId = profile.Id,
+                ShortId = SUIDGenerator.Generate()
+            };
 
             var photoId = photo.Id;
 
@@ -56,8 +60,7 @@ namespace Api.App.Images
                                  MediaId = imageInfo.MediaId,
                                  Uri = imageInfo.Uri,
                                  Height = imageInfo.Height,
-                                 Width = imageInfo.Width,
-                                 ShortId = SUIDGenerator.Generate()
+                                 Width = imageInfo.Width
                              };
             imageInfo = imageProcessor.CreatePhotoPreview(fileName, previewFileName, profile.Id);
             photo.Preview = new MediaData
