@@ -19,8 +19,8 @@
                     "minHeight": "@@Images.Photos.MinHeight",
                     "minWidth": "@@Images.Photos.MinWidth"
                 },
-                "previewSize": "300",
-                "thumbnailSize": "60"
+                "previewSize": "@@Images.Photos.PreviewSize",
+                "thumbnailSize": "@@Images.Photos.ThumbnailSize"
             }
         }
     }

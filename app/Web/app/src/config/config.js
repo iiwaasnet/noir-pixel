@@ -36,6 +36,10 @@
                 ThumbnailSize: '32'
             }
         },
+        Photos: {
+            PreviewSize: '130',
+            ThumbnailSize: '60'
+        },
         Strings: {
             InvalidationTimeout: '00:10:00',
             VersionsUri: '/strings/versions',

@@ -11,11 +11,15 @@
             progressClearDelay = 1000;
         ctrl.updateProgress = updateProgress;
         ctrl.uploadCompleted = uploadCompleted;
+        ctrl.fileUploadSuccess = fileUploadSuccess;
         ctrl.photoUpload = getPhotoUploadConfig();
         ctrl.loadProgress = undefined;
 
         function updateProgress(loaded) {
             ctrl.loadProgress = loaded * 100;
+        }
+
+        function fileUploadSuccess(response) {
         }
 
         function uploadCompleted() {

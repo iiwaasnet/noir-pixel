@@ -36,6 +36,10 @@
                 ThumbnailSize: '@@Images.ProfileImages.ThumbnailSize'
             }
         },
+        Photos: {
+            PreviewSize: '@@Images.Photos.PreviewSize',
+            ThumbnailSize: '@@Images.Photos.ThumbnailSize'
+        },
         Strings: {
             InvalidationTimeout: '@@Strings.InvalidationTimeout',
             VersionsUri: '@@Strings.VersionsUri',

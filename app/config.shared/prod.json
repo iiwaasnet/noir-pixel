@@ -10,5 +10,7 @@
     "Images.Photos.MaxHeight": "800",
     "Images.Photos.MaxWidth": "800",
     "Images.Photos.MinHeight": "200",
-    "Images.Photos.MinWidth": "200"
+    "Images.Photos.MinWidth": "200",
+    "Images.Photos.PreviewSize": "130",
+    "Images.Photos.ThumbnailSize": "60"
 }

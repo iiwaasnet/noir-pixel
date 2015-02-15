@@ -8,6 +8,7 @@
                      flow-drop
                      flow-file-progress="darkroomCtrl.updateProgress($flow.progress())"
                      flow-complete="darkroomCtrl.uploadCompleted()"
+                     flow-file-success="darkroomCtrl.fileUploadSuccess($message)"
                      flow-files-submitted="$flow.upload()"
                      flow-btn>
                     <span class="text" np-i18n="Darkroom_DropZoone"></span>

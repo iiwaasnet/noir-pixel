@@ -80,6 +80,7 @@ namespace Api.App.Images
 
             return new Photo
                    {
+                       Id = photo.ShortId,
                        FullViewUrl = photo.FullView.Uri,
                        PreviewUrl = photo.Preview.Uri,
                        ThumbnailUrl = photo.Thumbnail.Uri
