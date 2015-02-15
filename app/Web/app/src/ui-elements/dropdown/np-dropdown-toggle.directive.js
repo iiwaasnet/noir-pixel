@@ -13,7 +13,7 @@
 
         return dir;
 
-        function link(scope, element, attrs, npDropdownCtrl) {
+        function link(scope, element) {
             var NG_HIDE_CLASS = 'ng-hide',
                 closeDropdownAttr = 'np-close-dropdown';
             element.addClass(NG_HIDE_CLASS);
