@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Api.App.Db;
 using Api.App.Db.Extensions;
 using Api.App.Framework;
@@ -90,6 +91,7 @@ namespace Api.App.Images
         {
             offset = offset ?? 0;
             count = count ?? DefaultPhotoCount;
+            count = Math.Min(count.Value, DefaultPhotoCount);
 
             var profile = db.GetProfile(userName);
             var collection = db.GetCollection<Entities.Photo>(Entities.Photo.CollectionName);

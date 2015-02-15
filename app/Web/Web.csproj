@@ -426,6 +426,8 @@
     <Content Include="app\src\geo\geo.module.js" />
     <Content Include="app\src\geo\geo.service.js" />
     <Content Include="app\src\interceptors\httpProgressInterceptor.js" />
+    <Content Include="app\src\photos\photos.module.js" />
+    <Content Include="app\src\photos\photos.service.js" />
     <Content Include="app\src\profile\profile.module.js" />
     <Content Include="app\src\profile\profile.service.js" />
     <Content Include="app\src\roles\roles.module.js" />
