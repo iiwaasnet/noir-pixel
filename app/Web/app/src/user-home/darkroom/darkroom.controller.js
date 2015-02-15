@@ -9,6 +9,7 @@
     function darkroomController($interval ,Url, Config, Photos) {
         var ctrl = this,
             progressClearDelay = 1000;
+        ctrl.loading = false;
         ctrl.updateProgress = updateProgress;
         ctrl.uploadCompleted = uploadCompleted;
         ctrl.fileUploadSuccess = fileUploadSuccess;
