@@ -293,11 +293,15 @@
     <Compile Include="App\Images\Config\SizeConstraints.cs" />
     <Compile Include="App\Images\Entities\MediaData.cs" />
     <Compile Include="App\Images\Entities\PhotoFullViewData.cs" />
+    <Compile Include="App\Images\Entities\PhotoStatus.cs" />
     <Compile Include="App\Images\ImageUtils.cs" />
     <Compile Include="App\Images\ImagesModule.cs" />
     <Compile Include="App\Images\IPhotosManager.cs" />
     <Compile Include="App\Images\IProfileImageManager.cs" />
+    <Compile Include="App\Images\Paging.cs" />
+    <Compile Include="App\Images\PendingPhotos.cs" />
     <Compile Include="App\Images\Photo.cs" />
+    <Compile Include="App\Images\PhotosManager.private.cs" />
     <Compile Include="App\Images\PhotosManager.cs" />
     <Compile Include="App\Images\ProfileImage.cs" />
     <Compile Include="App\Images\ProfileImageManager.cs" />

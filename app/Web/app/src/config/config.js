@@ -26,7 +26,8 @@
                 Countries: 'geo/countries'
             },
             Photos: {
-                Upload: 'photos/upload'
+                Upload: 'photos/upload',
+                GetPending: 'photos/pending'
             }
         },
         Profiles: {

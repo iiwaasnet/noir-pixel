@@ -8,6 +8,7 @@ using Api.App.Media;
 
 namespace Api.App.Photos
 {
+    [Authorize]
     [RoutePrefix("photos")]
     public class PhotosController : ApiBaseController
     {
@@ -55,6 +56,15 @@ namespace Api.App.Photos
             {
                 return ApiError(HttpStatusCode.NotAcceptable);
             }
+        }
+
+        [HttpGet]
+        [Route("pending")]
+        public IHttpActionResult GetPendingPhotos(int? offset = null, int? count = null)
+        {
+            var pendingPhotos = photosManager.GetPendingPhotos(User.Identity.Name, offset, count);
+
+            return Ok(pendingPhotos);
         }
     }
 }

@@ -26,7 +26,8 @@
                 Countries: '@@ApiUris.Geo.Countries'
             },
             Photos: {
-                Upload: '@@ApiUris.Photos.Upload'
+                Upload: '@@ApiUris.Photos.Upload',
+                GetPending: '@@ApiUris.Photos.GetPending'
             }
         },
         Profiles: {

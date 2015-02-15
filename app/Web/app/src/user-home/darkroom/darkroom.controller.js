@@ -14,6 +14,17 @@
         ctrl.fileUploadSuccess = fileUploadSuccess;
         ctrl.photoUpload = getPhotoUploadConfig();
         ctrl.loadProgress = undefined;
+        ctrl.pendingPhotos = [];
+
+        activate();
+
+        function activate() {
+            getPendingPhotos();
+        }
+
+        function getPendingPhotos() {
+            
+        }
 
         function updateProgress(loaded) {
             ctrl.loadProgress = loaded * 100;

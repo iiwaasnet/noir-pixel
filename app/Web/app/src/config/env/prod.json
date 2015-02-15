@@ -17,6 +17,7 @@
     "ApiUris.Profiles.UpdatePrivateInfo": "profiles/update-profile/private-info",
 
     "ApiUris.Photos.Upload": "photos/upload",
+    "ApiUris.Photos.GetPending": "photos/pending",
 
     "ApiUris.Geo.Countries":  "geo/countries",
 

@@ -1,4 +1,4 @@
-﻿using System.IO;
+﻿using System.Linq;
 using Api.App.Db;
 using Api.App.Db.Extensions;
 using Api.App.Framework;
@@ -10,26 +10,25 @@ using Api.App.Media.Extensions;
 using Diagnostics;
 using JsonConfigurationProvider;
 using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 
 namespace Api.App.Images
 {
-    public class PhotosManager : IPhotosManager
+    public partial class PhotosManager : IPhotosManager
     {
         private readonly PhotosConfiguration config;
         private readonly MediaConfiguration mediaConfig;
         private readonly IImageProcessor imageProcessor;
         private readonly MongoDatabase db;
         private readonly ILogger logger;
-        private readonly IMediaManager mediaManager;
+        private const int DefaultPhotoCount = 20;
 
         public PhotosManager(IAppDbProvider appDbProvider,
                              IImageProcessor imageProcessor,
                              IConfigProvider configProvider,
-                             IMediaManager mediaManager,
                              ILogger logger)
         {
             this.logger = logger;
-            this.mediaManager = mediaManager;
             config = configProvider.GetConfiguration<ImagesConfiguration>().Photos;
             mediaConfig = configProvider.GetConfiguration<MediaConfiguration>();
             this.imageProcessor = imageProcessor;
@@ -41,10 +40,10 @@ namespace Api.App.Images
             //TODO: Assert photo dimensions
             var profile = db.GetProfile(userName);
             var photo = new Entities.Photo
-            {
-                OwnerId = profile.Id,
-                ShortId = SUIDGenerator.Generate()
-            };
+                        {
+                            OwnerId = profile.Id,
+                            ShortId = SUIDGenerator.Generate()
+                        };
 
             var photoId = photo.Id;
 
@@ -87,36 +86,34 @@ namespace Api.App.Images
                    };
         }
 
-        private void EnsureTargetDirectoryExists(string userId, string photoId)
+        public PendingPhotos GetPendingPhotos(string userName, int? offset, int? count)
         {
-            var folder = PhotosFolderName(userId, photoId);
-            if (!Directory.Exists(folder))
-            {
-                Directory.CreateDirectory(folder);
-            }
-        }
+            offset = offset ?? 0;
+            count = count ?? DefaultPhotoCount;
 
-        private string FullPreviewFileName(string userId, string photoId, string ext)
-        {
-            return Path.Combine(PhotosFolderName(userId, photoId),
-                                string.Format(config.PreviewNameTemplate, photoId, ext));
-        }
+            var profile = db.GetProfile(userName);
+            var collection = db.GetCollection<Entities.Photo>(Entities.Photo.CollectionName);
+            var pendingPhotos = collection.FindAs<Entities.Photo>(Query.And(Query<Entities.Photo>.EQ(p => p.OwnerId, profile.Id),
+                                                                            Query<Entities.Photo>.EQ(p => p.Status, PhotoStatus.Pending)))
+                                          .SetSortOrder(SortBy<Entities.Photo>.Descending(p => p.Id))
+                                          .SetSkip(offset.Value)
+                                          .SetLimit(count.Value);
 
-        private string ThumbnailFileName(string userId, string photoId, string ext)
-        {
-            return Path.Combine(PhotosFolderName(userId, photoId),
-                                string.Format(config.ThumbnailNameTemplate, photoId, ext));
-        }
-
-        private string FullViewFileName(string userId, string photoId, string ext)
-        {
-            return Path.Combine(PhotosFolderName(userId, photoId),
-                                string.Format(config.FullViewNameTemplate, photoId, ext));
-        }
-
-        private string PhotosFolderName(string userId, string photoId)
-        {
-            return string.Format(mediaConfig.PhotosFolderTemplate, userId, photoId);
+            return new PendingPhotos
+                   {
+                       Photos = pendingPhotos.Select(p => new Photo
+                                                          {
+                                                              Id = p.ShortId,
+                                                              FullViewUrl = p.FullView.Uri,
+                                                              PreviewUrl = p.Preview.Uri,
+                                                              ThumbnailUrl = p.Thumbnail.Uri
+                                                          }),
+                       Paging = new Paging
+                                {
+                                    Offset = offset.Value,
+                                    Count = count.Value
+                                }
+                   };
         }
     }
 }
