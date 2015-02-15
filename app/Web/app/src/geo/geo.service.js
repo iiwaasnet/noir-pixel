@@ -11,7 +11,7 @@
         srv.getCountries = getCountries;
 
         function getCountries() {
-            var url = Url.buildUrl(Config.ApiUris.Geo.Countries);
+            var url = Url.buildApiUrl(Config.ApiUris.Geo.Countries);
             return $http.get(url);
         }
     }

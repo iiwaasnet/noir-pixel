@@ -24,7 +24,7 @@
 
 
         function updatePublicInfo(publicInfo) {
-            var url = Url.buildUrl(Config.ApiUris.Profiles.UpdatePublicInfo);
+            var url = Url.buildApiUrl(Config.ApiUris.Profiles.UpdatePublicInfo);
             return $http.post(url, {
                 userFullName: publicInfo.userFullName,
                 livesIn: {
@@ -37,7 +37,7 @@
         function deleteProfileImage() {
             var deferred = $q.defer();
 
-            var url = Url.buildUrl(Config.ApiUris.Profiles.DeleteProfileImage);
+            var url = Url.buildApiUrl(Config.ApiUris.Profiles.DeleteProfileImage);
             $http.delete(url).then(
                 function(response) { deleteProfileImageSuccess(deferred); },
                 function(reason) { deleteProfileImageError(reason, deferred); });
@@ -59,7 +59,7 @@
 
         function getUserProfile(userName) {
             if (userName) {
-                var url = Url.buildUrl(Config.ApiUris.Profiles.Profile).formatNamed({ userName: userName });
+                var url = Url.buildApiUrl(Config.ApiUris.Profiles.Profile).formatNamed({ userName: userName });
                 return $http.get(url);
             }
 
