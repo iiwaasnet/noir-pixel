@@ -39,7 +39,7 @@
 
         function getPhotoUploadConfig() {
             var config = {
-                endpoint: Url.build(Config.ApiUris.Base, Config.ApiUris.Photos.Upload)
+                endpoint: Url.buildUrl(Config.ApiUris.Photos.Upload)
             };
             return config;
         }
