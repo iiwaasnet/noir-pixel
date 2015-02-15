@@ -4,9 +4,9 @@
     angular.module('np.user-home')
         .controller('DarkroomController', darkroomController);
 
-    darkroomController.$inject = ['$interval', 'Url', 'Config'];
+    darkroomController.$inject = ['$interval', 'Url', 'Config', 'Photos'];
 
-    function darkroomController($interval ,Url, Config) {
+    function darkroomController($interval ,Url, Config, Photos) {
         var ctrl = this,
             progressClearDelay = 1000;
         ctrl.updateProgress = updateProgress;
@@ -23,8 +23,15 @@
         }
 
         function getPendingPhotos() {
-            
+            Photos.getPendingPhotos()
+                .then(getPendingPhotosSuccess, getPendingPhotosError);
         }
+
+        function getPendingPhotosSuccess(response) {
+            ctrl.pendingPhotos = response.data.photos;
+        }
+
+        function getPendingPhotosError(error) {}
 
         function updateProgress(loaded) {
             ctrl.loadProgress = loaded * 100;
@@ -39,7 +46,7 @@
 
         function getPhotoUploadConfig() {
             var config = {
-                endpoint: Url.buildUrl(Config.ApiUris.Photos.Upload)
+                endpoint: Url.buildApiUrl(Config.ApiUris.Photos.Upload)
             };
             return config;
         }
