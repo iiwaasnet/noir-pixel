@@ -11,19 +11,18 @@
         <base href="/" />
     </head>
     <body flow-prevent-drop flow-drag-enter="dropZoneClass='drag-over'" flow-drag-leave="dropZoneClass=''">
-        <div id="progress-overlay" class="hidden">
-            <div id="init-loading" class="centered-outer" ng-if="false">
-                <div class="centered-middle">
-                    <div class="centered-inner">
-                        <div class="message">Loading...</div>
-                        <div class="spinner">
-                            <div class="double-bounce1"></div>
-                            <div class="double-bounce2"></div>
-                        </div>
+        <div id="init-loading" class="centered-outer" ng-if="false">
+            <div class="centered-middle">
+                <div class="centered-inner">
+                    <div class="message">Loading...</div>
+                    <div class="spinner">
+                        <div class="double-bounce1"></div>
+                        <div class="double-bounce2"></div>
                     </div>
                 </div>
             </div>
         </div>
+        <div id="progress-overlay" class="hidden"></div>
         <div ng-cloak>
             @{
                 if (Request.ShowHeader())
@@ -53,12 +52,6 @@
         <script src="~/app/src/vendor-ng.js"></script>
         <script src="~/app/src/app.js"></script>
 
-        @*@Scripts.Render("~/bundles/vendor-native")
-            @Scripts.Render("~/bundles/angular")
-            @Scripts.Render("~/bundles/vendor-ng")
-            @Scripts.Render("~/bundles/vendor-ng-min")
-            @Scripts.Render("~/bundles/app")*@
-
         <script type="text/javascript">
             (function() {
                 var srv = angular.injector(['ng', 'np.i18n']).get('Strings');
@@ -71,7 +64,6 @@
                         function() {
                             alert("Sorry, something went wrong :(");
                         });
-
             })();
         </script>
     </body>
