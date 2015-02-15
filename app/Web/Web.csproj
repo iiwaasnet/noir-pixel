@@ -435,6 +435,8 @@
     <Content Include="app\src\ui-elements\autofocus\np-autofocus.directive.js" />
     <Content Include="app\src\ui-elements\inplace\inplace-buttons.html" />
     <Content Include="app\src\ui-elements\inplace\np-inplace-buttons.directive.js" />
+    <Content Include="app\src\ui-elements\spinner\np-spinner.directive.js" />
+    <Content Include="app\src\ui-elements\spinner\spinner.html" />
     <Content Include="app\src\ui-elements\state-menu\np-state-menu-item.directive.js" />
     <Content Include="app\src\ui-elements\state-menu\np-state-menu.directive.js" />
     <Content Include="app\src\ui-elements\user-thumbnail\np-user-thumbnail.directive.js" />
