@@ -24,15 +24,19 @@
         }
 
         function getPendingPhotos() {
+            ctrl.loadig = true;
             Photos.getPendingPhotos()
-                .then(getPendingPhotosSuccess, getPendingPhotosError);
+                .then(getPendingPhotosSuccess, getPendingPhotosError, 1);
         }
 
         function getPendingPhotosSuccess(response) {
+            
             ctrl.pendingPhotos = response.data.photos;
         }
 
-        function getPendingPhotosError(error) {}
+        function getPendingPhotosError(error) {
+            ctrl.loading = false;
+        }
 
         function updateProgress(loaded) {
             ctrl.loadProgress = loaded * 100;

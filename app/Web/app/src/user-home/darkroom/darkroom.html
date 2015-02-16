@@ -56,6 +56,10 @@
         </div>
         <div class="column-center">
             <np-spinner ng-if="darkroomCtrl.loading"></np-spinner>
+            
+            <div>
+                <img ng-repeat="photo in darkroomCtrl.pendingPhotos" ng-src="{{::photo.previewUrl}}" />
+            </div>
         </div>
     </div>
 </div>

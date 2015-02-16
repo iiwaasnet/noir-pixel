@@ -15,11 +15,11 @@
                 "previewNameTemplate": "{0}_fp.{1}",
                 "fullViewSize": {
                     "maxHeight": "800",
-                    "maxWidth": "800",
-                    "minHeight": "200",
-                    "minWidth": "200"
+                    "maxWidth": "1000",
+                    "minHeight": "300",
+                    "minWidth": "300"
                 },
-                "previewSize": "130",
+                "previewSize": "250",
                 "thumbnailSize": "60"
             }
         }

@@ -43,7 +43,8 @@ namespace Api.App.Images
             var photo = new Entities.Photo
                         {
                             OwnerId = profile.Id,
-                            ShortId = SUIDGenerator.Generate()
+                            ShortId = SUIDGenerator.Generate(),
+                            Status = PhotoStatus.Pending
                         };
 
             var photoId = photo.Id;

@@ -295,7 +295,7 @@ namespace Resources.Client {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your full name will be displayed instead of username.
+        ///   Looks up a localized string similar to Full name will be displayed instead of username.
         /// </summary>
         public static string Hint_FullName {
             get {

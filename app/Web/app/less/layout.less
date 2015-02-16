@@ -1,0 +1,23 @@
+﻿@side-column-width: 100px;
+@min-center-column-width: 900px;
+
+.layout {
+    &.column-left {
+        -ms-flex: 0 0 @side-column-width;
+        -webkit-flex: 0 0 @side-column-width;
+        flex: 0 0 @side-column-width;
+    }
+
+    &.column-center {
+        -webkit-flex: 1 1 auto;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        min-width: @min-center-column-width;
+    }
+
+    &.column-right {
+        -ms-flex: 0 0 @side-column-width;
+        -webkit-flex: 0 0 @side-column-width;
+        flex: 0 0 @side-column-width;
+    }
+}

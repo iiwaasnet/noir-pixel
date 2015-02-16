@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -63,8 +65,21 @@ namespace Api.App.Photos
         public IHttpActionResult GetPendingPhotos(int? offset = null, int? count = null)
         {
             var pendingPhotos = photosManager.GetPendingPhotos(User.Identity.Name, offset, count);
+            pendingPhotos.Photos = MakeAbsoluteUrl(pendingPhotos.Photos);
 
             return Ok(pendingPhotos);
+        }
+
+        private IEnumerable<Photo> MakeAbsoluteUrl(IEnumerable<Photo> photos)
+        {
+            foreach (var photo in photos)
+            {
+                photo.FullViewUrl = MakeAbsoluteUrl(photo.FullViewUrl);
+                photo.PreviewUrl = MakeAbsoluteUrl(photo.PreviewUrl);
+                photo.ThumbnailUrl = MakeAbsoluteUrl(photo.ThumbnailUrl);
+
+                yield return photo;
+            }
         }
     }
 }

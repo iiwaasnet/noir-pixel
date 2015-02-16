@@ -13,7 +13,8 @@ namespace Api.App.Images.Entities
 
         public string ShortId { get; set; }
         public PhotoStatus Status { get; set; }
-        public int Category { get; set; }
+        [BsonIgnoreIfNull]
+        public int? Category { get; set; }
         public bool PublishedToGallery { get; set; }
         public PhotoFullViewData FullView { get; set; }
         public MediaData Preview { get; set; }

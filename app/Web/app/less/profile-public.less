@@ -32,6 +32,14 @@
 }
 
 #profile-public {
+    .column-center {
+        width: @profile-data-width;
+        max-width: @max-profile-data-width;
+        -webkit-flex: 0 0 auto;
+        -ms-flex: 0 0 auto;
+        flex: 0 0 auto;
+    }
+
     .full-name {
         width: 100%;
     }
@@ -54,12 +62,6 @@
 
     .city {
         width: 100% - @country-select-width - 1%;
-    }
-
-    .column-center {
-        width: @profile-data-width;
-        -ms-flex: 0 1 auto;
-        flex: 0 1 auto;
     }
 
     .column-right {

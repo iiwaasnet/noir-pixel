@@ -295,6 +295,9 @@
     <Content Include="app\less\inplace-buttons.css">
       <DependentUpon>inplace-buttons.less</DependentUpon>
     </Content>
+    <Content Include="app\less\layout.css">
+      <DependentUpon>layout.less</DependentUpon>
+    </Content>
     <Content Include="app\less\links.css">
       <DependentUpon>links.less</DependentUpon>
     </Content>
@@ -404,6 +407,10 @@
     <Content Include="app\less\icons.less" />
     <Content Include="app\less\icons.css.map">
       <DependentUpon>icons.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\layout.less" />
+    <Content Include="app\less\layout.css.map">
+      <DependentUpon>layout.css</DependentUpon>
     </Content>
     <None Include="app\less\ui-select\select.less" />
     <Content Include="app\less\ui-select\select.css">

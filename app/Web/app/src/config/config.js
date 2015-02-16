@@ -38,7 +38,7 @@
             }
         },
         Photos: {
-            PreviewSize: '130',
+            PreviewSize: '250',
             ThumbnailSize: '60'
         },
         Strings: {

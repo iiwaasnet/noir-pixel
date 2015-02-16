@@ -184,7 +184,7 @@
     <value>Gallery</value>
   </data>
   <data name="Hint_FullName" xml:space="preserve">
-    <value>Your full name will be displayed instead of username</value>
+    <value>Full name will be displayed instead of username</value>
   </data>
   <data name="Label_Country" xml:space="preserve">
     <value>Country</value>
