@@ -42,14 +42,14 @@ namespace Api.App.Photos
                 var mediaUploadResult = await mediaManager.ReceiveMediaChunk(Request, User.Identity.Name);
                 if (mediaUploadResult.Completed)
                 {
-                    var url = photosManager.SavePhoto(User.Identity.Name, mediaUploadResult.FileName);
-                    url.FullViewUrl = MakeAbsoluteUrl(url.FullViewUrl);
-                    url.PreviewUrl = MakeAbsoluteUrl(url.PreviewUrl);
-                    url.ThumbnailUrl = MakeAbsoluteUrl(url.ThumbnailUrl);
+                    var photo = photosManager.SavePhoto(User.Identity.Name, mediaUploadResult.FileName);
+                    photo.FullViewUrl = MakeAbsoluteUrl(photo.FullViewUrl);
+                    photo.PreviewUrl = MakeAbsoluteUrl(photo.PreviewUrl);
+                    photo.ThumbnailUrl = MakeAbsoluteUrl(photo.ThumbnailUrl);
 
                     mediaManager.DeleteMediaFile(mediaUploadResult.FileName);
 
-                    return Ok(url);
+                    return Ok(photo);
                 }
 
                 return Ok();

@@ -6,7 +6,7 @@
 
     darkroomController.$inject = ['$interval', 'Url', 'Config', 'Photos'];
 
-    function darkroomController($interval ,Url, Config, Photos) {
+    function darkroomController($interval, Url, Config, Photos) {
         var ctrl = this,
             progressClearDelay = 1000;
         ctrl.loading = false;
@@ -24,18 +24,17 @@
         }
 
         function getPendingPhotos() {
-            ctrl.loadig = true;
+            ctrl.loading = true;
             Photos.getPendingPhotos()
-                .then(getPendingPhotosSuccess, getPendingPhotosError, 1);
+                .then(getPendingPhotosSuccess, getPendingPhotosError)
+                .then(function() { ctrl.loading = false; });
         }
 
         function getPendingPhotosSuccess(response) {
-            
             ctrl.pendingPhotos = response.data.photos;
         }
 
         function getPendingPhotosError(error) {
-            ctrl.loading = false;
         }
 
         function updateProgress(loaded) {
@@ -43,10 +42,11 @@
         }
 
         function fileUploadSuccess(response) {
+            ctrl.pendingPhotos.splice(0, 0, angular.fromJson(response));
         }
 
         function uploadCompleted() {
-            $interval(function () { ctrl.loadProgress = 0; }, progressClearDelay, 1);
+            $interval(function() { ctrl.loadProgress = 0; }, progressClearDelay, 1);
         }
 
         function getPhotoUploadConfig() {
