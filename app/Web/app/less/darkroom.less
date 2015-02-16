@@ -2,6 +2,8 @@
 @import (reference) "animations.less";
 @import (reference) "icons.less";
 @import (reference) "colors.less";
+@import (reference) "column-layout.less";
+@import (reference) "images.less";
 
 @drop-zone-height: 2.8em;
 @menu-section-width: 250px;
@@ -126,6 +128,22 @@
                 -o-animation-fill-mode: forwards;
                 -webkit-animation-fill-mode: forwards;
                 animation-fill-mode: forwards;
+            }
+        }
+    }
+
+    @photo-margin: 2em;
+
+    .pending-photos {
+        margin: @photo-margin 0 0;
+
+        .container {
+            float: left;
+            margin: @photo-margin;
+
+            img {
+                width: @photo-preview-size;
+                height: @photo-preview-size;
             }
         }
     }
