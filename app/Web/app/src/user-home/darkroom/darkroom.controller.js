@@ -13,6 +13,7 @@
         ctrl.updateProgress = updateProgress;
         ctrl.uploadCompleted = uploadCompleted;
         ctrl.fileUploadSuccess = fileUploadSuccess;
+        ctrl.filesAdded = filesAdded;
         ctrl.photoUpload = getPhotoUploadConfig();
         ctrl.loadProgress = undefined;
         ctrl.pendingPhotos = [];
@@ -21,6 +22,10 @@
 
         function activate() {
             getPendingPhotos();
+        }
+
+        function filesAdded(files) {
+            debugger;
         }
 
         function getPendingPhotos() {
@@ -37,7 +42,8 @@
         function getPendingPhotosError(error) {
         }
 
-        function updateProgress(loaded) {
+        function updateProgress(loaded, files) {
+            debugger;
             ctrl.loadProgress = loaded * 100;
         }
 

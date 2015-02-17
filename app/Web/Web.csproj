@@ -354,6 +354,9 @@
     <Content Include="app\less\profile.css">
       <DependentUpon>profile.less</DependentUpon>
     </Content>
+    <Content Include="app\less\progress-arc.css">
+      <DependentUpon>progress-arc.less</DependentUpon>
+    </Content>
     <Content Include="app\less\resets.css">
       <DependentUpon>resets.less</DependentUpon>
     </Content>
@@ -411,6 +414,10 @@
     <Content Include="app\less\layout.less" />
     <Content Include="app\less\layout.css.map">
       <DependentUpon>layout.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\progress-arc.less" />
+    <Content Include="app\less\progress-arc.css.map">
+      <DependentUpon>progress-arc.css</DependentUpon>
     </Content>
     <None Include="app\less\ui-select\select.less" />
     <Content Include="app\less\ui-select\select.css">
