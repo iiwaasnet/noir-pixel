@@ -662,6 +662,8 @@
     <Content Include="app\vendor\angular-messages.js" />
     <Content Include="app\vendor\angular-messages.min.js" />
     <Content Include="app\vendor\angular-mocks.js" />
+    <Content Include="app\vendor\angular-progress-arc.js" />
+    <Content Include="app\vendor\angular-progress-arc.min.js" />
     <Content Include="app\vendor\angular-route.js" />
     <Content Include="app\vendor\angular-route.min.js" />
     <Content Include="app\vendor\angular-sanitize.js" />
