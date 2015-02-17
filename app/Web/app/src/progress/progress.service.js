@@ -43,7 +43,6 @@
         function cancelTimer(timer) {
             if (timer) {
                 $interval.cancel(timer);
-                timer = undefined;
             }
         }
     }
