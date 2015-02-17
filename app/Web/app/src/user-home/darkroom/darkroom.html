@@ -15,7 +15,7 @@
                     <span class="text" np-i18n="Darkroom_DropZoone"></span>
 
                     <div class="bar"
-                         ng-style="{'width': darkroomCtrl.loadProgress + '%' }"
+                         ng-style="{'width': (darkroomCtrl.loadProgress * 100) + '%' }"
                          ng-class="{'completed': darkroomCtrl.loadProgress === 0}"></div>
                 </div>
             </div>
@@ -56,11 +56,7 @@
             </ul>
         </div>
         <div class="column-center">
-            <progress-arc complete="0.5"
-                          size="40"
-                          background="#888"
-                          stroke="#ccc"
-                          stroke-width="5"></progress-arc>
+            <progress-arc complete="darkroomCtrl.loadProgress"></progress-arc>
             <np-spinner ng-if="darkroomCtrl.loading"></np-spinner>
             <div class="pending-photos">
                 <div ng-repeat="photo in darkroomCtrl.pendingPhotos" class="container">

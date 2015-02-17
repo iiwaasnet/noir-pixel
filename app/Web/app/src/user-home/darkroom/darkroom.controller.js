@@ -25,7 +25,6 @@
         }
 
         function filesAdded(files) {
-            debugger;
         }
 
         function getPendingPhotos() {
@@ -43,8 +42,7 @@
         }
 
         function updateProgress(loaded, files) {
-            debugger;
-            ctrl.loadProgress = loaded * 100;
+            ctrl.loadProgress = loaded;
         }
 
         function fileUploadSuccess(response) {
