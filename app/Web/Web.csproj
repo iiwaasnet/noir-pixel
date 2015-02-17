@@ -465,7 +465,7 @@
     <Content Include="app\src\user-home\profile\profile.html" />
     <Content Include="app\src\user-home\user-home.controller.js" />
     <Content Include="app\src\user-public\user-public.html" />
-    <Content Include="app\src\utils\delayedToggle.service.js" />
+    <Content Include="app\src\progress\delayedToggle.service.js" />
     <Content Include="app\src\view-resolver\view-resolver.module.js" />
     <Content Include="app\src\view-resolver\view-resolver.service.js" />
     <Content Include="app\src\user\user.module.js" />

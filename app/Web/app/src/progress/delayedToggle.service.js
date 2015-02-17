@@ -1,7 +1,7 @@
 ﻿(function() {
     'use strict';
 
-    angular.module('np.utils')
+    angular.module('np.progress')
         .service('DelayedToggle', delayedToggle);
 
     delayedToggle.$inject = ['$interval'];
@@ -22,35 +22,35 @@
                 startTimer: undefined,
                 progressStarted: false
             };
-            toggle.on = on;
             toggle.off = off;
+            activate();
 
             return toggle;
 
-            function on() {
+            function activate() {
                 if (!toggle.progressStarted) {
                     toggle.progressStarted = true;
                     toggle.startTimer = $interval(internalStart, toggle.startDelay, 1);
                 }
+            }
 
-                function internalStart() {
-                    if (toggle.progressStarted) {
-                        obj[prop] = true;
-                        toggle.stopTimer = $interval(stop, toggle.stopCallTimeout, 1);
-                    }
+            function internalStart() {
+                if (toggle.progressStarted) {
+                    obj[prop] = true;
+                    toggle.stopTimer = $interval(off, toggle.stopCallTimeout, 1);
                 }
+            }
 
-                function stop() {
-                    toggle.progressStarted = false;
-                    cancelTimer(toggle.startTimer);
-                    obj[prop] = false;
-                    cancelTimer(toggle.stopTimer);
-                }
+            function off() {
+                toggle.progressStarted = false;
+                cancelTimer(toggle.startTimer);
+                obj[prop] = false;
+                cancelTimer(toggle.stopTimer);
+            }
 
-                function cancelTimer(timer) {
-                    if (timer) {
-                        $interval.cancel(timer);
-                    }
+            function cancelTimer(timer) {
+                if (timer) {
+                    $interval.cancel(timer);
                 }
             }
         }

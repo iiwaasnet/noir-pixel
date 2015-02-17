@@ -4,9 +4,9 @@
     angular.module('np.user-home')
         .controller('DarkroomController', darkroomController);
 
-    darkroomController.$inject = ['$interval', 'Url', 'Config', 'Photos'];
+    darkroomController.$inject = ['$interval', 'DelayedToggle', 'Url', 'Config', 'Photos'];
 
-    function darkroomController($interval, Url, Config, Photos) {
+    function darkroomController($interval, DelayedToggle, Url, Config, Photos) {
         var ctrl = this,
             progressClearDelay = 1000;
         ctrl.loading = false;
@@ -24,13 +24,10 @@
         }
 
         function getPendingPhotos() {
-            DelayedToggle.on(function () { ctrl.loading = true; });
-            DelayedToggle.on(ctrl, 'loading');
-
-            ctrl.loading = true;
+            var toggle = DelayedToggle.on(ctrl, 'loading');
             Photos.getPendingPhotos()
                 .then(getPendingPhotosSuccess, getPendingPhotosError)
-                .then(function() { ctrl.loading = false; });
+                .then(function() { toggle.off(); });
         }
 
         function getPendingPhotosSuccess(response) {
