@@ -24,6 +24,9 @@
         }
 
         function getPendingPhotos() {
+            DelayedToggle.on(function () { ctrl.loading = true; });
+            DelayedToggle.on(ctrl, 'loading');
+
             ctrl.loading = true;
             Photos.getPendingPhotos()
                 .then(getPendingPhotosSuccess, getPendingPhotosError)
