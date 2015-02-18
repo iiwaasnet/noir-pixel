@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('np.images')
+    angular.module('np.ui-elements')
         .directive('npImgCloak', npImgCloak);
 
     function npImgCloak() {
