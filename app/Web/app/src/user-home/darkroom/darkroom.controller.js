@@ -17,6 +17,7 @@
         ctrl.photoUpload = getPhotoUploadConfig();
         ctrl.loadProgress = undefined;
         ctrl.pendingPhotos = [];
+        ctrl.currentlyLoading = [];
 
         activate();
 
@@ -25,6 +26,7 @@
         }
 
         function filesAdded(files) {
+            ctrl.currentlyLoading = ctrl.currentlyLoading.concat(files);
         }
 
         function getPendingPhotos() {
@@ -41,7 +43,7 @@
         function getPendingPhotosError(error) {
         }
 
-        function updateProgress(loaded, files) {
+        function updateProgress(loaded, files) {            
             ctrl.loadProgress = loaded;
         }
 

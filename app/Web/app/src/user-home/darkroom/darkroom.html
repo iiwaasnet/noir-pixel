@@ -1,8 +1,8 @@
-﻿<div id="darkroom">
+﻿<div id="darkroom" flow-init="{target: darkroomCtrl.photoUpload.endpoint, withCredentials: true}">
     <div class="columns-container">
         <div class="column-left"></div>
         <div class="column-center">
-            <div flow-init="{target: darkroomCtrl.photoUpload.endpoint, withCredentials: true}">
+            <div>
                 <div class="drop-zone"
                      ng-class="dropZoneClass"
                      flow-drop
@@ -16,7 +16,8 @@
 
                     <div class="bar"
                          ng-style="{'width': (darkroomCtrl.loadProgress * 100) + '%' }"
-                         ng-class="{'completed': darkroomCtrl.loadProgress === 0}"></div>
+                         ng-class="{'completed': darkroomCtrl.loadProgress === 0}">                        
+                    </div>                    
                 </div>
             </div>
         </div>
@@ -56,11 +57,14 @@
             </ul>
         </div>
         <div class="column-center">
-            <progress-arc complete="darkroomCtrl.loadProgress"></progress-arc>
+            <!--<progress-arc complete="darkroomCtrl.loadProgress"></progress-arc>-->
+            <div ng-repeat="file in darkroomCtrl.currentlyLoading">
+                <img np-image-crop flow-img="file" style="max-width: 50px; max-height: 50px;" />
+            </div>
             <np-spinner ng-if="darkroomCtrl.loading"></np-spinner>
             <div class="pending-photos">
                 <div ng-repeat="photo in darkroomCtrl.pendingPhotos" class="container">
-                    <img ng-src="{{::photo.previewUrl}}"/>
+                    <img ng-src="{{::photo.previewUrl}}" />
                 </div>
             </div>
         </div>
