@@ -629,8 +629,7 @@
     <Content Include="app\src\home\home.html" />
     <Content Include="app\src\home\home.controller.js" />
     <Content Include="app\src\home\home.module.js" />
-    <Content Include="app\src\images\images.module.js" />
-    <Content Include="app\src\images\np-img-cloak.directive.js" />
+    <Content Include="app\src\ui-elements\img-cloak\np-img-cloak.directive.js" />
     <Content Include="app\src\layout\layout.module.js" />
     <Content Include="app\src\constants\errors.constants.js" />
     <Content Include="app\src\localization\i18n.module.js" />

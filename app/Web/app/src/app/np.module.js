@@ -24,7 +24,6 @@
         'np.utils',
         'np.validation',
         'np.events',
-        'np.images',
         'np.user',
         'np.roles',
         'np.view-resolver',
