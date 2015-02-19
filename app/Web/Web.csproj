@@ -447,7 +447,6 @@
     <Content Include="app\src\roles\roles.module.js" />
     <Content Include="app\src\roles\roles.service.js" />
     <Content Include="app\src\ui-elements\autofocus\np-autofocus.directive.js" />
-    <Content Include="app\src\ui-elements\image-crop\np-image-crop.directive.js" />
     <Content Include="app\src\ui-elements\inplace\inplace-buttons.html" />
     <Content Include="app\src\ui-elements\inplace\np-inplace-buttons.directive.js" />
     <Content Include="app\src\ui-elements\spinner\np-spinner.directive.js" />

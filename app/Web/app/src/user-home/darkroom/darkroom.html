@@ -59,7 +59,7 @@
         <div class="column-center">
             <!--<progress-arc complete="darkroomCtrl.loadProgress"></progress-arc>-->
             <div ng-repeat="file in darkroomCtrl.currentlyLoading">
-                <img np-image-crop flow-img="file" style="max-width: 50px; max-height: 50px;" />
+                <img flow-img="file" style="max-width: 50px; max-height: 50px;" />
             </div>
             <np-spinner ng-if="darkroomCtrl.loading"></np-spinner>
             <div class="pending-photos">
