@@ -129,19 +129,23 @@
         }
     }
 
-    @max-image-preview-size: 50px;
+    @spinner-size: 40px;
+    @image-preview-size: 50px;
 
     .currently-uploading {
         .container {
-            height: @max-image-preview-size;
-
             .image-container {
-                width: @max-image-preview-size;
+                position: relative;
 
-                /*img {
-                    max-width: @max-image-preview-size;
-                    max-height: @max-image-preview-size;
-                }*/
+                progress-arc{
+                    position: absolute;
+                    top: (@image-preview-size - @spinner-size) / 2;
+                    left: (@image-preview-size - @spinner-size) / 2;
+                }
+
+                img {
+                    opacity: 0.3;
+                }
             }
 
             .progress-bar {

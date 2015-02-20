@@ -65,10 +65,7 @@
                         <np-img-quasi-crop size="50">
                             <img flow-img="file" />
                         </np-img-quasi-crop>
-                    </div>
-                    <div class="progress-bar"
-                         ng-style="{'width': (file.progress() * 100) + '%' }">
-                        <!--ng-class="{'completed': file.progress() === 1}">-->
+                        <progress-arc complete="file.progress()"></progress-arc>
                     </div>
                 </div>
             </div>
