@@ -13,6 +13,7 @@
         ctrl.updateProgress = updateProgress;
         ctrl.uploadCompleted = uploadCompleted;
         ctrl.fileUploadSuccess = fileUploadSuccess;
+        ctrl.fileUploadError = fileUploadError;
         ctrl.filesAdded = filesAdded;
         ctrl.photoUpload = getPhotoUploadConfig();
         ctrl.loadProgress = undefined;
@@ -45,6 +46,10 @@
 
         function updateProgress(loaded, files) {            
             ctrl.loadProgress = loaded;
+        }
+
+        function fileUploadError(file, message) {
+            debugger;
         }
 
         function fileUploadSuccess(response) {
