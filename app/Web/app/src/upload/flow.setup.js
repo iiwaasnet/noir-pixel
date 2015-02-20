@@ -10,6 +10,7 @@
         flowFactoryProvider.defaults = {
             headers: getAuthHeader,
             testChunks: false,
+            chunkSize: 50 * 1024,
             simultaneousUploads: 1
         };
 
