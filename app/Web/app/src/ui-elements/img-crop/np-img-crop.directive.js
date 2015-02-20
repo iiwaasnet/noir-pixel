@@ -2,14 +2,14 @@
     'use strict';
 
     angular.module('np.ui-elements')
-        .directive('npImgQuasiCrop', imgQausiCrop);
+        .directive('npImgCrop', imgCrop);
 
-    function imgQausiCrop() {
+    function imgCrop() {
         var dir = {
             restrict: 'E',
             link: link,
             transclude: true,
-            templateUrl: '/app/src/ui-elements/img-quasi-crop/img-quasi-crop.html',
+            templateUrl: '/app/src/ui-elements/img-crop/img-crop.html',
             scope: {
                 size: '='
             }
