@@ -6,7 +6,7 @@
      flow-file-error="darkroomCtrl.fileUploadError($file, $message)"
      flow-files-submitted="$flow.upload()"
      flow-files-added="darkroomCtrl.filesAdded($files)">
-    <div class="columns-container">
+    <!--<div class="columns-container">
         <div class="column-left"></div>
         <div class="column-center">
             <div>
@@ -16,18 +16,24 @@
                      flow-btn>
                     <span class="text" np-i18n="Darkroom_DropZoone"></span>
 
-                    <!--<div class="bar"
+                    <div class="bar"
                          ng-style="{'width': (darkroomCtrl.loadProgress * 100) + '%' }"
                          ng-class="{'completed': darkroomCtrl.loadProgress === 0}">
-                    </div>-->
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 
     <div class="columns-container">
         <div class="column-left">
             <ul class="menu" np-state-menu>
+                <li flow-btn>
+                    <div class="menu-item">
+                        <span class="icon icon-upload-32"></span>
+                        <span class="text">Upload Photos</span>
+                    </div>
+                </li>
                 <li np-state-menu-item>
                     <div class="menu-item" np-state-menu-set>
                         <span class="icon icon-photos-32"></span>
