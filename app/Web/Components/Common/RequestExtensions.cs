@@ -17,14 +17,9 @@ namespace Web.Components.Common
                               };
         }
 
-        public static bool ShowHeader(this HttpRequestBase request)
+        public static bool RenderMainLayout(this HttpRequestBase request)
         {
             return NullLayoutPaths.All(path => request.Path.ToLower() != path);
-        }
-
-        public static bool ShowFooter(this HttpRequestBase request)
-        {
-            return ShowHeader(request);
         }
     }
 }

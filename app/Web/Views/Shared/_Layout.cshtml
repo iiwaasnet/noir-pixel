@@ -23,25 +23,25 @@
             </div>
         </div>
         <div id="progress-overlay" class="hidden"></div>
-        <div ng-cloak>
+        <div ng-cloak ng-model="renderLayout = Request.RenderMainLayout()">
             @{
-                if (Request.ShowHeader())
+                if (Request.RenderMainLayout())
                 {
                     Html.RenderPartial("~/app/src/layout/header/header.cshtml");
                 }
             }
             <main>
                 <div class="columns-container">
-                    <div ui-view="leftColumn" class="column-left layout"></div>
-                    <div ui-view class="column-center layout">
+                    <div ui-view="leftColumn" ng-class="{'column-left layout': renderLayout}"></div>
+                    <div ui-view ng-class="{'column-center layout': renderLayout}">
                         @RenderBody()
                     </div>
-                    <div ui-view="rightColumn" class="column-right layout"></div>
+                    <div ui-view="rightColumn" ng-class="{'column-right layout': renderLayout}"></div>
                 </div>
             </main>
 
             @{
-                if (Request.ShowFooter())
+                if (Request.RenderMainLayout())
                 {
                     Html.RenderPartial("~/app/src/layout/footer/footer.cshtml");
                 }
