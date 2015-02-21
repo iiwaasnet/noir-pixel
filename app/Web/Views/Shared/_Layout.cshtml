@@ -31,7 +31,7 @@
                 }
             }
             <main>
-                <div class="columns-container">
+                <div ng-class="{'columns-container': renderLayout}">
                     <div ui-view="leftColumn" ng-class="{'column-left layout': renderLayout}"></div>
                     <div ui-view ng-class="{'column-center layout': renderLayout}">
                         @RenderBody()
