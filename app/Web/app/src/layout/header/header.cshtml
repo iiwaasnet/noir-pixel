@@ -1,6 +1,6 @@
 ﻿<header ng-controller="HeaderController as ctrl" class="columns-container">
     <a ui-sref="home" class="column-left site-icon"><img src="app/images/np-header.png" alt="noir-pixel" /></a>
-    <nav id="main-menu" class="column-center">
+    <nav id="main-menu" class="column-center layout">
         <a class="dotted-hover" ng-repeat="menuItem in ::ctrl.mainMenu" ui-sref="{{::menuItem.uri}}" ng-bind="::menuItem.text"></a>
     </nav>
     <nav id="auth-menu" class="column-right">
