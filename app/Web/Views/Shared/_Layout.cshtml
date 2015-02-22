@@ -1,70 +1,71 @@
 ﻿@using Web.Components.Common
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Noir Pixel</title>
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300&subset=cyrillic,latin' rel='stylesheet' type='text/css'>
-        @*@Styles.Render("~/bundles/css")*@
-        <link href="/app/less/all.min.css" rel="stylesheet">
-        <base href="/" />
-    </head>
-    <body flow-prevent-drop flow-drag-enter="dropZoneClass='drag-over'" flow-drag-leave="dropZoneClass=''">
-        <div id="init-loading" class="centered-outer" ng-if="false">
-            <div class="centered-middle">
-                <div class="centered-inner">
-                    <div class="message">Loading...</div>
-                    <div class="spinner">
-                        <div class="double-bounce1"></div>
-                        <div class="double-bounce2"></div>
-                    </div>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noir Pixel</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300&subset=cyrillic,latin' rel='stylesheet' type='text/css'>
+    @*@Styles.Render("~/bundles/css")*@
+    <link href="/app/less/all.min.css" rel="stylesheet">
+    <base href="/" />
+</head>
+<body flow-prevent-drop flow-drag-enter="dropZoneClass='drag-over'" flow-drag-leave="dropZoneClass=''">
+    <div id="init-loading" class="centered-outer" ng-if="false">
+        <div class="centered-middle">
+            <div class="centered-inner">
+                <div class="message">Loading...</div>
+                <div class="spinner">
+                    <div class="double-bounce1"></div>
+                    <div class="double-bounce2"></div>
                 </div>
             </div>
         </div>
-        <div id="progress-overlay" class="hidden"></div>
-        <div ng-cloak ng-model="renderLayout = Request.RenderMainLayout()">
-            @{
-                if (Request.RenderMainLayout())
-                {
-                    Html.RenderPartial("~/app/src/layout/header/header.cshtml");
-                }
+    </div>
+    <div id="progress-overlay" class="hidden"></div>
+    @{ var renderLayout = "renderLayout=" + (Request.RenderMainLayout() ? "true" : "false"); }
+    <div ng-cloak ng-model="@renderLayout">
+        @{
+            if (Request.RenderMainLayout())
+            {
+                Html.RenderPartial("~/app/src/layout/header/header.cshtml");
             }
-            <main>
-                <div ng-class="{'columns-container': renderLayout}">
-                    <div ui-view="leftColumn" ng-class="{'column-left layout': renderLayout}"></div>
-                    <div ui-view ng-class="{'column-center layout': renderLayout}">
-                        @RenderBody()
-                    </div>
-                    <div ui-view="rightColumn" ng-class="{'column-right layout': renderLayout}"></div>
+        }
+        <main>
+            <div ng-class="{'columns-container': renderLayout}">
+                <div ui-view="leftColumn" ng-class="{'column-left layout': renderLayout}"></div>
+                <div ui-view ng-class="{'column-center layout': renderLayout}">
+                    @RenderBody()
                 </div>
-            </main>
+                <div ui-view="rightColumn" ng-class="{'column-right layout': renderLayout}"></div>
+            </div>
+        </main>
 
-            @{
-                if (Request.RenderMainLayout())
-                {
-                    Html.RenderPartial("~/app/src/layout/footer/footer.cshtml");
-                }
+        @{
+            if (Request.RenderMainLayout())
+            {
+                Html.RenderPartial("~/app/src/layout/footer/footer.cshtml");
             }
-        </div>
-        <script src="~/app/src/vendor-native.js"></script>
-        <script src="~/app/src/ng.js"></script>
-        <script src="~/app/src/vendor-ng.js"></script>
-        <script src="~/app/src/app.js"></script>
+        }
+    </div>
+    <script src="~/app/src/vendor-native.js"></script>
+    <script src="~/app/src/ng.js"></script>
+    <script src="~/app/src/vendor-ng.js"></script>
+    <script src="~/app/src/app.js"></script>
 
-        <script type="text/javascript">
-            (function() {
-                var srv = angular.injector(['ng', 'np.i18n']).get('Strings');
-                srv.init()
-                    .then(function() {
-                            angular.element(document).ready(function() {
-                                angular.bootstrap(document, ['np'], { strictDi: false });
-                            });
-                        },
-                        function() {
-                            alert("Sorry, something went wrong :(");
-                        });
-            })();
-        </script>
-    </body>
+    <script type="text/javascript">
+        (function () {
+            var srv = angular.injector(['ng', 'np.i18n']).get('Strings');
+            srv.init()
+                .then(function () {
+                    angular.element(document).ready(function () {
+                        angular.bootstrap(document, ['np'], { strictDi: false });
+                    });
+                },
+                    function () {
+                        alert("Sorry, something went wrong :(");
+                    });
+        })();
+    </script>
+</body>
 </html>
