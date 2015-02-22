@@ -65,7 +65,7 @@
             </ul>
         </div>
         <div class="column-center">
-            <div class="currently-uploading">
+            <!--<div class="currently-uploading">
                 <div class="container" ng-repeat="file in darkroomCtrl.currentlyLoading">
                     <div class="image-container fade-out" ng-if="file.progress() != 1">
                         <np-img-crop size="50">
@@ -74,7 +74,7 @@
                         <progress-arc complete="file.progress()"></progress-arc>
                     </div>
                 </div>
-            </div>
+            </div>-->
             <div class="pending-photos clearfix">
                 <div ng-repeat="photo in darkroomCtrl.pendingPhotos" class="container">
                     <img ng-src="{{::photo.previewUrl}}" />

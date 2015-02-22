@@ -4,9 +4,9 @@
     angular.module('np.user-home')
         .controller('DarkroomController', darkroomController);
 
-    darkroomController.$inject = ['$interval', 'DelayedToggle', 'Url', 'Config', 'Photos'];
+    darkroomController.$inject = ['$interval', 'DelayedToggle', 'Url', 'Config', 'Photos', 'Overlay'];
 
-    function darkroomController($interval, DelayedToggle, Url, Config, Photos) {
+    function darkroomController($interval, DelayedToggle, Url, Config, Photos, Overlay) {
         var ctrl = this,
             progressClearDelay = 1000;
         ctrl.loading = false;
@@ -27,7 +27,10 @@
         }
 
         function filesAdded(files) {
-            ctrl.currentlyLoading = ctrl.currentlyLoading.concat(files);
+            Overlay.open('app/src/user-home/darkroom/photos-upload.html',
+                'PhotosUploadController as ctrl',
+                { photos: files });
+            //ctrl.currentlyLoading = ctrl.currentlyLoading.concat(files);
         }
 
         function getPendingPhotos() {
@@ -44,7 +47,7 @@
         function getPendingPhotosError(error) {
         }
 
-        function updateProgress(loaded, files) {            
+        function updateProgress(loaded, files) {
             ctrl.loadProgress = loaded;
         }
 

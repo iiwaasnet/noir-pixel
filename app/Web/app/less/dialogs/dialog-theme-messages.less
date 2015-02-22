@@ -3,11 +3,10 @@
 @import (reference) "dialog-mixins.less";
 
 @message-window-width: 75%;
-@messages-background-color: @olive-drab;
 
-.dialog-content(@rangoon-green, @border-color){
+.dialog-content(@background-color, @border-color){
     .flyin(0.5s);
-    background: @rangoon-green;
+    background: @background-color;
     border-radius: 0 0 5px 5px;
     border: solid 1px @border-color;
     margin: 0 auto;
@@ -99,10 +98,15 @@
 }
 
 .ngdialog.dialog-theme-messages.info .ngdialog-content {
-    .dialog-content(@messages-background-color, @plantation);
+    .dialog-content(@olive-drab, @plantation);
+}
+
+.ngdialog.dialog-theme-messages.overlay .ngdialog-content {
+    .dialog-content(@rangoon-green, @plantation);
 }
 
 .ngdialog.dialog-theme-messages.error.ngdialog-closing .ngdialog-content,
+.ngdialog.dialog-theme-messages.overlay.ngdialog-closing .ngdialog-content
 .ngdialog.dialog-theme-messages.info.ngdialog-closing .ngdialog-content
  {
     .flyout(0.5s);

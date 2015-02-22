@@ -83,7 +83,6 @@
             }
         }
     }
-
     /*.drop-zone {
         border-radius: 3px;
         border: 1px solid @ecru-white;
@@ -126,31 +125,31 @@
             }
         }
     }
+}
 
-    @spinner-size: 40px;
-    @image-preview-size: 50px;
+@spinner-size: 40px;
+@image-preview-size: 50px;
 
-    .currently-uploading {
-        .container {
-            .image-container {
-                position: relative;
+.currently-uploading {
+    .container {
+        .image-container {
+            position: relative;
 
-                progress-arc {
-                    position: absolute;
-                    top: (@image-preview-size - @spinner-size) / 2;
-                    left: (@image-preview-size - @spinner-size) / 2;
-                }
+            progress-arc {
+                position: absolute;
+                top: (@image-preview-size - @spinner-size) / 2;
+                left: (@image-preview-size - @spinner-size) / 2;
+            }
 
-                img {
-                    opacity: 0.3;
-                }
+            img {
+                opacity: 0.3;
+            }
 
-                &.fade-out.ng-leave {
-                    -moz-animation: fadeout 0.7s;
-                    -o-animation: fadeout 0.7s;
-                    -webkit-animation: fadeout 0.7s;
-                    animation: fadeout 0.7s;
-                }
+            &.fade-out.ng-leave {
+                -moz-animation: fadeout 0.7s;
+                -o-animation: fadeout 0.7s;
+                -webkit-animation: fadeout 0.7s;
+                animation: fadeout 0.7s;
             }
         }
     }

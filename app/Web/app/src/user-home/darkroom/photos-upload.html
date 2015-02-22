@@ -1,0 +1,11 @@
+﻿<div class="currently-uploading">
+    <div class="container" ng-repeat="file in ctrl.currentlyLoading">
+        <!--<div class="image-container fade-out" ng-if="file.progress() != 1">-->
+        <div class="image-container fade-out">
+            <np-img-crop size="50">
+                    <img flow-img="file" />
+                </np-img-crop>
+            <progress-arc complete="file.progress()"></progress-arc>
+        </div>
+    </div>
+</div>

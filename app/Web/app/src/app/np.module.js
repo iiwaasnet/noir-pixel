@@ -31,7 +31,8 @@
         'np.const',
         'np.profile',
         'np.geo',
-        'np.photos'
+        'np.photos',
+        'np.overlay'
     ];
 
     angular.module('np', vendor.concat(app));
