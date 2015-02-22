@@ -253,6 +253,9 @@
     <Content Include="app\less\dialogs\dialog-theme-messages.min.css">
       <DependentUpon>dialog-theme-messages.css</DependentUpon>
     </Content>
+    <Content Include="app\less\dialogs\ngDialog-theme-default.css">
+      <DependentUpon>ngDialog-theme-default.less</DependentUpon>
+    </Content>
     <Content Include="app\less\dialogs\ngDialog.css">
       <DependentUpon>ngDialog.less</DependentUpon>
     </Content>
@@ -419,6 +422,9 @@
     <Content Include="app\less\progress-arc.css.map">
       <DependentUpon>progress-arc.css</DependentUpon>
     </Content>
+    <Content Include="app\less\dialogs\ngDialog-theme-default.css.map">
+      <DependentUpon>ngDialog-theme-default.css</DependentUpon>
+    </Content>
     <None Include="app\less\ui-select\select.less" />
     <Content Include="app\less\ui-select\select.css">
       <DependentUpon>select.less</DependentUpon>
@@ -440,6 +446,8 @@
     <Content Include="app\src\geo\geo.module.js" />
     <Content Include="app\src\geo\geo.service.js" />
     <Content Include="app\src\interceptors\httpProgressInterceptor.js" />
+    <Content Include="app\src\overlay\overlay.module.js" />
+    <Content Include="app\src\overlay\overlay.service.js" />
     <Content Include="app\src\photos\photos.module.js" />
     <Content Include="app\src\photos\photos.service.js" />
     <Content Include="app\src\profile\profile.module.js" />
@@ -463,6 +471,8 @@
     <Content Include="app\src\upload\flow.setup.js" />
     <Content Include="app\src\user-home\darkroom\darkroom.controller.js" />
     <Content Include="app\src\user-home\darkroom\darkroom.html" />
+    <Content Include="app\src\user-home\darkroom\photos-upload.controller.js" />
+    <Content Include="app\src\user-home\darkroom\photos-upload.html" />
     <Content Include="app\src\user-home\error-messages.html" />
     <Content Include="app\src\user-home\profile\profile-private.html" />
     <Content Include="app\src\user-home\profile\profile-public.html" />

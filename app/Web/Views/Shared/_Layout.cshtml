@@ -24,7 +24,7 @@
     </div>
     <div id="progress-overlay" class="hidden"></div>
     @{ var renderLayout = "renderLayout=" + (Request.RenderMainLayout() ? "true" : "false"); }
-    <div ng-cloak ng-model="@renderLayout">
+    <div ng-cloak ng-init="@renderLayout">
         @{
             if (Request.RenderMainLayout())
             {
