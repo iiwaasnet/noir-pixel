@@ -459,6 +459,7 @@
     <Content Include="app\src\ui-elements\inplace\inplace-buttons.html" />
     <Content Include="app\src\ui-elements\inplace\np-inplace-buttons.directive.js" />
     <Content Include="app\src\ui-elements\img-crop\np-img-crop.directive.js" />
+    <Content Include="app\src\ui-elements\local-image\np-local-image.directive.js" />
     <Content Include="app\src\ui-elements\spinner\np-spinner.directive.js" />
     <Content Include="app\src\ui-elements\spinner\spinner.html" />
     <Content Include="app\src\ui-elements\state-menu\np-state-menu-item.directive.js" />

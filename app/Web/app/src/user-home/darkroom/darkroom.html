@@ -2,7 +2,7 @@
      flow-init="{target: darkroomCtrl.photoUpload.endpoint, withCredentials: true}"
      flow-file-progress="darkroomCtrl.updateProgress($flow.progress(), $flow.files)"
      flow-complete="darkroomCtrl.uploadCompleted()"
-     flow-file-success="darkroomCtrl.fileUploadSuccess($message)"
+     flow-file-success="darkroomCtrl.fileUploadSuccess($file, $message)"
      flow-file-error="darkroomCtrl.fileUploadError($file, $message)"
      flow-files-submitted="$flow.upload()"
      flow-files-added="darkroomCtrl.filesAdded($files)">

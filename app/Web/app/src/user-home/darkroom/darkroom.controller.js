@@ -27,9 +27,11 @@
         }
 
         function filesAdded(files) {
-            Overlay.open('app/src/user-home/darkroom/photos-upload.html',
-                'PhotosUploadController as ctrl',
-                { photos: files });
+            if (files.length) {
+                Overlay.open('app/src/user-home/darkroom/photos-upload.html',
+                    'PhotosUploadController as ctrl',
+                    { photos: files });
+            }
             //ctrl.currentlyLoading = ctrl.currentlyLoading.concat(files);
         }
 
@@ -55,8 +57,13 @@
             debugger;
         }
 
-        function fileUploadSuccess(response) {
+        function fileUploadSuccess(file, response) {
             ctrl.pendingPhotos.splice(0, 0, angular.fromJson(response));
+            clearFileFromHistory(file);
+        }
+
+        function clearFileFromHistory(file) {
+            file.cancel();
         }
 
         function uploadCompleted() {

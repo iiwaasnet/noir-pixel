@@ -19,7 +19,8 @@
                 controller: controller,
                 className: 'dialog-theme-messages overlay',
                 showClose: true,
-                locals: locals
+                locals: locals,
+                closeByDocument: false
             });
         }
 
