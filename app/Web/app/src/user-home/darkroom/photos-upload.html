@@ -1,11 +1,11 @@
 ﻿<div class="currently-uploading">
-    <div class="container" ng-repeat="file in ctrl.currentlyLoading">
-        <!--<div class="image-container fade-out" ng-if="file.progress() != 1">-->
-        <div class="image-container fade-out">
+    <div class="container" ng-repeat="photo in ctrl.currentlyLoading">
+        <div class="image-container fade-out" ng-if="!photo.isCompleted || photo.error">
+            <!--<div class="image-container fade-out">-->
             <np-img-crop size="50">
-                <img np-local-image="file.file" />
+                <img np-local-image="photo.file.file" />
             </np-img-crop>
-            <progress-arc complete="file.progress()"></progress-arc>
+            <progress-arc complete="photo.file.progress()"></progress-arc>
         </div>
     </div>
 </div>

@@ -8,7 +8,8 @@
 
     function darkroomController($interval, DelayedToggle, Url, Config, Photos, Overlay) {
         var ctrl = this,
-            progressClearDelay = 1000;
+            progressClearDelay = 1000,
+            currentlyUploading = [];
         ctrl.loading = false;
         ctrl.updateProgress = updateProgress;
         ctrl.uploadCompleted = uploadCompleted;
@@ -27,12 +28,28 @@
         }
 
         function filesAdded(files) {
+            currentlyUploading = [];
             if (files.length) {
+                currentlyUploading = getCurrentlyUploadingFiles(files);
                 Overlay.open('app/src/user-home/darkroom/photos-upload.html',
                     'PhotosUploadController as ctrl',
-                    { photos: files });
+                    { photos: currentlyUploading });
             }
             //ctrl.currentlyLoading = ctrl.currentlyLoading.concat(files);
+        }
+
+        function getCurrentlyUploadingFiles(files) {
+            var tmp = [];
+            angular.forEach(files, function (file) { tmp.push(wrapFileForUpload(file)); });
+
+            return tmp;
+        }
+
+        function wrapFileForUpload(file) {
+            return {
+                file: file,
+                isCompleted: false
+            };
         }
 
         function getPendingPhotos() {
@@ -54,11 +71,26 @@
         }
 
         function fileUploadError(file, message) {
-            debugger;
+            var item = currentlyUploading.first(function (f) {
+                return f.file === file;
+            });
+            if (item) {
+                item.error = message || 'bla';
+            }
         }
 
         function fileUploadSuccess(file, response) {
             ctrl.pendingPhotos.splice(0, 0, angular.fromJson(response));
+            markFileCompleted(file);
+        }
+
+        function markFileCompleted(file) {
+            var item = currentlyUploading.first(function(f) {
+                return f.file === file;
+            });
+            if (item) {
+                item.isCompleted = true;
+            }
             clearFileFromHistory(file);
         }
 
@@ -67,7 +99,10 @@
         }
 
         function uploadCompleted() {
-            $interval(function() { ctrl.loadProgress = 0; }, progressClearDelay, 1);
+            if (!currentlyUploading.any(function(f) { return f.error; })) {
+                Overlay.close();
+            }
+            //$interval(function() { ctrl.loadProgress = 0; }, progressClearDelay, 1);
         }
 
         function getPhotoUploadConfig() {
