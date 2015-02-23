@@ -47,17 +47,18 @@
         function stateChangeError(event, toState, toParams, fromState, fromParams, error) {
             endLoadAnimation();
 
-            if (error.status === 401) {
-                event.preventDefault();
-                //alert('Unauthorized!');
-                if (!fromState.name) {
-                    $state.go('notAuthorized', { redirectTo: toState.url });
+            if (error) {
+                if (error.status === 401) {
+                    event.preventDefault();
+                    //alert('Unauthorized!');
+                    if (!fromState.name) {
+                        $state.go('notAuthorized', { redirectTo: toState.url });
+                    }
+                    //else {
+                    //    $state.go('notAuthorized', { backTo: fromState.name});
+                    //}
                 }
-                //else {
-                //    $state.go('notAuthorized', { backTo: fromState.name});
-                //}
             }
-
         }
 
         function stateChangeStart(event, toState, toParams, fromState, fromParams) {
