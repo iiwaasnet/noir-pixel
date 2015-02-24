@@ -8,18 +8,14 @@
 
     function darkroomController($interval, DelayedToggle, Url, Config, Photos, Overlay) {
         var ctrl = this,
-            progressClearDelay = 1000,
             currentlyUploading = [];
-        ctrl.loading = false;
         ctrl.updateProgress = updateProgress;
         ctrl.uploadCompleted = uploadCompleted;
         ctrl.fileUploadSuccess = fileUploadSuccess;
         ctrl.fileUploadError = fileUploadError;
         ctrl.filesAdded = filesAdded;
         ctrl.photoUpload = getPhotoUploadConfig();
-        ctrl.loadProgress = undefined;
         ctrl.pendingPhotos = [];
-        ctrl.currentlyLoading = [];
 
         activate();
 
@@ -35,12 +31,11 @@
                     'PhotosUploadController as ctrl',
                     { photos: currentlyUploading });
             }
-            //ctrl.currentlyLoading = ctrl.currentlyLoading.concat(files);
         }
 
         function getCurrentlyUploadingFiles(files) {
             var tmp = [];
-            angular.forEach(files, function (file) { tmp.push(wrapFileForUpload(file)); });
+            angular.forEach(files, function(file) { tmp.push(wrapFileForUpload(file)); });
 
             return tmp;
         }
@@ -53,10 +48,8 @@
         }
 
         function getPendingPhotos() {
-            var toggle = DelayedToggle.on(ctrl, 'loading');
             Photos.getPendingPhotos()
-                .then(getPendingPhotosSuccess, getPendingPhotosError)
-                .then(function() { toggle.off(); });
+                .then(getPendingPhotosSuccess, getPendingPhotosError);
         }
 
         function getPendingPhotosSuccess(response) {
@@ -67,11 +60,10 @@
         }
 
         function updateProgress(loaded, files) {
-            ctrl.loadProgress = loaded;
         }
 
         function fileUploadError(file, message) {
-            var item = currentlyUploading.first(function (f) {
+            var item = currentlyUploading.first(function(f) {
                 return f.file === file;
             });
             if (item) {
@@ -102,7 +94,6 @@
             if (!currentlyUploading.any(function(f) { return f.error; })) {
                 Overlay.close();
             }
-            //$interval(function() { ctrl.loadProgress = 0; }, progressClearDelay, 1);
         }
 
         function getPhotoUploadConfig() {

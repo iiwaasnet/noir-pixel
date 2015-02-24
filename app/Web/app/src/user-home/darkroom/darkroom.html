@@ -6,24 +6,6 @@
      flow-file-error="darkroomCtrl.fileUploadError($file, $message)"
      flow-files-submitted="$flow.upload()"
      flow-files-added="darkroomCtrl.filesAdded($files)">
-    <!--<div class="columns-container">
-        <div class="column-left"></div>
-        <div class="column-center">
-            <div>
-                <div class="drop-zone"
-                     ng-class="dropZoneClass"
-                     flow-drop
-                     flow-btn>
-                    <span class="text" np-i18n="Darkroom_DropZoone"></span>
-
-                    <div class="bar"
-                         ng-style="{'width': (darkroomCtrl.loadProgress * 100) + '%' }"
-                         ng-class="{'completed': darkroomCtrl.loadProgress === 0}">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>-->
 
     <div class="columns-container">
         <div class="column-left">
@@ -65,16 +47,6 @@
             </ul>
         </div>
         <div class="column-center">
-            <!--<div class="currently-uploading">
-                <div class="container" ng-repeat="file in darkroomCtrl.currentlyLoading">
-                    <div class="image-container fade-out" ng-if="file.progress() != 1">
-                        <np-img-crop size="50">
-                            <img flow-img="file"/>
-                        </np-img-crop>
-                        <progress-arc complete="file.progress()"></progress-arc>
-                    </div>
-                </div>
-            </div>-->
             <div class="pending-photos clearfix">
                 <div ng-repeat="photo in darkroomCtrl.pendingPhotos" class="container">
                     <img ng-src="{{::photo.previewUrl}}" />
