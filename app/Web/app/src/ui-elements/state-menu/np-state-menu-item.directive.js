@@ -24,8 +24,20 @@
             scope.enable = enable;
 
             stateMenuCtrl.addItem(scope);
-            enable();
+            activate();
             element.on('$destroy', cleanup);
+
+            function activate() {
+                setItem.removeClass(disabledClassName);
+                if (resetItem) {
+                    resetItem.on('click', click);
+                }
+                if (setItem[0].hasAttribute('external-command')) {
+                    setItem.on('click', clickWrap);
+                } else {
+                    setItem.on('click', click);
+                }
+            }
 
             function click(e) {
                 e.stopPropagation();
@@ -35,6 +47,12 @@
                     set();
                 } else {
                     stateMenuCtrl.enableAll();
+                }
+            }
+
+            function clickWrap(e) {
+                if (setItem.hasClass(disabledClassName)) {
+                    e.stopPropagation();
                 }
             }
 
@@ -51,7 +69,9 @@
                 if (resetItem) {
                     resetItem.on('click', click);
                 }
-                setItem.on('click', click);
+                if (!setItem[0].hasAttribute('external-command')) {
+                    setItem.on('click', click);
+                }
             }
 
             function reset() {
@@ -64,11 +84,17 @@
                 if (resetItem) {
                     resetItem.off('click', click);
                 }
-                setItem.off('click', click);
+                if (!setItem[0].hasAttribute('external-command')) {
+                    setItem.off('click', click);
+                }
             }
 
             function cleanup() {
-                setItem.off('click', click);
+                if (setItem[0].hasAttribute('external-command')) {
+                    setItem.off('click', clickWrap);
+                } else {
+                    setItem.off('click', click);
+                }
                 if (resetItem) {
                     resetItem.off('click', click);
                 }
