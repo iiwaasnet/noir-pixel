@@ -11,7 +11,7 @@
         NProgress.configure({
             showSpinner: false,
             trickleRate: 0.2,
-            trickleSpeed: 600
+            trickleSpeed: 1000
         });
     }
 })();
