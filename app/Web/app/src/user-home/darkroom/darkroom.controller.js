@@ -67,7 +67,7 @@
                 return f.file === file;
             });
             if (item) {
-                item.error = message || 'bla';
+                item.error = angular.fromJson(message) || 'bla';
             }
         }
 
