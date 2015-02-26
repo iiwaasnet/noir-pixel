@@ -69,6 +69,7 @@
             if (item) {
                 item.error = angular.fromJson(message) || 'bla';
             }
+            clearFileFromHistory(file);
         }
 
         function fileUploadSuccess(file, response) {
