@@ -1,0 +1,161 @@
+@import (reference) "../colors.less";
+@import (reference) "../mixins.less";
+
+.keyframe(@y, @opacity) {
+    opacity: @opacity;
+    -webkit-transform: translateY(@y);
+    -ms-transform: translateY(@y);
+    -moz-transform: translateY(@y);
+    -o-transform: translateY(@y);
+    transform: translateY(@y);
+}
+
+@-webkit-keyframes ngdialog-flyin {
+    0% {
+        .keyframe(-40px, 0);
+    }
+
+    100% {
+        .keyframe(0, 1);
+    }
+}
+
+@-moz-keyframes ngdialog-flyin {
+    0% {
+        .keyframe(-40px, 0);
+    }
+
+    100% {
+        .keyframe(0, 1);
+    }
+}
+
+@keyframes ngdialog-flyin {
+    0% {
+        .keyframe(-40px, 0);
+    }
+
+    100% {
+        .keyframe(0, 1);
+    }
+}
+
+@-webkit-keyframes ngdialog-flyout {
+    0% {
+        .keyframe(0, 1);
+    }
+
+    100% {
+        .keyframe(-40px, 0);
+    }
+}
+
+@keyframes ngdialog-flyout {
+    0% {
+        .keyframe(0, 1);
+    }
+
+    100% {
+        .keyframe(-40px, 0);
+    }
+}
+
+.flyout(@delay) {
+    -webkit-animation: ngdialog-flyout @delay;
+    -moz-animation: ngdialog-flyout @delay;
+    -o-animation: ngdialog-flyout @delay;
+    animation: ngdialog-flyout @delay;
+}
+
+.flyin(@delay) {
+    -webkit-animation: ngdialog-flyin @delay;
+    -moz-animation: ngdialog-flyin @delay;
+    -o-animation: ngdialog-flyin @delay;
+    animation: ngdialog-flyin @delay;
+}
+
+
+.dialog-content(@background-color, @border-color, @window-width) {
+    .ngdialog-content {
+        .flyin(0.5s);
+        background: @background-color;
+        border-radius: 0 0 5px 5px;
+        border: solid 1px @border-color;
+        margin: 0 auto;
+        max-width: 100%;
+        padding: .5em 2.5em .5em 1em;
+        opacity: 0.96;
+        width: @window-width;
+        .dropdown-shadow;
+    }
+
+    .ngdialog-close {
+        border-radius: 5px;
+        cursor: pointer;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+    .ngdialog-close:before {
+        background: transparent;
+        border-radius: 3px;
+        content: '\00D7';
+        font-size: 30px;
+        font-weight: 100;
+        height: 30px;
+        line-height: 26px;
+        position: absolute;
+        right: 3px;
+        text-align: center;
+        top: 3px;
+        width: 30px;
+    }
+
+    .ngdialog .ngdialog-close:hover:before,
+    .ngdialog-close:active:before {
+        color: #777;
+    }
+
+    .ngdialog-message {
+        margin-bottom: .5em;
+    }
+
+    &.ngdialog-closing {
+        .ngdialog-content {
+            .flyout(.5s);
+        }
+    }
+}
+
+@context-menu-width: 100%;
+
+.ngdialog.dialog-theme-contextmenu {
+    .dialog-content(@rangoon-green, @plantation, @context-menu-width);
+}
+
+@message-window-width: 75%;
+
+.ngdialog.dialog-theme-messages.error {
+    .dialog-content(@amaranth, @brick-red, @message-window-width);
+
+    .ngdialog-content {
+        position: relative;
+    }
+}
+
+.ngdialog.dialog-theme-messages.info {
+    .dialog-content(@olive-drab, @plantation, @message-window-width);
+
+    .ngdialog-content {
+        position: relative;
+    }
+}
+
+.ngdialog.dialog-theme-messages.overlay {
+    .dialog-content(@rangoon-green, @plantation, @message-window-width);
+
+    .ngdialog-content {
+        position: relative;
+    }
+}

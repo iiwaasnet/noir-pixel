@@ -241,17 +241,8 @@
     <Content Include="app\less\darkroom.css">
       <DependentUpon>darkroom.less</DependentUpon>
     </Content>
-    <Content Include="app\less\dialogs\dialog-theme-contextmenu.css">
-      <DependentUpon>dialog-theme-contextmenu.less</DependentUpon>
-    </Content>
-    <Content Include="app\less\dialogs\dialog-theme-contextmenu.min.css">
-      <DependentUpon>dialog-theme-contextmenu.css</DependentUpon>
-    </Content>
-    <Content Include="app\less\dialogs\dialog-theme-messages.css">
-      <DependentUpon>dialog-theme-messages.less</DependentUpon>
-    </Content>
-    <Content Include="app\less\dialogs\dialog-theme-messages.min.css">
-      <DependentUpon>dialog-theme-messages.css</DependentUpon>
+    <Content Include="app\less\dialogs\dialog-theme.css">
+      <DependentUpon>dialog-theme.less</DependentUpon>
     </Content>
     <Content Include="app\less\dialogs\ngDialog-theme-default.css">
       <DependentUpon>ngDialog-theme-default.less</DependentUpon>
@@ -319,12 +310,7 @@
     <Content Include="app\less\main-elements.min.css">
       <DependentUpon>main-elements.css</DependentUpon>
     </Content>
-    <Content Include="app\less\dialogs\dialog-theme-contextmenu.less" />
-    <Content Include="app\less\dialogs\dialog-theme-messages.less" />
-    <Content Include="app\less\dialogs\dialog-theme-messages.css.map">
-      <DependentUpon>dialog-theme-messages.css</DependentUpon>
-    </Content>
-    <Content Include="app\less\dialogs\dialog-mixins.less" />
+    <Content Include="app\less\dialogs\dialog-theme.less" />
     <Content Include="app\less\cloak.less" />
     <Content Include="app\less\cloak.css.map">
       <DependentUpon>cloak.css</DependentUpon>
@@ -338,8 +324,8 @@
       <DependentUpon>animations.css</DependentUpon>
     </Content>
     <Content Include="app\less\body.less" />
-    <Content Include="app\less\dialogs\dialog-theme-contextmenu.css.map">
-      <DependentUpon>dialog-theme-contextmenu.css</DependentUpon>
+    <Content Include="app\less\dialogs\dialog-theme.css.map">
+      <DependentUpon>dialog-theme.css</DependentUpon>
     </Content>
     <Content Include="app\less\body.css.map">
       <DependentUpon>body.css</DependentUpon>
