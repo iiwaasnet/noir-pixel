@@ -298,6 +298,7 @@
     <Compile Include="App\Images\ImagesModule.cs" />
     <Compile Include="App\Images\IPhotosManager.cs" />
     <Compile Include="App\Images\IProfileImageManager.cs" />
+    <Compile Include="App\Exceptions\OverMaxAllowedFileSize.cs" />
     <Compile Include="App\Images\Paging.cs" />
     <Compile Include="App\Images\PendingPhotos.cs" />
     <Compile Include="App\Images\Photo.cs" />

@@ -2,6 +2,7 @@
 using System.IO;
 using Api.App.Db;
 using Api.App.Db.Extensions;
+using Api.App.Exceptions;
 using Api.App.Images.Config;
 using Api.App.Images.Entities;
 using Api.App.Media;
@@ -10,7 +11,6 @@ using Api.App.Media.Extensions;
 using Api.App.Profiles.Entities;
 using Diagnostics;
 using JsonConfigurationProvider;
-using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 
@@ -161,6 +161,15 @@ namespace Api.App.Images
             collection.Update(Query<Profile>.EQ(p => p.Id, profile.Id),
                               Update<Profile>.Unset(p => p.UserImage))
                       .LogCommandResult(logger);
+        }
+
+        public void AssertFileSize(int fileSizeBytes)
+        {
+            var fileSizeMB = fileSizeBytes / 1024 / 1024;
+            if (fileSizeMB > config.MaxFileSizeMB)
+            {
+                throw new OverMaxAllowedFileSize(config.MaxFileSizeMB, fileSizeMB);
+            }
         }
     }
 }

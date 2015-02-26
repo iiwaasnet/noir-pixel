@@ -36,14 +36,17 @@ namespace Api.App.Media
             return ChunkIsHere(flowChunkNumber, flowIdentifier, GetUserId(userName));
         }
 
-        public async Task<MediaUploadResult> ReceiveMediaChunk(HttpRequestMessage request, string userName)
+        public async Task<MediaUploadResult> ReceiveMediaChunk(HttpRequestMessage request, string userName, Action<int> sizeAssert)
         {
             //TODO: Assert file size doesn't exceed the max allowed for images (profile, photos, etc.)
             AssertRequestIsMultipart(request);
             EnsureRootUploadFolderExists();
 
-            var provider = await request.Content.ReadAsMultipartAsync(new MultipartFormDataStreamProvider(config.UploadFolder));
+            var multipartFormDataStreamProvider = new MultipartFormDataStreamProvider(config.UploadFolder);
+            var provider = await request.Content.ReadAsMultipartAsync(multipartFormDataStreamProvider);
             var chunkInfo = GetChunkInfo(provider, userName);
+
+            sizeAssert(chunkInfo.TotalSizeBytes);
 
             RenameChunk(chunkInfo);
             return TryAssembleFile(chunkInfo);
@@ -257,6 +260,7 @@ namespace Api.App.Media
                        TotalChunks = Convert.ToInt32(provider.FormData["flowTotalChunks"]),
                        Identifier = provider.FormData["flowIdentifier"],
                        FileName = provider.FormData["flowFilename"],
+                       TotalSizeBytes = Convert.ToInt32(provider.FormData["flowTotalSize"]),
                        Chunk = provider.FileData[0],
                        UserId = GetUserId(userName)
                    };

@@ -2,6 +2,7 @@
 using System.Linq;
 using Api.App.Db;
 using Api.App.Db.Extensions;
+using Api.App.Exceptions;
 using Api.App.Framework;
 using Api.App.Images.Config;
 using Api.App.Images.Entities;
@@ -117,6 +118,15 @@ namespace Api.App.Images
                                     Count = count.Value
                                 }
                    };
+        }
+
+        public void AssertFileSize(int fileSizeBytes)
+        {
+            var fileSizeMB = fileSizeBytes / 1024 / 1024;
+            if (fileSizeMB > config.MaxFileSizeMB)
+            {
+                throw new OverMaxAllowedFileSize(config.MaxFileSizeMB, fileSizeMB);
+            }
         }
     }
 }

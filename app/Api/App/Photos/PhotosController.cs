@@ -39,7 +39,7 @@ namespace Api.App.Photos
         {
             try
             {
-                var mediaUploadResult = await mediaManager.ReceiveMediaChunk(Request, User.Identity.Name);
+                var mediaUploadResult = await mediaManager.ReceiveMediaChunk(Request, User.Identity.Name, photosManager.AssertFileSize);
                 if (mediaUploadResult.Completed)
                 {
                     var photo = photosManager.SavePhoto(User.Identity.Name, mediaUploadResult.FileName);
