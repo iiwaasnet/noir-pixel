@@ -38,7 +38,16 @@
         }
 
         function updatePublicInfoSuccess() {
+            syncProfileDataLivesIn(ctrl.livesIn);
             $scope.profilePublic.$setPristine();
+        }
+
+        function syncProfileDataLivesIn() {
+            profileData.data.publicInfo.livesIn = {
+                city: ctrl.livesIn.city,
+                countryCode: ctrl.livesIn.country.code,
+                country: ctrl.livesIn.country.name
+            };
         }
 
         function uploadProfileImage() {
