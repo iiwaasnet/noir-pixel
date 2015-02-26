@@ -28,6 +28,11 @@
         }
 
         function error() {
+            Messages.error({
+                main: {
+                    text: 'Simple error message'
+                }
+            });
         }
 
         function message() {
