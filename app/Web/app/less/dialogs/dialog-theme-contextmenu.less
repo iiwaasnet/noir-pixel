@@ -1,4 +1,6 @@
 /*@import (reference) "dialog-mixins.less";*/
+@import (reference) "../colors.less";
+@import (reference) "../mixins.less";
 
 .keyframe(@y, @opacity) {
     opacity: @opacity;
@@ -74,11 +76,25 @@
 }
 
 
-.ngdialog.dialog-theme-contextmenu {
+
+
+
+@message-window-width: 100%;
+/*@message-window-width: 75%;*/
+
+.dialog-content(@background-color, @border-color) {
     .ngdialog-content {
-        .flyin(.5s);
+        .flyin(0.5s);
+        background: @background-color;
+        border-radius: 0 0 5px 5px;
+        border: solid 1px @border-color;
         margin: 0 auto;
         max-width: 100%;
+        padding: .5em 2.5em .5em 1em;
+        opacity: 0.96;
+        /*position: relative;*/
+        width: @message-window-width;
+        .dropdown-shadow;
     }
 
     .ngdialog-close {
@@ -92,10 +108,9 @@
     .ngdialog-close:before {
         background: transparent;
         border-radius: 3px;
-        color: #bbb;
         content: '\00D7';
-        font-size: 26px;
-        font-weight: 400;
+        font-size: 30px;
+        font-weight: 100;
         height: 30px;
         line-height: 26px;
         position: absolute;
@@ -104,7 +119,13 @@
         top: 3px;
         width: 30px;
     }
+}
 
+
+
+.ngdialog.dialog-theme-contextmenu {
+    .dialog-content(@rangoon-green, @plantation);
+    
     .ngdialog.dialog-theme-contextmenu .ngdialog-close:hover:before,
     .ngdialog-close:active:before {
         color: #777;
@@ -113,11 +134,14 @@
     .ngdialog-message {
         margin-bottom: .5em;
     }
+
+    &.ngdialog-closing {
+        .ngdialog-content {
+            .flyout(.5s);
+        }
+    }
 }
 
-.ngdialog.dialog-theme-contextmenu.ngdialog-closing .ngdialog-content {
-    .flyout(.5s)
-}
 
 /*.ngdialog.dialog-theme-contextmenu .ngdialog-input {
     margin-bottom: 1em;
