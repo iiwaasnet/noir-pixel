@@ -1,15 +1,14 @@
 ﻿<div id="currently-uploading">
     <div class="container" ng-repeat="photo in ctrl.currentlyLoading">
         <div class="image-container fade-out columns-container" ng-if="!photo.isCompleted || photo.error">
-            <!--<div class="image-container fade-out">-->
             <np-img-crop size="50" class="column-left">
-                <img np-local-image="photo.file.file"/>
+                <img np-local-image="photo.file.file" ng-class="{'loading': !photo.isCompleted && !photo.error}" />
             </np-img-crop>
             <div class="error column-center" ng-if="photo.error">
                 <span class="icon icon-attention-16"></span>
                 <span class="text" ng-bind="photo.error"></span>
             </div>
-            <progress-arc complete="photo.file.progress()"></progress-arc>
+            <progress-arc complete="photo.file.progress()" ng-if="!photo.isCompleted && !photo.error"></progress-arc>
         </div>
     </div>
 </div>
