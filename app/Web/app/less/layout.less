@@ -3,21 +3,21 @@
 
 .layout {
     &.column-left {
-        -ms-flex: 0 0 @side-column-width;
-        -webkit-flex: 0 0 @side-column-width;
-        flex: 0 0 @side-column-width;
+        -ms-flex: 1 0 @side-column-width;
+        -webkit-flex: 1 0 @side-column-width;
+        flex: 1 0 @side-column-width;
     }
 
     &.column-center {
-        -webkit-flex: 1 1 auto;
-        -ms-flex: 1 1 auto;
-        flex: 1 1 auto;
+        -webkit-flex: 1 0 @min-center-column-width;
+        -ms-flex: 1 0 @min-center-column-width;
+        flex: 1 0 @min-center-column-width;
         min-width: @min-center-column-width;
     }
 
     &.column-right {
-        -ms-flex: 0 0 @side-column-width;
-        -webkit-flex: 0 0 @side-column-width;
-        flex: 0 0 @side-column-width;
+        -ms-flex: 1 0 @side-column-width;
+        -webkit-flex: 1 0 @side-column-width;
+        flex: 1 0 @side-column-width;
     }
 }
