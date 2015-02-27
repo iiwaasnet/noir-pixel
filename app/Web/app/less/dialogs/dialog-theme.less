@@ -136,26 +136,27 @@
 
 @message-window-width: 75%;
 
+.messages-content{
+    .ngdialog-content {
+        position: relative;
+        text-align: center;
+    }
+}
+
 .ngdialog.dialog-theme-messages.error {
     .dialog-content(@amaranth, @brick-red, @message-window-width);
 
-    .ngdialog-content {
-        position: relative;
-    }
+    .messages-content;
 }
 
 .ngdialog.dialog-theme-messages.info {
     .dialog-content(@olive-drab, @plantation, @message-window-width);
 
-    .ngdialog-content {
-        position: relative;
-    }
+    .messages-content;
 }
 
 .ngdialog.dialog-theme-messages.overlay {
     .dialog-content(@rangoon-green, @plantation, @message-window-width);
 
-    .ngdialog-content {
-        position: relative;
-    }
+    .messages-content;
 }
