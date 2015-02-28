@@ -1,4 +1,4 @@
-﻿<div id="darkroom" 
+﻿<div id="darkroom"
      flow-init="{target: darkroomCtrl.photoUpload.endpoint, withCredentials: true}"
      flow-file-progress="darkroomCtrl.updateProgress($flow.progress(), $flow.files)"
      flow-complete="darkroomCtrl.uploadCompleted()"
@@ -47,8 +47,14 @@
             </ul>
         </div>
         <div class="column-center">
-            <div class="pending-photos clearfix" ng-scrollbar is-bar-shown rebuild-on-resize style="height: 600px;">
-                <div ng-repeat="photo in darkroomCtrl.pendingPhotos" class="container">
+            <div class="pending-photos clearfix" 
+                 ng-scrollbar 
+                 is-bar-shown 
+                 rebuild-on-resize
+                 np-fill-height 
+                 bottom-margin="50"
+                 min-height="300">
+                <div class="container" ng-repeat="photo in darkroomCtrl.pendingPhotos">
                     <img ng-src="{{::photo.previewUrl}}" />
                 </div>
             </div>
