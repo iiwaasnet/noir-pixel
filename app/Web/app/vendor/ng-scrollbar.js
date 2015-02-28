@@ -158,7 +158,7 @@ angular.module('ngScrollbar', []).directive('ngScrollbar', [
                         mainElm.css({ height: '100%' });
                     }
                 };
-                var rebuild = function(e, data) {
+                var rebuild = function (e, data) {
                     /* jshint +W116 */
                     var rollToBottom = !!data && !!data.rollToBottom;
                     scope.$evalAsync(function () {
@@ -175,6 +175,7 @@ angular.module('ngScrollbar', []).directive('ngScrollbar', [
                 if (attrs.hasOwnProperty('rebuildOnResize')) {
                     win.on('resize', rebuild);
                 }
+                scope.$watch(function() { return transculdedContainer[0].scrollHeight; }, rebuild);
             },
             template: '<div>' +
                 '<div class="ngsb-wrap">'
