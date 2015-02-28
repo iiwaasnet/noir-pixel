@@ -691,6 +691,7 @@
     <Content Include="app\vendor\moment.min.js" />
     <Content Include="app\vendor\ng-flow-standalone.js" />
     <Content Include="app\vendor\ng-flow-standalone.min.js" />
+    <Content Include="app\vendor\ng-scrollbar.js" />
     <Content Include="app\vendor\ngDialog.js" />
     <Content Include="app\vendor\ngDialog.min.js" />
     <Content Include="app\vendor\nprogress.js" />
