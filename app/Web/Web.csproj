@@ -448,6 +448,7 @@
     <Content Include="app\src\roles\roles.module.js" />
     <Content Include="app\src\roles\roles.service.js" />
     <Content Include="app\src\ui-elements\autofocus\np-autofocus.directive.js" />
+    <Content Include="app\src\ui-elements\fill-height\np-fill-height.directive.js" />
     <Content Include="app\src\ui-elements\img-crop\img-crop.html" />
     <Content Include="app\src\ui-elements\inplace\inplace-buttons.html" />
     <Content Include="app\src\ui-elements\inplace\np-inplace-buttons.directive.js" />
@@ -801,6 +802,7 @@
   <ItemGroup>
     <Content Include="app\src\app\np.run.js" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
