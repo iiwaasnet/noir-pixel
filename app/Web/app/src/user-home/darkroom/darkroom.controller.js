@@ -4,9 +4,9 @@
     angular.module('np.user-home')
         .controller('DarkroomController', darkroomController);
 
-    darkroomController.$inject = ['$interval', 'DelayedToggle', 'Url', 'Config', 'Photos', 'Overlay'];
+    darkroomController.$inject = ['Url', 'Config', 'Photos', 'Overlay'];
 
-    function darkroomController($interval, DelayedToggle, Url, Config, Photos, Overlay) {
+    function darkroomController(Url, Config, Photos, Overlay) {
         var ctrl = this,
             currentlyUploading = [];
         ctrl.updateProgress = updateProgress;
