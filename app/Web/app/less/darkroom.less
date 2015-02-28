@@ -12,7 +12,7 @@
     overflow: hidden;
 
     .column-left {
-        width: 250px;
+        width: @menu-section-width;
         -ms-flex: 0 0 auto;
         -webkit-flex: 0 0 auto;
         flex: 0 0 auto;
@@ -100,18 +100,18 @@
 }
 
 @spinner-size: 40px;
-@image-preview-size: 50px;
+@loading-image-preview-size: 50px;
 
 #currently-uploading {
     .container {
         .image-container {
             position: relative;
-            min-height: @image-preview-size;
+            min-height: @loading-image-preview-size;
 
             progress-arc {
                 position: absolute;
-                top: (@image-preview-size - @spinner-size) / 2;
-                left: (@image-preview-size - @spinner-size) / 2;
+                top: (@loading-image-preview-size - @spinner-size) / 2;
+                left: (@loading-image-preview-size - @spinner-size) / 2;
             }
 
             img {
