@@ -95,11 +95,10 @@ angular.module('ngScrollbar', []).directive('ngScrollbar', [
                 };
                 var buildScrollbar = function (rollToBottom) {
                     // Getting top position of a parent element to place scroll correctly
-                    //var parentOffsetTop = element[0].parentElement.offsetTop;
                     var parentOffsetTop = 0;
                     var wheelEvent = win[0].onmousewheel !== undefined ? 'mousewheel' : 'DOMMouseScroll';
                     rollToBottom = flags.bottom || rollToBottom;
-                    mainElm = angular.element(element.children()[0]);
+                    mainElm = angular.element(element.children()[0].children[0]);
                     transculdedContainer = angular.element(mainElm.children()[0]);
                     debugger;
                     tools = angular.element(mainElm.children()[1]);

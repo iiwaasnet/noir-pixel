@@ -9,7 +9,8 @@
         'ngMessages',
         'ui.select',
         'flow',
-        'angular-progress-arc'
+        'angular-progress-arc',
+        'ngScrollbar'
     ];
 
     var app = [

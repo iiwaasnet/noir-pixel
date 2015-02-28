@@ -334,6 +334,13 @@
     <Content Include="app\less\column-layout.css.map">
       <DependentUpon>column-layout.css</DependentUpon>
     </Content>
+    <Content Include="app\less\ng-scrollbar.css.map">
+      <DependentUpon>ng-scrollbar.css</DependentUpon>
+    </Content>
+    <None Include="app\less\ng-scrollbar.less" />
+    <Content Include="app\less\ng-scrollbar.css">
+      <DependentUpon>ng-scrollbar.less</DependentUpon>
+    </Content>
     <Content Include="app\less\profile-private.css">
       <DependentUpon>profile-private.less</DependentUpon>
     </Content>

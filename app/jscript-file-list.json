@@ -12,7 +12,8 @@
             "web/app/vendor/angular-ui-router.min.js",
             "web/app/vendor/select.js",
             "web/app/vendor/ng-flow-standalone.js",
-            "web/app/vendor/angular-progress-arc.min.js"
+            "web/app/vendor/angular-progress-arc.min.js",
+            "web/app/vendor/ng-scrollbar.js"
         ],
         "web/app/src/vendor-native.js": [
             "web/app/vendor/moment.min.js",
