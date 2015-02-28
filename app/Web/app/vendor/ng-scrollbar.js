@@ -100,7 +100,6 @@ angular.module('ngScrollbar', []).directive('ngScrollbar', [
                     rollToBottom = flags.bottom || rollToBottom;
                     mainElm = angular.element(element.children()[0].children[0]);
                     transculdedContainer = angular.element(mainElm.children()[0]);
-                    debugger;
                     tools = angular.element(mainElm.children()[1]);
                     thumb = angular.element(angular.element(tools.children()[0]).children()[0]);
                     thumbLine = angular.element(thumb.children()[0]);
@@ -159,25 +158,13 @@ angular.module('ngScrollbar', []).directive('ngScrollbar', [
                         mainElm.css({ height: '100%' });
                     }
                 };
-                var rebuildTimer;
                 var rebuild = function(e, data) {
-                    /* jshint -W116 */
-                    if (rebuildTimer != null) {
-                        clearTimeout(rebuildTimer);
-                    }
                     /* jshint +W116 */
                     var rollToBottom = !!data && !!data.rollToBottom;
-                    rebuildTimer = setTimeout(function() {
+                    scope.$evalAsync(function () {
                         page.height = null;
                         buildScrollbar(rollToBottom);
-                        if (!scope.$$phase) {
-                            scope.$digest();
-                        }
-                        // update parent for flag update
-                        if (!scope.$parent.$$phase) {
-                            scope.$parent.$digest();
-                        }
-                    }, 72);
+                    });
                 };
                 buildScrollbar();
                 if (!!attrs.rebuildOn) {
