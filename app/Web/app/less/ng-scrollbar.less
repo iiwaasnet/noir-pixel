@@ -1,3 +1,5 @@
+@scroll-bar-width: 6px;
+
 .ngsb-wrap {
   -ms-touch-action: none;
 }
@@ -12,7 +14,7 @@
   /* old ie */
 }
 .ngsb-wrap .ngsb-scrollbar {
-  width: 4px;
+  width: @scroll-bar-width;
   height: 100%;
   top: 0;
   right: 0;
@@ -35,7 +37,7 @@
 .ngsb-wrap .ngsb-scrollbar .ngsb-track {
   height: 100%;
   margin: 0 auto;
-  width: 4px;
+  width: @scroll-bar-width;
   background: #000;
   background: rgba(0, 0, 0, 0.4);
   -webkit-border-radius: 2px;
@@ -52,7 +54,7 @@
 }
 .ngsb-wrap .ngsb-scrollbar .ngsb-thumb-pos .ngsb-thumb {
   transition: 0.5s all;
-  width: 4px;
+  width: @scroll-bar-width;
   height: 100%;
   margin: 0 auto;
 

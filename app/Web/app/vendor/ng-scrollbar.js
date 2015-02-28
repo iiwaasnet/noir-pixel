@@ -55,7 +55,7 @@ angular.module('ngScrollbar', []).directive('ngScrollbar', [
                     event.stopPropagation();
                 };
                 var wheelHandler = function(event) {
-                    var wheelDivider = 20;
+                    var wheelDivider = 10;
                     // so it can be changed easily
                     var deltaY = event.wheelDeltaY !== undefined ? event.wheelDeltaY / wheelDivider : event.wheelDelta !== undefined ? event.wheelDelta / wheelDivider : -event.detail * (wheelDivider / 10);
                     dragger.top = Math.max(0, Math.min(parseInt(page.height, 10) - parseInt(dragger.height, 10), parseInt(dragger.top, 10) - deltaY));
