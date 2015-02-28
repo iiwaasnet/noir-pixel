@@ -15,17 +15,28 @@
         return dir;
 
         function link(scope, element, attrs) {
-            var scrollBarHeight = 25,
-                bottomMargin = Math.max(0, parseInt(attrs.bottomMargin, 10)),
-                height = Math.max($window.innerHeight
-                    - element[0].offsetTop
-                    - scrollBarHeight
-                    - bottomMargin,
-                    Math.max(0, parseInt(attrs.minHeight, 10)));
-            element.css({
-                height: height + 'px',
-                overflow: 'hidden'
-            });
+            var win = angular.element($window);
+            win.on('resize', recalcHeight);
+            element.on('$destroy', cleanup);
+            recalcHeight();
+
+            function recalcHeight() {
+                var scrollBarHeight = 25,
+                    bottomMargin = Math.max(0, parseInt(attrs.bottomMargin, 10)),
+                    height = Math.max($window.innerHeight
+                        - element[0].offsetTop
+                        - scrollBarHeight
+                        - bottomMargin,
+                        Math.max(0, parseInt(attrs.minHeight, 10)));
+                element.css({
+                    height: height + 'px',
+                    overflow: 'hidden'
+                });
+            }
+
+            function cleanup() {
+                win.off('resize', recalcHeight);
+            }
         }
     }
 })();
