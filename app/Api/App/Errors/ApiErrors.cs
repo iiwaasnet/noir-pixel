@@ -24,5 +24,11 @@
             public const string NotSame = "EAPI_NotSame";
             public const string InvalidEmail = "EAPI_InvalidMail";
         }
+
+        public class Media
+        {
+            public const string UsupportedMediaFormat = "EAPI_Media_UsupportedFormat";
+            public const string FileTooBig = "EAPI_Media_FileTooBig";
+        }
     }
 }

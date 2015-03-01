@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -20,11 +21,13 @@ namespace Api.App.Media
         private readonly MediaConfiguration config;
         private readonly MongoDatabase db;
         private readonly string mediaAccessRoute;
+        private readonly IMediaValidator mediaValidator;
 
-        public MediaManager(IAppDbProvider dbProvider, IConfigProvider configProvider)
+        public MediaManager(IAppDbProvider dbProvider, IMediaValidator mediaValidator, IConfigProvider configProvider)
         {
             mediaAccessRoute = RoutePrefix + "/{0}";
             db = dbProvider.GetDatabase();
+            this.mediaValidator = mediaValidator;
             config = configProvider.GetConfiguration<MediaConfiguration>();
         }
 
@@ -36,17 +39,16 @@ namespace Api.App.Media
             return ChunkIsHere(flowChunkNumber, flowIdentifier, GetUserId(userName));
         }
 
-        public async Task<MediaUploadResult> ReceiveMediaChunk(HttpRequestMessage request, string userName, Action<int> sizeAssert)
+        public async Task<MediaUploadResult> ReceiveMediaChunk(HttpRequestMessage request, string userName, IEnumerable<MediaConstraint> constraints)
         {
-            //TODO: Assert file size doesn't exceed the max allowed for images (profile, photos, etc.)
             AssertRequestIsMultipart(request);
             EnsureRootUploadFolderExists();
 
-            var multipartFormDataStreamProvider = new MultipartFormDataStreamProvider(config.UploadFolder);
-            var provider = await request.Content.ReadAsMultipartAsync(multipartFormDataStreamProvider);
+            var provider = new MultipartFormDataStreamProvider(config.UploadFolder);
+            provider = await request.Content.ReadAsMultipartAsync(provider);
             var chunkInfo = GetChunkInfo(provider, userName);
 
-            sizeAssert(chunkInfo.TotalSizeBytes);
+            await mediaValidator.Assert(chunkInfo, constraints);
 
             RenameChunk(chunkInfo);
             return TryAssembleFile(chunkInfo);

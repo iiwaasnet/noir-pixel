@@ -276,6 +276,7 @@
     <Compile Include="App\Errors\ErrorsModule.cs" />
     <Compile Include="App\Errors\ValidationError.cs" />
     <Compile Include="App\Exceptions\NotFoundException.cs" />
+    <Compile Include="App\Exceptions\UnsupportedFileTypeException.cs" />
     <Compile Include="App\Framework\StaticRandom.cs" />
     <Compile Include="App\Framework\SUIDGenerator.cs" />
     <Compile Include="App\ApiBase\HttpContextDependencyProvider.cs" />
@@ -294,11 +295,14 @@
     <Compile Include="App\Images\Entities\MediaData.cs" />
     <Compile Include="App\Images\Entities\PhotoFullViewData.cs" />
     <Compile Include="App\Images\Entities\PhotoStatus.cs" />
+    <Compile Include="App\Media\IMediaValidator.cs" />
+    <Compile Include="App\Media\MediaValidator.cs" />
     <Compile Include="App\Images\ImageUtils.cs" />
     <Compile Include="App\Images\ImagesModule.cs" />
     <Compile Include="App\Images\IPhotosManager.cs" />
     <Compile Include="App\Images\IProfileImageManager.cs" />
     <Compile Include="App\Exceptions\OverMaxAllowedFileSize.cs" />
+    <Compile Include="App\Media\MediaConstraint.cs" />
     <Compile Include="App\Images\Paging.cs" />
     <Compile Include="App\Images\PendingPhotos.cs" />
     <Compile Include="App\Images\Photo.cs" />

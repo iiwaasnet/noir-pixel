@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using Api.App.Db;
 using Api.App.Db.Extensions;
 using Api.App.Exceptions;
@@ -24,6 +28,7 @@ namespace Api.App.Images
         private readonly MongoDatabase db;
         private readonly ILogger logger;
         private const int DefaultPhotoCount = 20;
+        private readonly MediaValidator mediaValidator;
 
         public PhotosManager(IAppDbProvider appDbProvider,
                              IImageProcessor imageProcessor,
@@ -31,6 +36,7 @@ namespace Api.App.Images
                              ILogger logger)
         {
             this.logger = logger;
+            mediaValidator = new MediaValidator();
             config = configProvider.GetConfiguration<ImagesConfiguration>().Photos;
             mediaConfig = configProvider.GetConfiguration<MediaConfiguration>();
             this.imageProcessor = imageProcessor;
@@ -120,13 +126,9 @@ namespace Api.App.Images
                    };
         }
 
-        public void AssertFileSize(int fileSizeBytes)
+        public IEnumerable<MediaConstraint> GetMediaConstraints()
         {
-            var fileSizeMB = fileSizeBytes / 1024 / 1024;
-            if (fileSizeMB > config.MaxFileSizeMB)
-            {
-                throw new OverMaxAllowedFileSize(config.MaxFileSizeMB, fileSizeMB);
-            }
+            yield return new MediaConstraint {MediaType = MediaType.Jpeg, MaxFileSizeMB = config.MaxFileSizeMB};
         }
     }
 }

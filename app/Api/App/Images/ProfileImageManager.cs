@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using Api.App.Db;
 using Api.App.Db.Extensions;
 using Api.App.Exceptions;
@@ -163,13 +165,9 @@ namespace Api.App.Images
                       .LogCommandResult(logger);
         }
 
-        public void AssertFileSize(int fileSizeBytes)
+        public IEnumerable<MediaConstraint> GetMediaConstraints()
         {
-            var fileSizeMB = fileSizeBytes / 1024 / 1024;
-            if (fileSizeMB > config.MaxFileSizeMB)
-            {
-                throw new OverMaxAllowedFileSize(config.MaxFileSizeMB, fileSizeMB);
-            }
+            yield return new MediaConstraint { MediaType = MediaType.Jpeg, MaxFileSizeMB = config.MaxFileSizeMB };
         }
     }
 }

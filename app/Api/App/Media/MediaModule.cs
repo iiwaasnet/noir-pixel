@@ -13,6 +13,10 @@ namespace Api.App.Media
             builder.RegisterType<ImageProcessor>()
                    .As<IImageProcessor>()
                    .SingleInstance();
+
+            builder.RegisterType<MediaValidator>()
+                   .As<IMediaValidator>()
+                   .SingleInstance();
         }
     }
 }

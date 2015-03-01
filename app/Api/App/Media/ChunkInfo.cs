@@ -2,7 +2,7 @@
 
 namespace Api.App.Media
 {
-    internal class ChunkInfo
+    public class ChunkInfo
     {
         public int ChunkNumber { get; set; }
         public int TotalChunks { get; set; }

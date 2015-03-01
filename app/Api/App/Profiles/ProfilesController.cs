@@ -3,6 +3,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Api.App.ApiBase;
+using Api.App.Errors;
 using Api.App.Exceptions;
 using Api.App.Images;
 using Api.App.Media;
@@ -95,7 +96,7 @@ namespace Api.App.Profiles
         {
             try
             {
-                var mediaUploadResult = await mediaManager.ReceiveMediaChunk(Request, User.Identity.Name, profileImageManager.AssertFileSize);
+                var mediaUploadResult = await mediaManager.ReceiveMediaChunk(Request, User.Identity.Name, profileImageManager.GetMediaConstraints());
                 if (mediaUploadResult.Completed)
                 {
                     var url = profileImageManager.SaveImage(User.Identity.Name, mediaUploadResult.FileName);
@@ -112,6 +113,14 @@ namespace Api.App.Profiles
             catch (NotSupportedException)
             {
                 return ApiError(HttpStatusCode.NotAcceptable);
+            }
+            catch (UnsupportedFileTypeException)
+            {
+                return ApiError(HttpStatusCode.UnsupportedMediaType, ApiErrors.Media.UsupportedMediaFormat);
+            }
+            catch (OverMaxAllowedFileSize)
+            {
+                return ApiError(HttpStatusCode.BadRequest, ApiErrors.Media.FileTooBig);
             }
         }
 
