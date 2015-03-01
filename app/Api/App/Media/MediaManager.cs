@@ -157,10 +157,10 @@ namespace Api.App.Media
         {
             if (AllChunksAreHere(chunkInfo.Identifier, chunkInfo.TotalChunks, chunkInfo.UserId))
             {
-                var consolidatedFileName = GetFileName(chunkInfo.Identifier);
+                var tmpConcatedFileName = GetFileName(chunkInfo.Identifier);
 
-                ConcatFileParts(chunkInfo.Identifier, chunkInfo.TotalChunks, consolidatedFileName, chunkInfo.UserId);
-                var fileName = RenameFinalFile(chunkInfo.FileName, consolidatedFileName, chunkInfo.UserId);
+                ConcatFileParts(chunkInfo.Identifier, chunkInfo.TotalChunks, tmpConcatedFileName, chunkInfo.UserId);
+                var fileName = RenameFinalFile(chunkInfo.FileName, tmpConcatedFileName, chunkInfo.UserId);
                 DeleteChunks(chunkInfo.Identifier, chunkInfo.TotalChunks, chunkInfo.UserId);
 
                 return new MediaUploadResult {Completed = true, FileName = fileName};
@@ -178,7 +178,7 @@ namespace Api.App.Media
             }
         }
 
-        private string RenameFinalFile(string fileName, string consolidatedFileName, string userId)
+        private string RenameFinalFile(string fileName, string tmpFileName, string userId)
         {
             fileName = string.Format("{0}_{1}", userId, PreventCrossDirectoryAttack(fileName));
             var realFileName = Path.Combine(config.UploadFolder, fileName);
@@ -187,7 +187,7 @@ namespace Api.App.Media
             {
                 File.Delete(realFileName);
             }
-            File.Move(consolidatedFileName, realFileName);
+            File.Move(tmpFileName, realFileName);
 
             return realFileName;
         }
