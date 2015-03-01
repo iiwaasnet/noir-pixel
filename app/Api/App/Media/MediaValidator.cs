@@ -22,10 +22,13 @@ namespace Api.App.Media
 
         public async Task Assert(ChunkInfo chunk, IEnumerable<MediaConstraint> constraints)
         {
-            var mediaType = await FindSupportedMediaType(chunk, constraints);
+            if (chunk.ChunkNumber == 1)
+            {
+                var mediaType = await FindSupportedMediaType(chunk, constraints);
 
-            var maxFileSize = constraints.First(c => c.MediaType == mediaType).MaxFileSizeMB;
-            AssertFileSizeAllowed(chunk.TotalSizeBytes, maxFileSize);
+                var maxFileSize = constraints.First(c => c.MediaType == mediaType).MaxFileSizeMB;
+                AssertFileSizeAllowed(chunk.TotalSizeBytes, maxFileSize);
+            }
         }
 
         private async Task<MediaType> FindSupportedMediaType(ChunkInfo chunk, IEnumerable<MediaConstraint> constraints)
