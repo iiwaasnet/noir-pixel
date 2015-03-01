@@ -15,6 +15,13 @@ header {
         -ms-flex-item-align: end;
         align-self: flex-end;
         padding: 0;
+        text-align: right;
+
+        &.column-left {
+            -webkit-flex: 0 1 4em;
+            -ms-flex: 0 1 4em;
+            flex: 0 1 4em;
+        }
 
         img {
             width: @main-icon-size;
@@ -31,10 +38,16 @@ header {
         padding: 0;
         margin: 0 0 0 2.5em;
         letter-spacing: 0.12em;
+        text-align: center;
 
         a {
             display: inline;
             margin: 0 1.5em 0 0;
+            opacity: 0.55;
+
+            &:hover {
+                opacity: 1;
+            }
         }
     }
 
@@ -43,6 +56,12 @@ header {
         -ms-flex-item-align: end;
         align-self: flex-end;
         white-space: nowrap;
+
+        &.column-right {
+            -webkit-flex: 0 1 4em;
+            -ms-flex: 0 1 4em;
+            flex: 0 1 4em;
+        }
 
         .dropdown {
             li {
