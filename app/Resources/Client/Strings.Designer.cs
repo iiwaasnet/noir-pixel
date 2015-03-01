@@ -457,6 +457,15 @@ namespace Resources.Client {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You.
+        /// </summary>
+        public static string UserHome_Tab_You {
+            get {
+                return ResourceManager.GetString("UserHome_Tab_You", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Favorites.
         /// </summary>
         public static string UserPublic_Tab_Favorites {

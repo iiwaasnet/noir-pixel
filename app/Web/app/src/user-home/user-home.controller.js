@@ -4,9 +4,9 @@
     angular.module('np.user-home')
         .controller('UserHomeController', userHomeController);
 
-    userHomeController.$inject = ['States', 'User', 'Profile', 'profileData'];
+    userHomeController.$inject = ['States', 'User', 'Profile', 'profileData', 'Strings'];
 
-    function userHomeController(States, User, Profile, profileData) {
+    function userHomeController(States, User, Profile, profileData, Strings) {
         var ctrl = this;
         ctrl.user = {};
         ctrl.tabs = [];
@@ -15,7 +15,7 @@
 
         function activate() {
             ctrl.user.userName = profileData.data.publicInfo.user.userName;
-            ctrl.user.displayName = profileData.data.publicInfo.user.fullName || ctrl.user.userName;
+            ctrl.user.displayName = Strings.getLocalizedString('UserHome_Tab_You');
 
             ctrl.tabs = createTabs();
         }

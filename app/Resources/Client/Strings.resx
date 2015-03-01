@@ -255,4 +255,7 @@
   <data name="Darkroom_DropZoone" xml:space="preserve">
     <value>Drop file or click to upload photo</value>
   </data>
+  <data name="UserHome_Tab_You" xml:space="preserve">
+    <value>You</value>
+  </data>
 </root>
