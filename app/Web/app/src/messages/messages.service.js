@@ -8,7 +8,6 @@
 
     function messagesService($q, ngDialog, Strings) {
         var srv = this,
-            EAPI_Unknown = 'EAPI_Unknown',
             currentDialog;
         srv.error = error;
         srv.message = message;
@@ -27,7 +26,7 @@
                 className: 'dialog-theme-messages info',
                 showClose: true,
                 locals: {
-                    message: convertToMessage(msg, placeholders, fallbackMsgCode)
+                    message: Strings.getLocalizedMessageObject(msg, placeholders, fallbackMsgCode)
                 }
             });
         }
@@ -40,29 +39,9 @@
                 className: 'dialog-theme-messages error',
                 showClose: true,
                 locals: {
-                    message: convertToMessage(err, placeholders, fallbackErrCode)
+                    message: Strings.getLocalizedErrorObject(err, placeholders, fallbackErrCode)
                 }
             });
-        }
-
-        function convertToMessage(obj, placeholders, fallbackMsgCode) {
-            var tmp = {};
-            if (obj) {
-                if (obj.main) {
-                    tmp.main = obj.main.message ? obj.main.message : Strings.getLocalizedString(obj.main.code);
-                    if (placeholders) {
-                        tmp.main = tmp.main.formatNamed(placeholders);
-                    }
-                    if (obj.aux) {
-                        tmp.aux = obj.aux.message ? obj.aux.message : Strings.getLocalizedString(obj.aux.code);
-                    }
-                }
-            }
-            if (!tmp.main) {
-                tmp.main = Strings.getLocalizedString(fallbackMsgCode) || Strings.getLocalizedString(EAPI_Unknown);
-            }
-
-            return tmp;
         }
 
         function closeCurrent() {

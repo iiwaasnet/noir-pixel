@@ -10,6 +10,8 @@
 
     function stringsService($q, $http, $rootScope, $window, $interval, Storage, Config, ApplicationLogging, Moment) {
         var service = this,
+            EAPI_Unknown = 'EAPI_Unknown',
+            MAPI_Fallback = 'MAPI_Fallback',
             dictionary = {},
             langStorageKey = 'curUILang',
             fallbackLang = 'en',
@@ -21,12 +23,49 @@
         service.setCurrentLanguage = setCurrentLanguage;
         service.getCurrentLanguage = getCurrentLanguage;
         service.getLocalizedString = getLocalizedString;
+        service.getLocalizedErrorObject = getLocalizedErrorObject;
+        service.getLocalizedMessageObject = getLocalizedMessageObject;
+        service.getLocalizedMessage = getLocalizedMessage;
 
         function init() {
             var promise = initStringResources();
             scheduleCacheInvalidation();
 
             return promise;
+        }
+
+        function getLocalizedMessage(msgCode, placeholders, fallbackMsgCode) {
+            var obj = createLocalizedMessageObject({ main: { code: msgCode } }, placeholders, fallbackMsgCode, MAPI_Fallback);
+
+            return obj.main;
+        }
+
+        function getLocalizedMessageObject(obj, placeholders, fallbackMsgCode) {
+            return createLocalizedMessageObject(obj, placeholders, fallbackMsgCode, MAPI_Fallback);
+        }
+
+        function getLocalizedErrorObject(obj, placeholders, fallbackErrCode) {
+            return createLocalizedMessageObject(obj, placeholders, fallbackErrCode, EAPI_Unknown);
+        }
+
+        function createLocalizedMessageObject(obj, placeholders, fallbackMsgCode, lastResort) {
+            var tmp = {};
+            if (obj) {
+                if (obj.main) {
+                    tmp.main = obj.main.message ? obj.main.message : getLocalizedString(obj.main.code);
+                    if (placeholders) {
+                        tmp.main = tmp.main.formatNamed(placeholders);
+                    }
+                    if (obj.aux) {
+                        tmp.aux = obj.aux.message ? obj.aux.message : getLocalizedString(obj.aux.code);
+                    }
+                }
+            }
+            if (!tmp.main) {
+                tmp.main = getLocalizedString(fallbackMsgCode) || getLocalizedString(lastResort);
+            }
+
+            return tmp;
         }
 
         function setCurrentLanguage(lang) {

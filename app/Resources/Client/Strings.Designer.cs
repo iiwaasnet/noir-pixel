@@ -205,6 +205,24 @@ namespace Resources.Client {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File is too big!.
+        /// </summary>
+        public static string EAPI_Media_FileTooBig {
+            get {
+                return ResourceManager.GetString("EAPI_Media_FileTooBig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File format is not supported!.
+        /// </summary>
+        public static string EAPI_Media_UsupportedFormat {
+            get {
+                return ResourceManager.GetString("EAPI_Media_UsupportedFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to We have encountered an error, while trying to execute your request :( Please, try one more time..
         /// </summary>
         public static string EAPI_Unknown {
@@ -372,6 +390,15 @@ namespace Resources.Client {
         public static string MainMenu_Gallery {
             get {
                 return ResourceManager.GetString("MainMenu_Gallery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There was a message for you, but we can&apos;t find it anymore :(.
+        /// </summary>
+        public static string MAPI_Fallback {
+            get {
+                return ResourceManager.GetString("MAPI_Fallback", resourceCulture);
             }
         }
         

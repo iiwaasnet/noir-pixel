@@ -4,9 +4,9 @@
     angular.module('np.user-home')
         .controller('DarkroomController', darkroomController);
 
-    darkroomController.$inject = ['Url', 'Config', 'Photos', 'Overlay'];
+    darkroomController.$inject = ['Url', 'Config', 'Photos', 'Overlay', 'Strings'];
 
-    function darkroomController(Url, Config, Photos, Overlay) {
+    function darkroomController(Url, Config, Photos, Overlay, Strings) {
         var ctrl = this,
             currentlyUploading = [];
         ctrl.updateProgress = updateProgress;
@@ -67,7 +67,7 @@
                 return f.file === file;
             });
             if (item) {
-                item.error = angular.fromJson(message) || 'bla';
+                item.error = Strings.getLocalizedMessage(angular.fromJson(message));
             }
             clearFileFromHistory(file);
         }

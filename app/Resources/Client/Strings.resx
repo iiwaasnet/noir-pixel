@@ -258,4 +258,13 @@
   <data name="UserHome_Tab_You" xml:space="preserve">
     <value>You</value>
   </data>
+  <data name="EAPI_Media_FileTooBig" xml:space="preserve">
+    <value>File is too big!</value>
+  </data>
+  <data name="EAPI_Media_UsupportedFormat" xml:space="preserve">
+    <value>File format is not supported!</value>
+  </data>
+  <data name="MAPI_Fallback" xml:space="preserve">
+    <value>There was a message for you, but we can't find it anymore :(</value>
+  </data>
 </root>
