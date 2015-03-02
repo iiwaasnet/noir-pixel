@@ -2,9 +2,9 @@
 
 namespace Api.App.Exceptions
 {
-    public class OverMaxAllowedFileSize : Exception
+    public class OverMaxAllowedFileSizeException : Exception
     {
-        public OverMaxAllowedFileSize(int maxAllowedSizeMb, int fileSizeMb)
+        public OverMaxAllowedFileSizeException(int maxAllowedSizeMb, int fileSizeMb)
         {
             MaxAllowedSizeMB = maxAllowedSizeMb;
             FileSizeMB = fileSizeMb;

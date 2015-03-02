@@ -8,6 +8,7 @@
 
     function darkroomController(Url, Config, Photos, Overlay, Strings) {
         var ctrl = this,
+            EAPI_Image_Unknown = 'EAPI_Image_Unknown',
             currentlyUploading = [];
         ctrl.updateProgress = updateProgress;
         ctrl.uploadCompleted = uploadCompleted;
@@ -69,7 +70,7 @@
                 return f.file === file;
             });
             if (item) {
-                item.error = Strings.getLocalizedMessage(angular.fromJson(message));
+                item.error = Strings.getLocalizedMessage(angular.fromJson(message), null, EAPI_Image_Unknown);
             }
         }
 

@@ -7,7 +7,8 @@
     profilePublicController.$inject = ['$rootScope', '$scope', '$filter', 'States', 'Url', 'Config', 'Strings', 'Profile', 'Progress', 'Messages', 'profileData', 'countries'];
 
     function profilePublicController($rootScope, $scope, $filter, States, Url, Config, Strings, Profile, Progress, Messages, profileData, countries) {
-        var ctrl = this;
+        var ctrl = this,
+            EAPI_Image_Unknown = 'EAPI_Image_Unknown';
         ctrl.countries = $filter('orderBy')(countries.data, 'name');
         ctrl.livesIn = getLivesIn();
         ctrl.save = save;
@@ -26,7 +27,7 @@
             clearFileFromHistory(file);
             Messages.error({
                 main: {
-                    code: angular.fromJson(message)
+                    message: Strings.getLocalizedMessage(angular.fromJson(message), null, EAPI_Image_Unknown)
                 }
             });
         }

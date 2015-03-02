@@ -187,6 +187,42 @@ namespace Resources.Client {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File is too big!.
+        /// </summary>
+        public static string EAPI_Image_FileTooBig {
+            get {
+                return ResourceManager.GetString("EAPI_Image_FileTooBig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image dimensions are either too big or too small!.
+        /// </summary>
+        public static string EAPI_Image_SizeViolation {
+            get {
+                return ResourceManager.GetString("EAPI_Image_SizeViolation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We have encountered an error, trying save your file :( Please, try one more time..
+        /// </summary>
+        public static string EAPI_Image_Unknown {
+            get {
+                return ResourceManager.GetString("EAPI_Image_Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File format is not supported!.
+        /// </summary>
+        public static string EAPI_Image_UnsupportedFormat {
+            get {
+                return ResourceManager.GetString("EAPI_Image_UnsupportedFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid model state.
         /// </summary>
         public static string EAPI_InvalidModelState {
@@ -201,24 +237,6 @@ namespace Resources.Client {
         public static string EAPI_InvalidValue {
             get {
                 return ResourceManager.GetString("EAPI_InvalidValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to File is too big!.
-        /// </summary>
-        public static string EAPI_Media_FileTooBig {
-            get {
-                return ResourceManager.GetString("EAPI_Media_FileTooBig", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to File format is not supported!.
-        /// </summary>
-        public static string EAPI_Media_UsupportedFormat {
-            get {
-                return ResourceManager.GetString("EAPI_Media_UsupportedFormat", resourceCulture);
             }
         }
         

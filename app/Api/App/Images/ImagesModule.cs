@@ -13,6 +13,10 @@ namespace Api.App.Images
             builder.RegisterType<PhotosManager>()
                    .As<IPhotosManager>()
                    .SingleInstance();
+
+            builder.RegisterType<ImageValidator>()
+                   .As<IImageValidator>()
+                   .SingleInstance();
         }
     }
 }

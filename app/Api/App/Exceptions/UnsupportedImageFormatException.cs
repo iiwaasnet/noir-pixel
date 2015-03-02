@@ -2,7 +2,7 @@
 
 namespace Api.App.Exceptions
 {
-    public class UnsupportedFileTypeException: Exception
+    public class UnsupportedImageFormatException: Exception
     {
     }
 }

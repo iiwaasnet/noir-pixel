@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Api.App.Db;
 using Api.App.Db.Extensions;
+using Api.App.Images;
 using Api.App.Media.Config;
 using Api.App.Media.Entities;
 using JsonConfigurationProvider;
@@ -21,13 +22,11 @@ namespace Api.App.Media
         private readonly MediaConfiguration config;
         private readonly MongoDatabase db;
         private readonly string mediaAccessRoute;
-        private readonly IMediaValidator mediaValidator;
 
-        public MediaManager(IAppDbProvider dbProvider, IMediaValidator mediaValidator, IConfigProvider configProvider)
+        public MediaManager(IAppDbProvider dbProvider, IConfigProvider configProvider)
         {
             mediaAccessRoute = RoutePrefix + "/{0}";
-            db = dbProvider.GetDatabase();
-            this.mediaValidator = mediaValidator;
+            db = dbProvider.GetDatabase();           
             config = configProvider.GetConfiguration<MediaConfiguration>();
         }
 
@@ -39,7 +38,7 @@ namespace Api.App.Media
             return ChunkIsHere(flowChunkNumber, flowIdentifier, GetUserId(userName));
         }
 
-        public async Task<MediaUploadResult> ReceiveMediaChunk(HttpRequestMessage request, string userName, IEnumerable<MediaConstraint> constraints)
+        public async Task<MediaUploadResult> ReceiveMediaChunk(HttpRequestMessage request, string userName)
         {
             AssertRequestIsMultipart(request);
             EnsureRootUploadFolderExists();
@@ -47,8 +46,6 @@ namespace Api.App.Media
             var provider = new MultipartFormDataStreamProvider(config.UploadFolder);
             provider = await request.Content.ReadAsMultipartAsync(provider);
             var chunkInfo = GetChunkInfo(provider, userName);
-
-            await mediaValidator.Assert(chunkInfo, constraints);
 
             RenameChunk(chunkInfo);
             return TryAssembleFile(chunkInfo);

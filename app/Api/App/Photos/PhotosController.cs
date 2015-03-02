@@ -41,9 +41,10 @@ namespace Api.App.Photos
         {
             try
             {
-                var mediaUploadResult = await mediaManager.ReceiveMediaChunk(Request, User.Identity.Name, photosManager.GetMediaConstraints());
+                var mediaUploadResult = await mediaManager.ReceiveMediaChunk(Request, User.Identity.Name);
                 if (mediaUploadResult.Completed)
                 {
+                    //TODO: try/catch and delete file in case of error
                     var photo = photosManager.SavePhoto(User.Identity.Name, mediaUploadResult.FileName);
                     photo.FullViewUrl = MakeAbsoluteUrl(photo.FullViewUrl);
                     photo.PreviewUrl = MakeAbsoluteUrl(photo.PreviewUrl);
@@ -60,13 +61,17 @@ namespace Api.App.Photos
             {
                 return ApiError(HttpStatusCode.NotAcceptable);
             }
-            catch (UnsupportedFileTypeException)
+            catch (UnsupportedImageFormatException)
             {
-                return ApiError(HttpStatusCode.UnsupportedMediaType, ApiErrors.Media.UsupportedMediaFormat);
+                return ApiError(HttpStatusCode.UnsupportedMediaType, ApiErrors.Images.UnsupportedMediaFormat);
             }
-            catch (OverMaxAllowedFileSize)
+            catch (OverMaxAllowedFileSizeException)
             {
-                return ApiError(HttpStatusCode.BadRequest, ApiErrors.Media.FileTooBig);
+                return ApiError(HttpStatusCode.BadRequest, ApiErrors.Images.FileTooBig);
+            }
+            catch (ImageSizeConstraintsException)
+            {
+                return ApiError(HttpStatusCode.BadRequest, ApiErrors.Images.ImageSizeViolation);
             }
         }
 

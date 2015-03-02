@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.IO;
-using System.Threading.Tasks;
 using Api.App.Db;
 using Api.App.Db.Extensions;
-using Api.App.Exceptions;
 using Api.App.Images.Config;
 using Api.App.Images.Entities;
 using Api.App.Media;
@@ -26,11 +25,13 @@ namespace Api.App.Images
         private readonly MongoDatabase db;
         private readonly ILogger logger;
         private readonly IMediaManager mediaManager;
+        private readonly IImageValidator imageValidator;
 
         public ProfileImageManager(IAppDbProvider appDbProvider,
                                    IImageProcessor imageProcessor,
                                    IConfigProvider configProvider,
                                    IMediaManager mediaManager,
+                                   IImageValidator imageValidator,
                                    ILogger logger)
         {
             this.logger = logger;
@@ -38,11 +39,14 @@ namespace Api.App.Images
             config = configProvider.GetConfiguration<ImagesConfiguration>().ProfileImages;
             mediaConfig = configProvider.GetConfiguration<MediaConfiguration>();
             this.imageProcessor = imageProcessor;
+            this.imageValidator = imageValidator;
             db = appDbProvider.GetDatabase();
         }
 
         public ProfileImage SaveImage(string userName, string fileName)
         {
+            imageValidator.Assert(fileName, GetMediaConstraints());
+
             var profile = db.GetProfile(userName);
             var currentProfileImage = profile.UserImage;
             var profileImage = new Entities.ProfileImage();
@@ -165,9 +169,20 @@ namespace Api.App.Images
                       .LogCommandResult(logger);
         }
 
-        public IEnumerable<MediaConstraint> GetMediaConstraints()
+        private IEnumerable<ImageConstraint> GetMediaConstraints()
         {
-            yield return new MediaConstraint { MediaType = MediaType.Jpeg, MaxFileSizeMB = config.MaxFileSizeMB };
+            yield return new ImageConstraint
+            {
+                ImageFormat = ImageFormat.Jpeg,
+                MaxFileSizeMB = config.MaxFileSizeMB,
+                Size = new SizeConstraints
+                {
+                    MaxHeight = Int32.MaxValue,
+                    MinHeight = config.FullViewSize,
+                    MaxWidth = Int32.MaxValue,
+                    MinWidth = config.FullViewSize
+                }
+            };
         }
     }
 }

@@ -25,10 +25,11 @@
             public const string InvalidEmail = "EAPI_InvalidMail";
         }
 
-        public class Media
+        public class Images
         {
-            public const string UsupportedMediaFormat = "EAPI_Media_UsupportedFormat";
-            public const string FileTooBig = "EAPI_Media_FileTooBig";
+            public const string UnsupportedMediaFormat = "EAPI_Image_UnsupportedFormat";
+            public const string FileTooBig = "EAPI_Image_FileTooBig";
+            public const string ImageSizeViolation = "EAPI_Image_SizeViolation";
         }
     }
 }

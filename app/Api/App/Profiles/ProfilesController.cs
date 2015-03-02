@@ -96,9 +96,10 @@ namespace Api.App.Profiles
         {
             try
             {
-                var mediaUploadResult = await mediaManager.ReceiveMediaChunk(Request, User.Identity.Name, profileImageManager.GetMediaConstraints());
+                var mediaUploadResult = await mediaManager.ReceiveMediaChunk(Request, User.Identity.Name);
                 if (mediaUploadResult.Completed)
                 {
+                    //TODO: try/catch and delete file in case of error
                     var url = profileImageManager.SaveImage(User.Identity.Name, mediaUploadResult.FileName);
                     url.FullViewUrl = MakeAbsoluteUrl(url.FullViewUrl);
                     url.ThumbnailUrl = MakeAbsoluteUrl(url.ThumbnailUrl);
@@ -114,13 +115,17 @@ namespace Api.App.Profiles
             {
                 return ApiError(HttpStatusCode.NotAcceptable);
             }
-            catch (UnsupportedFileTypeException)
+            catch (UnsupportedImageFormatException)
             {
-                return ApiError(HttpStatusCode.UnsupportedMediaType, ApiErrors.Media.UsupportedMediaFormat);
+                return ApiError(HttpStatusCode.UnsupportedMediaType, ApiErrors.Images.UnsupportedMediaFormat);
             }
-            catch (OverMaxAllowedFileSize)
+            catch (OverMaxAllowedFileSizeException)
             {
-                return ApiError(HttpStatusCode.BadRequest, ApiErrors.Media.FileTooBig);
+                return ApiError(HttpStatusCode.BadRequest, ApiErrors.Images.FileTooBig);
+            }
+            catch (ImageSizeConstraintsException)
+            {
+                return ApiError(HttpStatusCode.BadRequest, ApiErrors.Images.ImageSizeViolation);
             }
         }
 

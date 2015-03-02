@@ -258,13 +258,19 @@
   <data name="UserHome_Tab_You" xml:space="preserve">
     <value>You</value>
   </data>
-  <data name="EAPI_Media_FileTooBig" xml:space="preserve">
+  <data name="EAPI_Image_FileTooBig" xml:space="preserve">
     <value>File is too big!</value>
   </data>
-  <data name="EAPI_Media_UsupportedFormat" xml:space="preserve">
+  <data name="EAPI_Image_UnsupportedFormat" xml:space="preserve">
     <value>File format is not supported!</value>
   </data>
   <data name="MAPI_Fallback" xml:space="preserve">
     <value>There was a message for you, but we can't find it anymore :(</value>
+  </data>
+  <data name="EAPI_Image_SizeViolation" xml:space="preserve">
+    <value>Image dimensions are either too big or too small!</value>
+  </data>
+  <data name="EAPI_Image_Unknown" xml:space="preserve">
+    <value>We have encountered an error, trying save your file :( Please, try one more time.</value>
   </data>
 </root>

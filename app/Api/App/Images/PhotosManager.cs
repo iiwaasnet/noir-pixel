@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Drawing.Imaging;
 using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Api.App.Db;
 using Api.App.Db.Extensions;
-using Api.App.Exceptions;
 using Api.App.Framework;
 using Api.App.Images.Config;
 using Api.App.Images.Entities;
@@ -28,15 +25,16 @@ namespace Api.App.Images
         private readonly MongoDatabase db;
         private readonly ILogger logger;
         private const int DefaultPhotoCount = 20;
-        private readonly MediaValidator mediaValidator;
+        private readonly IImageValidator imageValidator;
 
         public PhotosManager(IAppDbProvider appDbProvider,
                              IImageProcessor imageProcessor,
                              IConfigProvider configProvider,
+                             IImageValidator imageValidator,
                              ILogger logger)
         {
             this.logger = logger;
-            mediaValidator = new MediaValidator();
+            this.imageValidator = imageValidator;
             config = configProvider.GetConfiguration<ImagesConfiguration>().Photos;
             mediaConfig = configProvider.GetConfiguration<MediaConfiguration>();
             this.imageProcessor = imageProcessor;
@@ -45,7 +43,8 @@ namespace Api.App.Images
 
         public Photo SavePhoto(string userName, string fileName)
         {
-            //TODO: Assert photo dimensions
+            imageValidator.Assert(fileName, GetMediaConstraints());
+
             var profile = db.GetProfile(userName);
             var photo = new Entities.Photo
                         {
@@ -126,9 +125,20 @@ namespace Api.App.Images
                    };
         }
 
-        public IEnumerable<MediaConstraint> GetMediaConstraints()
+        private IEnumerable<ImageConstraint> GetMediaConstraints()
         {
-            yield return new MediaConstraint {MediaType = MediaType.Jpeg, MaxFileSizeMB = config.MaxFileSizeMB};
+            yield return new ImageConstraint
+                         {
+                             ImageFormat = ImageFormat.Jpeg,
+                             MaxFileSizeMB = config.MaxFileSizeMB,
+                             Size = new SizeConstraints
+                                    {
+                                        MaxHeight = config.FullViewSize.MaxHeight,
+                                        MinHeight = config.FullViewSize.MinHeight,
+                                        MaxWidth = config.FullViewSize.MaxWidth,
+                                        MinWidth = config.FullViewSize.MinWidth
+                                    }
+                         };
         }
     }
 }
