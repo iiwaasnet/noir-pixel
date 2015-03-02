@@ -59,26 +59,31 @@
             }
         }
 
-        .menu-item {
+        *[np-state-menu-item] {
             margin: 2em 0 0;
-            cursor: pointer;
-            display: inline-block;
 
-
-
-            &.selected {
-                .text {
-                    margin: 0 0 0 0.3em;
-                    font-size: 140%;
-                }
+            &:first-of-type {
+                margin: 0;
             }
 
-            &.disabled {
-                cursor: default;
+            .menu-item {
+                cursor: pointer;
+                display: inline-block;
 
-                .text,
-                .icon {
-                    opacity: 0.2;
+                &.selected {
+                    .text {
+                        margin: 0 0 0 0.3em;
+                        font-size: 140%;
+                    }
+                }
+
+                &.disabled {
+                    cursor: default;
+
+                    .text,
+                    .icon {
+                        opacity: 0.2;
+                    }
                 }
             }
         }
