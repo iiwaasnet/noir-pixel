@@ -32,6 +32,8 @@
                      flow-init="{target: publicCtrl.imageUpload.endpoint, withCredentials: true}"
                      flow-files-added="publicCtrl.uploadProfileImage()"
                      flow-complete="publicCtrl.uploadCompleted()"
+                     flow-file-success="publicCtrl.fileUploadSuccess($file, $message)"
+                     flow-file-error="publicCtrl.fileUploadError($file, $message)"
                      flow-files-submitted="$flow.upload()">
                     <div flow-btn
                          class="add"

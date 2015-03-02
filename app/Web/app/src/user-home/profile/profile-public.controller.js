@@ -4,9 +4,9 @@
     angular.module('np.user-home')
         .controller('ProfilePublicController', profilePublicController);
 
-    profilePublicController.$inject = ['$rootScope', '$scope', '$filter', 'States', 'Url', 'Config', 'Strings', 'Profile', 'Progress', 'profileData', 'countries'];
+    profilePublicController.$inject = ['$rootScope', '$scope', '$filter', 'States', 'Url', 'Config', 'Strings', 'Profile', 'Progress', 'Messages', 'profileData', 'countries'];
 
-    function profilePublicController($rootScope, $scope, $filter, States, Url, Config, Strings, Profile, Progress, profileData, countries) {
+    function profilePublicController($rootScope, $scope, $filter, States, Url, Config, Strings, Profile, Progress, Messages, profileData, countries) {
         var ctrl = this;
         ctrl.countries = $filter('orderBy')(countries.data, 'name');
         ctrl.livesIn = getLivesIn();
@@ -14,11 +14,30 @@
         ctrl.imageUpload = getImageUploadConfig();
         ctrl.profileData = profileData.data.publicInfo;
         ctrl.uploadProfileImage = uploadProfileImage;
+        ctrl.fileUploadSuccess = fileUploadSuccess;
+        ctrl.fileUploadError = fileUploadError;
         ctrl.uploadCompleted = uploadCompleted;
         ctrl.deleteProfileImage = deleteProfileImage;
         var unsubscribe;
 
         activate();
+
+        function fileUploadError(file, message) {
+            clearFileFromHistory(file);
+            Messages.error({
+                main: {
+                    code: angular.fromJson(message)
+                }
+            });
+        }
+
+        function fileUploadSuccess(file) {
+            clearFileFromHistory(file);
+        }
+
+        function clearFileFromHistory(file) {
+            file.cancel();
+        }
 
         function deleteProfileImage() {
             Profile.deleteProfileImage().then(deleteProfileImageSuccess);
