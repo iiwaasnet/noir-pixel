@@ -63,13 +63,14 @@
         }
 
         function fileUploadError(file, message) {
+            clearFileFromHistory(file);
+
             var item = currentlyUploading.first(function(f) {
                 return f.file === file;
             });
             if (item) {
                 item.error = Strings.getLocalizedMessage(angular.fromJson(message));
             }
-            clearFileFromHistory(file);
         }
 
         function fileUploadSuccess(file, response) {
