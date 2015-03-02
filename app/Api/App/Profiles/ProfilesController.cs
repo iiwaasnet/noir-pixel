@@ -73,7 +73,7 @@ namespace Api.App.Profiles
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
         }
-        
+
         [HttpPost]
         [Route("update-profile/private-info")]
         public IHttpActionResult UpdatePrivateInfo(ProfilePrivateInfo info)
@@ -99,14 +99,18 @@ namespace Api.App.Profiles
                 var mediaUploadResult = await mediaManager.ReceiveMediaChunk(Request, User.Identity.Name);
                 if (mediaUploadResult.Completed)
                 {
-                    //TODO: try/catch and delete file in case of error
-                    var url = profileImageManager.SaveImage(User.Identity.Name, mediaUploadResult.FileName);
-                    url.FullViewUrl = MakeAbsoluteUrl(url.FullViewUrl);
-                    url.ThumbnailUrl = MakeAbsoluteUrl(url.ThumbnailUrl);
+                    try
+                    {
+                        var url = SaveProfileImage(mediaUploadResult);
+                        url.FullViewUrl = MakeAbsoluteUrl(url.FullViewUrl);
+                        url.ThumbnailUrl = MakeAbsoluteUrl(url.ThumbnailUrl);
 
-                    mediaManager.DeleteMediaFile(mediaUploadResult.FileName);
-
-                    return Ok(url);
+                        return Ok(url);
+                    }
+                    finally
+                    {
+                        mediaManager.DeleteMediaFile(mediaUploadResult.FileName);
+                    }
                 }
 
                 return Ok();
@@ -115,18 +119,29 @@ namespace Api.App.Profiles
             {
                 return ApiError(HttpStatusCode.NotAcceptable);
             }
+        }
+
+        private ProfileImage SaveProfileImage(MediaUploadResult mediaUploadResult)
+        {
+            ProfileImage url = null;
+            try
+            {
+                url = profileImageManager.SaveImage(User.Identity.Name, mediaUploadResult.FileName);
+            }
             catch (UnsupportedImageFormatException)
             {
-                return ApiError(HttpStatusCode.UnsupportedMediaType, ApiErrors.Images.UnsupportedMediaFormat);
+                ApiException(HttpStatusCode.UnsupportedMediaType, ApiErrors.Images.UnsupportedMediaFormat);
             }
             catch (OverMaxAllowedFileSizeException)
             {
-                return ApiError(HttpStatusCode.BadRequest, ApiErrors.Images.FileTooBig);
+                ApiException(HttpStatusCode.BadRequest, ApiErrors.Images.FileTooBig);
             }
             catch (ImageSizeConstraintsException)
             {
-                return ApiError(HttpStatusCode.BadRequest, ApiErrors.Images.ImageSizeViolation);
+                ApiException(HttpStatusCode.BadRequest, ApiErrors.Images.ImageSizeViolation);
             }
+
+            return url;
         }
 
         [HttpDelete]

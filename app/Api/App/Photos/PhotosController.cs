@@ -44,15 +44,19 @@ namespace Api.App.Photos
                 var mediaUploadResult = await mediaManager.ReceiveMediaChunk(Request, User.Identity.Name);
                 if (mediaUploadResult.Completed)
                 {
-                    //TODO: try/catch and delete file in case of error
-                    var photo = photosManager.SavePhoto(User.Identity.Name, mediaUploadResult.FileName);
-                    photo.FullViewUrl = MakeAbsoluteUrl(photo.FullViewUrl);
-                    photo.PreviewUrl = MakeAbsoluteUrl(photo.PreviewUrl);
-                    photo.ThumbnailUrl = MakeAbsoluteUrl(photo.ThumbnailUrl);
+                    try
+                    {
+                        var photo = SavePhoto(mediaUploadResult);
+                        photo.FullViewUrl = MakeAbsoluteUrl(photo.FullViewUrl);
+                        photo.PreviewUrl = MakeAbsoluteUrl(photo.PreviewUrl);
+                        photo.ThumbnailUrl = MakeAbsoluteUrl(photo.ThumbnailUrl);
 
-                    mediaManager.DeleteMediaFile(mediaUploadResult.FileName);
-
-                    return Ok(photo);
+                        return Ok(photo);
+                    }
+                    finally 
+                    {
+                        mediaManager.DeleteMediaFile(mediaUploadResult.FileName);
+                    }
                 }
 
                 return Ok();
@@ -61,18 +65,29 @@ namespace Api.App.Photos
             {
                 return ApiError(HttpStatusCode.NotAcceptable);
             }
+        }
+
+        private Photo SavePhoto(MediaUploadResult mediaUploadResult)
+        {
+            Photo photo = null;
+            try
+            {
+                photo = photosManager.SavePhoto(User.Identity.Name, mediaUploadResult.FileName);
+            }
             catch (UnsupportedImageFormatException)
             {
-                return ApiError(HttpStatusCode.UnsupportedMediaType, ApiErrors.Images.UnsupportedMediaFormat);
+                ApiException(HttpStatusCode.UnsupportedMediaType, ApiErrors.Images.UnsupportedMediaFormat);
             }
             catch (OverMaxAllowedFileSizeException)
             {
-                return ApiError(HttpStatusCode.BadRequest, ApiErrors.Images.FileTooBig);
+                ApiException(HttpStatusCode.BadRequest, ApiErrors.Images.FileTooBig);
             }
             catch (ImageSizeConstraintsException)
             {
-                return ApiError(HttpStatusCode.BadRequest, ApiErrors.Images.ImageSizeViolation);
+                ApiException(HttpStatusCode.BadRequest, ApiErrors.Images.ImageSizeViolation);
             }
+
+            return photo;
         }
 
         [HttpGet]
