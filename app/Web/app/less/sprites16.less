@@ -6,8 +6,12 @@ LESS variables are information about icon's compiled state, stored under its ori
 }
 
 The large array-like variables contain all information about a single icon
-@icon-home: x y offset_x offset_y width height total_width total_height image_path;
+@icon-home: x y offset_x offset_y width height total_width total_height image_path name;
+
+At the bottom of this section, we provide information about the spritesheet itself
+@spritesheet: width height image @spritesheet-sprites;
 */
+@attention16-name: attention16;
 @attention16-x: 80px;
 @attention16-y: 0px;
 @attention16-offset-x: -80px;
@@ -17,7 +21,8 @@ The large array-like variables contain all information about a single icon
 @attention16-total-width: 96px;
 @attention16-total-height: 96px;
 @attention16-image: '../images/sprites16.png';
-@attention16: 80px 0px -80px 0px 16px 16px 96px 96px '../images/sprites16.png';
+@attention16: 80px 0px -80px 0px 16px 16px 96px 96px '../images/sprites16.png' attention16;
+@close16-name: close16;
 @close16-x: 64px;
 @close16-y: 16px;
 @close16-offset-x: -64px;
@@ -27,7 +32,8 @@ The large array-like variables contain all information about a single icon
 @close16-total-width: 96px;
 @close16-total-height: 96px;
 @close16-image: '../images/sprites16.png';
-@close16: 64px 16px -64px -16px 16px 16px 96px 96px '../images/sprites16.png';
+@close16: 64px 16px -64px -16px 16px 16px 96px 96px '../images/sprites16.png' close16;
+@home16-name: home16;
 @home16-x: 48px;
 @home16-y: 32px;
 @home16-offset-x: -48px;
@@ -37,7 +43,8 @@ The large array-like variables contain all information about a single icon
 @home16-total-width: 96px;
 @home16-total-height: 96px;
 @home16-image: '../images/sprites16.png';
-@home16: 48px 32px -48px -32px 16px 16px 96px 96px '../images/sprites16.png';
+@home16: 48px 32px -48px -32px 16px 16px 96px 96px '../images/sprites16.png' home16;
+@logout16-name: logout16;
 @logout16-x: 32px;
 @logout16-y: 48px;
 @logout16-offset-x: -32px;
@@ -47,7 +54,8 @@ The large array-like variables contain all information about a single icon
 @logout16-total-width: 96px;
 @logout16-total-height: 96px;
 @logout16-image: '../images/sprites16.png';
-@logout16: 32px 48px -32px -48px 16px 16px 96px 96px '../images/sprites16.png';
+@logout16: 32px 48px -32px -48px 16px 16px 96px 96px '../images/sprites16.png' logout16;
+@private16-name: private16;
 @private16-x: 16px;
 @private16-y: 64px;
 @private16-offset-x: -16px;
@@ -57,7 +65,8 @@ The large array-like variables contain all information about a single icon
 @private16-total-width: 96px;
 @private16-total-height: 96px;
 @private16-image: '../images/sprites16.png';
-@private16: 16px 64px -16px -64px 16px 16px 96px 96px '../images/sprites16.png';
+@private16: 16px 64px -16px -64px 16px 16px 96px 96px '../images/sprites16.png' private16;
+@public16-name: public16;
 @public16-x: 0px;
 @public16-y: 80px;
 @public16-offset-x: 0px;
@@ -67,7 +76,12 @@ The large array-like variables contain all information about a single icon
 @public16-total-width: 96px;
 @public16-total-height: 96px;
 @public16-image: '../images/sprites16.png';
-@public16: 0px 80px 0px -80px 16px 16px 96px 96px '../images/sprites16.png';
+@public16: 0px 80px 0px -80px 16px 16px 96px 96px '../images/sprites16.png' public16;
+@spritesheet-width: 96px;
+@spritesheet-height: 96px;
+@spritesheet-image: '../images/sprites16.png';
+@spritesheet-sprites: @attention16 @close16 @home16 @logout16 @private16 @public16;
+@spritesheet: 96px 96px '../images/sprites16.png' @spritesheet-sprites;
 
 /*
 The provided classes are intended to be used with the array-like variables
@@ -80,22 +94,23 @@ The provided classes are intended to be used with the array-like variables
 }
 */
 .sprite-width(@sprite) {
-  width: ~`"@{sprite}".split(', ')[4]`;
+  width: extract(@sprite, 5);
 }
 
 .sprite-height(@sprite) {
-  height: ~`"@{sprite}".split(', ')[5]`;
+  height: extract(@sprite, 6);
 }
 
 .sprite-position(@sprite) {
-  @sprite-offset-x: ~`"@{sprite}".split(', ')[2]`;
-  @sprite-offset-y: ~`"@{sprite}".split(', ')[3]`;
-  background-position: @sprite-offset-x  @sprite-offset-y;
+  @sprite-offset-x: extract(@sprite, 3);
+  @sprite-offset-y: extract(@sprite, 4);
+  background-position: @sprite-offset-x @sprite-offset-y;
 }
 
 .sprite-image(@sprite) {
-  @sprite-image: ~`"@{sprite}".split(', ')[8].slice(1, -2)`;
-  background-image: url(@sprite-image);
+  @sprite-image: extract(@sprite, 9);
+  @sprite-image-bare: ~`"@{sprite-image}".slice(1, -1)`;
+  background-image: url(@sprite-image-bare);
 }
 
 .sprite(@sprite) {
@@ -103,4 +118,22 @@ The provided classes are intended to be used with the array-like variables
   .sprite-position(@sprite);
   .sprite-width(@sprite);
   .sprite-height(@sprite);
+}
+
+/*
+The `.sprites` mixin generates identical output to the CSS template
+  but can be overridden inside of LESS
+
+This must be run when you have at least 2 sprites.
+  If run with a single sprite, then there will be reference errors.
+
+.sprites(@spritesheet-sprites);
+*/
+.sprites(@sprites, @i: 1) when (@i <= length(@sprites)) {
+  @sprite: extract(@sprites, @i);
+  @sprite-name: extract(@sprite, 10);
+  .@{sprite-name} {
+    .sprite(@sprite);
+  }
+  .sprites(@sprites, @i + 1);
 }

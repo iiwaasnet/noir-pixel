@@ -6,8 +6,12 @@ LESS variables are information about icon's compiled state, stored under its ori
 }
 
 The large array-like variables contain all information about a single icon
-@icon-home: x y offset_x offset_y width height total_width total_height image_path;
+@icon-home: x y offset_x offset_y width height total_width total_height image_path name;
+
+At the bottom of this section, we provide information about the spritesheet itself
+@spritesheet: width height image @spritesheet-sprites;
 */
+@facebook-name: facebook;
 @facebook-x: 500px;
 @facebook-y: 0px;
 @facebook-offset-x: -500px;
@@ -17,7 +21,8 @@ The large array-like variables contain all information about a single icon
 @facebook-total-width: 600px;
 @facebook-total-height: 288px;
 @facebook-image: '../images/sprites-login.png';
-@facebook: 500px 0px -500px 0px 100px 48px 600px 288px '../images/sprites-login.png';
+@facebook: 500px 0px -500px 0px 100px 48px 600px 288px '../images/sprites-login.png' facebook;
+@google-name: google;
 @google-x: 400px;
 @google-y: 48px;
 @google-offset-x: -400px;
@@ -27,7 +32,8 @@ The large array-like variables contain all information about a single icon
 @google-total-width: 600px;
 @google-total-height: 288px;
 @google-image: '../images/sprites-login.png';
-@google: 400px 48px -400px -48px 100px 48px 600px 288px '../images/sprites-login.png';
+@google: 400px 48px -400px -48px 100px 48px 600px 288px '../images/sprites-login.png' google;
+@instagram-name: instagram;
 @instagram-x: 300px;
 @instagram-y: 96px;
 @instagram-offset-x: -300px;
@@ -37,7 +43,8 @@ The large array-like variables contain all information about a single icon
 @instagram-total-width: 600px;
 @instagram-total-height: 288px;
 @instagram-image: '../images/sprites-login.png';
-@instagram: 300px 96px -300px -96px 100px 48px 600px 288px '../images/sprites-login.png';
+@instagram: 300px 96px -300px -96px 100px 48px 600px 288px '../images/sprites-login.png' instagram;
+@pinterest-name: pinterest;
 @pinterest-x: 200px;
 @pinterest-y: 144px;
 @pinterest-offset-x: -200px;
@@ -47,7 +54,8 @@ The large array-like variables contain all information about a single icon
 @pinterest-total-width: 600px;
 @pinterest-total-height: 288px;
 @pinterest-image: '../images/sprites-login.png';
-@pinterest: 200px 144px -200px -144px 100px 48px 600px 288px '../images/sprites-login.png';
+@pinterest: 200px 144px -200px -144px 100px 48px 600px 288px '../images/sprites-login.png' pinterest;
+@twitter-name: twitter;
 @twitter-x: 100px;
 @twitter-y: 192px;
 @twitter-offset-x: -100px;
@@ -57,7 +65,8 @@ The large array-like variables contain all information about a single icon
 @twitter-total-width: 600px;
 @twitter-total-height: 288px;
 @twitter-image: '../images/sprites-login.png';
-@twitter: 100px 192px -100px -192px 100px 48px 600px 288px '../images/sprites-login.png';
+@twitter: 100px 192px -100px -192px 100px 48px 600px 288px '../images/sprites-login.png' twitter;
+@yahoo-name: yahoo;
 @yahoo-x: 0px;
 @yahoo-y: 240px;
 @yahoo-offset-x: 0px;
@@ -67,7 +76,12 @@ The large array-like variables contain all information about a single icon
 @yahoo-total-width: 600px;
 @yahoo-total-height: 288px;
 @yahoo-image: '../images/sprites-login.png';
-@yahoo: 0px 240px 0px -240px 100px 48px 600px 288px '../images/sprites-login.png';
+@yahoo: 0px 240px 0px -240px 100px 48px 600px 288px '../images/sprites-login.png' yahoo;
+@spritesheet-width: 600px;
+@spritesheet-height: 288px;
+@spritesheet-image: '../images/sprites-login.png';
+@spritesheet-sprites: @facebook @google @instagram @pinterest @twitter @yahoo;
+@spritesheet: 600px 288px '../images/sprites-login.png' @spritesheet-sprites;
 
 /*
 The provided classes are intended to be used with the array-like variables
@@ -80,22 +94,23 @@ The provided classes are intended to be used with the array-like variables
 }
 */
 .sprite-width(@sprite) {
-  width: ~`"@{sprite}".split(', ')[4]`;
+  width: extract(@sprite, 5);
 }
 
 .sprite-height(@sprite) {
-  height: ~`"@{sprite}".split(', ')[5]`;
+  height: extract(@sprite, 6);
 }
 
 .sprite-position(@sprite) {
-  @sprite-offset-x: ~`"@{sprite}".split(', ')[2]`;
-  @sprite-offset-y: ~`"@{sprite}".split(', ')[3]`;
-  background-position: @sprite-offset-x  @sprite-offset-y;
+  @sprite-offset-x: extract(@sprite, 3);
+  @sprite-offset-y: extract(@sprite, 4);
+  background-position: @sprite-offset-x @sprite-offset-y;
 }
 
 .sprite-image(@sprite) {
-  @sprite-image: ~`"@{sprite}".split(', ')[8].slice(1, -2)`;
-  background-image: url(@sprite-image);
+  @sprite-image: extract(@sprite, 9);
+  @sprite-image-bare: ~`"@{sprite-image}".slice(1, -1)`;
+  background-image: url(@sprite-image-bare);
 }
 
 .sprite(@sprite) {
@@ -103,4 +118,22 @@ The provided classes are intended to be used with the array-like variables
   .sprite-position(@sprite);
   .sprite-width(@sprite);
   .sprite-height(@sprite);
+}
+
+/*
+The `.sprites` mixin generates identical output to the CSS template
+  but can be overridden inside of LESS
+
+This must be run when you have at least 2 sprites.
+  If run with a single sprite, then there will be reference errors.
+
+.sprites(@spritesheet-sprites);
+*/
+.sprites(@sprites, @i: 1) when (@i <= length(@sprites)) {
+  @sprite: extract(@sprites, @i);
+  @sprite-name: extract(@sprite, 10);
+  .@{sprite-name} {
+    .sprite(@sprite);
+  }
+  .sprites(@sprites, @i + 1);
 }

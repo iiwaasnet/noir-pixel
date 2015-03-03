@@ -6,8 +6,12 @@ LESS variables are information about icon's compiled state, stored under its ori
 }
 
 The large array-like variables contain all information about a single icon
-@icon-home: x y offset_x offset_y width height total_width total_height image_path;
+@icon-home: x y offset_x offset_y width height total_width total_height image_path name;
+
+At the bottom of this section, we provide information about the spritesheet itself
+@spritesheet: width height image @spritesheet-sprites;
 */
+@camera32-name: camera32;
 @camera32-x: 448px;
 @camera32-y: 0px;
 @camera32-offset-x: -448px;
@@ -17,7 +21,8 @@ The large array-like variables contain all information about a single icon
 @camera32-total-width: 480px;
 @camera32-total-height: 466px;
 @camera32-image: '../images/sprites32.png';
-@camera32: 448px 0px -448px 0px 32px 26px 480px 466px '../images/sprites32.png';
+@camera32: 448px 0px -448px 0px 32px 26px 480px 466px '../images/sprites32.png' camera32;
+@darkroom32-a-name: darkroom32-a;
 @darkroom32-a-x: 224px;
 @darkroom32-a-y: 210px;
 @darkroom32-a-offset-x: -224px;
@@ -27,7 +32,8 @@ The large array-like variables contain all information about a single icon
 @darkroom32-a-total-width: 480px;
 @darkroom32-a-total-height: 466px;
 @darkroom32-a-image: '../images/sprites32.png';
-@darkroom32-a: 224px 210px -224px -210px 32px 32px 480px 466px '../images/sprites32.png';
+@darkroom32-a: 224px 210px -224px -210px 32px 32px 480px 466px '../images/sprites32.png' darkroom32-a;
+@darkroom32-name: darkroom32;
 @darkroom32-x: 256px;
 @darkroom32-y: 178px;
 @darkroom32-offset-x: -256px;
@@ -37,7 +43,8 @@ The large array-like variables contain all information about a single icon
 @darkroom32-total-width: 480px;
 @darkroom32-total-height: 466px;
 @darkroom32-image: '../images/sprites32.png';
-@darkroom32: 256px 178px -256px -178px 32px 32px 480px 466px '../images/sprites32.png';
+@darkroom32: 256px 178px -256px -178px 32px 32px 480px 466px '../images/sprites32.png' darkroom32;
+@delete32-name: delete32;
 @delete32-x: 320px;
 @delete32-y: 114px;
 @delete32-offset-x: -320px;
@@ -47,7 +54,8 @@ The large array-like variables contain all information about a single icon
 @delete32-total-width: 480px;
 @delete32-total-height: 466px;
 @delete32-image: '../images/sprites32.png';
-@delete32: 320px 114px -320px -114px 32px 32px 480px 466px '../images/sprites32.png';
+@delete32: 320px 114px -320px -114px 32px 32px 480px 466px '../images/sprites32.png' delete32;
+@gallery32-a-name: gallery32-a;
 @gallery32-a-x: 160px;
 @gallery32-a-y: 274px;
 @gallery32-a-offset-x: -160px;
@@ -57,7 +65,8 @@ The large array-like variables contain all information about a single icon
 @gallery32-a-total-width: 480px;
 @gallery32-a-total-height: 466px;
 @gallery32-a-image: '../images/sprites32.png';
-@gallery32-a: 160px 274px -160px -274px 32px 32px 480px 466px '../images/sprites32.png';
+@gallery32-a: 160px 274px -160px -274px 32px 32px 480px 466px '../images/sprites32.png' gallery32-a;
+@gallery32-name: gallery32;
 @gallery32-x: 288px;
 @gallery32-y: 146px;
 @gallery32-offset-x: -288px;
@@ -67,7 +76,8 @@ The large array-like variables contain all information about a single icon
 @gallery32-total-width: 480px;
 @gallery32-total-height: 466px;
 @gallery32-image: '../images/sprites32.png';
-@gallery32: 288px 146px -288px -146px 32px 32px 480px 466px '../images/sprites32.png';
+@gallery32: 288px 146px -288px -146px 32px 32px 480px 466px '../images/sprites32.png' gallery32;
+@home32-a-name: home32-a;
 @home32-a-x: 384px;
 @home32-a-y: 54px;
 @home32-a-offset-x: -384px;
@@ -77,7 +87,8 @@ The large array-like variables contain all information about a single icon
 @home32-a-total-width: 480px;
 @home32-a-total-height: 466px;
 @home32-a-image: '../images/sprites32.png';
-@home32-a: 384px 54px -384px -54px 32px 28px 480px 466px '../images/sprites32.png';
+@home32-a: 384px 54px -384px -54px 32px 28px 480px 466px '../images/sprites32.png' home32-a;
+@home32-name: home32;
 @home32-x: 416px;
 @home32-y: 26px;
 @home32-offset-x: -416px;
@@ -87,7 +98,8 @@ The large array-like variables contain all information about a single icon
 @home32-total-width: 480px;
 @home32-total-height: 466px;
 @home32-image: '../images/sprites32.png';
-@home32: 416px 26px -416px -26px 32px 28px 480px 466px '../images/sprites32.png';
+@home32: 416px 26px -416px -26px 32px 28px 480px 466px '../images/sprites32.png' home32;
+@photos32-name: photos32;
 @photos32-x: 192px;
 @photos32-y: 242px;
 @photos32-offset-x: -192px;
@@ -97,7 +109,8 @@ The large array-like variables contain all information about a single icon
 @photos32-total-width: 480px;
 @photos32-total-height: 466px;
 @photos32-image: '../images/sprites32.png';
-@photos32: 192px 242px -192px -242px 32px 32px 480px 466px '../images/sprites32.png';
+@photos32: 192px 242px -192px -242px 32px 32px 480px 466px '../images/sprites32.png' photos32;
+@private32-name: private32;
 @private32-x: 352px;
 @private32-y: 82px;
 @private32-offset-x: -352px;
@@ -107,7 +120,8 @@ The large array-like variables contain all information about a single icon
 @private32-total-width: 480px;
 @private32-total-height: 466px;
 @private32-image: '../images/sprites32.png';
-@private32: 352px 82px -352px -82px 32px 32px 480px 466px '../images/sprites32.png';
+@private32: 352px 82px -352px -82px 32px 32px 480px 466px '../images/sprites32.png' private32;
+@public32-a-name: public32-a;
 @public32-a-x: 128px;
 @public32-a-y: 306px;
 @public32-a-offset-x: -128px;
@@ -117,7 +131,8 @@ The large array-like variables contain all information about a single icon
 @public32-a-total-width: 480px;
 @public32-a-total-height: 466px;
 @public32-a-image: '../images/sprites32.png';
-@public32-a: 128px 306px -128px -306px 32px 32px 480px 466px '../images/sprites32.png';
+@public32-a: 128px 306px -128px -306px 32px 32px 480px 466px '../images/sprites32.png' public32-a;
+@public32-name: public32;
 @public32-x: 96px;
 @public32-y: 338px;
 @public32-offset-x: -96px;
@@ -127,7 +142,8 @@ The large array-like variables contain all information about a single icon
 @public32-total-width: 480px;
 @public32-total-height: 466px;
 @public32-image: '../images/sprites32.png';
-@public32: 96px 338px -96px -338px 32px 32px 480px 466px '../images/sprites32.png';
+@public32: 96px 338px -96px -338px 32px 32px 480px 466px '../images/sprites32.png' public32;
+@stack32-name: stack32;
 @stack32-x: 64px;
 @stack32-y: 370px;
 @stack32-offset-x: -64px;
@@ -137,7 +153,8 @@ The large array-like variables contain all information about a single icon
 @stack32-total-width: 480px;
 @stack32-total-height: 466px;
 @stack32-image: '../images/sprites32.png';
-@stack32: 64px 370px -64px -370px 32px 32px 480px 466px '../images/sprites32.png';
+@stack32: 64px 370px -64px -370px 32px 32px 480px 466px '../images/sprites32.png' stack32;
+@upload32-name: upload32;
 @upload32-x: 32px;
 @upload32-y: 402px;
 @upload32-offset-x: -32px;
@@ -147,7 +164,8 @@ The large array-like variables contain all information about a single icon
 @upload32-total-width: 480px;
 @upload32-total-height: 466px;
 @upload32-image: '../images/sprites32.png';
-@upload32: 32px 402px -32px -402px 32px 32px 480px 466px '../images/sprites32.png';
+@upload32: 32px 402px -32px -402px 32px 32px 480px 466px '../images/sprites32.png' upload32;
+@user32-name: user32;
 @user32-x: 0px;
 @user32-y: 434px;
 @user32-offset-x: 0px;
@@ -157,7 +175,12 @@ The large array-like variables contain all information about a single icon
 @user32-total-width: 480px;
 @user32-total-height: 466px;
 @user32-image: '../images/sprites32.png';
-@user32: 0px 434px 0px -434px 32px 32px 480px 466px '../images/sprites32.png';
+@user32: 0px 434px 0px -434px 32px 32px 480px 466px '../images/sprites32.png' user32;
+@spritesheet-width: 480px;
+@spritesheet-height: 466px;
+@spritesheet-image: '../images/sprites32.png';
+@spritesheet-sprites: @camera32 @darkroom32-a @darkroom32 @delete32 @gallery32-a @gallery32 @home32-a @home32 @photos32 @private32 @public32-a @public32 @stack32 @upload32 @user32;
+@spritesheet: 480px 466px '../images/sprites32.png' @spritesheet-sprites;
 
 /*
 The provided classes are intended to be used with the array-like variables
@@ -170,22 +193,23 @@ The provided classes are intended to be used with the array-like variables
 }
 */
 .sprite-width(@sprite) {
-  width: ~`"@{sprite}".split(', ')[4]`;
+  width: extract(@sprite, 5);
 }
 
 .sprite-height(@sprite) {
-  height: ~`"@{sprite}".split(', ')[5]`;
+  height: extract(@sprite, 6);
 }
 
 .sprite-position(@sprite) {
-  @sprite-offset-x: ~`"@{sprite}".split(', ')[2]`;
-  @sprite-offset-y: ~`"@{sprite}".split(', ')[3]`;
-  background-position: @sprite-offset-x  @sprite-offset-y;
+  @sprite-offset-x: extract(@sprite, 3);
+  @sprite-offset-y: extract(@sprite, 4);
+  background-position: @sprite-offset-x @sprite-offset-y;
 }
 
 .sprite-image(@sprite) {
-  @sprite-image: ~`"@{sprite}".split(', ')[8].slice(1, -2)`;
-  background-image: url(@sprite-image);
+  @sprite-image: extract(@sprite, 9);
+  @sprite-image-bare: ~`"@{sprite-image}".slice(1, -1)`;
+  background-image: url(@sprite-image-bare);
 }
 
 .sprite(@sprite) {
@@ -193,4 +217,22 @@ The provided classes are intended to be used with the array-like variables
   .sprite-position(@sprite);
   .sprite-width(@sprite);
   .sprite-height(@sprite);
+}
+
+/*
+The `.sprites` mixin generates identical output to the CSS template
+  but can be overridden inside of LESS
+
+This must be run when you have at least 2 sprites.
+  If run with a single sprite, then there will be reference errors.
+
+.sprites(@spritesheet-sprites);
+*/
+.sprites(@sprites, @i: 1) when (@i <= length(@sprites)) {
+  @sprite: extract(@sprites, @i);
+  @sprite-name: extract(@sprite, 10);
+  .@{sprite-name} {
+    .sprite(@sprite);
+  }
+  .sprites(@sprites, @i + 1);
 }

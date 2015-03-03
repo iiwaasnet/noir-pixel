@@ -125,8 +125,8 @@ module.exports = function (grunt) {
         sprite: {
             16: {
                 src: ['../graphics/src/16/*.png'],
-                destImg: 'web/app/images/sprites16.png',
-                destCSS: 'web/app/less/sprites16.less',
+                dest: 'web/app/images/sprites16.png',
+                destCss: 'web/app/less/sprites16.less',
                 algorithm: 'alt-diagonal',
                 cssFormat: 'less',
                 imgOpts: {
@@ -136,8 +136,8 @@ module.exports = function (grunt) {
             },
             32: {
                 src: ['../graphics/src/32/*.png'],
-                destImg: 'web/app/images/sprites32.png',
-                destCSS: 'web/app/less/sprites32.less',
+                dest: 'web/app/images/sprites32.png',
+                destCss: 'web/app/less/sprites32.less',
                 algorithm: 'alt-diagonal',
                 cssFormat: 'less',
                 imgOpts: {
@@ -147,8 +147,8 @@ module.exports = function (grunt) {
             },
             login: {
                 src: ['../graphics/src/login/*.png'],
-                destImg: 'web/app/images/sprites-login.png',
-                destCSS: 'web/app/less/sprites-login.less',
+                dest: 'web/app/images/sprites-login.png',
+                destCss: 'web/app/less/sprites-login.less',
                 algorithm: 'alt-diagonal',
                 cssFormat: 'less',
                 imgOpts: {
