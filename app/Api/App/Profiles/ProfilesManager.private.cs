@@ -43,6 +43,7 @@ namespace Api.App.Profiles
                            };
                     users.Insert(user).LogCommandResult(logger);
                     CreateProfileThumbnail(login);
+                    user = db.GetProfile(userName);
                 }
             }
             catch (MongoDuplicateKeyException)
