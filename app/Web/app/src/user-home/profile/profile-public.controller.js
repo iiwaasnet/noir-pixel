@@ -49,11 +49,12 @@
         }
 
         function save() {
-            Profile.updatePublicInfo({
-                    userFullName: ctrl.profileData.user.fullName,
-                    countryCode: ctrl.livesIn.country.code,
-                    city: ctrl.livesIn.city
-                })
+            var publicInfo = {
+                userFullName: ctrl.profileData.user.fullName,
+                countryCode: (ctrl.livesIn.country) ? ctrl.livesIn.country.code : undefined,
+                city: ctrl.livesIn.city
+            };
+            Profile.updatePublicInfo(publicInfo)
                 .then(updatePublicInfoSuccess);
         }
 
@@ -63,11 +64,11 @@
         }
 
         function syncProfileDataLivesIn() {
-            profileData.data.publicInfo.livesIn = {
-                city: ctrl.livesIn.city,
-                countryCode: ctrl.livesIn.country.code,
-                country: ctrl.livesIn.country.name
-            };
+            profileData.data.publicInfo.livesIn.city = ctrl.livesIn.city;
+            if (ctrl.livesIn.country) {
+                profileData.data.publicInfo.livesIn.countryCode = ctrl.livesIn.country.code;
+                profileData.data.publicInfo.livesIn.country = ctrl.livesIn.country.name;
+            }
         }
 
         function uploadProfileImage() {
@@ -103,16 +104,16 @@
 
         function getLivesIn() {
             var livesIn = {
-                city: undefined,
-                country: {
-                    code: undefined,
-                    name: undefined
-                }
+                city: undefined
             };
             if (profileData.data.publicInfo.livesIn) {
                 livesIn.city = profileData.data.publicInfo.livesIn.city;
-                livesIn.country.code = profileData.data.publicInfo.livesIn.countryCode;
-                livesIn.country.name = profileData.data.publicInfo.livesIn.country;
+                if (profileData.data.publicInfo.livesIn.countryCode) {
+                    livesIn.country = {
+                        code: profileData.data.publicInfo.livesIn.countryCode,
+                        name: profileData.data.publicInfo.livesIn.country
+                    };
+                }
             }
             return livesIn;
         }

@@ -28,13 +28,18 @@ namespace Api.App.Geo
 
         public Country GetCountry(string countryCode)
         {
-            var countries = db.GetCollection<Entities.Country>(Entities.Country.CollectionName);
+            if (!string.IsNullOrWhiteSpace(countryCode))
+            {
+                var countries = db.GetCollection<Entities.Country>(Entities.Country.CollectionName);
 
-            var country = countries.FindOne(Query<Entities.Country>.EQ(c => c.Code, countryCode.ToUpper()));
+                var country = countries.FindOne(Query<Entities.Country>.EQ(c => c.Code, countryCode.ToUpper()));
 
-            return (country != null)
-                       ? new Country {Code = country.Code, Name = country.Name}
-                       : null;
+                return (country != null)
+                           ? new Country {Code = country.Code, Name = country.Name}
+                           : null;
+            }
+
+            return null;
         }
     }
 }
