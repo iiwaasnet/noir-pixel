@@ -64,8 +64,12 @@
         }
 
         function syncProfileDataLivesIn() {
-            profileData.data.publicInfo.livesIn.city = ctrl.livesIn.city;
+            if (ctrl.livesIn.city) {
+                profileData.data.publicInfo.livesIn = { city: ctrl.livesIn.city };
+            }
+            
             if (ctrl.livesIn.country) {
+                profileData.data.publicInfo.livesIn = profileData.data.publicInfo.livesIn || {};
                 profileData.data.publicInfo.livesIn.countryCode = ctrl.livesIn.country.code;
                 profileData.data.publicInfo.livesIn.country = ctrl.livesIn.country.name;
             }
