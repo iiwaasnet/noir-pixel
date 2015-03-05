@@ -5,12 +5,14 @@ namespace Api.App.Entities
 {
     public abstract class Entity : IEntity
     {
-        protected Entity()
+        public string InitEntityId()
         {
             Id = ObjectId.GenerateNewId().ToString();
+
+            return Id;
         }
-        
+
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; private set; }
+        public string Id { get; set; }
     }
 }

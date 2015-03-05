@@ -53,7 +53,7 @@ namespace Api.App.Images
                             Status = PhotoStatus.Pending
                         };
 
-            var photoId = photo.Id;
+            var photoId = photo.InitEntityId();
 
             var fullViewFile = FullViewFileName(profile.Id, photoId, fileName.GetFileExtension());
             var previewFileName = FullPreviewFileName(profile.Id, photoId, fileName.GetFileExtension());

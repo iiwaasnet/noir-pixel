@@ -51,7 +51,7 @@ namespace Api.App.Images
             var currentProfileImage = profile.UserImage;
             var profileImage = new Entities.ProfileImage();
 
-            var profileImageId = profileImage.Id;
+            var profileImageId = profileImage.InitEntityId();
 
             var fullViewFile = FullViewFileName(profile.Id, profileImageId, fileName.GetFileExtension());
             var thumbnailFile = ThumbnailFileName(profile.Id, profileImageId, fileName.GetFileExtension());
