@@ -11,7 +11,9 @@
                        placeholder="{{'Hint_EmailAddress' | npi18n}}"
                        np-autofocus />
             </div>
-            <div ng-messages="profilePrivate.email.$error" multiple ng-messages-include="/app/src/user-home/error-messages.html"></div>
+            <div ng-messages="profilePrivate.email.$error" multiple>
+                <ng-messages-include src="/app/src/user-home/error-messages.html"></ng-messages-include>
+            </div>
             <div class="email-description" np-i18n="ProfilePrivate_EmailDescription"></div>
             <input type="button" ng-class="{'default-action': !(profilePrivate.$pristine || profilePrivate.$invalid)}" 
                    class="save" 

@@ -12,7 +12,8 @@
                    ng-pattern="::ctrl.userNameValidation.regEx"
                    ng-minlength="::ctrl.userNameValidation.minLength" ng-maxlength="::ctrl.userNameValidation.maxLength"
                    ng-model-options="{allowInvalid: true, updateOn: 'default blur', debounce: {'default': 300, 'blur': 0}}" />
-            <div ng-messages="externalRegister.userName.$error" multiple ng-messages-include="/app/src/auth/error-messages.html">
+            <div ng-messages="externalRegister.userName.$error" multiple>
+                <ng-messages-include src="/app/src/auth/error-messages.html"></ng-messages-include>
             </div>
             <div class="buttons-block clearfix">
                 <input type="submit" class="default-action" ng-click="ctrl.register()" np-i18n="Btn_Register" ng-disabled="!externalRegister.$valid" />
