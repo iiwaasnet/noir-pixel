@@ -19,9 +19,9 @@ namespace Api.App.Auth
             builder.RegisterType<AuthOptions>()
                    .AsSelf()
                    .SingleInstance();
-            builder.RegisterType<ApplicationUserManager>()
-                   .AsSelf()
-                   .SingleInstance();
+            //NOTE: Should NOT be registered as SingleInstance
+            builder.RegisterType<ApplicationUserManager>().AsSelf();
+
             builder.Register(c => new UserStore<ApplicationUser>(
                                       c.Resolve<ApplicationIdentityContext>()))
                    .As<IUserStore<ApplicationUser>>()
