@@ -3,8 +3,8 @@ using Api.App.Auth;
 using Api.App.Db.Extensions;
 using Api.App.Exceptions;
 using Api.App.Profiles.Entities;
+using AspNet.Identity.MongoDB;
 using MongoDB.Driver;
-using MongoDB.Driver.Builders;
 
 namespace Api.App.Profiles
 {
@@ -27,7 +27,7 @@ namespace Api.App.Profiles
         private async Task<Profile> EnsureUserProfileExists(string userName)
         {
             var users = db.GetCollection<Profile>(Profile.CollectionName);
-            var user = users.FindOne(Query<Profile>.EQ(p => p.UserName, userName));
+            var user = await users.Find(p => p.UserName == userName).FirstOrDefaultAsync();
 
             try
             {
@@ -41,17 +41,16 @@ namespace Api.App.Profiles
                                UserName = login.UserName,
                                UserId = login.Id
                            };
-                    users.Insert(user).LogCommandResult(logger);
-                    CreateProfileThumbnail(login);
-                    user = db.GetProfile(userName);
+                    await users.InsertOneAsync(user);
+                    CreateProfileThumbnail((ApplicationUser) login);
+                    user = await db.GetProfile(userName);
                 }
             }
             catch (MongoDuplicateKeyException)
             {
-                user = users.FindOne(Query<Profile>.EQ(p => p.UserName, userName));
             }
 
-            return user;
+            return user ?? await users.Find(p => p.UserName == userName).FirstOrDefaultAsync();
         }
 
         private void CreateProfileThumbnail(ApplicationUser login)
@@ -62,7 +61,7 @@ namespace Api.App.Profiles
             }
         }
 
-        private void AssertUserIsRegistered(ApplicationUser login)
+        private void AssertUserIsRegistered(IdentityUser login)
         {
             if (login == null)
             {
@@ -70,11 +69,11 @@ namespace Api.App.Profiles
             }
         }
 
-        private Entities.Geo MapCountryName(ProfilePublicInfo publicInfo)
+        private async Task<Entities.Geo> MapCountryName(ProfilePublicInfo publicInfo)
         {
-            var country = geoManager.GetCountry(publicInfo.LivesIn.CountryCode);
+            var country = await geoManager.GetCountry(publicInfo.LivesIn.CountryCode);
 
-            var geo = new Entities.Geo { City = publicInfo.LivesIn.City };
+            var geo = new Entities.Geo {City = publicInfo.LivesIn.City};
             if (country != null)
             {
                 geo.CountryCode = country.Code;

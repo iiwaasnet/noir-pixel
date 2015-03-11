@@ -1,9 +1,11 @@
-﻿namespace Api.App.Images
+﻿using System.Threading.Tasks;
+
+namespace Api.App.Images
 {
     public interface IProfileImageManager
     {
-        ProfileImage SaveImage(string userName, string fileName);
+        Task<ProfileImage> SaveImage(string userName, string fileName);
         void DeleteImage(string userName);
-        ProfileImage SaveThumbnailLink(string userName, string url);
+        Task<ProfileImage> SaveThumbnailLink(string userName, string url);
     }
 }

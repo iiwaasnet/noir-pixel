@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Threading.Tasks;
 using Api.App.Db;
 using Api.App.Db.Extensions;
 using Api.App.Images.Config;
@@ -13,7 +14,6 @@ using Api.App.Profiles.Entities;
 using Diagnostics;
 using JsonConfigurationProvider;
 using MongoDB.Driver;
-using MongoDB.Driver.Builders;
 
 namespace Api.App.Images
 {
@@ -22,7 +22,7 @@ namespace Api.App.Images
         private readonly ProfileImagesConfiguration config;
         private readonly MediaConfiguration mediaConfig;
         private readonly IImageProcessor imageProcessor;
-        private readonly MongoDatabase db;
+        private readonly IMongoDatabase db;
         private readonly ILogger logger;
         private readonly IMediaManager mediaManager;
         private readonly IImageValidator imageValidator;
@@ -43,11 +43,11 @@ namespace Api.App.Images
             db = appDbProvider.GetDatabase();
         }
 
-        public ProfileImage SaveImage(string userName, string fileName)
+        public async Task<ProfileImage> SaveImage(string userName, string fileName)
         {
             imageValidator.Assert(fileName, GetMediaConstraints());
 
-            var profile = db.GetProfile(userName);
+            var profile = await db.GetProfile(userName);
             var currentProfileImage = profile.UserImage;
             var profileImage = new Entities.ProfileImage();
 
@@ -72,9 +72,8 @@ namespace Api.App.Images
                                      };
 
             var collection = db.GetCollection<Profile>(Profile.CollectionName);
-            collection.Update(Query<Profile>.EQ(p => p.Id, profile.Id),
-                              Update<Profile>.Set(p => p.UserImage, profileImage))
-                      .LogCommandResult(logger);
+            await collection.FindOneAndUpdateAsync(p => p.Id == profile.Id,
+                                                   new UpdateDefinitionBuilder<Profile>().Set(p => p.UserImage, profileImage));
 
             DeleteProfileImages(currentProfileImage);
 
@@ -85,12 +84,12 @@ namespace Api.App.Images
                    };
         }
 
-        public ProfileImage SaveThumbnailLink(string userName, string url)
+        public async Task<ProfileImage> SaveThumbnailLink(string userName, string url)
         {
-            var profile = db.GetProfile(userName);
+            var profile = await db.GetProfile(userName);
             var profileImage = new Entities.ProfileImage();
 
-            var mediaInfo = mediaManager.SaveMediaUrl(url, profile.Id);
+            var mediaInfo = await mediaManager.SaveMediaUrl(url, profile.Id);
             profileImage.Thumbnail = new MediaData
                                      {
                                          MediaId = mediaInfo.MediaId,
@@ -98,9 +97,8 @@ namespace Api.App.Images
                                      };
 
             var collection = db.GetCollection<Profile>(Profile.CollectionName);
-            collection.Update(Query<Profile>.EQ(p => p.Id, profile.Id),
-                              Update<Profile>.Set(p => p.UserImage, profileImage))
-                      .LogCommandResult(logger);
+            await collection.FindOneAndUpdateAsync(p => p.Id == profile.Id,
+                                                   new UpdateDefinitionBuilder<Profile>().Set(p => p.UserImage, profileImage));
 
             return new ProfileImage
                    {
@@ -158,31 +156,31 @@ namespace Api.App.Images
             return string.Format(mediaConfig.ProfileImageFolderTemplate, id);
         }
 
-        public void DeleteImage(string userName)
+        public async void DeleteImage(string userName)
         {
-            var profile = db.GetProfile(userName);
+            var profile = await db.GetProfile(userName);
             DeleteProfileImages(profile.UserImage);
 
             var collection = db.GetCollection<Profile>(Profile.CollectionName);
-            collection.Update(Query<Profile>.EQ(p => p.Id, profile.Id),
-                              Update<Profile>.Unset(p => p.UserImage))
-                      .LogCommandResult(logger);
+
+            await collection.FindOneAndUpdateAsync(p => p.Id == profile.Id,
+                                                   new UpdateDefinitionBuilder<Profile>().Unset(p => p.UserImage));
         }
 
         private IEnumerable<ImageConstraint> GetMediaConstraints()
         {
             yield return new ImageConstraint
-            {
-                ImageFormat = ImageFormat.Jpeg,
-                MaxFileSizeMB = config.MaxFileSizeMB,
-                Size = new SizeConstraints
-                {
-                    MaxHeight = Int32.MaxValue,
-                    MinHeight = config.FullViewSize,
-                    MaxWidth = Int32.MaxValue,
-                    MinWidth = config.FullViewSize
-                }
-            };
+                         {
+                             ImageFormat = ImageFormat.Jpeg,
+                             MaxFileSizeMB = config.MaxFileSizeMB,
+                             Size = new SizeConstraints
+                                    {
+                                        MaxHeight = Int32.MaxValue,
+                                        MinHeight = config.FullViewSize,
+                                        MaxWidth = Int32.MaxValue,
+                                        MinWidth = config.FullViewSize
+                                    }
+                         };
         }
     }
 }

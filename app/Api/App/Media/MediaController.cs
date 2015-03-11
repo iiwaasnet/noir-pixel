@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Threading.Tasks;
 using System.Web.Http;
 using Api.App.ApiBase;
 
@@ -16,9 +17,9 @@ namespace Api.App.Media
 
         [HttpGet]
         [Route("{id}")]
-        public IHttpActionResult Get(string id)
+        public async Task<IHttpActionResult> Get(string id)
         {
-            var link = mediaManager.GetMediaLink(id);
+            var link = await mediaManager.GetMediaLink(id);
             if (link != null)
             {
                 if (link.Remote)

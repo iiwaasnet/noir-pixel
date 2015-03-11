@@ -1,38 +1,39 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 using Api.App.Db;
 using MongoDB.Driver;
-using MongoDB.Driver.Builders;
 
 namespace Api.App.Geo
 {
     public class GeoManager : IGeoManager
     {
-        private readonly MongoDatabase db;
+        private readonly IMongoDatabase db;
 
         public GeoManager(IAppDbProvider appDbProvider)
         {
             db = appDbProvider.GetDatabase();
         }
 
-        public IEnumerable<Country> GetCountries()
+        public async Task<IEnumerable<Country>> GetCountries()
         {
             var countries = db.GetCollection<Entities.Country>(Entities.Country.CollectionName);
 
-            return countries.FindAll().Select(c => new Country
-                                                   {
-                                                       Code = c.Code,
-                                                       Name = c.Name
-                                                   });
+            return await countries
+                             .Find(c => true)
+                             .Project(c => new Country
+                                           {
+                                               Code = c.Code,
+                                               Name = c.Name
+                                           }).ToListAsync();
         }
 
-        public Country GetCountry(string countryCode)
+        public async Task<Country> GetCountry(string countryCode)
         {
             if (!string.IsNullOrWhiteSpace(countryCode))
             {
                 var countries = db.GetCollection<Entities.Country>(Entities.Country.CollectionName);
 
-                var country = countries.FindOne(Query<Entities.Country>.EQ(c => c.Code, countryCode.ToUpper()));
+                var country = await countries.Find(c => c.Code == countryCode.ToUpper()).FirstOrDefaultAsync();
 
                 return (country != null)
                            ? new Country {Code = country.Code, Name = country.Name}

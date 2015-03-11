@@ -12,7 +12,8 @@ namespace Api.App.Auth
         public static void ConfigureAuth(this IAppBuilder app)
         {
             // Configure the db context and user manager to use a single instance per request
-            app.CreatePerOwinContext(() => DependencyInjection.GetContainer().Resolve<ApplicationIdentityContext>());
+            app.CreatePerOwinContext(() => DependencyInjection.GetContainer().Resolve<IdentityUserContext>());
+            app.CreatePerOwinContext(() => DependencyInjection.GetContainer().Resolve<IdentityRoleContext>());
             app.CreatePerOwinContext(() => DependencyInjection.GetContainer().Resolve<ApplicationUserManager>());
             app.CreatePerOwinContext(() => DependencyInjection.GetContainer().Resolve<ApplicationRoleManager>());
 

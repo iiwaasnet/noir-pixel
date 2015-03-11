@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing.Imaging;
-using System.Linq;
+using System.Threading.Tasks;
 using Api.App.Db;
 using Api.App.Db.Extensions;
 using Api.App.Framework;
@@ -13,7 +13,6 @@ using Api.App.Media.Extensions;
 using Diagnostics;
 using JsonConfigurationProvider;
 using MongoDB.Driver;
-using MongoDB.Driver.Builders;
 
 namespace Api.App.Images
 {
@@ -22,7 +21,7 @@ namespace Api.App.Images
         private readonly PhotosConfiguration config;
         private readonly MediaConfiguration mediaConfig;
         private readonly IImageProcessor imageProcessor;
-        private readonly MongoDatabase db;
+        private readonly IMongoDatabase db;
         private readonly ILogger logger;
         private const int DefaultPhotoCount = 20;
         private readonly IImageValidator imageValidator;
@@ -41,11 +40,11 @@ namespace Api.App.Images
             db = appDbProvider.GetDatabase();
         }
 
-        public Photo SavePhoto(string userName, string fileName)
+        public async Task<Photo> SavePhoto(string userName, string fileName)
         {
             imageValidator.Assert(fileName, GetMediaConstraints());
 
-            var profile = db.GetProfile(userName);
+            var profile = await db.GetProfile(userName);
             var photo = new Entities.Photo
                         {
                             OwnerId = profile.Id,
@@ -83,7 +82,7 @@ namespace Api.App.Images
                               };
 
             var collection = db.GetCollection<Entities.Photo>(Entities.Photo.CollectionName);
-            collection.Insert(photo).LogCommandResult(logger);
+            await collection.InsertOneAsync(photo);
 
             return new Photo
                    {

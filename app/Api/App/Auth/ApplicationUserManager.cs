@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNet.Identity.MongoDB;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security.DataProtection;
@@ -10,16 +11,16 @@ namespace Api.App.Auth
 {
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
 
-    public class ApplicationUserManager : UserManager<ApplicationUser>
+    public class ApplicationUserManager : UserManager<IdentityUser>
     {
-        public ApplicationUserManager(IUserStore<ApplicationUser> store)
+        public ApplicationUserManager(IUserStore<IdentityUser> store)
             : base(store)
         {
             UserValidator = CreateUserValidator();
             PasswordValidator = CreatePasswordValidator();
 
             var provider = new DpapiDataProtectionProvider("np");
-            UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser, string>(provider.Create("Web.Api Identity"));
+            UserTokenProvider = new DataProtectorTokenProvider<IdentityUser, string>(provider.Create("Web.Api Identity"));
         }
 
         /// <summary>
@@ -30,7 +31,7 @@ namespace Api.App.Auth
         /// <returns></returns>
         public virtual async Task<IdentityResult> AddUserToRolesAsync(string userId, IEnumerable<string> roles)
         {
-            var userRoleStore = (IUserRoleStore<ApplicationUser, string>) Store;
+            var userRoleStore = (IUserRoleStore<IdentityUser, string>)Store;
 
             var user = await FindByIdAsync(userId).ConfigureAwait(false);
             if (user == null)
@@ -57,7 +58,7 @@ namespace Api.App.Auth
         /// <returns></returns>
         public virtual async Task<IdentityResult> RemoveUserFromRolesAsync(string userId, IEnumerable<string> roles)
         {
-            var userRoleStore = (IUserRoleStore<ApplicationUser, string>) Store;
+            var userRoleStore = (IUserRoleStore<IdentityUser, string>)Store;
 
             var user = await FindByIdAsync(userId).ConfigureAwait(false);
             if (user == null)
@@ -88,9 +89,9 @@ namespace Api.App.Auth
                    };
         }
 
-        private UserValidator<ApplicationUser> CreateUserValidator()
+        private UserValidator<IdentityUser> CreateUserValidator()
         {
-            return new UserValidator<ApplicationUser>(this)
+            return new UserValidator<IdentityUser>(this)
                    {
                        AllowOnlyAlphanumericUserNames = false,
                        RequireUniqueEmail = false

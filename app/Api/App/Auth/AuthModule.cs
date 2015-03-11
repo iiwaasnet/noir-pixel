@@ -8,6 +8,7 @@ using Autofac;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security.Facebook;
 using Microsoft.Owin.Security.Twitter;
+using Owin.Security.Providers.ArcGISOnline.Provider;
 using Owin.Security.Providers.GooglePlus;
 
 namespace Api.App.Auth
@@ -22,19 +23,24 @@ namespace Api.App.Auth
             //NOTE: Should NOT be registered as SingleInstance
             builder.RegisterType<ApplicationUserManager>().AsSelf();
 
-            builder.Register(c => new UserStore<ApplicationUser>(
-                                      c.Resolve<ApplicationIdentityContext>()))
+            builder.Register(c => new UserStore<IdentityUser>(
+                                      c.Resolve<UsersContext<IdentityUser>>()))
                    .As<IUserStore<ApplicationUser>>()
                    .SingleInstance();
-            builder.Register(c => ApplicationIdentityContext.Create(c.Resolve<IIdentityDbProvider>()))
-                   .As<ApplicationIdentityContext>()
+            builder.Register(c => IdentityUserContext.Create(c.Resolve<IIdentityDbProvider>()))
+                   .As<UsersContext<IdentityUser>>()
+                   .SingleInstance();
+
+            builder.Register(c => new RoleStore<IdentityRole>(c.Resolve<RolesContext<IdentityRole>>()))
+                  .As<IRoleStore<IdentityRole, string>>()
+                  .SingleInstance();
+            builder.Register(c => IdentityRoleContext.Create(c.Resolve<IIdentityDbProvider>()))
+                   .As<RolesContext<IdentityRole>>()
                    .SingleInstance();
             builder.RegisterType<ApplicationRoleManager>()
                    .AsSelf()
                    .SingleInstance();
-            builder.Register(c => new RoleStore<IdentityRole>(c.Resolve<ApplicationIdentityContext>()))
-                   .As<IRoleStore<IdentityRole, string>>()
-                   .SingleInstance();
+           
 
             builder.RegisterType<GooglePlusAccountProvider>()
                    .As<ISocialAccountProvider>()

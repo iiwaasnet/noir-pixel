@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Api.App.Geo
 {
     public interface IGeoManager
     {
-        Country GetCountry(string countryCode);
-        IEnumerable<Country> GetCountries();
+        Task<Country> GetCountry(string countryCode);
+        Task<IEnumerable<Country>> GetCountries();
     }
 }

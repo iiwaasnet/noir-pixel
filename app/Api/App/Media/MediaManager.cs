@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Api.App.Db;
 using Api.App.Db.Extensions;
-using Api.App.Images;
 using Api.App.Media.Config;
 using Api.App.Media.Entities;
 using JsonConfigurationProvider;
 using MongoDB.Driver;
-using MongoDB.Driver.Builders;
 
 namespace Api.App.Media
 {
@@ -20,22 +17,22 @@ namespace Api.App.Media
         public const string RoutePrefix = "media";
 
         private readonly MediaConfiguration config;
-        private readonly MongoDatabase db;
+        private readonly IMongoDatabase db;
         private readonly string mediaAccessRoute;
 
         public MediaManager(IAppDbProvider dbProvider, IConfigProvider configProvider)
         {
             mediaAccessRoute = RoutePrefix + "/{0}";
-            db = dbProvider.GetDatabase();           
+            db = dbProvider.GetDatabase();
             config = configProvider.GetConfiguration<MediaConfiguration>();
         }
 
-        public bool MediaChunkReceived(HttpRequestMessage request, string userName)
+        public async Task<bool> MediaChunkReceived(HttpRequestMessage request, string userName)
         {
             var flowChunkNumber = Int32.Parse(request.GetQueryNameValuePairs().FirstOrDefault(p => p.Key == "flowChunkNumber").Value);
             var flowIdentifier = request.GetQueryNameValuePairs().FirstOrDefault(p => p.Key == "flowIdentifier").Value;
 
-            return ChunkIsHere(flowChunkNumber, flowIdentifier, GetUserId(userName));
+            return ChunkIsHere(flowChunkNumber, flowIdentifier, await GetUserId(userName));
         }
 
         public async Task<MediaUploadResult> ReceiveMediaChunk(HttpRequestMessage request, string userName)
@@ -45,13 +42,13 @@ namespace Api.App.Media
 
             var provider = new MultipartFormDataStreamProvider(config.UploadFolder);
             provider = await request.Content.ReadAsMultipartAsync(provider);
-            var chunkInfo = GetChunkInfo(provider, userName);
+            var chunkInfo = await GetChunkInfo(provider, userName);
 
             RenameChunk(chunkInfo);
             return TryAssembleFile(chunkInfo);
         }
 
-        public MediaInfo SaveMediaFile(string fileName, string ownerId)
+        public async Task<MediaInfo> SaveMediaFile(string fileName, string ownerId)
         {
             var collection = db.GetCollection<Entities.Media>(Entities.Media.CollectionName);
             var media = new Entities.Media
@@ -61,7 +58,7 @@ namespace Api.App.Media
                         };
             media.Uri = GenerateMediaAccessUri(media.InitEntityId());
 
-            collection.Insert(media);
+            await collection.InsertOneAsync(media);
 
             return new MediaInfo
                    {
@@ -71,7 +68,7 @@ namespace Api.App.Media
                    };
         }
 
-        public MediaInfo SaveMediaUrl(string url, string ownerId)
+        public async Task<MediaInfo> SaveMediaUrl(string url, string ownerId)
         {
             var collection = db.GetCollection<Entities.Media>(Entities.Media.CollectionName);
             var media = new Entities.Media
@@ -81,7 +78,7 @@ namespace Api.App.Media
                         };
             media.Uri = GenerateMediaAccessUri(media.InitEntityId());
 
-            collection.Insert(media);
+            await collection.InsertOneAsync(media);
 
             return new MediaInfo
                    {
@@ -91,17 +88,17 @@ namespace Api.App.Media
                    };
         }
 
-        public void DeleteMedia(string mediaId)
+        public async void DeleteMedia(string mediaId)
         {
             var collection = db.GetCollection<Entities.Media>(Entities.Media.CollectionName);
-            var media = collection.FindOne(Query<Entities.Media>.EQ(m => m.Id, mediaId));
+            var media = await collection.Find(m => m.Id == mediaId).FirstOrDefaultAsync();
             if (media != null)
             {
                 if (!media.Location.Remote)
                 {
                     DeleteMediaFile(media.Location.Location);
                 }
-                collection.Remove(Query<Entities.Media>.EQ(m => m.Id, media.Id));
+                await collection.FindOneAndDeleteAsync(m => m.Id == media.Id);
             }
         }
 
@@ -110,10 +107,10 @@ namespace Api.App.Media
             File.Delete(fileName);
         }
 
-        public MediaLink GetMediaLink(string mediaId)
+        public async Task<MediaLink> GetMediaLink(string mediaId)
         {
             var collection = db.GetCollection<Entities.Media>(Entities.Media.CollectionName);
-            var media = collection.FindOne(Query<Entities.Media>.EQ(m => m.Id, mediaId));
+            var media = await collection.Find(m => m.Id == mediaId).FirstOrDefaultAsync();
             if (media != null)
             {
                 return new MediaLink
@@ -131,9 +128,9 @@ namespace Api.App.Media
             return string.Format(mediaAccessRoute, id);
         }
 
-        private string GetUserId(string userName)
+        private async Task<string> GetUserId(string userName)
         {
-            return db.GetProfile(userName).Id;
+            return (await db.GetProfile(userName)).Id;
         }
 
         private static void AssertRequestIsMultipart(HttpRequestMessage request)
@@ -251,7 +248,7 @@ namespace Api.App.Media
             return Path.Combine(config.UploadFolder, string.Format("{0}_{1}_{2}", userId, identifier, chunkNumber));
         }
 
-        private ChunkInfo GetChunkInfo(MultipartFormDataStreamProvider provider, string userName)
+        private async Task<ChunkInfo> GetChunkInfo(MultipartFormDataStreamProvider provider, string userName)
         {
             return new ChunkInfo
                    {
@@ -261,7 +258,7 @@ namespace Api.App.Media
                        FileName = provider.FormData["flowFilename"],
                        TotalSizeBytes = Convert.ToInt32(provider.FormData["flowTotalSize"]),
                        Chunk = provider.FileData[0],
-                       UserId = GetUserId(userName)
+                       UserId = await GetUserId(userName)
                    };
         }
     }

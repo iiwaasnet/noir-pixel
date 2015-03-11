@@ -5,12 +5,12 @@ namespace Api.App.Media
 {
     public interface IMediaManager
     {
-        bool MediaChunkReceived(HttpRequestMessage request, string userName);
+        Task<bool> MediaChunkReceived(HttpRequestMessage request, string userName);
         Task<MediaUploadResult> ReceiveMediaChunk(HttpRequestMessage request, string userName);
-        MediaInfo SaveMediaFile(string fileName, string ownerId);
-        MediaInfo SaveMediaUrl(string url, string ownerId);
+        Task<MediaInfo> SaveMediaFile(string fileName, string ownerId);
+        Task<MediaInfo> SaveMediaUrl(string url, string ownerId);
         void DeleteMediaFile(string fileName);
         void DeleteMedia(string mediaId);
-        MediaLink GetMediaLink(string mediaId);
+        Task<MediaLink> GetMediaLink(string mediaId);
     }
 }

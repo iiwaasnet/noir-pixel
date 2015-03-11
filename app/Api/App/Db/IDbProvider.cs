@@ -4,6 +4,6 @@ namespace Api.App.Db
 {
     public interface IDbProvider
     {
-        MongoDatabase GetDatabase();
+        IMongoDatabase GetDatabase();
     }
 }

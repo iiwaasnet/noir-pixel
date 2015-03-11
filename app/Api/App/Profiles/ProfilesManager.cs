@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Api.App.Auth;
 using Api.App.Db;
 using Api.App.Geo;
@@ -7,13 +6,12 @@ using Api.App.Images;
 using Api.App.Profiles.Entities;
 using Diagnostics;
 using MongoDB.Driver;
-using MongoDB.Driver.Builders;
 
 namespace Api.App.Profiles
 {
     public partial class ProfilesManager : IProfilesManager
     {
-        private readonly MongoDatabase db;
+        private readonly IMongoDatabase db;
         private readonly ApplicationUserManager accountsManager;
         private readonly IProfileImageManager profileImageManager;
         private readonly ILogger logger;
@@ -22,7 +20,7 @@ namespace Api.App.Profiles
         public ProfilesManager(IAppDbProvider appDbProvider,
                                ApplicationUserManager accountsManager,
                                IProfileImageManager profileImageManager,
-            IGeoManager geoManager,
+                               IGeoManager geoManager,
                                ILogger logger)
         {
             db = appDbProvider.GetDatabase();
@@ -66,31 +64,30 @@ namespace Api.App.Profiles
             return userProfile;
         }
 
-        public void UpdatePublicInfo(string userName, ProfilePublicInfo info)
+        public async void UpdatePublicInfo(string userName, ProfilePublicInfo info)
         {
             var collection = db.GetCollection<Profile>(Profile.CollectionName);
 
-            var geo = MapCountryName(info);
+            var geo = await MapCountryName(info);
 
-            var update = new FindAndModifyArgs
-                         {
-                             Query = Query<Profile>.EQ(p => p.UserName, userName),
-                             Update = Update<Profile>.Combine(Update<Profile>.Set(p => p.FullName, info.UserFullName),
-                                                              Update<Profile>.Set(p => p.LivesIn, geo))
-                         };
-            collection.FindAndModify(update);
+            var builder = new UpdateDefinitionBuilder<Profile>();
+            var update = builder.Combine(new[]
+                                         {
+                                             builder.Set(p => p.FullName, info.UserFullName),
+                                             builder.Set(p => p.LivesIn, geo)
+                                         });
+
+            await collection.FindOneAndUpdateAsync(p => p.UserName == userName, update);
         }
 
-        public void UpdatePrivateInfo(string userName, ProfilePrivateInfo info)
+        public async void UpdatePrivateInfo(string userName, ProfilePrivateInfo info)
         {
             var collection = db.GetCollection<Profile>(Profile.CollectionName);
 
-            var update = new FindAndModifyArgs
-            {
-                Query = Query<Profile>.EQ(p => p.UserName, userName),
-                Update = Update<Profile>.Combine(Update<Profile>.Set(p => p.Email, info.Email))
-            };
-            collection.FindAndModify(update);
+            var builder = new UpdateDefinitionBuilder<Profile>();
+            var update = builder.Set(p => p.Email, info.Email);
+
+            await collection.FindOneAndUpdateAsync(p => p.UserName == userName, update);
         }
     }
 }
