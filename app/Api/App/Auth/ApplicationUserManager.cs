@@ -11,16 +11,16 @@ namespace Api.App.Auth
 {
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
 
-    public class ApplicationUserManager : UserManager<IdentityUser>
+    public class ApplicationUserManager : UserManager<ApplicationUser>
     {
-        public ApplicationUserManager(IUserStore<IdentityUser> store)
+        public ApplicationUserManager(IUserStore<ApplicationUser> store)
             : base(store)
         {
             UserValidator = CreateUserValidator();
             PasswordValidator = CreatePasswordValidator();
 
             var provider = new DpapiDataProtectionProvider("np");
-            UserTokenProvider = new DataProtectorTokenProvider<IdentityUser, string>(provider.Create("Web.Api Identity"));
+            UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser, string>(provider.Create("Web.Api Identity"));
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Api.App.Auth
         /// <returns></returns>
         public virtual async Task<IdentityResult> RemoveUserFromRolesAsync(string userId, IEnumerable<string> roles)
         {
-            var userRoleStore = (IUserRoleStore<IdentityUser, string>)Store;
+            var userRoleStore = (IUserRoleStore<ApplicationUser, string>)Store;
 
             var user = await FindByIdAsync(userId).ConfigureAwait(false);
             if (user == null)
@@ -89,9 +89,9 @@ namespace Api.App.Auth
                    };
         }
 
-        private UserValidator<IdentityUser> CreateUserValidator()
+        private UserValidator<ApplicationUser> CreateUserValidator()
         {
-            return new UserValidator<IdentityUser>(this)
+            return new UserValidator<ApplicationUser>(this)
                    {
                        AllowOnlyAlphanumericUserNames = false,
                        RequireUniqueEmail = false

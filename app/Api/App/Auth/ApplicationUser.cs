@@ -7,7 +7,7 @@ namespace Api.App.Auth
 {
     public class ApplicationUser : IdentityUser
     {
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<IdentityUser> manager, string authenticationType)
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
         {
             var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
             // TODO: Add custom user claims here

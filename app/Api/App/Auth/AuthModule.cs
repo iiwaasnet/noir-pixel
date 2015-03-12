@@ -22,12 +22,11 @@ namespace Api.App.Auth
             //NOTE: Should NOT be registered as SingleInstance
             builder.RegisterType<ApplicationUserManager>().AsSelf();
 
-            builder.RegisterType<UserStore<IdentityUser>>()
-                   .As<IUserStore<IdentityUser>>()
+            builder.RegisterType<UserStore<ApplicationUser>>()
+                   .As<IUserStore<ApplicationUser>>()
                    .SingleInstance();
             builder.Register(c => IdentityUserContext.Create(c.Resolve<IIdentityDbProvider>()))
-                   .As<UsersContext<IdentityUser>>()
-                   .As<IdentityUserContext>()
+                   .As<UsersContext<ApplicationUser>>()
                    .SingleInstance();
 
             builder.RegisterType<RoleStore<IdentityRole>>()
@@ -35,7 +34,6 @@ namespace Api.App.Auth
                   .SingleInstance();
             builder.Register(c => IdentityRoleContext.Create(c.Resolve<IIdentityDbProvider>()))
                    .As<RolesContext<IdentityRole>>()
-                   .As<IdentityRoleContext>()
                    .SingleInstance();
             builder.RegisterType<ApplicationRoleManager>()
                    .AsSelf()

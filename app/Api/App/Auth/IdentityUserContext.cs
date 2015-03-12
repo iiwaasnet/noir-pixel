@@ -5,9 +5,9 @@ using MongoDB.Driver;
 
 namespace Api.App.Auth
 {
-    public class IdentityUserContext : UsersContext<IdentityUser>, IDisposable
+    public class IdentityUserContext : UsersContext<ApplicationUser>, IDisposable
     {
-        public IdentityUserContext(IMongoCollection<IdentityUser> users)
+        public IdentityUserContext(IMongoCollection<ApplicationUser> users)
             : base(users)
         {
         }
@@ -15,7 +15,7 @@ namespace Api.App.Auth
         public static IdentityUserContext Create(IIdentityDbProvider dbProvider)
         {
             var database = dbProvider.GetDatabase();
-            var users = database.GetCollection<IdentityUser>("users");
+            var users = database.GetCollection<ApplicationUser>("users");
             users.EnsureUniqueIndexOnEmail();
             users.EnsureUniqueIndexOnUserName();
 
