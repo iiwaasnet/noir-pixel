@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Threading.Tasks;
 using Api.App.Images;
 using Api.App.Images.Config;
 using JsonConfigurationProvider;
@@ -16,23 +17,23 @@ namespace Api.App.Media
             config = configProvider.GetConfiguration<ImagesConfiguration>();
         }
 
-        public ImageInfo CreateProfileImage(string source, string destination, string ownerId)
+        public async Task<ImageInfo> CreateProfileImage(string source, string destination, string ownerId)
         {
-            return CropSquareAndSaveImage(source, destination, ownerId, config.ProfileImages.FullViewSize);
+            return await CropSquareAndSaveImage(source, destination, ownerId, config.ProfileImages.FullViewSize);
         }
 
-        public ImageInfo CreateProfileImageThumbnail(string source, string destination, string ownerId)
+        public async Task<ImageInfo> CreateProfileImageThumbnail(string source, string destination, string ownerId)
         {
-            return CropSquareAndSaveImage(source, destination, ownerId, config.ProfileImages.ThumbnailSize);
+            return await CropSquareAndSaveImage(source, destination, ownerId, config.ProfileImages.ThumbnailSize);
         }
 
-        public ImageInfo CreatePhoto(string source, string destination, string ownerId)
+        public async Task<ImageInfo> CreatePhoto(string source, string destination, string ownerId)
         {
             using (var image = new Bitmap(source))
             {
                 ImageUtils.SaveJpeg(destination, image);
 
-                var mediaInfo = mediaManager.SaveMediaFile(destination, ownerId);
+                var mediaInfo = await mediaManager.SaveMediaFile(destination, ownerId);
                 return new ImageInfo
                        {
                            MediaId = mediaInfo.MediaId,
@@ -43,24 +44,24 @@ namespace Api.App.Media
             }
         }
 
-        public ImageInfo CreatePhotoPreview(string source, string destination, string ownerId)
+        public async Task<ImageInfo> CreatePhotoPreview(string source, string destination, string ownerId)
         {
-            return CropSquareAndSaveImage(source, destination, ownerId, config.Photos.PreviewSize);
+            return await CropSquareAndSaveImage(source, destination, ownerId, config.Photos.PreviewSize);
         }
 
-        public ImageInfo CreatePhotoThumbnail(string source, string destination, string ownerId)
+        public async Task<ImageInfo> CreatePhotoThumbnail(string source, string destination, string ownerId)
         {
-            return CropSquareAndSaveImage(source, destination, ownerId, config.Photos.ThumbnailSize);
+            return await CropSquareAndSaveImage(source, destination, ownerId, config.Photos.ThumbnailSize);
         }
 
-        private ImageInfo CropSquareAndSaveImage(string source, string destination, string ownerId, int size)
+        private async Task<ImageInfo> CropSquareAndSaveImage(string source, string destination, string ownerId, int size)
         {
             using (var image = new Bitmap(source))
             {
                 ImageUtils.SaveJpeg(destination,
                                     ImageUtils.CropImage(ImageUtils.ResizeImageForCrop(image, size), size, size));
 
-                var mediaInfo = mediaManager.SaveMediaFile(destination, ownerId);
+                var mediaInfo = await mediaManager.SaveMediaFile(destination, ownerId);
                 return new ImageInfo
                        {
                            MediaId = mediaInfo.MediaId,

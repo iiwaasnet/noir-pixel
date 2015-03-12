@@ -51,9 +51,9 @@ namespace Api.App.Profiles
 
         [HttpGet]
         [Route("update-profile-image")]
-        public IHttpActionResult CheckProfileImagePart()
+        public async Task<IHttpActionResult> CheckProfileImagePart()
         {
-            return mediaManager.MediaChunkReceived(Request, User.Identity.Name)
+            return await mediaManager.MediaChunkReceived(Request, User.Identity.Name)
                        ? Ok()
                        : ApiError(HttpStatusCode.NotFound);
         }
@@ -101,7 +101,7 @@ namespace Api.App.Profiles
                 {
                     try
                     {
-                        var url = SaveProfileImage(mediaUploadResult);
+                        var url = await SaveProfileImage(mediaUploadResult);
                         url.FullViewUrl = MakeAbsoluteUrl(url.FullViewUrl);
                         url.ThumbnailUrl = MakeAbsoluteUrl(url.ThumbnailUrl);
 
@@ -121,12 +121,12 @@ namespace Api.App.Profiles
             }
         }
 
-        private ProfileImage SaveProfileImage(MediaUploadResult mediaUploadResult)
+        private async Task<ProfileImage> SaveProfileImage(MediaUploadResult mediaUploadResult)
         {
             ProfileImage url = null;
             try
             {
-                url = profileImageManager.SaveImage(User.Identity.Name, mediaUploadResult.FileName);
+                url = await profileImageManager.SaveImage(User.Identity.Name, mediaUploadResult.FileName);
             }
             catch (UnsupportedImageFormatException)
             {

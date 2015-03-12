@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -28,9 +27,9 @@ namespace Api.App.Photos
 
         [HttpGet]
         [Route("upload")]
-        public IHttpActionResult CheckPhotosPart()
+        public async Task<IHttpActionResult> CheckPhotosPart()
         {
-            return mediaManager.MediaChunkReceived(Request, User.Identity.Name)
+            return await mediaManager.MediaChunkReceived(Request, User.Identity.Name)
                        ? Ok()
                        : ApiError(HttpStatusCode.NotFound);
         }
@@ -46,14 +45,14 @@ namespace Api.App.Photos
                 {
                     try
                     {
-                        var photo = SavePhoto(mediaUploadResult);
+                        var photo = await SavePhoto(mediaUploadResult);
                         photo.FullViewUrl = MakeAbsoluteUrl(photo.FullViewUrl);
                         photo.PreviewUrl = MakeAbsoluteUrl(photo.PreviewUrl);
                         photo.ThumbnailUrl = MakeAbsoluteUrl(photo.ThumbnailUrl);
 
                         return Ok(photo);
                     }
-                    finally 
+                    finally
                     {
                         mediaManager.DeleteMediaFile(mediaUploadResult.FileName);
                     }
@@ -67,12 +66,12 @@ namespace Api.App.Photos
             }
         }
 
-        private Photo SavePhoto(MediaUploadResult mediaUploadResult)
+        private async Task<Photo> SavePhoto(MediaUploadResult mediaUploadResult)
         {
             Photo photo = null;
             try
             {
-                photo = photosManager.SavePhoto(User.Identity.Name, mediaUploadResult.FileName);
+                photo = await photosManager.SavePhoto(User.Identity.Name, mediaUploadResult.FileName);
             }
             catch (UnsupportedImageFormatException)
             {
@@ -92,9 +91,9 @@ namespace Api.App.Photos
 
         [HttpGet]
         [Route("pending")]
-        public IHttpActionResult GetPendingPhotos(int? offset = null, int? count = null)
+        public async Task<IHttpActionResult> GetPendingPhotos(int? offset = null, int? count = null)
         {
-            var pendingPhotos = photosManager.GetPendingPhotos(User.Identity.Name, offset, count);
+            var pendingPhotos = await photosManager.GetPendingPhotos(User.Identity.Name, offset, count);
             pendingPhotos.Photos = MakeAbsoluteUrl(pendingPhotos.Photos);
 
             return Ok(pendingPhotos);

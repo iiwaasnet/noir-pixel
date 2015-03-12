@@ -41,7 +41,7 @@ namespace Api.App.Auth
         {
             var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
-            var user = await userManager.FindAsync(context.UserName, context.Password);
+            var user = (ApplicationUser)await userManager.FindAsync(context.UserName, context.Password);
 
             if (user == null)
             {

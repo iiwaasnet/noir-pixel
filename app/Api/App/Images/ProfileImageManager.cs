@@ -58,13 +58,13 @@ namespace Api.App.Images
 
             EnsureTargetDirectoryExists(profile.Id);
 
-            var imageInfo = imageProcessor.CreateProfileImage(fileName, fullViewFile, profile.Id);
+            var imageInfo = await imageProcessor.CreateProfileImage(fileName, fullViewFile, profile.Id);
             profileImage.FullView = new MediaData
                                     {
                                         MediaId = imageInfo.MediaId,
                                         Uri = imageInfo.Uri
                                     };
-            imageInfo = imageProcessor.CreateProfileImageThumbnail(fileName, thumbnailFile, profile.Id);
+            imageInfo = await imageProcessor.CreateProfileImageThumbnail(fileName, thumbnailFile, profile.Id);
             profileImage.Thumbnail = new MediaData
                                      {
                                          MediaId = imageInfo.MediaId,

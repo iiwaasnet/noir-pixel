@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing.Imaging;
+using System.Linq;
 using System.Threading.Tasks;
 using Api.App.Db;
 using Api.App.Db.Extensions;
@@ -60,7 +61,7 @@ namespace Api.App.Images
 
             EnsureTargetDirectoryExists(profile.Id, photoId);
 
-            var imageInfo = imageProcessor.CreatePhoto(fileName, fullViewFile, profile.Id);
+            var imageInfo = await imageProcessor.CreatePhoto(fileName, fullViewFile, profile.Id);
             photo.FullView = new PhotoFullViewData
                              {
                                  MediaId = imageInfo.MediaId,
@@ -68,13 +69,13 @@ namespace Api.App.Images
                                  Height = imageInfo.Height,
                                  Width = imageInfo.Width
                              };
-            imageInfo = imageProcessor.CreatePhotoPreview(fileName, previewFileName, profile.Id);
+            imageInfo = await imageProcessor.CreatePhotoPreview(fileName, previewFileName, profile.Id);
             photo.Preview = new MediaData
                             {
                                 MediaId = imageInfo.MediaId,
                                 Uri = imageInfo.Uri
                             };
-            imageInfo = imageProcessor.CreatePhotoThumbnail(fileName, thumbnailFile, profile.Id);
+            imageInfo = await imageProcessor.CreatePhotoThumbnail(fileName, thumbnailFile, profile.Id);
             photo.Thumbnail = new MediaData
                               {
                                   MediaId = imageInfo.MediaId,
@@ -93,19 +94,19 @@ namespace Api.App.Images
                    };
         }
 
-        public PendingPhotos GetPendingPhotos(string userName, int? offset, int? count)
+        public async Task<PendingPhotos> GetPendingPhotos(string userName, int? offset, int? count)
         {
             offset = offset ?? 0;
             count = count ?? DefaultPhotoCount;
             count = Math.Min(count.Value, DefaultPhotoCount);
 
-            var profile = db.GetProfile(userName);
+            var profile = await db.GetProfile(userName);
             var collection = db.GetCollection<Entities.Photo>(Entities.Photo.CollectionName);
-            var pendingPhotos = collection.FindAs<Entities.Photo>(Query.And(Query<Entities.Photo>.EQ(p => p.OwnerId, profile.Id),
-                                                                            Query<Entities.Photo>.EQ(p => p.Status, PhotoStatus.Pending)))
-                                          .SetSortOrder(SortBy<Entities.Photo>.Descending(p => p.Id))
-                                          .SetSkip(offset.Value)
-                                          .SetLimit(count.Value);
+            var pendingPhotos = await collection.Find(p => p.OwnerId == profile.Id && p.Status == PhotoStatus.Pending)
+                                                .Sort(new SortDefinitionBuilder<Entities.Photo>().Descending(p => p.Id))
+                                                .Skip(offset.Value)
+                                                .Limit(count.Value)
+                                                .ToListAsync();
 
             return new PendingPhotos
                    {

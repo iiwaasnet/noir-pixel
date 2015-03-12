@@ -8,6 +8,7 @@ using System.Web.Http;
 using Api.App.ApiBase;
 using Api.App.Auth.ExternalUserInfo;
 using Api.App.Errors;
+using AspNet.Identity.MongoDB;
 using Common.Extensions;
 using Diagnostics;
 using Microsoft.AspNet.Identity;
@@ -177,7 +178,7 @@ namespace Api.App.Auth
             AssertModelStateValid();
 
             var verifiedAccessToken = await VarifyAccessToken(model);
-            var user = await FindUser(model, verifiedAccessToken);
+            var user = (ApplicationUser)await FindUser(model, verifiedAccessToken);
 
             GetAuthentication().SignOut(DefaultAuthenticationTypes.ExternalCookie);
 
@@ -204,7 +205,7 @@ namespace Api.App.Auth
             return Ok(tokenResponse);
         }
 
-        private async Task<ApplicationUser> FindUser(LocalAccessTokenModel model, ParsedExternalAccessToken verifiedAccessToken)
+        private async Task<IdentityUser> FindUser(LocalAccessTokenModel model, ParsedExternalAccessToken verifiedAccessToken)
         {
             var user = await userManager.FindAsync(new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
             if (user == null)

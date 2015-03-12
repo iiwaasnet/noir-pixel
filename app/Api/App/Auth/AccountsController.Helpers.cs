@@ -11,6 +11,7 @@ using Api.App.ApiBase;
 using Api.App.Auth.Extensions;
 using Api.App.Errors;
 using Api.App.Errors.Extensions;
+using AspNet.Identity.MongoDB;
 using Common.Extensions;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
@@ -25,7 +26,7 @@ namespace Api.App.Auth
             return Request.GetOwinContext().Authentication;
         }
 
-        private void AssertIdentityResult(IdentityResult result, ApplicationUser user)
+        private void AssertIdentityResult(IdentityResult result, IdentityUser user)
         {
             if (ResultFailed(result))
             {
@@ -63,7 +64,7 @@ namespace Api.App.Auth
             }
         }
 
-        private ApiError CreateApiError(IdentityResult result, ApplicationUser user)
+        private ApiError CreateApiError(IdentityResult result, IdentityUser user)
         {
             var apiError = new ApiError
                            {
@@ -96,7 +97,7 @@ namespace Api.App.Auth
             }
         }
 
-        private static AuthenticationProperties CreateAuthenticationProperties(ApplicationUser user, TimeSpan expiresIn)
+        private static AuthenticationProperties CreateAuthenticationProperties(IdentityUser user, TimeSpan expiresIn)
         {
             return new AuthenticationProperties(new Dictionary<string, string>
                                                 {
