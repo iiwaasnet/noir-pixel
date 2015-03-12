@@ -42,7 +42,7 @@ namespace Api.App.Profiles
                                UserId = login.Id
                            };
                     await users.InsertOneAsync(user);
-                    CreateProfileThumbnail((ApplicationUser) login);
+                    await CreateProfileThumbnail((ApplicationUser) login);
                     user = await db.GetProfile(userName);
                 }
             }
@@ -53,11 +53,11 @@ namespace Api.App.Profiles
             return user ?? await users.Find(p => p.UserName == userName).FirstOrDefaultAsync();
         }
 
-        private void CreateProfileThumbnail(ApplicationUser login)
+        private async Task CreateProfileThumbnail(ApplicationUser login)
         {
             if (!string.IsNullOrWhiteSpace(login.ThumbnailImage))
             {
-                profileImageManager.SaveThumbnailLink(login.UserName, login.ThumbnailImage);
+                await profileImageManager.SaveThumbnailLink(login.UserName, login.ThumbnailImage);
             }
         }
 
