@@ -8,7 +8,6 @@ using Autofac;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security.Facebook;
 using Microsoft.Owin.Security.Twitter;
-using Owin.Security.Providers.ArcGISOnline.Provider;
 using Owin.Security.Providers.GooglePlus;
 
 namespace Api.App.Auth
@@ -23,19 +22,20 @@ namespace Api.App.Auth
             //NOTE: Should NOT be registered as SingleInstance
             builder.RegisterType<ApplicationUserManager>().AsSelf();
 
-            builder.Register(c => new UserStore<IdentityUser>(
-                                      c.Resolve<UsersContext<IdentityUser>>()))
-                   .As<IUserStore<ApplicationUser>>()
+            builder.RegisterType<UserStore<IdentityUser>>()
+                   .As<IUserStore<IdentityUser>>()
                    .SingleInstance();
             builder.Register(c => IdentityUserContext.Create(c.Resolve<IIdentityDbProvider>()))
                    .As<UsersContext<IdentityUser>>()
+                   .As<IdentityUserContext>()
                    .SingleInstance();
 
-            builder.Register(c => new RoleStore<IdentityRole>(c.Resolve<RolesContext<IdentityRole>>()))
+            builder.RegisterType<RoleStore<IdentityRole>>()
                   .As<IRoleStore<IdentityRole, string>>()
                   .SingleInstance();
             builder.Register(c => IdentityRoleContext.Create(c.Resolve<IIdentityDbProvider>()))
                    .As<RolesContext<IdentityRole>>()
+                   .As<IdentityRoleContext>()
                    .SingleInstance();
             builder.RegisterType<ApplicationRoleManager>()
                    .AsSelf()
