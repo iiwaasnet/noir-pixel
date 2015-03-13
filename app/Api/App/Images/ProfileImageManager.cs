@@ -75,7 +75,7 @@ namespace Api.App.Images
             await collection.FindOneAndUpdateAsync(p => p.Id == profile.Id,
                                                    new UpdateDefinitionBuilder<Profile>().Set(p => p.UserImage, profileImage));
 
-            DeleteProfileImages(currentProfileImage);
+            await DeleteProfileImages(currentProfileImage);
 
             return new ProfileImage
                    {
@@ -115,14 +115,14 @@ namespace Api.App.Images
             }
         }
 
-        private void DeleteProfileImages(Entities.ProfileImage profileImage)
+        private async Task DeleteProfileImages(Entities.ProfileImage profileImage)
         {
             try
             {
                 if (profileImage != null)
                 {
-                    DeleteMedia(profileImage.FullView);
-                    DeleteMedia(profileImage.Thumbnail);
+                    await DeleteMedia(profileImage.FullView);
+                    await DeleteMedia(profileImage.Thumbnail);
                 }
             }
             catch (Exception err)
@@ -131,11 +131,11 @@ namespace Api.App.Images
             }
         }
 
-        private void DeleteMedia(MediaData mediaData)
+        private async Task DeleteMedia(MediaData mediaData)
         {
             if (mediaData != null)
             {
-                mediaManager.DeleteMedia(mediaData.MediaId);
+                await mediaManager.DeleteMedia(mediaData.MediaId);
             }
         }
 
@@ -159,7 +159,7 @@ namespace Api.App.Images
         public async Task DeleteImage(string userName)
         {
             var profile = await db.GetProfile(userName);
-            DeleteProfileImages(profile.UserImage);
+            await DeleteProfileImages(profile.UserImage);
 
             var collection = db.GetCollection<Profile>(Profile.CollectionName);
 

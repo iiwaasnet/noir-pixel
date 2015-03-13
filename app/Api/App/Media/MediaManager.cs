@@ -88,7 +88,7 @@ namespace Api.App.Media
                    };
         }
 
-        public async void DeleteMedia(string mediaId)
+        public async Task DeleteMedia(string mediaId)
         {
             var collection = db.GetCollection<Entities.Media>(Entities.Media.CollectionName);
             var media = await collection.Find(m => m.Id == mediaId).FirstOrDefaultAsync();
