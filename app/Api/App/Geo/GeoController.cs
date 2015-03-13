@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Threading.Tasks;
+using System.Web.Http;
 using Api.App.ApiBase;
 
 namespace Api.App.Geo
@@ -14,9 +15,9 @@ namespace Api.App.Geo
 
         [HttpGet]
         [Route("countries")]
-        public IHttpActionResult GetCountries()
+        public async Task<IHttpActionResult> GetCountries()
         {
-            return Ok(geoManager.GetCountries());
+            return Ok(await geoManager.GetCountries());
         }
     }
 }
