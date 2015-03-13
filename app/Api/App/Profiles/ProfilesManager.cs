@@ -64,7 +64,7 @@ namespace Api.App.Profiles
             return userProfile;
         }
 
-        public async void UpdatePublicInfo(string userName, ProfilePublicInfo info)
+        public async Task UpdatePublicInfo(string userName, ProfilePublicInfo info)
         {
             var collection = db.GetCollection<Profile>(Profile.CollectionName);
 
@@ -80,7 +80,7 @@ namespace Api.App.Profiles
             await collection.FindOneAndUpdateAsync(p => p.UserName == userName, update);
         }
 
-        public async void UpdatePrivateInfo(string userName, ProfilePrivateInfo info)
+        public async Task UpdatePrivateInfo(string userName, ProfilePrivateInfo info)
         {
             var collection = db.GetCollection<Profile>(Profile.CollectionName);
 

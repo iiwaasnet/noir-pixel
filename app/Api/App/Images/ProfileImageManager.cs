@@ -156,7 +156,7 @@ namespace Api.App.Images
             return string.Format(mediaConfig.ProfileImageFolderTemplate, id);
         }
 
-        public async void DeleteImage(string userName)
+        public async Task DeleteImage(string userName)
         {
             var profile = await db.GetProfile(userName);
             DeleteProfileImages(profile.UserImage);

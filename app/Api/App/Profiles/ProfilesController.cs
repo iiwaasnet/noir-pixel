@@ -60,11 +60,11 @@ namespace Api.App.Profiles
 
         [HttpPost]
         [Route("update-profile/public-info")]
-        public IHttpActionResult UpdatePublicInfo(ProfilePublicInfo info)
+        public async Task<IHttpActionResult> UpdatePublicInfo(ProfilePublicInfo info)
         {
             try
             {
-                profilesManager.UpdatePublicInfo(User.Identity.Name, info);
+                await profilesManager.UpdatePublicInfo(User.Identity.Name, info);
 
                 return Ok();
             }
@@ -76,11 +76,11 @@ namespace Api.App.Profiles
 
         [HttpPost]
         [Route("update-profile/private-info")]
-        public IHttpActionResult UpdatePrivateInfo(ProfilePrivateInfo info)
+        public async Task<IHttpActionResult> UpdatePrivateInfo(ProfilePrivateInfo info)
         {
             try
             {
-                profilesManager.UpdatePrivateInfo(User.Identity.Name, info);
+                await profilesManager.UpdatePrivateInfo(User.Identity.Name, info);
 
                 return Ok();
             }
@@ -146,9 +146,9 @@ namespace Api.App.Profiles
 
         [HttpDelete]
         [Route("delete-profile-image")]
-        public IHttpActionResult DeleteProfileImage()
+        public async Task<IHttpActionResult> DeleteProfileImage()
         {
-            profileImageManager.DeleteImage(User.Identity.Name);
+            await profileImageManager.DeleteImage(User.Identity.Name);
 
             return Ok();
         }
