@@ -41,12 +41,14 @@ angular.module('ngScrollbar', []).directive('ngScrollbar', [
                         overflow: 'hidden'
                     };
                 };
-                var redraw = function() {
-                    thumb.css('top', dragger.top + 'px');
-                    var draggerOffset = dragger.top / page.height;
-                    page.top = -Math.round(page.scrollHeight * draggerOffset);
-                    transculdedContainer.css('top', page.top + 'px');
-                };
+                var redraw = function () {
+                    scope.$evalAsync(function() {
+                        thumb.css('top', dragger.top + 'px');
+                        var draggerOffset = dragger.top / page.height;
+                        page.top = -Math.round(page.scrollHeight * draggerOffset);
+                        transculdedContainer.css('top', page.top + 'px');
+                    });
+            };
                 var trackClick = function(event) {
                     var offsetY = event.hasOwnProperty('offsetY') ? event.offsetY : event.layerY;
                     var newTop = Math.max(0, Math.min(parseInt(dragger.trackHeight, 10) - parseInt(dragger.height, 10), offsetY));
