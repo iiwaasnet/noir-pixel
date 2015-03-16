@@ -16,12 +16,13 @@
             element.on('click', click);
             var scroll = angular.element(element.parent());
             var parent = angular.element(scroll.parent());
-            scope.$watch(function () { return scroll.css('top'); }, test);
+            scope.$watch(function () { return scroll[0].offsetTop; }, changeOpacity);
+            changeOpacity();
 
-            function test(offsetTop) {
+            function changeOpacity() {
                 var rect = element[0].getBoundingClientRect();
-                var visible = rect.top - parent[0].offsetTop >= 0;
-                    //&& (rect.top + rect.height - parent[0].offsetTop) <= parent[0].clientHeight;
+                var visible = rect.top - parent[0].offsetTop >= 0
+                    && (rect.top + rect.height - parent[0].offsetTop) <= parent[0].clientHeight;
                 element.css('opacity', (visible ? 1 : 0.1));
             }
 
