@@ -1,4 +1,4 @@
-﻿(function () {
+﻿(function() {
     'use strict';
 
     angular.module('np.ui-elements')
@@ -12,25 +12,28 @@
 
         return dir;
 
-        function link(scope, element, attrs) {
+        function link(scope, element) {
             element.on('click', click);
             var scroll = angular.element(element.parent());
             var parent = angular.element(scroll.parent());
-            scope.$watch(function () { return scroll[0].offsetTop; }, changeOpacity);
+            scope.$watch(function() { return scroll[0].offsetTop; }, changeOpacity);
             changeOpacity();
 
             function changeOpacity() {
-                var rect = element[0].getBoundingClientRect();
-                var visible = rect.top - parent[0].offsetTop >= 0
-                    && (rect.top + rect.height - parent[0].offsetTop) <= parent[0].clientHeight;
+                var rect = element[0].getBoundingClientRect(),
+                    top = rect.top - parent[0].offsetTop,
+                    visible = top >= 0
+                        && (top + rect.height) <= parent[0].clientHeight;
+
                 element.css('opacity', (visible ? 1 : 0.1));
             }
 
             function click() {
-                var rect = element[0].getBoundingClientRect();
-                var visible = rect.top - parent[0].offsetTop >= 0
-                    && (rect.top + rect.height - parent[0].offsetTop) <= parent[0].clientHeight;
-                alert(visible);
+                var rect = element[0].getBoundingClientRect(),
+                    top = rect.top - parent[0].offsetTop,
+                    visible = top >= 0
+                        && (top + rect.height) <= parent[0].clientHeight;
+                alert((top + rect.height) / rect.height);
             }
         }
     }
