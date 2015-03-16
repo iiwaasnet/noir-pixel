@@ -463,6 +463,7 @@
     <Content Include="app\src\ui-elements\tabs\np-tabs.directive.js" />
     <Content Include="app\src\ui-elements\tabs\tabs.html" />
     <Content Include="app\src\ui-elements\user-thumbnail\user-thumbnail.html" />
+    <Content Include="app\src\ui-elements\visibility-transition\np-visibility-transition.directive.js" />
     <Content Include="app\src\upload\flow.setup.js" />
     <Content Include="app\src\user-home\darkroom\darkroom.controller.js" />
     <Content Include="app\src\user-home\darkroom\darkroom.html" />
