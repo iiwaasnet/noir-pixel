@@ -13,7 +13,6 @@
         return dir;
 
         function link(scope, element) {
-            element.on('click', click);
             var scroll = angular.element(element.parent());
             var parent = angular.element(scroll.parent());
             scope.$watch(function() { return scroll[0].offsetTop; }, changeOpacity);
@@ -21,19 +20,25 @@
 
             function changeOpacity() {
                 var rect = element[0].getBoundingClientRect(),
-                    top = rect.top - parent[0].offsetTop,
-                    visible = top >= 0
-                        && (top + rect.height) <= parent[0].clientHeight;
+                        top = rect.top - parent[0].offsetTop,
+                        opacity = 1;
+                if (isTopHidden()) {
+                    opacity = ((top + rect.height) / rect.height);
+                } else {
+                    if (isBottomHidden()) {
+                        opacity = (parent[0].clientHeight - top) / rect.height;
+                    }
+                }
 
-                element.css('opacity', (visible ? 1 : 0.1));
-            }
+                element.css('opacity', opacity);
 
-            function click() {
-                var rect = element[0].getBoundingClientRect(),
-                    top = rect.top - parent[0].offsetTop,
-                    visible = top >= 0
-                        && (top + rect.height) <= parent[0].clientHeight;
-                alert((top + rect.height) / rect.height);
+                function isTopHidden() {
+                    return top < 0;
+                }
+
+                function isBottomHidden() {
+                    return (top + rect.height) > parent[0].clientHeight;
+                }
             }
         }
     }
