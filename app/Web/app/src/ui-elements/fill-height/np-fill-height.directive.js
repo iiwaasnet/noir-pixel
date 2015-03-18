@@ -15,7 +15,6 @@
         return dir;
 
         function link(scope, element, attrs) {
-            debugger;
             var win = angular.element($window);
             win.on('resize', recalcHeight);
             element.on('$destroy', cleanup);
