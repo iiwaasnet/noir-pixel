@@ -15,6 +15,7 @@
         return dir;
 
         function link(scope, element, attrs) {
+            debugger;
             var win = angular.element($window);
             win.on('resize', recalcHeight);
             element.on('$destroy', cleanup);
@@ -22,12 +23,12 @@
 
             function recalcHeight() {
                 var scrollBarHeight = 25,
-                    bottomMargin = Math.max(0, parseInt(attrs.bottomMargin, 10)),
+                    bottomMargin = Math.max(0, parseInt(attrs.bottomMargin || 0, 10)),
                     height = Math.max($window.innerHeight
                         - element[0].offsetTop
                         - scrollBarHeight
                         - bottomMargin,
-                        Math.max(0, parseInt(attrs.minHeight, 10)));
+                        Math.max(0, parseInt(attrs.minHeight || 0, 10)));
                 element.css({
                     height: height + 'px',
                     overflow: 'hidden'
