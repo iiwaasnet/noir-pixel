@@ -259,6 +259,9 @@
     <Content Include="app\less\dropdown.min.css">
       <DependentUpon>dropdown.css</DependentUpon>
     </Content>
+    <Content Include="app\less\edit-photo.css">
+      <DependentUpon>edit-photo.less</DependentUpon>
+    </Content>
     <Content Include="app\less\edits.css">
       <DependentUpon>edits.less</DependentUpon>
     </Content>
@@ -336,6 +339,10 @@
     </Content>
     <Content Include="app\less\ng-scrollbar.css.map">
       <DependentUpon>ng-scrollbar.css</DependentUpon>
+    </Content>
+    <Content Include="app\less\edit-photo.less" />
+    <Content Include="app\less\edit-photo.css.map">
+      <DependentUpon>edit-photo.css</DependentUpon>
     </Content>
     <None Include="app\less\ng-scrollbar.less" />
     <Content Include="app\less\ng-scrollbar.css">
@@ -467,6 +474,8 @@
     <Content Include="app\src\upload\flow.setup.js" />
     <Content Include="app\src\user-home\darkroom\darkroom.controller.js" />
     <Content Include="app\src\user-home\darkroom\darkroom.html" />
+    <Content Include="app\src\user-home\darkroom\edit-photo.controller.js" />
+    <Content Include="app\src\user-home\darkroom\edit-photo.html" />
     <Content Include="app\src\user-home\darkroom\photos-upload.controller.js" />
     <Content Include="app\src\user-home\darkroom\photos-upload.html" />
     <Content Include="app\src\user-home\error-messages.html" />

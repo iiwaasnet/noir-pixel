@@ -273,4 +273,13 @@
   <data name="EAPI_Image_Unknown" xml:space="preserve">
     <value>We have encountered an error, trying save your file :( Please, try one more time.</value>
   </data>
+  <data name="Hint_PhotoStory" xml:space="preserve">
+    <value>Tell a story about this photo</value>
+  </data>
+  <data name="Label_Story" xml:space="preserve">
+    <value>Story</value>
+  </data>
+  <data name="Label_Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
 </root>

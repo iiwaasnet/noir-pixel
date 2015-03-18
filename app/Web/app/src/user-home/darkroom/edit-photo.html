@@ -1,0 +1,17 @@
+﻿<div id="edit-photo" np-fill-height bottom-margin="50">
+    <div class="columns-container">
+        <div class="column-left">
+            <img ng-src="{{::ctrl.photo.previewUrl}}" />
+        </div>
+        <div class="column-center">
+            <div class="edit-block">
+                <span class="edit-label" np-i18n="Label_Title"></span>
+                <input type="text" np-autofocus />
+            </div>
+            <div class="edit-block">
+                <span class="edit-label" np-i18n="Label_Story"></span>
+                <textarea placeholder="{{'Hint_PhotoStory' | npi18n}}"></textarea>
+            </div>
+        </div>
+    </div>
+</div>

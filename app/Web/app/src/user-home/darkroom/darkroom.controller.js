@@ -15,6 +15,7 @@
         ctrl.fileUploadSuccess = fileUploadSuccess;
         ctrl.fileUploadError = fileUploadError;
         ctrl.filesAdded = filesAdded;
+        ctrl.edit = edit;
         ctrl.photoUpload = getPhotoUploadConfig();
         ctrl.pendingPhotos = [];
 
@@ -22,6 +23,12 @@
 
         function activate() {
             getPendingPhotos();
+        }
+
+        function edit(photo) {
+            Overlay.open('app/src/user-home/darkroom/edit-photo.html',
+                    'EditPhotoController as ctrl',
+                    { photo: photo });
         }
 
         function filesAdded(files) {

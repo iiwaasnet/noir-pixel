@@ -340,6 +340,15 @@ namespace Resources.Client {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tell a story about this photo.
+        /// </summary>
+        public static string Hint_PhotoStory {
+            get {
+                return ResourceManager.GetString("Hint_PhotoStory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to What&apos;s on your mind?.
         /// </summary>
         public static string Hint_WhatsOnYourMind {
@@ -390,6 +399,24 @@ namespace Resources.Client {
         public static string Label_SelectUserName {
             get {
                 return ResourceManager.GetString("Label_SelectUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Story.
+        /// </summary>
+        public static string Label_Story {
+            get {
+                return ResourceManager.GetString("Label_Story", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        public static string Label_Title {
+            get {
+                return ResourceManager.GetString("Label_Title", resourceCulture);
             }
         }
         
