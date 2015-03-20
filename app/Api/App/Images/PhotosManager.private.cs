@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Api.App.Images.Entities;
 
 namespace Api.App.Images
 {
@@ -34,6 +35,21 @@ namespace Api.App.Images
         private string PhotosFolderName(string userId, string photoId)
         {
             return string.Format(mediaConfig.PhotosFolderTemplate, userId, photoId);
+        }
+
+        private ExifData ReadExif(string fileName)
+        {
+            var data = exifReader.ReadExifData(fileName);
+            if (data != null)
+            {
+                return new ExifData
+                       {
+                           Iso = data.Iso,
+                           ShutterSpeed = data.ShutterSpeed
+                       };
+            }
+
+            return null;
         }
     }
 }

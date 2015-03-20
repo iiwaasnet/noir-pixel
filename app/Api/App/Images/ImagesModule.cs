@@ -1,4 +1,5 @@
-﻿using Autofac;
+﻿using Api.App.Images.Exit;
+using Autofac;
 
 namespace Api.App.Images
 {
@@ -16,6 +17,9 @@ namespace Api.App.Images
 
             builder.RegisterType<ImageValidator>()
                    .As<IImageValidator>()
+                   .SingleInstance();
+            builder.RegisterType<ExifReader>()
+                   .As<IExifReader>()
                    .SingleInstance();
         }
     }

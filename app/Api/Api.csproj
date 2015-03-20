@@ -64,6 +64,9 @@
     <Reference Include="Autofac.Integration.WebApi">
       <HintPath>..\packages\Autofac.WebApi2.3.4.0\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
     </Reference>
+    <Reference Include="ExifLib">
+      <HintPath>..\packages\ExifLib.1.6.3.0\lib\net45\ExifLib.dll</HintPath>
+    </Reference>
     <Reference Include="Ext.FluentValidation, Version=5.6.0.3, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Ext.FluentValidation.5.6.0.3\lib\Net45\Ext.FluentValidation.dll</HintPath>
@@ -283,6 +286,7 @@
     <Compile Include="App\Errors\ValidationError.cs" />
     <Compile Include="App\Exceptions\NotFoundException.cs" />
     <Compile Include="App\Exceptions\UnsupportedImageFormatException.cs" />
+    <Compile Include="App\Framework\Fraction.cs" />
     <Compile Include="App\Framework\StaticRandom.cs" />
     <Compile Include="App\Framework\SUIDGenerator.cs" />
     <Compile Include="App\ApiBase\HttpContextDependencyProvider.cs" />
@@ -298,9 +302,13 @@
     <Compile Include="App\Images\Config\PhotosConfiguration.cs" />
     <Compile Include="App\Images\Config\ProfileImagesConfiguration.cs" />
     <Compile Include="App\Images\Config\SizeConstraints.cs" />
+    <Compile Include="App\Images\Entities\ExifData.cs" />
     <Compile Include="App\Images\Entities\MediaData.cs" />
     <Compile Include="App\Images\Entities\PhotoFullViewData.cs" />
     <Compile Include="App\Images\Entities\PhotoStatus.cs" />
+    <Compile Include="App\Images\Exit\ExifReader.cs" />
+    <Compile Include="App\Images\Exit\ExifData.cs" />
+    <Compile Include="App\Images\Exit\IExifReader.cs" />
     <Compile Include="App\Images\IImageValidator.cs" />
     <Compile Include="App\Exceptions\ImageSizeConstraintsException.cs" />
     <Compile Include="App\Images\ImageValidator.cs" />
@@ -442,9 +450,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="config\Auth.config.json">

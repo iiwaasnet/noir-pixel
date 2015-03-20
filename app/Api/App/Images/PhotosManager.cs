@@ -8,6 +8,7 @@ using Api.App.Db.Extensions;
 using Api.App.Framework;
 using Api.App.Images.Config;
 using Api.App.Images.Entities;
+using Api.App.Images.Exit;
 using Api.App.Media;
 using Api.App.Media.Config;
 using Api.App.Media.Extensions;
@@ -26,11 +27,13 @@ namespace Api.App.Images
         private readonly ILogger logger;
         private const int DefaultPhotoCount = 20;
         private readonly IImageValidator imageValidator;
+        private readonly IExifReader exifReader;
 
         public PhotosManager(IAppDbProvider appDbProvider,
                              IImageProcessor imageProcessor,
                              IConfigProvider configProvider,
                              IImageValidator imageValidator,
+                             IExifReader exifReader,
                              ILogger logger)
         {
             this.logger = logger;
@@ -39,6 +42,7 @@ namespace Api.App.Images
             mediaConfig = configProvider.GetConfiguration<MediaConfiguration>();
             this.imageProcessor = imageProcessor;
             db = appDbProvider.GetDatabase();
+            this.exifReader = exifReader;
         }
 
         public async Task<Photo> SavePhoto(string userName, string fileName)
@@ -81,7 +85,7 @@ namespace Api.App.Images
                                   MediaId = imageInfo.MediaId,
                                   Uri = imageInfo.Uri
                               };
-
+            photo.Exif = ReadExif(fullViewFile);
             var collection = db.GetCollection<Entities.Photo>(Entities.Photo.CollectionName);
             await collection.InsertOneAsync(photo);
 

@@ -19,5 +19,7 @@ namespace Api.App.Images.Entities
         public PhotoFullViewData FullView { get; set; }
         public MediaData Preview { get; set; }
         public MediaData Thumbnail { get; set; }
+        [BsonIgnoreIfNull]
+        public ExifData Exif { get; set; }
     }
 }
