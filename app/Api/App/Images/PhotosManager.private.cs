@@ -45,7 +45,13 @@ namespace Api.App.Images
                 return new ExifData
                        {
                            Iso = data.Iso,
-                           ShutterSpeed = data.ShutterSpeed
+                           ShutterSpeed = data.ShutterSpeed,
+                           CameraModel = data.CameraModel,
+                           Copyright = data.Copyright,
+                           DateTimeTaken = data.DateTimeTaken,
+                           ExposureTime = data.ExposureTime,
+                           FStop = data.FStop,
+                           FocalLength = data.FocalLength
                        };
             }
 

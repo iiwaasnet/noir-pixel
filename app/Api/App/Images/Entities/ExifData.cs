@@ -18,8 +18,6 @@ namespace Api.App.Images.Entities
         [BsonIgnoreIfNull]
         public double? FocalLength { get; set; }
         [BsonIgnoreIfNull]
-        public string CameraMake { get; set; }
-        [BsonIgnoreIfNull]
         public string CameraModel { get; set; }
         [BsonIgnoreIfNull]
         public string ShutterSpeed { get; set; }
