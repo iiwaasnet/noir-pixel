@@ -5,7 +5,7 @@ using System.Web.Http.Filters;
 using Antlr.Runtime.Misc;
 using Api.App.Diagnostics.Config;
 using Diagnostics;
-using JsonConfigurationProvider;
+using TypedConfigProvider;
 
 namespace Api.App.Errors
 {

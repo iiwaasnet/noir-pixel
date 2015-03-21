@@ -1,27 +1,25 @@
-﻿[
-    {
-        "prod": {
-            "profileImages": {
-				"maxFileSizeMB": "@@Images.ProfileImages.MaxFileSizeMB",
-                "fullViewNameTemplate": "{0}_p.{1}",
-                "thumbnailNameTemplate": "{0}_pth.{1}",
-                "fullViewSize": "@@Images.ProfileImages.FullViewSize",
-                "thumbnailSize": "@@Images.ProfileImages.ThumbnailSize"
+﻿{
+    "prod": {
+        "profileImages": {
+            "maxFileSizeMB": "@@Images.ProfileImages.MaxFileSizeMB",
+            "fullViewNameTemplate": "{0}_p.{1}",
+            "thumbnailNameTemplate": "{0}_pth.{1}",
+            "fullViewSize": "@@Images.ProfileImages.FullViewSize",
+            "thumbnailSize": "@@Images.ProfileImages.ThumbnailSize"
+        },
+        "photos": {
+            "maxFileSizeMB": "@@Images.Photos.MaxFileSizeMB",
+            "fullViewNameTemplate": "{0}_f.{1}",
+            "thumbnailNameTemplate": "{0}_fth.{1}",
+            "previewNameTemplate": "{0}_fp.{1}",
+            "fullViewSize": {
+                "maxHeight": "@@Images.Photos.MaxHeight",
+                "maxWidth": "@@Images.Photos.MaxWidth",
+                "minHeight": "@@Images.Photos.MinHeight",
+                "minWidth": "@@Images.Photos.MinWidth"
             },
-            "photos": {
-				"maxFileSizeMB": "@@Images.Photos.MaxFileSizeMB",
-                "fullViewNameTemplate": "{0}_f.{1}",
-                "thumbnailNameTemplate": "{0}_fth.{1}",
-                "previewNameTemplate": "{0}_fp.{1}",
-                "fullViewSize": {
-                    "maxHeight": "@@Images.Photos.MaxHeight",
-                    "maxWidth": "@@Images.Photos.MaxWidth",
-                    "minHeight": "@@Images.Photos.MinHeight",
-                    "minWidth": "@@Images.Photos.MinWidth"
-                },
-                "previewSize": "@@Images.Photos.PreviewSize",
-                "thumbnailSize": "@@Images.Photos.ThumbnailSize"
-            }
+            "previewSize": "@@Images.Photos.PreviewSize",
+            "thumbnailSize": "@@Images.Photos.ThumbnailSize"
         }
     }
-]
+}

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Api.App.Images;
 using Api.App.Images.Config;
-using JsonConfigurationProvider;
+using TypedConfigProvider;
 
 namespace Api.App.Media
 {

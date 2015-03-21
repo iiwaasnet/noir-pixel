@@ -1,34 +1,32 @@
-﻿[
-    {
-        "dev": {
-            "publicClientId": "self",
-            "accessTokenExpirationTime": "14.00:00:00",
-            "googlePlus": {
-                "clientId": "180426522882-j68nln4atebaf3r1ddb6lgc7h4im2c7j.apps.googleusercontent.com",
-                "clientSecret": "yg_imJKvQIjYu40L01d23QZ4"
-            },
-            "facebook": {
-                "appId": "1513484548903273",
-                "appSecret": "a8b0b56b824359a0ff6e885d7fd3475a",
-                "userScope": [
-                    "public_profile",
-                    "email"
-                ]
-            },
-            "twitter": {
-                "consumerKey": "QhLCzmIZokjGR3gOYw2Q717t7",
-                "consumerSecret": "xenykXM9gWTdWUnlyMjAnyDznHVmgc3GbtvcIvqPlj2rGgrgVY"
-            },
-            "yahoo": {
-                "appId": "eUy7WP5g",
-                "consumerKey": "dj0yJmk9NGQ1aHl1bzVHRVo2JmQ9WVdrOVpWVjVOMWRRTldjbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD1jZQ--",
-                "consumerSecret": "b03bb9da5d8243e8b953a20336087a39ed963969"
-            },
-            "userValidation": {
-                "nameValidationRegEx": "@@Auth.UserNameValidationRegEx",
-                "minUserNameLength": "@@Auth.MinUserNameLength",
-                "maxUserNameLength": "@@Auth.MaxUserNameLength"
-            }
+﻿{
+    "dev": {
+        "publicClientId": "self",
+        "accessTokenExpirationTime": "14.00:00:00",
+        "googlePlus": {
+            "clientId": "180426522882-j68nln4atebaf3r1ddb6lgc7h4im2c7j.apps.googleusercontent.com",
+            "clientSecret": "yg_imJKvQIjYu40L01d23QZ4"
+        },
+        "facebook": {
+            "appId": "1513484548903273",
+            "appSecret": "a8b0b56b824359a0ff6e885d7fd3475a",
+            "userScope": [
+                "public_profile",
+                "email"
+            ]
+        },
+        "twitter": {
+            "consumerKey": "QhLCzmIZokjGR3gOYw2Q717t7",
+            "consumerSecret": "xenykXM9gWTdWUnlyMjAnyDznHVmgc3GbtvcIvqPlj2rGgrgVY"
+        },
+        "yahoo": {
+            "appId": "eUy7WP5g",
+            "consumerKey": "dj0yJmk9NGQ1aHl1bzVHRVo2JmQ9WVdrOVpWVjVOMWRRTldjbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD1jZQ--",
+            "consumerSecret": "b03bb9da5d8243e8b953a20336087a39ed963969"
+        },
+        "userValidation": {
+            "nameValidationRegEx": "@@Auth.UserNameValidationRegEx",
+            "minUserNameLength": "@@Auth.MinUserNameLength",
+            "maxUserNameLength": "@@Auth.MaxUserNameLength"
         }
     }
-]
+}

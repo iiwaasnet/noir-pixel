@@ -2,7 +2,7 @@
 {
     public class DbConfiguration
     {
-        public string Server { get; set; }
-        public string Database { get; set; }
+        public ConnectionConfiguration Identity { get; set; }
+        public ConnectionConfiguration Application { get; set; }
     }
 }

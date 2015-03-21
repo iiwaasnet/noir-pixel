@@ -1,6 +1,6 @@
 ﻿using Api.App.Db.Config;
 using Autofac;
-using JsonConfigurationProvider;
+using TypedConfigProvider;
 
 namespace Api.App.Db
 {
@@ -12,23 +12,23 @@ namespace Api.App.Db
         protected override void Load(ContainerBuilder builder)
         {
             builder.Register(c => GetDbConfigurations(c).Application)
-                   .Named<DbConfiguration>(Application)
+                   .Named<ConnectionConfiguration>(Application)
                    .SingleInstance();
             builder.Register(c => GetDbConfigurations(c).Identity)
-                   .Named<DbConfiguration>(Identity)
+                   .Named<ConnectionConfiguration>(Identity)
                    .SingleInstance();
 
-            builder.Register(c => new IdentityDbProvider(c.ResolveNamed<DbConfiguration>(Identity)))
+            builder.Register(c => new IdentityDbProvider(c.ResolveNamed<ConnectionConfiguration>(Identity)))
                    .As<IIdentityDbProvider>()
                    .SingleInstance();
-            builder.Register(c => new AppDbProvider(c.ResolveNamed<DbConfiguration>(Application)))
+            builder.Register(c => new AppDbProvider(c.ResolveNamed<ConnectionConfiguration>(Application)))
                    .As<IAppDbProvider>()
                    .SingleInstance();
         }
 
-        private static DbSourcesConfiguration GetDbConfigurations(IComponentContext c)
+        private static DbConfiguration GetDbConfigurations(IComponentContext c)
         {
-            return c.Resolve<IConfigProvider>().GetConfiguration<DbSourcesConfiguration>();
+            return c.Resolve<IConfigProvider>().GetConfiguration<DbConfiguration>();
         }
     }
 }

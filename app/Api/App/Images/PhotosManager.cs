@@ -13,7 +13,7 @@ using Api.App.Media;
 using Api.App.Media.Config;
 using Api.App.Media.Extensions;
 using Diagnostics;
-using JsonConfigurationProvider;
+using TypedConfigProvider;
 using MongoDB.Driver;
 
 namespace Api.App.Images

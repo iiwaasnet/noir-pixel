@@ -1,6 +1,5 @@
 ﻿using Autofac;
-using Diagnostics;
-using JsonConfigurationProvider;
+using TypedConfigProvider;
 
 namespace Api.App.Configuration
 {
@@ -8,12 +7,11 @@ namespace Api.App.Configuration
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.Register(c => new JsonConfigProvider(c.Resolve<IConfigTargetProvider>(),
-                                                         "config",
-                                                         c.Resolve<ILogger>()))
+            builder.RegisterType<ConfigProvider>()
                    .As<IConfigProvider>()
                    .SingleInstance();
-            builder.Register(c => new JsonConfigTargetProvider("config/Environment.config.json"))
+
+            builder.RegisterType<AppConfigTargetProvider>()
                    .As<IConfigTargetProvider>()
                    .SingleInstance();
         }

@@ -8,7 +8,7 @@ namespace Api.App.Db
 
     public class IdentityDbProvider : DbProvider, IIdentityDbProvider
     {
-        public IdentityDbProvider(DbConfiguration config) 
+        public IdentityDbProvider(ConnectionConfiguration config) 
             : base(config)
         {
         }

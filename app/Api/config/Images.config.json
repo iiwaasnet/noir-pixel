@@ -1,27 +1,25 @@
-[
-    {
-        "prod": {
-            "profileImages": {
-				"maxFileSizeMB": "1",
-                "fullViewNameTemplate": "{0}_p.{1}",
-                "thumbnailNameTemplate": "{0}_pth.{1}",
-                "fullViewSize": "130",
-                "thumbnailSize": "32"
+{
+    "prod": {
+        "profileImages": {
+            "maxFileSizeMB": "1",
+            "fullViewNameTemplate": "{0}_p.{1}",
+            "thumbnailNameTemplate": "{0}_pth.{1}",
+            "fullViewSize": "130",
+            "thumbnailSize": "32"
+        },
+        "photos": {
+            "maxFileSizeMB": "3",
+            "fullViewNameTemplate": "{0}_f.{1}",
+            "thumbnailNameTemplate": "{0}_fth.{1}",
+            "previewNameTemplate": "{0}_fp.{1}",
+            "fullViewSize": {
+                "maxHeight": "800",
+                "maxWidth": "1000",
+                "minHeight": "300",
+                "minWidth": "300"
             },
-            "photos": {
-				"maxFileSizeMB": "3",
-                "fullViewNameTemplate": "{0}_f.{1}",
-                "thumbnailNameTemplate": "{0}_fth.{1}",
-                "previewNameTemplate": "{0}_fp.{1}",
-                "fullViewSize": {
-                    "maxHeight": "800",
-                    "maxWidth": "1000",
-                    "minHeight": "300",
-                    "minWidth": "300"
-                },
-                "previewSize": "200",
-                "thumbnailSize": "60"
-            }
+            "previewSize": "200",
+            "thumbnailSize": "60"
         }
     }
-]
+}

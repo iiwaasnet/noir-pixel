@@ -3,7 +3,7 @@ using Api.App.Auth.ExternalUserInfo.Facebook;
 using Api.App.Auth.ExternalUserInfo.GPlus;
 using Api.App.Auth.ExternalUserInfo.Twitter;
 using Api.App.Auth.ExternalUserInfo.Yahoo;
-using JsonConfigurationProvider;
+using TypedConfigProvider;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Facebook;
 using Microsoft.Owin.Security.OAuth;

@@ -7,7 +7,7 @@ namespace Api.App.Db
     {
         private readonly IMongoDatabase database;
 
-        public DbProvider(DbConfiguration config)
+        public DbProvider(ConnectionConfiguration config)
         {
             var client = new MongoClient(config.Server);
             database = client.GetDatabase(config.Database);

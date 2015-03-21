@@ -8,7 +8,7 @@ namespace Api.App.Db
 
     public class AppDbProvider : DbProvider, IAppDbProvider
     {
-        public AppDbProvider(DbConfiguration config) 
+        public AppDbProvider(ConnectionConfiguration config) 
             : base(config)
         {
         }

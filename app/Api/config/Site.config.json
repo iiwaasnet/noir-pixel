@@ -1,7 +1,5 @@
-﻿[
-    {
-        "prod": { 
-            siteUrl: "noir-pixel.com"
-        }
+﻿{
+    "prod": {
+        "siteUrl": "noir-pixel.com"
     }
-]
+}

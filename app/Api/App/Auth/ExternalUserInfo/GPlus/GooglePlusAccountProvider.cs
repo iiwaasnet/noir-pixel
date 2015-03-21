@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Api.App.Images.Config;
-using JsonConfigurationProvider;
+using TypedConfigProvider;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Owin.Security.Providers.GooglePlus;

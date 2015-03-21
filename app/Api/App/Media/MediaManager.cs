@@ -7,7 +7,7 @@ using Api.App.Db;
 using Api.App.Db.Extensions;
 using Api.App.Media.Config;
 using Api.App.Media.Entities;
-using JsonConfigurationProvider;
+using TypedConfigProvider;
 using MongoDB.Driver;
 
 namespace Api.App.Media

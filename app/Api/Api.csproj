@@ -217,6 +217,9 @@
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="TypedConfigProvider">
+      <HintPath>..\packages\TypedConfigProvider.1.0\lib\net452\TypedConfigProvider.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
       <Private>True</Private>
@@ -270,8 +273,8 @@
     <Compile Include="App\Auth\ExternalUserInfo\Twitter\TwitterAuthProvider.cs" />
     <Compile Include="App\Auth\ExternalUserInfo\Yahoo\YahooAuthProvider.cs" />
     <Compile Include="App\Configuration\ConfigurationModule.cs" />
+    <Compile Include="App\Db\Config\ConnectionConfiguration.cs" />
     <Compile Include="App\Db\Config\DbConfiguration.cs" />
-    <Compile Include="App\Db\Config\DbSourcesConfiguration.cs" />
     <Compile Include="App\Db\DbModule.cs" />
     <Compile Include="App\Db\DbProvider.cs" />
     <Compile Include="App\Db\IDbProvider.cs" />
@@ -515,10 +518,6 @@
     <ProjectReference Include="..\Diagnostics\Diagnostics.csproj">
       <Project>{fa2d348c-a9d9-45ef-8059-1ab5d1554e67}</Project>
       <Name>Diagnostics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\JsonConfigurationProvider\JsonConfigurationProvider.csproj">
-      <Project>{7baef581-a42b-4a8a-af73-e9b1f52c1ffa}</Project>
-      <Name>JsonConfigurationProvider</Name>
     </ProjectReference>
     <ProjectReference Include="..\Resources\Resources.csproj">
       <Project>{87c1faee-88e4-41f9-a66d-2e52a37e27b5}</Project>

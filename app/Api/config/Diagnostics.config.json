@@ -1,16 +1,12 @@
-﻿[
-    {
-        "dev": {
-            "logging": {
-                "logAllHttpErrors": true
-            }
+﻿{
+    "dev": {
+        "logging": {
+            "logAllHttpErrors": true
         }
     },
-    {
-        "prod": {
-            "logging": {
-                "logAllHttpErrors": false
-            }
+    "prod": {
+        "logging": {
+            "logAllHttpErrors": false
         }
     }
-]
+}

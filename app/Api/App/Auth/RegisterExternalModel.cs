@@ -4,7 +4,7 @@ using Api.App.Errors;
 using Ext.FluentValidation;
 using Ext.FluentValidation.Attributes;
 using Ext.FluentValidation.Resources;
-using JsonConfigurationProvider;
+using TypedConfigProvider;
 
 namespace Api.App.Auth
 {

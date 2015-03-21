@@ -1,14 +1,12 @@
-[
-    {
-        "dev": {
-            "identity": {
-                "server": "mongodb://localhost:27017",
-                "database": "np-identity"
-            },
-            "application": {
-                "server": "mongodb://localhost:27017",
-                "database": "np"
-            }
+{
+    "dev": {
+        "identity": {
+            "server": "mongodb://localhost:27017",
+            "database": "np-identity"
+        },
+        "application": {
+            "server": "mongodb://localhost:27017",
+            "database": "np"
         }
     }
-]
+}

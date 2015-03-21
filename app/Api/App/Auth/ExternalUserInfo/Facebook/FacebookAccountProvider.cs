@@ -3,10 +3,11 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Api.App.Images;
 using Api.App.Images.Config;
-using JsonConfigurationProvider;
+using TypedConfigProvider;
 using Microsoft.Owin.Security.Facebook;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using TypedConfigProvider;
 
 namespace Api.App.Auth.ExternalUserInfo.Facebook
 {
