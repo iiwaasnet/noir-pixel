@@ -1,4 +1,4 @@
-﻿using Api.App.Images.Exit;
+﻿using Api.App.Images.Exif;
 using Autofac;
 
 namespace Api.App.Images

@@ -4,7 +4,8 @@ namespace Api.App.Images
 {
     public interface IPhotosManager
     {
-        Task<Photo> SavePhoto(string userName, string fileName);
+        Task<ImageData> SavePhoto(string userName, string fileName);
         Task<PendingPhotos> GetPendingPhotos(string userName, int? offset, int? count);
+        Task<Photo> GetPhotoForEdit(string userName, string shortId);
     }
 }

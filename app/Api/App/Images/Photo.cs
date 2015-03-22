@@ -1,10 +1,13 @@
+﻿using Api.App.Images.Exif;
+
 namespace Api.App.Images
 {
     public class Photo
     {
-        public string Id { get; set; }
-        public string FullViewUrl { get; set; }
-        public string PreviewUrl { get; set; }
-        public string ThumbnailUrl { get; set; }
+        public string OwnerId { get; set; }
+        public ImageData Image { get; set; }
+        public int? Category { get; set; }
+        public bool PublishedToGallery { get; set; }
+        public ExifData Exif { get; set; }
     }
 }
