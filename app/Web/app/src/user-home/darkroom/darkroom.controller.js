@@ -1,12 +1,12 @@
-﻿(function() {
+﻿(function () {
     'use strict';
 
     angular.module('np.user-home')
         .controller('DarkroomController', darkroomController);
 
-    darkroomController.$inject = ['Url', 'Config', 'Photos', 'Overlay', 'Strings'];
+    darkroomController.$inject = ['Url', 'Config', 'Photos', 'Overlay', 'Strings', 'Messages'];
 
-    function darkroomController(Url, Config, Photos, Overlay, Strings) {
+    function darkroomController(Url, Config, Photos, Overlay, Strings, Messages) {
         var ctrl = this,
             EAPI_Image_Unknown = 'EAPI_Image_Unknown',
             currentlyUploading = [];
@@ -26,9 +26,18 @@
         }
 
         function edit(photo) {
+            Photos.getPhotoForEdit(photo.id)
+                .when(getPhotoForEditSuccess, getPhotoForEditError);
+        }
+
+        function getPhotoForEditSuccess(response) {
             Overlay.open('app/src/user-home/darkroom/edit-photo.html',
                     'EditPhotoController as ctrl',
-                    { photo: photo });
+                    { photo: response.data });
+        }
+
+        function getPhotoForEditError(error) {
+            Messages.error({ main: { code: error } });
         }
 
         function filesAdded(files) {
@@ -43,7 +52,7 @@
 
         function getCurrentlyUploadingFiles(files) {
             var tmp = [];
-            angular.forEach(files, function(file) { tmp.push(wrapFileForUpload(file)); });
+            angular.forEach(files, function (file) { tmp.push(wrapFileForUpload(file)); });
 
             return tmp;
         }
@@ -73,7 +82,7 @@
         function fileUploadError(file, message) {
             clearFileFromHistory(file);
 
-            var item = currentlyUploading.first(function(f) {
+            var item = currentlyUploading.first(function (f) {
                 return f.file === file;
             });
             if (item) {
@@ -87,7 +96,7 @@
         }
 
         function markFileCompleted(file) {
-            var item = currentlyUploading.first(function(f) {
+            var item = currentlyUploading.first(function (f) {
                 return f.file === file;
             });
             if (item) {
@@ -101,7 +110,7 @@
         }
 
         function uploadCompleted() {
-            if (!currentlyUploading.any(function(f) { return f.error; })) {
+            if (!currentlyUploading.any(function (f) { return f.error; })) {
                 Overlay.close();
             }
         }

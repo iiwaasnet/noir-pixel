@@ -27,8 +27,9 @@
             },
             Photos: {
                 Upload: 'photos/upload',
-                GetPending: 'photos/pending'
-            }
+                GetPending: 'photos/pending',
+                GetPhotoForEdit: 'photos/{shortId}/edit'
+}
         },
         Profiles: {
             Image: {

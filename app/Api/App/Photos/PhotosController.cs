@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -38,32 +37,25 @@ namespace Api.App.Photos
         [Route("upload")]
         public async Task<IHttpActionResult> Upload()
         {
-            try
+            var mediaUploadResult = await mediaManager.ReceiveMediaChunk(Request, User.Identity.Name);
+            if (mediaUploadResult.Completed)
             {
-                var mediaUploadResult = await mediaManager.ReceiveMediaChunk(Request, User.Identity.Name);
-                if (mediaUploadResult.Completed)
+                try
                 {
-                    try
-                    {
-                        var photo = await SavePhoto(mediaUploadResult);
-                        photo.FullViewUrl = MakeAbsoluteUrl(photo.FullViewUrl);
-                        photo.PreviewUrl = MakeAbsoluteUrl(photo.PreviewUrl);
-                        photo.ThumbnailUrl = MakeAbsoluteUrl(photo.ThumbnailUrl);
+                    var photo = await SavePhoto(mediaUploadResult);
+                    photo.FullViewUrl = MakeAbsoluteUrl(photo.FullViewUrl);
+                    photo.PreviewUrl = MakeAbsoluteUrl(photo.PreviewUrl);
+                    photo.ThumbnailUrl = MakeAbsoluteUrl(photo.ThumbnailUrl);
 
-                        return Ok(photo);
-                    }
-                    finally
-                    {
-                        mediaManager.DeleteMediaFile(mediaUploadResult.FileName);
-                    }
+                    return Ok(photo);
                 }
+                finally
+                {
+                    mediaManager.DeleteMediaFile(mediaUploadResult.FileName);
+                }
+            }
 
-                return Ok();
-            }
-            catch (NotSupportedException)
-            {
-                return ApiError(HttpStatusCode.NotAcceptable);
-            }
+            return Ok();
         }
 
         private async Task<ImageData> SavePhoto(MediaUploadResult mediaUploadResult)
@@ -105,7 +97,11 @@ namespace Api.App.Photos
         {
             var photo = await photosManager.GetPhotoForEdit(User.Identity.Name, shortId);
 
-            return null;
+            photo.Image.FullViewUrl = MakeAbsoluteUrl(photo.Image.FullViewUrl);
+            photo.Image.PreviewUrl = MakeAbsoluteUrl(photo.Image.PreviewUrl);
+            photo.Image.ThumbnailUrl = MakeAbsoluteUrl(photo.Image.ThumbnailUrl);
+
+            return Ok(photo);
         }
 
         private IEnumerable<ImageData> MakeAbsoluteUrl(IEnumerable<ImageData> photos)

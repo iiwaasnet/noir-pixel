@@ -27,8 +27,9 @@
             },
             Photos: {
                 Upload: '@@ApiUris.Photos.Upload',
-                GetPending: '@@ApiUris.Photos.GetPending'
-            }
+                GetPending: '@@ApiUris.Photos.GetPending',
+                GetPhotoForEdit: '@@ApiUris.Photos.GetPhotoForEdit'
+}
         },
         Profiles: {
             Image: {

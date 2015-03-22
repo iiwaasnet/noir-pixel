@@ -21,5 +21,7 @@ namespace Api.App.Images.Entities
         public string CameraModel { get; set; }
         [BsonIgnoreIfNull]
         public string ShutterSpeed { get; set; }
+        [BsonIgnoreIfNull]
+        public string LensModel { get; set; }
     }
 }

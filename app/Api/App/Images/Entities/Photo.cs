@@ -21,5 +21,7 @@ namespace Api.App.Images.Entities
         public MediaData Thumbnail { get; set; }
         [BsonIgnoreIfNull]
         public ExifData Exif { get; set; }
+        [BsonIgnoreIfNull]
+        public string Story { get; set; }
     }
 }

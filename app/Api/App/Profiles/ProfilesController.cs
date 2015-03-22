@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Api.App.ApiBase;
@@ -73,31 +72,24 @@ namespace Api.App.Profiles
         [Route("update-profile-image")]
         public async Task<IHttpActionResult> UpdateProfileImage()
         {
-            try
+            var mediaUploadResult = await mediaManager.ReceiveMediaChunk(Request, User.Identity.Name);
+            if (mediaUploadResult.Completed)
             {
-                var mediaUploadResult = await mediaManager.ReceiveMediaChunk(Request, User.Identity.Name);
-                if (mediaUploadResult.Completed)
+                try
                 {
-                    try
-                    {
-                        var url = await SaveProfileImage(mediaUploadResult);
-                        url.FullViewUrl = MakeAbsoluteUrl(url.FullViewUrl);
-                        url.ThumbnailUrl = MakeAbsoluteUrl(url.ThumbnailUrl);
+                    var url = await SaveProfileImage(mediaUploadResult);
+                    url.FullViewUrl = MakeAbsoluteUrl(url.FullViewUrl);
+                    url.ThumbnailUrl = MakeAbsoluteUrl(url.ThumbnailUrl);
 
-                        return Ok(url);
-                    }
-                    finally
-                    {
-                        mediaManager.DeleteMediaFile(mediaUploadResult.FileName);
-                    }
+                    return Ok(url);
                 }
+                finally
+                {
+                    mediaManager.DeleteMediaFile(mediaUploadResult.FileName);
+                }
+            }
 
-                return Ok();
-            }
-            catch (NotSupportedException)
-            {
-                return ApiError(HttpStatusCode.NotAcceptable);
-            }
+            return Ok();
         }
 
         private async Task<ProfileImage> SaveProfileImage(MediaUploadResult mediaUploadResult)

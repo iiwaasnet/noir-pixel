@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing.Imaging;
 using System.Linq;
 using System.Threading.Tasks;
 using Api.App.Db;
@@ -14,8 +12,9 @@ using Api.App.Media;
 using Api.App.Media.Config;
 using Api.App.Media.Extensions;
 using Diagnostics;
-using TypedConfigProvider;
 using MongoDB.Driver;
+using TypedConfigProvider;
+using ExifData = Api.App.Images.Exif.ExifData;
 
 namespace Api.App.Images
 {
@@ -135,20 +134,39 @@ namespace Api.App.Images
             var profile = await db.GetProfile(userName);
             var collection = db.GetCollection<Entities.Photo>(Entities.Photo.CollectionName);
             var photo = await collection.Find(p => p.OwnerId == profile.Id && p.ShortId == shortId)
-                                  .FirstOrDefaultAsync();
-            AssertPhotoFound(shortId, photo);
+                                        .FirstOrDefaultAsync();
+            AssertPhotoFoundAndNotPublished(shortId, photo);
 
             return new Photo
                    {
-                       
+                       Category = photo.Category,
+                       Exif = new ExifData
+                              {
+                                  CameraModel = photo.Exif.CameraModel,
+                                  Copyright = photo.Exif.Copyright,
+                                  DateTimeTaken = photo.Exif.DateTimeTaken,
+                                  ExposureTime = photo.Exif.ExposureTime,
+                                  FStop = photo.Exif.FStop,
+                                  FocalLength = photo.Exif.FocalLength,
+                                  ShutterSpeed = photo.Exif.ShutterSpeed,
+                                  Iso = photo.Exif.Iso,
+                                  LensModel = photo.Exif.LensModel
+                              },
+                       OwnerId = photo.OwnerId,
+                       Image = new ImageData {Id = photo.ShortId},
+                       Story = photo.Story
                    };
         }
 
-        private static void AssertPhotoFound(string shortId, Entities.Photo photo)
+        private static void AssertPhotoFoundAndNotPublished(string shortId, Entities.Photo photo)
         {
             if (photo == null)
             {
                 throw new NotFoundException(string.Format("Photo {0} is not found!", shortId));
+            }
+            if (photo.PublishedToGallery)
+            {
+                throw new InvalidPotoStateException(string.Format("Photo {0} is already published!", shortId));
             }
         }
     }

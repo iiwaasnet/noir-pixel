@@ -9,6 +9,7 @@
     function photosService($http, $q, Config, Url) {
         var srv = this;
         srv.getPendingPhotos = getPendingPhotos;
+        srv.getPhotoForEdit = getPhotoForEdit;
 
         function getPendingPhotos(offset, count) {
             var url = Url.buildApiUrl(Config.ApiUris.Photos.GetPending);
@@ -19,6 +20,12 @@
                     count: count
                 }
             });
+        }
+
+        function getPhotoForEdit(shortId) {
+            var url = Url.buildApiUrl(Config.ApiUris.Photos.GetPhotoForEdit).formatNamed({ shortId: shortId });
+
+            return $http.get(url);
         }
     }
 })();

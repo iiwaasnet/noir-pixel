@@ -11,6 +11,7 @@ namespace Api.App.Images.Exif
         public double? FStop { get; set; }
         public double? FocalLength { get; set; }
         public string CameraModel { get; set; }
+        public string LensModel { get; set; }
         public string ShutterSpeed { get; set; }
     }
 }

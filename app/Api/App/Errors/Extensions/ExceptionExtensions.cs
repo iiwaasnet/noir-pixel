@@ -17,6 +17,14 @@ namespace Api.App.Errors.Extensions
                 {
                     actionExecutedContext.Response = new HttpResponseMessage(HttpStatusCode.NotFound);
                 }
+                if (actionExecutedContext.Exception.GetType() == typeof(InvalidPotoStateException))
+                {
+                    actionExecutedContext.Response = new HttpResponseMessage(HttpStatusCode.MethodNotAllowed);
+                }
+                if (actionExecutedContext.Exception.GetType() == typeof (NotSupportedException))
+                {
+                    actionExecutedContext.Response = new HttpResponseMessage(HttpStatusCode.NotAcceptable);
+                }
             }
         }
     }
