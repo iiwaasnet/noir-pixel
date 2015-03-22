@@ -42,7 +42,7 @@ namespace Api.App.Profiles
                                UserId = login.Id
                            };
                     await users.InsertOneAsync(user);
-                    await CreateProfileThumbnail((ApplicationUser) login);
+                    await CreateProfileThumbnail(login);
                     user = await db.GetProfile(userName);
                 }
             }
