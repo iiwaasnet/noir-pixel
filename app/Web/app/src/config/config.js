@@ -2,7 +2,7 @@
     'use strict';
 
     var config = {
-        Environment: 'DEV',
+        Environment: '@@Environment',
         SiteBaseUri: 'noir-pixel.com',
         LoggingApiUri: 'api.logging.noir-pixel.com/log/add',
         ApiUris: {

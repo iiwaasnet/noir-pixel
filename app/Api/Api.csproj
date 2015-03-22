@@ -483,25 +483,19 @@
     <None Include="config\Db.config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Content Include="config\Environment.config.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="config\env\Environment.config.json">
-      <LastGenOutput>Environment.config1.cs</LastGenOutput>
     </Content>
     <Content Include="config\Site.config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="config\env\Auth.config.json" />
+    <Content Include="config\templ\Auth.config.json" />
     <Content Include="config\Diagnostics.config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="config\Images.config.json" />
     <Content Include="config\Media.config.json" />
-    <Content Include="config\env\Images.config.json" />
+    <Content Include="config\templ\Images.config.json" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

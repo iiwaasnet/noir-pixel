@@ -9,13 +9,9 @@ module.exports = function (grunt) {
                     preserveOrder: true,
                     patterns: [
                         {
-                            json: grunt.file.readJSON('./web/config/env/dev.json')
+                            json: grunt.file.readJSON('./web/app/src/config/templ/dev.json')
                         }, {
-                            json: grunt.file.readJSON('./web/config/env/prod.json')
-                        }, {
-                            json: grunt.file.readJSON('./web/app/src/config/env/dev.json')
-                        }, {
-                            json: grunt.file.readJSON('./web/app/src/config/env/prod.json')
+                            json: grunt.file.readJSON('./web/app/src/config/templ/prod.json')
                         }, {
                             json: grunt.file.readJSON('./config.shared/dev.json')
                         }, {
@@ -26,54 +22,50 @@ module.exports = function (grunt) {
                 files: [
                     {
                         expand: false,
-                        flatten: true,
-                        src: ['./web/config/env/Environment.config.json'],
-                        dest: './web/config/Environment.config.json'
-                    }, {
-                        expand: false,
                         flatten: false,
-                        src: ['./web/app/src/config/env/Config.js'],
+                        src: ['./web/app/src/config/templ/Config.js'],
                         dest: './web/app/src/config/Config.js'
                     }, {
                         expand: false,
                         flatten: false,
-                        src: ['./api/config/env/Environment.config.json'],
-                        dest: './api/config/Environment.config.json'
-                    }, {
-                        expand: false,
-                        flatten: false,
-                        src: ['./api/config/env/Auth.config.json'],
+                        src: ['./api/config/templ/Auth.config.json'],
                         dest: './api/config/Auth.config.json'
                     }, {
                         expand: false,
                         flatten: false,
-                        src: ['./api/config/env/Images.config.json'],
+                        src: ['./api/config/templ/Images.config.json'],
                         dest: './api/config/Images.config.json'
                     }
                 ]
             },
             prod: {
                 options: {
+                    preserveOrder: true,
                     patterns: [
-                        {
-                            json: grunt.file.readJSON('./web/config/env/prod.json')
-                        }, {
-                            json: grunt.file.readJSON('./web/app/src/config/env/prod.json')
-                        }
+                         {
+                             json: grunt.file.readJSON('./web/app/src/config/templ/prod.json')
+                         }, {
+                             json: grunt.file.readJSON('./config.shared/prod.json')
+                         }
                     ]
                 },
                 files: [
-                    {
-                        expand: false,
-                        flatten: true,
-                        src: ['./web/config/env/Environment.config.tt'],
-                        dest: './web/config/Environment.config'
-                    }, {
-                        expand: false,
-                        flatten: true,
-                        src: ['./web/app/src/config/env/Config.js'],
-                        dest: './web/app/src/config/Config.js'
-                    }
+                     {
+                         expand: false,
+                         flatten: false,
+                         src: ['./web/app/src/config/templ/Config.js'],
+                         dest: './web/app/src/config/Config.js'
+                     }, {
+                         expand: false,
+                         flatten: false,
+                         src: ['./api/config/templ/Auth.config.json'],
+                         dest: './api/config/Auth.config.json'
+                     }, {
+                         expand: false,
+                         flatten: false,
+                         src: ['./api/config/templ/Images.config.json'],
+                         dest: './api/config/Images.config.json'
+                     }
                 ]
             }
         },

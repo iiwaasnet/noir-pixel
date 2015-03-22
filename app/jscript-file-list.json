@@ -22,7 +22,7 @@
         ],
         "web/app/src/app.js": [
             "web/app/src/**/**/*.module.js",
-            "web/app/src/**/!(env)**/!(*.module.js)*.js"
+            "web/app/src/**/!(templ)**/!(*.module.js)*.js"
         ]
     }
 }

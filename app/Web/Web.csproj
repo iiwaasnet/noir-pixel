@@ -579,7 +579,7 @@
     <Content Include="app\src\auth\tokenStorage.service.js" />
     <Content Include="app\src\config\config.js" />
     <Content Include="app\src\config\config.module.js" />
-    <Content Include="app\src\config\env\prod.json" />
+    <Content Include="app\src\config\templ\prod.json" />
     <Content Include="app\less\colors.less" />
     <Content Include="app\less\all.less" />
     <Content Include="app\less\edits.less" />
@@ -640,8 +640,8 @@
     <Content Include="app\less\ui-select\selectize.css.map">
       <DependentUpon>selectize.css</DependentUpon>
     </Content>
-    <None Include="app\src\config\env\dev.json" />
-    <Content Include="app\src\config\env\config.js">
+    <None Include="app\src\config\templ\dev.json" />
+    <Content Include="app\src\config\templ\config.js">
       <LastGenOutput>Const1.cs</LastGenOutput>
     </Content>
     <Content Include="app\src\constants\const.module.js" />
@@ -782,9 +782,6 @@
     <Content Include="app\src\layout\header\header.controller.js" />
     <Content Include="app\src\layout\header\mainMenu.service.js" />
     <Content Include="app\vendor\angular-messages.min.js.map" />
-    <Content Include="config\Environment.config.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="app\vendor\ngDialog.min.js.map">
       <DependentUpon>ngDialog.min.js</DependentUpon>
     </Content>
@@ -798,11 +795,6 @@
     <Content Include="app\vendor\moment.min.js.map">
       <DependentUpon>moment.min.js</DependentUpon>
     </Content>
-    <None Include="config\env\Environment.config.json">
-      <LastGenOutput>Environment.config1.cs</LastGenOutput>
-    </None>
-    <Content Include="config\env\prod.json" />
-    <Content Include="config\env\dev.json" />
     <Content Include="config\Site.config.json" />
   </ItemGroup>
   <ItemGroup>
@@ -811,7 +803,9 @@
   <ItemGroup>
     <Content Include="app\src\app\np.run.js" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="config\templ\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
