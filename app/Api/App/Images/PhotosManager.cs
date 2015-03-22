@@ -153,7 +153,13 @@ namespace Api.App.Images
                                   LensModel = photo.Exif.LensModel
                               },
                        OwnerId = photo.OwnerId,
-                       Image = new ImageData {Id = photo.ShortId},
+                       Image = new ImageData
+                               {
+                                   Id = photo.ShortId,
+                                   FullViewUrl = photo.FullView.Uri,
+                                   PreviewUrl = photo.Preview.Uri,
+                                   ThumbnailUrl = photo.Thumbnail.Uri
+                               },
                        Story = photo.Story
                    };
         }

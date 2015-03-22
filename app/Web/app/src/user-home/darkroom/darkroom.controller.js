@@ -1,4 +1,4 @@
-﻿(function () {
+﻿(function() {
     'use strict';
 
     angular.module('np.user-home')
@@ -27,13 +27,13 @@
 
         function edit(photo) {
             Photos.getPhotoForEdit(photo.id)
-                .when(getPhotoForEditSuccess, getPhotoForEditError);
+                .then(getPhotoForEditSuccess, getPhotoForEditError);
         }
 
         function getPhotoForEditSuccess(response) {
             Overlay.open('app/src/user-home/darkroom/edit-photo.html',
-                    'EditPhotoController as ctrl',
-                    { photo: response.data });
+                'EditPhotoController as ctrl',
+                { photo: response.data });
         }
 
         function getPhotoForEditError(error) {
@@ -52,7 +52,7 @@
 
         function getCurrentlyUploadingFiles(files) {
             var tmp = [];
-            angular.forEach(files, function (file) { tmp.push(wrapFileForUpload(file)); });
+            angular.forEach(files, function(file) { tmp.push(wrapFileForUpload(file)); });
 
             return tmp;
         }
@@ -82,7 +82,7 @@
         function fileUploadError(file, message) {
             clearFileFromHistory(file);
 
-            var item = currentlyUploading.first(function (f) {
+            var item = currentlyUploading.first(function(f) {
                 return f.file === file;
             });
             if (item) {
@@ -96,7 +96,7 @@
         }
 
         function markFileCompleted(file) {
-            var item = currentlyUploading.first(function (f) {
+            var item = currentlyUploading.first(function(f) {
                 return f.file === file;
             });
             if (item) {
@@ -110,7 +110,7 @@
         }
 
         function uploadCompleted() {
-            if (!currentlyUploading.any(function (f) { return f.error; })) {
+            if (!currentlyUploading.any(function(f) { return f.error; })) {
                 Overlay.close();
             }
         }
