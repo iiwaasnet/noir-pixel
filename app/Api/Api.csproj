@@ -282,6 +282,7 @@
     <Compile Include="App\Diagnostics\Config\LoggingConfiguration.cs" />
     <Compile Include="App\Entities\IEntity.cs" />
     <Compile Include="App\Errors\ApiError.cs" />
+    <Compile Include="App\Errors\Extensions\ExceptionExtensions.cs" />
     <Compile Include="App\Errors\HttpExceptionLoggingFilter.cs" />
     <Compile Include="App\Errors\Extensions\ModelStateExtensions.cs" />
     <Compile Include="App\Errors\FieldValidationError.cs" />

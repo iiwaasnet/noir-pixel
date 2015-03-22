@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Web.Http.Filters;
 using Antlr.Runtime.Misc;
 using Api.App.Diagnostics.Config;
+using Api.App.Errors.Extensions;
 using Diagnostics;
 using TypedConfigProvider;
 
@@ -23,6 +24,8 @@ namespace Api.App.Errors
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
             base.OnActionExecuted(actionExecutedContext);
+
+            actionExecutedContext.ShieldException();
 
             if (ShouldLog(actionExecutedContext))
             {

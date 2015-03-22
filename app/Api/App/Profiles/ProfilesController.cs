@@ -33,20 +33,13 @@ namespace Api.App.Profiles
         [AllowAnonymous]
         public async Task<IHttpActionResult> Get(string userName)
         {
-            try
-            {
-                var includePrivateData = User.Identity.Self(userName);
-                var profile = await profilesManager.GetUserProfile(userName, includePrivateData);
+            var includePrivateData = User.Identity.Self(userName);
+            var profile = await profilesManager.GetUserProfile(userName, includePrivateData);
 
-                profile.PublicInfo.ProfileImageThumbnail = MakeAbsoluteUrl(profile.PublicInfo.ProfileImageThumbnail);
-                profile.PublicInfo.ProfileImage = MakeAbsoluteUrl(profile.PublicInfo.ProfileImage);
+            profile.PublicInfo.ProfileImageThumbnail = MakeAbsoluteUrl(profile.PublicInfo.ProfileImageThumbnail);
+            profile.PublicInfo.ProfileImage = MakeAbsoluteUrl(profile.PublicInfo.ProfileImage);
 
-                return Ok(profile);
-            }
-            catch (NotFoundException)
-            {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
-            }
+            return Ok(profile);
         }
 
         [HttpGet]
@@ -62,32 +55,18 @@ namespace Api.App.Profiles
         [Route("update-profile/public-info")]
         public async Task<IHttpActionResult> UpdatePublicInfo(ProfilePublicInfo info)
         {
-            try
-            {
-                await profilesManager.UpdatePublicInfo(User.Identity.Name, info);
+            await profilesManager.UpdatePublicInfo(User.Identity.Name, info);
 
-                return Ok();
-            }
-            catch (NotFoundException)
-            {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
-            }
+            return Ok();
         }
 
         [HttpPost]
         [Route("update-profile/private-info")]
         public async Task<IHttpActionResult> UpdatePrivateInfo(ProfilePrivateInfo info)
         {
-            try
-            {
-                await profilesManager.UpdatePrivateInfo(User.Identity.Name, info);
+            await profilesManager.UpdatePrivateInfo(User.Identity.Name, info);
 
-                return Ok();
-            }
-            catch (NotFoundException)
-            {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
-            }
+            return Ok();
         }
 
         [HttpPost]
