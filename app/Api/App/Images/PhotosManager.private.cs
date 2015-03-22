@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.Drawing.Imaging;
+using System.IO;
 using Api.App.Images.Entities;
 
 namespace Api.App.Images
@@ -56,6 +58,22 @@ namespace Api.App.Images
             }
 
             return null;
+        }
+
+        private IEnumerable<ImageConstraint> GetMediaConstraints()
+        {
+            yield return new ImageConstraint
+                         {
+                             ImageFormat = ImageFormat.Jpeg,
+                             MaxFileSizeMB = config.MaxFileSizeMB,
+                             Size = new SizeConstraints
+                                    {
+                                        MaxHeight = config.FullViewSize.MaxHeight,
+                                        MinHeight = config.FullViewSize.MinHeight,
+                                        MaxWidth = config.FullViewSize.MaxWidth,
+                                        MinWidth = config.FullViewSize.MinWidth
+                                    }
+                         };
         }
     }
 }

@@ -3,7 +3,7 @@ using Api.App.Framework;
 using Diagnostics;
 using ExifLib;
 
-namespace Api.App.Images.Exit
+namespace Api.App.Images.Exif
 {
     public class ExifReader : IExifReader
     {

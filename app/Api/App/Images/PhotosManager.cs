@@ -5,10 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Api.App.Db;
 using Api.App.Db.Extensions;
+using Api.App.Exceptions;
 using Api.App.Framework;
 using Api.App.Images.Config;
 using Api.App.Images.Entities;
-using Api.App.Images.Exit;
+using Api.App.Images.Exif;
 using Api.App.Media;
 using Api.App.Media.Config;
 using Api.App.Media.Extensions;
@@ -45,7 +46,7 @@ namespace Api.App.Images
             this.exifReader = exifReader;
         }
 
-        public async Task<Photo> SavePhoto(string userName, string fileName)
+        public async Task<ImageData> SavePhoto(string userName, string fileName)
         {
             imageValidator.Assert(fileName, GetMediaConstraints());
 
@@ -89,7 +90,7 @@ namespace Api.App.Images
             var collection = db.GetCollection<Entities.Photo>(Entities.Photo.CollectionName);
             await collection.InsertOneAsync(photo);
 
-            return new Photo
+            return new ImageData
                    {
                        Id = photo.ShortId,
                        FullViewUrl = photo.FullView.Uri,
@@ -114,7 +115,7 @@ namespace Api.App.Images
 
             return new PendingPhotos
                    {
-                       Photos = pendingPhotos.Select(p => new Photo
+                       Photos = pendingPhotos.Select(p => new ImageData
                                                           {
                                                               Id = p.ShortId,
                                                               FullViewUrl = p.FullView.Uri,
@@ -129,20 +130,26 @@ namespace Api.App.Images
                    };
         }
 
-        private IEnumerable<ImageConstraint> GetMediaConstraints()
+        public async Task<Photo> GetPhotoForEdit(string userName, string shortId)
         {
-            yield return new ImageConstraint
-                         {
-                             ImageFormat = ImageFormat.Jpeg,
-                             MaxFileSizeMB = config.MaxFileSizeMB,
-                             Size = new SizeConstraints
-                                    {
-                                        MaxHeight = config.FullViewSize.MaxHeight,
-                                        MinHeight = config.FullViewSize.MinHeight,
-                                        MaxWidth = config.FullViewSize.MaxWidth,
-                                        MinWidth = config.FullViewSize.MinWidth
-                                    }
-                         };
+            var profile = await db.GetProfile(userName);
+            var collection = db.GetCollection<Entities.Photo>(Entities.Photo.CollectionName);
+            var photo = await collection.Find(p => p.OwnerId == profile.Id && p.ShortId == shortId)
+                                  .FirstOrDefaultAsync();
+            AssertPhotoFound(shortId, photo);
+
+            return new Photo
+                   {
+                       
+                   };
+        }
+
+        private static void AssertPhotoFound(string shortId, Entities.Photo photo)
+        {
+            if (photo == null)
+            {
+                throw new NotFoundException(string.Format("Photo {0} is not found!", shortId));
+            }
         }
     }
 }

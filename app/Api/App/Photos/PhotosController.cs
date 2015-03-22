@@ -66,12 +66,12 @@ namespace Api.App.Photos
             }
         }
 
-        private async Task<Photo> SavePhoto(MediaUploadResult mediaUploadResult)
+        private async Task<ImageData> SavePhoto(MediaUploadResult mediaUploadResult)
         {
-            Photo photo = null;
+            ImageData imageData = null;
             try
             {
-                photo = await photosManager.SavePhoto(User.Identity.Name, mediaUploadResult.FileName);
+                imageData = await photosManager.SavePhoto(User.Identity.Name, mediaUploadResult.FileName);
             }
             catch (UnsupportedImageFormatException)
             {
@@ -86,7 +86,7 @@ namespace Api.App.Photos
                 ApiException(HttpStatusCode.BadRequest, ApiErrors.Images.ImageSizeViolation);
             }
 
-            return photo;
+            return imageData;
         }
 
         [HttpGet]
@@ -99,7 +99,16 @@ namespace Api.App.Photos
             return Ok(pendingPhotos);
         }
 
-        private IEnumerable<Photo> MakeAbsoluteUrl(IEnumerable<Photo> photos)
+        [HttpGet]
+        [Route("{shortId}/edit")]
+        public async Task<IHttpActionResult> GetPhotoForEdit(string shortId)
+        {
+            var photo = await photosManager.GetPhotoForEdit(User.Identity.Name, shortId);
+
+            return null;
+        }
+
+        private IEnumerable<ImageData> MakeAbsoluteUrl(IEnumerable<ImageData> photos)
         {
             foreach (var photo in photos)
             {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Api.App.Images.Exit
+namespace Api.App.Images.Exif
 {
     public class ExifData
     {
