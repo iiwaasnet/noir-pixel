@@ -376,6 +376,87 @@ namespace Resources.Client {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Camera.
+        /// </summary>
+        public static string Label_Exif_CameraModel {
+            get {
+                return ResourceManager.GetString("Label_Exif_CameraModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copyright.
+        /// </summary>
+        public static string Label_Exif_Copyright {
+            get {
+                return ResourceManager.GetString("Label_Exif_Copyright", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date taken.
+        /// </summary>
+        public static string Label_Exif_DateTimeTaken {
+            get {
+                return ResourceManager.GetString("Label_Exif_DateTimeTaken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exposure.
+        /// </summary>
+        public static string Label_Exif_ExposureTime {
+            get {
+                return ResourceManager.GetString("Label_Exif_ExposureTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Focal length.
+        /// </summary>
+        public static string Label_Exif_FocalLength {
+            get {
+                return ResourceManager.GetString("Label_Exif_FocalLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to F-stop.
+        /// </summary>
+        public static string Label_Exif_FStop {
+            get {
+                return ResourceManager.GetString("Label_Exif_FStop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ISO.
+        /// </summary>
+        public static string Label_Exif_Iso {
+            get {
+                return ResourceManager.GetString("Label_Exif_Iso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lens.
+        /// </summary>
+        public static string Label_Exif_LensModel {
+            get {
+                return ResourceManager.GetString("Label_Exif_LensModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shutter speed.
+        /// </summary>
+        public static string Label_Exif_ShutterSpeed {
+            get {
+                return ResourceManager.GetString("Label_Exif_ShutterSpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Full name.
         /// </summary>
         public static string Label_FullName {

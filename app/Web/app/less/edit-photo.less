@@ -1,6 +1,21 @@
 ﻿#edit-photo {
     .column-left {
         padding: 1.5em 2em;
+
+        .exif-tag {
+            .label,
+            .value {
+                width: 49%;
+                text-align: right;
+                padding: 0 0.7em 0 0;
+                display: inline-block;
+            }
+
+            .value {
+                text-align: left;
+                padding: 0;
+            }
+        }
     }
 
     .column-center {
@@ -12,7 +27,7 @@
             width: 70%;
         }
 
-        textarea{
+        textarea {
             height: 5em;
             max-height: 10em;
             resize: vertical;

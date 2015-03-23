@@ -75,5 +75,10 @@ namespace Api.App.Images
                                     }
                          };
         }
+
+        private bool ExposureTimeLessThanSecond(ExifData exif)
+        {
+            return exif.ExposureTime < 1d;
+        }
     }
 }

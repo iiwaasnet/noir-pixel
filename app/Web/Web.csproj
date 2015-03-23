@@ -677,7 +677,7 @@
     <Content Include="app\src\ui-elements\dropdown\np-dropdown.directive.js" />
     <Content Include="app\src\ui-elements\ui-elements.module.js" />
     <Content Include="app\src\utils\moment.factory.js" />
-    <Content Include="app\src\utils\string.format.js" />
+    <Content Include="app\src\utils\string.extensions.js" />
     <Content Include="app\src\utils\url.service.js" />
     <Content Include="app\src\utils\utils.module.js" />
     <Content Include="app\src\auth\error-messages.html" />

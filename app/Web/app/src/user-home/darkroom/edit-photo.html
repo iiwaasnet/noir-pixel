@@ -2,8 +2,9 @@
     <div class="columns-container">
         <div class="column-left">
             <img ng-src="{{::ctrl.photo.image.previewUrl}}" />
-            <div id="exif-tags">
-                
+            <div ng-repeat="tag in ctrl.photo.exif" class="exif-tag">
+                <span class="label" ng-bind="tag.label"></span>
+                <span class="value" ng-bind="tag.value"></span>
             </div>
         </div>
         <div class="column-center">

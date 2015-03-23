@@ -145,10 +145,14 @@ namespace Api.App.Images
                                   CameraModel = photo.Exif.CameraModel,
                                   Copyright = photo.Exif.Copyright,
                                   DateTimeTaken = photo.Exif.DateTimeTaken,
-                                  ExposureTime = photo.Exif.ExposureTime,
+                                  ExposureTime = (ExposureTimeLessThanSecond(photo.Exif))
+                                                     ? null
+                                                     : photo.Exif.ExposureTime,
                                   FStop = photo.Exif.FStop,
                                   FocalLength = photo.Exif.FocalLength,
-                                  ShutterSpeed = photo.Exif.ShutterSpeed,
+                                  ShutterSpeed = (ExposureTimeLessThanSecond(photo.Exif))
+                                                     ? photo.Exif.ShutterSpeed
+                                                     : null,
                                   Iso = photo.Exif.Iso,
                                   LensModel = photo.Exif.LensModel
                               },
