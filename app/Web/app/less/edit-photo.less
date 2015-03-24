@@ -1,36 +1,62 @@
 ﻿#edit-photo {
-    .column-left {
-        padding: 1.5em 2em;
-
-        .exif-tag {
-            .label,
-            .value {
-                width: 49%;
-                text-align: right;
-                padding: 0 0.7em 0 0;
-                display: inline-block;
+    .top {
+        &.columns-container {
+            .column-left {
+                padding: 1.5em 2em;
+                -ms-flex: 0 0 auto;
+                flex: 0 0 auto;
             }
 
-            .value {
+            .column-center {
+                padding: 1.5em 2em 1.5em 6em;
                 text-align: left;
-                padding: 0;
+                -ms-flex: 1 0 auto;
+                flex: 1 0 auto;
+
+                input[type=text],
+                textarea {
+                    width: 70%;
+                }
+
+                textarea {
+                    height: 5em;
+                    max-height: 10em;
+                    resize: vertical;
+                }
             }
         }
     }
 
-    .column-center {
-        padding: 1.5em 2em 1.5em 6em;
-        text-align: left;
+    .middle {
+        &.columns-container {
+            -webkit-box-pack: start;
+            -moz-box-pack: start;
+            -webkit-justify-content: flex-start;
+            -ms-flex-pack: start;
+            justify-content: flex-start;
 
-        input[type=text],
-        textarea {
-            width: 70%;
-        }
+            .column-left {
+                padding: 5em 2em 0;
+                -ms-flex: 0 0 auto;
+                flex: 0 0 auto;
 
-        textarea {
-            height: 5em;
-            max-height: 10em;
-            resize: vertical;
+
+                .exif-tag {
+                    padding: 0.3em 0;
+                    .label,
+                    .value {
+                        width: 10em;
+                        text-align: right;
+                        padding: 0 0.7em 0 0;
+                        display: inline-block;
+                    }
+
+                    .value {
+                        text-align: left;
+                        padding: 0;
+                    }
+                }
+            }
         }
     }
 }
