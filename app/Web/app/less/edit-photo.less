@@ -1,4 +1,6 @@
-﻿#edit-photo {
+﻿@import (reference) "colors.less";
+
+#edit-photo {
     .top {
         &.columns-container {
             .column-left {
@@ -43,17 +45,42 @@
 
                 .exif-tag {
                     padding: 0.3em 0;
+
+                    &:hover {
+                        outline: dashed 1px @plantation;
+                        .value {
+                            color: @jet-stream;
+                            cursor: text;
+                            text-decoration: underline;
+
+                            -moz-text-decoration-line: underline;
+                            text-decoration-line: underline;
+                            -moz-text-decoration-style: dotted;
+                            text-decoration-style: dotted;
+                            -moz-text-decoration-color: @jet-stream;
+                            text-decoration-color: @jet-stream;
+                        }
+                    }
+
                     .label,
                     .value {
                         width: 10em;
                         text-align: right;
                         padding: 0 0.7em 0 0;
                         display: inline-block;
+                        cursor: default;
                     }
 
                     .value {
                         text-align: left;
                         padding: 0;
+                    }
+
+                    &.empty {
+                        .label,
+                        .value {
+                            opacity: 0.4;
+                        }
                     }
                 }
             }

@@ -16,9 +16,9 @@
     </div>
     <div class="columns-container middle">
         <div class="column-left">
-            <div ng-repeat="tag in ctrl.photo.exif" class="exif-tag">
+            <div ng-repeat="tag in ctrl.photo.exif" class="exif-tag" ng-class="{empty: !tag.value}">
                 <span class="label" ng-bind="tag.label"></span>
-                <span class="value" ng-bind="tag.value"></span>
+                <span class="value" ng-bind="tag.value || '...'"></span>
             </div>
         </div>
         <div class="column-center">
