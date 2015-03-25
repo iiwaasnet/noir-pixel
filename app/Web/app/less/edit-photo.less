@@ -45,14 +45,15 @@
 
                 .exif-tag {
                     padding: 0.3em 0;
+                    cursor: default;
 
                     &:hover {
                         outline: dashed 1px @plantation;
+
                         .value {
                             color: @jet-stream;
                             cursor: text;
                             text-decoration: underline;
-
                             -moz-text-decoration-line: underline;
                             text-decoration-line: underline;
                             -moz-text-decoration-style: dotted;
@@ -64,22 +65,22 @@
 
                     .label,
                     .value {
-                        width: 10em;
+                        width: 9em;
                         text-align: right;
                         padding: 0 0.7em 0 0;
                         display: inline-block;
-                        cursor: default;
                     }
 
                     .value {
+                        width: 11em;
                         text-align: left;
-                        padding: 0;
+                        display: inline-block;
                     }
 
                     &.empty {
                         .label,
                         .value {
-                            opacity: 0.4;
+                            opacity: 0.3;
                         }
                     }
                 }

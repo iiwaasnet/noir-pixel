@@ -304,6 +304,51 @@ namespace Resources.Client {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to [ add ].
+        /// </summary>
+        public static string Exif_Empty {
+            get {
+                return ResourceManager.GetString("Exif_Empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}  s.
+        /// </summary>
+        public static string Format_Exif_ExposureTime {
+            get {
+                return ResourceManager.GetString("Format_Exif_ExposureTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}  mm.
+        /// </summary>
+        public static string Format_Exif_FocalLength {
+            get {
+                return ResourceManager.GetString("Format_Exif_FocalLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to f/{0}.
+        /// </summary>
+        public static string Format_Exif_FStop {
+            get {
+                return ResourceManager.GetString("Format_Exif_FStop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}  s.
+        /// </summary>
+        public static string Format_Exif_ShutterSpeed {
+            get {
+                return ResourceManager.GetString("Format_Exif_ShutterSpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to City.
         /// </summary>
         public static string Hint_City {
@@ -421,7 +466,7 @@ namespace Resources.Client {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to F-stop.
+        ///   Looks up a localized string similar to Aperture.
         /// </summary>
         public static string Label_Exif_FStop {
             get {

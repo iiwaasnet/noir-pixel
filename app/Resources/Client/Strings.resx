@@ -298,7 +298,7 @@
     <value>Focal length</value>
   </data>
   <data name="Label_Exif_FStop" xml:space="preserve">
-    <value>F-stop</value>
+    <value>Aperture</value>
   </data>
   <data name="Label_Exif_Iso" xml:space="preserve">
     <value>ISO</value>
@@ -308,5 +308,20 @@
   </data>
   <data name="Label_Exif_ShutterSpeed" xml:space="preserve">
     <value>Shutter speed</value>
+  </data>
+  <data name="Format_Exif_ExposureTime" xml:space="preserve">
+    <value>{0}  s</value>
+  </data>
+  <data name="Format_Exif_FocalLength" xml:space="preserve">
+    <value>{0}  mm</value>
+  </data>
+  <data name="Format_Exif_FStop" xml:space="preserve">
+    <value>f/{0}</value>
+  </data>
+  <data name="Format_Exif_ShutterSpeed" xml:space="preserve">
+    <value>{0}  s</value>
+  </data>
+  <data name="Exif_Empty" xml:space="preserve">
+    <value>[ add ]</value>
   </data>
 </root>
