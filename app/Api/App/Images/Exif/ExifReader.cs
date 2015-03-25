@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using Api.App.Framework;
 using Diagnostics;
 using ExifLib;
@@ -27,9 +28,25 @@ namespace Api.App.Images.Exif
                 exifRetrieved = exifRetrieved | (exifData.ExposureTime = SafeReadExifTag(ReadExposureTime, exifReader)) != null;
                 exifRetrieved = exifRetrieved | (exifData.CameraModel = SafeReadExifTag(ReadCameraModel, exifReader)) != null;
                 exifRetrieved = exifRetrieved | (exifData.Copyright = SafeReadExifTag(ReadCopyright, exifReader)) != null;
+                exifRetrieved = exifRetrieved | (exifData.DateTimeTaken = SafeReadExifTag(ReadDateTaken, exifReader)) != null;
             }
 
             return exifRetrieved ? exifData : null;
+        }
+
+        private DateTime? ReadDateTaken(ExifLib.ExifReader exifReader)
+        {
+            string value;
+            exifReader.GetTagValue(ExifTags.DateTime, out value);
+            DateTime dateTime;
+
+            if (!string.IsNullOrWhiteSpace(value)
+                && DateTime.TryParseExact(value, "yyyy':'MM':'dd HH':'mm':'ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))
+            {
+                return dateTime;
+            }
+
+            return null;
         }
 
         private string ReadCopyright(ExifLib.ExifReader exifReader)
