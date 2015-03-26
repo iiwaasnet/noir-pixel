@@ -1,0 +1,63 @@
+﻿@import (reference) "colors.less";
+
+np-exif-edit {
+    .exif-tag {
+        padding: 0.3em 0;
+        cursor: default;
+
+        &:hover {
+            outline: dashed 1px @plantation;
+
+            .value {
+                color: @jet-stream;
+                cursor: text;
+                text-decoration: underline;
+                -moz-text-decoration-line: underline;
+                text-decoration-line: underline;
+                -moz-text-decoration-style: dotted;
+                text-decoration-style: dotted;
+                -moz-text-decoration-color: @jet-stream;
+                text-decoration-color: @jet-stream;
+            }
+        }
+
+        .label,
+        .value {
+            width: 9em;
+            text-align: right;
+            padding: 0 0.7em 0 0;
+            display: inline-block;
+        }
+
+        .value {
+            width: 11em;
+            text-align: left;
+            display: inline-block;
+        }
+
+        &.empty {
+            .label,
+            .value {
+                opacity: 0.3;
+            }
+        }
+
+
+
+        input {
+            width: 11em;
+            font-size: 100%;
+            border: none;
+            text-decoration: none;
+            -moz-text-decoration-style: none;
+            text-decoration-style: none;
+            padding: 0;
+            margin: 0;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            font-weight: 200;
+            outline: none;
+        }
+    }
+}

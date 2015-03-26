@@ -33,7 +33,8 @@
         function getPhotoForEditSuccess(response) {
             Overlay.open('app/src/user-home/darkroom/edit-photo.html',
                 'EditPhotoController as ctrl',
-                { photo: response.data });
+                { photo: response.data },
+                { closeByEscape: false });
         }
 
         function getPhotoForEditError(error) {

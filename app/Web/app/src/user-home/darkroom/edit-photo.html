@@ -16,10 +16,8 @@
     </div>
     <div class="columns-container middle">
         <div class="column-left">
-            <div ng-repeat="tag in ctrl.photo.exif" class="exif-tag" ng-class="{empty: tag.empty}">
-                <span class="label" ng-bind="tag.label"></span>
-                <span class="value" ng-bind="tag.value || '...'"></span>
-            </div>
+            <np-exif-edit ng-repeat="tag in ctrl.photo.exif">
+            </np-exif-edit>
         </div>
         <div class="column-center">
         </div>

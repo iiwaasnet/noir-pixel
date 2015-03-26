@@ -12,8 +12,8 @@
         srv.open = open;
         srv.close = close;
 
-        function open(templateUrl, controller, locals) {
-            currentOverlay = ngDialog.open({
+        function open(templateUrl, controller, locals, options) {
+            options = angular.extend({
                 template: templateUrl,
                 cache: true,
                 controller: controller,
@@ -21,7 +21,9 @@
                 showClose: true,
                 locals: locals,
                 closeByDocument: false
-            });
+            }, options);
+
+            currentOverlay = ngDialog.open(options);
         }
 
         function close() {
