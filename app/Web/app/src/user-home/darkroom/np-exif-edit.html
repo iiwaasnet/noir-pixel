@@ -1,5 +1,10 @@
-﻿<div exif-tag="tag" class="exif-tag" ng-class="{empty: tag.empty && !edit}">
+﻿<div exif-tag="tag" class="exif-tag" ng-class="{empty: !tag.editValue && !edit}">
     <span class="label" ng-bind="tag.label"></span>
-    <span ng-if="!edit" class="value" ng-bind="tag.value || '...'"></span>
-    <input np-autofocus ng-if="edit" type="text" ng-model="tag.value" ng-keydown="keydown($event)"/>
+    <span ng-if="!edit" class="value" ng-bind="tag.displayValue"></span>
+    <input ng-if="edit"
+           type="text"
+           np-autofocus
+           ng-model="tag.editValue"
+           placeholder="{{tag.placeholder}}"
+           ng-keydown="keydown($event)" />
 </div>

@@ -304,15 +304,6 @@ namespace Resources.Client {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [ add ].
-        /// </summary>
-        public static string Exif_Empty {
-            get {
-                return ResourceManager.GetString("Exif_Empty", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to {0}  s.
         /// </summary>
         public static string Format_Exif_ExposureTime {
@@ -372,6 +363,87 @@ namespace Resources.Client {
         public static string Hint_EmailAddress {
             get {
                 return ResourceManager.GetString("Hint_EmailAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add camera model.
+        /// </summary>
+        public static string Hint_Exif_CameraModel {
+            get {
+                return ResourceManager.GetString("Hint_Exif_CameraModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add copyright.
+        /// </summary>
+        public static string Hint_Exif_Copyright {
+            get {
+                return ResourceManager.GetString("Hint_Exif_Copyright", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to YYYY-MM-DD.
+        /// </summary>
+        public static string Hint_Exif_DateTimeTaken {
+            get {
+                return ResourceManager.GetString("Hint_Exif_DateTimeTaken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exposure time (s).
+        /// </summary>
+        public static string Hint_Exif_ExposureTime {
+            get {
+                return ResourceManager.GetString("Hint_Exif_ExposureTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Focal length (mm).
+        /// </summary>
+        public static string Hint_Exif_FocalLength {
+            get {
+                return ResourceManager.GetString("Hint_Exif_FocalLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add F-number.
+        /// </summary>
+        public static string Hint_Exif_FStop {
+            get {
+                return ResourceManager.GetString("Hint_Exif_FStop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add ISO number.
+        /// </summary>
+        public static string Hint_Exif_Iso {
+            get {
+                return ResourceManager.GetString("Hint_Exif_Iso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add lens model.
+        /// </summary>
+        public static string Hint_Exif_LensModel {
+            get {
+                return ResourceManager.GetString("Hint_Exif_LensModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shutter speed (1/s).
+        /// </summary>
+        public static string Hint_Exif_ShutterSpeed {
+            get {
+                return ResourceManager.GetString("Hint_Exif_ShutterSpeed", resourceCulture);
             }
         }
         

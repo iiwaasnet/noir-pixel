@@ -28,6 +28,8 @@
 
             function keydown(event) {
                 if (event.which == 13 || event.which == 27 || event.which == 9) {
+                    //if (event.which == 13) {
+                    //}
                     cancelEdit();
                 }
             }

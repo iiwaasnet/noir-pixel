@@ -11,22 +11,29 @@
             labelPrefix = 'Label_Exif_',
             formatPrefix = 'Format_Exif_',
             photoDate = 'dateTimeTaken',
-            emptyExifValue = 'Exif_Empty';
+            placeholderPrefix = 'Hint_Exif_';
         photo.exif = transformExifData(photo.exif);
         ctrl.photo = photo;
 
         function transformExifData(exifData) {
-            var exif = [];
-            Object.keys(exifData).forEach(function(key) {
-                exif.push({
+            var exifTags = [];
+            Object.keys(exifData).forEach(function (key) {
+                var exif = {
                     name: key,
                     label: getExifTagLabel(key),
-                    value: format(key, exifData[key]),
-                    empty: !exifData[key]
-                });
+                    displayValue: getExifDisplayValue(key, exifData[key]),
+                    editValue: getExifTagEditValue(key, exifData[key]),
+                    placeholder: getExifTagPlaceholder(key)
+                };
+
+                exifTags.push(exif);
             });
 
-            return exif;
+            return exifTags;
+        }
+
+        function getExifTagPlaceholder(tagName) {
+            return getExifString(placeholderPrefix, tagName);
         }
 
         function getExifTagLabel(exifTag) {
@@ -37,12 +44,17 @@
             return getExifString(formatPrefix, exifTag);
         }
 
-        function getExifString(prefix, exifTag) {
-            var labelName = prefix + exifTag.capitalize();
-            return Strings.getLocalizedString(labelName);
+
+        function getExifTagEditValue(tagName, tagValue) {
+            if (tagValue && tagName === photoDate) {
+                var formatString = getExifTagFormat(tagName);
+
+                return Moment(tagValue).format(formatString || 'YYYY-MM-DD');
+            }
+            return tagValue;
         }
 
-        function format(tagName, tagValue) {
+        function getExifDisplayValue(tagName, tagValue) {
             if (tagValue) {
                 var formatString = getExifTagFormat(tagName);
 
@@ -53,8 +65,13 @@
                     return formatString.format(tagValue);
                 }
             }
-            tagValue = tagValue || Strings.getLocalizedString(emptyExifValue);
+            tagValue = tagValue || getExifTagPlaceholder(tagName);
             return tagValue;
+        }
+
+        function getExifString(prefix, exifTag) {
+            var labelName = prefix + exifTag.capitalize();
+            return Strings.getLocalizedString(labelName);
         }
     }
 })();

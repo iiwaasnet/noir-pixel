@@ -321,7 +321,31 @@
   <data name="Format_Exif_ShutterSpeed" xml:space="preserve">
     <value>{0}  s</value>
   </data>
-  <data name="Exif_Empty" xml:space="preserve">
-    <value>[ add ]</value>
+  <data name="Hint_Exif_CameraModel" xml:space="preserve">
+    <value>Add camera model</value>
+  </data>
+  <data name="Hint_Exif_Copyright" xml:space="preserve">
+    <value>Add copyright</value>
+  </data>
+  <data name="Hint_Exif_DateTimeTaken" xml:space="preserve">
+    <value>YYYY-MM-DD</value>
+  </data>
+  <data name="Hint_Exif_ExposureTime" xml:space="preserve">
+    <value>Exposure time (s)</value>
+  </data>
+  <data name="Hint_Exif_FocalLength" xml:space="preserve">
+    <value>Focal length (mm)</value>
+  </data>
+  <data name="Hint_Exif_FStop" xml:space="preserve">
+    <value>Add F-number</value>
+  </data>
+  <data name="Hint_Exif_Iso" xml:space="preserve">
+    <value>Add ISO number</value>
+  </data>
+  <data name="Hint_Exif_LensModel" xml:space="preserve">
+    <value>Add lens model</value>
+  </data>
+  <data name="Hint_Exif_ShutterSpeed" xml:space="preserve">
+    <value>Shutter speed (1/s)</value>
   </data>
 </root>
