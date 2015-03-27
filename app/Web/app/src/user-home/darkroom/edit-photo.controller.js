@@ -4,9 +4,9 @@
     angular.module('np.user-home')
         .controller('EditPhotoController', editPhotoController);
 
-    editPhotoController.$inject = ['Moment', 'Strings', 'photo'];
+    editPhotoController.$inject = ['$scope', 'Moment', 'Strings', 'photo'];
 
-    function editPhotoController(Moment, Strings, photo) {
+    function editPhotoController($scope, Moment, Strings, photo) {
         var ctrl = this,
             labelPrefix = 'Label_Exif_',
             formatPrefix = 'Format_Exif_',
@@ -17,7 +17,7 @@
 
         function transformExifData(exifData) {
             var exifTags = [];
-            Object.keys(exifData).forEach(function (key) {
+            Object.keys(exifData).forEach(function(key) {
                 var exif = {
                     name: key,
                     label: getExifTagLabel(key),
@@ -27,9 +27,14 @@
                 };
 
                 exifTags.push(exif);
+                $scope.$watch(function() { return exif.editValue; }, function(v) {setDisplayValue(exif, key, v);});
             });
 
             return exifTags;
+        }
+
+        function setDisplayValue(tag, tagName, value) {
+            tag.displayValue = getExifDisplayValue(tagName, value);
         }
 
         function getExifTagPlaceholder(tagName) {
