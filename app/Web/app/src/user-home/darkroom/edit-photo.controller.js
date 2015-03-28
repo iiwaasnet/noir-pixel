@@ -27,7 +27,7 @@
                 };
 
                 exifTags.push(exif);
-                $scope.$watch(function() { return exif.editValue; }, function(v) {setDisplayValue(exif, key, v);});
+                $scope.$watch(function() { return exif.editValue; }, function(v) { setDisplayValue(exif, key, v); });
             });
 
             return exifTags;
@@ -53,8 +53,11 @@
         function getExifTagEditValue(tagName, tagValue) {
             if (tagValue && tagName === photoDate) {
                 var formatString = getExifTagFormat(tagName);
+                var date = Moment(tagValue);
 
-                return Moment(tagValue).format(formatString || 'YYYY-MM-DD');
+                return (date.isValid())
+                    ? date.format(formatString || 'YYYY-MM-DD')
+                    : undefined;
             }
             return tagValue;
         }
@@ -64,7 +67,12 @@
                 var formatString = getExifTagFormat(tagName);
 
                 if (tagName === photoDate) {
-                    return Moment(tagValue).format(formatString || 'YYYY-MM-DD');
+                    var date = Moment(tagValue);
+
+                    return (date.isValid())
+                        ? date.format(formatString || 'YYYY-MM-DD')
+                        : undefined;
+
                 }
                 if (formatString) {
                     return formatString.format(tagValue);
