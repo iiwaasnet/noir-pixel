@@ -6,8 +6,6 @@ namespace Api.App.Images.Entities
     public class ExifData
     {
         [BsonIgnoreIfNull]
-        public string Copyright { get; set; }
-        [BsonIgnoreIfNull]
         public DateTime? DateTimeTaken { get; set; }
         [BsonIgnoreIfNull]
         public double? ExposureTime { get; set; }

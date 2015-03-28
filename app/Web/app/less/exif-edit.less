@@ -1,15 +1,19 @@
 ﻿@import (reference) "colors.less";
+@import (reference) "mixins.less";
 
 np-exif-edit {
     .exif-tag {
         padding: 0.3em 0;
         cursor: default;
 
+        &.edit {
+            outline: dashed 1px @plantation;
+        }
+
         &:hover {
             outline: dashed 1px @plantation;
 
             .value {
-                color: @jet-stream;
                 cursor: text;
                 text-decoration: underline;
                 -moz-text-decoration-line: underline;
@@ -21,18 +25,23 @@ np-exif-edit {
             }
         }
 
-        .label,
-        .value {
+        .label {
             width: 9em;
             text-align: right;
             padding: 0 0.7em 0 0;
+            overflow: hidden;
             display: inline-block;
+            height: 100%;
+            vertical-align: middle;
         }
 
         .value {
             width: 11em;
             text-align: left;
+            .cut-text(11em);
             display: inline-block;
+            height: 100%;
+            vertical-align: middle;
         }
 
         &.empty {
@@ -43,7 +52,6 @@ np-exif-edit {
         }
 
         input {
-            resize: horizontal;
             width: 11em;
             font-size: 100%;
             border: none;
@@ -57,6 +65,8 @@ np-exif-edit {
             box-sizing: border-box;
             font-weight: 200;
             outline: none;
+            height: 100%;
+            vertical-align: middle;
         }
     }
 }

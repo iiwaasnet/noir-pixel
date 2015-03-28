@@ -1,4 +1,4 @@
-﻿<div exif-tag="tag" class="exif-tag" ng-class="{empty: !tag.editValue && !edit}">
+﻿<div exif-tag="tag" class="exif-tag" ng-class="{empty: !tag.editValue && !edit, edit: edit}">
     <span class="label" ng-bind="tag.label"></span>
     <span ng-if="!edit" class="value" ng-bind="tag.displayValue"></span>
     <input ng-if="edit"

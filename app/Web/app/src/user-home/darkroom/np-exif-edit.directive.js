@@ -4,14 +4,15 @@
     angular.module('np.user-home')
         .directive('npExifEdit', exifEdit);
 
-    exifEdit.$inject = ['$document'];
+    exifEdit.$inject = ['$document', '$rootScope'];
 
-    function exifEdit($document) {
+    function exifEdit($document, $rootScope) {
         var dir = {
             restrict: 'E',
             link: link,
             templateUrl: '/app/src/user-home/darkroom/np-exif-edit.html'
         };
+        var CANCEL_EDIT = 'np.exif-edit.cancel';
 
         return dir;
 
@@ -20,31 +21,39 @@
             element.on('$destroy', cleanup);
             element.on('click', click);
             $document.on('click', cancelEdit);
+            var unsubscribe = $rootScope.$on(CANCEL_EDIT, cancelEdit);
 
             function click(e) {
                 e.stopPropagation();
+
+                $rootScope.$emit(CANCEL_EDIT);
                 editable(true);
             }
 
             function keydown(event) {
+                event.stopPropagation();
+
                 if (event.which == 13 || event.which == 27 || event.which == 9) {
-                    //if (event.which == 13) {
-                    //}
                     cancelEdit();
                 }
             }
 
             function editable(yes) {
-                scope.$evalAsync(function () { scope.edit = yes; });
+                scope.$evalAsync(function () {
+                    scope.edit = yes;
+                });
             }
 
             function cancelEdit() {
-                editable(false);
+                if (scope.edit) {
+                    editable(false);
+                }
             }
 
             function cleanup() {
                 element.off('click', click);
                 $document.off('click', cancelEdit);
+                unsubscribe && unsubscribe();
             }
         }
     }

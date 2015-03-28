@@ -143,7 +143,6 @@ namespace Api.App.Images
                        Exif = new ExifData
                               {
                                   CameraModel = photo.Exif.CameraModel,
-                                  Copyright = photo.Exif.Copyright,
                                   DateTimeTaken = photo.Exif.DateTimeTaken,
                                   ExposureTime = (ExposureTimeLessThanSecond(photo.Exif))
                                                      ? null

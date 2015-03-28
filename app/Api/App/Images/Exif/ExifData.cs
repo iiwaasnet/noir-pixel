@@ -4,7 +4,6 @@ namespace Api.App.Images.Exif
 {
     public class ExifData
     {
-        public string Copyright { get; set; }
         public DateTime? DateTimeTaken { get; set; }
         public double? ExposureTime { get; set; }
         public ushort? Iso { get; set; }

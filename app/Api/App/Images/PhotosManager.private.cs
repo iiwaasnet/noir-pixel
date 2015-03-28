@@ -49,7 +49,6 @@ namespace Api.App.Images
                            Iso = data.Iso,
                            ShutterSpeed = data.ShutterSpeed,
                            CameraModel = data.CameraModel,
-                           Copyright = data.Copyright,
                            DateTimeTaken = data.DateTimeTaken,
                            ExposureTime = data.ExposureTime,
                            FStop = data.FStop,

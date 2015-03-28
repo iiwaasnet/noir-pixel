@@ -285,9 +285,6 @@
   <data name="Label_Exif_CameraModel" xml:space="preserve">
     <value>Camera</value>
   </data>
-  <data name="Label_Exif_Copyright" xml:space="preserve">
-    <value>Copyright</value>
-  </data>
   <data name="Label_Exif_DateTimeTaken" xml:space="preserve">
     <value>Date taken</value>
   </data>
@@ -323,9 +320,6 @@
   </data>
   <data name="Hint_Exif_CameraModel" xml:space="preserve">
     <value>Add camera model</value>
-  </data>
-  <data name="Hint_Exif_Copyright" xml:space="preserve">
-    <value>Add copyright</value>
   </data>
   <data name="Hint_Exif_DateTimeTaken" xml:space="preserve">
     <value>YYYY-MM-DD</value>

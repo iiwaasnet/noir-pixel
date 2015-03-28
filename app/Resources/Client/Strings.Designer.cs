@@ -376,15 +376,6 @@ namespace Resources.Client {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add copyright.
-        /// </summary>
-        public static string Hint_Exif_Copyright {
-            get {
-                return ResourceManager.GetString("Hint_Exif_Copyright", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to YYYY-MM-DD.
         /// </summary>
         public static string Hint_Exif_DateTimeTaken {
@@ -498,15 +489,6 @@ namespace Resources.Client {
         public static string Label_Exif_CameraModel {
             get {
                 return ResourceManager.GetString("Label_Exif_CameraModel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Copyright.
-        /// </summary>
-        public static string Label_Exif_Copyright {
-            get {
-                return ResourceManager.GetString("Label_Exif_Copyright", resourceCulture);
             }
         }
         

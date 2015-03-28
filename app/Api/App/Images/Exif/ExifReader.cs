@@ -27,7 +27,6 @@ namespace Api.App.Images.Exif
                 exifRetrieved = exifRetrieved | (exifData.FStop = SafeReadExifTag(ReadFStop, exifReader)) != null;
                 exifRetrieved = exifRetrieved | (exifData.ExposureTime = SafeReadExifTag(ReadExposureTime, exifReader)) != null;
                 exifRetrieved = exifRetrieved | (exifData.CameraModel = SafeReadExifTag(ReadCameraModel, exifReader)) != null;
-                exifRetrieved = exifRetrieved | (exifData.Copyright = SafeReadExifTag(ReadCopyright, exifReader)) != null;
                 exifRetrieved = exifRetrieved | (exifData.DateTimeTaken = SafeReadExifTag(ReadDateTaken, exifReader)) != null;
             }
 
@@ -47,14 +46,6 @@ namespace Api.App.Images.Exif
             }
 
             return null;
-        }
-
-        private string ReadCopyright(ExifLib.ExifReader exifReader)
-        {
-            string value;
-            return exifReader.GetTagValue(ExifTags.Copyright, out value)
-                       ? value
-                       : null;
         }
 
         private string ReadCameraModel(ExifLib.ExifReader exifReader)
