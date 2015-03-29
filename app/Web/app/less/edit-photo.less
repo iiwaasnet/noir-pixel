@@ -46,8 +46,8 @@
             }
 
             .column-center {
-               margin: @top-section-offset 0 0 4em;
-               text-align: left;
+                margin: @top-section-offset 0 0 4em;
+                text-align: left;
 
                 .tags {
                     .add-tag {
@@ -57,6 +57,24 @@
                         min-width: 5em;
                         width: 5em;
                         max-width: 15em;
+                    }
+
+                    .tag {
+                        text-align: center;
+                        padding: 0.22em 1em;
+                        margin: 0.3em;
+                        border: solid 1px @plantation;
+                        border-radius: 15px;
+                        background-color: @rangoon-green;
+                        color: @persian-green;
+                        display: inline-block;
+                        cursor: pointer;
+
+                        &.selected {
+                            background-color: @persian-green;
+                            font-weight: 600;
+                            color: @mine-shaft;
+                        }
                     }
                 }
             }
