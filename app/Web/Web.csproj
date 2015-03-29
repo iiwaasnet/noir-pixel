@@ -465,6 +465,7 @@
     <Content Include="app\src\roles\roles.module.js" />
     <Content Include="app\src\roles\roles.service.js" />
     <Content Include="app\src\ui-elements\autofocus\np-autofocus.directive.js" />
+    <Content Include="app\src\ui-elements\autowidth\np-autowidth.js" />
     <Content Include="app\src\ui-elements\fill-height\np-fill-height.directive.js" />
     <Content Include="app\src\ui-elements\img-crop\img-crop.html" />
     <Content Include="app\src\ui-elements\inplace\inplace-buttons.html" />

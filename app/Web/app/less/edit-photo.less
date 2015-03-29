@@ -29,6 +29,8 @@
         }
     }
 
+    @top-section-offset: 5em;
+
     .middle {
         &.columns-container {
             -webkit-box-pack: start;
@@ -38,9 +40,25 @@
             justify-content: flex-start;
 
             .column-left {
-                margin: 5em 0 0;
+                margin: @top-section-offset 0 0;
                 -ms-flex: 0 0 auto;
                 flex: 0 0 auto;
+            }
+
+            .column-center {
+               margin: @top-section-offset 0 0 4em;
+               text-align: left;
+
+                .tags {
+                    .add-tag {
+                        font-size: 100%;
+                        border: dashed 1px @plantation;
+                        border-radius: 15px;
+                        min-width: 5em;
+                        width: 5em;
+                        max-width: 15em;
+                    }
+                }
             }
         }
     }
