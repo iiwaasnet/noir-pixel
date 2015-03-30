@@ -14,6 +14,7 @@
             placeholderPrefix = 'Hint_Exif_';
         photo.exif = transformExifData(photo.exif);
         ctrl.photo = photo;
+       
 
         function transformExifData(exifData) {
             var exifTags = [];

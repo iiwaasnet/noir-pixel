@@ -342,4 +342,7 @@
   <data name="Hint_Exif_ShutterSpeed" xml:space="preserve">
     <value>Shutter speed (1/s)</value>
   </data>
+  <data name="Hint_AddTag" xml:space="preserve">
+    <value>Add tag</value>
+  </data>
 </root>

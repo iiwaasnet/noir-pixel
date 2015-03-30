@@ -20,15 +20,16 @@
         </div>
         <div class="column-center">
             <div class="tags">
-                <input type="text" class="add-tag" np-autowidth placeholder="Add tag"/>
-                <span class="tag selected">B&amp;W</span>
-                <span class="tag selected">Nature</span>
-                <span class="tag">Woods</span>
-                <span class="tag selected">Bu</span>
+                <input type="text" class="add-tag" np-autowidth placeholder="{{'Hint_AddTag' | npi18n}}" />
+                <span class="tag" 
+                      ng-repeat="tag in ctrl.tags" 
+                      ng-bind="tag.tag" 
+                      np-tag-edit
+                      selected="tag.selected"></span>
             </div>
         </div>
     </div>
     <div class="bottom">
-        <input type="button" value="Save"/>
+        <input type="button" np-i18n="Btn_Save" />
     </div>
 </div>
