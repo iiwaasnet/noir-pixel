@@ -20,9 +20,14 @@
         </div>
         <div class="column-center">
             <div class="tags">
-                <input type="text" class="add-tag" np-autowidth placeholder="{{'Hint_AddTag' | npi18n}}" />
+                <input type="text"
+                       np-autowidth
+                       np-tag-add
+                       tags="ctrl.photo.tags"
+                       class="add-tag"
+                       placeholder="{{'Hint_AddTag' | npi18n}}" />
                 <span class="tag" 
-                      ng-repeat="tag in ctrl.tags" 
+                      ng-repeat="tag in ctrl.photo.tags" 
                       ng-bind="tag.tag" 
                       np-tag-edit
                       selected="tag.selected"></span>

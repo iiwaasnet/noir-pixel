@@ -33,13 +33,15 @@
             function keydown(event) {
                 event.stopPropagation();
 
-                if (event.which == 13 || event.which == 27 || event.which == 9) {
+                if (event.which == KeyEvent.DOM_VK_RETURN
+                    || event.which == KeyEvent.DOM_VK_ESCAPE
+                    || event.which == KeyEvent.DOM_VK_TAB) {
                     cancelEdit();
                 }
             }
 
             function editable(yes) {
-                scope.$evalAsync(function () {
+                scope.$evalAsync(function() {
                     scope.edit = yes;
                 });
             }

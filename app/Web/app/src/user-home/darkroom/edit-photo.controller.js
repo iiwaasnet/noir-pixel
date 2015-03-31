@@ -13,8 +13,20 @@
             photoDate = 'dateTimeTaken',
             placeholderPrefix = 'Hint_Exif_';
         photo.exif = transformExifData(photo.exif);
+        photo.tags = transformTags(photo.tags);
         ctrl.photo = photo;
-       
+
+        function transformTags(photoTags) {
+            var tags = [];
+            angular.forEach(photoTags, function(tag) {
+                tags.push({
+                    tag: tag,
+                    selected: true
+                });
+            });
+
+            return tags;
+        }
 
         function transformExifData(exifData) {
             var exifTags = [];

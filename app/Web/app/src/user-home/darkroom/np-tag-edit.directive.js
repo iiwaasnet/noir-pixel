@@ -18,11 +18,14 @@
         function link(scope, element) {
             updateState();
             element.on('$destroy', cleanup);
-            element.on('click', updateState);
+            element.on('click', invertState);
+
+            function invertState() {
+                scope.selected = !scope.selected;
+                updateState();
+            }
 
             function updateState() {
-                debugger;
-                scope.selected = !scope.selected;
                 if (scope.selected) {
                     element.addClass('selected');
                 } else {
