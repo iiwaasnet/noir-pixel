@@ -34,7 +34,7 @@
             }
 
             function cleanup() {
-                element.off('click', click);
+                element.off('click', invertState);
             }
         }
     }
