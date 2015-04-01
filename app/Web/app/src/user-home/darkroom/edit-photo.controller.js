@@ -16,6 +16,22 @@
         photo.tags = transformTags(photo.tags);
         ctrl.photo = photo;
 
+        activate();
+
+        function activate() {
+            $scope.$watch(trackTagsChanges, invalidateForm);
+        }
+
+        function trackTagsChanges() {
+            return ctrl.photo.tags.filter(function(t) { return t.selected; }).length;
+        }
+
+        function invalidateForm() {
+            if ($scope.editPhoto) {
+                $scope.editPhoto.$setDirty();
+            }
+        }
+
         function transformTags(photoTags) {
             var tags = [];
             angular.forEach(photoTags, function(tag) {
