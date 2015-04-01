@@ -15,7 +15,7 @@
             <div ng-messages="externalRegister.userName.$error" multiple>
                 <ng-messages-include src="/app/src/auth/error-messages.html"></ng-messages-include>
             </div>
-            <div class="buttons-block clearfix">
+            <div class="buttons-block-left clearfix">
                 <input type="submit" class="default-action" ng-click="ctrl.register()" np-i18n="Btn_Register" ng-disabled="!externalRegister.$valid" />
                 <input type="button" ng-click="ctrl.close()" np-i18n="Btn_Cancel" />
             </div>
