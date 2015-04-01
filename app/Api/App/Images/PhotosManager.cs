@@ -139,6 +139,7 @@ namespace Api.App.Images
 
             return new Photo
                    {
+                       Title = photo.Title,
                        Category = photo.Category,
                        Exif = new ExifData
                               {
@@ -163,7 +164,10 @@ namespace Api.App.Images
                                    PreviewUrl = photo.Preview.Uri,
                                    ThumbnailUrl = photo.Thumbnail.Uri
                                },
-                       Story = photo.Story
+                       Story = photo.Story,
+                       Tags = (photo.Tags != null)
+                                  ? photo.Tags.Select(t => new Tag {Name = t.Name})
+                                  : Enumerable.Empty<Tag>()
                    };
         }
 

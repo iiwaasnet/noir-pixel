@@ -311,6 +311,7 @@
     <Compile Include="App\Images\Entities\MediaData.cs" />
     <Compile Include="App\Images\Entities\PhotoFullViewData.cs" />
     <Compile Include="App\Images\Entities\PhotoStatus.cs" />
+    <Compile Include="App\Images\Entities\Tag.cs" />
     <Compile Include="App\Images\Exif\ExifReader.cs" />
     <Compile Include="App\Images\Exif\ExifData.cs" />
     <Compile Include="App\Images\Exif\IExifReader.cs" />
@@ -331,6 +332,7 @@
     <Compile Include="App\Images\PhotosManager.cs" />
     <Compile Include="App\Images\ProfileImage.cs" />
     <Compile Include="App\Images\ProfileImageManager.cs" />
+    <Compile Include="App\Images\Tag.cs" />
     <Compile Include="App\Media\ChunkInfo.cs" />
     <Compile Include="App\Media\Config\MediaConfiguration.cs" />
     <Compile Include="App\Images\Entities\Photo.cs" />

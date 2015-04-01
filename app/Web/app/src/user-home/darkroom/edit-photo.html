@@ -1,4 +1,4 @@
-﻿<div id="edit-photo">
+﻿<div id="edit-photo" ng-form="editPhoto">
     <div class="columns-container top">
         <div class="column-left">
             <img ng-src="{{::ctrl.photo.image.previewUrl}}" />
@@ -6,11 +6,11 @@
         <div class="column-center">
             <div class="edit-block">
                 <span class="edit-label" np-i18n="Label_Title"></span>
-                <input type="text" np-autofocus />
+                <input type="text" np-autofocus ng-model="ctrl.photo.title"/>
             </div>
             <div class="edit-block">
                 <span class="edit-label" np-i18n="Label_Story"></span>
-                <textarea placeholder="{{'Hint_PhotoStory' | npi18n}}"></textarea>
+                <textarea placeholder="{{'Hint_PhotoStory' | npi18n}}" ng-model="ctrl.photo.story"></textarea>
             </div>
         </div>
     </div>
@@ -34,7 +34,8 @@
             </div>
         </div>
     </div>
-    <div class="bottom">
-        <input type="button" np-i18n="Btn_Save" />
+    <div class="bottom buttons-block-right clearfix">
+        <input type="button" np-i18n="Btn_Cancel" ng-click="closeThisDialog()"/>
+        <input type="button" ng-class="{'default-action': !editPhoto.$pristine}" np-i18n="Btn_Save" />
     </div>
 </div>
