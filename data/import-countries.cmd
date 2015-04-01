@@ -1,1 +1,0 @@
-"C:\Program Files\MongoDB\Server\3.0\bin\mongoimport.exe" -d np -c countries --type json --file countries.json

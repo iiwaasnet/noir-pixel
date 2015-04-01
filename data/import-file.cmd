@@ -1,0 +1,1 @@
+"C:\Program Files\MongoDB\Server\3.0\bin\mongoimport.exe" -d np -c %1 --type json --file %2
