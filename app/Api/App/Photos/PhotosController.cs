@@ -104,6 +104,16 @@ namespace Api.App.Photos
             return Ok(photo);
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("genres")]
+        public async Task<IHttpActionResult> GetPhotoGenres()
+        {
+            var genres = await photosManager.GetPhotoGenres();
+
+            return Ok(genres);
+        }
+
         private IEnumerable<ImageData> MakeAbsoluteUrl(IEnumerable<ImageData> photos)
         {
             foreach (var photo in photos)

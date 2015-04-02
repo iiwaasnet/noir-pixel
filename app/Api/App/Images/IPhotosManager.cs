@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Api.App.Images
 {
@@ -7,5 +9,6 @@ namespace Api.App.Images
         Task<ImageData> SavePhoto(string userName, string fileName);
         Task<PendingPhotos> GetPendingPhotos(string userName, int? offset, int? count);
         Task<Photo> GetPhotoForEdit(string userName, string shortId);
+        Task<IEnumerable<Genre>> GetPhotoGenres();
     }
 }

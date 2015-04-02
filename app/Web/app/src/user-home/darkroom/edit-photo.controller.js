@@ -4,9 +4,9 @@
     angular.module('np.user-home')
         .controller('EditPhotoController', editPhotoController);
 
-    editPhotoController.$inject = ['$scope', 'Moment', 'Strings', 'photo'];
+    editPhotoController.$inject = ['$scope', 'Moment', 'Strings', 'Photos', 'photo'];
 
-    function editPhotoController($scope, Moment, Strings, photo) {
+    function editPhotoController($scope, Moment, Strings, Photos, photo) {
         var ctrl = this,
             labelPrefix = 'Label_Exif_',
             formatPrefix = 'Format_Exif_',
@@ -15,11 +15,19 @@
         photo.exif = transformExifData(photo.exif);
         photo.tags = transformTags(photo.tags);
         ctrl.photo = photo;
+        ctrl.genres = [];
 
         activate();
 
         function activate() {
             $scope.$watch(trackTagsChanges, invalidateForm);
+            Photos.getPhotoGenres().then(assignGenres);
+        }
+
+        function assignGenres(response) {
+            ctrl.genres = (response && response.data)
+                ? response.data
+                : ctrl.genres;
         }
 
         function trackTagsChanges() {

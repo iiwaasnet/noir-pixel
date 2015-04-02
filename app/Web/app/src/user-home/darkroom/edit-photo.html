@@ -6,11 +6,23 @@
         <div class="column-center">
             <div class="edit-block">
                 <span class="edit-label" np-i18n="Label_Title"></span>
-                <input type="text" np-autofocus ng-model="ctrl.photo.title"/>
+                <input type="text" np-autofocus ng-model="ctrl.photo.title" />
             </div>
             <div class="edit-block">
                 <span class="edit-label" np-i18n="Label_Story"></span>
                 <textarea placeholder="{{'Hint_PhotoStory' | npi18n}}" ng-model="ctrl.photo.story"></textarea>
+            </div>
+            <div class="edit-block">
+                <span class="edit-label" np-i18n="Label_Genre"></span>
+                <ui-select ng-model="ctrl.photo.genre"
+                           theme="selectize"
+                           reset-search-input="true">
+                    <ui-select-match placeholder="{{'Hint_Genre' | npi18n}}">{{$select.selected.name}}</ui-select-match>
+                    <ui-select-choices repeat="genre in ctrl.genres | filter: $select.search"
+                                       class="country-option">
+                        <span ng-bind-html="::genre.name | highlight: $select.search"></span>
+                    </ui-select-choices>
+                </ui-select>
             </div>
         </div>
     </div>
@@ -26,16 +38,16 @@
                        tags="ctrl.photo.tags"
                        class="add-tag"
                        placeholder="{{'Hint_AddTag' | npi18n}}" />
-                <span class="tag" 
-                      ng-repeat="tag in ctrl.photo.tags" 
-                      ng-bind="tag.tag" 
+                <span class="tag"
+                      ng-repeat="tag in ctrl.photo.tags"
+                      ng-bind="tag.tag"
                       np-tag-edit
                       selected="tag.selected"></span>
             </div>
         </div>
     </div>
     <div class="bottom buttons-block-right clearfix">
-        <input type="button" np-i18n="Btn_Cancel" ng-click="closeThisDialog()"/>
+        <input type="button" np-i18n="Btn_Cancel" ng-click="closeThisDialog()" />
         <input type="button" ng-class="{'default-action': !editPhoto.$pristine}" np-i18n="Btn_Save" />
     </div>
 </div>

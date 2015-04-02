@@ -16,7 +16,7 @@ namespace Api.App.Images.Entities
         public PhotoStatus Status { get; set; }
 
         [BsonIgnoreIfNull]
-        public int? Category { get; set; }
+        public Genre Genre { get; set; }
 
         public bool PublishedToGallery { get; set; }
         public PhotoFullViewData FullView { get; set; }

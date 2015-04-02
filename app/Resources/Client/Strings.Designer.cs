@@ -457,6 +457,15 @@ namespace Resources.Client {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please, select a Genre.
+        /// </summary>
+        public static string Hint_Genre {
+            get {
+                return ResourceManager.GetString("Hint_Genre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tell a story about this photo.
         /// </summary>
         public static string Hint_PhotoStory {
@@ -570,6 +579,15 @@ namespace Resources.Client {
         public static string Label_FullName {
             get {
                 return ResourceManager.GetString("Label_FullName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Genre.
+        /// </summary>
+        public static string Label_Genre {
+            get {
+                return ResourceManager.GetString("Label_Genre", resourceCulture);
             }
         }
         

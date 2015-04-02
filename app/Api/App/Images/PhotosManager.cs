@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Api.App.Db;
 using Api.App.Db.Extensions;
-using Api.App.Exceptions;
 using Api.App.Framework;
 using Api.App.Images.Config;
 using Api.App.Images.Entities;
@@ -24,7 +24,6 @@ namespace Api.App.Images
         private readonly MediaConfiguration mediaConfig;
         private readonly IImageProcessor imageProcessor;
         private readonly IMongoDatabase db;
-        private readonly ILogger logger;
         private const int DefaultPhotoCount = 20;
         private readonly IImageValidator imageValidator;
         private readonly IExifReader exifReader;
@@ -33,10 +32,8 @@ namespace Api.App.Images
                              IImageProcessor imageProcessor,
                              IConfigProvider configProvider,
                              IImageValidator imageValidator,
-                             IExifReader exifReader,
-                             ILogger logger)
+                             IExifReader exifReader)
         {
-            this.logger = logger;
             this.imageValidator = imageValidator;
             config = configProvider.GetConfiguration<ImagesConfiguration>().Photos;
             mediaConfig = configProvider.GetConfiguration<MediaConfiguration>();
@@ -140,22 +137,30 @@ namespace Api.App.Images
             return new Photo
                    {
                        Title = photo.Title,
-                       Category = photo.Category,
-                       Exif = new ExifData
-                              {
-                                  CameraModel = photo.Exif.CameraModel,
-                                  DateTimeTaken = photo.Exif.DateTimeTaken,
-                                  ExposureTime = (ExposureTimeLessThanSecond(photo.Exif))
-                                                     ? null
-                                                     : photo.Exif.ExposureTime,
-                                  FStop = photo.Exif.FStop,
-                                  FocalLength = photo.Exif.FocalLength,
-                                  ShutterSpeed = (ExposureTimeLessThanSecond(photo.Exif))
-                                                     ? photo.Exif.ShutterSpeed
-                                                     : null,
-                                  Iso = photo.Exif.Iso,
-                                  LensModel = photo.Exif.LensModel
-                              },
+                       Genre = (photo.Genre != null)
+                                   ? new Genre
+                                     {
+                                         Id = photo.Genre.Code,
+                                         Name = photo.Genre.Name
+                                     }
+                                   : null,
+                       Exif = (photo.Exif != null)
+                                  ? new ExifData
+                                    {
+                                        CameraModel = photo.Exif.CameraModel,
+                                        DateTimeTaken = photo.Exif.DateTimeTaken,
+                                        ExposureTime = (ExposureTimeLessThanSecond(photo.Exif))
+                                                           ? null
+                                                           : photo.Exif.ExposureTime,
+                                        FStop = photo.Exif.FStop,
+                                        FocalLength = photo.Exif.FocalLength,
+                                        ShutterSpeed = (ExposureTimeLessThanSecond(photo.Exif))
+                                                           ? photo.Exif.ShutterSpeed
+                                                           : null,
+                                        Iso = photo.Exif.Iso,
+                                        LensModel = photo.Exif.LensModel
+                                    }
+                                  : null,
                        OwnerId = photo.OwnerId,
                        Image = new ImageData
                                {
@@ -171,16 +176,13 @@ namespace Api.App.Images
                    };
         }
 
-        private static void AssertPhotoFoundAndNotPublished(string shortId, Entities.Photo photo)
+        public async Task<IEnumerable<Genre>> GetPhotoGenres()
         {
-            if (photo == null)
-            {
-                throw new NotFoundException(string.Format("Photo {0} is not found!", shortId));
-            }
-            if (photo.PublishedToGallery)
-            {
-                throw new InvalidPotoStateException(string.Format("Photo {0} is already published!", shortId));
-            }
+            var collection = db.GetCollection<Entities.Genre>(Entities.Genre.CollectionName);
+
+            return await collection.Find(_ => true)
+                                   .Project(g => new Genre {Id = g.Code, Name = g.Name})
+                                   .ToListAsync();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing.Imaging;
 using System.IO;
+using Api.App.Exceptions;
 using Api.App.Images.Entities;
 
 namespace Api.App.Images
@@ -78,6 +79,18 @@ namespace Api.App.Images
         private bool ExposureTimeLessThanSecond(ExifData exif)
         {
             return exif.ExposureTime < 1d;
+        }
+
+        private static void AssertPhotoFoundAndNotPublished(string shortId, Entities.Photo photo)
+        {
+            if (photo == null)
+            {
+                throw new NotFoundException(string.Format("Photo {0} is not found!", shortId));
+            }
+            if (photo.PublishedToGallery)
+            {
+                throw new InvalidPotoStateException(string.Format("Photo {0} is already published!", shortId));
+            }
         }
     }
 }

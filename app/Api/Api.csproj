@@ -310,6 +310,7 @@
     <Compile Include="App\Images\Config\ProfileImagesConfiguration.cs" />
     <Compile Include="App\Images\Config\SizeConstraints.cs" />
     <Compile Include="App\Images\Entities\ExifData.cs" />
+    <Compile Include="App\Images\Entities\Genre.cs" />
     <Compile Include="App\Images\Entities\MediaData.cs" />
     <Compile Include="App\Images\Entities\PhotoFullViewData.cs" />
     <Compile Include="App\Images\Entities\PhotoStatus.cs" />
@@ -317,6 +318,7 @@
     <Compile Include="App\Images\Exif\ExifReader.cs" />
     <Compile Include="App\Images\Exif\ExifData.cs" />
     <Compile Include="App\Images\Exif\IExifReader.cs" />
+    <Compile Include="App\Images\Genre.cs" />
     <Compile Include="App\Images\IImageValidator.cs" />
     <Compile Include="App\Exceptions\ImageSizeConstraintsException.cs" />
     <Compile Include="App\Images\ImageValidator.cs" />

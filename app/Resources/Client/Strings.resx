@@ -345,4 +345,10 @@
   <data name="Hint_AddTag" xml:space="preserve">
     <value>Add tag</value>
   </data>
+  <data name="Hint_Genre" xml:space="preserve">
+    <value>Please, select a Genre</value>
+  </data>
+  <data name="Label_Genre" xml:space="preserve">
+    <value>Genre</value>
+  </data>
 </root>

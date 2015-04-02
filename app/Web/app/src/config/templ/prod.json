@@ -19,6 +19,7 @@
     "ApiUris.Photos.Upload": "photos/upload",
     "ApiUris.Photos.GetPending": "photos/pending",
     "ApiUris.Photos.GetPhotoForEdit": "photos/{shortId}/edit",
+    "ApiUris.Photos.GetPhotoGenres":  "photos/genres",
 
     "ApiUris.Geo.Countries":  "geo/countries",
 
