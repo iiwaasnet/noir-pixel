@@ -16,10 +16,10 @@
                 <span class="edit-label" np-i18n="Label_Genre"></span>
                 <ui-select ng-model="ctrl.photo.genre"
                            theme="selectize"
+                           class="genre-select"
                            reset-search-input="true">
                     <ui-select-match placeholder="{{'Hint_Genre' | npi18n}}">{{$select.selected.name}}</ui-select-match>
-                    <ui-select-choices repeat="genre in ctrl.genres | filter: $select.search"
-                                       class="country-option">
+                    <ui-select-choices repeat="genre in ctrl.genres | filter: $select.search">
                         <span ng-bind-html="::genre.name | highlight: $select.search"></span>
                     </ui-select-choices>
                 </ui-select>

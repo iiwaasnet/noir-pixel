@@ -4,9 +4,9 @@
     angular.module('np.user-home')
         .controller('EditPhotoController', editPhotoController);
 
-    editPhotoController.$inject = ['$scope', 'Moment', 'Strings', 'Photos', 'photo'];
+    editPhotoController.$inject = ['$scope', '$filter', 'Moment', 'Strings', 'Photos', 'photo'];
 
-    function editPhotoController($scope, Moment, Strings, Photos, photo) {
+    function editPhotoController($scope, $filter, Moment, Strings, Photos, photo) {
         var ctrl = this,
             labelPrefix = 'Label_Exif_',
             formatPrefix = 'Format_Exif_',
@@ -26,7 +26,7 @@
 
         function assignGenres(response) {
             ctrl.genres = (response && response.data)
-                ? response.data
+                ? $filter('orderBy')(response.data, 'name')
                 : ctrl.genres;
         }
 

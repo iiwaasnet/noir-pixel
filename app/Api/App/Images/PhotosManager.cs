@@ -11,7 +11,6 @@ using Api.App.Images.Exif;
 using Api.App.Media;
 using Api.App.Media.Config;
 using Api.App.Media.Extensions;
-using Diagnostics;
 using MongoDB.Driver;
 using TypedConfigProvider;
 using ExifData = Api.App.Images.Exif.ExifData;
@@ -181,7 +180,7 @@ namespace Api.App.Images
             var collection = db.GetCollection<Entities.Genre>(Entities.Genre.CollectionName);
 
             return await collection.Find(_ => true)
-                                   .Project(g => new Genre {Id = g.Code, Name = g.Name})
+                                   .Project(g => new Genre { Id = g.Code, Name = g.Name })
                                    .ToListAsync();
         }
     }
