@@ -104,6 +104,16 @@ namespace Api.App.Photos
             return Ok(photo);
         }
 
+        [HttpPost]
+        [Route("{shortId}/update")]
+        public async Task<IHttpActionResult> UpdatePhoto([FromUri]string shortId, [FromBody]PhotoDescription description)
+        {
+            await photosManager.UpdatePhotoDescription(User.Identity.Name, shortId, description);
+
+            return Ok();
+        }
+
+
         [HttpGet]
         [AllowAnonymous]
         [Route("genres")]

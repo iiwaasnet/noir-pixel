@@ -354,6 +354,7 @@
     <Compile Include="App\Media\MediaUploadResult.cs" />
     <Compile Include="App\Media\MediaInfo.cs" />
     <Compile Include="App\ApiBase\MethodExecutionResult.cs" />
+    <Compile Include="App\Images\PhotoDescription.cs" />
     <Compile Include="App\Photos\PhotosController.cs" />
     <Compile Include="App\Posts\DataPage.cs" />
     <Compile Include="App\Posts\Entities\Reply.cs" />

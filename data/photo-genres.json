@@ -1,11 +1,11 @@
-{"code": 1, "name": "Portrait"}
-{"code": 2, "name": "Landscape"}
-{"code": 3, "name": "Night"}
-{"code": 4, "name": "Underwater"}
-{"code": 5, "name": "Action"}
-{"code": 6, "name": "Nude"}
-{"code": 7, "name": "Life"}
-{"code": 8, "name": "Nature"}
-{"code": 9, "name": "Documentary"}
-{"code": 10, "name": "Still Life"}
-{"code": 11, "name": "Art"}
+{"Name": "Portrait"}
+{"Name": "Landscape"}
+{"Name": "Night"}
+{"Name": "Underwater"}
+{"Name": "Action"}
+{"Name": "Nude"}
+{"Name": "Life"}
+{"Name": "Nature"}
+{"Name": "Documentary"}
+{"Name": "Still Life"}
+{"Name": "Art"}

@@ -135,31 +135,6 @@ namespace Api.App.Images
 
             return new Photo
                    {
-                       Title = photo.Title,
-                       Genre = (photo.Genre != null)
-                                   ? new Genre
-                                     {
-                                         Id = photo.Genre.Code,
-                                         Name = photo.Genre.Name
-                                     }
-                                   : null,
-                       Exif = (photo.Exif != null)
-                                  ? new ExifData
-                                    {
-                                        CameraModel = photo.Exif.CameraModel,
-                                        DateTimeTaken = photo.Exif.DateTimeTaken,
-                                        ExposureTime = (ExposureTimeLessThanSecond(photo.Exif))
-                                                           ? null
-                                                           : photo.Exif.ExposureTime,
-                                        FStop = photo.Exif.FStop,
-                                        FocalLength = photo.Exif.FocalLength,
-                                        ShutterSpeed = (ExposureTimeLessThanSecond(photo.Exif))
-                                                           ? photo.Exif.ShutterSpeed
-                                                           : null,
-                                        Iso = photo.Exif.Iso,
-                                        LensModel = photo.Exif.LensModel
-                                    }
-                                  : null,
                        OwnerId = photo.OwnerId,
                        Image = new ImageData
                                {
@@ -168,10 +143,38 @@ namespace Api.App.Images
                                    PreviewUrl = photo.Preview.Uri,
                                    ThumbnailUrl = photo.Thumbnail.Uri
                                },
-                       Story = photo.Story,
-                       Tags = (photo.Tags != null)
-                                  ? photo.Tags.Select(t => new Tag {Name = t.Name})
-                                  : Enumerable.Empty<Tag>()
+                       Description = new PhotoDescription
+                                     {
+                                         Title = photo.Title,
+                                         Story = photo.Story,
+                                         Genre = (photo.Genre != null)
+                                                     ? new Genre
+                                                       {
+                                                           Id = photo.Genre.Id,
+                                                           Name = photo.Genre.Name
+                                                       }
+                                                     : null,
+                                         Exif = (photo.Exif != null)
+                                                    ? new ExifData
+                                                      {
+                                                          CameraModel = photo.Exif.CameraModel,
+                                                          DateTimeTaken = photo.Exif.DateTimeTaken,
+                                                          ExposureTime = (ExposureTimeLessThanSecond(photo.Exif))
+                                                                             ? null
+                                                                             : photo.Exif.ExposureTime,
+                                                          FStop = photo.Exif.FStop,
+                                                          FocalLength = photo.Exif.FocalLength,
+                                                          ShutterSpeed = (ExposureTimeLessThanSecond(photo.Exif))
+                                                                             ? photo.Exif.ShutterSpeed
+                                                                             : null,
+                                                          Iso = photo.Exif.Iso,
+                                                          LensModel = photo.Exif.LensModel
+                                                      }
+                                                    : new ExifData(),
+                                         Tags = (photo.Tags != null)
+                                                    ? photo.Tags.Select(t => new Tag {Name = t.Name})
+                                                    : Enumerable.Empty<Tag>()
+                                     }
                    };
         }
 
@@ -180,8 +183,46 @@ namespace Api.App.Images
             var collection = db.GetCollection<Entities.Genre>(Entities.Genre.CollectionName);
 
             return await collection.Find(_ => true)
-                                   .Project(g => new Genre { Id = g.Code, Name = g.Name })
+                                   .Project(g => new Genre {Id = g.Id, Name = g.Name})
                                    .ToListAsync();
+        }
+
+        public async Task UpdatePhotoDescription(string userName, string shortId, PhotoDescription description)
+        {
+            var profile = await db.GetProfile(userName);
+            var photos = db.GetCollection<Entities.Photo>(Entities.Photo.CollectionName);
+            var genres = db.GetCollection<Entities.Genre>(Entities.Genre.CollectionName);
+            Entities.Genre genre = null;
+            if (description.Genre != null)
+            {
+                genre = await genres.Find(g => g.Id == description.Genre.Id).FirstOrDefaultAsync();
+            }
+
+            var updateBuilder = new UpdateDefinitionBuilder<Entities.Photo>();
+
+            var update = updateBuilder.Combine(updateBuilder.Set(p => p.Genre, genre),
+                                  updateBuilder.Set(p => p.Exif,
+                                                    (description.Exif != null)
+                                                        ? new Entities.ExifData
+                                                          {
+                                                              CameraModel = description.Exif.CameraModel,
+                                                              DateTimeTaken = description.Exif.DateTimeTaken,
+                                                              ExposureTime = description.Exif.ExposureTime,
+                                                              FStop = description.Exif.FStop,
+                                                              ShutterSpeed = description.Exif.ShutterSpeed,
+                                                              FocalLength = description.Exif.FocalLength,
+                                                              Iso = description.Exif.Iso,
+                                                              LensModel = description.Exif.LensModel
+                                                          }
+                                                        : null),
+                                  updateBuilder.Set(p => p.Tags,
+                                                    (description.Tags != null && description.Tags.Any())
+                                                        ? description.Tags.Select(t => new Entities.Tag {Name = t.Name})
+                                                        : null),
+                                  updateBuilder.Set(p => p.Title, description.Title),
+                                  updateBuilder.Set(p => p.Story, description.Story));
+
+            await photos.FindOneAndUpdateAsync(p => p.OwnerId == profile.Id && p.ShortId == shortId, update);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿<div id="edit-photo" ng-form="editPhoto">
+﻿<form name="editPhoto" id="edit-photo" ng-submit="ctrl.save()">
     <div class="columns-container top">
         <div class="column-left">
             <img ng-src="{{::ctrl.photo.image.previewUrl}}" />
@@ -6,15 +6,15 @@
         <div class="column-center">
             <div class="edit-block">
                 <span class="edit-label" np-i18n="Label_Title"></span>
-                <input type="text" np-autofocus ng-model="ctrl.photo.title" />
+                <input type="text" np-autofocus ng-model="ctrl.photo.description.title" />
             </div>
             <div class="edit-block">
                 <span class="edit-label" np-i18n="Label_Story"></span>
-                <textarea placeholder="{{'Hint_PhotoStory' | npi18n}}" ng-model="ctrl.photo.story"></textarea>
+                <textarea placeholder="{{'Hint_PhotoStory' | npi18n}}" ng-model="ctrl.photo.description.story"></textarea>
             </div>
             <div class="edit-block">
                 <span class="edit-label" np-i18n="Label_Genre"></span>
-                <ui-select ng-model="ctrl.photo.genre"
+                <ui-select ng-model="ctrl.photo.description.genre"
                            theme="selectize"
                            class="genre-select"
                            reset-search-input="true">
@@ -28,18 +28,18 @@
     </div>
     <div class="columns-container middle">
         <div class="column-left">
-            <np-exif-edit ng-repeat="tag in ctrl.photo.exif"></np-exif-edit>
+            <np-exif-edit ng-repeat="tag in ctrl.photo.description.exif"></np-exif-edit>
         </div>
         <div class="column-center">
             <div class="tags">
                 <input type="text"
                        np-autowidth
                        np-tag-add
-                       tags="ctrl.photo.tags"
+                       tags="ctrl.photo.description.tags"
                        class="add-tag"
                        placeholder="{{'Hint_AddTag' | npi18n}}" />
                 <span class="tag"
-                      ng-repeat="tag in ctrl.photo.tags"
+                      ng-repeat="tag in ctrl.photo.description.tags"
                       ng-bind="tag.tag"
                       np-tag-edit
                       selected="tag.selected"></span>
@@ -47,7 +47,7 @@
         </div>
     </div>
     <div class="bottom buttons-block-right clearfix">
-        <input type="button" np-i18n="Btn_Cancel" ng-click="closeThisDialog()" />
-        <input type="button" ng-class="{'default-action': !editPhoto.$pristine}" np-i18n="Btn_Save" />
+        <input type="button" np-i18n="Btn_Cancel" ng-click="ctrl.close()" />
+        <input type="submit" ng-class="{'default-action': !editPhoto.$pristine}" np-i18n="Btn_Save" />
     </div>
-</div>
+</form>

@@ -11,6 +11,13 @@
         srv.getPendingPhotos = getPendingPhotos;
         srv.getPhotoForEdit = getPhotoForEdit;
         srv.getPhotoGenres = getPhotoGenres;
+        srv.updatePhoto = updatePhoto;
+
+        function updatePhoto(shortId, description) {
+            var url = Url.buildApiUrl(Config.ApiUris.Photos.UpdatePhoto).formatNamed({ shortId: shortId });
+
+            return $http.post(url, description);
+        }
 
         function getPhotoGenres() {
             var url = Url.buildApiUrl(Config.ApiUris.Photos.GetPhotoGenres);

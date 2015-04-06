@@ -9,5 +9,6 @@ namespace Api.App.Images
         Task<PendingPhotos> GetPendingPhotos(string userName, int? offset, int? count);
         Task<Photo> GetPhotoForEdit(string userName, string shortId);
         Task<IEnumerable<Genre>> GetPhotoGenres();
+        Task UpdatePhotoDescription(string userName, string shortId, PhotoDescription description);
     }
 }

@@ -12,16 +12,56 @@
             formatPrefix = 'Format_Exif_',
             photoDate = 'dateTimeTaken',
             placeholderPrefix = 'Hint_Exif_';
-        photo.exif = transformExifData(photo.exif);
-        photo.tags = transformTags(photo.tags);
+        photo.description.exif = transformExifData(photo.description.exif);
+        photo.description.tags = transformTags(photo.description.tags);
         ctrl.photo = photo;
         ctrl.genres = [];
+        ctrl.save = save;
+        ctrl.close = close;
 
         activate();
 
         function activate() {
             $scope.$watch(trackTagsChanges, invalidateForm);
             Photos.getPhotoGenres().then(assignGenres);
+        }
+
+        function close() {
+            $scope.closeThisDialog();
+        }
+
+        function save() {
+            Photos.updatePhoto(ctrl.photo.image.id, createUpdateObject())
+                .then(updatePhotoSuccess, updatePhotoError);
+        }
+
+        function updatePhotoSuccess() {
+            ctrl.close();
+        }
+
+        function updatePhotoError() {
+            debugger;
+        }
+
+        function createUpdateObject() {
+            return {
+                title: ctrl.photo.description.title,
+                story: ctrl.photo.description.story,
+                genre: ctrl.photo.description.genre,
+                exif: getExif(),
+                tags: getTags()
+            };
+        }
+
+        function getTags() {
+            ctrl.photo.description.tags.filter(function(t) { return t.selected; });
+        }
+
+        function getExif() {
+            var exifData = {};
+            ctrl.photo.description.exif.forEach(function (exifTag) {
+                exifData[exifTag.name] = exifTag.editValue;
+            });
         }
 
         function assignGenres(response) {
@@ -31,7 +71,7 @@
         }
 
         function trackTagsChanges() {
-            return ctrl.photo.tags.filter(function(t) { return t.selected; }).length;
+            return ctrl.photo.description.tags.filter(function(t) { return t.selected; }).length;
         }
 
         function invalidateForm() {
@@ -42,7 +82,7 @@
 
         function transformTags(photoTags) {
             var tags = [];
-            angular.forEach(photoTags, function(tag) {
+            (photoTags || []).forEach(function (tag) {
                 tags.push({
                     tag: tag,
                     selected: true
@@ -54,7 +94,7 @@
 
         function transformExifData(exifData) {
             var exifTags = [];
-            Object.keys(exifData).forEach(function(key) {
+            Object.keys(exifData || {}).forEach(function(key) {
                 var exif = {
                     name: key,
                     label: getExifTagLabel(key),

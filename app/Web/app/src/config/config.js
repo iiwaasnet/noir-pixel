@@ -29,7 +29,8 @@
                 Upload: 'photos/upload',
                 GetPending: 'photos/pending',
                 GetPhotoForEdit: 'photos/{shortId}/edit',
-                GetPhotoGenres: 'photos/genres'
+                GetPhotoGenres: 'photos/genres',
+                UpdatePhoto: 'photos/{shortId}/update'
 }
         },
         Profiles: {
