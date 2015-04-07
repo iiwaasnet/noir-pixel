@@ -1,4 +1,4 @@
-﻿<form name="editPhoto" id="edit-photo" ng-submit="ctrl.save()">
+﻿<div id="edit-photo" ng-form="editPhoto">
     <div class="columns-container top">
         <div class="column-left">
             <img ng-src="{{::ctrl.photo.image.previewUrl}}" />
@@ -40,7 +40,7 @@
                        placeholder="{{'Hint_AddTag' | npi18n}}" />
                 <span class="tag"
                       ng-repeat="tag in ctrl.photo.description.tags"
-                      ng-bind="tag.tag"
+                      ng-bind="tag.tag.name"
                       np-tag-edit
                       selected="tag.selected"></span>
             </div>
@@ -48,6 +48,6 @@
     </div>
     <div class="bottom buttons-block-right clearfix">
         <input type="button" np-i18n="Btn_Cancel" ng-click="ctrl.close()" />
-        <input type="submit" ng-class="{'default-action': !editPhoto.$pristine}" np-i18n="Btn_Save" />
+        <input type="button" ng-class="{'default-action': !editPhoto.$pristine}" np-i18n="Btn_Save" ng-click="ctrl.save()"/>
     </div>
-</form>
+</div>

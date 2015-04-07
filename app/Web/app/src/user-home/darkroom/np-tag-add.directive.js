@@ -33,7 +33,7 @@
                 if (newTag) {
                     scope.$evalAsync(function() {
                         scope.tags.push({
-                            tag: newTag,
+                            tag: { name: newTag },
                             selected: true
                         });
                     });

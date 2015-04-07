@@ -40,7 +40,6 @@
         }
 
         function updatePhotoError() {
-            debugger;
         }
 
         function createUpdateObject() {
@@ -54,14 +53,18 @@
         }
 
         function getTags() {
-            ctrl.photo.description.tags.filter(function(t) { return t.selected; });
+            return ctrl.photo.description.tags
+                .filter(function(t) { return t.selected; })
+                .map(function(t) { return { name: t.tag.name }; });
         }
 
         function getExif() {
             var exifData = {};
-            ctrl.photo.description.exif.forEach(function (exifTag) {
+            ctrl.photo.description.exif.forEach(function(exifTag) {
                 exifData[exifTag.name] = exifTag.editValue;
             });
+
+            return exifData;
         }
 
         function assignGenres(response) {
@@ -82,7 +85,7 @@
 
         function transformTags(photoTags) {
             var tags = [];
-            (photoTags || []).forEach(function (tag) {
+            (photoTags || []).forEach(function(tag) {
                 tags.push({
                     tag: tag,
                     selected: true

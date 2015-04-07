@@ -159,12 +159,12 @@ namespace Api.App.Images
                                                       {
                                                           CameraModel = photo.Exif.CameraModel,
                                                           DateTimeTaken = photo.Exif.DateTimeTaken,
-                                                          ExposureTime = (ExposureTimeLessThanSecond(photo.Exif))
+                                                          ExposureTime = (ExposureTimeLessThanSecondOrEmpty(photo.Exif.ExposureTime))
                                                                              ? null
                                                                              : photo.Exif.ExposureTime,
                                                           FStop = photo.Exif.FStop,
                                                           FocalLength = photo.Exif.FocalLength,
-                                                          ShutterSpeed = (ExposureTimeLessThanSecond(photo.Exif))
+                                                          ShutterSpeed = (ExposureTimeLessThanSecondOrEmpty(photo.Exif.ExposureTime))
                                                                              ? photo.Exif.ShutterSpeed
                                                                              : null,
                                                           Iso = photo.Exif.Iso,
@@ -201,26 +201,30 @@ namespace Api.App.Images
             var updateBuilder = new UpdateDefinitionBuilder<Entities.Photo>();
 
             var update = updateBuilder.Combine(updateBuilder.Set(p => p.Genre, genre),
-                                  updateBuilder.Set(p => p.Exif,
-                                                    (description.Exif != null)
-                                                        ? new Entities.ExifData
-                                                          {
-                                                              CameraModel = description.Exif.CameraModel,
-                                                              DateTimeTaken = description.Exif.DateTimeTaken,
-                                                              ExposureTime = description.Exif.ExposureTime,
-                                                              FStop = description.Exif.FStop,
-                                                              ShutterSpeed = description.Exif.ShutterSpeed,
-                                                              FocalLength = description.Exif.FocalLength,
-                                                              Iso = description.Exif.Iso,
-                                                              LensModel = description.Exif.LensModel
-                                                          }
-                                                        : null),
-                                  updateBuilder.Set(p => p.Tags,
-                                                    (description.Tags != null && description.Tags.Any())
-                                                        ? description.Tags.Select(t => new Entities.Tag {Name = t.Name})
-                                                        : null),
-                                  updateBuilder.Set(p => p.Title, description.Title),
-                                  updateBuilder.Set(p => p.Story, description.Story));
+                                               updateBuilder.Set(p => p.Exif,
+                                                                 (description.Exif != null)
+                                                                     ? new Entities.ExifData
+                                                                       {
+                                                                           CameraModel = description.Exif.CameraModel,
+                                                                           DateTimeTaken = description.Exif.DateTimeTaken,
+                                                                           ExposureTime = ExposureTimeLessThanSecondOrEmpty(description.Exif.ExposureTime)
+                                                                                              ? null
+                                                                                              : description.Exif.ExposureTime,
+                                                                           FStop = description.Exif.FStop,
+                                                                           ShutterSpeed = ExposureTimeLessThanSecondOrEmpty(description.Exif.ExposureTime)
+                                                                           ?description.Exif.ShutterSpeed
+                                                                           :,
+                                                                           FocalLength = description.Exif.FocalLength,
+                                                                           Iso = description.Exif.Iso,
+                                                                           LensModel = description.Exif.LensModel
+                                                                       }
+                                                                     : null),
+                                               updateBuilder.Set(p => p.Tags,
+                                                                 (description.Tags != null && description.Tags.Any())
+                                                                     ? description.Tags.Select(t => new Entities.Tag {Name = t.Name})
+                                                                     : null),
+                                               updateBuilder.Set(p => p.Title, description.Title),
+                                               updateBuilder.Set(p => p.Story, description.Story));
 
             await photos.FindOneAndUpdateAsync(p => p.OwnerId == profile.Id && p.ShortId == shortId, update);
         }

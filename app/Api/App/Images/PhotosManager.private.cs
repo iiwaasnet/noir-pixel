@@ -76,9 +76,9 @@ namespace Api.App.Images
                          };
         }
 
-        private bool ExposureTimeLessThanSecond(ExifData exif)
+        private bool ExposureTimeLessThanSecondOrEmpty(double? exposureTime)
         {
-            return exif.ExposureTime < 1d;
+            return !exposureTime.HasValue || exposureTime < 1d;
         }
 
         private static void AssertPhotoFoundAndNotPublished(string shortId, Entities.Photo photo)
