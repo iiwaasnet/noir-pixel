@@ -212,8 +212,10 @@ namespace Api.App.Images
                                                                                               : description.Exif.ExposureTime,
                                                                            FStop = description.Exif.FStop,
                                                                            ShutterSpeed = ExposureTimeLessThanSecondOrEmpty(description.Exif.ExposureTime)
-                                                                           ?description.Exif.ShutterSpeed
-                                                                           :,
+                                                                                              ? ((string.IsNullOrWhiteSpace(description.Exif.ShutterSpeed))
+                                                                                                     ? CalcShutterSpeedFromExposureTime(description.Exif.ExposureTime)
+                                                                                                     : description.Exif.ShutterSpeed)
+                                                                                              : null,
                                                                            FocalLength = description.Exif.FocalLength,
                                                                            Iso = description.Exif.Iso,
                                                                            LensModel = description.Exif.LensModel

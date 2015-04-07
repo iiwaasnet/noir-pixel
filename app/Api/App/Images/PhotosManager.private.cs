@@ -2,6 +2,7 @@
 using System.Drawing.Imaging;
 using System.IO;
 using Api.App.Exceptions;
+using Api.App.Framework;
 using Api.App.Images.Entities;
 
 namespace Api.App.Images
@@ -91,6 +92,13 @@ namespace Api.App.Images
             {
                 throw new InvalidPotoStateException(string.Format("Photo {0} is already published!", shortId));
             }
+        }
+
+        private static string CalcShutterSpeedFromExposureTime(double? exposureTime)
+        {
+            return exposureTime.HasValue
+                       ? new Fraction(exposureTime.Value).ToString()
+                       : null;
         }
     }
 }
