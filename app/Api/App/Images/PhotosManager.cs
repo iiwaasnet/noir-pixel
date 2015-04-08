@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 using Api.App.Db;
 using Api.App.Db.Extensions;
 using Api.App.Framework;
+using Api.App.Framework.Extensions;
 using Api.App.Images.Config;
 using Api.App.Images.Entities;
 using Api.App.Images.Exif;
 using Api.App.Media;
 using Api.App.Media.Config;
 using Api.App.Media.Extensions;
+using Common.Extensions;
 using MongoDB.Driver;
 using TypedConfigProvider;
 using ExifData = Api.App.Images.Exif.ExifData;
@@ -228,7 +230,9 @@ namespace Api.App.Images
                                                updateBuilder.Set(p => p.Title, description.Title),
                                                updateBuilder.Set(p => p.Story, description.Story));
 
-            await photos.FindOneAndUpdateAsync(p => p.OwnerId == profile.Id && p.ShortId == shortId, update);
+            await photos
+                .FindOneAndUpdateAsync(p => p.OwnerId == profile.Id && p.ShortId == shortId, update)
+                .EnsureNotNullAsync();
         }
     }
 }

@@ -196,6 +196,15 @@ namespace Resources.Client {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sorry, but the image was not found..
+        /// </summary>
+        public static string EAPI_Image_NotFound {
+            get {
+                return ResourceManager.GetString("EAPI_Image_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Image dimensions are either too big or too small!.
         /// </summary>
         public static string EAPI_Image_SizeViolation {

@@ -11,7 +11,8 @@
             labelPrefix = 'Label_Exif_',
             formatPrefix = 'Format_Exif_',
             photoDate = 'dateTimeTaken',
-            placeholderPrefix = 'Hint_Exif_';
+            placeholderPrefix = 'Hint_Exif_',
+            EAPI_Image_NotFound = 'EAPI_Image_NotFound';
         photo.description.exif = transformExifData(photo.description.exif);
         photo.description.tags = transformTags(photo.description.tags);
         ctrl.photo = photo;
@@ -40,7 +41,8 @@
         }
 
         function updatePhotoError(error) {
-            Messages.error({main: {code: error.data} });
+            var code = error.status == 404 ? EAPI_Image_NotFound : error.data;
+            Messages.error({main: {code: code } });
         }
 
         function createUpdateObject() {

@@ -298,6 +298,7 @@
     <Compile Include="App\Framework\SUIDGenerator.cs" />
     <Compile Include="App\ApiBase\HttpContextDependencyProvider.cs" />
     <Compile Include="App\ApiBase\IHttpContextDependencyProvider.cs" />
+    <Compile Include="App\Framework\Extensions\TaskExtensions.cs" />
     <Compile Include="App\Geo\Country.cs" />
     <Compile Include="App\Geo\Entities\Country.cs" />
     <Compile Include="App\Geo\GeoController.cs" />

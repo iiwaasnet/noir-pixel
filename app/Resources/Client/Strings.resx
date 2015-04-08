@@ -351,4 +351,7 @@
   <data name="Label_Genre" xml:space="preserve">
     <value>Genre</value>
   </data>
+  <data name="EAPI_Image_NotFound" xml:space="preserve">
+    <value>Sorry, but the image was not found.</value>
+  </data>
 </root>
