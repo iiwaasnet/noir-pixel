@@ -4,9 +4,9 @@
     angular.module('np.user-home')
         .controller('EditPhotoController', editPhotoController);
 
-    editPhotoController.$inject = ['$scope', '$filter', 'Moment', 'Strings', 'Photos', 'photo'];
+    editPhotoController.$inject = ['$scope', '$filter', 'Moment', 'Strings', 'Photos', 'Messages', 'photo'];
 
-    function editPhotoController($scope, $filter, Moment, Strings, Photos, photo) {
+    function editPhotoController($scope, $filter, Moment, Strings, Photos, Messages, photo) {
         var ctrl = this,
             labelPrefix = 'Label_Exif_',
             formatPrefix = 'Format_Exif_',
@@ -39,7 +39,8 @@
             ctrl.close();
         }
 
-        function updatePhotoError() {
+        function updatePhotoError(error) {
+            Messages.error({main: {code: error.data} });
         }
 
         function createUpdateObject() {
