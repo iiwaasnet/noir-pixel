@@ -745,6 +745,15 @@ namespace Resources.Client {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Photos.
+        /// </summary>
+        public static string UserHome_Tab_Photos {
+            get {
+                return ResourceManager.GetString("UserHome_Tab_Photos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You.
         /// </summary>
         public static string UserHome_Tab_You {

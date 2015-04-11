@@ -354,4 +354,7 @@
   <data name="EAPI_Image_NotFound" xml:space="preserve">
     <value>Sorry, but the image was not found.</value>
   </data>
+  <data name="UserHome_Tab_Photos" xml:space="preserve">
+    <value>Photos</value>
+  </data>
 </root>

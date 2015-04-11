@@ -56,7 +56,7 @@
                  min-height="300">
                 <div class="container" ng-repeat="photo in darkroomCtrl.pendingPhotos" 
                      np-visibility-transition
-                     ng-click="darkroomCtrl.edit(photo)">
+                     ng-click="darkroomCtrl.action(photo)">
                     <img ng-src="{{::photo.previewUrl}}" />
                 </div>
             </div>

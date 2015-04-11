@@ -375,6 +375,9 @@
     <Content Include="app\less\social.css">
       <DependentUpon>social.less</DependentUpon>
     </Content>
+    <Content Include="app\less\sprites32.css">
+      <DependentUpon>sprites32.less</DependentUpon>
+    </Content>
     <Content Include="app\less\tabs.css">
       <DependentUpon>tabs.less</DependentUpon>
     </Content>
@@ -435,6 +438,10 @@
       <DependentUpon>ngDialog-theme-default.css</DependentUpon>
     </Content>
     <Content Include="app\less\exif-edit.less" />
+    <Content Include="app\less\home-photos.less" />
+    <Content Include="app\less\sprites32.css.map">
+      <DependentUpon>sprites32.css</DependentUpon>
+    </Content>
     <None Include="app\less\ui-select\select.less" />
     <Content Include="app\less\ui-select\select.css">
       <DependentUpon>select.less</DependentUpon>
@@ -471,6 +478,7 @@
     <Content Include="app\src\ui-elements\inplace\inplace-buttons.html" />
     <Content Include="app\src\ui-elements\inplace\np-inplace-buttons.directive.js" />
     <Content Include="app\src\ui-elements\img-crop\np-img-crop.directive.js" />
+    <Content Include="app\src\user-home\darkroom\darkroom.constants.js" />
     <Content Include="app\src\utils\keyCodes.js" />
     <Content Include="app\src\ui-elements\local-image\np-local-image.directive.js" />
     <Content Include="app\src\ui-elements\spinner\np-spinner.directive.js" />

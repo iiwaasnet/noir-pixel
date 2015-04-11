@@ -29,6 +29,9 @@
             if (state === States.UserHome.Darkroom.Name) {
                 return $templateFactory.fromUrl('/app/src/user-home/darkroom/darkroom.html', stateParams);
             }
+            if (state === States.UserHome.Photos.Name) {
+                return $templateFactory.fromUrl('/app/src/user-home/photos/photos.html', stateParams);
+            }
             if (state === States.UserPublic.Photos.Name) {
                 return $templateFactory.fromUrl('/app/src/user-home/photos/photos.html', stateParams);
             }
@@ -53,6 +56,9 @@
             }
             if (state === States.UserHome.Darkroom.Name) {
                 return 'DarkroomController';
+            }
+            if (state === States.UserHome.Photos.Name) {
+                return 'PhotosHomeController';
             }
             return '';
         }

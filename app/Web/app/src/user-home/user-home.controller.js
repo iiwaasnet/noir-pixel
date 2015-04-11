@@ -27,6 +27,12 @@
                 text: 'UserHome_Tab_Darkroom',
                 image: 'tab-darkroom'
             });
+            ctrl.tabs.push({
+                parentState: States.UserHome.Photos.Name,
+                state: States.UserHome.Photos.Name,
+                text: 'UserHome_Tab_Photos',
+                image: 'tab-photos'
+            });
 
             return ctrl.tabs;
         }

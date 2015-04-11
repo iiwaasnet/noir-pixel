@@ -62,6 +62,12 @@
                 controllerProvider: ['ViewResolver', '$stateParams', function (ViewResolver, $stateParams) { return ViewResolver.resolveController(States.UserHome.Darkroom.Name, $stateParams); }],
                 controllerAs: 'darkroomCtrl'
             })
+            .state(States.UserHome.Photos.Name, {
+                url: '/photos',
+                templateProvider: ['ViewResolver', '$stateParams', function (ViewResolver, $stateParams) { return ViewResolver.resolveTemplateUrl(States.UserHome.Photos.Name, $stateParams); }],
+                controllerProvider: ['ViewResolver', '$stateParams', function (ViewResolver, $stateParams) { return ViewResolver.resolveController(States.UserHome.Photos.Name, $stateParams); }],
+                controllerAs: 'photosCtrl'
+            })
             //.state('userPublic', {
             //    url: '/people',
             //    abstract: true,

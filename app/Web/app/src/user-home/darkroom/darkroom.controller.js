@@ -4,18 +4,19 @@
     angular.module('np.user-home')
         .controller('DarkroomController', darkroomController);
 
-    darkroomController.$inject = ['Url', 'Config', 'Photos', 'Overlay', 'Strings', 'Messages'];
+    darkroomController.$inject = ['Url', 'Config', 'Photos', 'Overlay', 'Strings', 'Messages', 'DarkroomModes'];
 
-    function darkroomController(Url, Config, Photos, Overlay, Strings, Messages) {
+    function darkroomController(Url, Config, Photos, Overlay, Strings, Messages, DarkroomModes) {
         var ctrl = this,
             EAPI_Image_Unknown = 'EAPI_Image_Unknown',
-            currentlyUploading = [];
+            currentlyUploading = [],
+            mode = DarkroomModes.Edit;
         ctrl.updateProgress = updateProgress;
         ctrl.uploadCompleted = uploadCompleted;
         ctrl.fileUploadSuccess = fileUploadSuccess;
         ctrl.fileUploadError = fileUploadError;
         ctrl.filesAdded = filesAdded;
-        ctrl.edit = edit;
+        ctrl.action = action;
         ctrl.photoUpload = getPhotoUploadConfig();
         ctrl.pendingPhotos = [];
 
@@ -23,6 +24,12 @@
 
         function activate() {
             getPendingPhotos();
+        }
+
+        function action(photo) {
+            if (mode === DarkroomModes.Edit) {
+                edit(photo);
+            }
         }
 
         function edit(photo) {
