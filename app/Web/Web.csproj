@@ -479,6 +479,8 @@
     <Content Include="app\src\ui-elements\inplace\np-inplace-buttons.directive.js" />
     <Content Include="app\src\ui-elements\img-crop\np-img-crop.directive.js" />
     <Content Include="app\src\user-home\darkroom\darkroom.constants.js" />
+    <Content Include="app\src\user-home\darkroom\pending-photos.directive.js" />
+    <Content Include="app\src\user-home\darkroom\pending-photos.html" />
     <Content Include="app\src\utils\keyCodes.js" />
     <Content Include="app\src\ui-elements\local-image\np-local-image.directive.js" />
     <Content Include="app\src\ui-elements\spinner\np-spinner.directive.js" />

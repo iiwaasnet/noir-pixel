@@ -22,7 +22,7 @@
                         <span class="text">Add to your Photos</span>
                     </div>
                 </li>
-                <li np-state-menu-item>
+                <li np-state-menu-item state-changed="darkroomCtrl.addPhotosMode">
                     <div class="menu-item" np-state-menu-set>
                         <span class="icon icon-stack-32"></span>
                         <span class="text">Stack</span>
@@ -47,19 +47,7 @@
             </ul>
         </div>
         <div class="column-center">
-            <div class="pending-photos clearfix scroll-area-shadow" 
-                 ng-scrollbar 
-                 is-bar-shown 
-                 rebuild-on-resize
-                 np-fill-height 
-                 bottom-margin="50"
-                 min-height="300">
-                <div class="container" ng-repeat="photo in darkroomCtrl.pendingPhotos" 
-                     np-visibility-transition
-                     ng-click="darkroomCtrl.action(photo)">
-                    <img ng-src="{{::photo.previewUrl}}" />
-                </div>
-            </div>
+            <np-pending-photos ng-if="darkroomCtrl.mode === 'Edit'" photos="darkroomCtrl.pendingPhotos"></np-pending-photos>
         </div>
     </div>
 </div>

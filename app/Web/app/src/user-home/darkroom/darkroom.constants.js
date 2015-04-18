@@ -3,7 +3,7 @@
 
     var modes  = {
         Edit: 'Edit',
-        AddToPortfolio: 'AddToPortfolio',
+        AddToPhotos: 'AddToPhotos',
         Delete: 'Delete',
         Stack: 'Stack'
     }

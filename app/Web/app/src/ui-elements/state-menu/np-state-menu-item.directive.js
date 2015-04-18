@@ -9,7 +9,9 @@
             restrict: 'A',
             require: '^npStateMenu',
             link: link,
-            scope: {}
+            scope: {
+                stateChanged: '='
+            }
         };
 
         return dir;
@@ -48,6 +50,7 @@
                 } else {
                     stateMenuCtrl.enableAll();
                 }
+                scope.stateChanged && scope.stateChanged(!isSet);
             }
 
             function clickWrap(e) {

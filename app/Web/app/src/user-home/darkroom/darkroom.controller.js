@@ -4,13 +4,13 @@
     angular.module('np.user-home')
         .controller('DarkroomController', darkroomController);
 
-    darkroomController.$inject = ['Url', 'Config', 'Photos', 'Overlay', 'Strings', 'Messages', 'DarkroomModes'];
+    darkroomController.$inject = ['$scope', 'Url', 'Config', 'Photos', 'Overlay', 'Strings', 'Messages', 'DarkroomModes'];
 
-    function darkroomController(Url, Config, Photos, Overlay, Strings, Messages, DarkroomModes) {
+    function darkroomController($scope, Url, Config, Photos, Overlay, Strings, Messages, DarkroomModes) {
         var ctrl = this,
             EAPI_Image_Unknown = 'EAPI_Image_Unknown',
-            currentlyUploading = [],
-            mode = DarkroomModes.Edit;
+            currentlyUploading = [];
+        ctrl.mode = DarkroomModes.Edit;
         ctrl.updateProgress = updateProgress;
         ctrl.uploadCompleted = uploadCompleted;
         ctrl.fileUploadSuccess = fileUploadSuccess;
@@ -19,33 +19,31 @@
         ctrl.action = action;
         ctrl.photoUpload = getPhotoUploadConfig();
         ctrl.pendingPhotos = [];
+        ctrl.addPhotosMode = addPhotosMode;
 
         activate();
+
+        function addPhotosMode(on) {
+            switchMode(on, DarkroomModes.AddToPhotos);
+        }
+
+        function switchMode(on, toMode) {
+            $scope.$evalAsync(function() {
+                ctrl.mode = on ? toMode : DarkroomModes.Edit;
+            });
+        }
 
         function activate() {
             getPendingPhotos();
         }
 
         function action(photo) {
-            if (mode === DarkroomModes.Edit) {
+            switch (mode) {
+            case DarkroomModes.Edit:
                 edit(photo);
+                return;
+            default:
             }
-        }
-
-        function edit(photo) {
-            Photos.getPhotoForEdit(photo.id)
-                .then(getPhotoForEditSuccess, getPhotoForEditError);
-        }
-
-        function getPhotoForEditSuccess(response) {
-            Overlay.open('app/src/user-home/darkroom/edit-photo.html',
-                'EditPhotoController as ctrl',
-                { photo: response.data },
-                { closeByEscape: false });
-        }
-
-        function getPhotoForEditError(error) {
-            Messages.error({ main: { code: error } });
         }
 
         function filesAdded(files) {
