@@ -47,7 +47,15 @@
             </ul>
         </div>
         <div class="column-center">
-            <np-pending-photos ng-if="darkroomCtrl.mode === 'Edit'" photos="darkroomCtrl.pendingPhotos"></np-pending-photos>
+            <div class="pending-photos clearfix scroll-area-shadow"
+                 ng-scrollbar
+                 is-bar-shown
+                 rebuild-on-resize
+                 np-fill-height
+                 bottom-margin="50"
+                 min-height="300">
+                <np-pending-photos ng-if="darkroomCtrl.mode === 'Edit'" photos="darkroomCtrl.pendingPhotos"></np-pending-photos>
+            </div>
         </div>
     </div>
 </div>

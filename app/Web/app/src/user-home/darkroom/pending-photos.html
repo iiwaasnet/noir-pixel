@@ -1,13 +1,5 @@
-﻿<div class="pending-photos clearfix scroll-area-shadow"
-     ng-scrollbar
-     is-bar-shown
-     rebuild-on-resize
-     np-fill-height
-     bottom-margin="50"
-     min-height="300">
-    <div class="container" ng-repeat="photo in photos"
-         np-visibility-transition
-         ng-click="pendingPhotosCtrl.edit(photo)">
-        <img ng-src="{{::photo.previewUrl}}" />
-    </div>
+﻿<div class="container" ng-repeat="photo in photos"
+     np-visibility-transition
+     ng-click="pendingPhotosCtrl.edit(photo)">
+    <img ng-src="{{::photo.previewUrl}}" />
 </div>
