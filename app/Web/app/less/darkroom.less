@@ -4,9 +4,36 @@
 @import (reference) "colors.less";
 @import (reference) "column-layout.less";
 @import (reference) "images.less";
+@import (reference) "edits.less";
 
 @drop-zone-height: 2.8em;
 @menu-section-width: 250px;
+
+@action-image-size: 32px;
+@action-button-height-ratio: 0.3;
+
+.action-mixin {
+    width: 100%;
+    height: 100%;
+    background-color: @mine-shaft;
+    opacity: 0.3;
+    cursor: pointer;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+
+    &:hover {
+        opacity: 0.85;
+        border: solid 1px @bianca;
+    }
+
+    .image {
+        display: inline-block;
+        opacity: 1;
+        position: absolute;
+        left: @photo-preview-size / 2 - @action-image-size / 2;
+    }
+}
 
 #darkroom {
     overflow: hidden;
@@ -105,6 +132,32 @@
             img {
                 width: @photo-preview-size;
                 height: @photo-preview-size;
+            }
+
+            .image-actions {
+                margin: @edit-before-margin 0 0;
+                position: relative;
+                overflow: hidden;
+                width: @photo-preview-size;
+                height: @photo-preview-size;
+
+                .delete {
+                    position: absolute;
+                    width: 100%;
+                    bottom: 0;
+                    right: 0;
+                    height: @photo-preview-size * @action-button-height-ratio;
+
+                    .action {
+                        .action-mixin;
+                    }
+
+                    .image {
+                        .icon-delete-32;
+                        left: @photo-preview-size / 2 - @action-image-size / 2;
+                        top: (@photo-preview-size * @action-button-height-ratio) / 2 - @action-image-size / 2;
+                    }
+                }
             }
         }
     }

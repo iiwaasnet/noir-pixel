@@ -1,5 +1,5 @@
 ﻿(function() {
-    'use strict';
+    "use strict";
 
     angular.module('np.ui-elements')
         .directive('npVisibilityTransition', visibilityTransition);

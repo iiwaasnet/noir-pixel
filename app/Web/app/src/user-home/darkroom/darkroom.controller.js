@@ -4,9 +4,9 @@
     angular.module('np.user-home')
         .controller('DarkroomController', darkroomController);
 
-    darkroomController.$inject = ['$scope', 'Url', 'Config', 'Photos', 'Overlay', 'Strings', 'Messages', 'DarkroomModes'];
+    darkroomController.$inject = ['$timeout', '$scope', 'Url', 'Config', 'Photos', 'Overlay', 'Strings', 'Messages', 'DarkroomModes'];
 
-    function darkroomController($scope, Url, Config, Photos, Overlay, Strings, Messages, DarkroomModes) {
+    function darkroomController($timeout, $scope, Url, Config, Photos, Overlay, Strings, Messages, DarkroomModes) {
         var ctrl = this,
             EAPI_Image_Unknown = 'EAPI_Image_Unknown',
             currentlyUploading = [];
@@ -20,6 +20,7 @@
         ctrl.photoUpload = getPhotoUploadConfig();
         ctrl.pendingPhotos = [];
         ctrl.addPhotosMode = addPhotosMode;
+        ctrl.stackPhotosMode = stackPhotosMode;
 
         activate();
 
@@ -27,10 +28,18 @@
             switchMode(on, DarkroomModes.AddToPhotos);
         }
 
+        function stackPhotosMode(on) {
+            switchMode(on, DarkroomModes.Stack);
+        }
+
         function switchMode(on, toMode) {
             $scope.$evalAsync(function() {
                 ctrl.mode = on ? toMode : DarkroomModes.Edit;
+                $timeout(function() { $scope.$broadcast('rebuild:me'); }, 100);
             });
+            //$scope.$evalAsync(function () {
+            //    $timeout(function () { $scope.$broadcast('rebuild:me'); }, 100);
+            //});
         }
 
         function activate() {
