@@ -25,6 +25,7 @@
     <RestorePackages>true</RestorePackages>
     <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
     <TargetFrameworkProfile />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -826,6 +827,7 @@
     <Content Include="app\src\app\np.run.js" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="app\src\user-home\darkroom\directives\edit\" />
     <Folder Include="config\templ\" />
   </ItemGroup>
   <ItemGroup>
