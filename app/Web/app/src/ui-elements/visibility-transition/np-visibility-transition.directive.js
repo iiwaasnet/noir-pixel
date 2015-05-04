@@ -16,15 +16,11 @@
             var scroll = angular.element(element.parent());
             var parent = angular.element(scroll.parent());
 
-            scope.$watch(function() { return scroll[0].offsetTop; }, changeOpacity);
-            //scope.$watch(function() {
-            //    var rect = element[0].getBoundingClientRect();
-            //    return rect.top - parent[0].offsetTop;
-            //}, changeOpacity);
+            scope.$watch(function () { return scroll[0].offsetTop; }, changeOpacity);
 
             changeOpacity();
 
-            function changeOpacity(val) {
+            function changeOpacity() {
                 var rect = element[0].getBoundingClientRect(),
                     top = rect.top - parent[0].offsetTop,
                     opacity = 1;
