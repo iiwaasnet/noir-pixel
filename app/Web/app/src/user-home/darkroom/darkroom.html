@@ -51,6 +51,7 @@
                  ng-scrollbar
                  is-bar-shown
                  rebuild-on-resize
+                 rebuild-on="rebuild:pending"
                  np-fill-height
                  bottom-margin="50"
                  min-height="300">
@@ -61,7 +62,7 @@
                     <div class="image-actions">
                         <img ng-src="{{::photo.previewUrl}}"/>
                         <np-action-edit-photo ng-if="darkroomCtrl.mode === 'Edit'" photo="photo"></np-action-edit-photo>
-                        <np-action-delete-photo ng-if="darkroomCtrl.mode === 'Delete'" photo="photo"></np-action-delete-photo>
+                        <np-action-delete-photo ng-if="darkroomCtrl.mode === 'Delete'" photo="photo" photos="darkroomCtrl.pendingPhotos"></np-action-delete-photo>
                     </div>
                 </div>
             </div>

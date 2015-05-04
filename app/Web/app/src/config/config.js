@@ -31,6 +31,7 @@
                 GetPhotoForEdit: 'photos/{shortId}',
                 GetPhotoGenres: 'photos/genres',
                 UpdatePhoto: 'photos/{shortId}',
+                DeletePhoto: 'photos/{shortId}'
 }
         },
         Profiles: {

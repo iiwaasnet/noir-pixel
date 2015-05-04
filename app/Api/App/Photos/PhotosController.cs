@@ -114,6 +114,12 @@ namespace Api.App.Photos
             return Ok();
         }
 
+        [HttpDelete]
+        [Route("{shortId}")]
+        public async Task<IHttpActionResult> DeletePhoto(string shortId)
+        {
+            return Ok();
+        }
 
         [HttpGet]
         [AllowAnonymous]

@@ -15,13 +15,19 @@
         function link(scope, element) {
             var scroll = angular.element(element.parent());
             var parent = angular.element(scroll.parent());
+
             scope.$watch(function() { return scroll[0].offsetTop; }, changeOpacity);
+            //scope.$watch(function() {
+            //    var rect = element[0].getBoundingClientRect();
+            //    return rect.top - parent[0].offsetTop;
+            //}, changeOpacity);
+
             changeOpacity();
 
-            function changeOpacity() {
+            function changeOpacity(val) {
                 var rect = element[0].getBoundingClientRect(),
-                        top = rect.top - parent[0].offsetTop,
-                        opacity = 1;
+                    top = rect.top - parent[0].offsetTop,
+                    opacity = 1;
                 if (isTopHidden()) {
                     opacity = ((top + rect.height) / rect.height);
                 } else {

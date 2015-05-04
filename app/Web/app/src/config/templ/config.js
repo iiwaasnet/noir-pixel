@@ -30,7 +30,8 @@
                 GetPending: '@@ApiUris.Photos.GetPending',
                 GetPhotoForEdit: '@@ApiUris.Photos.GetPhotoForEdit',
                 GetPhotoGenres: '@@ApiUris.Photos.GetPhotoGenres',
-                UpdatePhoto: '@@ApiUris.Photos.UpdatePhoto'
+                UpdatePhoto: '@@ApiUris.Photos.UpdatePhoto',
+                DeletePhoto: '@@ApiUris.Photos.DeletePhoto'
 }
         },
         Profiles: {

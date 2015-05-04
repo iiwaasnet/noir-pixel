@@ -9,32 +9,40 @@
             restrict: 'E',
             templateUrl: '/app/src/user-home/darkroom/delete/action-delete-photo.html',
             scope: {
-                photo: '='
+                photo: '=',
+                photos: '='
             },
-            controller: ['Overlay', 'Messages', 'Photos', controller],
-            controllerAs: 'editPhotoCtrl'
+            controller: ['$scope', 'Messages', 'Photos', controller],
+            controllerAs: 'deletePhotoCtrl'
         };
 
         return dir;
 
-        function controller(Overlay, Messages, Photos) {
+        function controller($scope, Messages, Photos) {
             var ctrl = this;
-            ctrl.edit = edit;
+            ctrl.deletePhoto = deletePhoto;
 
-            function edit(photo) {
-                Photos.getPhotoForEdit(photo.id)
-                    .then(getPhotoForEditSuccess, getPhotoForEditError);
+            function deletePhoto() {
+                Photos.deletePhoto($scope.photo.id)
+                    .then(deletePhotoSuccess, deletePhotoError);
             }
 
-            function getPhotoForEditSuccess(response) {
-                Overlay.open('app/src/user-home/darkroom/edit/edit-photo.html',
-                    'EditPhotoController as ctrl',
-                    { photo: response.data },
-                    { closeByEscape: false });
+            function deletePhotoSuccess(response) {
+                removeDeletedPhotoFromCollection();
             }
 
-            function getPhotoForEditError(error) {
+            function deletePhotoError(error) {
                 Messages.error({ main: { code: error } });
+            }
+
+            function removeDeletedPhotoFromCollection(shortId) {
+                $scope.photos.forEach(function (el, index) {
+                    if (el.id === $scope.photo.id) {
+                        $scope.photos.splice(index, 1);
+
+                        return;
+                    }
+                });
             }
         }
     }

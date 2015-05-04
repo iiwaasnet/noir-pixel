@@ -21,6 +21,7 @@
     "ApiUris.Photos.GetPhotoForEdit": "photos/{shortId}",
     "ApiUris.Photos.GetPhotoGenres": "photos/genres",
     "ApiUris.Photos.UpdatePhoto": "photos/{shortId}",
+    "ApiUris.Photos.DeletePhoto":  "photos/{shortId}",
 
     "ApiUris.Geo.Countries":  "geo/countries",
 

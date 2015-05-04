@@ -12,6 +12,13 @@
         srv.getPhotoForEdit = getPhotoForEdit;
         srv.getPhotoGenres = getPhotoGenres;
         srv.updatePhoto = updatePhoto;
+        srv.deletePhoto = deletePhoto;
+
+        function deletePhoto(shortId) {
+            var url = Url.buildApiUrl(Config.ApiUris.Photos.DeletePhoto).formatNamed({ shortId: shortId });
+
+            return $http.delete(url);
+        }
 
         function updatePhoto(shortId, description) {
             var url = Url.buildApiUrl(Config.ApiUris.Photos.UpdatePhoto).formatNamed({ shortId: shortId });
