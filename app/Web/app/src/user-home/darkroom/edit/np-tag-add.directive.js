@@ -9,7 +9,7 @@
             restrict: 'A',
             link: link,
             scope: {
-                tags: '=tags'
+                tags: '='
             }
         };
 
