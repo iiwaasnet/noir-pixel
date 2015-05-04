@@ -92,8 +92,9 @@ namespace Api.App.Photos
         }
 
         [HttpGet]
-        [Route("{shortId}/edit")]
-        public async Task<IHttpActionResult> GetPhotoForEdit(string shortId)
+        [Route("{shortId}")]
+        //[Route("{shortId}/edit")]
+        public async Task<IHttpActionResult> GetPhoto(string shortId)
         {
             var photo = await photosManager.GetPhotoForEdit(User.Identity.Name, shortId);
 
@@ -105,7 +106,7 @@ namespace Api.App.Photos
         }
 
         [HttpPost]
-        [Route("{shortId}/update")]
+        [Route("{shortId}")]
         public async Task<IHttpActionResult> UpdatePhoto([FromUri]string shortId, [FromBody]PhotoDescription description)
         {
             await photosManager.UpdatePhotoDescription(User.Identity.Name, shortId, description);
