@@ -12,11 +12,11 @@
 @action-image-size: 32px;
 @action-button-height-ratio: 0.3;
 
-.action-mixin {
+/*.action-mixin {
     width: 100%;
     height: 100%;
     background-color: @mine-shaft;
-    opacity: 0.3;
+    opacity: 0.2;
     cursor: pointer;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -33,7 +33,7 @@
         position: absolute;
         left: @photo-preview-size / 2 - @action-image-size / 2;
     }
-}
+}*/
 
 #darkroom {
     overflow: hidden;
@@ -141,7 +141,7 @@
                 width: @photo-preview-size;
                 height: @photo-preview-size;
 
-                .delete {
+                .image-action {
                     position: absolute;
                     width: 100%;
                     bottom: 0;
@@ -149,13 +149,16 @@
                     height: @photo-preview-size * @action-button-height-ratio;
 
                     .action {
-                        .action-mixin;
+                        .action-mixin(@photo-preview-size, @action-image-size);
                     }
 
                     .image {
-                        .icon-delete-32;
                         left: @photo-preview-size / 2 - @action-image-size / 2;
                         top: (@photo-preview-size * @action-button-height-ratio) / 2 - @action-image-size / 2;
+
+                        &.edit {
+                            .icon-edit-32;
+                        }
                     }
                 }
             }

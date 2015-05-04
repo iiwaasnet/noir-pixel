@@ -3,33 +3,11 @@
 @import (reference) "edits.less";
 @import (reference) "icons.less";
 @import (reference) "profile.less";
+@import (reference) "mixins.less";
 
 @country-select-width: 16em;
 @action-image-size: 32px;
 @add-to-delete-ratio: 0.6;
-
-.action-mixin {
-    width: 100%;
-    height: 100%;
-    background-color: @mine-shaft;
-    opacity: 0.2;
-    cursor: pointer;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-
-    &:hover {
-        opacity: 0.85;
-        border: solid 1px @bianca;
-    }
-
-    .image {
-        display: inline-block;
-        opacity: 1;
-        position: absolute;
-        left: @profile-image-size / 2 - @action-image-size / 2;
-    }
-}
 
 #profile-public {
     .column-center {
@@ -103,7 +81,7 @@
                 height: @profile-image-size * @add-to-delete-ratio;
 
                 .action {
-                    .action-mixin;
+                    .action-mixin(@profile-image-size, @action-image-size);
                 }
 
                 .image {
@@ -132,7 +110,7 @@
                 height: @profile-image-size * (1 - @add-to-delete-ratio);
 
                 .action {
-                    .action-mixin;
+                    .action-mixin(@profile-image-size, @action-image-size);
                 }
 
                 .image {

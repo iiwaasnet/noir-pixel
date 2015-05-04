@@ -480,8 +480,8 @@
     <Content Include="app\src\ui-elements\inplace\np-inplace-buttons.directive.js" />
     <Content Include="app\src\ui-elements\img-crop\np-img-crop.directive.js" />
     <Content Include="app\src\user-home\darkroom\darkroom.constants.js" />
-    <Content Include="app\src\user-home\darkroom\pending-photos.directive.js" />
-    <Content Include="app\src\user-home\darkroom\pending-photos.html" />
+    <Content Include="app\src\user-home\darkroom\edit\action-edit-photo.html" />
+    <Content Include="app\src\user-home\darkroom\edit\np-action-edit-photo.directive.js" />
     <Content Include="app\src\utils\keyCodes.js" />
     <Content Include="app\src\ui-elements\local-image\np-local-image.directive.js" />
     <Content Include="app\src\ui-elements\spinner\np-spinner.directive.js" />
@@ -497,11 +497,11 @@
     <Content Include="app\src\upload\flow.setup.js" />
     <Content Include="app\src\user-home\darkroom\darkroom.controller.js" />
     <Content Include="app\src\user-home\darkroom\darkroom.html" />
-    <Content Include="app\src\user-home\darkroom\edit-photo.controller.js" />
-    <Content Include="app\src\user-home\darkroom\edit-photo.html" />
-    <Content Include="app\src\user-home\darkroom\np-exif-edit.directive.js" />
-    <Content Include="app\src\user-home\darkroom\np-exif-edit.html" />
-    <Content Include="app\src\user-home\darkroom\np-tag-add.directive.js" />
+    <Content Include="app\src\user-home\darkroom\edit\edit-photo.controller.js" />
+    <Content Include="app\src\user-home\darkroom\edit\edit-photo.html" />
+    <Content Include="app\src\user-home\darkroom\edit\np-exif-edit.directive.js" />
+    <Content Include="app\src\user-home\darkroom\edit\np-exif-edit.html" />
+    <Content Include="app\src\user-home\darkroom\edit\np-tag-add.directive.js" />
     <Content Include="app\src\user-home\darkroom\photos-upload.controller.js" />
     <Content Include="app\src\user-home\darkroom\photos-upload.html" />
     <Content Include="app\src\user-home\error-messages.html" />
@@ -827,11 +827,10 @@
     <Content Include="app\src\app\np.run.js" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\src\user-home\darkroom\directives\edit\" />
     <Folder Include="config\templ\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\src\user-home\darkroom\np-tag-edit.directive.js" />
+    <Content Include="app\src\user-home\darkroom\edit\np-tag-edit.directive.js" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -2,22 +2,22 @@
     'use strict';
 
     angular.module('np.user-home')
-        .directive('npPendingPhotos', pendingPhotos);
+        .directive('npActionEditPhoto', actionEditPhoto);
 
-    function pendingPhotos() {
+    function actionEditPhoto() {
         var dir = {
             restrict: 'E',
-            templateUrl: '/app/src/user-home/darkroom/pending-photos.html',
+            templateUrl: '/app/src/user-home/darkroom/edit/action-edit-photo.html',
             scope: {
-                photos: '='
+                photo: '='
             },
             controller: ['Overlay', 'Messages', 'Photos', controller],
-            controllerAs: 'pendingPhotosCtrl'
+            controllerAs: 'editPhotoCtrl'
         };
 
         return dir;
 
-       function controller(Overlay, Messages, Photos) {
+        function controller(Overlay, Messages, Photos) {
             var ctrl = this;
             ctrl.edit = edit;
 
@@ -27,7 +27,7 @@
             }
 
             function getPhotoForEditSuccess(response) {
-                Overlay.open('app/src/user-home/darkroom/edit-photo.html',
+                Overlay.open('app/src/user-home/darkroom/edit/edit-photo.html',
                     'EditPhotoController as ctrl',
                     { photo: response.data },
                     { closeByEscape: false });

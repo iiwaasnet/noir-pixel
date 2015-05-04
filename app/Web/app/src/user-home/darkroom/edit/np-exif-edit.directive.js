@@ -10,7 +10,7 @@
         var dir = {
             restrict: 'E',
             link: link,
-            templateUrl: '/app/src/user-home/darkroom/np-exif-edit.html'
+            templateUrl: '/app/src/user-home/darkroom/edit/np-exif-edit.html'
         };
         var CANCEL_EDIT = 'np.exif-edit.cancel';
 

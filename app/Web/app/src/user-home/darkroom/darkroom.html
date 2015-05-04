@@ -61,18 +61,9 @@
                      ng-click="darkroomCtrl.edit(photo)">
                     <div class="image-actions">
                         <img ng-src="{{::photo.previewUrl}}"/>
-                        <div np-inplace-buttons
-                             inplace-button-yes
-                             class="delete">
-                            <div class="action">
-                                <span class="image"></span>
-                            </div>
-                        </div>
+                        <np-action-edit-photo photo="photo"></np-action-edit-photo>
                     </div>
                 </div>
-
-                <!--<np-pending-photos photos="darkroomCtrl.pendingPhotos"></np-pending-photos>-->
-                <!--<np-pending-photos ng-if="darkroomCtrl.mode === 'Stack'" photos="darkroomCtrl.pendingPhotos"></np-pending-photos>-->
             </div>
         </div>
     </div>
