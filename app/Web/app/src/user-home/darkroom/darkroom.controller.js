@@ -21,6 +21,7 @@
         ctrl.pendingPhotos = [];
         ctrl.addPhotosMode = addPhotosMode;
         ctrl.stackPhotosMode = stackPhotosMode;
+        ctrl.deletePhotosMode = deletePhotosMode;
 
         activate();
 
@@ -32,14 +33,14 @@
             switchMode(on, DarkroomModes.Stack);
         }
 
+        function deletePhotosMode(on) {
+            switchMode(on, DarkroomModes.Delete);
+        }
+
         function switchMode(on, toMode) {
             $scope.$evalAsync(function() {
                 ctrl.mode = on ? toMode : DarkroomModes.Edit;
-                $timeout(function() { $scope.$broadcast('rebuild:me'); }, 100);
             });
-            //$scope.$evalAsync(function () {
-            //    $timeout(function () { $scope.$broadcast('rebuild:me'); }, 100);
-            //});
         }
 
         function activate() {

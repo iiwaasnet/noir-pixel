@@ -480,6 +480,8 @@
     <Content Include="app\src\ui-elements\inplace\np-inplace-buttons.directive.js" />
     <Content Include="app\src\ui-elements\img-crop\np-img-crop.directive.js" />
     <Content Include="app\src\user-home\darkroom\darkroom.constants.js" />
+    <Content Include="app\src\user-home\darkroom\delete\action-delete-photo.html" />
+    <Content Include="app\src\user-home\darkroom\delete\np-action-delete-photo.directive.js" />
     <Content Include="app\src\user-home\darkroom\edit\action-edit-photo.html" />
     <Content Include="app\src\user-home\darkroom\edit\np-action-edit-photo.directive.js" />
     <Content Include="app\src\utils\keyCodes.js" />

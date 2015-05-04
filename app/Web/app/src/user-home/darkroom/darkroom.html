@@ -38,7 +38,7 @@
                         </div>
                     </div>
                 </li>
-                <li np-state-menu-item>
+                <li np-state-menu-item state-changed="darkroomCtrl.deletePhotosMode">
                     <div class="menu-item" np-state-menu-set>
                         <span class="icon icon-delete-32"></span>
                         <span class="text">Delete</span>
@@ -51,7 +51,6 @@
                  ng-scrollbar
                  is-bar-shown
                  rebuild-on-resize
-                 rebuild-on="rebuild:me"
                  np-fill-height
                  bottom-margin="50"
                  min-height="300">
@@ -61,7 +60,8 @@
                      ng-click="darkroomCtrl.edit(photo)">
                     <div class="image-actions">
                         <img ng-src="{{::photo.previewUrl}}"/>
-                        <np-action-edit-photo photo="photo"></np-action-edit-photo>
+                        <np-action-edit-photo ng-if="darkroomCtrl.mode === 'Edit'" photo="photo"></np-action-edit-photo>
+                        <np-action-delete-photo ng-if="darkroomCtrl.mode === 'Delete'" photo="photo"></np-action-delete-photo>
                     </div>
                 </div>
             </div>
