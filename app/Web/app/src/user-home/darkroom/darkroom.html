@@ -47,6 +47,10 @@
             </ul>
         </div>
         <div class="column-center">
+            <div class="scroll-shadow">
+                <div class="top-shadow"></div>
+            </div>
+
             <div class="pending-photos clearfix"
                  ng-scrollbar
                  is-bar-shown
@@ -54,16 +58,20 @@
                  np-fill-height
                  bottom-margin="50"
                  min-height="300">
-                
-                <div class="container" ng-repeat="photo in darkroomCtrl.pendingPhotos"
-                     np-visibility-transition
-                     ng-click="darkroomCtrl.edit(photo)">
+
+                <div ng-repeat="photo in darkroomCtrl.pendingPhotos"
+                     ng-click="darkroomCtrl.edit(photo)"
+                     class="container">
                     <div class="image-actions">
                         <img ng-src="{{::photo.previewUrl}}"/>
                         <np-action-edit-photo ng-if="darkroomCtrl.mode === 'Edit'" photo="photo"></np-action-edit-photo>
                         <np-action-delete-photo ng-if="darkroomCtrl.mode === 'Delete'" photo="photo" photos="darkroomCtrl.pendingPhotos"></np-action-delete-photo>
                     </div>
                 </div>
+            </div>
+
+            <div class="scroll-shadow">
+                <div class="bottom-shadow"></div>
             </div>
         </div>
     </div>
