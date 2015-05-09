@@ -19,15 +19,28 @@ namespace Api.App.Images.Exif
         {
             var exifRetrieved = false;
             var exifData = new ExifData();
-            using (var exifReader = new ExifLib.ExifReader(fileName))
+            try
             {
-                exifRetrieved = (exifData.ShutterSpeed = SafeReadExifTag(ReadShutterSpeed, exifReader)) != null;
-                exifRetrieved = exifRetrieved | (exifData.Iso = SafeReadExifTag(ReadIso, exifReader)) != null;
-                exifRetrieved = exifRetrieved | (exifData.FocalLength = SafeReadExifTag(ReadFocalLength, exifReader)) != null;
-                exifRetrieved = exifRetrieved | (exifData.FStop = SafeReadExifTag(ReadFStop, exifReader)) != null;
-                exifRetrieved = exifRetrieved | (exifData.ExposureTime = SafeReadExifTag(ReadExposureTime, exifReader)) != null;
-                exifRetrieved = exifRetrieved | (exifData.CameraModel = SafeReadExifTag(ReadCameraModel, exifReader)) != null;
-                exifRetrieved = exifRetrieved | (exifData.DateTimeTaken = SafeReadExifTag(ReadDateTaken, exifReader)) != null;
+                using (var exifReader = new ExifLib.ExifReader(fileName))
+                {
+                    exifRetrieved = (exifData.ShutterSpeed = SafeReadExifTag(ReadShutterSpeed, exifReader)) != null;
+                    exifRetrieved = exifRetrieved
+                                    | (exifData.Iso = SafeReadExifTag(ReadIso, exifReader)) != null;
+                    exifRetrieved = exifRetrieved
+                                    | (exifData.FocalLength = SafeReadExifTag(ReadFocalLength, exifReader)) != null;
+                    exifRetrieved = exifRetrieved
+                                    | (exifData.FStop = SafeReadExifTag(ReadFStop, exifReader)) != null;
+                    exifRetrieved = exifRetrieved
+                                    | (exifData.ExposureTime = SafeReadExifTag(ReadExposureTime, exifReader)) != null;
+                    exifRetrieved = exifRetrieved
+                                    | (exifData.CameraModel = SafeReadExifTag(ReadCameraModel, exifReader)) != null;
+                    exifRetrieved = exifRetrieved
+                                    | (exifData.DateTimeTaken = SafeReadExifTag(ReadDateTaken, exifReader)) != null;
+                }
+            }
+            catch (Exception err)
+            {
+                logger.Error(err);
             }
 
             return exifRetrieved ? exifData : null;
@@ -40,7 +53,9 @@ namespace Api.App.Images.Exif
             DateTime dateTime;
 
             if (!string.IsNullOrWhiteSpace(value)
-                && DateTime.TryParseExact(value, "yyyy':'MM':'dd HH':'mm':'ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime))
+                &&
+                DateTime.TryParseExact(value, "yyyy':'MM':'dd HH':'mm':'ss", CultureInfo.InvariantCulture,
+                    DateTimeStyles.None, out dateTime))
             {
                 return dateTime;
             }
@@ -52,51 +67,51 @@ namespace Api.App.Images.Exif
         {
             string value;
             return exifReader.GetTagValue(ExifTags.Model, out value)
-                       ? value
-                       : null;
+                ? value
+                : null;
         }
 
         private double? ReadExposureTime(ExifLib.ExifReader exifReader)
         {
             double value;
             return exifReader.GetTagValue(ExifTags.ExposureTime, out value)
-                       ? value
-                       : (double?) null;
+                ? value
+                : (double?) null;
         }
 
         private double? ReadFStop(ExifLib.ExifReader exifReader)
         {
             double value;
             return exifReader.GetTagValue(ExifTags.FNumber, out value)
-                       ? value
-                       : (double?) null;
+                ? value
+                : (double?) null;
         }
 
         private double? ReadFocalLength(ExifLib.ExifReader exifReader)
         {
             double value;
             return exifReader.GetTagValue(ExifTags.FocalLength, out value)
-                       ? value
-                       : (double?) null;
+                ? value
+                : (double?) null;
         }
 
         private ushort? ReadIso(ExifLib.ExifReader exifReader)
         {
             ushort value;
             return exifReader.GetTagValue(ExifTags.ISOSpeedRatings, out value)
-                       ? value
-                       : (ushort?) null;
+                ? value
+                : (ushort?) null;
         }
 
         private string ReadShutterSpeed(ExifLib.ExifReader exifReader)
         {
             double value;
             return exifReader.GetTagValue(ExifTags.ExposureTime, out value)
-                       ? new Fraction(value).ToString()
-                       : null;
+                ? new Fraction(value).ToString()
+                : null;
         }
 
-        private T SafeReadExifTag<T>(Antlr.Runtime.Misc.Func<ExifLib.ExifReader, T> readExifTag, ExifLib.ExifReader exifReader)
+        private T SafeReadExifTag<T>(Func<ExifLib.ExifReader, T> readExifTag, ExifLib.ExifReader exifReader)
         {
             try
             {
@@ -107,7 +122,7 @@ namespace Api.App.Images.Exif
                 logger.Error(err);
             }
 
-            return default (T);
+            return default(T);
         }
     }
 }
