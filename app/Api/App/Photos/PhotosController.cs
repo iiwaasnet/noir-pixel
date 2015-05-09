@@ -118,6 +118,8 @@ namespace Api.App.Photos
         [Route("{shortId}")]
         public async Task<IHttpActionResult> DeletePhoto(string shortId)
         {
+            await photosManager.DeletePhoto(User.Identity.Name, shortId);
+
             return Ok();
         }
 

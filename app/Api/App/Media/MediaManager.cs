@@ -105,6 +105,22 @@ namespace Api.App.Media
         public void DeleteMediaFile(string fileName)
         {
             File.Delete(fileName);
+
+            DeleteContainingFolderIfEmpty(fileName);
+        }
+
+        private void DeleteContainingFolderIfEmpty(string fileName)
+        {
+            var folder = Path.GetDirectoryName(fileName);
+            if (ContainingFolderIsEmpty(folder))
+            {
+                Directory.Delete(folder);
+            }
+        }
+
+        private bool ContainingFolderIsEmpty(string folder)
+        {
+            return ! Directory.EnumerateFiles(folder).Any();
         }
 
         public async Task<MediaLink> GetMediaLink(string mediaId)

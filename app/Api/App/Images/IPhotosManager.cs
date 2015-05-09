@@ -10,5 +10,6 @@ namespace Api.App.Images
         Task<Photo> GetPhotoForEdit(string userName, string shortId);
         Task<IEnumerable<Genre>> GetPhotoGenres();
         Task UpdatePhotoDescription(string userName, string shortId, PhotoDescription description);
+        Task DeletePhoto(string userName, string shortId);
     }
 }
